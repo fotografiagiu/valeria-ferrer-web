@@ -1,0 +1,50 @@
+
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", serif;
+}
+
+@layer base {
+  body {
+    @apply bg-[#0a0a0a] text-white font-sans scroll-smooth;
+  }
+  
+  h1, h2, h3, .serif {
+    @apply font-serif;
+  }
+}
+
+@layer components {
+  .luxury-gradient {
+    @apply bg-linear-to-br from-[#c2b2a3] to-[#8e7d6f];
+  }
+  
+  .luxury-text-gradient {
+    @apply bg-linear-to-br from-[#c2b2a3] to-white bg-clip-text text-transparent;
+  }
+}
+
+.markdown-body p {
+  margin-bottom: 0.75rem;
+}
+
+.markdown-body p:last-child {
+  margin-bottom: 0;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 0.75rem;
+  padding-left: 1.25rem;
+}
+
+.markdown-body li {
+  margin-bottom: 0.25rem;
+  list-style-type: disc;
+}
+
+.markdown-body strong {
+  color: #c2b2a3;
+  font-weight: 600;
+}
