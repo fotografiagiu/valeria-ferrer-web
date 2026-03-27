@@ -37,7 +37,7 @@ const Hero: React.FC = () => {
           Valeria <span className="luxury-text-gradient font-bold italic uppercase">Ferrer</span>
           <br />
           <span className="text-2xl md:text-4xl tracking-[0.4em] font-light">
-            Premium Agency
+          PRUEBA CURSOR
           </span>
         </motion.h1>
 
