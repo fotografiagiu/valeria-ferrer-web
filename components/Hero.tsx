@@ -10,20 +10,13 @@ const Hero: React.FC = () => {
         <div className="absolute inset-0 bg-black/40 z-10"></div>
 
         <video
+          src="/video/plaza-escort-valencia-centro-alojamiento.mp4"
           autoPlay
           loop
           muted
           playsInline
-          preload="auto"
-          onLoadedData={(e) => {
-            e.currentTarget.play().catch(() => {});
-          }}
           className="w-full h-full object-cover"
-          style={{ objectFit: 'cover' }}
-        >
-          <source src="/video/escortbanner.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+        />
       </div>
 
       {/* Content */}
