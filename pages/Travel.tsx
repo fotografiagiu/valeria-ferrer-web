@@ -14,7 +14,7 @@ const Travel: React.FC = () => {
           <Plane size={48} className="mx-auto text-[#c2b2a3] mb-6 opacity-40" />
           <h1 className="text-4xl md:text-6xl serif luxury-text-gradient uppercase mb-6">Acompañamiento de Viajes</h1>
           <p className="text-gray-400 font-light tracking-widest uppercase text-xs leading-relaxed max-w-2xl mx-auto">
-            Acompañamiento de lujo sin fronteras. Nuestras escorts de lujo están preparadas para viajar a cualquier destino global con la elegancia y discreción que nos caracteriza.
+            Acompañamiento de lujo sin fronteras. Nuestras modelos de lujo están preparadas para viajar a cualquier destino global con la elegancia y discreción que nos caracteriza.
           </p>
         </div>
 

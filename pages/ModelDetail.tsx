@@ -1,13 +1,25 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { MODELS } from '../constants';
 import { ArrowLeft, Check, Calendar, Phone, MapPin, Ruler, User, Heart, Star, Sparkles } from 'lucide-react';
+import GalleryModal from '../components/GalleryModal';
 
 const ModelDetail: React.FC = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const model = MODELS.find(m => m.id === id);
+  const [isGalleryOpen, setIsGalleryOpen] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const openGallery = (index: number) => {
+    setCurrentImageIndex(index);
+    setIsGalleryOpen(true);
+  };
+
+  const closeGallery = () => {
+    setIsGalleryOpen(false);
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -16,8 +28,8 @@ const ModelDetail: React.FC = () => {
   if (!model) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center text-center p-6 bg-[#0a0a0a]">
-        <h1 className="text-4xl serif mb-4 luxury-text-gradient uppercase tracking-widest">Escort no encontrada</h1>
-        <Link to="/models" className="text-[#c2b2a3] uppercase tracking-[0.3em] text-xs underline underline-offset-8 decoration-[#c2b2a3]/30">Volver a todas las escorts</Link>
+        <h1 className="text-4xl serif mb-4 luxury-text-gradient uppercase tracking-widest">Modelo no encontrada</h1>
+        <Link to="/models" className="text-[#c2b2a3] uppercase tracking-[0.3em] text-xs underline underline-offset-8 decoration-[#c2b2a3]/30">Volver a todas las modelos</Link>
       </div>
     );
   }
@@ -159,7 +171,7 @@ const ModelDetail: React.FC = () => {
               Solicitar Encuentro
             </Link>
             <a 
-              href="tel:+491623093103" 
+              href="tel:645872227" 
               className="flex-1 flex items-center justify-center space-x-3 text-center py-6 border border-[#c2b2a3]/30 text-[#c2b2a3] uppercase tracking-[0.3em] text-[10px] font-bold hover:bg-[#c2b2a3] hover:text-black transition-all duration-700"
             >
               <Phone size={14} /> 
@@ -184,11 +196,16 @@ const ModelDetail: React.FC = () => {
           
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {(model.gallery || []).map((img, idx) => (
-              <div key={idx} className={`relative overflow-hidden bg-[#111111] group cursor-zoom-in border border-white/5 ${idx % 3 === 0 ? 'md:row-span-2' : ''}`}>
+              <div 
+                key={idx} 
+                className={`relative overflow-hidden bg-[#111111] group cursor-pointer border border-white/5 ${idx % 3 === 0 ? 'md:row-span-2' : ''}`}
+                onClick={() => openGallery(idx)}
+              >
                 <img 
                   src={img} 
                   alt={`${model.name} Portfolio ${idx + 1}`} 
                   className="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110"
+                  draggable={false}
                 />
                 <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
                   <div className="w-10 h-10 border border-white/30 rounded-full flex items-center justify-center">
@@ -244,6 +261,15 @@ const ModelDetail: React.FC = () => {
           </p>
         </div>
       </section>
+
+      {/* Gallery Modal */}
+      <GalleryModal
+        images={model.gallery || []}
+        initialIndex={currentImageIndex}
+        isOpen={isGalleryOpen}
+        onClose={closeGallery}
+        modelName={model.name}
+      />
     </div>
   );
 };

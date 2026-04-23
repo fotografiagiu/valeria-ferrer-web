@@ -44,6 +44,21 @@ const ModelCard: React.FC<{ model: Model; index: number }> = ({ model, index }) 
             </div>
           )}
           
+          {/* VIP Badge for Gaby */}
+          {model.name === 'Gaby' && (
+            <div className="absolute top-2 right-2 md:top-4 md:right-4 z-30">
+              <div className="relative group">
+                <div className="absolute inset-0 bg-gradient-to-r from-[#c2b2a3]/20 to-[#c2b2a3]/10 blur-md"></div>
+                <div className="relative flex items-center space-x-1 px-3 py-1.5 md:px-4 md:py-2 bg-gradient-to-r from-[#c2b2a3]/10 to-[#c2b2a3]/5 backdrop-blur-sm border border-[#c2b2a3]/30 rounded-full">
+                  <div className="w-2 h-2 bg-[#c2b2a3] rounded-full animate-pulse"></div>
+                  <span className="text-[#c2b2a3] text-[9px] md:text-[10px] tracking-[0.3em] uppercase font-light">
+                    VIP
+                  </span>
+                </div>
+              </div>
+            </div>
+          )}
+          
           {/* Quick view badge */}
           <div className={`absolute bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 transition-all duration-500 z-20 ${isHovered ? 'translate-y-0' : 'translate-y-12'}`}>
             <span className="px-3.5 py-2 md:px-4 md:py-2 bg-white/10 backdrop-blur-md text-[10px] md:text-[10px] tracking-[0.3em] uppercase font-bold border border-white/20">
@@ -72,7 +87,7 @@ const ModelsGrid: React.FC = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16 px-4 md:px-0"
         >
-          <h2 className="text-3xl md:text-5xl font-light mb-4">Descubre nuestras <span className="italic">Escorts Elite</span></h2>
+          <h2 className="text-3xl md:text-5xl font-light mb-4">Escorts VIP <span className="italic">de Lujo</span></h2>
           <div className="w-20 h-[1px] bg-[#c2b2a3] mx-auto"></div>
         </motion.div>
 
@@ -87,7 +102,7 @@ const ModelsGrid: React.FC = () => {
             to="/models" 
             className="inline-block px-12 py-5 bg-white text-black text-xs font-bold tracking-[0.3em] uppercase hover:bg-[#c2b2a3] transition-colors"
           >
-            Todas las Escorts
+            Ver Todas las Escorts
           </Link>
         </div>
       </div>

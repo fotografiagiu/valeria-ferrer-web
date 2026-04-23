@@ -1,0 +1,25 @@
+{
+  "id": "ejemplo-slug",
+  "slug": "ejemplo-slug",
+  "name": "Nombre",
+  "age": 0,
+  "height": 0,
+  "weight": 0,
+  "nationality": "",
+  "city": "",
+  "location": "",
+  "image": "/chicas/ejemplo-slug/portada.jpg",
+  "hoverImage": "/chicas/ejemplo-slug/hover.jpg",
+  "description": "",
+  "bio": "",
+  "services": [],
+  "availability": {},
+  "gallery": [
+    "/chicas/ejemplo-slug/gallery/01.jpg",
+    "/chicas/ejemplo-slug/gallery/02.jpg"
+  ],
+  "videos": [
+    "/chicas/ejemplo-slug/videos/01.mp4"
+  ],
+  "isNew": false
+}

@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { REVIEWS } from '../constants';
-import { Quote, User } from 'lucide-react';
+import { Quote, User, Star, ChevronLeft, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Reviews: React.FC = () => {
@@ -65,25 +65,49 @@ const Reviews: React.FC = () => {
               {visibleReviews.map((review, idx) => (
                 <div key={`${review.id}-${idx}`} className="bg-[#0a0a0a] border border-white/5 p-10 relative group hover:border-[#c2b2a3]/30 transition-all duration-500 h-full flex flex-col">
                   <Quote className="absolute top-6 right-6 text-[#c2b2a3]/20" size={40} />
-                  <div className="mb-6 flex items-center space-x-4">
-                    <div className="w-16 h-16 rounded-full overflow-hidden border border-[#c2b2a3]/20 bg-[#1a1a1a] flex items-center justify-center">
-                      {review.image ? (
-                        <img src={review.image} alt={review.author} className="w-full h-full object-cover" />
-                      ) : (
-                        <User className="text-[#c2b2a3]/40" size={32} />
-                      )}
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-[#c2b2a3] tracking-widest text-xs uppercase">{review.author}</h4>
-                      <p className="text-[10px] text-gray-500 tracking-[0.2em] uppercase">Cliente Verificado</p>
+                  <div className="mb-6">
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center space-x-4">
+                        <div className="w-16 h-16 rounded-full overflow-hidden border border-[#c2b2a3]/20 bg-[#1a1a1a] flex items-center justify-center">
+                          {review.image ? (
+                            <img src={review.image} alt={review.author} className="w-full h-full object-cover" />
+                          ) : (
+                            <User className="text-[#c2b2a3]/40" size={32} />
+                          )}
+                        </div>
+                        <div>
+                          <h4 className="font-bold text-[#c2b2a3] tracking-widest text-xs uppercase">{review.author}</h4>
+                          <p className="text-[10px] text-gray-500 tracking-[0.2em] uppercase">Cliente Verificado</p>
+                        </div>
+                      </div>
+                      <div className="flex space-x-1">
+                        {[...Array(5)].map((_, i) => (
+                          <Star
+                            key={i}
+                            size={16}
+                            className={`${i < 5 ? 'text-yellow-400 fill-yellow-400' : 'text-gray-600'} transition-colors`}
+                          />
+                        ))}
+                      </div>
                     </div>
                   </div>
-                  <h3 className="text-xl serif italic mb-4">"{review.title}"</h3>
-                  <p className="text-sm font-light text-gray-400 leading-relaxed italic mb-6 flex-grow">
-                    {review.content}
-                  </p>
+                  <div className="flex-grow">
+                    <h3 className="text-xl serif italic mb-4 text-white">"{review.title}"</h3>
+                    <p className="text-sm font-light text-gray-400 leading-relaxed italic mb-6">
+                      {review.content}
+                    </p>
+                  </div>
                   <div className="pt-6 border-t border-white/5 flex items-center justify-between mt-auto">
-                    <span className="text-[10px] tracking-widest uppercase text-[#c2b2a3]">Cita con {review.modelName}</span>
+                    <span className="text-[10px] tracking-widest uppercase text-[#c2b2a3] font-medium">Experiencia con {review.modelName}</span>
+                    <div className="flex items-center space-x-1">
+                      {[...Array(5)].map((_, i) => (
+                        <Star
+                          key={i}
+                          size={12}
+                          className={`${i < 5 ? 'text-yellow-400 fill-yellow-400' : 'text-gray-600'} transition-colors`}
+                        />
+                      ))}
+                    </div>
                   </div>
                 </div>
               ))}
@@ -91,16 +115,32 @@ const Reviews: React.FC = () => {
           </AnimatePresence>
         </div>
 
-        <div className="flex justify-center mt-12 space-x-2">
-          {Array.from({ length: Math.ceil(REVIEWS.length / itemsToShow) }).map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setCurrentIndex(i)}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                currentIndex === i ? 'bg-[#c2b2a3] w-8' : 'bg-white/20'
-              }`}
-            />
-          ))}
+        <div className="flex justify-center items-center mt-12 space-x-6">
+          <button
+            onClick={() => setCurrentIndex((prev) => (prev - 1 + Math.ceil(REVIEWS.length / itemsToShow)) % Math.ceil(REVIEWS.length / itemsToShow))}
+            className="p-2 rounded-full border border-white/10 hover:border-[#c2b2a3]/30 hover:bg-[#c2b2a3]/5 transition-all duration-300"
+          >
+            <ChevronLeft size={20} className="text-[#c2b2a3]" />
+          </button>
+          
+          <div className="flex space-x-2">
+            {Array.from({ length: Math.ceil(REVIEWS.length / itemsToShow) }).map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setCurrentIndex(i)}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  currentIndex === i ? 'bg-[#c2b2a3] w-8' : 'bg-white/20 hover:bg-white/30'
+                }`}
+              />
+            ))}
+          </div>
+          
+          <button
+            onClick={() => setCurrentIndex((prev) => (prev + 1) % Math.ceil(REVIEWS.length / itemsToShow))}
+            className="p-2 rounded-full border border-white/10 hover:border-[#c2b2a3]/30 hover:bg-[#c2b2a3]/5 transition-all duration-300"
+          >
+            <ChevronRight size={20} className="text-[#c2b2a3]" />
+          </button>
         </div>
       </div>
     </section>

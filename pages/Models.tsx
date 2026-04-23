@@ -7,8 +7,8 @@ const Models: React.FC = () => {
     <div className="pt-24 min-h-screen">
       <div className="bg-[#111111] py-20 px-6 border-b border-white/5">
         <div className="max-w-[1600px] mx-auto text-center">
-          <h1 className="text-4xl md:text-6xl font-light mb-6 tracking-wider">Nuestras <span className="italic luxury-text-gradient">Escorts</span></h1>
-          <p className="text-gray-400 font-light uppercase tracking-[0.3em] text-xs">Selección de Acompañantes de Élite en todo el Mundo</p>
+          <h1 className="text-4xl md:text-6xl font-light mb-6 tracking-wider">Escorts de Lujo <span className="italic luxury-text-gradient">en Valencia</span></h1>
+          <p className="text-gray-400 font-light uppercase tracking-[0.3em] text-xs">Las mejores acompañantes VIP y modelos de alto standing. Escorts españolas, rusas y latinas. Discreción garantizada.</p>
         </div>
       </div>
       

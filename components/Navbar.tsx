@@ -29,37 +29,46 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolled, openMembers }) => {
 
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
-        <Link to="/" className="flex items-center space-x-3">
+        <Link to="/" className="flex items-center space-x-6 lg:space-x-8 lg:ml-4">
           <div className="flex flex-col">
-            <span className="text-2xl md:text-3xl tracking-[0.2em] font-light luxury-text-gradient uppercase leading-none">Valeria Ferrer</span>
-            <span className="text-[10px] md:text-[11px] tracking-[0.4em] uppercase text-[#c2b2a3] font-medium mt-1">Agencia de Escorts de Lujo</span>
+            <span className="text-2xl md:text-3xl tracking-[0.1em] font-light luxury-text-gradient uppercase leading-none whitespace-nowrap">Valeria Ferrer</span>
+            <span className="text-[10px] md:text-[11px] tracking-[0.4em] uppercase text-[#c2b2a3] font-medium mt-1">Agencia de Modelos de Lujo</span>
           </div>
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden lg:flex items-center space-x-10 text-[13px] font-medium tracking-widest uppercase">
+        <div className="hidden lg:flex items-center space-x-10 text-[13px] font-medium tracking-widest uppercase lg:mr-4">
           <Link to="/" className="hover:text-[#c2b2a3] transition-colors">Inicio</Link>
-          <Link to="/about" className="hover:text-[#c2b2a3] transition-colors">Sobre Nosotros</Link>
-          <Link to="/models" className="hover:text-[#c2b2a3] transition-colors">Escorts</Link>
+          <Link to="/models" className="hover:text-[#c2b2a3] transition-colors">Modelos</Link>
+          <Link to="/about" className="hover:text-[#c2b2a3] transition-colors">Agencia</Link>
           
           <div className="group relative">
             <button className="flex items-center hover:text-[#c2b2a3] transition-colors">
-              Servicios <ChevronDown size={14} className="ml-1" />
+              Experiencias <ChevronDown size={14} className="ml-1" />
             </button>
             <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 hidden group-hover:block">
-              <div className="bg-[#1a1a1a] border border-white/5 p-6 w-64 shadow-2xl">
-                <ul className="space-y-4">
-                  <li><Link to="/travel" className="hover:text-[#c2b2a3] block text-[11px]">Acompañamiento de Viaje</Link></li>
-                  <li><Link to="/services/gfe" className="hover:text-[#c2b2a3] block text-[11px]">Girlfriend Experience</Link></li>
-                  <li><Link to="/services/duo" className="hover:text-[#c2b2a3] block text-[11px]">Experiencia Dúo</Link></li>
-                  <li><Link to="/services/dinner" className="hover:text-[#c2b2a3] block text-[11px]">Acompañante de Cenas</Link></li>
-                </ul>
+              <div className="bg-[#1a1a1a] border border-white/5 p-6 w-72 shadow-2xl">
+                <div className="mb-4">
+                  <p className="text-[9px] text-[#c2b2a3] tracking-widest mb-3 font-bold">SERVICIOS EXCLUSIVOS</p>
+                  <ul className="space-y-3">
+                    <li><Link to="/services/gfe" className="hover:text-[#c2b2a3] block text-[11px] flex items-center"><span className="w-1 h-1 bg-[#c2b2a3] rounded-full mr-3"></span>Girlfriend Experience</Link></li>
+                    <li><Link to="/services/duo" className="hover:text-[#c2b2a3] block text-[11px] flex items-center"><span className="w-1 h-1 bg-[#c2b2a3] rounded-full mr-3"></span>Experiencia Dúo</Link></li>
+                    <li><Link to="/services/dinner" className="hover:text-[#c2b2a3] block text-[11px] flex items-center"><span className="w-1 h-1 bg-[#c2b2a3] rounded-full mr-3"></span>Cenas de Negocios</Link></li>
+                  </ul>
+                </div>
+                <div className="border-t border-white/10 pt-4">
+                  <p className="text-[9px] text-gray-500 tracking-widest mb-3 font-bold">SERVICIOS PREMIUM</p>
+                  <ul className="space-y-3">
+                    <li><Link to="/travel" className="hover:text-[#c2b2a3] block text-[11px] flex items-center"><span className="w-1 h-1 bg-gray-500 rounded-full mr-3"></span>Acompañamiento de Viaje</Link></li>
+                    <li><Link to="/booking" className="hover:text-[#c2b2a3] block text-[11px] flex items-center"><span className="w-1 h-1 bg-gray-500 rounded-full mr-3"></span>Reservas VIP</Link></li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
 
-          <Link to="/booking" className="hover:text-[#c2b2a3] transition-colors">Reservas</Link>
           <Link to="/casting" className="hover:text-[#c2b2a3] transition-colors">Casting</Link>
+          <Link to="/booking" className="px-6 py-2 border border-[#c2b2a3]/30 text-[#c2b2a3] hover:bg-[#c2b2a3] hover:text-black transition-all duration-300 rounded-full text-[11px]">Reservar</Link>
         </div>
 
         {/* Right Actions */}
@@ -96,10 +105,10 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolled, openMembers }) => {
             </a>
           </div>
           <Link to="/" onClick={() => setIsMobileMenuOpen(false)}>Inicio</Link>
-          <Link to="/about" onClick={() => setIsMobileMenuOpen(false)}>Sobre Nosotros</Link>
-          <Link to="/models" onClick={() => setIsMobileMenuOpen(false)}>Escorts</Link>
-          <Link to="/booking" onClick={() => setIsMobileMenuOpen(false)}>Reservas</Link>
+          <Link to="/models" onClick={() => setIsMobileMenuOpen(false)}>Modelos</Link>
+          <Link to="/about" onClick={() => setIsMobileMenuOpen(false)}>Agencia</Link>
           <Link to="/casting" onClick={() => setIsMobileMenuOpen(false)}>Casting</Link>
+          <Link to="/booking" onClick={() => setIsMobileMenuOpen(false)} className="px-6 py-2 border border-[#c2b2a3]/30 text-[#c2b2a3] hover:bg-[#c2b2a3] hover:text-black transition-all duration-300 rounded-full text-[11px]">Reservar</Link>
           <button onClick={() => { setIsMobileMenuOpen(false); openMembers(); }} className="text-[#c2b2a3]">Lounge de Miembros <span className="text-[10px] opacity-60">(Próximamente)</span></button>
         </div>
       )}

@@ -9,9 +9,9 @@ const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-20">
           {/* Brand Info */}
           <div className="space-y-6">
-            <h3 className="text-3xl tracking-[0.2em] font-light luxury-text-gradient uppercase leading-none">Valeria Ferrer</h3>
+            <h3 className="text-3xl tracking-[0.1em] font-light luxury-text-gradient uppercase leading-none whitespace-nowrap">Valeria Ferrer</h3>
             <p className="text-xs font-light text-gray-400 leading-relaxed uppercase tracking-wider">
-              Exclusiva Agencia de Escorts de Lujo que representa a las mejores escorts en todo el mundo. Redefinimos el acompañamiento de lujo con sofisticación y discreción absoluta.
+              Exclusiva Agencia de Modelos de Lujo que representa a las mejores modelos en todo el mundo. Redefinimos el acompañamiento de lujo con sofisticación y discreción absoluta.
             </p>
             <div className="flex space-x-4 pt-4">
               <a href="#" className="w-10 h-10 rounded-full bg-[#1a1a1a] flex items-center justify-center text-[#c2b2a3] hover:bg-[#c2b2a3] hover:text-black transition-all">

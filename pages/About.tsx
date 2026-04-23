@@ -18,10 +18,10 @@ const About: React.FC = () => {
             <h2 className="text-3xl md:text-5xl font-light mb-8 leading-tight tracking-wide">
               Bienvenidos a <span className="italic">Valeria Ferrer</span>
               <br />
-              Escorts de Lujo en Valencia
+              Modelos de Lujo en Valencia
             </h2>
             <p className="text-gray-400 font-light leading-relaxed mb-8">
-              En Valeria Ferrer, bajo nuestro sello <strong>www.valeriaferrer.com</strong>, seleccionamos a las escorts de lujo más exclusivas para ofrecer un acompañamiento sin precedentes. No somos solo una agencia; somos un estándar de vida.
+              En Valeria Ferrer, bajo nuestro sello <strong>www.valeriaferrer.com</strong>, seleccionamos a las modelos de lujo más exclusivas para ofrecer un acompañamiento sin precedentes. No somos solo una agencia; somos un estándar de vida.
             </p>
             <p className="text-gray-400 font-light leading-relaxed mb-10">
               Cada perfil es verificado y cada encuentro es planeado bajo los más estrictos controles de calidad y discreción. Nuestra misión es superar la elegancia y ofrecer una experiencia intelectual y pasional única.
@@ -71,7 +71,7 @@ const About: React.FC = () => {
             >
               <h3 className="text-2xl serif text-[#c2b2a3] uppercase tracking-widest mb-8">Acompañamiento de Viajes</h3>
               <p className="text-gray-400 font-light leading-[2] text-lg">
-                Las escorts de Valeria Ferrer están disponibles para acompañarle en viajes de negocios o placer. Entendemos las necesidades del viajero exigente y ofrecemos una compañía que se adapta a cualquier entorno, desde reuniones corporativas hasta escapadas privadas en destinos exóticos.
+                Las modelos de Valeria Ferrer están disponibles para acompañarle en viajes de negocios o placer. Entendemos las necesidades del viajero exigente y ofrecemos una compañía que se adapta a cualquier entorno, desde reuniones corporativas hasta escapadas privadas en destinos exóticos.
               </p>
               <div className="mt-8 p-6 border-l-2 border-[#c2b2a3] bg-white/[0.02]">
                 <p className="text-xs tracking-widest uppercase text-gray-500 leading-relaxed">
@@ -88,7 +88,7 @@ const About: React.FC = () => {
             >
               <h3 className="text-2xl serif text-[#c2b2a3] uppercase tracking-widest mb-8">Etiqueta y Discreción</h3>
               <p className="text-gray-400 font-light leading-[2] text-lg">
-                Mantenemos un estándar de conducta impecable. Esperamos de nuestros clientes el mismo nivel de respeto y cortesía que nuestras escorts ofrecen. La discreción es el pilar de nuestra agencia: protegemos su identidad con el máximo celo profesional.
+                Mantenemos un estándar de conducta impecable. Esperamos de nuestros clientes el mismo nivel de respeto y cortesía que nuestras modelos ofrecen. La discreción es el pilar de nuestra agencia: protegemos su identidad con el máximo celo profesional.
               </p>
               <div className="mt-8 p-6 border-l-2 border-[#c2b2a3] bg-white/[0.02]">
                 <p className="text-xs tracking-widest uppercase text-gray-500 leading-relaxed">

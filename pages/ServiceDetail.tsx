@@ -21,10 +21,10 @@ const servicesData = {
   duo: {
     title: "Experiencia Dúo",
     subtitle: "Doble Elegancia, Doble Placer",
-    description: "Para aquellos que buscan una experiencia verdaderamente excepcional, ofrecemos la posibilidad de un encuentro con dos de nuestras escorts. Una coreografía perfecta de belleza y sofisticación diseñada para superar sus fantasías más exigentes.",
+    description: "Para aquellos que buscan una experiencia verdaderamente excepcional, ofrecemos la posibilidad de un encuentro con dos de nuestras modelos. Una coreografía perfecta de belleza y sofisticación diseñada para superar sus fantasías más exigentes.",
     icon: <Users size={48} />,
     features: [
-      "Sincronía perfecta entre escorts",
+      "Sincronía perfecta entre modelos",
       "Atención personalizada doble",
       "Ambiente de lujo compartido",
       "Experiencia sensorial completa"
@@ -34,7 +34,7 @@ const servicesData = {
   dinner: {
     title: "Acompañante de Cenas",
     subtitle: "La Invitada Perfecta",
-    description: "Nuestras escorts poseen la educación, el protocolo y la cultura necesarios para acompañarle a los eventos sociales más exclusivos. Ya sea una cena de negocios, una gala benéfica o un evento privado, ella será el centro de todas las miradas por su elegancia.",
+    description: "Nuestras modelos poseen la educación, el protocolo y la cultura necesarios para acompañarle a los eventos sociales más exclusivos. Ya sea una cena de negocios, una gala benéfica o un evento privado, ella será el centro de todas las miradas por su elegancia.",
     icon: <Utensils size={48} />,
     features: [
       "Dominio de protocolo social",

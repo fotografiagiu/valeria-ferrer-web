@@ -37,7 +37,7 @@ const Hero: React.FC = () => {
           Valeria <span className="luxury-text-gradient font-bold italic uppercase">Ferrer</span>
           <br />
           <span className="text-2xl md:text-4xl tracking-[0.4em] font-light">
-          PRUEBA CURSOR
+          Agencia Premium
           </span>
         </motion.h1>
 
@@ -47,7 +47,7 @@ const Hero: React.FC = () => {
           transition={{ duration: 1, delay: 0.5 }}
           className="text-lg md:text-xl font-light tracking-[0.3em] uppercase text-gray-200 mb-12 drop-shadow-xl"
         >
-          Presencia premium en Valencia
+          Escorts de lujo y acompañantes VIP en Valencia
         </motion.p>
 
         <motion.div
@@ -60,14 +60,14 @@ const Hero: React.FC = () => {
             to="/models"
             className="px-12 py-5 border border-[#c2b2a3] text-[#c2b2a3] uppercase tracking-[0.3em] text-xs backdrop-blur-md hover:bg-[#c2b2a3] hover:text-black transition-all duration-700 w-full sm:w-auto"
           >
-            Ver perfiles
+            Ver Escorts de Lujo
           </Link>
 
           <Link
             to="/booking"
             className="px-12 py-5 luxury-gradient text-black uppercase tracking-[0.3em] text-xs font-bold hover:scale-105 hover:shadow-[0_0_30px_rgba(194,178,163,0.3)] transition-all duration-300 w-full sm:w-auto"
           >
-            Reservar
+            Reservar una Escort de Lujo
           </Link>
         </motion.div>
       </div>
