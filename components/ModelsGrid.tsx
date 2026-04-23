@@ -4,8 +4,9 @@ import { Link } from 'react-router-dom';
 import { MODELS } from '../constants';
 import { Model } from '../types';
 import { motion } from 'framer-motion';
+import { Grid3X3, LayoutGrid } from 'lucide-react';
 
-const ModelCard: React.FC<{ model: Model; index: number }> = ({ model, index }) => {
+const ModelCard: React.FC<{ model: Model; index: number; isDoubleView?: boolean }> = ({ model, index, isDoubleView = false }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -60,7 +61,7 @@ const ModelCard: React.FC<{ model: Model; index: number }> = ({ model, index }) 
           )}
           
           {/* Quick view badge */}
-          <div className={`absolute bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 transition-all duration-500 z-20 ${isHovered ? 'translate-y-0' : 'translate-y-12'}`}>
+          <div className={`absolute bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 transition-all duration-500 z-20 ${isHovered ? 'translate-y-0' : 'translate-y-12'} ${isDoubleView ? 'hidden md:block' : ''}`}>
             <span className="px-3.5 py-2 md:px-4 md:py-2 bg-white/10 backdrop-blur-md text-[10px] md:text-[10px] tracking-[0.3em] uppercase font-bold border border-white/20">
               Ver Perfil
             </span>
@@ -77,6 +78,13 @@ const ModelCard: React.FC<{ model: Model; index: number }> = ({ model, index }) 
 };
 
 const ModelsGrid: React.FC = () => {
+  const [viewMode, setViewMode] = useState<'normal' | 'double'>('normal');
+
+  const handleViewChange = (mode: 'normal' | 'double') => {
+    console.log('Cambiando vista a:', mode);
+    setViewMode(mode);
+  };
+
   return (
     <section className="py-24 bg-[#0a0a0a]">
       <div className="max-w-[1600px] mx-auto px-0 md:px-6">
@@ -88,12 +96,45 @@ const ModelsGrid: React.FC = () => {
           className="text-center mb-16 px-4 md:px-0"
         >
           <h2 className="text-3xl md:text-5xl font-light mb-4">Escorts VIP <span className="italic">de Lujo</span></h2>
-          <div className="w-20 h-[1px] bg-[#c2b2a3] mx-auto"></div>
+          <div className="w-20 h-[1px] bg-[#c2b2a3] mx-auto mb-8"></div>
+          
+          {/* View Mode Toggle */}
+          <div className="flex justify-center items-center space-x-4 mb-8">
+            <span className="text-[10px] text-[#c2b2a3] uppercase tracking-[0.3em]">Vista:</span>
+            <div className="flex bg-[#1a1a1a] border border-[#c2b2a3]/20 rounded-full p-1">
+              <button
+                onClick={() => handleViewChange('normal')}
+                className={`flex items-center space-x-2 px-4 py-2 rounded-full transition-all duration-300 ${
+                  viewMode === 'normal' 
+                    ? 'bg-[#c2b2a3] text-black' 
+                    : 'text-[#c2b2a3] hover:text-white'
+                }`}
+              >
+                <Grid3X3 size={16} />
+                <span className="text-[10px] font-medium tracking-[0.2em] uppercase">Normal</span>
+              </button>
+              <button
+                onClick={() => handleViewChange('double')}
+                className={`flex items-center space-x-2 px-4 py-2 rounded-full transition-all duration-300 ${
+                  viewMode === 'double' 
+                    ? 'bg-[#c2b2a3] text-black' 
+                    : 'text-[#c2b2a3] hover:text-white'
+                }`}
+              >
+                <LayoutGrid size={16} />
+                <span className="text-[10px] font-medium tracking-[0.2em] uppercase">2x2</span>
+              </button>
+            </div>
+          </div>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8 md:gap-6 lg:gap-8">
+        <div className={`grid gap-8 md:gap-6 lg:gap-8 ${
+          viewMode === 'normal' 
+            ? 'grid-cols-1 md:grid-cols-3 lg:grid-cols-4' 
+            : 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4'
+        }`}>
           {MODELS.map((model, index) => (
-            <ModelCard key={model.id} model={model} index={index} />
+            <ModelCard key={model.id} model={model} index={index} isDoubleView={viewMode === 'double'} />
           ))}
         </div>
 

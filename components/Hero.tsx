@@ -15,8 +15,16 @@ const Hero: React.FC = () => {
           loop
           muted
           playsInline
+          preload="metadata"
+          onLoadedData={(e) => {
+            e.currentTarget.play().catch(() => {});
+          }}
           className="w-full h-full object-cover"
-        />
+          style={{ objectFit: 'cover' }}
+        >
+          <source src="/video/plaza-escort-valencia-centro-alojamiento.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
       </div>
 
       {/* Content */}
