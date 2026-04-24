@@ -1,5 +1,33 @@
 [
   {
+    "slug": "teresa",
+    "name": "Teresa",
+    "age": 20,
+    "height": "1.52 m",
+    "weight": "45 kg",
+    "nationality": "Española",
+    "city": "Valencia",
+    "profileUrl": "https://www.valeriaferrer.com/teresa-model-agency-valencia-vf/",
+    "coverImageUrl": "/chicas/teresa-valeria-ferrer-model-agency-valencia/cover.jpg",
+    "description": "Teresa es una española joven y vibrante de 20 años. Con 1.52m y 45 kg, combina frescura y naturalidad con una energía contagiosa. Perfecta para quienes buscan experiencias auténticas y llenas de vitalidad.",
+    "essence": "Esencia de Teresa: Una joya española cuya juventud y espontaneidad crean momentos mágicos y genuinos. Su presencia cálida y su carisma natural la hacen especial, capaz de transformar cualquier encuentro en una experiencia refreshingly auténtica. Teresa representa la belleza joven y la pasión española en su máxima expresión.",
+    "images": [
+      "/chicas/teresa-valeria-ferrer-model-agency-valencia/cover.jpg",
+      "/chicas/teresa-valeria-ferrer-model-agency-valencia/1.jpg",
+      "/chicas/teresa-valeria-ferrer-model-agency-valencia/2.jpg",
+      "/chicas/teresa-valeria-ferrer-model-agency-valencia/3.jpg"
+    ],
+    "services": [
+      "Girlfriend Experience",
+      "Cenas de Negocios",
+      "Eventos Sociales",
+      "Acompañamiento Personal"
+    ],
+    "availability": "24h",
+    "languages": ["Español"],
+    "featured": true
+  },
+  {
     "slug": "gaby-vip",
     "name": "Gaby",
     "age": 25,

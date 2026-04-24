@@ -31,7 +31,7 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolled, openMembers }) => {
         {/* Logo */}
         <Link to="/" className="flex items-center space-x-6 lg:space-x-8 lg:ml-4">
           <div className="flex flex-col">
-            <span className="text-2xl md:text-3xl tracking-[0.1em] font-light luxury-text-gradient uppercase leading-none whitespace-nowrap">Valeria Ferrer</span>
+            <span className="text-2xl md:text-3xl tracking-[0.05em] font-[300] luxury-text-gradient uppercase leading-none whitespace-nowrap" style={{ fontFamily: 'Playfair Display, serif', letterSpacing: '0.15em', fontWeight: '300' }}>Valeria Ferrer</span>
             <span className="text-[10px] md:text-[11px] tracking-[0.4em] uppercase text-[#c2b2a3] font-medium mt-1">Agencia de Modelos de Lujo</span>
           </div>
         </Link>

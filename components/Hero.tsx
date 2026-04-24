@@ -37,7 +37,7 @@ const Hero: React.FC = () => {
           transition={{ duration: 1, ease: 'easeOut' }}
           className="text-5xl md:text-8xl font-light mb-6 tracking-wider leading-tight"
         >
-          Valeria <span className="luxury-text-gradient font-bold italic uppercase">Ferrer</span>
+          Valeria Ferrer
           <br />
           <span className="text-2xl md:text-4xl tracking-[0.4em] font-light">
           Agencia Premium

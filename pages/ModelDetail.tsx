@@ -58,7 +58,15 @@ const ModelDetail: React.FC = () => {
           <div className="sticky top-40">
             <div className="relative group">
               <div className="absolute -inset-1 bg-gradient-to-b from-[#c2b2a3]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
-              <div className="aspect-[3/4.2] overflow-hidden border border-white/5 bg-[#111111]">
+              <div 
+                className="aspect-[3/4.2] overflow-hidden border border-white/5 bg-[#111111] cursor-pointer active:scale-[0.98] transition-transform duration-150"
+                onClick={() => openGallery(0)}
+                onTouchEnd={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  openGallery(0);
+                }}
+              >
                 <img 
                   src={model.image} 
                   alt={model.name} 
@@ -72,11 +80,12 @@ const ModelDetail: React.FC = () => {
             </div>
             
             {/* Quick Stats Overlay (Mobile Only) */}
-            <div className="lg:hidden grid grid-cols-3 gap-3 mt-8">
+            <div className="lg:hidden grid grid-cols-2 gap-3 mt-8">
               {[
                 { label: 'Edad', val: model.age },
-                { label: 'Estatura', val: `${model.height}cm` },
-                { label: 'Peso', val: `${model.weight}kg` }
+                { label: 'Estatura', val: `${model.height} cm` },
+                { label: 'Peso', val: `${model.weight} kg` },
+                { label: 'Nacionalidad', val: model.nationality || 'Española' }
               ].map((stat, idx) => (
                 <div key={idx} className="bg-[#111111] p-5 border border-white/5 text-center">
                   <p className="text-[9px] text-gray-500 uppercase tracking-[0.3em] mb-2 font-bold">{stat.label}</p>
@@ -115,69 +124,8 @@ const ModelDetail: React.FC = () => {
             </p>
           </div>
 
-          {/* Detailed Stats Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-y-12 gap-x-8 p-10 bg-white/[0.02] border border-white/5">
-            <div className="space-y-3">
-              <div className="flex items-center text-[#c2b2a3] opacity-60">
-                <User size={14} className="mr-2" />
-                <span className="text-[9px] uppercase tracking-[0.3em] font-bold">Origen</span>
-              </div>
-              <p className="text-lg font-light tracking-wide">{model.nationality || 'Española'}</p>
-            </div>
-            <div className="space-y-3">
-              <div className="flex items-center text-[#c2b2a3] opacity-60">
-                <Ruler size={14} className="mr-2" />
-                <span className="text-[9px] uppercase tracking-[0.3em] font-bold">Estadísticas</span>
-              </div>
-              <p className="text-lg font-light tracking-wide">{model.height}cm / {model.weight}kg</p>
-            </div>
-            <div className="space-y-3">
-              <div className="flex items-center text-[#c2b2a3] opacity-60">
-                <Heart size={14} className="mr-2" />
-                <span className="text-[9px] uppercase tracking-[0.3em] font-bold">Ojos / Cabello</span>
-              </div>
-              <p className="text-lg font-light tracking-wide">Miel / Oscuro</p>
-            </div>
-            <div className="space-y-3">
-              <div className="flex items-center text-[#c2b2a3] opacity-60">
-                <Sparkles size={14} className="mr-2" />
-                <span className="text-[9px] uppercase tracking-[0.3em] font-bold">Idiomas</span>
-              </div>
-              <p className="text-lg font-light tracking-wide">ES, EN, DE</p>
-            </div>
-          </div>
+          
 
-          {/* Services Offered */}
-          <div className="space-y-8">
-            <h3 className="text-2xl serif text-white uppercase tracking-widest flex items-center">
-              Servicios <span className="ml-4 h-[1px] w-20 bg-[#c2b2a3]/30"></span>
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
-              {(model.services || ['Girlfriend Experience', 'Acompañamiento en Viajes', 'Cenas de Negocios']).map((service, idx) => (
-                <div key={idx} className="group flex items-center space-x-4">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#c2b2a3] transition-all group-hover:scale-150"></div>
-                  <span className="text-sm tracking-[0.1em] text-gray-400 group-hover:text-white transition-colors">{service}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Contact / CTA */}
-          <div className="flex flex-col md:flex-row gap-6 pt-10">
-            <Link 
-              to="/booking" 
-              className="flex-[1.5] text-center py-6 luxury-gradient text-black font-bold uppercase tracking-[0.4em] text-[10px] hover:scale-[1.02] transition-all duration-500 shadow-xl"
-            >
-              Solicitar Encuentro
-            </Link>
-            <a 
-              href="tel:645872227" 
-              className="flex-1 flex items-center justify-center space-x-3 text-center py-6 border border-[#c2b2a3]/30 text-[#c2b2a3] uppercase tracking-[0.3em] text-[10px] font-bold hover:bg-[#c2b2a3] hover:text-black transition-all duration-700"
-            >
-              <Phone size={14} /> 
-              <span>Llamada Directa</span>
-            </a>
-          </div>
         </div>
       </section>
 
@@ -199,7 +147,7 @@ const ModelDetail: React.FC = () => {
               <div 
                 key={idx} 
                 className={`relative overflow-hidden bg-[#111111] group cursor-pointer border border-white/5 ${idx % 3 === 0 ? 'md:row-span-2' : ''}`}
-                onClick={() => openGallery(idx)}
+                onClick={() => openGallery(idx + 1)}
               >
                 <img 
                   src={img} 
@@ -218,36 +166,146 @@ const ModelDetail: React.FC = () => {
         </div>
       </section>
 
-      {/* Availability Section */}
-      <section className="py-32 bg-[#0a0a0a]">
-        <div className="max-w-4xl mx-auto px-6">
-          <div className="bg-[#111111] p-12 md:p-20 border border-[#c2b2a3]/20 relative overflow-hidden">
-            <div className="absolute -right-20 -top-20 w-64 h-64 bg-[#c2b2a3]/5 rounded-full blur-3xl"></div>
-            
-            <div className="relative z-10 text-center mb-16">
-              <Calendar size={48} className="mx-auto text-[#c2b2a3] mb-6 opacity-30" />
-              <h3 className="text-3xl serif text-white uppercase tracking-[0.2em]">Disponibilidad</h3>
-              <div className="w-12 h-[2px] bg-[#c2b2a3] mx-auto mt-4"></div>
-            </div>
+      {/* Request Meeting Button */}
+      <section className="py-16 bg-[#0a0a0a]">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <Link 
+            to="/booking" 
+            className="inline-flex items-center justify-center px-16 py-6 luxury-gradient text-black font-bold uppercase tracking-[0.4em] text-[10px] hover:scale-[1.02] transition-all duration-500 shadow-xl"
+          >
+            Solicitar Encuentro
+          </Link>
+        </div>
+      </section>
 
-            <div className="relative z-10 space-y-6 max-w-md mx-auto">
-              {Object.entries(model.availability || {}).map(([day, hours]) => (
-                <div key={day} className="flex justify-between items-center group">
-                  <span className="text-[11px] uppercase tracking-[0.4em] text-gray-500 group-hover:text-[#c2b2a3] transition-colors font-bold">{day}</span>
-                  <div className="h-[1px] flex-1 mx-6 bg-white/5 group-hover:bg-[#c2b2a3]/20 transition-colors"></div>
-                  <span className="text-sm font-medium tracking-widest text-gray-300">{hours}</span>
-                </div>
-              ))}
+      {/* Pricing Table */}
+      <section className="py-32 bg-[#080808] border-t border-white/5">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl md:text-6xl font-light mb-6 tracking-tight">Tarifas <span className="italic luxury-text-gradient">Premium</span></h2>
+            <p className="text-gray-500 text-sm font-light leading-relaxed uppercase tracking-widest max-w-2xl mx-auto">
+              Experiencias exclusivas adaptadas a tus necesidades. Todas nuestras tarifas incluyen discreción absoluta y servicio de primera clase.
+            </p>
+          </div>
+          
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-[#111111] border border-[#c2b2a3]/20 overflow-hidden">
+              <div className="grid grid-cols-2 divide-x divide-[#c2b2a3]/10">
+                {model.name === 'Gaby' ? (
+                  // VIP Tariffs for Gaby
+                  <>
+                    <div className="p-6 space-y-1">
+                      <div className="flex justify-between items-center py-4 border-b border-white/5">
+                        <span className="text-sm text-gray-400 tracking-[0.1em]">1 hora</span>
+                        <span className="text-lg font-light luxury-text-gradient">180 €</span>
+                      </div>
+                      <div className="flex justify-between items-center py-4 border-b border-white/5">
+                        <span className="text-sm text-gray-400 tracking-[0.1em]">45 minutos</span>
+                        <span className="text-lg font-light luxury-text-gradient">150 €</span>
+                      </div>
+                      <div className="flex justify-between items-center py-4 border-b border-white/5">
+                        <span className="text-sm text-gray-400 tracking-[0.1em]">30 minutos</span>
+                        <span className="text-lg font-light luxury-text-gradient">120 €</span>
+                      </div>
+                      <div className="flex justify-between items-center py-4 border-b border-white/5">
+                        <span className="text-sm text-gray-400 tracking-[0.1em]">2 horas</span>
+                        <span className="text-lg font-light luxury-text-gradient">350 €</span>
+                      </div>
+                      <div className="flex justify-between items-center py-4">
+                        <span className="text-sm text-gray-400 tracking-[0.1em]">3 horas</span>
+                        <span className="text-lg font-light luxury-text-gradient">520 €</span>
+                      </div>
+                    </div>
+                    <div className="p-6 space-y-1">
+                      <div className="flex justify-between items-center py-4 border-b border-white/5">
+                        <span className="text-sm text-gray-400 tracking-[0.1em]">Salida hotel</span>
+                        <span className="text-lg font-light luxury-text-gradient">250 €</span>
+                      </div>
+                      <div className="flex justify-between items-center py-4 border-b border-white/5">
+                        <span className="text-sm text-gray-400 tracking-[0.1em]">Noche (10 horas)</span>
+                        <span className="text-lg font-light luxury-text-gradient">2.000 €</span>
+                      </div>
+                      <div className="flex justify-between items-center py-4 border-b border-white/5">
+                        <span className="text-sm text-gray-400 tracking-[0.1em]">Todo el día (24 horas)</span>
+                        <span className="text-lg font-light luxury-text-gradient">3.000 €</span>
+                      </div>
+                      <div className="flex justify-between items-center py-4">
+                        <span className="text-sm text-gray-400 tracking-[0.1em]">Dos días (48 horas)</span>
+                        <span className="text-lg font-light luxury-text-gradient">4.000 €</span>
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  // Standard Tariffs for other models
+                  <>
+                    <div className="p-6 space-y-1">
+                      <div className="flex justify-between items-center py-4 border-b border-white/5">
+                        <span className="text-sm text-gray-400 tracking-[0.1em]">1 hora</span>
+                        <span className="text-lg font-light luxury-text-gradient">150 €</span>
+                      </div>
+                      <div className="flex justify-between items-center py-4 border-b border-white/5">
+                        <span className="text-sm text-gray-400 tracking-[0.1em]">45 minutos</span>
+                        <span className="text-lg font-light luxury-text-gradient">120 €</span>
+                      </div>
+                      <div className="flex justify-between items-center py-4 border-b border-white/5">
+                        <span className="text-sm text-gray-400 tracking-[0.1em]">30 minutos</span>
+                        <span className="text-lg font-light luxury-text-gradient">80 €</span>
+                      </div>
+                      <div className="flex justify-between items-center py-4 border-b border-white/5">
+                        <span className="text-sm text-gray-400 tracking-[0.1em]">1,5 horas</span>
+                        <span className="text-lg font-light luxury-text-gradient">240 €</span>
+                      </div>
+                      <div className="flex justify-between items-center py-4">
+                        <span className="text-sm text-gray-400 tracking-[0.1em]">2 horas</span>
+                        <span className="text-lg font-light luxury-text-gradient">300 €</span>
+                      </div>
+                    </div>
+                    <div className="p-6 space-y-1">
+                      <div className="flex justify-between items-center py-4 border-b border-white/5">
+                        <span className="text-sm text-gray-400 tracking-[0.1em]">3 horas</span>
+                        <span className="text-lg font-light luxury-text-gradient">430 €</span>
+                      </div>
+                      <div className="flex justify-between items-center py-4 border-b border-white/5">
+                        <span className="text-sm text-gray-400 tracking-[0.1em]">Salida</span>
+                        <span className="text-lg font-light luxury-text-gradient">200 €</span>
+                      </div>
+                      <div className="flex justify-between items-center py-4 border-b border-white/5">
+                        <span className="text-sm text-gray-400 tracking-[0.1em]">Noche (10 horas)</span>
+                        <span className="text-lg font-light luxury-text-gradient">1.200 €</span>
+                      </div>
+                      <div className="flex justify-between items-center py-4 border-b border-white/5">
+                        <span className="text-sm text-gray-400 tracking-[0.1em]">Noche (24 horas)</span>
+                        <span className="text-lg font-light luxury-text-gradient">2.800 €</span>
+                      </div>
+                      <div className="flex justify-between items-center py-4">
+                        <span className="text-sm text-gray-400 tracking-[0.1em]">Dos días (48 horas)</span>
+                        <span className="text-lg font-light luxury-text-gradient">3.700 €</span>
+                      </div>
+                    </div>
+                  </>
+                )}
+              </div>
             </div>
             
-            <div className="mt-20 text-center relative z-10">
-              <p className="text-[10px] text-gray-600 tracking-[0.5em] uppercase mb-10">Disponibilidad limitada en Barcelona / Madrid</p>
-              <Link 
-                to="/booking" 
-                className="inline-block px-14 py-5 bg-white text-black text-[10px] font-bold tracking-[0.4em] uppercase hover:bg-[#c2b2a3] transition-all duration-500"
-              >
-                Consultar Estado
-              </Link>
+            <div className="mt-12 text-center">
+              <p className="text-[10px] text-gray-600 tracking-[0.5em] uppercase mb-8">
+                * Todas las tarifas son en euros • Servicios adicionales disponibles • Consultar condiciones
+              </p>
+              <div className="flex flex-col md:flex-row gap-6 justify-center">
+                <Link 
+                  to="/booking" 
+                  className="inline-flex items-center justify-center px-12 py-5 luxury-gradient text-black font-bold uppercase tracking-[0.4em] text-[10px] hover:scale-[1.02] transition-all duration-500"
+                >
+                  Reservar Ahora
+                </Link>
+                <a 
+                  href="tel:645872227" 
+                  className="inline-flex items-center justify-center px-12 py-5 border border-[#c2b2a3]/30 text-[#c2b2a3] uppercase tracking-[0.3em] text-[10px] font-bold hover:bg-[#c2b2a3] hover:text-black transition-all duration-700"
+                >
+                  <Phone size={14} className="mr-3" /> 
+                  <span>Llamada Directa</span>
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -264,7 +322,7 @@ const ModelDetail: React.FC = () => {
 
       {/* Gallery Modal */}
       <GalleryModal
-        images={model.gallery || []}
+        images={[model.image, ...(model.gallery || [])].filter(Boolean)}
         initialIndex={currentImageIndex}
         isOpen={isGalleryOpen}
         onClose={closeGallery}
