@@ -28,6 +28,35 @@
     "featured": true
   },
   {
+    "slug": "emma",
+    "name": "Emma",
+    "age": 24,
+    "height": "1.57 m",
+    "weight": "45 kg",
+    "nationality": "Colombiana",
+    "city": "Valencia",
+    "profileUrl": "https://www.valeriaferrer.com/emma-model-agency-valencia-vf-2/",
+    "coverImageUrl": "/chicas/emma-valeria-ferrer-model-agency-valencia/cover.jpg",
+    "description": "Emma es una colombiana sofisticada de 24 años. Con 1.57m y 45 kg, combina elegancia latina con una presencia cautivadora. Perfecta para quienes buscan experiencias refinadas y llenas de pasión.",
+    "essence": "Esencia de Emma: Una joya colombiana cuya madurez y elegancia crean momentos inolvidables y sofisticados. Su presencia magnética y su carisma latino la hacen excepcional, capaz de transformar cualquier encuentro en una experiencia lujosa y apasionada. Emma representa la belleza latina y la sofisticación internacional en su máxima expresión.",
+    "images": [
+      "/chicas/emma-valeria-ferrer-model-agency-valencia/cover.jpg",
+      "/chicas/emma-valeria-ferrer-model-agency-valencia/1.jpg",
+      "/chicas/emma-valeria-ferrer-model-agency-valencia/2.jpg",
+      "/chicas/emma-valeria-ferrer-model-agency-valencia/3.jpg",
+      "/chicas/emma-valeria-ferrer-model-agency-valencia/4.jpg"
+    ],
+    "services": [
+      "Girlfriend Experience",
+      "Cenas de Negocios",
+      "Eventos Sociales",
+      "Acompañamiento Personal"
+    ],
+    "availability": "24h",
+    "languages": ["Español"],
+    "featured": true
+  },
+  {
     "slug": "gaby-vip",
     "name": "Gaby",
     "age": 25,
