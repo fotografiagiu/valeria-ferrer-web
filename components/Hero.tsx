@@ -20,7 +20,9 @@ const Hero: React.FC = () => {
             e.currentTarget.play().catch(() => {});
           }}
           className="w-full h-full object-cover"
-          style={{ objectFit: 'cover' }}
+          style={{ 
+            objectFit: 'cover'
+          } as React.CSSProperties}
         >
           <source src="/video/plaza-escort-valencia-centro-alojamiento.mp4" type="video/mp4" />
           Your browser does not support the video tag.

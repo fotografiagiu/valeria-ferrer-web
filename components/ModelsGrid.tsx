@@ -99,31 +99,43 @@ const ModelsGrid: React.FC = () => {
           <div className="w-20 h-[1px] bg-[#c2b2a3] mx-auto mb-8"></div>
           
           {/* View Mode Toggle */}
-          <div className="flex justify-center items-center space-x-4 mb-8">
-            <span className="text-[10px] text-[#c2b2a3] uppercase tracking-[0.3em]">Vista:</span>
-            <div className="flex bg-[#1a1a1a] border border-[#c2b2a3]/20 rounded-full p-1">
-              <button
-                onClick={() => handleViewChange('normal')}
-                className={`flex items-center space-x-2 px-4 py-2 rounded-full transition-all duration-300 ${
-                  viewMode === 'normal' 
-                    ? 'bg-[#c2b2a3] text-black' 
-                    : 'text-[#c2b2a3] hover:text-white'
-                }`}
-              >
-                <Grid3X3 size={16} />
-                <span className="text-[10px] font-medium tracking-[0.2em] uppercase">Normal</span>
-              </button>
-              <button
-                onClick={() => handleViewChange('double')}
-                className={`flex items-center space-x-2 px-4 py-2 rounded-full transition-all duration-300 ${
-                  viewMode === 'double' 
-                    ? 'bg-[#c2b2a3] text-black' 
-                    : 'text-[#c2b2a3] hover:text-white'
-                }`}
-              >
-                <LayoutGrid size={16} />
-                <span className="text-[10px] font-medium tracking-[0.2em] uppercase">2x2</span>
-              </button>
+          <div className="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-6 mb-8">
+            <div className="flex items-center space-x-4">
+              <span className="text-[10px] text-[#c2b2a3] uppercase tracking-[0.3em]">Vista:</span>
+              <div className="flex bg-[#1a1a1a] border border-[#c2b2a3]/20 rounded-full p-1">
+                <button
+                  onClick={() => handleViewChange('normal')}
+                  className={`flex items-center space-x-2 px-4 py-2 rounded-full transition-all duration-300 ${
+                    viewMode === 'normal' 
+                      ? 'bg-[#c2b2a3] text-black' 
+                      : 'text-[#c2b2a3] hover:text-white'
+                  }`}
+                >
+                  <Grid3X3 size={16} />
+                  <span className="text-[10px] font-medium tracking-[0.2em] uppercase">Normal</span>
+                </button>
+                <button
+                  onClick={() => handleViewChange('double')}
+                  className={`flex items-center space-x-2 px-4 py-2 rounded-full transition-all duration-300 ${
+                    viewMode === 'double' 
+                      ? 'bg-[#c2b2a3] text-black' 
+                      : 'text-[#c2b2a3] hover:text-white'
+                  }`}
+                >
+                  <LayoutGrid size={16} />
+                  <span className="text-[10px] font-medium tracking-[0.2em] uppercase">2x2</span>
+                </button>
+              </div>
+            </div>
+            
+            {/* Texto explicativo */}
+            <div className="text-center md:text-left">
+              <p className="text-[10px] text-gray-500 font-light max-w-xs">
+                {viewMode === 'normal' 
+                  ? 'Visualiza las fichas en grande - Navegación vertical en móvil'
+                  : 'Visualiza las fichas en formato 2x2 - Más modelos visibles'
+                }
+              </p>
             </div>
           </div>
         </motion.div>
@@ -146,6 +158,35 @@ const ModelsGrid: React.FC = () => {
             Ver Todas las Escorts
           </Link>
         </div>
+      </div>
+
+        {/* View Mode Toggle */}
+        <div className="flex justify-center items-center space-x-4 mb-8">
+          <span className="text-[10px] text-[#c2b2a3] uppercase tracking-[0.3em]">Vista:</span>
+          <div className="flex bg-[#1a1a1a] border border-[#c2b2a3]/20 rounded-full p-1">
+            <button
+              onClick={() => handleViewChange('normal')}
+              className={`flex items-center space-x-2 px-4 py-2 rounded-full transition-all duration-300 ${
+                viewMode === 'normal' 
+                  ? 'bg-[#c2b2a3] text-black' 
+                  : 'text-[#c2b2a3] hover:text-white'
+              }`}
+            >
+              <Grid3X3 size={16} />
+              <span className="text-[10px] font-medium tracking-[0.2em] uppercase">Normal</span>
+            </button>
+            <button
+              onClick={() => handleViewChange('double')}
+              className={`flex items-center space-x-2 px-4 py-2 rounded-full transition-all duration-300 ${
+                viewMode === 'double' 
+                  ? 'bg-[#c2b2a3] text-black' 
+                  : 'text-[#c2b2a3] hover:text-white'
+              }`}
+            >
+              <LayoutGrid size={16} />
+              <span className="text-[10px] font-medium tracking-[0.2em] uppercase">2x2</span>
+            </button>
+          </div>
       </div>
     </section>
   );
