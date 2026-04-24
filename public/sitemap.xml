@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- Página Principal -->
+  <url>
+    <loc>https://valeriaferrer.com/</loc>
+    <lastmod>2026-04-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <!-- Página de Modelos -->
+  <url>
+    <loc>https://valeriaferrer.com/models</loc>
+    <lastmod>2026-04-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Perfiles de Modelos con Imágenes -->
+  <url>
+    <loc>https://valeriaferrer.com/model/teresa</loc>
+    <lastmod>2026-04-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://valeriaferrer.com/chicas/teresa-valeria-ferrer-model-agency-valencia/cover.jpg</image:loc>
+      <image:title>Teresa - Modelo Valeria Ferrer Valencia</image:title>
+      <image:caption>Teresa, modelo española de 20 años disponible en Valencia</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://valeriaferrer.com/chicas/teresa-valeria-ferrer-model-agency-valencia/1.jpg</image:loc>
+      <image:title>Teresa Galería 1 - Modelo Valencia</image:title>
+      <image:caption>Foto profesional de Teresa, modelo exclusiva Valeria Ferrer</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://valeriaferrer.com/chicas/teresa-valeria-ferrer-model-agency-valencia/2.jpg</image:loc>
+      <image:title>Teresa Galería 2 - Modelo Española</image:title>
+      <image:caption>Teresa modelo española en Valencia - Valeria Ferrer Agency</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://valeriaferrer.com/chicas/teresa-valeria-ferrer-model-agency-valencia/3.jpg</image:loc>
+      <image:title>Teresa Galería 3 - Agencia Premium</image:title>
+      <image:caption>Modelo Teresa exclusiva para eventos y acompañamiento en Valencia</image:caption>
+    </image:image>
+  </url>
+  
+  <url>
+    <loc>https://valeriaferrer.com/model/emma</loc>
+    <lastmod>2026-04-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://valeriaferrer.com/chicas/emma-valeria-ferrer-model-agency-valencia/cover.jpg</image:loc>
+      <image:title>Emma - Modelo Colombiana Valeria Ferrer</image:title>
+      <image:caption>Emma, modelo colombiana de 24 años disponible en Valencia</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://valeriaferrer.com/chicas/emma-valeria-ferrer-model-agency-valencia/1.jpg</image:loc>
+      <image:title>Emma Galería 1 - Modelo Colombiana Valencia</image:title>
+      <image:caption>Foto profesional de Emma, modelo colombiana exclusiva</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://valeriaferrer.com/chicas/emma-valeria-ferrer-model-agency-valencia/2.jpg</image:loc>
+      <image:title>Emma Galería 2 - Modelo Latina</image:title>
+      <image:caption>Emma modelo colombiana elegante y sofisticada en Valencia</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://valeriaferrer.com/chicas/emma-valeria-ferrer-model-agency-valencia/3.jpg</image:loc>
+      <image:title>Emma Galería 3 - Agencia Models</image:title>
+      <image:caption>Emma modelo colombiana para cenas y eventos en Valencia</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://valeriaferrer.com/chicas/emma-valeria-ferrer-model-agency-valencia/4.jpg</image:loc>
+      <image:title>Emma Galería 4 - Modelo Exclusiva</image:title>
+      <image:caption>Emma modelo colombiana premium - Valeria Ferrer Agency</image:caption>
+    </image:image>
+  </url>
+  
+  <!-- Otras páginas importantes -->
+  <url>
+    <loc>https://valeriaferrer.com/about</loc>
+    <lastmod>2026-04-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://valeriaferrer.com/contact</loc>
+    <lastmod>2026-04-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://valeriaferrer.com/booking</loc>
+    <lastmod>2026-04-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+</urlset>

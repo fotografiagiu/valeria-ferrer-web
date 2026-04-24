@@ -1,0 +1,40 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Emma",
+  "description": "Emma es una colombiana sofisticada de 24 años. Con 1.57m y 45 kg, combina elegancia latina con una presencia cautivadora. Perfecta para quienes buscan experiencias refinadas y llenas de pasión.",
+  "url": "https://valeriaferrer.com/model/emma",
+  "image": [
+    "https://valeriaferrer.com/chicas/emma-valeria-ferrer-model-agency-valencia/cover.jpg",
+    "https://valeriaferrer.com/chicas/emma-valeria-ferrer-model-agency-valencia/1.jpg",
+    "https://valeriaferrer.com/chicas/emma-valeria-ferrer-model-agency-valencia/2.jpg",
+    "https://valeriaferrer.com/chicas/emma-valeria-ferrer-model-agency-valencia/3.jpg",
+    "https://valeriaferrer.com/chicas/emma-valeria-ferrer-model-agency-valencia/4.jpg"
+  ],
+  "nationality": "Colombiana",
+  "jobTitle": "Modelo VIP",
+  "knowsLanguage": [
+    "Español"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "itemOffered": {
+      "@type": "Service",
+      "name": "Acompañamiento Premium",
+      "description": "Servicios exclusivos de acompañamiento con Emma en Valencia"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Valencia"
+    },
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "name": "Contacto Directo",
+      "url": "https://valeriaferrer.com/contact"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://valeriaferrer.com/model/emma"
+  }
+}

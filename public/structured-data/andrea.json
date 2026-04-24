@@ -1,0 +1,47 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Andrea",
+  "description": "Andrea es una uruguaya sofisticada de 28 años con una figura esbelta y elegante. Con 1.65m y 50 kilos, combina madurez y sensualidad con un toque sudamericano distintivo. Ideal para experiencias refinadas y memorables.",
+  "url": "https://valeriaferrer.com/model/andrea",
+  "image": [
+    "https://valeriaferrer.com/chicas/andrea-model-agency-valencia-vf-3/gallery/01.jpg",
+    "https://valeriaferrer.com/chicas/andrea-model-agency-valencia-vf-3/gallery/02.jpg",
+    "https://valeriaferrer.com/chicas/andrea-model-agency-valencia-vf-3/gallery/03.jpg",
+    "https://valeriaferrer.com/chicas/andrea-model-agency-valencia-vf-3/gallery/04.jpg",
+    "https://valeriaferrer.com/chicas/andrea-model-agency-valencia-vf-3/gallery/05.jpg",
+    "https://valeriaferrer.com/chicas/andrea-model-agency-valencia-vf-3/gallery/06.jpg",
+    "https://valeriaferrer.com/chicas/andrea-model-agency-valencia-vf-3/gallery/07.jpg",
+    "https://valeriaferrer.com/chicas/andrea-model-agency-valencia-vf-3/gallery/08.jpg",
+    "https://valeriaferrer.com/chicas/andrea-model-agency-valencia-vf-3/gallery/09.jpg",
+    "https://valeriaferrer.com/chicas/andrea-model-agency-valencia-vf-3/gallery/10.jpg",
+    "https://valeriaferrer.com/chicas/andrea-model-agency-valencia-vf-3/gallery/11.jpg",
+    "https://valeriaferrer.com/chicas/andrea-model-agency-valencia-vf-3/gallery/12.jpg"
+  ],
+  "nationality": "Uruguaya",
+  "jobTitle": "Modelo VIP",
+  "knowsLanguage": [
+    "Español"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "itemOffered": {
+      "@type": "Service",
+      "name": "Acompañamiento Premium",
+      "description": "Servicios exclusivos de acompañamiento con Andrea en Valencia"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Valencia"
+    },
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "name": "Contacto Directo",
+      "url": "https://valeriaferrer.com/contact"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://valeriaferrer.com/model/andrea"
+  }
+}

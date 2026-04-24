@@ -1,0 +1,47 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Maria",
+  "description": "Maria es una española madura y experimentada de 29 años. Con 1.57m y una figura bien proporcionada, ofrece la combinación perfecta de elegancia y pasión. Su experiencia garantiza momentos inolvidables y sofisticados.",
+  "url": "https://valeriaferrer.com/model/maria",
+  "image": [
+    "https://valeriaferrer.com/chicas/maria-model-agency-valencia-valeria-ferrer/gallery/01.jpg",
+    "https://valeriaferrer.com/chicas/maria-model-agency-valencia-valeria-ferrer/gallery/02.jpg",
+    "https://valeriaferrer.com/chicas/maria-model-agency-valencia-valeria-ferrer/gallery/03.jpg",
+    "https://valeriaferrer.com/chicas/maria-model-agency-valencia-valeria-ferrer/gallery/04.jpg",
+    "https://valeriaferrer.com/chicas/maria-model-agency-valencia-valeria-ferrer/gallery/05.jpg",
+    "https://valeriaferrer.com/chicas/maria-model-agency-valencia-valeria-ferrer/gallery/06.jpg",
+    "https://valeriaferrer.com/chicas/maria-model-agency-valencia-valeria-ferrer/gallery/07.jpg",
+    "https://valeriaferrer.com/chicas/maria-model-agency-valencia-valeria-ferrer/gallery/08.jpg",
+    "https://valeriaferrer.com/chicas/maria-model-agency-valencia-valeria-ferrer/gallery/09.jpg",
+    "https://valeriaferrer.com/chicas/maria-model-agency-valencia-valeria-ferrer/gallery/10.jpg",
+    "https://valeriaferrer.com/chicas/maria-model-agency-valencia-valeria-ferrer/gallery/11.jpg",
+    "https://valeriaferrer.com/chicas/maria-model-agency-valencia-valeria-ferrer/gallery/12.jpg"
+  ],
+  "nationality": "Española",
+  "jobTitle": "Modelo VIP",
+  "knowsLanguage": [
+    "Español"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "itemOffered": {
+      "@type": "Service",
+      "name": "Acompañamiento Premium",
+      "description": "Servicios exclusivos de acompañamiento con Maria en Valencia"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Valencia"
+    },
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "name": "Contacto Directo",
+      "url": "https://valeriaferrer.com/contact"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://valeriaferrer.com/model/maria"
+  }
+}

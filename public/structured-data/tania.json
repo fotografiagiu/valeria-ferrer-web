@@ -1,0 +1,47 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Tania",
+  "description": "Tania es una colombiana apasionada de 25 años con 1.63m de estatura. Su figura equilibrada de 52 kilos y temperamento ardiente la hacen perfecta para experiencias intensas y memorables con sabor latino.",
+  "url": "https://valeriaferrer.com/model/tania",
+  "image": [
+    "https://valeriaferrer.com/chicas/tania-model-agency-valencia-vf/gallery/01.jpg",
+    "https://valeriaferrer.com/chicas/tania-model-agency-valencia-vf/gallery/02.jpg",
+    "https://valeriaferrer.com/chicas/tania-model-agency-valencia-vf/gallery/03.jpg",
+    "https://valeriaferrer.com/chicas/tania-model-agency-valencia-vf/gallery/04.jpg",
+    "https://valeriaferrer.com/chicas/tania-model-agency-valencia-vf/gallery/05.jpg",
+    "https://valeriaferrer.com/chicas/tania-model-agency-valencia-vf/gallery/06.jpg",
+    "https://valeriaferrer.com/chicas/tania-model-agency-valencia-vf/gallery/07.jpg",
+    "https://valeriaferrer.com/chicas/tania-model-agencia-valencia-vf/gallery/08.jpg",
+    "https://valeriaferrer.com/chicas/tania-model-agency-valencia-vf/gallery/09.jpg",
+    "https://valeriaferrer.com/chicas/tania-model-agency-valencia-vf/gallery/10.jpg",
+    "https://valeriaferrer.com/chicas/tania-model-agency-valencia-vf/gallery/11.jpg",
+    "https://valeriaferrer.com/chicas/tania-model-agency-valencia-vf/gallery/12.jpg"
+  ],
+  "nationality": "Colombiana",
+  "jobTitle": "Modelo VIP",
+  "knowsLanguage": [
+    "Español"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "itemOffered": {
+      "@type": "Service",
+      "name": "Acompañamiento Premium",
+      "description": "Servicios exclusivos de acompañamiento con Tania en Valencia"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Valencia"
+    },
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "name": "Contacto Directo",
+      "url": "https://valeriaferrer.com/contact"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://valeriaferrer.com/model/tania"
+  }
+}

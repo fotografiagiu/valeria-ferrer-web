@@ -1,0 +1,47 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Silvia",
+  "description": "Silvia es una joven venezolana de 19 años con una fresca y juvenil energía. Con 1.60m y una figura delicada de 48 kilos, combina inocencia con un toque de misterio. Perfecta para aventuras emocionantes y nuevas experiencias.",
+  "url": "https://valeriaferrer.com/model/silvia",
+  "image": [
+    "https://valeriaferrer.com/chicas/silvia-model-agency-valencia/gallery/01.jpg",
+    "https://valeriaferrer.com/chicas/silvia-model-agency-valencia/gallery/02.jpg",
+    "https://valeriaferrer.com/chicas/silvia-model-agency-valencia/gallery/03.jpg",
+    "https://valeriaferrer.com/chicas/silvia-model-agencia-valencia/gallery/04.jpg",
+    "https://valeriaferrer.com/chicas/silvia-model-agency-valencia/gallery/05.jpg",
+    "https://valeriaferrer.com/chicas/silvia-model-agency-valencia/gallery/06.jpg",
+    "https://valeriaferrer.com/chicas/silvia-model-agencia-valencia/gallery/07.jpg",
+    "https://valeriaferrer.com/chicas/silvia-model-agency-valencia/gallery/08.jpg",
+    "https://valeriaferrer.com/chicas/silvia-model-agencia-valencia/gallery/09.jpg",
+    "https://valeriaferrer.com/chicas/silvia-model-agencia-valencia/gallery/10.jpg",
+    "https://valeriaferrer.com/chicas/silvia-model-agencia-valencia/gallery/11.jpg",
+    "https://valeriaferrer.com/chicas/silvia-model-agencia-valencia/gallery/12.jpg"
+  ],
+  "nationality": "Venezolana",
+  "jobTitle": "Modelo VIP",
+  "knowsLanguage": [
+    "Español"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "itemOffered": {
+      "@type": "Service",
+      "name": "Acompañamiento Premium",
+      "description": "Servicios exclusivos de acompañamiento con Silvia en Valencia"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Valencia"
+    },
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "name": "Contacto Directo",
+      "url": "https://valeriaferrer.com/contact"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://valeriaferrer.com/model/silvia"
+  }
+}

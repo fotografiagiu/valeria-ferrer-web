@@ -1,0 +1,18 @@
+# REDIRECCIONES 301 PARA CAMBIO DE DOMINIO
+# Archivo de referencia para configurar redirecciones en el servidor
+
+# Redirecciones de perfiles individuales (ejemplos)
+Redirect 301 /teresa-model-agency-valencia-vf/ https://valeriaferrer.com/model/teresa
+Redirect 301 /emma-model-agency-valencia-vf-2/ https://valeriaferrer.com/model/emma
+
+# Redirecciones de categorías
+Redirect 301 /category/valencia-models https://valeriaferrer.com/models
+Redirect 301 /category/escorts-valencia https://valeriaferrer.com/models
+
+# Redirección general del dominio antiguo al nuevo
+# (configurar en DNS o servidor virtual)
+# old-domain.com -> new-domain.com
+
+# Redirecciones de imágenes específicas si cambian las URLs
+Redirect 301 /wp-content/uploads/2026/04/TERESA_Valencia.jpeg https://valeriaferrer.com/chicas/teresa-valeria-ferrer-model-agency-valencia/cover.jpg
+Redirect 301 /wp-content/uploads/2026/04/EMMA_Escrot_Valencia.jpeg https://valeriaferrer.com/chicas/emma-valeria-ferrer-model-agency-valencia/cover.jpg

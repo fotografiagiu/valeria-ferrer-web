@@ -1,0 +1,40 @@
+User-agent: *
+Allow: /
+
+# Priorizar indexación de imágenes
+Allow: /chicas/
+Allow: /public/chicas/
+
+# Bloquear archivos del sistema y desarrollo
+Disallow: /scripts/
+Disallow: /.git/
+Disallow: /node_modules/
+Disallow: /src/
+Disallow: /*.json$
+Disallow: /*.js$
+Disallow: /*.ts$
+Disallow: /*.tsx$
+
+# Permitir indexación de contenido importante
+Allow: /$
+Allow: /models$
+Allow: /model/
+Allow: /about$
+Allow: /contact$
+Allow: /booking$
+
+# Sitemap location
+Sitemap: https://valeriaferrer.com/sitemap.xml
+
+# Google Image Bot específico
+User-agent: Googlebot-Image
+Allow: /chicas/
+Allow: /public/chicas/
+
+# Bing Image Bot
+User-agent: msnbot-media
+Allow: /chicas/
+Allow: /public/chicas/
+
+# Configuración de crawl-delay para evitar sobrecarga
+Crawl-delay: 1

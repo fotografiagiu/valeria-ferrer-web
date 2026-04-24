@@ -1,0 +1,220 @@
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Modelos VIP Valeria Ferrer",
+  "description": "Catálogo completo de modelos exclusivas en Valencia",
+  "url": "https://valeriaferrer.com/models",
+  "numberOfItems": 21,
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@type": "Person",
+        "name": "Teresa",
+        "url": "https://valeriaferrer.com/model/teresa",
+        "image": "https://valeriaferrer.com/chicas/teresa-valeria-ferrer-model-agency-valencia/cover.jpg"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "item": {
+        "@type": "Person",
+        "name": "Emma",
+        "url": "https://valeriaferrer.com/model/emma",
+        "image": "https://valeriaferrer.com/chicas/emma-valeria-ferrer-model-agency-valencia/cover.jpg"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "item": {
+        "@type": "Person",
+        "name": "Gaby",
+        "url": "https://valeriaferrer.com/model/gaby-vip",
+        "image": "https://valeriaferrer.comhttps://www.valeriaferrer.com/wp-content/uploads/2025/11/PORTADA-2.jpg"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "item": {
+        "@type": "Person",
+        "name": "Elena",
+        "url": "https://valeriaferrer.com/model/elena",
+        "image": "https://valeriaferrer.com/chicas/elena-vf-model-agency-valencia/portada.jpg"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 5,
+      "item": {
+        "@type": "Person",
+        "name": "Lana",
+        "url": "https://valeriaferrer.com/model/lana",
+        "image": "https://valeriaferrer.com/chicas/lana-model-agency-valencia-vf/portada.jpg"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 6,
+      "item": {
+        "@type": "Person",
+        "name": "Mia",
+        "url": "https://valeriaferrer.com/model/mia",
+        "image": "https://valeriaferrer.com/chicas/mia-model-agency-valencia-vf/portada.jpg"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 7,
+      "item": {
+        "@type": "Person",
+        "name": "Estefany",
+        "url": "https://valeriaferrer.com/model/estefany",
+        "image": "https://valeriaferrer.com/chicas/estefany-model-agency-valencia-vf/portada.jpg"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 8,
+      "item": {
+        "@type": "Person",
+        "name": "Carla",
+        "url": "https://valeriaferrer.com/model/carla",
+        "image": "https://valeriaferrer.com/chicas/carla-model-agency-valencia-vf/portada.jpg"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 9,
+      "item": {
+        "@type": "Person",
+        "name": "Maria",
+        "url": "https://valeriaferrer.com/model/maria",
+        "image": "https://valeriaferrer.com/chicas/maria-model-agency-valencia-valeria-ferrer/portada.jpg"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 10,
+      "item": {
+        "@type": "Person",
+        "name": "Carlota",
+        "url": "https://valeriaferrer.com/model/carlota",
+        "image": "https://valeriaferrer.com/chicas/carlota-model-agency-valencia-vf/portada.jpg"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 11,
+      "item": {
+        "@type": "Person",
+        "name": "Claudia (VIP)",
+        "url": "https://valeriaferrer.com/model/claudia-vip",
+        "image": "https://valeriaferrer.com/chicas/claudia-vip-model-agency-valencia/portada.jpg"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 12,
+      "item": {
+        "@type": "Person",
+        "name": "Silvia",
+        "url": "https://valeriaferrer.com/model/silvia",
+        "image": "https://valeriaferrer.com/chicas/silvia-model-agency-valencia/portada.jpg"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 13,
+      "item": {
+        "@type": "Person",
+        "name": "Yaiza",
+        "url": "https://valeriaferrer.com/model/yaiza",
+        "image": "https://valeriaferrer.com/chicas/yaiza-valeria-ferrer-model-agency-valencia/portada.jpg"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 14,
+      "item": {
+        "@type": "Person",
+        "name": "Andrea",
+        "url": "https://valeriaferrer.com/model/andrea",
+        "image": "https://valeriaferrer.com/chicas/andrea-model-agency-valencia-vf-3/portada.jpg"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 15,
+      "item": {
+        "@type": "Person",
+        "name": "Naty",
+        "url": "https://valeriaferrer.com/model/naty",
+        "image": "https://valeriaferrer.com/chicas/naty-valeria-ferrer-model-agency-valencia-2/portada.jpg"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 16,
+      "item": {
+        "@type": "Person",
+        "name": "Erika",
+        "url": "https://valeriaferrer.com/model/erika",
+        "image": "https://valeriaferrer.com/chicas/erika-valeria-ferrer-model-agency-valencia/portada.jpg"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 17,
+      "item": {
+        "@type": "Person",
+        "name": "Alicia",
+        "url": "https://valeriaferrer.com/model/alicia",
+        "image": "https://valeriaferrer.com/chicas/alicia-model-agency-valencia-vf/portada.jpg"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 18,
+      "item": {
+        "@type": "Person",
+        "name": "Paula (VIP)",
+        "url": "https://valeriaferrer.com/model/paula-vip",
+        "image": "https://valeriaferrer.com/chicas/paula-vip-model-agency-valencia/portada.jpg"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 19,
+      "item": {
+        "@type": "Person",
+        "name": "Luna",
+        "url": "https://valeriaferrer.com/model/luna",
+        "image": "https://valeriaferrer.com/chicas/luna-model-agency-valencia-vf/portada.jpg"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 20,
+      "item": {
+        "@type": "Person",
+        "name": "Tania",
+        "url": "https://valeriaferrer.com/model/tania",
+        "image": "https://valeriaferrer.com/chicas/tania-model-agency-valencia-vf/portada.jpg"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 21,
+      "item": {
+        "@type": "Person",
+        "name": "Alba (VIP)",
+        "url": "https://valeriaferrer.com/model/alba-vip",
+        "image": "https://valeriaferrer.com/chicas/alba-vip-model-agency-valencia/portada.jpg"
+      }
+    }
+  ]
+}

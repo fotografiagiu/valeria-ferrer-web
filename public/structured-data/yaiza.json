@@ -1,0 +1,47 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Yaiza",
+  "description": "Yaiza es una española joven y vibrante de 22 años. Con 1.65m y 52 kilos, posee una figura equilibrada y un carisma mediterráneo. Su energía natural y estilo único la hacen perfecta para momentos divertidos y relajados.",
+  "url": "https://valeriaferrer.com/model/yaiza",
+  "image": [
+    "https://valeriaferrer.com/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/01.jpg",
+    "https://valeriaferrer.com/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/02.jpg",
+    "https://valeriaferrer.com/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/03.jpg",
+    "https://valeriaferrer.com/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/04.jpg",
+    "https://valeriaferrer.com/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/05.jpg",
+    "https://valeriaferrer.com/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/06.jpg",
+    "https://valeriaferrer.com/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/07.jpg",
+    "https://valeriaferrer.com/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/08.jpg",
+    "https://valeriaferrer.com/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/09.jpg",
+    "https://valeriaferrer.com/chicas/yaiza-valeria-ferrer-model-agencia-valencia/gallery/10.jpg",
+    "https://valeriaferrer.com/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/11.jpg",
+    "https://valeriaferrer.com/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/12.jpg"
+  ],
+  "nationality": "Española",
+  "jobTitle": "Modelo VIP",
+  "knowsLanguage": [
+    "Español"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "itemOffered": {
+      "@type": "Service",
+      "name": "Acompañamiento Premium",
+      "description": "Servicios exclusivos de acompañamiento con Yaiza en Valencia"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Valencia"
+    },
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "name": "Contacto Directo",
+      "url": "https://valeriaferrer.com/contact"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://valeriaferrer.com/model/yaiza"
+  }
+}

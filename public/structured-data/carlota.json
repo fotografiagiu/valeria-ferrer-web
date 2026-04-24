@@ -1,0 +1,47 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Carlota",
+  "description": "Carlota es una venezolana imponente de 23 años con 1.80m de estatura. Su presencia magnética y figura atlética de 77 kilos la hacen única. Perfecta para quienes buscan una compañera con presencia y carisma excepcionales.",
+  "url": "https://valeriaferrer.com/model/carlota",
+  "image": [
+    "https://valeriaferrer.com/chicas/carlota-model-agency-valencia-vf/gallery/01.jpg",
+    "https://valeriaferrer.com/chicas/carlota-model-agency-valencia-vf/gallery/02.jpg",
+    "https://valeriaferrer.com/chicas/carlota-model-agency-valencia-vf/gallery/03.jpg",
+    "https://valeriaferrer.com/chicas/carlota-model-agency-valencia-vf/gallery/04.jpg",
+    "https://valeriaferrer.com/chicas/carlota-model-agency-valencia-vf/gallery/05.jpg",
+    "https://valeriaferrer.com/chicas/carlota-model-agency-valencia-vf/gallery/06.jpg",
+    "https://valeriaferrer.com/chicas/carlota-model-agency-valencia-vf/gallery/07.jpg",
+    "https://valeriaferrer.com/chicas/carlota-model-agency-valencia-vf/gallery/08.jpg",
+    "https://valeriaferrer.com/chicas/carlota-model-agency-valencia-vf/gallery/09.jpg",
+    "https://valeriaferrer.com/chicas/carlota-model-agency-valencia-vf/gallery/10.jpg",
+    "https://valeriaferrer.com/chicas/carlota-model-agency-valencia-vf/gallery/11.jpg",
+    "https://valeriaferrer.com/chicas/carlota-model-agency-valencia-vf/gallery/12.jpg"
+  ],
+  "nationality": "Venezolana",
+  "jobTitle": "Modelo VIP",
+  "knowsLanguage": [
+    "Español"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "itemOffered": {
+      "@type": "Service",
+      "name": "Acompañamiento Premium",
+      "description": "Servicios exclusivos de acompañamiento con Carlota en Valencia"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Valencia"
+    },
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "name": "Contacto Directo",
+      "url": "https://valeriaferrer.com/contact"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://valeriaferrer.com/model/carlota"
+  }
+}
