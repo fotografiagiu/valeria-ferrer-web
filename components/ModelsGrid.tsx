@@ -98,8 +98,8 @@ const ModelsGrid: React.FC = () => {
           <h2 className="text-3xl md:text-5xl font-light mb-4">Escorts VIP <span className="italic">de Lujo</span></h2>
           <div className="w-20 h-[1px] bg-[#c2b2a3] mx-auto mb-8"></div>
           
-          {/* View Mode Toggle */}
-          <div className="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-6 mb-8">
+          {/* View Mode Toggle - Solo visible en móvil */}
+          <div className="flex flex-col justify-center items-center space-y-4 mb-8 md:hidden">
             <div className="flex items-center space-x-4">
               <span className="text-[10px] text-[#c2b2a3] uppercase tracking-[0.3em]">Vista:</span>
               <div className="flex bg-[#1a1a1a] border border-[#c2b2a3]/20 rounded-full p-1">
@@ -128,8 +128,8 @@ const ModelsGrid: React.FC = () => {
               </div>
             </div>
             
-            {/* Texto explicativo */}
-            <div className="text-center md:text-left">
+            {/* Texto explicativo - Solo móvil */}
+            <div className="text-center">
               <p className="text-[10px] text-gray-500 font-light max-w-xs">
                 {viewMode === 'normal' 
                   ? 'Visualiza las fichas en grande - Navegación vertical en móvil'
