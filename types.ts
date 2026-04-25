@@ -14,6 +14,7 @@ export interface Model {
   services?: string[];
   availability?: { [key: string]: string };
   gallery?: string[];
+  featured?: boolean;
 }
 
 export interface Review {

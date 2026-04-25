@@ -100,11 +100,29 @@ const ModelDetail: React.FC = () => {
         <div className="lg:col-span-7 space-y-16">
           {/* Header */}
           <div className="border-b border-white/5 pb-12">
-            <div className="flex items-center space-x-3 mb-4 text-[#c2b2a3]">
-              <Star size={14} className="fill-[#c2b2a3]" />
-              <span className="text-[10px] tracking-[0.5em] uppercase font-bold">Acompañante Premier</span>
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center space-x-3 text-[#c2b2a3]">
+                <Star size={14} className="fill-[#c2b2a3]" />
+                <span className="text-[10px] tracking-[0.5em] uppercase font-bold">Acompañante Premier</span>
+              </div>
+              {model.featured && (
+                <div className="relative group">
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#c2b2a3]/20 to-[#c2b2a3]/10 blur-md"></div>
+                  <div className="relative flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-[#c2b2a3]/10 to-[#c2b2a3]/5 backdrop-blur-sm border border-[#c2b2a3]/30 rounded-full">
+                    <div className="w-3 h-3 bg-[#c2b2a3] rounded-full animate-pulse"></div>
+                    <span className="text-[#c2b2a3] text-[11px] tracking-[0.3em] uppercase font-light">
+                      VIP
+                    </span>
+                  </div>
+                </div>
+              )}
             </div>
-            <h1 className="text-6xl md:text-8xl serif luxury-text-gradient uppercase mb-6 leading-[0.9] tracking-tighter">{model.name}</h1>
+            <h1 className="text-6xl md:text-8xl serif luxury-text-gradient uppercase mb-6 leading-[0.9] tracking-tighter">
+              {model.name}
+              {model.featured && (
+                <span className="text-4xl md:text-6xl ml-3 text-[#c2b2a3] font-light">(VIP)</span>
+              )}
+            </h1>
             <div className="flex items-center space-x-6">
               <p className="text-lg font-light text-gray-400 tracking-[0.2em] uppercase italic flex items-center">
                 <MapPin size={16} className="mr-2 text-[#c2b2a3]" />

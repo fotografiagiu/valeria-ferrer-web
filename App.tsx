@@ -15,7 +15,6 @@ import Footer from './components/Footer';
 import MembersModal from './components/MembersModal';
 import Chatbot from './components/Chatbot';
 import FloatingContactPopup from './components/FloatingContactPopup';
-import CookieConsent from './components/CookieConsent';
 
 const App: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -61,7 +60,6 @@ const App: React.FC = () => {
 
         <Chatbot />
         <FloatingContactPopup />
-        <CookieConsent />
       </div>
     </Router>
   );

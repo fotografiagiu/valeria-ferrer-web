@@ -5,6 +5,7 @@ import Hero from '../components/Hero';
 import ModelsGrid from '../components/ModelsGrid';
 import FAQ from '../components/FAQ';
 import Reviews from '../components/Reviews';
+import modelsData from '../data/models.json';
 import { ArrowRight, Plane, Shield, Heart, Globe, Diamond, ShieldCheck, Star, Send } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -90,7 +91,7 @@ const Home: React.FC = () => {
       </div>
 
       {/* Models Selection */}
-      <ModelsGrid />
+      <ModelsGrid models={modelsData} />
 
       {/* Reviews */}
       <Reviews />

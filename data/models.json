@@ -3,7 +3,7 @@
     "slug": "teresa",
     "name": "Teresa",
     "age": 20,
-    "height": "1.52 m",
+    "height": "1,52 m",
     "weight": "45 kg",
     "nationality": "Española",
     "city": "Valencia",
@@ -24,8 +24,7 @@
       "Acompañamiento Personal"
     ],
     "availability": "24h",
-    "languages": ["Español"],
-    "featured": true
+    "languages": ["Español"]
   },
   {
     "slug": "emma",
@@ -53,8 +52,7 @@
       "Acompañamiento Personal"
     ],
     "availability": "24h",
-    "languages": ["Español"],
-    "featured": true
+    "languages": ["Español"]
   },
   {
     "slug": "gaby-vip",
@@ -65,7 +63,7 @@
     "nationality": "Venezolana",
     "city": "Valencia",
     "profileUrl": "https://www.valeriaferrer.com/gaby-vip-model-agency-valencia/",
-    "coverImageUrl": "https://www.valeriaferrer.com/wp-content/uploads/2025/11/PORTADA-2.jpg",
+    "coverImageUrl": "/chicas/gaby-vip-model-agency-valencia/cover.jpg",
     "description": "Gaby es una venezolana VIP exclusiva de 25 años. Con 1.65m y 52 kilos, combina elegancia y sofisticación con un toque latino carismático. Servicio VIP para experiencias únicas y memorables.",
     "essence": "Esencia de Gaby: Una diosa venezolana cuyo magnetismo natural trasciende lo convencional. Su presencia ilumina cualquier espacio con una mezcla perfecta de pasión latina y elegancia sofisticada. Gaby no solo ofrece compañía, sino una experiencia transformadora donde cada momento se convierte en un recuerdo inolvidable. Su carisma auténtico y su capacidad para conectar a nivel profundo la hacen la elección perfecta para quienes buscan algo más allá de lo ordinario.",
     "images": [
@@ -81,7 +79,8 @@
       "https://www.valeriaferrer.com/wp-content/uploads/2025/11/DSC09289-1.jpg",
       "https://www.valeriaferrer.com/wp-content/uploads/2025/11/DSC09285-1.jpg",
       "https://www.valeriaferrer.com/wp-content/uploads/2025/11/DSC09296.jpg"
-    ]
+    ],
+    "featured": true
   },
   {
     "slug": "elena",
@@ -447,7 +446,8 @@
       "/chicas/paula-vip-model-agencia-valencia/gallery/10.jpg",
       "/chicas/paula-vip-model-agency-valencia/gallery/11.jpg",
       "/chicas/paula-vip-model-agency-valencia/gallery/12.jpg"
-    ]
+    ],
+    "featured": true
   },
   {
     "slug": "luna",
@@ -525,6 +525,7 @@
       "/chicas/alba-vip-model-agency-valencia/gallery/10.jpg",
       "/chicas/alba-vip-model-agencia-valencia/gallery/11.jpg",
       "/chicas/alba-vip-model-agency-valencia/gallery/12.jpg"
-    ]
+    ],
+    "featured": true
   }
 ]

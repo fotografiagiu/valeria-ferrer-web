@@ -6,8 +6,18 @@ import { Model } from '../types';
 import { motion } from 'framer-motion';
 import { Grid3X3, LayoutGrid } from 'lucide-react';
 
-const ModelCard: React.FC<{ model: Model; index: number; isDoubleView?: boolean }> = ({ model, index, isDoubleView = false }) => {
+const ModelCard: React.FC<{ model: any; index: number; isDoubleView?: boolean }> = ({ model, index, isDoubleView = false }) => {
   const [isHovered, setIsHovered] = useState(false);
+
+  // Adaptar datos del JSON al formato esperado
+  const adaptedModel = {
+    id: model.slug,
+    name: model.name,
+    image: model.coverImageUrl,
+    hoverImage: model.images?.[1] || model.coverImageUrl,
+    location: model.city,
+    featured: model.featured
+  };
 
   return (
     <motion.div 
@@ -21,23 +31,23 @@ const ModelCard: React.FC<{ model: Model; index: number; isDoubleView?: boolean 
       onTouchStart={() => setIsHovered(true)}
       onTouchEnd={() => setIsHovered(false)}
     >
-      <Link to={`/models/${model.id}`} className="block">
+      <Link to={`/models/${adaptedModel.id}`} className="block">
         <div className="aspect-[2/3] relative overflow-hidden">
           <img 
-            src={model.image} 
-            alt={model.name}
+            src={adaptedModel.image} 
+            alt={adaptedModel.name}
             className={`w-full h-full object-cover transition-transform duration-700 ${isHovered ? 'scale-110' : 'scale-100'}`}
           />
           {/* Hover Reveal Image */}
           <img 
-            src={model.hoverImage} 
-            alt={`${model.name} alternate`}
+            src={adaptedModel.hoverImage} 
+            alt={`${adaptedModel.name} alternate`}
             className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${isHovered ? 'opacity-100' : 'opacity-0'}`}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60"></div>
           
           {/* New Badge */}
-          {(model.name === 'Ariel' || model.name === 'Carlota') && (
+          {(adaptedModel.name === 'Teresa' || adaptedModel.name === 'Emma') && (
             <div className="absolute top-2 left-2 md:top-4 md:left-4 z-30">
               <span className="px-2.5 py-1 md:px-3 md:py-1 bg-[#c2b2a3] text-black text-[10px] md:text-[9px] tracking-[0.2em] uppercase font-bold rounded-sm shadow-lg">
                 Nueva
@@ -45,14 +55,14 @@ const ModelCard: React.FC<{ model: Model; index: number; isDoubleView?: boolean 
             </div>
           )}
           
-          {/* VIP Badge for Gaby */}
-          {model.name === 'Gaby' && (
+          {/* VIP Badge */}
+          {adaptedModel.featured && (
             <div className="absolute top-2 right-2 md:top-4 md:right-4 z-30">
               <div className="relative group">
                 <div className="absolute inset-0 bg-gradient-to-r from-[#c2b2a3]/20 to-[#c2b2a3]/10 blur-md"></div>
-                <div className="relative flex items-center space-x-1 px-3 py-1.5 md:px-4 md:py-2 bg-gradient-to-r from-[#c2b2a3]/10 to-[#c2b2a3]/5 backdrop-blur-sm border border-[#c2b2a3]/30 rounded-full">
-                  <div className="w-2 h-2 bg-[#c2b2a3] rounded-full animate-pulse"></div>
-                  <span className="text-[#c2b2a3] text-[9px] md:text-[10px] tracking-[0.3em] uppercase font-light">
+                <div className="relative flex items-center space-x-2 px-4 py-2 md:px-6 md:py-3 bg-gradient-to-r from-[#c2b2a3]/10 to-[#c2b2a3]/5 backdrop-blur-sm border border-[#c2b2a3]/30 rounded-full">
+                  <div className="w-3 h-3 bg-[#c2b2a3] rounded-full animate-pulse"></div>
+                  <span className="text-[#c2b2a3] text-[11px] md:text-[12px] tracking-[0.3em] uppercase font-light">
                     VIP
                   </span>
                 </div>
@@ -69,15 +79,19 @@ const ModelCard: React.FC<{ model: Model; index: number; isDoubleView?: boolean 
         </div>
         
         <div className="p-4 md:p-6 relative z-10 text-center">
-          <h3 className="text-xl md:text-2xl tracking-widest uppercase mb-1 font-light">{model.name}</h3>
-          <p className="text-[10px] md:text-xs tracking-[0.2em] uppercase text-[#c2b2a3]">{model.location}</p>
+          <h3 className="text-xl md:text-2xl tracking-widest uppercase mb-1 font-light">{adaptedModel.name}</h3>
+          <p className="text-[10px] md:text-xs tracking-[0.2em] uppercase text-[#c2b2a3]">{adaptedModel.location}</p>
         </div>
       </Link>
     </motion.div>
   );
 };
 
-const ModelsGrid: React.FC = () => {
+interface ModelsGridProps {
+  models?: any[];
+}
+
+const ModelsGrid: React.FC<ModelsGridProps> = ({ models = MODELS }) => {
   const [viewMode, setViewMode] = useState<'normal' | 'double'>('normal');
 
   const handleViewChange = (mode: 'normal' | 'double') => {
@@ -123,7 +137,7 @@ const ModelsGrid: React.FC = () => {
                   }`}
                 >
                   <LayoutGrid size={16} />
-                  <span className="text-[10px] font-medium tracking-[0.2em] uppercase">2x2</span>
+                  <span className="text-[10px] font-medium tracking-[0.2em] uppercase">cambiar vista</span>
                 </button>
               </div>
             </div>
@@ -145,8 +159,8 @@ const ModelsGrid: React.FC = () => {
             ? 'grid-cols-1 md:grid-cols-3 lg:grid-cols-4' 
             : 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4'
         }`}>
-          {MODELS.map((model, index) => (
-            <ModelCard key={model.id} model={model} index={index} isDoubleView={viewMode === 'double'} />
+          {models.map((model, index) => (
+            <ModelCard key={model.slug || model.id} model={model} index={index} isDoubleView={viewMode === 'double'} />
           ))}
         </div>
 
