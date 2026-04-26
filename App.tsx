@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
@@ -16,6 +15,7 @@ import Footer from './components/Footer';
 import MembersModal from './components/MembersModal';
 import Chatbot from './components/Chatbot';
 import FloatingContactPopup from './components/FloatingContactPopup';
+import ContentProtection from './components/ContentProtection';
 
 const App: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -62,6 +62,7 @@ const App: React.FC = () => {
 
         <Chatbot />
         <FloatingContactPopup />
+        <ContentProtection />
       </div>
     </Router>
   );

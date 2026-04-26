@@ -74,9 +74,12 @@ const ModelDetail: React.FC = () => {
                 />
               </div>
               {/* Badge for exclusivity */}
-              <div className="absolute top-6 left-6 px-4 py-2 bg-black/40 backdrop-blur-md border border-[#c2b2a3]/30 text-[9px] tracking-[0.4em] uppercase font-bold text-[#c2b2a3]">
+              <button 
+                onClick={() => openGallery(0)}
+                className="absolute top-6 left-6 px-4 py-2 bg-black/40 backdrop-blur-md border border-[#c2b2a3]/30 text-[9px] tracking-[0.4em] uppercase font-bold text-[#c2b2a3] hover:bg-[#c2b2a3]/20 hover:border-[#c2b2a3]/50 hover:text-white transition-all duration-300 cursor-pointer"
+              >
                 Elección Élite
-              </div>
+              </button>
             </div>
             
             {/* Quick Stats Overlay (Mobile Only) */}
