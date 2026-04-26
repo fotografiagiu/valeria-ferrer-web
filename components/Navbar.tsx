@@ -41,32 +41,7 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolled, openMembers }) => {
           <Link to="/" className="hover:text-[#c2b2a3] transition-colors">Inicio</Link>
           <Link to="/models" className="hover:text-[#c2b2a3] transition-colors">Modelos</Link>
           <Link to="/about" className="hover:text-[#c2b2a3] transition-colors">Agencia</Link>
-          
-          <div className="group relative">
-            <button className="flex items-center hover:text-[#c2b2a3] transition-colors">
-              Experiencias <ChevronDown size={14} className="ml-1" />
-            </button>
-            <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 hidden group-hover:block">
-              <div className="bg-[#1a1a1a] border border-white/5 p-6 w-72 shadow-2xl">
-                <div className="mb-4">
-                  <p className="text-[9px] text-[#c2b2a3] tracking-widest mb-3 font-bold">SERVICIOS EXCLUSIVOS</p>
-                  <ul className="space-y-3">
-                    <li><Link to="/services/gfe" className="hover:text-[#c2b2a3] block text-[11px] flex items-center"><span className="w-1 h-1 bg-[#c2b2a3] rounded-full mr-3"></span>Girlfriend Experience</Link></li>
-                    <li><Link to="/services/duo" className="hover:text-[#c2b2a3] block text-[11px] flex items-center"><span className="w-1 h-1 bg-[#c2b2a3] rounded-full mr-3"></span>Experiencia Dúo</Link></li>
-                    <li><Link to="/services/dinner" className="hover:text-[#c2b2a3] block text-[11px] flex items-center"><span className="w-1 h-1 bg-[#c2b2a3] rounded-full mr-3"></span>Cenas de Negocios</Link></li>
-                  </ul>
-                </div>
-                <div className="border-t border-white/10 pt-4">
-                  <p className="text-[9px] text-gray-500 tracking-widest mb-3 font-bold">SERVICIOS PREMIUM</p>
-                  <ul className="space-y-3">
-                    <li><Link to="/travel" className="hover:text-[#c2b2a3] block text-[11px] flex items-center"><span className="w-1 h-1 bg-gray-500 rounded-full mr-3"></span>Acompañamiento de Viaje</Link></li>
-                    <li><Link to="/booking" className="hover:text-[#c2b2a3] block text-[11px] flex items-center"><span className="w-1 h-1 bg-gray-500 rounded-full mr-3"></span>Reservas VIP</Link></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-
+          <Link to="/contact" className="hover:text-[#c2b2a3] transition-colors">Contacto</Link>
           <Link to="/casting" className="hover:text-[#c2b2a3] transition-colors">Casting</Link>
           <Link to="/booking" className="px-6 py-2 border border-[#c2b2a3]/30 text-[#c2b2a3] hover:bg-[#c2b2a3] hover:text-black transition-all duration-300 rounded-full text-[11px]">Reservar</Link>
         </div>
@@ -107,6 +82,7 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolled, openMembers }) => {
           <Link to="/" onClick={() => setIsMobileMenuOpen(false)}>Inicio</Link>
           <Link to="/models" onClick={() => setIsMobileMenuOpen(false)}>Modelos</Link>
           <Link to="/about" onClick={() => setIsMobileMenuOpen(false)}>Agencia</Link>
+          <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)}>Contacto</Link>
           <Link to="/casting" onClick={() => setIsMobileMenuOpen(false)}>Casting</Link>
           <Link to="/booking" onClick={() => setIsMobileMenuOpen(false)} className="px-6 py-2 border border-[#c2b2a3]/30 text-[#c2b2a3] hover:bg-[#c2b2a3] hover:text-black transition-all duration-300 rounded-full text-[11px]">Reservar</Link>
           <button onClick={() => { setIsMobileMenuOpen(false); openMembers(); }} className="text-[#c2b2a3]">Lounge de Miembros <span className="text-[10px] opacity-60">(Próximamente)</span></button>

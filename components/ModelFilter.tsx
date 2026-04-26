@@ -49,7 +49,7 @@ const ModelFilter: React.FC<ModelFilterProps> = ({ models, onFilter }) => {
 
     // Filter VIP only
     if (showVIPOnly) {
-      filtered = filtered.filter(model => model.featured);
+      filtered = filtered.filter(model => model.vip);
     }
 
     onFilter(filtered);

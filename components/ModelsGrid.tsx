@@ -56,7 +56,7 @@ const ModelCard: React.FC<{ model: any; index: number; isDoubleView?: boolean }>
           )}
           
           {/* VIP Badge */}
-          {adaptedModel.featured && (
+          {(adaptedModel.featured || adaptedModel.name.includes('VIP')) && (
             <div className="absolute top-2 right-2 md:top-4 md:right-4 z-30">
               <div className="relative group">
                 <div className="absolute inset-0 bg-gradient-to-r from-[#c2b2a3]/20 to-[#c2b2a3]/10 blur-md"></div>

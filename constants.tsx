@@ -16,6 +16,11 @@ export const MODELS: Model[] = (modelsData as any[]).map((item) => ({
   gallery: item.images || [],
   videos: item.videos || [],
   isNew: item.isNew || false,
+  vip: item.vip || false,
+  vipRates: item.vipRates || {},
+  services: item.services || [],
+  availability: item.availability || {},
+  featured: item.featured || false,
 }));
 
 export const REVIEWS: Review[] = [

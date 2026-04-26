@@ -15,6 +15,10 @@ export interface Model {
   availability?: { [key: string]: string };
   gallery?: string[];
   featured?: boolean;
+  vip?: boolean;
+  vipRates?: {
+    [key: string]: string;
+  };
 }
 
 export interface Review {

@@ -120,23 +120,9 @@ const ModelDetail: React.FC = () => {
                 <Star size={14} className="fill-[#c2b2a3]" />
                 <span className="text-[10px] tracking-[0.5em] uppercase font-bold">Acompañante Premier</span>
               </div>
-              {model.featured && (
-                <div className="relative group">
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#c2b2a3]/20 to-[#c2b2a3]/10 blur-md"></div>
-                  <div className="relative flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-[#c2b2a3]/10 to-[#c2b2a3]/5 backdrop-blur-sm border border-[#c2b2a3]/30 rounded-full">
-                    <div className="w-3 h-3 bg-[#c2b2a3] rounded-full animate-pulse"></div>
-                    <span className="text-[#c2b2a3] text-[11px] tracking-[0.3em] uppercase font-light">
-                      VIP
-                    </span>
-                  </div>
-                </div>
-              )}
             </div>
             <h1 className="text-6xl md:text-8xl serif luxury-text-gradient uppercase mb-6 leading-[0.9] tracking-tighter">
               {model.name}
-              {model.featured && (
-                <span className="text-4xl md:text-6xl ml-3 text-[#c2b2a3] font-light">(VIP)</span>
-              )}
             </h1>
             <div className="flex items-center space-x-6">
               <p className="text-lg font-light text-gray-400 tracking-[0.2em] uppercase italic flex items-center">
@@ -166,8 +152,8 @@ const ModelDetail: React.FC = () => {
       <section className="bg-[#080808] py-32 border-t border-white/5">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
-            <div className="max-w-xl">
-              <h2 className="text-4xl md:text-6xl font-light mb-6 tracking-tight">Portafolio <span className="italic luxury-text-gradient">Oficial</span></h2>
+            <div className="relative z-10 overflow-visible">
+              <h2 className="text-4xl md:text-6xl font-light mb-6 tracking-normal pr-4">Portafolio <span className="italic luxury-text-gradient">Oficial</span></h2>
               <p className="text-gray-500 text-sm font-light leading-relaxed uppercase tracking-widest">
                 Una selección de capturas de alta calidad que muestran la elegancia auténtica de {model.name}. Todas las imágenes son recientes y verificadas.
               </p>
@@ -224,52 +210,52 @@ const ModelDetail: React.FC = () => {
           <div className="max-w-4xl mx-auto">
             <div className="bg-[#111111] border border-[#c2b2a3]/20 overflow-hidden">
               <div className="grid grid-cols-2 divide-x divide-[#c2b2a3]/10">
-                {model.name === 'Gaby' ? (
-                  // VIP Tariffs for Gaby
+                {model.vip ? (
+                  // VIP Tariffs for VIP models
                   <>
                     <div className="p-6 space-y-1">
                       <div className="flex justify-between items-center py-4 border-b border-white/5">
                         <span className="text-sm text-gray-400 tracking-[0.1em]">1 hora</span>
-                        <span className="text-lg font-light luxury-text-gradient">180 €</span>
+                        <span className="text-lg font-light luxury-text-gradient">{model.vipRates?.["1h"] || "180 €"}</span>
                       </div>
                       <div className="flex justify-between items-center py-4 border-b border-white/5">
                         <span className="text-sm text-gray-400 tracking-[0.1em]">45 minutos</span>
-                        <span className="text-lg font-light luxury-text-gradient">150 €</span>
+                        <span className="text-lg font-light luxury-text-gradient">{model.vipRates?.["45min"] || "150 €"}</span>
                       </div>
                       <div className="flex justify-between items-center py-4 border-b border-white/5">
                         <span className="text-sm text-gray-400 tracking-[0.1em]">30 minutos</span>
-                        <span className="text-lg font-light luxury-text-gradient">120 €</span>
+                        <span className="text-lg font-light luxury-text-gradient">{model.vipRates?.["30min"] || "120 €"}</span>
                       </div>
                       <div className="flex justify-between items-center py-4 border-b border-white/5">
                         <span className="text-sm text-gray-400 tracking-[0.1em]">2 horas</span>
-                        <span className="text-lg font-light luxury-text-gradient">350 €</span>
+                        <span className="text-lg font-light luxury-text-gradient">{model.vipRates?.["2h"] || "350 €"}</span>
                       </div>
                       <div className="flex justify-between items-center py-4">
                         <span className="text-sm text-gray-400 tracking-[0.1em]">3 horas</span>
-                        <span className="text-lg font-light luxury-text-gradient">520 €</span>
+                        <span className="text-lg font-light luxury-text-gradient">{model.vipRates?.["3h"] || "520 €"}</span>
                       </div>
                     </div>
                     <div className="p-6 space-y-1">
                       <div className="flex justify-between items-center py-4 border-b border-white/5">
                         <span className="text-sm text-gray-400 tracking-[0.1em]">Salida hotel</span>
-                        <span className="text-lg font-light luxury-text-gradient">250 €</span>
+                        <span className="text-lg font-light luxury-text-gradient">{model.vipRates?.["salidaHotel"] || "250 €"}</span>
                       </div>
                       <div className="flex justify-between items-center py-4 border-b border-white/5">
                         <span className="text-sm text-gray-400 tracking-[0.1em]">Noche (10 horas)</span>
-                        <span className="text-lg font-light luxury-text-gradient">2.000 €</span>
+                        <span className="text-lg font-light luxury-text-gradient">{model.vipRates?.["noche"] || "2.000 €"}</span>
                       </div>
                       <div className="flex justify-between items-center py-4 border-b border-white/5">
                         <span className="text-sm text-gray-400 tracking-[0.1em]">Todo el día (24 horas)</span>
-                        <span className="text-lg font-light luxury-text-gradient">3.000 €</span>
+                        <span className="text-lg font-light luxury-text-gradient">{model.vipRates?.["dia"] || "3.000 €"}</span>
                       </div>
                       <div className="flex justify-between items-center py-4">
                         <span className="text-sm text-gray-400 tracking-[0.1em]">Dos días (48 horas)</span>
-                        <span className="text-lg font-light luxury-text-gradient">4.000 €</span>
+                        <span className="text-lg font-light luxury-text-gradient">{model.vipRates?.["dosDias"] || "4.000 €"}</span>
                       </div>
                     </div>
                   </>
                 ) : (
-                  // Standard Tariffs for other models
+                  // Standard Tariffs for regular models
                   <>
                     <div className="p-6 space-y-1">
                       <div className="flex justify-between items-center py-4 border-b border-white/5">

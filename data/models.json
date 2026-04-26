@@ -202,7 +202,6 @@
       "/chicas/claudia-vip-model-agency-valencia/3.jpg",
       "/chicas/claudia-vip-model-agency-valencia/4.jpg",
       "/chicas/claudia-vip-model-agency-valencia/5.jpg",
-      "/chicas/claudia-vip-model-agency-valencia/6.jpg",
       "/chicas/claudia-vip-model-agency-valencia/7.jpg",
       "/chicas/claudia-vip-model-agency-valencia/8.jpg"
     ],
@@ -213,7 +212,19 @@
       "Acompañamiento Personal"
     ],
     "availability": "24h",
-    "languages": ["Español"]
+    "languages": ["Español"],
+    "vip": true,
+    "vipRates": {
+      "30min": "120€",
+      "45min": "150€",
+      "1h": "180€",
+      "2h": "350€",
+      "3h": "520€",
+      "salidaHotel": "250€",
+      "noche": "2000€",
+      "dia": "3000€",
+      "dosDias": "4000€"
+    }
   },
   {
     "slug": "silvia",
@@ -232,13 +243,7 @@
       "/chicas/silvia-model-agency-valencia/gallery/03.jpg",
       "/chicas/silvia-model-agency-valencia/gallery/04.jpg",
       "/chicas/silvia-model-agency-valencia/gallery/05.jpg",
-      "/chicas/silvia-model-agency-valencia/gallery/06.jpg",
-      "/chicas/silvia-model-agency-valencia/gallery/07.jpg",
-      "/chicas/silvia-model-agency-valencia/gallery/08.jpg",
-      "/chicas/silvia-model-agency-valencia/gallery/09.jpg",
-      "/chicas/silvia-model-agency-valencia/gallery/10.jpg",
-      "/chicas/silvia-model-agency-valencia/gallery/11.jpg",
-      "/chicas/silvia-model-agency-valencia/gallery/12.jpg"
+      "/chicas/silvia-model-agency-valencia/gallery/06.jpg"
     ],
     "services": [
       "Girlfriend Experience",
@@ -270,9 +275,7 @@
       "/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/07.jpg",
       "/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/08.jpg",
       "/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/09.jpg",
-      "/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/10.jpg",
-      "/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/11.jpg",
-      "/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/12.jpg"
+      "/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/10.jpg"
     ],
     "services": [
       "Girlfriend Experience",
@@ -302,11 +305,7 @@
       "/chicas/erika-valeria-ferrer-model-agency-valencia/gallery/05.jpg",
       "/chicas/erika-valeria-ferrer-model-agency-valencia/gallery/06.jpg",
       "/chicas/erika-valeria-ferrer-model-agency-valencia/gallery/07.jpg",
-      "/chicas/erika-valeria-ferrer-model-agency-valencia/gallery/08.jpg",
-      "/chicas/erika-valeria-ferrer-model-agency-valencia/gallery/09.jpg",
-      "/chicas/erika-valeria-ferrer-model-agencia-valencia/gallery/10.jpg",
-      "/chicas/erika-valeria-ferrer-model-agency-valencia/gallery/11.jpg",
-      "/chicas/erika-valeria-ferrer-model-agency-valencia/gallery/12.jpg"
+      "/chicas/erika-valeria-ferrer-model-agency-valencia/gallery/08.jpg"
     ],
     "services": [
       "Girlfriend Experience",
@@ -336,11 +335,7 @@
       "/chicas/paula-vip-model-agency-valencia/gallery/05.jpg",
       "/chicas/paula-vip-model-agency-valencia/gallery/06.jpg",
       "/chicas/paula-vip-model-agency-valencia/gallery/07.jpg",
-      "/chicas/paula-vip-model-agency-valencia/gallery/08.jpg",
-      "/chicas/paula-vip-model-agency-valencia/gallery/09.jpg",
-      "/chicas/paula-vip-model-agency-valencia/gallery/10.jpg",
-      "/chicas/paula-vip-model-agency-valencia/gallery/11.jpg",
-      "/chicas/paula-vip-model-agency-valencia/gallery/12.jpg"
+      "/chicas/paula-vip-model-agency-valencia/gallery/08.jpg"
     ],
     "featured": true,
     "services": [
@@ -350,7 +345,19 @@
       "Acompañamiento Personal"
     ],
     "availability": "24h",
-    "languages": ["Español"]
+    "languages": ["Español"],
+    "vip": true,
+    "vipRates": {
+      "30min": "120€",
+      "45min": "150€",
+      "1h": "180€",
+      "2h": "350€",
+      "3h": "520€",
+      "salidaHotel": "250€",
+      "noche": "2000€",
+      "dia": "3000€",
+      "dosDias": "4000€"
+    }
   },
   {
     "slug": "naty",
@@ -367,15 +374,7 @@
       "/chicas/naty-valeria-ferrer-model-agency-valencia-2/gallery/01.jpg",
       "/chicas/naty-valeria-ferrer-model-agency-valencia-2/gallery/02.jpg",
       "/chicas/naty-valeria-ferrer-model-agency-valencia-2/gallery/03.jpg",
-      "/chicas/naty-valeria-ferrer-model-agency-valencia-2/gallery/04.jpg",
-      "/chicas/naty-valeria-ferrer-model-agencia-valencia-2/gallery/05.jpg",
-      "/chicas/naty-valeria-ferrer-model-agency-valencia-2/gallery/06.jpg",
-      "/chicas/naty-valeria-ferrer-model-agency-valencia-2/gallery/07.jpg",
-      "/chicas/naty-valeria-ferrer-model-agency-valencia-2/gallery/08.jpg",
-      "/chicas/naty-valeria-ferrer-model-agency-valencia-2/gallery/09.jpg",
-      "/chicas/naty-valeria-ferrer-model-agency-valencia-2/gallery/10.jpg",
-      "/chicas/naty-valeria-ferrer-model-agency-valencia-2/gallery/11.jpg",
-      "/chicas/naty-valeria-ferrer-model-agency-valencia-2/gallery/12.jpg"
+      "/chicas/naty-valeria-ferrer-model-agency-valencia-2/gallery/04.jpg"
     ],
     "services": [
       "Girlfriend Experience",

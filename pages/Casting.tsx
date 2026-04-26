@@ -22,18 +22,22 @@ const Casting: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    const message = `SOLICITUD DE CASTING - VALERIA FERRER\n\n` +
-      `Nombre: ${formData.name}\n` +
-      `Edad: ${formData.age}\n` +
-      `Ciudad: ${formData.city}\n` +
-      `Contacto: ${formData.contact}\n` +
-      `Sobre mí: ${formData.about}\n\n` +
-      `* Adjuntaré las fotos a continuación en este chat.`;
+    // Crear mensaje para WhatsApp
+    const message = `🌟 *SOLICITUD DE CASTING - VALERIA FERRER* 🌟\n\n` +
+      `📋 *DATOS PERSONALES*\n` +
+      `👤 Nombre: ${formData.name}\n` +
+      `🎂 Edad: ${formData.age} años\n` +
+      `🏙️ Ciudad: ${formData.city}\n` +
+      `📱 Contacto: ${formData.contact}\n\n` +
+      `📝 *SOBRE MÍ*\n` +
+      `${formData.about || 'No especificado'}\n\n` +
+      `💫 *Estoy interesada en formar parte de Valeria Ferrer*`;
     
+    // Abrir WhatsApp con el mensaje
     const encodedMessage = encodeURIComponent(message);
-    const telegramUrl = `https://t.me/Valeriaferreeer?text=${encodedMessage}`;
+    const whatsappUrl = `https://wa.me/34687410110?text=${encodedMessage}`;
     
-    window.open(telegramUrl, '_blank');
+    window.open(whatsappUrl, '_blank');
   };
 
   return (
@@ -81,9 +85,14 @@ const Casting: React.FC = () => {
           onSubmit={handleSubmit}
           className="bg-[#111111] border border-white/5 p-10 md:p-16 space-y-8"
         >
+          <div className="text-center mb-8">
+            <p className="text-[10px] text-gray-500 uppercase tracking-widest">
+              Los campos marcados con * son obligatorios para procesar tu solicitud
+            </p>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="space-y-2">
-              <label className="text-[10px] tracking-widest uppercase text-gray-500 font-bold">Nombre</label>
+              <label className="text-[10px] tracking-widest uppercase text-gray-500 font-bold">Nombre *</label>
               <input 
                 type="text" 
                 name="name"
@@ -94,7 +103,7 @@ const Casting: React.FC = () => {
               />
             </div>
             <div className="space-y-2">
-              <label className="text-[10px] tracking-widest uppercase text-gray-500 font-bold">Edad</label>
+              <label className="text-[10px] tracking-widest uppercase text-gray-500 font-bold">Edad *</label>
               <input 
                 type="number" 
                 name="age"
@@ -108,7 +117,7 @@ const Casting: React.FC = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="space-y-2">
-              <label className="text-[10px] tracking-widest uppercase text-gray-500 font-bold">Ciudad de Residencia</label>
+              <label className="text-[10px] tracking-widest uppercase text-gray-500 font-bold">Ciudad de Residencia *</label>
               <input 
                 type="text" 
                 name="city"
@@ -119,7 +128,7 @@ const Casting: React.FC = () => {
               />
             </div>
             <div className="space-y-2">
-              <label className="text-[10px] tracking-widest uppercase text-gray-500 font-bold">WhatsApp / Telegram</label>
+              <label className="text-[10px] tracking-widest uppercase text-gray-500 font-bold">WhatsApp / Telegram *</label>
               <input 
                 type="text" 
                 name="contact"
@@ -142,17 +151,12 @@ const Casting: React.FC = () => {
             ></textarea>
           </div>
 
-          <div className="p-8 border border-dashed border-white/10 text-center">
-            <Camera size={32} className="mx-auto text-gray-600 mb-4" />
-            <p className="text-[10px] tracking-widest uppercase text-gray-500">Adjuntar Fotos (Mínimo 3 fotos recientes sin filtros)</p>
-            <p className="text-[8px] text-gray-600 mt-2 uppercase tracking-widest">Se enviarán directamente por Telegram tras pulsar enviar</p>
-          </div>
-
+          
           <button 
             type="submit"
             className="w-full py-6 bg-[#c2b2a3] text-black font-bold uppercase tracking-[0.4em] text-xs hover:bg-white transition-all duration-500 mt-10"
           >
-            Enviar Solicitud de Casting
+            Enviar Solicitud por WhatsApp
           </button>
         </motion.form>
       </div>

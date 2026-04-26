@@ -9,6 +9,7 @@ import ModelDetail from './pages/ModelDetail';
 import Fees from './pages/Fees';
 import Booking from './pages/Booking';
 import Casting from './pages/Casting';
+import Contact from './pages/Contact';
 import Travel from './pages/Travel';
 import ServiceDetail from './pages/ServiceDetail';
 import Footer from './components/Footer';
@@ -45,6 +46,7 @@ const App: React.FC = () => {
             <Route path="/fees" element={<Fees />} />
             <Route path="/booking" element={<Booking />} />
             <Route path="/casting" element={<Casting />} />
+            <Route path="/contact" element={<Contact />} />
             <Route path="/travel" element={<Travel />} />
             <Route path="/services/:type" element={<ServiceDetail />} />
             {/* Rutas adicionales podrían añadirse aquí siguiendo el mismo patrón */}
