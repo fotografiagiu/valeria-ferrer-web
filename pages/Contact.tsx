@@ -139,7 +139,7 @@ const Contact: React.FC = () => {
             <div className="bg-[#111111] border border-white/5 p-4 rounded-lg overflow-hidden">
               <div className="aspect-w-16 aspect-h-9 relative">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3037.6177214356!2d-0.3766850846044!3d39.46990727948825!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1sEl+Corte+Ingl%C3%A9s%2C+Calle+Col%C3%B3n%2C+Valencia!2sValencia%2C+Espa%C3%B1a!5e0!3m2!1ses!2sus!4v1234567890"
+                  src="https://www.google.com/maps?q=El+Corte+Inglés+Pintor+Sorolla+Colón+Edificio+2,+Valencia&output=embed"
                   width="100%"
                   height="450"
                   style={{ border: 0 }}
