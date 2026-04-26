@@ -31,18 +31,38 @@ const Hero: React.FC = () => {
 
       {/* Content */}
       <div className="relative z-20 text-center max-w-5xl px-6">
-        <motion.h1
+        <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: 'easeOut' }}
-          className="text-5xl md:text-8xl font-light mb-6 tracking-wider leading-tight"
+          className="text-center mb-8"
         >
-          Valeria <span className="bg-gradient-to-r from-[#f7e7ce] via-[#e8d4b0] to-[#d4af37] bg-clip-text text-transparent">Ferrer</span>
-          <br />
-          <span className="text-2xl md:text-4xl tracking-[0.4em] font-light">
-          Agencia Premium
-          </span>
-        </motion.h1>
+          {/* Main name with better visual organization */}
+          <div className="relative inline-block">
+            <h1 className="text-5xl md:text-8xl font-light tracking-wider leading-none mb-4">
+              <span className="block bg-gradient-to-r from-[#f7e7ce] via-[#e8d4b0] via-[#d4af37] via-[#c2b2a3] to-[#f7e7ce] bg-clip-text text-transparent">
+                Valeria Ferrer
+              </span>
+            </h1>
+            
+            {/* Visual separator */}
+            <div className="flex items-center justify-center space-x-4 mb-3">
+              <div className="flex-1 h-px bg-gradient-to-r from-transparent via-[#c2b2a3]/30 to-transparent max-w-xs"></div>
+              <div className="w-2 h-2 rounded-full bg-[#c2b2a3]/50"></div>
+              <div className="flex-1 h-px bg-gradient-to-r from-transparent via-[#c2b2a3]/30 to-transparent max-w-xs"></div>
+            </div>
+            
+            {/* Subtitle with better positioning */}
+            <div className="relative">
+              <span className="text-2xl md:text-4xl tracking-[0.4em] font-light text-[#c2b2a3] block">
+                Agencia Premium
+              </span>
+              
+              {/* Subtle underline */}
+              <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-20 h-px bg-gradient-to-r from-transparent via-[#c2b2a3]/40 to-transparent"></div>
+            </div>
+          </div>
+        </motion.div>
 
         <motion.p
           initial={{ opacity: 0 }}
@@ -50,7 +70,7 @@ const Hero: React.FC = () => {
           transition={{ duration: 1, delay: 0.5 }}
           className="text-lg md:text-xl font-light tracking-[0.3em] uppercase text-gray-200 mb-12 drop-shadow-xl"
         >
-          Escorts de lujo y acompañantes VIP en Valencia
+          Experiencias exclusivas y citas discretas en Valencia
         </motion.p>
 
         <motion.div
@@ -63,14 +83,14 @@ const Hero: React.FC = () => {
             to="/models"
             className="px-12 py-5 border border-[#c2b2a3] text-[#c2b2a3] uppercase tracking-[0.3em] text-xs backdrop-blur-md hover:bg-[#c2b2a3] hover:text-black transition-all duration-700 w-full sm:w-auto"
           >
-            Ver Escorts de Lujo
+            Descubrir Escorts
           </Link>
 
           <Link
             to="/booking"
             className="px-12 py-5 luxury-gradient text-black uppercase tracking-[0.3em] text-xs font-bold hover:scale-105 hover:shadow-[0_0_30px_rgba(194,178,163,0.3)] transition-all duration-300 w-full sm:w-auto"
           >
-            Reservar una Escort de Lujo
+            Reservar Cita Exclusiva
           </Link>
         </motion.div>
       </div>
