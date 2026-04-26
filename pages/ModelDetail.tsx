@@ -83,8 +83,23 @@ const ModelDetail: React.FC = () => {
             <div className="lg:hidden grid grid-cols-2 gap-3 mt-8">
               {[
                 { label: 'Edad', val: model.age },
-                { label: 'Estatura', val: `${model.height} cm` },
-                { label: 'Peso', val: `${model.weight} kg` },
+                { label: 'Estatura', val: model.height },
+                { label: 'Peso', val: model.weight },
+                { label: 'Nacionalidad', val: model.nationality || 'Española' }
+              ].map((stat, idx) => (
+                <div key={idx} className="bg-[#111111] p-5 border border-white/5 text-center">
+                  <p className="text-[9px] text-gray-500 uppercase tracking-[0.3em] mb-2 font-bold">{stat.label}</p>
+                  <p className="text-xl serif luxury-text-gradient">{stat.val}</p>
+                </div>
+              ))}
+            </div>
+            
+            {/* Quick Stats Overlay (Desktop Only) */}
+            <div className="hidden lg:block grid grid-cols-2 gap-3 mt-8">
+              {[
+                { label: 'Edad', val: model.age },
+                { label: 'Estatura', val: model.height },
+                { label: 'Peso', val: model.weight },
                 { label: 'Nacionalidad', val: model.nationality || 'Española' }
               ].map((stat, idx) => (
                 <div key={idx} className="bg-[#111111] p-5 border border-white/5 text-center">
