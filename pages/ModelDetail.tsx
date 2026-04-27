@@ -94,14 +94,15 @@ const ModelDetail: React.FC = () => {
         </button>
       </div>
 
-      {/* Main Content Grid */}
-      <section className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 pb-32 pt-10">
-        
-        {/* Left Column: Image */}
-        <div className="lg:col-span-5 relative">
-          <div className="sticky top-40">
+      {/* Main Content Grid - Anna Claire Style */}
+      <section className="max-w-7xl mx-auto px-6 pb-32 pt-10">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
+          
+          {/* Main Content Area - 2 columns */}
+          <div className="lg:col-span-2 space-y-12">
+            
+            {/* Main Image */}
             <div className="relative group">
-              <div className="absolute -inset-1 bg-gradient-to-b from-[#c2b2a3]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
               <div 
                 className="relative overflow-hidden rounded-2xl cursor-pointer" 
                 onClick={() => openGallery(0)}
@@ -112,122 +113,213 @@ const ModelDetail: React.FC = () => {
                   className="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-105"
                 />
               </div>
-              
-              {/* Badge for exclusivity */}
-              <button 
-                onClick={() => openGallery(0)}
-                className="absolute top-6 left-6 px-4 py-2 bg-black/40 backdrop-blur-md border border-[#c2b2a3]/30 text-[9px] tracking-[0.4em] uppercase font-bold text-[#c2b2a3] hover:bg-[#c2b2a3]/20 hover:border-[#c2b2a3]/50 hover:text-white transition-all duration-300 cursor-pointer"
-              >
-                Elección Élite
-              </button>
             </div>
             
-            {/* Quick Stats Overlay (Mobile Only) */}
-            <div className="lg:hidden grid grid-cols-2 gap-3 mt-8">
-              {[
-                { label: 'Edad', val: model.age },
-                { label: 'Estatura', val: model.height },
-                { label: 'Peso', val: model.weight },
-                { label: 'Nacionalidad', val: model.nationality || 'Española' }
-              ].map((stat, idx) => (
-                <div key={idx} className="bg-[#111111] p-5 border border-white/5 text-center">
-                  <p className="text-[9px] text-gray-500 uppercase tracking-[0.3em] mb-2 font-bold">{stat.label}</p>
-                  <p className="text-xl serif luxury-text-gradient">{stat.val}</p>
+            {/* Bio Section */}
+            <div className="space-y-6">
+              <h2 className="text-3xl serif text-white uppercase tracking-widest">{model.name}</h2>
+              <p className="text-gray-400 font-light leading-[1.8] text-lg">
+                {model.description}
+              </p>
+              {model.essence && (
+                <div className="bg-[#111111] border border-white/5 p-6">
+                  <h3 className="text-sm text-[#c2b2a3] uppercase tracking-[0.4em] mb-3 font-bold">La Esencia</h3>
+                  <p className="text-gray-400 font-light leading-[1.6]">
+                    {model.essence}
+                  </p>
                 </div>
-              ))}
+              )}
             </div>
             
-            {/* Quick Stats Overlay (Desktop Only) */}
-            <div className="hidden lg:block grid grid-cols-2 gap-3 mt-8">
-              {[
-                { label: 'Edad', val: model.age },
-                { label: 'Estatura', val: model.height },
-                { label: 'Peso', val: model.weight },
-                { label: 'Nacionalidad', val: model.nationality || 'Española' }
-              ].map((stat, idx) => (
-                <div key={idx} className="bg-[#111111] p-5 border border-white/5 text-center">
-                  <p className="text-[9px] text-gray-500 uppercase tracking-[0.3em] mb-2 font-bold">{stat.label}</p>
-                  <p className="text-xl serif luxury-text-gradient">{stat.val}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Right Column: Details */}
-        <div className="lg:col-span-7 space-y-16">
-          {/* Header */}
-          <div className="border-b border-white/5 pb-12">
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center space-x-3 text-[#c2b2a3]">
-                <Star size={14} className="fill-[#c2b2a3]" />
-                <span className="text-[10px] tracking-[0.5em] uppercase font-bold">Acompañante Premier</span>
-              </div>
-            </div>
-            <h1 className="text-6xl md:text-8xl serif luxury-text-gradient uppercase mb-6 leading-[0.9] tracking-tighter">
-              {model.name}
-            </h1>
-            <div className="flex items-center space-x-6">
-              <p className="text-lg font-light text-gray-400 tracking-[0.2em] uppercase italic flex items-center">
-                <MapPin size={16} className="mr-2 text-[#c2b2a3]" />
-                {model.location}
-              </p>
-            </div>
-          </div>
-
-          {/* Intro / Bio */}
-          <div className="space-y-8">
-            <div className="flex items-center space-x-4">
-              <h2 className="text-3xl serif text-white uppercase tracking-widest leading-none">La Esencia de {model.name}</h2>
-              <div className="h-[1px] flex-1 bg-gradient-to-r from-white/10 to-transparent"></div>
-            </div>
-            <p className="text-gray-400 font-light leading-[1.8] text-xl first-letter:text-5xl first-letter:mr-3 first-letter:float-left first-letter:luxury-text-gradient first-letter:serif">
-              {model.bio || model.description}
-            </p>
-          </div>
-
-          
-
-        </div>
-      </section>
-
-      {/* Photo Gallery Grid */}
-      <section className="bg-[#080808] py-32 border-t border-white/5">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
-            <div className="relative z-10 overflow-visible">
-              <h2 className="text-4xl md:text-6xl font-light mb-6 tracking-normal pr-4">Portafolio <span className="italic luxury-text-gradient">Oficial</span></h2>
-              <p className="text-gray-500 text-sm font-light leading-relaxed uppercase tracking-widest">
-                Una selección de capturas de alta calidad que muestran la elegancia auténtica de {model.name}. Todas las imágenes son recientes y verificadas.
-              </p>
-            </div>
-            <div className="hidden md:block w-32 h-[1px] bg-[#c2b2a3]/50"></div>
-          </div>
-          
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {(model.gallery || []).map((img, idx) => (
-              <div 
-                key={idx} 
-                className={`relative overflow-hidden bg-[#111111] group cursor-pointer border border-white/5 ${idx % 3 === 0 ? 'md:row-span-2' : ''}`}
-                onClick={() => openGallery(idx + 1)}
-              >
-                <img 
-                  src={img} 
-                  alt={`${model.name} Portfolio ${idx + 1}`} 
-                  className="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110"
-                  draggable={false}
-                />
-                <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
-                  <div className="w-10 h-10 border border-white/30 rounded-full flex items-center justify-center">
-                    <Sparkles size={16} className="text-white/70" />
+            {/* Photo Gallery */}
+            <div className="space-y-8">
+              <h3 className="text-2xl serif text-white uppercase tracking-widest">Galería</h3>
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                {(model.gallery || []).map((img, idx) => (
+                  <div 
+                    key={idx} 
+                    className={`relative overflow-hidden bg-[#111111] group cursor-pointer border border-white/5 ${idx % 3 === 0 ? 'md:row-span-2' : ''}`}
+                    onClick={() => openGallery(idx + 1)}
+                  >
+                    <img 
+                      src={img} 
+                      alt={`${model.name} Gallery ${idx + 1}`} 
+                      className="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110"
+                      draggable={false}
+                    />
+                    <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                      <div className="w-10 h-10 border border-white/30 rounded-full flex items-center justify-center">
+                        <Sparkles size={16} className="text-white/70" />
+                      </div>
+                    </div>
                   </div>
-                </div>
+                ))}
               </div>
-            ))}
+            </div>
+            
           </div>
+          
+          {/* Sidebar - 1 column */}
+          <div className="lg:col-span-1 space-y-8">
+            
+            {/* Personal Details */}
+            <div className="bg-[#111111] border border-white/5 p-6">
+              <h4 className="text-lg font-bold text-white uppercase tracking-widest mb-6">Detalles Personales</h4>
+              <div className="space-y-3">
+                {[
+                  { label: 'Edad', value: model.age },
+                  { label: 'Estatura', value: model.height },
+                  { label: 'Peso', value: model.weight },
+                  { label: 'Nacionalidad', value: model.nationality || 'Española' },
+                  { label: 'Ciudad', value: model.city || 'Valencia' },
+                  { label: 'Disponibilidad', value: model.availability || '24h' },
+                  { label: 'Idiomas', value: (model.languages || ['Español']).join(', ') }
+                ].map((detail, idx) => (
+                  <div key={idx} className="flex justify-between items-center py-2 border-b border-white/5 last:border-0">
+                    <span className="text-sm text-gray-400 uppercase tracking-[0.2em]">{detail.label}</span>
+                    <span className="text-white font-light">{detail.value}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            {/* Prices */}
+            <div className="bg-[#111111] border border-white/5 p-6">
+              <h4 className="text-lg font-bold text-white uppercase tracking-widest mb-6">Tarifas</h4>
+              <div className="space-y-2">
+                {model.vip ? (
+                  // VIP Tariffs
+                  <>
+                    <div className="flex justify-between items-center py-2 border-b border-white/5">
+                      <span className="text-sm text-gray-400">1 hora</span>
+                      <span className="text-white font-light">{model.vipRates?.["1h"] || "180 €"}</span>
+                    </div>
+                    <div className="flex justify-between items-center py-2 border-b border-white/5">
+                      <span className="text-sm text-gray-400">45 minutos</span>
+                      <span className="text-white font-light">{model.vipRates?.["45min"] || "150 €"}</span>
+                    </div>
+                    <div className="flex justify-between items-center py-2 border-b border-white/5">
+                      <span className="text-sm text-gray-400">30 minutos</span>
+                      <span className="text-white font-light">{model.vipRates?.["30min"] || "120 €"}</span>
+                    </div>
+                    <div className="flex justify-between items-center py-2 border-b border-white/5">
+                      <span className="text-sm text-gray-400">2 horas</span>
+                      <span className="text-white font-light">{model.vipRates?.["2h"] || "350 €"}</span>
+                    </div>
+                    <div className="flex justify-between items-center py-2 border-b border-white/5">
+                      <span className="text-sm text-gray-400">3 horas</span>
+                      <span className="text-white font-light">{model.vipRates?.["3h"] || "520 €"}</span>
+                    </div>
+                    <div className="flex justify-between items-center py-2 border-b border-white/5">
+                      <span className="text-sm text-gray-400">Salida hotel</span>
+                      <span className="text-white font-light">{model.vipRates?.["salidaHotel"] || "250 €"}</span>
+                    </div>
+                    <div className="flex justify-between items-center py-2 border-b border-white/5">
+                      <span className="text-sm text-gray-400">Noche (10h)</span>
+                      <span className="text-white font-light">{model.vipRates?.["noche"] || "2.000 €"}</span>
+                    </div>
+                    <div className="flex justify-between items-center py-2">
+                      <span className="text-sm text-gray-400">Todo el día (24h)</span>
+                      <span className="text-white font-light">{model.vipRates?.["dia"] || "3.000 €"}</span>
+                    </div>
+                  </>
+                ) : (
+                  // Standard Tariffs
+                  <>
+                    <div className="flex justify-between items-center py-2 border-b border-white/5">
+                      <span className="text-sm text-gray-400">1 hora</span>
+                      <span className="text-white font-light">150 €</span>
+                    </div>
+                    <div className="flex justify-between items-center py-2 border-b border-white/5">
+                      <span className="text-sm text-gray-400">45 minutos</span>
+                      <span className="text-white font-light">120 €</span>
+                    </div>
+                    <div className="flex justify-between items-center py-2 border-b border-white/5">
+                      <span className="text-sm text-gray-400">30 minutos</span>
+                      <span className="text-white font-light">80 €</span>
+                    </div>
+                    <div className="flex justify-between items-center py-2 border-b border-white/5">
+                      <span className="text-sm text-gray-400">1,5 horas</span>
+                      <span className="text-white font-light">240 €</span>
+                    </div>
+                    <div className="flex justify-between items-center py-2 border-b border-white/5">
+                      <span className="text-sm text-gray-400">2 horas</span>
+                      <span className="text-white font-light">300 €</span>
+                    </div>
+                    <div className="flex justify-between items-center py-2 border-b border-white/5">
+                      <span className="text-sm text-gray-400">3 horas</span>
+                      <span className="text-white font-light">430 €</span>
+                    </div>
+                    <div className="flex justify-between items-center py-2 border-b border-white/5">
+                      <span className="text-sm text-gray-400">Salida</span>
+                      <span className="text-white font-light">200 €</span>
+                    </div>
+                    <div className="flex justify-between items-center py-2 border-b border-white/5">
+                      <span className="text-sm text-gray-400">Noche (10h)</span>
+                      <span className="text-white font-light">1.200 €</span>
+                    </div>
+                    <div className="flex justify-between items-center py-2">
+                      <span className="text-sm text-gray-400">Noche (24h)</span>
+                      <span className="text-white font-light">2.800 €</span>
+                    </div>
+                  </>
+                )}
+              </div>
+            </div>
+            
+            {/* Meetings in Valencia */}
+            <div className="bg-[#111111] border border-white/5 p-6">
+              <h4 className="text-lg font-bold text-white uppercase tracking-widest mb-6">Encuentros en Valencia</h4>
+              <p className="text-gray-400 text-sm leading-relaxed">
+                Disponible para encuentros en Valencia y alrededores. Servicio discreto y profesional en hotel, domicilio o lugar de tu elección.
+              </p>
+            </div>
+            
+            {/* International Meetings */}
+            <div className="bg-[#111111] border border-white/5 p-6">
+              <h4 className="text-lg font-bold text-white uppercase tracking-widest mb-6">Encuentros Internacionales</h4>
+              <p className="text-gray-400 text-sm leading-relaxed">
+                Disponible para viajes internacionales. Consultar disponibilidad y condiciones para acompañamiento en otras ciudades y países.
+              </p>
+            </div>
+            
+            {/* Contacts */}
+            <div className="bg-[#111111] border border-white/5 p-6">
+              <h4 className="text-lg font-bold text-white uppercase tracking-widest mb-6">Contacto</h4>
+              <div className="space-y-3">
+                <a 
+                  href="tel:645872227" 
+                  className="flex items-center text-[#c2b2a3] hover:text-white transition-colors"
+                >
+                  <Phone size={16} className="mr-3" /> 
+                  +34 645 872 227
+                </a>
+                <a 
+                  href="https://t.me/Valeriaferreeer" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center text-[#c2b2a3] hover:text-white transition-colors"
+                >
+                  <Phone size={16} className="mr-3" /> 
+                  @Valeriaferreeer
+                </a>
+              </div>
+            </div>
+            
+            {/* Valeria's Note */}
+            <div className="bg-[#111111] border border-white/5 p-6">
+              <h4 className="text-lg font-bold text-white uppercase tracking-widest mb-6">Nota de Valeria</h4>
+              <p className="text-gray-400 text-sm leading-relaxed">
+                {model.name} es una acompañante excepcional que combina elegancia, sofisticación y carisma natural. Su presencia garantiza experiencias inolvidables con el más alto nivel de discreción y profesionalismo.
+              </p>
+            </div>
+            
+          </div>
+          
         </div>
       </section>
 
+      
       {/* Request Meeting Button */}
       <section className="py-16 bg-[#0a0a0a]">
         <div className="max-w-4xl mx-auto px-6 text-center">
@@ -240,138 +332,6 @@ const ModelDetail: React.FC = () => {
         </div>
       </section>
 
-      {/* Pricing Table */}
-      <section className="py-32 bg-[#080808] border-t border-white/5">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-6xl font-light mb-6 tracking-tight">Tarifas <span className="italic luxury-text-gradient">Premium</span></h2>
-            <p className="text-gray-500 text-sm font-light leading-relaxed uppercase tracking-widest max-w-2xl mx-auto">
-              Experiencias exclusivas adaptadas a tus necesidades. Todas nuestras tarifas incluyen discreción absoluta y servicio de primera clase.
-            </p>
-          </div>
-          
-          <div className="max-w-4xl mx-auto">
-            <div className="bg-[#111111] border border-[#c2b2a3]/20 overflow-hidden">
-              <div className="grid grid-cols-2 divide-x divide-[#c2b2a3]/10">
-                {model.vip ? (
-                  // VIP Tariffs for VIP models
-                  <>
-                    <div className="p-6 space-y-1">
-                      <div className="flex justify-between items-center py-4 border-b border-white/5">
-                        <span className="text-sm text-gray-400 tracking-[0.1em]">1 hora</span>
-                        <span className="text-lg font-light luxury-text-gradient">{model.vipRates?.["1h"] || "180 €"}</span>
-                      </div>
-                      <div className="flex justify-between items-center py-4 border-b border-white/5">
-                        <span className="text-sm text-gray-400 tracking-[0.1em]">45 minutos</span>
-                        <span className="text-lg font-light luxury-text-gradient">{model.vipRates?.["45min"] || "150 €"}</span>
-                      </div>
-                      <div className="flex justify-between items-center py-4 border-b border-white/5">
-                        <span className="text-sm text-gray-400 tracking-[0.1em]">30 minutos</span>
-                        <span className="text-lg font-light luxury-text-gradient">{model.vipRates?.["30min"] || "120 €"}</span>
-                      </div>
-                      <div className="flex justify-between items-center py-4 border-b border-white/5">
-                        <span className="text-sm text-gray-400 tracking-[0.1em]">2 horas</span>
-                        <span className="text-lg font-light luxury-text-gradient">{model.vipRates?.["2h"] || "350 €"}</span>
-                      </div>
-                      <div className="flex justify-between items-center py-4">
-                        <span className="text-sm text-gray-400 tracking-[0.1em]">3 horas</span>
-                        <span className="text-lg font-light luxury-text-gradient">{model.vipRates?.["3h"] || "520 €"}</span>
-                      </div>
-                    </div>
-                    <div className="p-6 space-y-1">
-                      <div className="flex justify-between items-center py-4 border-b border-white/5">
-                        <span className="text-sm text-gray-400 tracking-[0.1em]">Salida hotel</span>
-                        <span className="text-lg font-light luxury-text-gradient">{model.vipRates?.["salidaHotel"] || "250 €"}</span>
-                      </div>
-                      <div className="flex justify-between items-center py-4 border-b border-white/5">
-                        <span className="text-sm text-gray-400 tracking-[0.1em]">Noche (10 horas)</span>
-                        <span className="text-lg font-light luxury-text-gradient">{model.vipRates?.["noche"] || "2.000 €"}</span>
-                      </div>
-                      <div className="flex justify-between items-center py-4 border-b border-white/5">
-                        <span className="text-sm text-gray-400 tracking-[0.1em]">Todo el día (24 horas)</span>
-                        <span className="text-lg font-light luxury-text-gradient">{model.vipRates?.["dia"] || "3.000 €"}</span>
-                      </div>
-                      <div className="flex justify-between items-center py-4">
-                        <span className="text-sm text-gray-400 tracking-[0.1em]">Dos días (48 horas)</span>
-                        <span className="text-lg font-light luxury-text-gradient">{model.vipRates?.["dosDias"] || "4.000 €"}</span>
-                      </div>
-                    </div>
-                  </>
-                ) : (
-                  // Standard Tariffs for regular models
-                  <>
-                    <div className="p-6 space-y-1">
-                      <div className="flex justify-between items-center py-4 border-b border-white/5">
-                        <span className="text-sm text-gray-400 tracking-[0.1em]">1 hora</span>
-                        <span className="text-lg font-light luxury-text-gradient">150 €</span>
-                      </div>
-                      <div className="flex justify-between items-center py-4 border-b border-white/5">
-                        <span className="text-sm text-gray-400 tracking-[0.1em]">45 minutos</span>
-                        <span className="text-lg font-light luxury-text-gradient">120 €</span>
-                      </div>
-                      <div className="flex justify-between items-center py-4 border-b border-white/5">
-                        <span className="text-sm text-gray-400 tracking-[0.1em]">30 minutos</span>
-                        <span className="text-lg font-light luxury-text-gradient">80 €</span>
-                      </div>
-                      <div className="flex justify-between items-center py-4 border-b border-white/5">
-                        <span className="text-sm text-gray-400 tracking-[0.1em]">1,5 horas</span>
-                        <span className="text-lg font-light luxury-text-gradient">240 €</span>
-                      </div>
-                      <div className="flex justify-between items-center py-4">
-                        <span className="text-sm text-gray-400 tracking-[0.1em]">2 horas</span>
-                        <span className="text-lg font-light luxury-text-gradient">300 €</span>
-                      </div>
-                    </div>
-                    <div className="p-6 space-y-1">
-                      <div className="flex justify-between items-center py-4 border-b border-white/5">
-                        <span className="text-sm text-gray-400 tracking-[0.1em]">3 horas</span>
-                        <span className="text-lg font-light luxury-text-gradient">430 €</span>
-                      </div>
-                      <div className="flex justify-between items-center py-4 border-b border-white/5">
-                        <span className="text-sm text-gray-400 tracking-[0.1em]">Salida</span>
-                        <span className="text-lg font-light luxury-text-gradient">200 €</span>
-                      </div>
-                      <div className="flex justify-between items-center py-4 border-b border-white/5">
-                        <span className="text-sm text-gray-400 tracking-[0.1em]">Noche (10 horas)</span>
-                        <span className="text-lg font-light luxury-text-gradient">1.200 €</span>
-                      </div>
-                      <div className="flex justify-between items-center py-4 border-b border-white/5">
-                        <span className="text-sm text-gray-400 tracking-[0.1em]">Noche (24 horas)</span>
-                        <span className="text-lg font-light luxury-text-gradient">2.800 €</span>
-                      </div>
-                      <div className="flex justify-between items-center py-4">
-                        <span className="text-sm text-gray-400 tracking-[0.1em]">Dos días (48 horas)</span>
-                        <span className="text-lg font-light luxury-text-gradient">3.700 €</span>
-                      </div>
-                    </div>
-                  </>
-                )}
-              </div>
-            </div>
-            
-            <div className="mt-12 text-center">
-              <p className="text-[10px] text-gray-600 tracking-[0.5em] uppercase mb-8">
-                * Todas las tarifas son en euros • Servicios adicionales disponibles • Consultar condiciones
-              </p>
-              <div className="flex flex-col md:flex-row gap-6 justify-center">
-                <Link 
-                  to="/booking" 
-                  className="inline-flex items-center justify-center px-12 py-5 luxury-gradient text-black font-bold uppercase tracking-[0.4em] text-[10px] hover:scale-[1.02] transition-all duration-500"
-                >
-                  Reservar Ahora
-                </Link>
-                <a 
-                  href="tel:645872227" 
-                  className="inline-flex items-center justify-center px-12 py-5 border border-[#c2b2a3]/30 text-[#c2b2a3] uppercase tracking-[0.3em] text-[10px] font-bold hover:bg-[#c2b2a3] hover:text-black transition-all duration-700"
-                >
-                  <Phone size={14} className="mr-3" /> 
-                  <span>Llamada Directa</span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Discretion Notice */}
       <section className="py-24 text-center bg-black border-t border-white/5">
