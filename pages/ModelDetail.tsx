@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { MODELS } from '../constants';
-import { ArrowLeft, Check, Calendar, Phone, MapPin, Ruler, User, Heart, Star, Sparkles } from 'lucide-react';
+import { ArrowLeft, Check, Calendar, Phone, MapPin, Ruler, User, Heart, Star, Sparkles, ChevronLeft, ChevronRight } from 'lucide-react';
 import GalleryModal from '../components/GalleryModal';
 
 const ModelDetail: React.FC = () => {
@@ -19,6 +19,15 @@ const ModelDetail: React.FC = () => {
 
   const closeGallery = () => {
     setIsGalleryOpen(false);
+  };
+
+  // Encontrar modelo anterior y siguiente
+  const currentIndex = MODELS.findIndex(m => m.id === id);
+  const previousModel = currentIndex > 0 ? MODELS[currentIndex - 1] : null;
+  const nextModel = currentIndex < MODELS.length - 1 ? MODELS[currentIndex + 1] : null;
+
+  const navigateToModel = (modelId: string) => {
+    navigate(`/models/${modelId}`);
   };
 
   useEffect(() => {
@@ -38,6 +47,41 @@ const ModelDetail: React.FC = () => {
     <div className="animate-in fade-in duration-1000 bg-[#0a0a0a] selection:bg-[#c2b2a3]/30">
       {/* Header Spacer */}
       <div className="h-20 lg:h-32"></div>
+
+      {/* Floating Navigation Arrows */}
+      <div className="fixed left-2 lg:left-4 top-1/2 -translate-y-1/2 z-50">
+        {previousModel && (
+          <button
+            onClick={() => navigateToModel(previousModel.id)}
+            className="group flex flex-col items-center justify-center w-10 h-10 lg:w-12 lg:h-12 bg-black/80 backdrop-blur-md border border-[#c2b2a3]/30 rounded-full hover:bg-[#c2b2a3]/20 hover:border-[#c2b2a3]/50 transition-all duration-300"
+          >
+            <ChevronLeft 
+              size={16} 
+              className="text-[#c2b2a3] group-hover:text-white transition-colors duration-300" 
+            />
+            <span className="text-[6px] lg:text-[8px] text-[#c2b2a3]/70 group-hover:text-[#c2b2a3] mt-1 uppercase tracking-widest">
+              Anterior
+            </span>
+          </button>
+        )}
+      </div>
+
+      <div className="fixed right-2 lg:right-4 top-1/2 -translate-y-1/2 z-50">
+        {nextModel && (
+          <button
+            onClick={() => navigateToModel(nextModel.id)}
+            className="group flex flex-col items-center justify-center w-10 h-10 lg:w-12 lg:h-12 bg-black/80 backdrop-blur-md border border-[#c2b2a3]/30 rounded-full hover:bg-[#c2b2a3]/20 hover:border-[#c2b2a3]/50 transition-all duration-300"
+          >
+            <ChevronRight 
+              size={16} 
+              className="text-[#c2b2a3] group-hover:text-white transition-colors duration-300" 
+            />
+            <span className="text-[6px] lg:text-[8px] text-[#c2b2a3]/70 group-hover:text-[#c2b2a3] mt-1 uppercase tracking-widest">
+              Siguiente
+            </span>
+          </button>
+        )}
+      </div>
 
       {/* Breadcrumbs / Back Link */}
       <div className="max-w-7xl mx-auto px-6 py-4">
@@ -59,13 +103,8 @@ const ModelDetail: React.FC = () => {
             <div className="relative group">
               <div className="absolute -inset-1 bg-gradient-to-b from-[#c2b2a3]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
               <div 
-                className="aspect-[3/4.2] overflow-hidden border border-white/5 bg-[#111111] cursor-pointer active:scale-[0.98] transition-transform duration-150"
+                className="relative overflow-hidden rounded-2xl cursor-pointer" 
                 onClick={() => openGallery(0)}
-                onTouchEnd={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  openGallery(0);
-                }}
               >
                 <img 
                   src={model.image} 
@@ -73,6 +112,7 @@ const ModelDetail: React.FC = () => {
                   className="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-105"
                 />
               </div>
+              
               {/* Badge for exclusivity */}
               <button 
                 onClick={() => openGallery(0)}
