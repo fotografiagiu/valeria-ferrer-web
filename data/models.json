@@ -24,7 +24,9 @@
       "Acompañamiento Personal"
     ],
     "availability": "24h",
-    "languages": ["Español"]
+    "languages": [
+      "Español"
+    ]
   },
   {
     "slug": "elena",
@@ -57,7 +59,9 @@
       "Acompañamiento Personal"
     ],
     "availability": "24h",
-    "languages": ["Español"]
+    "languages": [
+      "Español"
+    ]
   },
   {
     "slug": "lana",
@@ -89,7 +93,9 @@
       "Acompañamiento Personal"
     ],
     "availability": "24h",
-    "languages": ["Español"]
+    "languages": [
+      "Español"
+    ]
   },
   {
     "slug": "luna",
@@ -120,7 +126,9 @@
       "Acompañamiento Personal"
     ],
     "availability": "24h",
-    "languages": ["Español"]
+    "languages": [
+      "Español"
+    ]
   },
   {
     "slug": "carla",
@@ -149,7 +157,43 @@
       "Acompañamiento Personal"
     ],
     "availability": "24h",
-    "languages": ["Español"]
+    "languages": [
+      "Español"
+    ]
+  },
+  {
+    "slug": "estefany",
+    "name": "Estefany",
+    "age": 24,
+    "height": "1.57 m",
+    "weight": "55 kg",
+    "nationality": "Colombiana",
+    "city": "Valencia",
+    "profileUrl": "https://www.valeriaferrer.com/estefany-model-agency-valencia-vf/",
+    "coverImageUrl": "/chicas/estefany-model-agency-valencia-vf/gallery/01.jpg",
+    "description": "Estefany es una apasionada colombiana de 24 años con curvas voluptuosas y un temperamento ardiente. Con 1.57m de estatura, combina dulzura e intensidad en perfecta armonía. Su carisma natural la hace perfecta para momentos especiales.",
+    "essence": "La pasión de Estefany emerge de su intensidad latina y dulzura natural. Su carisma auténtico y curvas sensuales crean encuentros llenos de energía y autenticidad colombiana. Cada vivencia se transforma en una experiencia apasionada donde la ternura y el fuego se fusionan.",
+    "images": [
+      "/chicas/estefany-model-agency-valencia-vf/gallery/01.jpg",
+      "/chicas/estefany-model-agency-valencia-vf/portada.jpg",
+      "/chicas/estefany-model-agency-valencia-vf/gallery/02.jpg",
+      "/chicas/estefany-model-agency-valencia-vf/gallery/03.jpg",
+      "/chicas/estefany-model-agency-valencia-vf/gallery/04.jpg",
+      "/chicas/estefany-model-agency-valencia-vf/gallery/05.jpg",
+      "/chicas/estefany-model-agency-valencia-vf/gallery/06.jpg",
+      "/chicas/estefany-model-agency-valencia-vf/gallery/07.jpg",
+      "/chicas/estefany-model-agency-valencia-vf/gallery/08.jpg"
+    ],
+    "services": [
+      "Girlfriend Experience",
+      "Cenas de Negocios",
+      "Eventos Sociales",
+      "Acompañamiento Personal"
+    ],
+    "availability": "24h",
+    "languages": [
+      "Español"
+    ]
   },
   {
     "slug": "maria",
@@ -183,7 +227,9 @@
       "Acompañamiento Personal"
     ],
     "availability": "24h",
-    "languages": ["Español"]
+    "languages": [
+      "Español"
+    ]
   },
   {
     "slug": "claudia-vip",
@@ -212,7 +258,9 @@
       "Acompañamiento Personal"
     ],
     "availability": "24h",
-    "languages": ["Español"],
+    "languages": [
+      "Español"
+    ],
     "vip": true,
     "vipRates": {
       "30min": "120€",
@@ -252,7 +300,9 @@
       "Acompañamiento Personal"
     ],
     "availability": "24h",
-    "languages": ["Español"]
+    "languages": [
+      "Español"
+    ]
   },
   {
     "slug": "yaiza",
@@ -284,7 +334,9 @@
       "Acompañamiento Personal"
     ],
     "availability": "24h",
-    "languages": ["Español"]
+    "languages": [
+      "Español"
+    ]
   },
   {
     "slug": "erika",
@@ -314,7 +366,9 @@
       "Acompañamiento Personal"
     ],
     "availability": "24h",
-    "languages": ["Español"]
+    "languages": [
+      "Español"
+    ]
   },
   {
     "slug": "paula-vip",
@@ -345,7 +399,9 @@
       "Acompañamiento Personal"
     ],
     "availability": "24h",
-    "languages": ["Español"],
+    "languages": [
+      "Español"
+    ],
     "vip": true,
     "vipRates": {
       "30min": "120€",
@@ -383,6 +439,8 @@
       "Acompañamiento Personal"
     ],
     "availability": "24h",
-    "languages": ["Español"]
+    "languages": [
+      "Español"
+    ]
   }
 ]
