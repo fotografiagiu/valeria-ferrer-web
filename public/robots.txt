@@ -1,19 +1,15 @@
 User-agent: *
 Allow: /
 
-# Priorizar indexación de imágenes
+# Permitir indexación de imágenes
 Allow: /chicas/
 Allow: /public/chicas/
 
-# Bloquear archivos del sistema y desarrollo
+# Bloquear SOLO archivos del sistema y desarrollo críticos
 Disallow: /scripts/
 Disallow: /.git/
 Disallow: /node_modules/
 Disallow: /src/
-Disallow: /*.json$
-Disallow: /*.js$
-Disallow: /*.ts$
-Disallow: /*.tsx$
 
 # Permitir indexación de contenido importante
 Allow: /$
