@@ -1,4 +1,61 @@
 {
+  "redirects": [
+    {
+      "source": "/model/:slug*",
+      "destination": "https://www.valeriaferrer.com/models/:slug*",
+      "permanent": true
+    },
+    {
+      "source": "/inicio",
+      "destination": "https://www.valeriaferrer.com/",
+      "permanent": true
+    },
+    {
+      "source": "/blog",
+      "destination": "https://www.valeriaferrer.com/",
+      "permanent": true
+    },
+    {
+      "source": "/escort-valencia-contacto",
+      "destination": "https://www.valeriaferrer.com/contact",
+      "permanent": true
+    },
+    {
+      "source": "/escorts-valencia-casting",
+      "destination": "https://www.valeriaferrer.com/casting",
+      "permanent": true
+    },
+    {
+      "source": "/escorts-valencia-universitarias",
+      "destination": "https://www.valeriaferrer.com/models",
+      "permanent": true
+    },
+    {
+      "source": "/chicas-universitarias-valencia",
+      "destination": "https://www.valeriaferrer.com/models",
+      "permanent": true
+    },
+    {
+      "source": "/escorts-valencia-presentacion",
+      "destination": "https://www.valeriaferrer.com/",
+      "permanent": true
+    },
+    {
+      "source": "/escorts-valencia-maritimo",
+      "destination": "https://www.valeriaferrer.com/models",
+      "permanent": true
+    },
+    {
+      "source": "/pagos",
+      "destination": "https://www.valeriaferrer.com/",
+      "permanent": true
+    },
+    {
+      "source": "/pruebapagos",
+      "destination": "https://www.valeriaferrer.com/",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/(.*)",

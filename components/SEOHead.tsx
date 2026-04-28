@@ -44,7 +44,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({ model }) => {
       "name": model.name,
       "description": model.description || `Modelo ${model.nationality || 'Española'} de ${model.age} años disponible en ${model.city || 'Valencia'}`,
       "image": model.image,
-      "url": `https://valeriaferrer.com/models/${model.name.toLowerCase()}`,
+      "url": `https://www.valeriaferrer.com/models/${model.name.toLowerCase()}`,
       "jobTitle": "Modelo de Compañía VIP",
       "nationality": model.nationality || "Española",
       "birthDate": new Date(new Date().getFullYear() - model.age, 0, 1).toISOString().split('T')[0],
@@ -82,7 +82,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({ model }) => {
         }
       },
       "sameAs": [
-        `https://valeriaferrer.com/models/${model.name.toLowerCase()}`
+        `https://www.valeriaferrer.com/models/${model.name.toLowerCase()}`
       ]
     };
 
@@ -159,10 +159,10 @@ const SEOHead: React.FC<SEOHeadProps> = ({ model }) => {
     if (!canonicalLink) {
       const link = document.createElement('link');
       link.rel = 'canonical';
-      link.href = `https://valeriaferrer.com/models/${model.name.toLowerCase()}`;
+      link.href = `https://www.valeriaferrer.com/models/${model.name.toLowerCase()}`;
       document.head.appendChild(link);
     } else {
-      canonicalLink.href = `https://valeriaferrer.com/models/${model.name.toLowerCase()}`;
+      canonicalLink.href = `https://www.valeriaferrer.com/models/${model.name.toLowerCase()}`;
     }
 
     // Cleanup on unmount
