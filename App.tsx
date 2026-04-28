@@ -11,6 +11,9 @@ import Casting from './pages/Casting';
 import Contact from './pages/Contact';
 import Travel from './pages/Travel';
 import ServiceDetail from './pages/ServiceDetail';
+import Blog from './pages/Blog';
+import BlogArticle from './pages/BlogArticle';
+import DistrictPage from './pages/DistrictPage';
 import Footer from './components/Footer';
 import MembersModal from './components/MembersModal';
 import Chatbot from './components/Chatbot';
@@ -49,6 +52,9 @@ const App: React.FC = () => {
             <Route path="/contact" element={<Contact />} />
             <Route path="/travel" element={<Travel />} />
             <Route path="/services/:type" element={<ServiceDetail />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:id" element={<BlogArticle />} />
+            <Route path="/district/:districtId" element={<DistrictPage />} />
             {/* Rutas adicionales podrían añadirse aquí siguiendo el mismo patrón */}
           </Routes>
         </main>

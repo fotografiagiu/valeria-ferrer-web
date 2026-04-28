@@ -40,6 +40,7 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolled, openMembers }) => {
         <div className="hidden lg:flex items-center space-x-10 text-[13px] font-medium tracking-widest uppercase lg:mr-4">
           <Link to="/" className="hover:text-[#c2b2a3] transition-colors">Inicio</Link>
           <Link to="/models" className="hover:text-[#c2b2a3] transition-colors">Modelos</Link>
+          <Link to="/blog" className="hover:text-[#c2b2a3] transition-colors">Blog</Link>
           <Link to="/about" className="hover:text-[#c2b2a3] transition-colors">Agencia</Link>
           <Link to="/contact" className="hover:text-[#c2b2a3] transition-colors">Contacto</Link>
           <Link to="/casting" className="hover:text-[#c2b2a3] transition-colors">Casting</Link>
@@ -81,6 +82,7 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolled, openMembers }) => {
           </div>
           <Link to="/" onClick={() => setIsMobileMenuOpen(false)}>Inicio</Link>
           <Link to="/models" onClick={() => setIsMobileMenuOpen(false)}>Modelos</Link>
+          <Link to="/blog" onClick={() => setIsMobileMenuOpen(false)}>Blog</Link>
           <Link to="/about" onClick={() => setIsMobileMenuOpen(false)}>Agencia</Link>
           <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)}>Contacto</Link>
           <Link to="/casting" onClick={() => setIsMobileMenuOpen(false)}>Casting</Link>

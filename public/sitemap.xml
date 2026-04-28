@@ -46,7 +46,50 @@
     </image:image>
   </url>
   
-    
+  <!-- Blog URLs -->
+  <url>
+    <loc>https://www.valeriaferrer.com/blog</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.valeriaferrer.com/blog/guia-escorts-valencia</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://www.valeriaferrer.com/blog/guia-escorts-valencia-cover.jpg</image:loc>
+      <image:title>Guía Completa de Escorts Valencia</image:title>
+      <image:caption>Descubre todo sobre las escorts de lujo en Valencia. Zonas exclusivas, servicios VIP y cómo elegir la acompañante perfecta.</image:caption>
+    </image:image>
+  </url>
+  
+  <url>
+    <loc>https://www.valeriaferrer.com/blog/servicios-acompañamiento-valencia</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://www.valeriaferrer.com/blog/servicios-vip-valencia-cover.jpg</image:loc>
+      <image:title>Servicios de Acompañamiento VIP en Valencia</image:title>
+      <image:caption>Explora los servicios premium de acompañamiento en Valencia. Desde cenas de negocios hasta experiencias románticas.</image:caption>
+    </image:image>
+  </url>
+  
+  <url>
+    <loc>https://www.valeriaferrer.com/blog/hoteles-lujo-valencia-escorts</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://www.valeriaferrer.com/blog/hoteles-lujo-valencia-cover.jpg</image:loc>
+      <image:title>Hoteles de Lujo Valencia para Encuentros Exclusivos</image:title>
+      <image:caption>Los mejores hoteles 5 estrellas de Valencia para experiencias VIP. Suites presidenciales, spa de lujo y total discreción.</image:caption>
+    </image:image>
+  </url>
+  
   <!-- Modelos Adicionales - Añadidos para indexación completa -->
   <url>
     <loc>https://www.valeriaferrer.com/models/elena</loc>
