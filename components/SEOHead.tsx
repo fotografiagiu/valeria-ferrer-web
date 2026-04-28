@@ -32,7 +32,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({ model }) => {
       descriptionMeta.content = model.description || `${model.name}, modelo ${model.nationality || 'Española'} de ${model.age} años. Disponible para acompañamiento exclusivo en ${model.city || 'Valencia'}. Valeria Ferrer Agency.`;
     }
 
-    // Add structured data (JSON-LD)
+    // Add structured data (JSON-LD) - Enhanced Person schema
     const existingScript = document.querySelector('#structured-data');
     if (existingScript) {
       existingScript.remove();
@@ -44,17 +44,46 @@ const SEOHead: React.FC<SEOHeadProps> = ({ model }) => {
       "name": model.name,
       "description": model.description || `Modelo ${model.nationality || 'Española'} de ${model.age} años disponible en ${model.city || 'Valencia'}`,
       "image": model.image,
-      "jobTitle": "Modelo de Compañía",
+      "url": `https://valeriaferrer.com/models/${model.name.toLowerCase()}`,
+      "jobTitle": "Modelo de Compañía VIP",
+      "nationality": model.nationality || "Española",
+      "birthDate": new Date(new Date().getFullYear() - model.age, 0, 1).toISOString().split('T')[0],
+      "gender": "Female",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": model.city || 'Valencia',
+        "addressRegion": "Valencia",
         "addressCountry": "ES"
       },
+      "knowsLanguage": ["Spanish", "English"],
       "offers": {
         "@type": "Offer",
-        "description": "Servicios de acompañamiento exclusivos",
-        "areaServed": model.city || 'Valencia'
-      }
+        "description": "Servicios de acompañamiento exclusivos y discreción absoluta",
+        "areaServed": model.city || 'Valencia',
+        "availability": "https://schema.org/InStock",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "priceCurrency": "EUR",
+          "priceRange": "$$$"
+        },
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Acompañamiento VIP",
+          "description": "Servicios de acompañamiento de lujo con modelo exclusiva",
+          "serviceType": "Companion Services"
+        }
+      },
+      "hasOccupation": {
+        "@type": "Occupation",
+        "description": "Modelo de compañía y acompañante VIP",
+        "occupationLocation": {
+          "@type": "City",
+          "name": model.city || 'Valencia'
+        }
+      },
+      "sameAs": [
+        `https://valeriaferrer.com/models/${model.name.toLowerCase()}`
+      ]
     };
 
     const script = document.createElement('script');

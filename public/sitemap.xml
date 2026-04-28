@@ -20,8 +20,8 @@
   
   <!-- Perfiles de Modelos con Imágenes -->
   <url>
-    <loc>https://valeriaferrer.com/model/teresa</loc>
-    <lastmod>2026-04-24</lastmod>
+    <loc>https://valeriaferrer.com/models/teresa</loc>
+    <lastmod>2026-04-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -49,7 +49,7 @@
     
   <!-- Modelos Adicionales - Añadidos para indexación completa -->
   <url>
-    <loc>https://valeriaferrer.com/model/elena</loc>
+    <loc>https://valeriaferrer.com/models/elena</loc>
     <lastmod>2026-04-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -61,7 +61,7 @@
   </url>
   
   <url>
-    <loc>https://valeriaferrer.com/model/lana</loc>
+    <loc>https://valeriaferrer.com/models/lana</loc>
     <lastmod>2026-04-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -73,7 +73,7 @@
   </url>
   
   <url>
-    <loc>https://valeriaferrer.com/model/luna</loc>
+    <loc>https://valeriaferrer.com/models/luna</loc>
     <lastmod>2026-04-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -85,7 +85,7 @@
   </url>
   
   <url>
-    <loc>https://valeriaferrer.com/model/carla</loc>
+    <loc>https://valeriaferrer.com/models/carla</loc>
     <lastmod>2026-04-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -97,7 +97,7 @@
   </url>
   
   <url>
-    <loc>https://valeriaferrer.com/model/estefany</loc>
+    <loc>https://valeriaferrer.com/models/estefany</loc>
     <lastmod>2026-04-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -109,7 +109,7 @@
   </url>
   
   <url>
-    <loc>https://valeriaferrer.com/model/maria</loc>
+    <loc>https://valeriaferrer.com/models/maria</loc>
     <lastmod>2026-04-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -121,7 +121,7 @@
   </url>
   
   <url>
-    <loc>https://valeriaferrer.com/model/claudia-vip</loc>
+    <loc>https://valeriaferrer.com/models/claudia-vip</loc>
     <lastmod>2026-04-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
@@ -133,7 +133,7 @@
   </url>
   
   <url>
-    <loc>https://valeriaferrer.com/model/alicia</loc>
+    <loc>https://valeriaferrer.com/models/alicia</loc>
     <lastmod>2026-04-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -145,7 +145,7 @@
   </url>
   
   <url>
-    <loc>https://valeriaferrer.com/model/silvia</loc>
+    <loc>https://valeriaferrer.com/models/silvia</loc>
     <lastmod>2026-04-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -157,7 +157,7 @@
   </url>
   
   <url>
-    <loc>https://valeriaferrer.com/model/yaiza</loc>
+    <loc>https://valeriaferrer.com/models/yaiza</loc>
     <lastmod>2026-04-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -169,7 +169,7 @@
   </url>
   
   <url>
-    <loc>https://valeriaferrer.com/model/paula-vip</loc>
+    <loc>https://valeriaferrer.com/models/paula-vip</loc>
     <lastmod>2026-04-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
@@ -181,7 +181,7 @@
   </url>
   
   <url>
-    <loc>https://valeriaferrer.com/model/naty</loc>
+    <loc>https://valeriaferrer.com/models/naty</loc>
     <lastmod>2026-04-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -193,7 +193,7 @@
   </url>
   
   <url>
-    <loc>https://valeriaferrer.com/model/erika</loc>
+    <loc>https://valeriaferrer.com/models/erika</loc>
     <lastmod>2026-04-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -207,23 +207,37 @@
   <!-- Otras páginas importantes -->
   <url>
     <loc>https://valeriaferrer.com/about</loc>
-    <lastmod>2026-04-24</lastmod>
+    <lastmod>2026-04-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
     <loc>https://valeriaferrer.com/contact</loc>
-    <lastmod>2026-04-24</lastmod>
+    <lastmod>2026-04-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
     <loc>https://valeriaferrer.com/booking</loc>
-    <lastmod>2026-04-24</lastmod>
+    <lastmod>2026-04-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://valeriaferrer.com/fees</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://valeriaferrer.com/casting</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   
 </urlset>

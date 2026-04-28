@@ -6,6 +6,9 @@ interface LazyImageProps {
   className?: string;
   placeholder?: string;
   priority?: boolean;
+  sizes?: string;
+  title?: string;
+  loading?: 'lazy' | 'eager';
 }
 
 const LazyImage: React.FC<LazyImageProps> = ({ 
@@ -13,7 +16,10 @@ const LazyImage: React.FC<LazyImageProps> = ({
   alt, 
   className = '', 
   placeholder = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600"%3E%3Crect fill="%23111111" width="400" height="600"/%3E%3C/svg%3E',
-  priority = false 
+  priority = false,
+  sizes = '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw',
+  title,
+  loading = priority ? 'eager' : 'lazy'
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isInView, setIsInView] = useState(false);
@@ -44,16 +50,48 @@ const LazyImage: React.FC<LazyImageProps> = ({
     setIsLoaded(true);
   };
 
+  // Generate WebP and fallback sources (only if WebP exists)
+  const generateWebPSrc = (originalSrc: string) => {
+    if (originalSrc.includes('.jpg') || originalSrc.includes('.jpeg') || originalSrc.includes('.png')) {
+      return originalSrc.replace(/\.(jpg|jpeg|png)$/i, '.webp');
+    }
+    return originalSrc;
+  };
+
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    // Fallback for broken images
+    const img = e.currentTarget;
+    if (!img.dataset.fallback) {
+      img.dataset.fallback = 'true';
+      // Try to load the original image if WebP failed
+      if (img.src.includes('.webp')) {
+        img.src = img.src.replace('.webp', '.jpg');
+      }
+    }
+  };
+
   return (
     <div className="relative overflow-hidden">
-      <img
-        ref={imgRef}
-        src={isInView || priority ? src : placeholder}
-        alt={alt}
-        className={`transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-70'} ${className}`}
-        loading={priority ? 'eager' : 'lazy'}
-        onLoad={handleLoad}
-      />
+      <picture>
+        {/* WebP source - only add if we want to use WebP */}
+        {/* Temporarily disabled until WebP images are generated */}
+        {/* <source
+          srcSet={isInView || priority ? generateWebPSrc(src) : placeholder}
+          type="image/webp"
+        /> */}
+        <img
+          ref={imgRef}
+          src={isInView || priority ? src : placeholder}
+          alt={alt}
+          title={title || alt}
+          className={`transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-70'} ${className}`}
+          loading={loading}
+          sizes={sizes}
+          onLoad={handleLoad}
+          onError={handleImageError}
+          decoding="async"
+        />
+      </picture>
       {!isLoaded && (
         <div className="absolute inset-0 bg-[#111111] animate-pulse" />
       )}
