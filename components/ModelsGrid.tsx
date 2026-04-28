@@ -21,6 +21,7 @@ const ModelCard: React.FC<{ model: any; index: number; isDoubleView?: boolean }>
 
   return (
     <motion.div 
+      itemScope itemType="https://schema.org/Person"
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
@@ -31,17 +32,26 @@ const ModelCard: React.FC<{ model: any; index: number; isDoubleView?: boolean }>
       onTouchStart={() => setIsHovered(true)}
       onTouchEnd={() => setIsHovered(false)}
     >
-      <Link to={`/models/${adaptedModel.id}`} className="block">
+      <Link to={`/models/${adaptedModel.id}`} className="block" itemProp="url">
         <div className="aspect-[2/3] relative overflow-hidden">
           <img 
             src={adaptedModel.image} 
-            alt={adaptedModel.name}
+            alt={`${adaptedModel.name} - Escort VIP ${adaptedModel.location} | Valeria Ferrer Agency`}
+            title={`${adaptedModel.name} - Modelo Exclusiva en ${adaptedModel.location}`}
+            loading="lazy"
+            width="400"
+            height="600"
+            itemProp="image"
             className={`w-full h-full object-cover transition-transform duration-700 ${isHovered ? 'scale-110' : 'scale-100'}`}
           />
           {/* Hover Reveal Image */}
           <img 
             src={adaptedModel.hoverImage} 
-            alt={`${adaptedModel.name} alternate`}
+            alt={`${adaptedModel.name} - Galería Fotos ${adaptedModel.location} | Escorts Valencia`}
+            title={`${adaptedModel.name} - Fotos Profesionales Valencia`}
+            loading="lazy"
+            width="400"
+            height="600"
             className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${isHovered ? 'opacity-100' : 'opacity-0'}`}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60"></div>
@@ -79,8 +89,15 @@ const ModelCard: React.FC<{ model: any; index: number; isDoubleView?: boolean }>
         </div>
         
         <div className="p-4 md:p-6 relative z-10 text-center">
-          <h3 className="text-xl md:text-2xl tracking-widest uppercase mb-1 font-light">{adaptedModel.name}</h3>
-          <p className="text-[10px] md:text-xs tracking-[0.2em] uppercase text-[#c2b2a3]">{adaptedModel.location}</p>
+          <h3 className="text-xl md:text-2xl tracking-widest uppercase mb-1 font-light" itemProp="name">{adaptedModel.name}</h3>
+          <p className="text-[10px] md:text-xs tracking-[0.2em] uppercase text-[#c2b2a3]" itemProp="address">{adaptedModel.location}</p>
+          {model.age && model.height && (
+            <p className="text-[9px] text-gray-500 mt-2 tracking-[0.1em] uppercase">
+              {model.age} años • {model.height} • {model.nationality || 'Española'}
+            </p>
+          )}
+          <meta itemProp="jobTitle" content="Escort VIP" />
+          <meta itemProp="worksFor" content="Valeria Ferrer Agency" />
         </div>
       </Link>
     </motion.div>
@@ -109,7 +126,9 @@ const ModelsGrid: React.FC<ModelsGridProps> = ({ models = MODELS }) => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16 px-4 md:px-0"
         >
-          <h2 className="text-3xl md:text-5xl font-light mb-4">Escorts VIP <span className="italic">de Lujo</span></h2>
+          <h2 className="text-3xl md:text-5xl font-light mb-4">
+            Escorts VIP Valencia <span className="italic">Agencia de Lujo</span>
+          </h2>
           <div className="w-20 h-[1px] bg-[#c2b2a3] mx-auto mb-8"></div>
           
           {/* View Mode Toggle - Solo visible en móvil */}
