@@ -62,7 +62,7 @@ const Models: React.FC = () => {
 
       {/* Models Grid with filtered data */}
       <div className="max-w-[1600px] mx-auto px-6 pb-12">
-        <ModelsGrid models={filteredModels} />
+        <ModelsGrid models={filteredModels} onQuickView={openQuickView} />
       </div>
 
       {/* Quick View Modal */}
