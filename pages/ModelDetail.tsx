@@ -5,6 +5,7 @@ import { MODELS } from '../constants';
 import { ArrowLeft, Check, Calendar, Phone, MapPin, Ruler, User, Heart, Star, Sparkles, ChevronLeft, ChevronRight } from 'lucide-react';
 import GalleryModal from '../components/GalleryModal';
 import LazyImage from '../components/LazyImage';
+import SEOHead from '../components/SEOHead';
 
 const ModelDetail: React.FC = () => {
   const { id } = useParams();
@@ -46,6 +47,7 @@ const ModelDetail: React.FC = () => {
 
   return (
     <div className="animate-in fade-in duration-1000 bg-[#0a0a0a] selection:bg-[#c2b2a3]/30">
+      <SEOHead model={model} />
       {/* Header Spacer */}
       <div className="h-32 lg:h-32"></div>
 
