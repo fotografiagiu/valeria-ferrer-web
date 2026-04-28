@@ -54,6 +54,116 @@
       "source": "/pruebapagos",
       "destination": "https://www.valeriaferrer.com/",
       "permanent": true
+    },
+    {
+      "source": "/:name-model-agency-valencia-vf",
+      "destination": "https://www.valeriaferrer.com/models/:name",
+      "permanent": true
+    },
+    {
+      "source": "/:name-model-agency-valencia-vf/",
+      "destination": "https://www.valeriaferrer.com/models/:name",
+      "permanent": true
+    },
+    {
+      "source": "/teresa-model-agency-valencia-vf",
+      "destination": "https://www.valeriaferrer.com/models/teresa",
+      "permanent": true
+    },
+    {
+      "source": "/teresa-model-agency-valencia-vf/",
+      "destination": "https://www.valeriaferrer.com/models/teresa",
+      "permanent": true
+    },
+    {
+      "source": "/luna-model-agency-valencia-vf",
+      "destination": "https://www.valeriaferrer.com/models/luna",
+      "permanent": true
+    },
+    {
+      "source": "/luna-model-agency-valencia-vf/",
+      "destination": "https://www.valeriaferrer.com/models/luna",
+      "permanent": true
+    },
+    {
+      "source": "/elena-model-agency-valencia-vf",
+      "destination": "https://www.valeriaferrer.com/models/elena",
+      "permanent": true
+    },
+    {
+      "source": "/elena-model-agency-valencia-vf/",
+      "destination": "https://www.valeriaferrer.com/models/elena",
+      "permanent": true
+    },
+    {
+      "source": "/carla-model-agency-valencia-vf",
+      "destination": "https://www.valeriaferrer.com/models/carla",
+      "permanent": true
+    },
+    {
+      "source": "/carla-model-agency-valencia-vf/",
+      "destination": "https://www.valeriaferrer.com/models/carla",
+      "permanent": true
+    },
+    {
+      "source": "/maria-model-agency-valencia-vf",
+      "destination": "https://www.valeriaferrer.com/models/maria",
+      "permanent": true
+    },
+    {
+      "source": "/maria-model-agency-valencia-vf/",
+      "destination": "https://www.valeriaferrer.com/models/maria",
+      "permanent": true
+    },
+    {
+      "source": "/claudia-vip-model-agency-valencia-vf",
+      "destination": "https://www.valeriaferrer.com/models/claudia-vip",
+      "permanent": true
+    },
+    {
+      "source": "/claudia-vip-model-agency-valencia-vf/",
+      "destination": "https://www.valeriaferrer.com/models/claudia-vip",
+      "permanent": true
+    },
+    {
+      "source": "/alicia-model-agency-valencia-vf",
+      "destination": "https://www.valeriaferrer.com/models/alicia",
+      "permanent": true
+    },
+    {
+      "source": "/alicia-model-agency-valencia-vf/",
+      "destination": "https://www.valeriaferrer.com/models/alicia",
+      "permanent": true
+    },
+    {
+      "source": "/silvia-model-agency-valencia-vf",
+      "destination": "https://www.valeriaferrer.com/models/silvia",
+      "permanent": true
+    },
+    {
+      "source": "/silvia-model-agency-valencia-vf/",
+      "destination": "https://www.valeriaferrer.com/models/silvia",
+      "permanent": true
+    },
+    {
+      "source": "/yaiza-model-agency-valencia-vf",
+      "destination": "https://www.valeriaferrer.com/models/yaiza",
+      "permanent": true
+    },
+    {
+      "source": "/yaiza-model-agency-valencia-vf/",
+      "destination": "https://www.valeriaferrer.com/models/yaiza",
+      "permanent": true
+    },
+    {
+      "source": "/paula-vip-model-agency-valencia-vf",
+      "destination": "https://www.valeriaferrer.com/models/paula-vip",
+      "permanent": true
+    },
+    {
+      "source": "/paula-vip-model-agency-valencia-vf/",
+      "destination": "https://www.valeriaferrer.com/models/paula-vip",
+      "permanent": true
     }
   ],
   "rewrites": [
