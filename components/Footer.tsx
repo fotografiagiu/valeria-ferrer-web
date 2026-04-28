@@ -14,10 +14,10 @@ const Footer: React.FC = () => {
               Exclusiva Agencia de Modelos de Lujo que representa a las mejores modelos en todo el mundo. Redefinimos el acompañamiento de lujo con sofisticación y discreción absoluta.
             </p>
             <div className="flex space-x-4 pt-4">
-              <a href="#" className="w-10 h-10 rounded-full bg-[#1a1a1a] flex items-center justify-center text-[#c2b2a3] hover:bg-[#c2b2a3] hover:text-black transition-all">
+              <a href="https://instagram.com" className="w-10 h-10 rounded-full bg-[#1a1a1a] flex items-center justify-center text-[#c2b2a3] hover:bg-[#c2b2a3] hover:text-black transition-all">
                 <Instagram size={18} />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-[#1a1a1a] flex items-center justify-center text-[#c2b2a3] hover:bg-[#c2b2a3] hover:text-black transition-all">
+              <a href="https://twitter.com" className="w-10 h-10 rounded-full bg-[#1a1a1a] flex items-center justify-center text-[#c2b2a3] hover:bg-[#c2b2a3] hover:text-black transition-all">
                 <Twitter size={18} />
               </a>
             </div>
@@ -27,9 +27,9 @@ const Footer: React.FC = () => {
           <div className="space-y-6">
             <h4 className="text-xs font-bold tracking-[0.3em] uppercase text-[#c2b2a3]">Escorts Valeria</h4>
             <ul className="space-y-4 text-xs font-light tracking-widest uppercase">
-              <li><a href="#" className="hover:text-[#c2b2a3] transition-colors">Escorts de Lujo</a></li>
-              <li><a href="#" className="hover:text-[#c2b2a3] transition-colors">Girlfriend Experience</a></li>
-              <li><a href="#" className="hover:text-[#c2b2a3] transition-colors">Especiales Dúo</a></li>
+              <li><a href="/services" className="hover:text-[#c2b2a3] transition-colors">Escorts de Lujo</a></li>
+              <li><a href="/services/gfe" className="hover:text-[#c2b2a3] transition-colors">Girlfriend Experience</a></li>
+              <li><a href="/services/duo" className="hover:text-[#c2b2a3] transition-colors">Especiales Dúo</a></li>
             </ul>
           </div>
 
@@ -37,10 +37,10 @@ const Footer: React.FC = () => {
           <div className="space-y-6">
             <h4 className="text-xs font-bold tracking-[0.3em] uppercase text-[#c2b2a3]">Para Caballeros</h4>
             <ul className="space-y-4 text-xs font-light tracking-widest uppercase">
-              <li><a href="#" className="hover:text-[#c2b2a3] transition-colors">Información de Reserva</a></li>
-              <li><a href="#" className="hover:text-[#c2b2a3] transition-colors">Honorarios y Tarifas</a></li>
-              <li><a href="#" className="hover:text-[#c2b2a3] transition-colors">Lounge de Miembros <span className="text-[9px] opacity-50">(Próximamente)</span></a></li>
-              <li><a href="#" className="hover:text-[#c2b2a3] transition-colors">Guía de Ciudades</a></li>
+              <li><a href="/booking" className="hover:text-[#c2b2a3] transition-colors">Información de Reserva</a></li>
+              <li><a href="/fees" className="hover:text-[#c2b2a3] transition-colors">Honorarios y Tarifas</a></li>
+              <li><a href="/members" className="hover:text-[#c2b2a3] transition-colors">Lounge de Miembros <span className="text-[9px] opacity-50">(Próximamente)</span></a></li>
+              <li><a href="/cities" className="hover:text-[#c2b2a3] transition-colors">Guía de Ciudades</a></li>
             </ul>
           </div>
 
@@ -70,9 +70,9 @@ const Footer: React.FC = () => {
         <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0 text-[10px] font-medium tracking-[0.3em] uppercase text-gray-600">
           <p>Copyright © 2026 Agencia Valeria Ferrer™ - Todos los derechos reservados</p>
           <div className="flex space-x-8">
-            <a href="#" className="hover:text-[#c2b2a3]">Aviso Legal</a>
-            <a href="#" className="hover:text-[#c2b2a3]">Privacidad</a>
-            <a href="#" className="hover:text-[#c2b2a3]">Términos</a>
+            <a href="/legal" className="hover:text-[#c2b2a3]">Aviso Legal</a>
+            <a href="/privacy" className="hover:text-[#c2b2a3]">Privacidad</a>
+            <a href="/terms" className="hover:text-[#c2b2a3]">Términos</a>
           </div>
         </div>
       </div>

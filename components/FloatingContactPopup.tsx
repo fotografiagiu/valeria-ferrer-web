@@ -77,7 +77,7 @@ const FloatingContactPopup: React.FC = () => {
                   </a>
 
                   <a 
-                    href="#/booking"
+                    href="/booking"
                     className="flex items-center justify-center w-full text-[9px] font-medium uppercase tracking-[0.3em] text-[#c2b2a3] hover:text-white transition-colors py-1"
                   >
                     <Calendar size={12} className="mr-2" />

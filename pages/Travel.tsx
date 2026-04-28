@@ -72,7 +72,7 @@ const Travel: React.FC = () => {
           <p className="text-gray-400 font-light tracking-widest uppercase text-xs mb-12 max-w-xl mx-auto">
             Contacte con nuestra central de reservas para coordinar la logística de su acompañamiento.
           </p>
-          <a href="#/booking" className="inline-block px-14 py-5 bg-white text-black text-[10px] font-bold tracking-[0.4em] uppercase hover:bg-[#c2b2a3] transition-all duration-500">
+          <a href="/booking" className="inline-block px-14 py-5 bg-white text-black text-[10px] font-bold tracking-[0.4em] uppercase hover:bg-[#c2b2a3] transition-all duration-500">
             Solicitar Presupuesto de Viaje
           </a>
         </div>

@@ -44,7 +44,7 @@ const CookieConsent: React.FC = () => {
               <div className="space-y-2">
                 <h4 className="text-xs font-bold tracking-[0.3em] uppercase text-white">Privacidad y Cookies</h4>
                 <p className="text-[10px] md:text-xs font-light text-gray-400 leading-relaxed uppercase tracking-wider">
-                  Utilizamos cookies propias y de terceros para mejorar nuestros servicios y mostrarle publicidad relacionada con sus preferencias mediante el análisis de sus hábitos de navegación. Al continuar navegando, consideramos que acepta su uso. Puede obtener más información en nuestra <a href="#" className="text-[#c2b2a3] underline underline-offset-4">Política de Cookies</a>.
+                  Utilizamos cookies propias y de terceros para mejorar nuestros servicios y mostrarle publicidad relacionada con sus preferencias mediante el análisis de sus hábitos de navegación. Al continuar navegando, consideramos que acepta su uso. Puede obtener más información en nuestra <a href="/privacy" className="text-[#c2b2a3] underline underline-offset-4">Política de Cookies</a>.
                 </p>
               </div>
             </div>
