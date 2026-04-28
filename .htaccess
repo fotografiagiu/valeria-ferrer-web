@@ -28,3 +28,13 @@ RewriteRule . /index.html [L]
     AddOutputFilterByType DEFLATE application/javascript
     AddOutputFilterByType DEFLATE application/x-javascript
 </IfModule>
+
+# 301 Redirects - HashRouter to BrowserRouter (Basic)
+Redirect 301 "/#/" "https://valeriaferrer.com/"
+Redirect 301 "/#/models" "https://valeriaferrer.com/models"
+Redirect 301 "/#/about" "https://valeriaferrer.com/about"
+Redirect 301 "/#/fees" "https://valeriaferrer.com/fees"
+Redirect 301 "/#/booking" "https://valeriaferrer.com/booking"
+Redirect 301 "/#/casting" "https://valeriaferrer.com/casting"
+Redirect 301 "/#/contact" "https://valeriaferrer.com/contact"
+Redirect 301 "/#/travel" "https://valeriaferrer.com/travel"

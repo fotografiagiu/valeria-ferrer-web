@@ -4,16 +4,29 @@ import ModelsGrid from '../components/ModelsGrid';
 import ModelFilter from '../components/ModelFilter';
 import AnimatedCounter from '../components/AnimatedCounter';
 import QuickViewModal from '../components/QuickViewModal';
+import ModelComparison from '../components/ModelComparison';
 import modelsData from '../data/models.json';
 
 const Models: React.FC = () => {
   const [filteredModels, setFilteredModels] = useState<any[]>(modelsData);
   const [isQuickViewOpen, setIsQuickViewOpen] = useState(false);
   const [selectedModelId, setSelectedModelId] = useState('');
+  const [isComparisonOpen, setIsComparisonOpen] = useState(false);
+  const [comparisonModels, setComparisonModels] = useState<string[]>([]);
 
   const openQuickView = (modelId: string) => {
     setSelectedModelId(modelId);
     setIsQuickViewOpen(true);
+  };
+
+  const addToComparison = (modelId: string) => {
+    if (!comparisonModels.includes(modelId) && comparisonModels.length < 4) {
+      setComparisonModels([...comparisonModels, modelId]);
+    }
+  };
+
+  const removeFromComparison = (modelId: string) => {
+    setComparisonModels(comparisonModels.filter(id => id !== modelId));
   };
 
   return (
@@ -58,6 +71,28 @@ const Models: React.FC = () => {
         onClose={() => setIsQuickViewOpen(false)}
         modelId={selectedModelId}
       />
+
+      {/* Comparison Modal */}
+      <ModelComparison
+        isOpen={isComparisonOpen}
+        onClose={() => setIsComparisonOpen(false)}
+        modelIds={comparisonModels}
+      />
+
+      {/* Floating Comparison Button */}
+      {comparisonModels.length > 0 && (
+        <button
+          onClick={() => setIsComparisonOpen(true)}
+          className="fixed bottom-6 right-6 bg-[#c2b2a3] text-black p-4 rounded-full shadow-2xl hover:bg-white transition-all duration-300 z-40"
+        >
+          <span className="flex items-center space-x-2">
+            <span className="bg-white/20 px-2 py-1 rounded-full text-xs font-bold">
+              {comparisonModels.length}
+            </span>
+            <span className="text-sm font-medium">Comparar</span>
+          </span>
+        </button>
+      )}
     </div>
   );
 };
