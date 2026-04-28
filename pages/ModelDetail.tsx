@@ -4,6 +4,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { MODELS } from '../constants';
 import { ArrowLeft, Check, Calendar, Phone, MapPin, Ruler, User, Heart, Star, Sparkles, ChevronLeft, ChevronRight } from 'lucide-react';
 import GalleryModal from '../components/GalleryModal';
+import LazyImage from '../components/LazyImage';
 
 const ModelDetail: React.FC = () => {
   const { id } = useParams();
@@ -120,7 +121,7 @@ const ModelDetail: React.FC = () => {
                 openGallery(0);
               }}
             >
-              <img 
+              <LazyImage
                 src={model.image} 
                 alt={model.name} 
                 className="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-105"
