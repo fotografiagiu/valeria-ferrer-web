@@ -19,6 +19,56 @@ const ModelCard: React.FC<{ model: any; index: number; isDoubleView?: boolean }>
     featured: model.featured
   };
 
+  // Generar textos únicos para SEO basados en características del modelo
+  const generateAltText = (modelName: string, location: string, nationality?: string, age?: number) => {
+    const variations = [
+      `${modelName} - Acompañante VIP en ${location}`,
+      `${modelName} - Modelo de compañía en ${location}`,
+      `${modelName} - Chica exclusiva ${location}`,
+      `${modelName} - Compañera de lujo ${location}`,
+      `${modelName} - Modelo VIP ${nationality ? nationality : ''} ${location}`.trim(),
+      `${modelName} - Acompañamiento discreto ${location}`,
+      `${modelName} - Modelo profesional ${location}`,
+      `${modelName} - Chica de alta gama ${location}`
+    ];
+    
+    // Usar el índice para variar entre modelos
+    const variationIndex = (modelName.charCodeAt(0) + index) % variations.length;
+    return variations[variationIndex];
+  };
+
+  const generateHoverAltText = (modelName: string, location: string) => {
+    const variations = [
+      `${modelName} - Galería fotográfica profesional`,
+      `${modelName} - Sesión exclusiva ${location}`,
+      `${modelName} - Fotos profesionales ${location}`,
+      `${modelName} - Imágenes exclusivas`,
+      `${modelName} - Galería de alta calidad`,
+      `${modelName} - Sesión VIP ${location}`,
+      `${modelName} - Fotografías profesionales`,
+      `${modelName} - Colección exclusiva`
+    ];
+    
+    const variationIndex = (modelName.charCodeAt(1) + index) % variations.length;
+    return variations[variationIndex];
+  };
+
+  const generateDescription = (modelName: string, location: string, nationality?: string) => {
+    const variations = [
+      `Modelo exclusiva ${location} • Compañía VIP`,
+      `Acompañante de lujo ${location} • Alta gama`,
+      `Chica profesional ${location} • Discreción`,
+      `Modelo VIP ${location} • Experiencia única`,
+      `Compañera exclusiva ${location} • Lujo`,
+      `Modelo de alta clase ${location} • Elegancia`,
+      `Acompañamiento premium ${location} • Sofisticación`,
+      `Chica discreta ${location} • Profesionalismo`
+    ];
+    
+    const variationIndex = (modelName.charCodeAt(2) + index) % variations.length;
+    return variations[variationIndex];
+  };
+
   return (
     <motion.div 
       itemScope itemType="https://schema.org/Person"
@@ -36,8 +86,8 @@ const ModelCard: React.FC<{ model: any; index: number; isDoubleView?: boolean }>
         <div className="aspect-[2/3] relative overflow-hidden">
           <img 
             src={adaptedModel.image} 
-            alt={`${adaptedModel.name} - Escort VIP ${adaptedModel.location} | Valeria Ferrer Agency`}
-            title={`${adaptedModel.name} - Modelo Exclusiva en ${adaptedModel.location}`}
+            alt={generateAltText(adaptedModel.name, adaptedModel.location, model.nationality, model.age)}
+            title={generateAltText(adaptedModel.name, adaptedModel.location, model.nationality, model.age)}
             loading="lazy"
             width="400"
             height="600"
@@ -47,8 +97,8 @@ const ModelCard: React.FC<{ model: any; index: number; isDoubleView?: boolean }>
           {/* Hover Reveal Image */}
           <img 
             src={adaptedModel.hoverImage} 
-            alt={`${adaptedModel.name} - Galería Fotos ${adaptedModel.location} | Escorts Valencia`}
-            title={`${adaptedModel.name} - Fotos Profesionales Valencia`}
+            alt={generateHoverAltText(adaptedModel.name, adaptedModel.location)}
+            title={generateHoverAltText(adaptedModel.name, adaptedModel.location)}
             loading="lazy"
             width="400"
             height="600"
@@ -96,8 +146,13 @@ const ModelCard: React.FC<{ model: any; index: number; isDoubleView?: boolean }>
               {model.age} años • {model.height} • {model.nationality || 'Española'}
             </p>
           )}
-          <meta itemProp="jobTitle" content="Escort VIP" />
-          <meta itemProp="worksFor" content="Valeria Ferrer Agency" />
+          <p className="text-[8px] text-gray-600 mt-1 tracking-[0.1em] uppercase">
+            {generateDescription(adaptedModel.name, adaptedModel.location, model.nationality)}
+          </p>
+          <meta itemProp="jobTitle" content={generateDescription(adaptedModel.name, adaptedModel.location, model.nationality)} />
+          <meta itemProp="worksFor" content="Valeria Ferrer Agency Escorts Valencia" />
+          <meta itemProp="addressLocality" content="Valencia" />
+          <meta itemProp="addressRegion" content="Comunidad Valenciana" />
         </div>
       </Link>
     </motion.div>
@@ -127,8 +182,11 @@ const ModelsGrid: React.FC<ModelsGridProps> = ({ models = MODELS }) => {
           className="text-center mb-16 px-4 md:px-0"
         >
           <h2 className="text-3xl md:text-5xl font-light mb-4">
-            Escorts VIP Valencia <span className="italic">Agencia de Lujo</span>
+            Modelos Exclusivas <span className="italic">Compañía VIP Valencia</span>
           </h2>
+          <p className="text-sm text-gray-400 mb-6 max-w-2xl mx-auto">
+            💋 Modelos Exclusivas Valencia • Acompañantes VIP • Compañía de Lujo • Discreción Absoluta • Servicios Premium
+          </p>
           <div className="w-20 h-[1px] bg-[#c2b2a3] mx-auto mb-8"></div>
           
           {/* View Mode Toggle - Solo visible en móvil */}
@@ -188,10 +246,11 @@ const ModelsGrid: React.FC<ModelsGridProps> = ({ models = MODELS }) => {
             to="/models" 
             className="inline-block px-12 py-5 bg-white text-black text-xs font-bold tracking-[0.3em] uppercase hover:bg-[#c2b2a3] transition-colors"
           >
-            Ver Todas las Escorts
+            Ver Todas las Modelos
           </Link>
         </div>
-      </div>
+
+              </div>
 
         {/* View Mode Toggle */}
         <div className="flex justify-center items-center space-x-4 mb-8">
