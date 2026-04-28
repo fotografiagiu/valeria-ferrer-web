@@ -1,11 +1,12 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { MODELS } from '../constants';
 import { ArrowLeft, Check, Calendar, Phone, MapPin, Ruler, User, Heart, Star, Sparkles, ChevronLeft, ChevronRight, BarChart3 } from 'lucide-react';
 import GalleryModal from '../components/GalleryModal';
 import LazyImage from '../components/LazyImage';
 import SEOHead from '../components/SEOHead';
+import Breadcrumbs from '../components/Breadcrumbs';
 import ModelComparison from '../components/ModelComparison';
 
 const ModelDetail: React.FC = () => {
@@ -16,6 +17,7 @@ const ModelDetail: React.FC = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isComparisonOpen, setIsComparisonOpen] = useState(false);
   const [comparisonModels, setComparisonModels] = useState<string[]>([]);
+  const touchStartRef = useRef<{ x: number; y: number } | null>(null);
 
   const addToComparison = () => {
     if (model && !comparisonModels.includes(model.id) && comparisonModels.length < 4) {
@@ -60,16 +62,8 @@ const ModelDetail: React.FC = () => {
       {/* Header Spacer */}
       <div className="h-32 lg:h-32"></div>
 
-      {/* Breadcrumbs / Back Link */}
-      <div className="max-w-7xl mx-auto px-6 pt-8 pb-4">
-        <button 
-          onClick={() => navigate(-1)} 
-          className="group flex items-center text-[#c2b2a3] hover:text-white transition-all uppercase tracking-[0.3em] text-[10px] font-bold"
-        >
-          <ArrowLeft size={14} className="mr-3 group-hover:-translate-x-1 transition-transform" /> 
-          Volver a la selección
-        </button>
-      </div>
+      {/* Breadcrumbs */}
+      <Breadcrumbs modelName={model?.name} />
 
       {/* Mobile Layout - Old Style */}
       <div className="lg:hidden max-w-7xl mx-auto px-6 pb-32 pt-10">
@@ -126,10 +120,23 @@ const ModelDetail: React.FC = () => {
             <div 
               className="aspect-[3/4.2] overflow-hidden border border-white/5 bg-[#111111] cursor-pointer active:scale-[0.98] transition-transform duration-150"
               onClick={() => openGallery(0)}
+              onTouchStart={(e) => {
+                const touch = e.touches[0];
+                touchStartRef.current = { x: touch.clientX, y: touch.clientY };
+              }}
               onTouchEnd={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                openGallery(0);
+                if (!touchStartRef.current) return;
+
+                const touch = e.changedTouches[0];
+                const deltaX = Math.abs(touch.clientX - touchStartRef.current.x);
+                const deltaY = Math.abs(touch.clientY - touchStartRef.current.y);
+                const isTap = deltaX < 10 && deltaY < 10;
+
+                if (isTap) {
+                  openGallery(0);
+                }
+
+                touchStartRef.current = null;
               }}
             >
               <LazyImage
