@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { MODELS } from '../constants';
-import { ArrowLeft, Check, Calendar, Phone, MapPin, Ruler, User, Heart, Star, Sparkles } from 'lucide-react';
+import { ArrowLeft, Check, Calendar, Phone, MapPin, Ruler, User, Heart, Star, Sparkles, ChevronLeft, ChevronRight } from 'lucide-react';
 import GalleryModal from '../components/GalleryModal';
 
 const ModelDetail: React.FC = () => {
@@ -19,6 +19,15 @@ const ModelDetail: React.FC = () => {
 
   const closeGallery = () => {
     setIsGalleryOpen(false);
+  };
+
+  // Find previous and next models
+  const currentIndex = MODELS.findIndex(m => m.id === id);
+  const previousModel = currentIndex > 0 ? MODELS[currentIndex - 1] : null;
+  const nextModel = currentIndex < MODELS.length - 1 ? MODELS[currentIndex + 1] : null;
+
+  const navigateToModel = (modelId: string) => {
+    navigate(`/models/${modelId}`);
   };
 
   useEffect(() => {
@@ -52,6 +61,52 @@ const ModelDetail: React.FC = () => {
 
       {/* Mobile Layout - Old Style */}
       <div className="lg:hidden max-w-7xl mx-auto px-6 pb-32 pt-10">
+        {/* Model Navigation - Modern Minimalist Design */}
+        <div className="mb-6">
+          <div className="flex items-center justify-between bg-[#111111]/50 backdrop-blur-sm border border-white/5 rounded-2xl p-4">
+            {/* Previous Model */}
+            <button
+              onClick={() => previousModel && navigateToModel(previousModel.id)}
+              disabled={!previousModel}
+              className={`flex items-center space-x-3 transition-all duration-300 ${
+                previousModel 
+                  ? 'text-[#c2b2a3] hover:text-white hover:translate-x-1' 
+                  : 'text-gray-600 cursor-not-allowed opacity-50'
+              }`}
+            >
+              <ChevronLeft size={20} className="flex-shrink-0" />
+              <div className="text-left">
+                <p className="text-xs uppercase tracking-[0.2em] opacity-70">Anterior</p>
+                <p className="text-sm font-light truncate max-w-[120px]">
+                  {previousModel?.name || 'No disponible'}
+                </p>
+              </div>
+            </button>
+
+            {/* Center Divider */}
+            <div className="h-8 w-px bg-gradient-to-b from-transparent via-white/20 to-transparent"></div>
+
+            {/* Next Model */}
+            <button
+              onClick={() => nextModel && navigateToModel(nextModel.id)}
+              disabled={!nextModel}
+              className={`flex items-center space-x-3 transition-all duration-300 ${
+                nextModel 
+                  ? 'text-[#c2b2a3] hover:text-white hover:-translate-x-1' 
+                  : 'text-gray-600 cursor-not-allowed opacity-50'
+              }`}
+            >
+              <div className="text-right">
+                <p className="text-xs uppercase tracking-[0.2em] opacity-70">Siguiente</p>
+                <p className="text-sm font-light truncate max-w-[120px]">
+                  {nextModel?.name || 'No disponible'}
+                </p>
+              </div>
+              <ChevronRight size={20} className="flex-shrink-0" />
+            </button>
+          </div>
+        </div>
+
         {/* Main Image */}
         <div className="relative group mb-8">
           <div className="relative group">
@@ -289,6 +344,52 @@ const ModelDetail: React.FC = () => {
           
           {/* Main Content Area - 2 columns */}
           <div className="lg:col-span-2 space-y-12">
+            
+            {/* Model Navigation - Modern Minimalist Design */}
+            <div className="mb-8">
+              <div className="flex items-center justify-between bg-[#111111]/30 backdrop-blur-sm border border-white/5 rounded-2xl p-6">
+                {/* Previous Model */}
+                <button
+                  onClick={() => previousModel && navigateToModel(previousModel.id)}
+                  disabled={!previousModel}
+                  className={`flex items-center space-x-4 transition-all duration-300 ${
+                    previousModel 
+                      ? 'text-[#c2b2a3] hover:text-white hover:translate-x-2' 
+                      : 'text-gray-600 cursor-not-allowed opacity-50'
+                  }`}
+                >
+                  <ChevronLeft size={24} className="flex-shrink-0" />
+                  <div className="text-left">
+                    <p className="text-xs uppercase tracking-[0.3em] opacity-70">Anterior</p>
+                    <p className="text-base font-light truncate max-w-[150px]">
+                      {previousModel?.name || 'No disponible'}
+                    </p>
+                  </div>
+                </button>
+
+                {/* Center Divider */}
+                <div className="h-10 w-px bg-gradient-to-b from-transparent via-white/20 to-transparent"></div>
+
+                {/* Next Model */}
+                <button
+                  onClick={() => nextModel && navigateToModel(nextModel.id)}
+                  disabled={!nextModel}
+                  className={`flex items-center space-x-4 transition-all duration-300 ${
+                    nextModel 
+                      ? 'text-[#c2b2a3] hover:text-white hover:-translate-x-2' 
+                      : 'text-gray-600 cursor-not-allowed opacity-50'
+                  }`}
+                >
+                  <div className="text-right">
+                    <p className="text-xs uppercase tracking-[0.3em] opacity-70">Siguiente</p>
+                    <p className="text-base font-light truncate max-w-[150px]">
+                      {nextModel?.name || 'No disponible'}
+                    </p>
+                  </div>
+                  <ChevronRight size={24} className="flex-shrink-0" />
+                </button>
+              </div>
+            </div>
             
             {/* Main Image */}
             <div className="relative group">
