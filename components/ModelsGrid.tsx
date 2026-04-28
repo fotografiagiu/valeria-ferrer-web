@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 import { MODELS } from '../constants';
 import { Model } from '../types';
 import { motion } from 'framer-motion';
-import { Grid3X3, LayoutGrid, Eye } from 'lucide-react';
+import { Grid3X3, LayoutGrid } from 'lucide-react';
 
-const ModelCard: React.FC<{ model: any; index: number; isDoubleView?: boolean; onQuickView?: (modelId: string) => void }> = ({ model, index, isDoubleView = false, onQuickView }) => {
+const ModelCard: React.FC<{ model: any; index: number; isDoubleView?: boolean }> = ({ model, index, isDoubleView = false }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   // Adaptar datos del JSON al formato esperado
@@ -70,26 +70,11 @@ const ModelCard: React.FC<{ model: any; index: number; isDoubleView?: boolean; o
             </div>
           )}
           
-          {/* Quick view badge */}
+          {/* Ver Perfil badge */}
           <div className={`absolute bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 transition-all duration-500 z-20 ${isHovered ? 'translate-y-0' : 'translate-y-12'} ${isDoubleView ? 'hidden md:block' : ''}`}>
-            <div className="flex items-center space-x-2">
-              <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  if (onQuickView) {
-                    onQuickView(adaptedModel.id);
-                  }
-                }}
-                className="px-3 py-2 bg-[#c2b2a3]/20 backdrop-blur-md text-[10px] tracking-[0.3em] uppercase font-bold border border-[#c2b2a3]/30 text-[#c2b2a3] hover:bg-[#c2b2a3]/30 transition-colors flex items-center space-x-1"
-              >
-                <Eye size={12} />
-                <span>Quick</span>
-              </button>
-              <span className="px-3 py-2 bg-white/10 backdrop-blur-md text-[10px] tracking-[0.3em] uppercase font-bold border border-white/20">
-                Ver Perfil
-              </span>
-            </div>
+            <span className="px-3 py-2 bg-white/10 backdrop-blur-md text-[10px] tracking-[0.3em] uppercase font-bold border border-white/20">
+              Ver Perfil
+            </span>
           </div>
         </div>
         
@@ -104,10 +89,9 @@ const ModelCard: React.FC<{ model: any; index: number; isDoubleView?: boolean; o
 
 interface ModelsGridProps {
   models?: any[];
-  onQuickView?: (modelId: string) => void;
 }
 
-const ModelsGrid: React.FC<ModelsGridProps> = ({ models = MODELS, onQuickView }) => {
+const ModelsGrid: React.FC<ModelsGridProps> = ({ models = MODELS }) => {
   const [viewMode, setViewMode] = useState<'normal' | 'double'>('normal');
 
   const handleViewChange = (mode: 'normal' | 'double') => {
@@ -176,7 +160,7 @@ const ModelsGrid: React.FC<ModelsGridProps> = ({ models = MODELS, onQuickView })
             : 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4'
         }`}>
           {models.map((model, index) => (
-            <ModelCard key={model.slug || model.id} model={model} index={index} isDoubleView={viewMode === 'double'} onQuickView={onQuickView} />
+            <ModelCard key={model.slug || model.id} model={model} index={index} isDoubleView={viewMode === 'double'} />
           ))}
         </div>
 

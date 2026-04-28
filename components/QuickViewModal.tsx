@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { X, Phone, MessageCircle, Calendar, MapPin, Heart, Star, ChevronLeft, ChevronRight } from 'lucide-react';
 import LazyImage from './LazyImage';
+import modelsData from '../data/models.json';
 
 interface QuickViewModalProps {
   isOpen: boolean;
@@ -11,27 +12,15 @@ interface QuickViewModalProps {
 const QuickViewModal: React.FC<QuickViewModalProps> = ({ isOpen, onClose, modelId }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   
-  // Mock model data - in real implementation, this would come from your models data
-  const model = {
-    id: modelId,
-    name: modelId.charAt(0).toUpperCase() + modelId.slice(1),
-    age: 22,
-    nationality: 'Española',
-    height: '170cm',
-    weight: '52kg',
-    image: `/chicas/${modelId}-valencia-ferrer-model-agency-valencia/cover.jpg`,
-    gallery: [
-      `/chicas/${modelId}-valencia-ferrer-model-agency-valencia/1.jpg`,
-      `/chicas/${modelId}-valeria-ferrer-model-agency-valencia/2.jpg`,
-      `/chicas/${modelId}-valencia-ferrer-model-agency-valencia/3.jpg`
-    ],
-    description: 'Modelo exclusiva de alta clase con experiencia en eventos sociales y acompañamiento de lujo.',
-    services: ['Girlfriend Experience', 'Cenas de Negocios', 'Eventos Sociales', 'Acompañamiento Personal'],
-    availability: '24h',
-    languages: ['Español', 'Inglés']
-  };
+  // Find the real model data from models.json
+  const model = modelsData.find(m => m.slug === modelId || m.id === modelId);
+  
+  // If model not found, show error or return null
+  if (!model) {
+    return null;
+  }
 
-  const allImages = [model.image, ...model.gallery].filter(Boolean);
+  const allImages = model.images || [model.coverImageUrl].filter(Boolean);
 
   const nextImage = () => {
     setCurrentImageIndex((prev) => (prev + 1) % allImages.length);
@@ -114,7 +103,7 @@ const QuickViewModal: React.FC<QuickViewModalProps> = ({ isOpen, onClose, modelI
             {/* Description */}
             <div>
               <h3 className="text-sm font-bold text-[#c2b2a3] uppercase tracking-[0.3em] mb-3">Sobre {model.name}</h3>
-              <p className="text-gray-300 leading-relaxed">{model.description}</p>
+              <p className="text-gray-300 leading-relaxed">{model.description || model.essence}</p>
             </div>
 
             {/* Services */}
@@ -133,11 +122,11 @@ const QuickViewModal: React.FC<QuickViewModalProps> = ({ isOpen, onClose, modelI
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-400">Disponibilidad</p>
-                <p className="font-bold text-[#c2b2a3]">{model.availability}</p>
+                <p className="font-bold text-[#c2b2a3]">{model.availability || 'Consultar'}</p>
               </div>
               <div className="text-right">
                 <p className="text-sm text-gray-400">Idiomas</p>
-                <p className="font-bold text-[#c2b2a3]">{model.languages.join(', ')}</p>
+                <p className="font-bold text-[#c2b2a3]">{model.languages ? model.languages.join(', ') : 'Español'}</p>
               </div>
             </div>
 

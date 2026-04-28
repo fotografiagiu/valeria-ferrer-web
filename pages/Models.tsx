@@ -3,21 +3,14 @@ import React, { useState, useEffect } from 'react';
 import ModelsGrid from '../components/ModelsGrid';
 import ModelFilter from '../components/ModelFilter';
 import AnimatedCounter from '../components/AnimatedCounter';
-import QuickViewModal from '../components/QuickViewModal';
 import ModelComparison from '../components/ModelComparison';
 import modelsData from '../data/models.json';
 
 const Models: React.FC = () => {
   const [filteredModels, setFilteredModels] = useState<any[]>(modelsData);
-  const [isQuickViewOpen, setIsQuickViewOpen] = useState(false);
-  const [selectedModelId, setSelectedModelId] = useState('');
   const [isComparisonOpen, setIsComparisonOpen] = useState(false);
   const [comparisonModels, setComparisonModels] = useState<string[]>([]);
 
-  const openQuickView = (modelId: string) => {
-    setSelectedModelId(modelId);
-    setIsQuickViewOpen(true);
-  };
 
   const addToComparison = (modelId: string) => {
     if (!comparisonModels.includes(modelId) && comparisonModels.length < 4) {
@@ -62,15 +55,9 @@ const Models: React.FC = () => {
 
       {/* Models Grid with filtered data */}
       <div className="max-w-[1600px] mx-auto px-6 pb-12">
-        <ModelsGrid models={filteredModels} onQuickView={openQuickView} />
+        <ModelsGrid models={filteredModels} />
       </div>
 
-      {/* Quick View Modal */}
-      <QuickViewModal
-        isOpen={isQuickViewOpen}
-        onClose={() => setIsQuickViewOpen(false)}
-        modelId={selectedModelId}
-      />
 
       {/* Comparison Modal */}
       <ModelComparison
