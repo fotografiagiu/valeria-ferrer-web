@@ -10,6 +10,21 @@ export default defineConfig(({ mode }) => {
         port: 3000,
         host: '0.0.0.0',
       },
+      build: {
+        rollupOptions: {
+          output: {
+            manualChunks: {
+              vendor: ['react', 'react-dom'],
+              router: ['react-router-dom'],
+              motion: ['framer-motion'],
+              icons: ['lucide-react']
+            }
+          }
+        },
+        chunkSizeWarningLimit: 1000,
+        assetsInlineLimit: 4096,
+        cssCodeSplit: true
+      },
       plugins: [react(), tailwindcss()],
       define: {
         'process.env.API_KEY': JSON.stringify(env.GEMINI_API_KEY),

@@ -1,0 +1,23 @@
+{
+  "name": "Valeria Ferrer - Escorts de Lujo Valencia",
+  "short_name": "Valeria Ferrer",
+  "description": "Agencia de escorts de lujo en Valencia con modelos exclusivas y acompañantes VIP",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#c2b2a3",
+  "orientation": "portrait",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
