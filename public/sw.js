@@ -1,4 +1,4 @@
-const CACHE_NAME = 'valeria-ferrer-v1';
+const CACHE_NAME = 'valeria-ferrer-v2';
 const urlsToCache = [
   '/',
   '/models',
@@ -9,7 +9,7 @@ const urlsToCache = [
   '/manifest.json'
 ];
 
-// Install event - cache resources
+// Install event - cache app shell and activate immediately
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
@@ -17,40 +17,49 @@ self.addEventListener('install', event => {
         return cache.addAll(urlsToCache);
       })
   );
+  self.skipWaiting();
 });
 
-// Fetch event - serve from cache when offline
+// Fetch event:
+// - Navigation requests: network-first to avoid stale HTML/chunk mismatches
+// - Other GET requests: stale-while-revalidate
 self.addEventListener('fetch', event => {
+  if (event.request.method !== 'GET') {
+    return;
+  }
+
+  const isNavigationRequest = event.request.mode === 'navigate';
+
+  if (isNavigationRequest) {
+    event.respondWith(
+      fetch(event.request)
+        .then(networkResponse => {
+          const responseToCache = networkResponse.clone();
+          caches.open(CACHE_NAME).then(cache => {
+            cache.put(event.request, responseToCache);
+          });
+          return networkResponse;
+        })
+        .catch(() => caches.match(event.request).then(cached => cached || caches.match('/')))
+    );
+    return;
+  }
+
   event.respondWith(
-    caches.match(event.request)
-      .then(response => {
-        // Cache hit - return response
-        if (response) {
-          return response;
+    caches.match(event.request).then(cachedResponse => {
+      const fetchPromise = fetch(event.request).then(networkResponse => {
+        if (!networkResponse || networkResponse.status !== 200) {
+          return networkResponse;
         }
+        const responseToCache = networkResponse.clone();
+        caches.open(CACHE_NAME).then(cache => {
+          cache.put(event.request, responseToCache);
+        });
+        return networkResponse;
+      });
 
-        // Clone request
-        const fetchRequest = event.request.clone();
-
-        return fetch(fetchRequest).then(
-          response => {
-            // Check if valid response
-            if(!response || response.status !== 200 || response.type !== 'basic') {
-              return response;
-            }
-
-            // Clone response
-            const responseToCache = response.clone();
-
-            caches.open(CACHE_NAME)
-              .then(cache => {
-                cache.put(event.request, responseToCache);
-              });
-
-            return response;
-          }
-        );
-      })
+      return cachedResponse || fetchPromise;
+    })
   );
 });
 
@@ -67,4 +76,5 @@ self.addEventListener('activate', event => {
       );
     })
   );
+  self.clients.claim();
 });
