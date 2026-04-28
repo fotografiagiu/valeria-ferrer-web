@@ -3,10 +3,18 @@ import React, { useState, useEffect } from 'react';
 import ModelsGrid from '../components/ModelsGrid';
 import ModelFilter from '../components/ModelFilter';
 import AnimatedCounter from '../components/AnimatedCounter';
+import QuickViewModal from '../components/QuickViewModal';
 import modelsData from '../data/models.json';
 
 const Models: React.FC = () => {
   const [filteredModels, setFilteredModels] = useState<any[]>(modelsData);
+  const [isQuickViewOpen, setIsQuickViewOpen] = useState(false);
+  const [selectedModelId, setSelectedModelId] = useState('');
+
+  const openQuickView = (modelId: string) => {
+    setSelectedModelId(modelId);
+    setIsQuickViewOpen(true);
+  };
 
   return (
     <div className="pt-24 min-h-screen">
@@ -43,6 +51,13 @@ const Models: React.FC = () => {
       <div className="max-w-[1600px] mx-auto px-6 pb-12">
         <ModelsGrid models={filteredModels} />
       </div>
+
+      {/* Quick View Modal */}
+      <QuickViewModal
+        isOpen={isQuickViewOpen}
+        onClose={() => setIsQuickViewOpen(false)}
+        modelId={selectedModelId}
+      />
     </div>
   );
 };
