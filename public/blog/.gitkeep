@@ -1,0 +1,5 @@
+# Blog Images Directory
+# This directory will contain optimized blog cover images
+# Images should follow naming convention: article-name-cover.jpg/webp
+# All images should be 1920x1080px (16:9 aspect ratio)
+# Both JPG and WebP formats should be provided
