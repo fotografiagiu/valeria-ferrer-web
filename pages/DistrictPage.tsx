@@ -5,6 +5,7 @@ import { ArrowLeft, MapPin, Phone, Calendar, Star, Clock, User } from 'lucide-re
 import modelsData from '../data/models.json';
 import OptimizedImage from '../components/OptimizedImage';
 import BlogCard from '../components/BlogCard';
+import AnalyticsEvents from '../components/AnalyticsEvents';
 import blogData from '../data/blog.json';
 
 interface DistrictData {
@@ -153,6 +154,7 @@ const DistrictPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] pt-24">
+      <AnalyticsEvents districtName={district.name} />
       {/* Hero Section */}
       <section className="relative h-96 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-[#c2b2a3]/20 to-[#c2b2a3]/5"></div>

@@ -19,6 +19,7 @@ import MembersModal from './components/MembersModal';
 import Chatbot from './components/Chatbot';
 import FloatingContactPopup from './components/FloatingContactPopup';
 import ContentProtection from './components/ContentProtection';
+import Analytics from './components/Analytics';
 
 const App: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -69,6 +70,7 @@ const App: React.FC = () => {
         <Chatbot />
         <FloatingContactPopup />
         <ContentProtection />
+        <Analytics />
       </div>
     </Router>
   );

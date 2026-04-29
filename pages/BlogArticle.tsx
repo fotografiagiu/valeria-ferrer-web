@@ -2,8 +2,10 @@ import React, { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Calendar, Clock, User, ArrowLeft, Share2, Heart, Bookmark } from 'lucide-react';
-import blogData from '../data/blog.json';
+import SEOHead from '../components/SEOHead';
 import OptimizedImage from '../components/OptimizedImage';
+import AnalyticsEvents from '../components/AnalyticsEvents';
+import blogData from '../data/blog.json';
 
 const BlogArticle: React.FC = () => {
   const { id } = useParams();
@@ -62,6 +64,15 @@ const BlogArticle: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] pt-24">
+      <SEOHead
+        title={article.seo.title}
+        description={article.seo.description}
+        keywords={article.seo.keywords}
+        canonical={`https://valeriaferrer.com/blog/${article.id}`}
+        ogImage={article.featuredImage}
+        article={article}
+      />
+      <AnalyticsEvents blogArticleId={article.id} />
       {/* Hero Section */}
       <section className="relative h-96 overflow-hidden">
         <OptimizedImage
