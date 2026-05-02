@@ -107,7 +107,7 @@ const ModelCard: React.FC<{ model: any; index: number; isDoubleView?: boolean }>
           <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60"></div>
           
           {/* New Badge */}
-          {(adaptedModel.name === 'Teresa' || adaptedModel.name === 'Emma') && (
+          {(adaptedModel.name === 'Teresa' || adaptedModel.name === 'Emma' || adaptedModel.name === 'Kimberly') && (
             <div className="absolute top-2 left-2 md:top-4 md:left-4 z-30">
               <span className="px-2.5 py-1 md:px-3 md:py-1 bg-[#c2b2a3] text-black text-[10px] md:text-[9px] tracking-[0.2em] uppercase font-bold rounded-sm shadow-lg">
                 Nueva
