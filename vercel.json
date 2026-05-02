@@ -220,9 +220,5 @@
         }
       ]
     }
-  ],
-  "analytics": {
-    "enabled": true,
-    "selfHosted": false
-  }
+  ]
 }

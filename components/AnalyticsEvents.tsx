@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useRouter } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { track } from '@vercel/analytics';
 
 interface AnalyticsEventsProps {
@@ -15,7 +15,7 @@ const AnalyticsEvents: React.FC<AnalyticsEventsProps> = ({
   districtName,
   blogArticleId
 }) => {
-  const router = useRouter();
+  const location = useLocation();
 
   useEffect(() => {
     // Track page views
@@ -34,9 +34,8 @@ const AnalyticsEvents: React.FC<AnalyticsEventsProps> = ({
     handleRouteChange();
 
     // Track route changes
-    const unlisten = router.listen(handleRouteChange);
-    return () => unlisten();
-  }, [router, modelName, serviceType, districtName, blogArticleId]);
+    handleRouteChange(); // Initial tracking
+  }, [location, modelName, serviceType, districtName, blogArticleId]);
 
   useEffect(() => {
     // Track model views
