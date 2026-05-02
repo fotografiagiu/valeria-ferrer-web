@@ -141,6 +141,24 @@ const ModelDetail: React.FC = () => {
             <div className="absolute top-6 left-6 px-4 py-2 bg-black/40 backdrop-blur-md border border-[#c2b2a3]/30 text-[9px] tracking-[0.4em] uppercase font-bold text-[#c2b2a3]">
               Elección Élite
             </div>
+            
+            {/* Image Counter and Navigation Dots */}
+            <div className="absolute bottom-4 left-0 right-0 flex items-center justify-between px-6">
+              <div className="text-white/80 text-xs font-light">
+                1 / {(model.gallery?.length || 0) + 1}
+              </div>
+              <div className="flex space-x-2">
+                {Array.from({ length: (model.gallery?.length || 0) + 1 }, (_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => openGallery(i)}
+                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                      i === 0 ? 'bg-white' : 'bg-white/30'
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
           
           {/* Quick Stats Overlay (Mobile Only) */}
@@ -167,9 +185,12 @@ const ModelDetail: React.FC = () => {
               <span className="text-[10px] tracking-[0.5em] uppercase font-bold">Acompañante Premier</span>
             </div>
           </div>
-          <h1 className="text-6xl md:text-8xl serif luxury-text-gradient uppercase mb-6 leading-[0.9] tracking-tighter">
+          <h1 className="text-6xl md:text-8xl serif luxury-text-gradient uppercase mb-4 leading-[0.9] tracking-tighter">
             {model.name}
           </h1>
+          <div className="text-lg font-light text-[#c2b2a3] tracking-[0.3em] uppercase mb-6">
+            ESCORT EN VALENCIA
+          </div>
           <div className="flex items-center space-x-6">
             <p className="text-lg font-light text-gray-400 tracking-[0.2em] uppercase italic flex items-center">
               <MapPin size={16} className="mr-2 text-[#c2b2a3]" />
@@ -184,37 +205,538 @@ const ModelDetail: React.FC = () => {
             <h2 className="text-3xl serif text-white uppercase tracking-widest leading-none">La Esencia de {model.name}</h2>
             <div className="h-[1px] flex-1 bg-gradient-to-r from-white/10 to-transparent"></div>
           </div>
-          <p className="text-gray-400 font-light leading-[1.8] text-xl first-letter:text-5xl first-letter:mr-3 first-letter:float-left first-letter:luxury-text-gradient first-letter:serif">
-            {model.bio || model.description}
-          </p>
-        </div>
-
-        {/* Mobile Photo Gallery */}
-        <div className="space-y-8 mt-12">
-          <h3 className="text-2xl serif text-white uppercase tracking-widest">Galería</h3>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {(model.gallery || []).map((img, idx) => (
-              <div 
-                key={idx} 
-                className={`relative overflow-hidden bg-[#111111] group cursor-pointer border border-white/5 ${idx % 3 === 0 ? 'md:row-span-2' : ''}`}
-                onClick={() => openGallery(idx + 1)}
-              >
-                <img 
-                  src={img} 
-                  alt={`${model.name} Gallery ${idx + 1}`} 
-                  className="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110"
-                  draggable={false}
-                />
-                <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
-                  <div className="w-10 h-10 border border-white/30 rounded-full flex items-center justify-center">
-                    <Sparkles size={16} className="text-white/70" />
-                  </div>
-                </div>
+          <div className="text-gray-300 font-light leading-[1.6] text-lg max-w-7xl mx-auto px-2 space-y-2">
+            {(model.bio || model.description).split('. ').reduce((acc, sentence, idx) => {
+              if (sentence.trim()) {
+                const paragraphIndex = Math.floor(idx / 3);
+                if (!acc[paragraphIndex]) acc[paragraphIndex] = [];
+                acc[paragraphIndex].push(sentence.trim());
+              }
+              return acc;
+            }, []).slice(0, 2).map((paragraph, pIdx) => (
+              <div key={pIdx} className="bg-[#111111]/30 backdrop-blur-sm border-l-2 border-[#c2b2a3]/30 p-6 rounded-r-lg">
+                <p className="text-left first-letter:text-4xl first-letter:mr-2 first-letter:float-left first-letter:text-[#c2b2a3] first-letter:font-bold">
+                  {paragraph.join('. ')}.
+                </p>
               </div>
             ))}
           </div>
         </div>
 
+        <div className="py-8"></div>
+
+        {/* Lo que me hace única y Experiencias - Columnas en paralelo - Mobile - Todas las modelos */}
+        {model.name && (
+          <div className="grid grid-cols-2 gap-3 mt-12 px-1">
+            {/* Lo que me hace única */}
+            <div className="space-y-4">
+              <div className="flex items-center space-x-2">
+                <h2 className="text-lg serif text-white uppercase tracking-widest leading-none">Lo que me hace <span className="italic luxury-text-gradient">única</span></h2>
+                <div className="h-[1px] flex-1 bg-gradient-to-r from-white/10 to-transparent"></div>
+              </div>
+              <div className="bg-[#111111] border border-white/5 p-3 flex-1">
+                <ul className="text-gray-400 font-light leading-[1.6] space-y-2 text-sm">
+                  {model.name === "Kimberly" && (
+                    <>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Cuerpo escultural que desafía la gravedad</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Mirada penetrante que promete noches inolvidables</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Piel suave como seda y labios hechos para pecar</span>
+                      </li>
+                    </>
+                  )}
+                  {model.name === "Alicia" && (
+                    <>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Frescura juvenil con energía vibrante natural</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Aventuras inéditas descubriendo horizontes nuevos</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Conexiones auténticas espontáneas y genuinas</span>
+                      </li>
+                    </>
+                  )}
+                  {model.name === "Silvia" && (
+                    <>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Misterio enigmático con profundidad natural</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Elegancia sofisticada con toque exótico único</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Sensibilidad artística con carisma magnético</span>
+                      </li>
+                    </>
+                  )}
+                  {model.name === "Yaiza" && (
+                    <>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Sensualidad mediterránea con pasión brasileña</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Movimientos fluidos hipnóticos y naturales</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Carisma tropical que cautiva instantáneamente</span>
+                      </li>
+                    </>
+                  )}
+                  {model.name === "Paula (VIP)" && (
+                    <>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Elegancia VIP exclusiva de clase internacional</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Sofisticación élite con distinción natural</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Presencia magnética inolvidable y única</span>
+                      </li>
+                    </>
+                  )}
+                  {model.name === "Naty" && (
+                    <>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Energía tropical brasileña contagiosa y vibrante</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Alegría espontánea que ilumina cualquier ambiente</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Vitalidad natural con carisma cálido tropical</span>
+                      </li>
+                    </>
+                  )}
+                  {model.name === "Erika" && (
+                    <>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Sofisticación mediterránea con clase europea</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Elegancia cultural refinada e internacional</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Figura armoniosa con estilo cosmopolita</span>
+                      </li>
+                    </>
+                  )}
+                  {model.name === "Teresa" && (
+                    <>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Energía vibrante con carisma natural español</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Espontaneidad mediterránea fresca y auténtica</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Modernidad tradicional con alegría genuina</span>
+                      </li>
+                    </>
+                  )}
+                  {model.name === "Elena" && (
+                    <>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Sofisticación paraguaya con distinción única</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Figura armoniosa con refinamiento natural</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Magnetismo personal con carisma internacional</span>
+                      </li>
+                    </>
+                  )}
+                  {model.name === "Lana" && (
+                    <>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Energía tropical venezolana vibrante y magnética</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Autenticidad caribeña con elegancia natural</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Sofisticación latina con sensualidad única</span>
+                      </li>
+                    </>
+                  )}
+                  {model.name === "Luna" && (
+                    <>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Misterio nocturno colombiano enigmático profundo</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Sensualidad auténtica con atmósferas mágicas</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Carisma lunar con pasión tropical intensa</span>
+                      </li>
+                    </>
+                  )}
+                  {model.name === "Carla" && (
+                    <>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Estilo mediterráneo con elegancia natural</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Figura esbelta con autenticidad española</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Sensualidad mediterránea con pasión vibrante</span>
+                      </li>
+                    </>
+                  )}
+                  {model.name === "Estefany" && (
+                    <>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Intensidad latina con dulzura natural colombiana</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Curvas voluptuosas con temperamento ardiente</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Carisma auténtico con energía vibrante apasionada</span>
+                      </li>
+                    </>
+                  )}
+                  {model.name === "Maria" && (
+                    <>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Sofisticación española con experiencia madura</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Figura equilibrada con estilo refinado elegante</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Perspectiva única con elegancia natural auténtica</span>
+                      </li>
+                    </>
+                  )}
+                  {model.name === "Claudia (VIP)" && (
+                    <>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Sofisticación VIP española con elegancia exclusiva</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Figura equilibrada con presencia refinada distinguida</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Estilo VIP con clase internacional experiencias únicas</span>
+                      </li>
+                    </>
+                  )}
+                </ul>
+              </div>
+            </div>
+
+            {/* Experiencias que ofrezco */}
+            <div className="space-y-4">
+              <div className="flex items-center space-x-2">
+                <h2 className="text-lg serif text-white uppercase tracking-widest leading-none">Experiencias que <span className="italic luxury-text-gradient">ofrezco</span></h2>
+                <div className="h-[1px] flex-1 bg-gradient-to-r from-white/10 to-transparent"></div>
+              </div>
+              <div className="bg-[#111111] border border-white/5 p-3 flex-1">
+                <ul className="text-gray-400 font-light leading-[1.6] space-y-2 text-sm">
+                  {model.name === "Kimberly" && (
+                    <>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Noches de pasión sin límites ni tabúes</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Juegos sensuales que despertarán tus sentidos</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Secretos íntimos que solo compartirás conmigo</span>
+                      </li>
+                    </>
+                  )}
+                  {model.name === "Alicia" && (
+                    <>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Aventuras inéditas descubrimientos emocionantes únicos</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Exploración cultural perspectiva juvenil fresca moderna</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Conexiones auténticas espontáneas memorables duraderas</span>
+                      </li>
+                    </>
+                  )}
+                  {model.name === "Silvia" && (
+                    <>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Noches misteriosas revelaciones inesperadas profundas</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Exploración sensaciones enigma misterio seducción</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Conexiones profundas toque juvenil magia encanto</span>
+                      </li>
+                    </>
+                  )}
+                  {model.name === "Yaiza" && (
+                    <>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Baile sensual movimientos hipnóticos brasileños</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Masajes tropicales técnica experta relajación</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Noches pasión inolvidable intensidad deseo</span>
+                      </li>
+                    </>
+                  )}
+                  {model.name === "Paula (VIP)" && (
+                    <>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Experiencias VIP exclusivas personalizadas lujosas</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Acompañamiento lujo eventos élite sofisticación</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Servicios discreción garantizada privacidad absoluta</span>
+                      </li>
+                    </>
+                  )}
+                  {model.name === "Naty" && (
+                    <>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Fiestas tropicales energía brasileña contagiosa</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Cenas apasionadas sabor latino cariño pasión</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Momentos íntimos autenticidad tropical calidez</span>
+                      </li>
+                    </>
+                  )}
+                  {model.name === "Erika" && (
+                    <>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Acompañamiento lujo mediterráneo cultura refinada</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Cenas elegantes sofisticación clase internacional</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Experiencias culturales refinadas arte conocimiento</span>
+                      </li>
+                    </>
+                  )}
+                  {model.name === "Teresa" && (
+                    <>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Eventos sociales energía carisma alegría vital</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Encuentros auténticos espontaneidad frescura natural</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Vivencias tradición española modernidad refrescante</span>
+                      </li>
+                    </>
+                  )}
+                  {model.name === "Elena" && (
+                    <>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Cenas negocios sofisticación distinción elegancia</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Ocasiones especiales magnetismo internacional carisma</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Eventos memorables estilo refinado paraguayo único</span>
+                      </li>
+                    </>
+                  )}
+                  {model.name === "Lana" && (
+                    <>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Eventos exclusivos energía venezolana tropical</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Vivencias apasionadas autenticidad carisma cálido</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Experiencias sofisticadas toque caribeño latino</span>
+                      </li>
+                    </>
+                  )}
+                  {model.name === "Luna" && (
+                    <>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Encuentros íntimos memorables sensualidad auténtica</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Atmósferas mágicas misterio nocturno enigmático</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Vivencias extraordinarias influencia lunar tropical</span>
+                      </li>
+                    </>
+                  )}
+                  {model.name === "Carla" && (
+                    <>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Eventos exclusivos estilo mediterráneo elegante</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Ocasiones únicas sofisticación pasión vibrante</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Experiencias inolvidables autenticidad española sensual</span>
+                      </li>
+                    </>
+                  )}
+                  {model.name === "Estefany" && (
+                    <>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Encuentros apasionados intensidad latina cariño</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Experiencias voluptuosas ternura fuego pasión</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Vivencias auténticas energía colombiana vibrante</span>
+                      </li>
+                    </>
+                  )}
+                  {model.name === "Maria" && (
+                    <>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Cenas negocios sofisticación experiencia madura</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Eventos corporativos elegancia perspectiva única</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Experiencias refinadas autenticidad española</span>
+                      </li>
+                    </>
+                  )}
+                  {model.name === "Claudia (VIP)" && (
+                    <>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Acompañamiento lujo Valencia sofisticación exclusiva</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Encuentros distinguidos experiencias únicas VIP</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Vivencias extraordinarias clase internacional refinada</span>
+                      </li>
+                    </>
+                  )}
+                </ul>
+              </div>
+            </div>
+          </div>
+        )}
+
+        <div className="py-8"></div>
+
+        
         {/* Mobile Pricing Table */}
         <div className="lg:hidden py-16 bg-[#080808] border-t border-white/5">
           <div className="max-w-6xl mx-auto px-6">
@@ -419,11 +941,25 @@ const ModelDetail: React.FC = () => {
             {/* Bio Section */}
             <div className="space-y-6">
               <h2 className="text-3xl serif text-white uppercase tracking-widest">{model.name}</h2>
-              <p className="text-gray-400 font-light leading-[1.8] text-lg">
-                {model.description}
-              </p>
+              <div className="text-lg font-light text-[#c2b2a3] tracking-[0.3em] uppercase mb-4">
+                ESCORT EN VALENCIA
+              </div>
+              <div className="text-gray-400 font-light leading-[1.8] text-lg max-w-4xl px-6 space-y-6">
+                {model.description.split('. ').reduce((acc, sentence, idx) => {
+                  if (sentence.trim()) {
+                    const paragraphIndex = Math.floor(idx / 5);
+                    if (!acc[paragraphIndex]) acc[paragraphIndex] = [];
+                    acc[paragraphIndex].push(sentence.trim());
+                  }
+                  return acc;
+                }, []).map((paragraph, pIdx) => (
+                  <p key={pIdx} className="text-justify">
+                    {paragraph.join('. ')}.
+                  </p>
+                ))}
+              </div>
               {model.essence && (
-                <div className="bg-[#111111] border border-white/5 p-6">
+                <div className="bg-[#111111] border border-white/5 p-4 flex-1">
                   <h3 className="text-sm text-[#c2b2a3] uppercase tracking-[0.4em] mb-3 font-bold">La Esencia</h3>
                   <p className="text-gray-400 font-light leading-[1.6]">
                     {model.essence}
@@ -431,11 +967,520 @@ const ModelDetail: React.FC = () => {
                 </div>
               )}
             </div>
+
+            {/* Lo que me hace única y Experiencias - Columnas en paralelo - Desktop - Todas las modelos */}
+            {model.name && (
+              <div className="grid grid-cols-2 gap-6 mt-16">
+                {/* Lo que me hace única */}
+                <div className="space-y-4 h-full flex flex-col">
+                  <div className="flex items-center space-x-3">
+                    <h2 className="text-xl serif text-white uppercase tracking-widest leading-none">Lo que me hace <span className="italic luxury-text-gradient">única</span></h2>
+                    <div className="h-[1px] flex-1 bg-gradient-to-r from-white/10 to-transparent"></div>
+                  </div>
+                  <div className="bg-[#111111] border border-white/5 p-4 flex-1">
+                    <ul className="text-gray-400 font-light leading-[1.7] space-y-2">
+                      {model.name === "Kimberly" && (
+                        <>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Sofisticación europea con calidez latina natural</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Inteligencia conversacional y curiosidad cultural</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Estilo único que combina moda colombiana con diseño europeo</span>
+                          </li>
+                        </>
+                      )}
+                      {model.name === "Alicia" && (
+                        <>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Frescura juvenil con energía vibrante natural</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Aventuras inéditas descubriendo horizontes nuevos</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Conexiones auténticas espontáneas y genuinas</span>
+                          </li>
+                        </>
+                      )}
+                      {model.name === "Silvia" && (
+                        <>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Misterio enigmático con profundidad natural</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Elegancia sofisticada con toque exótico único</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Sensibilidad artística con carisma magnético</span>
+                          </li>
+                        </>
+                      )}
+                      {model.name === "Yaiza" && (
+                        <>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Sensualidad mediterránea con pasión brasileña</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Movimientos fluidos hipnóticos y naturales</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Carisma tropical que cautiva instantáneamente</span>
+                          </li>
+                        </>
+                      )}
+                      {model.name === "Paula (VIP)" && (
+                        <>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Elegancia VIP exclusiva de clase internacional</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Sofisticación élite con distinción natural</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Presencia magnética inolvidable y única</span>
+                          </li>
+                        </>
+                      )}
+                      {model.name === "Naty" && (
+                        <>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Energía tropical brasileña contagiosa y vibrante</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Alegría espontánea que ilumina cualquier ambiente</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Vitalidad natural con carisma cálido tropical</span>
+                          </li>
+                        </>
+                      )}
+                      {model.name === "Erika" && (
+                        <>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Sofisticación mediterránea con clase europea</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Elegancia cultural refinada e internacional</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Figura armoniosa con estilo cosmopolita</span>
+                          </li>
+                        </>
+                      )}
+                      {model.name === "Teresa" && (
+                        <>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Energía vibrante con carisma natural español</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Espontaneidad mediterránea fresca y auténtica</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Modernidad tradicional con alegría genuina</span>
+                          </li>
+                        </>
+                      )}
+                      {model.name === "Elena" && (
+                        <>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Sofisticación paraguaya con distinción única</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Figura armoniosa con refinamiento natural</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Magnetismo personal con carisma internacional</span>
+                          </li>
+                        </>
+                      )}
+                      {model.name === "Lana" && (
+                        <>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Energía tropical venezolana vibrante y magnética</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Autenticidad caribeña con elegancia natural</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Sofisticación latina con sensualidad única</span>
+                          </li>
+                        </>
+                      )}
+                      {model.name === "Luna" && (
+                        <>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Misterio nocturno colombiano enigmático profundo</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Sensualidad auténtica con atmósferas mágicas</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Carisma lunar con pasión tropical intensa</span>
+                          </li>
+                        </>
+                      )}
+                      {model.name === "Carla" && (
+                        <>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Estilo mediterráneo con elegancia natural</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Figura esbelta con autenticidad española</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Sensualidad mediterránea con pasión vibrante</span>
+                          </li>
+                        </>
+                      )}
+                      {model.name === "Estefany" && (
+                        <>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Intensidad latina con dulzura natural colombiana</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Curvas voluptuosas con temperamento ardiente</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Carisma auténtico con energía vibrante apasionada</span>
+                          </li>
+                        </>
+                      )}
+                      {model.name === "Maria" && (
+                        <>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Sofisticación española con experiencia madura</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Figura equilibrada con estilo refinado elegante</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Perspectiva única con elegancia natural auténtica</span>
+                          </li>
+                        </>
+                      )}
+                      {model.name === "Claudia (VIP)" && (
+                        <>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Sofisticación VIP española con elegancia exclusiva</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Figura equilibrada con presencia refinada distinguida</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Estilo VIP con clase internacional experiencias únicas</span>
+                          </li>
+                        </>
+                      )}
+                    </ul>
+                  </div>
+                </div>
+
+                {/* Experiencias que ofrezco */}
+                <div className="space-y-4 h-full flex flex-col">
+                  <div className="flex items-center space-x-3">
+                    <h2 className="text-xl serif text-white uppercase tracking-widest leading-none">Experiencias que <span className="italic luxury-text-gradient">ofrezco</span></h2>
+                    <div className="h-[1px] flex-1 bg-gradient-to-r from-white/10 to-transparent"></div>
+                  </div>
+                  <div className="bg-[#111111] border border-white/5 p-4 flex-1">
+                    <ul className="text-gray-400 font-light leading-[1.7] space-y-2">
+                      {model.name === "Kimberly" && (
+                        <>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Cenas de negocios con conversaciones profundas</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Eventos sociales con elegancia internacional</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Conexiones intelectuales y emocionales genuinas</span>
+                          </li>
+                        </>
+                      )}
+                      {model.name === "Alicia" && (
+                        <>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Aventuras inéditas descubrimientos emocionantes únicos</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Exploración cultural perspectiva juvenil fresca moderna</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Conexiones auténticas espontáneas memorables duraderas</span>
+                          </li>
+                        </>
+                      )}
+                      {model.name === "Silvia" && (
+                        <>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Noches misteriosas revelaciones inesperadas profundas</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Exploración sensaciones enigma misterio seducción</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Conexiones profundas toque juvenil magia encanto</span>
+                          </li>
+                        </>
+                      )}
+                      {model.name === "Yaiza" && (
+                        <>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Baile sensual movimientos hipnóticos brasileños</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Masajes tropicales técnica experta relajación</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Noches pasión inolvidable intensidad deseo</span>
+                          </li>
+                        </>
+                      )}
+                      {model.name === "Paula (VIP)" && (
+                        <>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Experiencias VIP exclusivas personalizadas lujosas</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Acompañamiento lujo eventos élite sofisticación</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Servicios discreción garantizada privacidad absoluta</span>
+                          </li>
+                        </>
+                      )}
+                      {model.name === "Naty" && (
+                        <>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Fiestas tropicales energía brasileña contagiosa</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Cenas apasionadas sabor latino cariño pasión</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Momentos íntimos autenticidad tropical calidez</span>
+                          </li>
+                        </>
+                      )}
+                      {model.name === "Erika" && (
+                        <>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Acompañamiento lujo mediterráneo cultura refinada</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Cenas elegantes sofisticación clase internacional</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Experiencias culturales refinadas arte conocimiento</span>
+                          </li>
+                        </>
+                      )}
+                      {model.name === "Teresa" && (
+                        <>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Eventos sociales energía carisma alegría vital</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Encuentros auténticos espontaneidad frescura natural</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Vivencias tradición española modernidad refrescante</span>
+                          </li>
+                        </>
+                      )}
+                      {model.name === "Elena" && (
+                        <>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Cenas negocios sofisticación distinción elegancia</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Ocasiones especiales magnetismo internacional carisma</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Eventos memorables estilo refinado paraguayo único</span>
+                          </li>
+                        </>
+                      )}
+                      {model.name === "Lana" && (
+                        <>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Eventos exclusivos energía venezolana tropical</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Vivencias apasionadas autenticidad carisma cálido</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Experiencias sofisticadas toque caribeño latino</span>
+                          </li>
+                        </>
+                      )}
+                      {model.name === "Luna" && (
+                        <>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Encuentros íntimos memorables sensualidad auténtica</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Atmósferas mágicas misterio nocturno enigmático</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Vivencias extraordinarias influencia lunar tropical</span>
+                          </li>
+                        </>
+                      )}
+                      {model.name === "Carla" && (
+                        <>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Eventos exclusivos estilo mediterráneo elegante</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Ocasiones únicas sofisticación pasión vibrante</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Experiencias inolvidables autenticidad española sensual</span>
+                          </li>
+                        </>
+                      )}
+                      {model.name === "Estefany" && (
+                        <>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Encuentros apasionados intensidad latina cariño</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Experiencias voluptuosas ternura fuego pasión</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Vivencias auténticas energía colombiana vibrante</span>
+                          </li>
+                        </>
+                      )}
+                      {model.name === "Maria" && (
+                        <>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Cenas negocios sofisticación experiencia madura</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Eventos corporativos elegancia perspectiva única</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Experiencias refinadas autenticidad española</span>
+                          </li>
+                        </>
+                      )}
+                      {model.name === "Claudia (VIP)" && (
+                        <>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Acompañamiento lujo Valencia sofisticación exclusiva</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Encuentros distinguidos experiencias únicas VIP</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Vivencias extraordinarias clase internacional refinada</span>
+                          </li>
+                        </>
+                      )}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            )}
             
-            {/* Photo Gallery */}
-            <div className="space-y-8">
+            {/* Photo Gallery - Desktop */}
+            <div className="space-y-8 mt-12">
               <h3 className="text-2xl serif text-white uppercase tracking-widest">Galería</h3>
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+              <div className="grid grid-cols-4 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 {(model.gallery || []).map((img, idx) => (
                   <div 
                     key={idx} 
@@ -457,14 +1502,14 @@ const ModelDetail: React.FC = () => {
                 ))}
               </div>
             </div>
-            
+                        
           </div>
           
           {/* Sidebar - 1 column */}
           <div className="lg:col-span-1 space-y-8">
             
             {/* Personal Details */}
-            <div className="bg-[#111111] border border-white/5 p-6">
+            <div className="bg-[#111111] border border-white/5 p-4 flex-1">
               <h4 className="text-lg font-bold text-white uppercase tracking-widest mb-6">Detalles Personales</h4>
               <div className="space-y-3">
                 {[
@@ -485,7 +1530,7 @@ const ModelDetail: React.FC = () => {
             </div>
             
             {/* Prices */}
-            <div className="bg-[#111111] border border-white/5 p-6">
+            <div className="bg-[#111111] border border-white/5 p-4 flex-1">
               <h4 className="text-lg font-bold text-white uppercase tracking-widest mb-6">Tarifas</h4>
               <div className="space-y-2">
                 {model.vip ? (
@@ -569,7 +1614,7 @@ const ModelDetail: React.FC = () => {
             </div>
             
             {/* Meetings in Valencia */}
-            <div className="bg-[#111111] border border-white/5 p-6">
+            <div className="bg-[#111111] border border-white/5 p-4 flex-1">
               <h4 className="text-lg font-bold text-white uppercase tracking-widest mb-6">Encuentros en Valencia</h4>
               <p className="text-gray-400 text-sm leading-relaxed">
                 Disponible para encuentros en Valencia y alrededores. Servicio discreto y profesional en hotel, domicilio o lugar de tu elección.
@@ -577,7 +1622,7 @@ const ModelDetail: React.FC = () => {
             </div>
             
             {/* International Meetings */}
-            <div className="bg-[#111111] border border-white/5 p-6">
+            <div className="bg-[#111111] border border-white/5 p-4 flex-1">
               <h4 className="text-lg font-bold text-white uppercase tracking-widest mb-6">Encuentros Internacionales</h4>
               <p className="text-gray-400 text-sm leading-relaxed">
                 Disponible para viajes internacionales. Consultar disponibilidad y condiciones para acompañamiento en otras ciudades y países.
@@ -585,7 +1630,7 @@ const ModelDetail: React.FC = () => {
             </div>
             
             {/* Contacts */}
-            <div className="bg-[#111111] border border-white/5 p-6">
+            <div className="bg-[#111111] border border-white/5 p-4 flex-1">
               <h4 className="text-lg font-bold text-white uppercase tracking-widest mb-6">Contacto</h4>
               <div className="space-y-3">
                 <a 
@@ -608,7 +1653,7 @@ const ModelDetail: React.FC = () => {
             </div>
             
             {/* Valeria's Note */}
-            <div className="bg-[#111111] border border-white/5 p-6">
+            <div className="bg-[#111111] border border-white/5 p-4 flex-1">
               <h4 className="text-lg font-bold text-white uppercase tracking-widest mb-6">Nota de Valeria</h4>
               <p className="text-gray-400 text-sm leading-relaxed">
                 {model.name} es una acompañante excepcional que combina elegancia, sofisticación y carisma natural. Su presencia garantiza experiencias inolvidables con el más alto nivel de discreción y profesionalismo.
