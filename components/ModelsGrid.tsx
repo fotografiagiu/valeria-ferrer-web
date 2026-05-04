@@ -1,26 +1,31 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { MODELS } from '../constants';
-import { Model } from '../types';
-import { motion } from 'framer-motion';
 import { Grid3X3, LayoutGrid } from 'lucide-react';
+import { motion } from 'framer-motion';
 
-const ModelCard: React.FC<{ model: any; index: number; isDoubleView?: boolean }> = ({ model, index, isDoubleView = false }) => {
+const ModelCard: React.FC<{ model: any; index: number; isDoubleView?: boolean }> = ({
+  model,
+  index,
+  isDoubleView = false,
+}) => {
   const [isHovered, setIsHovered] = useState(false);
 
-  // Adaptar datos del JSON al formato esperado
   const adaptedModel = {
     id: model.slug,
     name: model.name,
     image: model.coverImageUrl,
     hoverImage: model.images?.[1] || model.coverImageUrl,
-    location: model.city,
-    featured: model.featured
+    location: model.city || 'Valencia',
+    featured: model.featured,
   };
 
-  // Generar textos únicos para SEO basados en características del modelo
-  const generateAltText = (modelName: string, location: string, nationality?: string, age?: number) => {
+  const generateAltText = (
+    modelName: string,
+    location: string,
+    nationality?: string,
+    age?: number
+  ) => {
     const variations = [
       `${modelName} - Acompañante VIP en ${location}`,
       `${modelName} - Modelo de compañía en ${location}`,
@@ -29,10 +34,9 @@ const ModelCard: React.FC<{ model: any; index: number; isDoubleView?: boolean }>
       `${modelName} - Modelo VIP ${nationality ? nationality : ''} ${location}`.trim(),
       `${modelName} - Acompañamiento discreto ${location}`,
       `${modelName} - Modelo profesional ${location}`,
-      `${modelName} - Chica de alta gama ${location}`
+      `${modelName} - Chica de alta gama ${location}`,
     ];
-    
-    // Usar el índice para variar entre modelos
+
     const variationIndex = (modelName.charCodeAt(0) + index) % variations.length;
     return variations[variationIndex];
   };
@@ -46,9 +50,9 @@ const ModelCard: React.FC<{ model: any; index: number; isDoubleView?: boolean }>
       `${modelName} - Galería de alta calidad`,
       `${modelName} - Sesión VIP ${location}`,
       `${modelName} - Fotografías profesionales`,
-      `${modelName} - Colección exclusiva`
+      `${modelName} - Colección exclusiva`,
     ];
-    
+
     const variationIndex = (modelName.charCodeAt(1) + index) % variations.length;
     return variations[variationIndex];
   };
@@ -62,66 +66,81 @@ const ModelCard: React.FC<{ model: any; index: number; isDoubleView?: boolean }>
       `Compañera exclusiva ${location} • Lujo`,
       `Modelo de alta clase ${location} • Elegancia`,
       `Acompañamiento premium ${location} • Sofisticación`,
-      `Chica discreta ${location} • Profesionalismo`
+      `Chica discreta ${location} • Profesionalismo`,
     ];
-    
+
     const variationIndex = (modelName.charCodeAt(2) + index) % variations.length;
     return variations[variationIndex];
   };
 
+  const altText = generateAltText(
+    adaptedModel.name,
+    adaptedModel.location,
+    model.nationality,
+    model.age
+  );
+
+  const hoverAltText = generateHoverAltText(adaptedModel.name, adaptedModel.location);
+
+  const description = generateDescription(
+    adaptedModel.name,
+    adaptedModel.location,
+    model.nationality
+  );
+
   return (
-    <motion.div 
-      itemScope itemType="https://schema.org/Person"
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.8, delay: index * 0.1 }}
-      className="group relative overflow-hidden bg-[#1a1a1a]"
+    <div
+      itemScope
+      itemType="https://schema.org/Person"
+      className="group relative overflow-hidden bg-[#1a1a1a] transform-gpu"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      onTouchStart={() => setIsHovered(true)}
-      onTouchEnd={() => setIsHovered(false)}
     >
       <Link to={`/models/${adaptedModel.id}`} className="block" itemProp="url">
-        <div className="aspect-[2/3] relative overflow-hidden">
-          <img 
-            src={adaptedModel.image} 
-            alt={generateAltText(adaptedModel.name, adaptedModel.location, model.nationality, model.age)}
-            title={generateAltText(adaptedModel.name, adaptedModel.location, model.nationality, model.age)}
+        <div className="aspect-[2/3] relative overflow-hidden transform-gpu">
+          <img
+            src={adaptedModel.image}
+            alt={altText}
+            title={altText}
             loading="lazy"
             width="400"
             height="600"
             itemProp="image"
-            className={`w-full h-full object-cover transition-transform duration-700 ${isHovered ? 'scale-110' : 'scale-100'}`}
+            className={`w-full h-full object-cover transform-gpu will-change-transform transition-transform duration-700 ${
+              isHovered ? 'scale-110' : 'scale-100'
+            }`}
           />
-          {/* Hover Reveal Image */}
-          <img 
-            src={adaptedModel.hoverImage} 
-            alt={generateHoverAltText(adaptedModel.name, adaptedModel.location)}
-            title={generateHoverAltText(adaptedModel.name, adaptedModel.location)}
+
+          <img
+            src={adaptedModel.hoverImage}
+            alt={hoverAltText}
+            title={hoverAltText}
             loading="lazy"
             width="400"
             height="600"
-            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${isHovered ? 'opacity-100' : 'opacity-0'}`}
+            className={`absolute inset-0 w-full h-full object-cover transform-gpu will-change-opacity transition-opacity duration-700 ${
+              isHovered ? 'opacity-100' : 'opacity-0'
+            }`}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60"></div>
-          
-          {/* New Badge */}
-          {(adaptedModel.name === 'Teresa' || adaptedModel.name === 'Emma' || adaptedModel.name === 'Kimberly') && (
+
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
+
+          {(adaptedModel.name === 'Teresa' ||
+            adaptedModel.name === 'Emma' ||
+            adaptedModel.name === 'Kimberly') && (
             <div className="absolute top-2 left-2 md:top-4 md:left-4 z-30">
               <span className="px-2.5 py-1 md:px-3 md:py-1 bg-[#c2b2a3] text-black text-[10px] md:text-[9px] tracking-[0.2em] uppercase font-bold rounded-sm shadow-lg">
                 Nueva
               </span>
             </div>
           )}
-          
-          {/* VIP Badge */}
+
           {(adaptedModel.featured || adaptedModel.name.includes('VIP')) && (
             <div className="absolute top-2 right-2 md:top-4 md:right-4 z-30">
-              <div className="relative group">
-                <div className="absolute inset-0 bg-gradient-to-r from-[#c2b2a3]/20 to-[#c2b2a3]/10 blur-md"></div>
+              <div className="relative">
+                <div className="absolute inset-0 bg-gradient-to-r from-[#c2b2a3]/20 to-[#c2b2a3]/10 blur-md" />
                 <div className="relative flex items-center space-x-2 px-4 py-2 md:px-6 md:py-3 bg-gradient-to-r from-[#c2b2a3]/10 to-[#c2b2a3]/5 backdrop-blur-sm border border-[#c2b2a3]/30 rounded-full">
-                  <div className="w-3 h-3 bg-[#c2b2a3] rounded-full animate-pulse"></div>
+                  <div className="w-3 h-3 bg-[#c2b2a3] rounded-full" />
                   <span className="text-[#c2b2a3] text-[11px] md:text-[12px] tracking-[0.3em] uppercase font-light">
                     VIP
                   </span>
@@ -129,33 +148,50 @@ const ModelCard: React.FC<{ model: any; index: number; isDoubleView?: boolean }>
               </div>
             </div>
           )}
-          
-          {/* Ver Perfil badge */}
-          <div className={`absolute bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 transition-all duration-500 z-20 ${isHovered ? 'translate-y-0' : 'translate-y-12'} ${isDoubleView ? 'hidden md:block' : ''}`}>
+
+          <div
+            className={`absolute bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 transition-all duration-500 z-20 ${
+              isHovered ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
+            } ${isDoubleView ? 'hidden md:block' : ''}`}
+          >
             <span className="px-3 py-2 bg-white/10 backdrop-blur-md text-[10px] tracking-[0.3em] uppercase font-bold border border-white/20">
               Ver Perfil
             </span>
           </div>
         </div>
-        
+
         <div className="p-4 md:p-6 relative z-10 text-center">
-          <h3 className="text-xl md:text-2xl tracking-widest uppercase mb-1 font-light" itemProp="name">{adaptedModel.name}</h3>
-          <p className="text-[10px] md:text-xs tracking-[0.2em] uppercase text-[#c2b2a3]" itemProp="address">{adaptedModel.location}</p>
+          <h3
+            className="text-xl md:text-2xl tracking-widest uppercase mb-1 font-light"
+            itemProp="name"
+          >
+            {adaptedModel.name}
+          </h3>
+
+          <p
+            className="text-[10px] md:text-xs tracking-[0.2em] uppercase text-[#c2b2a3]"
+            itemProp="address"
+          >
+            {adaptedModel.location}
+          </p>
+
           {model.age && model.height && (
             <p className="text-[9px] text-gray-500 mt-2 tracking-[0.1em] uppercase">
               {model.age} años • {model.height} • {model.nationality || 'Española'}
             </p>
           )}
+
           <p className="text-[8px] text-gray-600 mt-1 tracking-[0.1em] uppercase">
-            {generateDescription(adaptedModel.name, adaptedModel.location, model.nationality)}
+            {description}
           </p>
-          <meta itemProp="jobTitle" content={generateDescription(adaptedModel.name, adaptedModel.location, model.nationality)} />
+
+          <meta itemProp="jobTitle" content={description} />
           <meta itemProp="worksFor" content="Valeria Ferrer Agency Escorts Valencia" />
           <meta itemProp="addressLocality" content="Valencia" />
           <meta itemProp="addressRegion" content="Comunidad Valenciana" />
         </div>
       </Link>
-    </motion.div>
+    </div>
   );
 };
 
@@ -167,118 +203,104 @@ const ModelsGrid: React.FC<ModelsGridProps> = ({ models = MODELS }) => {
   const [viewMode, setViewMode] = useState<'normal' | 'double'>('normal');
 
   const handleViewChange = (mode: 'normal' | 'double') => {
-    console.log('Cambiando vista a:', mode);
     setViewMode(mode);
   };
 
   return (
     <section className="py-24 bg-[#0a0a0a]">
       <div className="max-w-[1600px] mx-auto px-0 md:px-6">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.6 }}
           className="text-center mb-16 px-4 md:px-0"
         >
           <h2 className="text-3xl md:text-5xl font-light mb-4">
             Modelos Exclusivas <span className="italic">Compañía VIP Valencia</span>
           </h2>
+
           <p className="text-sm text-gray-400 mb-6 max-w-2xl mx-auto">
-            💋 Modelos Exclusivas Valencia • Acompañantes VIP • Compañía de Lujo • Discreción Absoluta • Servicios Premium
+            💋 Modelos Exclusivas Valencia • Acompañantes VIP • Compañía de Lujo •
+            Discreción Absoluta • Servicios Premium
           </p>
-          <div className="w-20 h-[1px] bg-[#c2b2a3] mx-auto mb-8"></div>
-          
-          {/* View Mode Toggle - Solo visible en móvil */}
+
+          <div className="w-20 h-[1px] bg-[#c2b2a3] mx-auto mb-8" />
+
           <div className="flex flex-col justify-center items-center space-y-4 mb-8 md:hidden">
             <div className="flex items-center space-x-4">
-              <span className="text-[10px] text-[#c2b2a3] uppercase tracking-[0.3em]">Vista:</span>
+              <span className="text-[10px] text-[#c2b2a3] uppercase tracking-[0.3em]">
+                Vista:
+              </span>
+
               <div className="flex bg-[#1a1a1a] border border-[#c2b2a3]/20 rounded-full p-1">
                 <button
+                  type="button"
                   onClick={() => handleViewChange('normal')}
                   className={`flex items-center space-x-2 px-4 py-2 rounded-full transition-all duration-300 ${
-                    viewMode === 'normal' 
-                      ? 'bg-[#c2b2a3] text-black' 
+                    viewMode === 'normal'
+                      ? 'bg-[#c2b2a3] text-black'
                       : 'text-[#c2b2a3] hover:text-white'
                   }`}
                 >
                   <Grid3X3 size={16} />
-                  <span className="text-[10px] font-medium tracking-[0.2em] uppercase">Normal</span>
+                  <span className="text-[10px] font-medium tracking-[0.2em] uppercase">
+                    Normal
+                  </span>
                 </button>
+
                 <button
+                  type="button"
                   onClick={() => handleViewChange('double')}
                   className={`flex items-center space-x-2 px-4 py-2 rounded-full transition-all duration-300 ${
-                    viewMode === 'double' 
-                      ? 'bg-[#c2b2a3] text-black' 
+                    viewMode === 'double'
+                      ? 'bg-[#c2b2a3] text-black'
                       : 'text-[#c2b2a3] hover:text-white'
                   }`}
                 >
                   <LayoutGrid size={16} />
-                  <span className="text-[10px] font-medium tracking-[0.2em] uppercase">cambiar vista</span>
+                  <span className="text-[10px] font-medium tracking-[0.2em] uppercase">
+                    2x2
+                  </span>
                 </button>
               </div>
             </div>
-            
-            {/* Texto explicativo - Solo móvil */}
+
             <div className="text-center">
               <p className="text-[10px] text-gray-500 font-light max-w-xs">
-                {viewMode === 'normal' 
+                {viewMode === 'normal'
                   ? 'Visualiza las fichas en grande - Navegación vertical en móvil'
-                  : 'Visualiza las fichas en formato 2x2 - Más modelos visibles'
-                }
+                  : 'Visualiza las fichas en formato 2x2 - Más modelos visibles'}
               </p>
             </div>
           </div>
         </motion.div>
 
-        <div className={`grid gap-8 md:gap-6 lg:gap-8 ${
-          viewMode === 'normal' 
-            ? 'grid-cols-1 md:grid-cols-3 lg:grid-cols-4' 
-            : 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4'
-        }`}>
+        <div
+          className={`grid gap-8 md:gap-6 lg:gap-8 ${
+            viewMode === 'normal'
+              ? 'grid-cols-1 md:grid-cols-3 lg:grid-cols-4'
+              : 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4'
+          }`}
+        >
           {models.map((model, index) => (
-            <ModelCard key={model.slug || model.id} model={model} index={index} isDoubleView={viewMode === 'double'} />
+            <ModelCard
+              key={model.slug || model.id}
+              model={model}
+              index={index}
+              isDoubleView={viewMode === 'double'}
+            />
           ))}
         </div>
 
         <div className="mt-16 text-center px-4 md:px-0">
-          <Link 
-            to="/models" 
+          <Link
+            to="/models"
             className="inline-block px-12 py-5 bg-white text-black text-xs font-bold tracking-[0.3em] uppercase hover:bg-[#c2b2a3] transition-colors"
           >
             Ver Todas las Modelos
           </Link>
         </div>
-
-              </div>
-
-        {/* View Mode Toggle */}
-        <div className="flex justify-center items-center space-x-4 mb-8">
-          <span className="text-[10px] text-[#c2b2a3] uppercase tracking-[0.3em]">Vista:</span>
-          <div className="flex bg-[#1a1a1a] border border-[#c2b2a3]/20 rounded-full p-1">
-            <button
-              onClick={() => handleViewChange('normal')}
-              className={`flex items-center space-x-2 px-4 py-2 rounded-full transition-all duration-300 ${
-                viewMode === 'normal' 
-                  ? 'bg-[#c2b2a3] text-black' 
-                  : 'text-[#c2b2a3] hover:text-white'
-              }`}
-            >
-              <Grid3X3 size={16} />
-              <span className="text-[10px] font-medium tracking-[0.2em] uppercase">Normal</span>
-            </button>
-            <button
-              onClick={() => handleViewChange('double')}
-              className={`flex items-center space-x-2 px-4 py-2 rounded-full transition-all duration-300 ${
-                viewMode === 'double' 
-                  ? 'bg-[#c2b2a3] text-black' 
-                  : 'text-[#c2b2a3] hover:text-white'
-              }`}
-            >
-              <LayoutGrid size={16} />
-              <span className="text-[10px] font-medium tracking-[0.2em] uppercase">2x2</span>
-            </button>
-          </div>
       </div>
     </section>
   );
