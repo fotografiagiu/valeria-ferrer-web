@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import About from './pages/About';
@@ -56,6 +56,12 @@ const App: React.FC = () => {
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:id" element={<BlogArticle />} />
             <Route path="/district/:districtId" element={<DistrictPage />} />
+            
+            {/* SEO Redirects - Redirecciones 301 para URLs alternativas */}
+            <Route path="/inicio" element={<Navigate to="/" replace />} />
+            <Route path="/inicio/*" element={<Navigate to="/" replace />} />
+            <Route path="/valencia-casting" element={<Navigate to="/casting" replace />} />
+            
             {/* Rutas adicionales podrían añadirse aquí siguiendo el mismo patrón */}
           </Routes>
         </main>
