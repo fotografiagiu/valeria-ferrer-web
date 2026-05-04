@@ -342,6 +342,22 @@ const ModelDetail: React.FC = () => {
                       </li>
                     </>
                   )}
+                  {model.name === "Mia" && (
+                    <>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Energía juvenil con figura esculpida perfecta</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Sonrisa contagiosa que ilumina cualquier ambiente</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Vitalidad tropical con frescura natural</span>
+                      </li>
+                    </>
+                  )}
                   {model.name === "Silvia" && (
                     <>
                       <li className="flex items-start">
@@ -591,6 +607,22 @@ const ModelDetail: React.FC = () => {
                       <li className="flex items-start">
                         <span className="text-[#c2b2a3] mr-2">•</span>
                         <span>Conexiones auténticas espontáneas memorables duraderas</span>
+                      </li>
+                    </>
+                  )}
+                  {model.name === "Mia" && (
+                    <>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Vivencias juveniles llenas de energía y alegría</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Momentos espontáneos con autenticidad tropical</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Experiencias vibrantes con frescura natural</span>
                       </li>
                     </>
                   )}
@@ -1207,6 +1239,22 @@ const ModelDetail: React.FC = () => {
                           </li>
                         </>
                       )}
+                      {model.name === "Mia" && (
+                        <>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Energía juvenil con figura esculpida perfecta</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Sonrisa contagiosa que ilumina cualquier ambiente</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Vitalidad tropical con frescura natural</span>
+                          </li>
+                        </>
+                      )}
                       {model.name === "Silvia" && (
                         <>
                           <li className="flex items-start">
@@ -1456,6 +1504,22 @@ const ModelDetail: React.FC = () => {
                           <li className="flex items-start">
                             <span className="text-[#c2b2a3] mr-2">•</span>
                             <span>Conexiones auténticas espontáneas memorables duraderas</span>
+                          </li>
+                        </>
+                      )}
+                      {model.name === "Mia" && (
+                        <>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Vivencias juveniles llenas de energía y alegría</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Momentos espontáneos con autenticidad tropical</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Experiencias vibrantes con frescura natural</span>
                           </li>
                         </>
                       )}
