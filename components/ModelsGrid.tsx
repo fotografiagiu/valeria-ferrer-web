@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { MODELS } from '../constants';
 import { Grid3X3, LayoutGrid } from 'lucide-react';
-import { motion } from 'framer-motion';
 
 const ModelCard: React.FC<{ model: any; index: number; isDoubleView?: boolean }> = ({
   model,
@@ -92,9 +91,11 @@ const ModelCard: React.FC<{ model: any; index: number; isDoubleView?: boolean }>
     <div
       itemScope
       itemType="https://schema.org/Person"
-      className="group relative overflow-hidden bg-[#1a1a1a] transform-gpu"
+      className="group relative overflow-hidden bg-[#1a1a1a] rounded-lg shadow-lg hover:shadow-[0_10px_40px_rgba(194,178,163,0.15)] transition-all duration-500 transform-gpu"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onTouchStart={() => setIsHovered(true)}
+      onTouchEnd={() => setIsHovered(false)}
     >
       <Link to={`/models/${adaptedModel.id}`} className="block" itemProp="url">
         <div className="aspect-[2/3] relative overflow-hidden transform-gpu">
@@ -151,10 +152,10 @@ const ModelCard: React.FC<{ model: any; index: number; isDoubleView?: boolean }>
 
           <div
             className={`absolute bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 transition-all duration-500 z-20 ${
-              isHovered ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
+              isHovered ? 'translate-y-0' : 'translate-y-12'
             } ${isDoubleView ? 'hidden md:block' : ''}`}
           >
-            <span className="px-3 py-2 bg-white/10 backdrop-blur-md text-[10px] tracking-[0.3em] uppercase font-bold border border-white/20">
+            <span className="px-3 py-2 bg-white/10 backdrop-blur-md text-[10px] tracking-[0.3em] uppercase font-bold border border-white/20 hover:bg-white/20 transition-colors">
               Ver Perfil
             </span>
           </div>
@@ -209,13 +210,7 @@ const ModelsGrid: React.FC<ModelsGridProps> = ({ models = MODELS }) => {
   return (
     <section className="py-24 bg-[#0a0a0a]">
       <div className="max-w-[1600px] mx-auto px-0 md:px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16 px-4 md:px-0"
-        >
+        <div className="text-center mb-16 px-4 md:px-0">
           <h2 className="text-3xl md:text-5xl font-light mb-4">
             Modelos Exclusivas <span className="italic">Compañía VIP Valencia</span>
           </h2>
@@ -274,7 +269,7 @@ const ModelsGrid: React.FC<ModelsGridProps> = ({ models = MODELS }) => {
               </p>
             </div>
           </div>
-        </motion.div>
+        </div>
 
         <div
           className={`grid gap-8 md:gap-6 lg:gap-8 ${

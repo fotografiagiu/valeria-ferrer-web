@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { MODELS } from '../constants';
-import { ArrowLeft, Check, Calendar, Phone, MapPin, Ruler, User, Heart, Star, Sparkles, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowLeft, Check, Calendar, Phone, MapPin, Ruler, User, Star, Sparkles, ChevronLeft, ChevronRight, MessageCircle, Shield, Crown, Clock, Heart } from 'lucide-react';
 import GalleryModal from '../components/GalleryModal';
 import LazyImage from '../components/LazyImage';
 import SEOHead from '../components/SEOHead';
@@ -14,6 +14,7 @@ const ModelDetail: React.FC = () => {
   const model = MODELS.find(m => m.id === id);
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const [showContactBar, setShowContactBar] = useState(true);
   const touchStartRef = useRef<{ x: number; y: number } | null>(null);
 
   const openGallery = (index: number) => {
@@ -38,6 +39,26 @@ const ModelDetail: React.FC = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowContactBar(window.scrollY < 300);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  
+  const getRelatedModels = () => {
+    const currentIndex = MODELS.findIndex(m => m.id === id);
+    const related = MODELS.filter((_, index) => index !== currentIndex)
+      .sort(() => Math.random() - 0.5)
+      .slice(0, 3);
+    return related;
+  };
+
+  const whatsappNumber = '+34666666666'; // Número de WhatsApp configurable
+  const phoneNumber = '+34966666666'; // Número de teléfono configurable
+
   if (!model) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center text-center p-6 bg-[#0a0a0a]">
@@ -53,6 +74,59 @@ const ModelDetail: React.FC = () => {
       <AnalyticsEvents modelName={model.name} />
       {/* Header Spacer */}
       <div className="h-32 lg:h-32"></div>
+
+      {/* Premium Hero Section */}
+      <div className="relative bg-gradient-to-b from-[#111111] to-transparent">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-4 lg:py-6">
+          {/* Centered Model Name */}
+          <div className="text-center mb-2 lg:mb-2">
+            
+            <div className="flex flex-col items-center lg:flex-row lg:items-center lg:justify-center gap-2 lg:gap-4">
+              <h1 className="text-4xl lg:text-6xl serif luxury-text-gradient uppercase leading-[0.9] tracking-tighter">
+                {model.name}
+              </h1>
+              
+              <div className="flex items-center space-x-2 text-[#c2b2a3]">
+                <MapPin size={16} />
+                <span className="text-lg font-light">{model.city || 'Valencia'}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Fixed Contact Bar */}
+      <div className={`fixed bottom-0 left-0 right-0 bg-[#0a0a0a]/95 backdrop-blur-lg border-t border-white/10 z-50 transition-transform duration-300 ${
+        showContactBar ? 'translate-y-0' : 'translate-y-full'
+      }`}>
+        <div className="max-w-7xl mx-auto px-6 py-4">
+          <div className="flex items-center justify-center gap-4">
+            <a
+              href={`https://t.me/Valeriaferreeer?text=Hola%20${model.name},%20vi%20tu%20perfil%20y%20me%20gustaría%20conocer%20más`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center space-x-2 px-6 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors duration-300"
+            >
+              <MessageCircle size={20} />
+              <span className="font-medium">Telegram</span>
+            </a>
+            <a
+              href={`tel:${phoneNumber}`}
+              className="flex items-center space-x-2 px-6 py-3 bg-[#c2b2a3] text-black rounded-full hover:bg-[#d4c4b3] transition-colors duration-300"
+            >
+              <Phone size={20} />
+              <span className="font-medium">Llamar</span>
+            </a>
+            <Link
+              to="/booking"
+              className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-[#c2b2a3] to-[#d4c4b3] text-black rounded-full hover:from-[#d4c4b3] hover:to-[#e6d6c3] transition-all duration-300"
+            >
+              <Calendar size={20} />
+              <span className="font-medium">Reservar</span>
+            </Link>
+          </div>
+        </div>
+      </div>
 
       {/* Breadcrumbs */}
       <Breadcrumbs modelName={model?.name} />
@@ -736,6 +810,63 @@ const ModelDetail: React.FC = () => {
 
         <div className="py-8"></div>
 
+        {/* Mobile Editorial Gallery */}
+        <div className="lg:hidden space-y-8 mt-12">
+          <div className="text-center">
+            <h3 className="text-2xl serif text-white uppercase tracking-widest mb-2">Galería Editorial</h3>
+            <p className="text-sm text-gray-400 italic">Explora su mundo visual</p>
+          </div>
+          
+          {/* Mobile Gallery Grid */}
+          <div className="grid grid-cols-2 gap-3">
+            {/* Main Image - Full Width */}
+            {(model.gallery || [])[0] && (
+              <div 
+                className="col-span-2 relative overflow-hidden bg-[#111111] group cursor-pointer border border-white/5 rounded-2xl aspect-[3/4]"
+                onClick={() => openGallery(1)}
+              >
+                <img 
+                  src={(model.gallery || [])[0]} 
+                  alt={`${model.name} - Portada`} 
+                  className="w-full h-full object-cover transition-all duration-[2s] group-hover:scale-105"
+                  draggable={false}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+                  <div className="absolute bottom-4 left-4 right-4">
+                    <p className="text-white text-xs font-light mb-1">Portada editorial</p>
+                    <p className="text-white/70 text-[10px]">Click para ver en alta resolución</p>
+                  </div>
+                </div>
+              </div>
+            )}
+            
+            {/* Side Images */}
+            {(model.gallery || []).slice(1, 5).map((img, idx) => (
+              <div 
+                key={idx}
+                className="relative overflow-hidden bg-[#111111] group cursor-pointer border border-white/5 rounded-2xl aspect-[3/4]"
+                onClick={() => openGallery(idx + 2)}
+              >
+                <img 
+                  src={img} 
+                  alt={`${model.name} - Galería ${idx + 2}`} 
+                  className="w-full h-full object-cover transition-all duration-[1.5s] group-hover:scale-110"
+                  draggable={false}
+                />
+                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                  <div className="text-white text-[10px] font-light">Ver imagen</div>
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          {/* Mobile Gallery Stats */}
+          <div className="text-center text-sm text-gray-400">
+            <p>{(model.gallery || []).length + 1} imágenes en alta resolución</p>
+            <p className="text-xs italic mt-1">Click en cualquier imagen para ver en pantalla completa</p>
+          </div>
+        </div>
+
         
         {/* Mobile Pricing Table */}
         <div className="lg:hidden py-16 bg-[#080808] border-t border-white/5">
@@ -869,6 +1000,45 @@ const ModelDetail: React.FC = () => {
             </div>
           </div>
         </div>
+
+        {/* Mobile Related Models */}
+        <div className="lg:hidden space-y-8 mt-16">
+          <div className="text-center">
+            <h3 className="text-2xl serif text-white uppercase tracking-widest mb-4">También te puede gustar</h3>
+            <p className="text-gray-400 text-sm font-light max-w-xs mx-auto">
+              Descubre otras modelos que podrían complementar tu experiencia perfecta
+            </p>
+          </div>
+          
+          <div className="space-y-4">
+            {getRelatedModels().slice(0, 3).map((relatedModel, idx) => (
+              <Link
+                key={relatedModel.id}
+                to={`/models/${relatedModel.id}`}
+                className="group block bg-[#111111] border border-white/5 rounded-2xl overflow-hidden hover:border-[#c2b2a3]/30 transition-all duration-300"
+              >
+                <div className="flex">
+                  <div className="w-24 h-32 flex-shrink-0 overflow-hidden">
+                    <img 
+                      src={relatedModel.image} 
+                      alt={relatedModel.name}
+                      className="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-105"
+                    />
+                  </div>
+                  <div className="flex-1 p-4">
+                    <h4 className="text-lg serif text-white uppercase tracking-wider mb-1">{relatedModel.name}</h4>
+                    <p className="text-gray-400 text-xs mb-3">{relatedModel.age} años • {relatedModel.city || 'Valencia'}</p>
+                    <div className="flex items-center">
+                      <span className="text-[#c2b2a3] text-xs font-light">Ver perfil</span>
+                      <ChevronRight size={14} className="text-[#c2b2a3] ml-auto group-hover:translate-x-1 transition-transform duration-300" />
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+
       </div>
 
       {/* Desktop Layout - Anna Claire Style */}
@@ -935,6 +1105,32 @@ const ModelDetail: React.FC = () => {
                   alt={model.name} 
                   className="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-105"
                 />
+                
+                {/* Badge for exclusivity */}
+                <div className="absolute top-6 left-6 px-4 py-2 bg-black/40 backdrop-blur-md border border-[#c2b2a3]/30 text-[9px] tracking-[0.4em] uppercase font-bold text-[#c2b2a3]">
+                  Elección Élite
+                </div>
+                
+                {/* Image Counter and Navigation Dots - Desktop */}
+                <div className="absolute bottom-4 left-0 right-0 flex items-center justify-between px-6">
+                  <div className="text-white/80 text-xs font-light">
+                    1 / {(model.gallery?.length || 0) + 1}
+                  </div>
+                  <div className="flex space-x-2">
+                    {Array.from({ length: (model.gallery?.length || 0) + 1 }, (_, i) => (
+                      <button
+                        key={i}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          openGallery(i);
+                        }}
+                        className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                          i === 0 ? 'bg-white' : 'bg-white/30 hover:bg-white/50'
+                        }`}
+                      />
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
             
@@ -1477,28 +1673,120 @@ const ModelDetail: React.FC = () => {
               </div>
             )}
             
-            {/* Photo Gallery - Desktop */}
+            {/* Editorial Gallery - Desktop */}
             <div className="space-y-8 mt-12">
-              <h3 className="text-2xl serif text-white uppercase tracking-widest">Galería</h3>
-              <div className="grid grid-cols-4 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                {(model.gallery || []).map((img, idx) => (
+              <div className="flex items-center justify-between">
+                <h3 className="text-2xl serif text-white uppercase tracking-widest">Galería Editorial</h3>
+                <p className="text-sm text-gray-400 italic">Explora su mundo visual</p>
+              </div>
+              
+              {/* Magazine-style Gallery Layout */}
+              <div className="grid grid-cols-12 gap-4">
+                {/* Main Feature Image */}
+                {(model.gallery || [])[0] && (
                   <div 
-                    key={idx} 
-                    className={`relative overflow-hidden bg-[#111111] group cursor-pointer border border-white/5 ${idx % 3 === 0 ? 'md:row-span-2' : ''}`}
-                    onClick={() => openGallery(idx + 1)}
+                    className="col-span-12 lg:col-span-8 row-span-2 relative overflow-hidden bg-[#111111] group cursor-pointer border border-white/5 rounded-2xl"
+                    onClick={() => openGallery(1)}
                   >
                     <img 
-                      src={img} 
-                      alt={`${model.name} Gallery ${idx + 1}`} 
-                      className="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110"
+                      src={(model.gallery || [])[0]} 
+                      alt={`${model.name} - Portada`} 
+                      className="w-full h-full object-cover transition-all duration-[2s] group-hover:scale-105"
                       draggable={false}
                     />
-                    <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
-                      <div className="w-10 h-10 border border-white/30 rounded-full flex items-center justify-center">
-                        <Sparkles size={16} className="text-white/70" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+                      <div className="absolute bottom-6 left-6 right-6">
+                        <p className="text-white text-sm font-light mb-2">Portada editorial</p>
+                        <p className="text-white/70 text-xs">Click para ver en alta resolución</p>
                       </div>
                     </div>
                   </div>
+                )}
+                
+                {/* Side Images */}
+                <div className="col-span-12 lg:col-span-4 grid grid-cols-2 lg:grid-cols-1 gap-4">
+                  {(model.gallery || []).slice(1, 3).map((img, idx) => (
+                    <div 
+                      key={idx}
+                      className="relative overflow-hidden bg-[#111111] group cursor-pointer border border-white/5 rounded-2xl aspect-[4/5] lg:aspect-auto"
+                      onClick={() => openGallery(idx + 2)}
+                    >
+                      <img 
+                        src={img} 
+                        alt={`${model.name} - Galería ${idx + 2}`} 
+                        className="w-full h-full object-cover transition-all duration-[1.5s] group-hover:scale-110"
+                        draggable={false}
+                      />
+                      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                        <div className="text-white text-xs font-light">Ver imagen</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                
+                {/* Bottom Gallery Strip */}
+                <div className="col-span-12">
+                  <div className="flex gap-3 overflow-x-auto pb-2 lg:pb-0">
+                    {(model.gallery || []).slice(3).map((img, idx) => (
+                      <div 
+                        key={idx}
+                        className="relative overflow-hidden bg-[#111111] group cursor-pointer border border-white/5 rounded-xl flex-shrink-0 w-24 h-32 lg:w-32 lg:h-40"
+                        onClick={() => openGallery(idx + 4)}
+                      >
+                        <img 
+                          src={img} 
+                          alt={`${model.name} - Galería ${idx + 4}`} 
+                          className="w-full h-full object-cover transition-all duration-[1s] group-hover:scale-110"
+                          draggable={false}
+                        />
+                        <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                          <Sparkles size={14} className="text-white/80" />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              
+              {/* Gallery Stats */}
+              <div className="flex items-center justify-between text-sm text-gray-400">
+                <p>{(model.gallery || []).length + 1} imágenes en alta resolución</p>
+                <p className="italic">Click en cualquier imagen para ver en pantalla completa</p>
+              </div>
+            </div>
+
+            {/* Related Models Section */}
+            <div className="space-y-8 mt-16">
+              <div className="text-center">
+                <h3 className="text-2xl serif text-white uppercase tracking-widest mb-4">También te puede gustar</h3>
+                <p className="text-gray-400 text-lg font-light max-w-2xl mx-auto">
+                  Descubre otras modelos que podrían complementar tu experiencia perfecta
+                </p>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {getRelatedModels().map((relatedModel, idx) => (
+                  <Link
+                    key={relatedModel.id}
+                    to={`/models/${relatedModel.id}`}
+                    className="group block bg-[#111111] border border-white/5 rounded-2xl overflow-hidden hover:border-[#c2b2a3]/30 transition-all duration-300"
+                  >
+                    <div className="aspect-[3/4] overflow-hidden">
+                      <img 
+                        src={relatedModel.image} 
+                        alt={relatedModel.name}
+                        className="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-105"
+                      />
+                    </div>
+                    <div className="p-6">
+                      <h4 className="text-xl serif text-white uppercase tracking-wider mb-2">{relatedModel.name}</h4>
+                      <p className="text-gray-400 text-sm mb-4">{relatedModel.age} años • {relatedModel.city || 'Valencia'}</p>
+                      <div className="flex items-center justify-between">
+                        <span className="text-[#c2b2a3] text-sm font-light">Ver perfil</span>
+                        <ChevronRight size={16} className="text-[#c2b2a3] group-hover:translate-x-1 transition-transform duration-300" />
+                      </div>
+                    </div>
+                  </Link>
                 ))}
               </div>
             </div>

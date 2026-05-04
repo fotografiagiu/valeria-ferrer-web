@@ -19,9 +19,10 @@ const Hero: React.FC = () => {
           onLoadedData={(e) => {
             e.currentTarget.play().catch(() => {});
           }}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover transition-opacity duration-1000"
           style={{ 
-            objectFit: 'cover'
+            objectFit: 'cover',
+            opacity: 0.9
           } as React.CSSProperties}
         >
           <source src="/video/plaza-escort-valencia-centro-alojamiento.mp4" type="video/mp4" />
@@ -79,19 +80,35 @@ const Hero: React.FC = () => {
           transition={{ duration: 0.8, delay: 0.8 }}
           className="flex flex-col sm:flex-row items-center justify-center space-y-5 sm:space-y-0 sm:space-x-8"
         >
-          <Link
-            to="/models"
-            className="px-12 py-5 border border-[#c2b2a3] text-[#c2b2a3] uppercase tracking-[0.3em] text-xs backdrop-blur-md hover:bg-[#c2b2a3] hover:text-black transition-all duration-700 w-full sm:w-auto"
+          <motion.div
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            transition={{ duration: 0.2 }}
+            className="w-full sm:w-auto"
           >
-            Descubrir Escorts
-          </Link>
+            <Link
+              to="/models"
+              className="block px-12 py-5 border border-[#c2b2a3] text-[#c2b2a3] uppercase tracking-[0.3em] text-xs backdrop-blur-md hover:bg-[#c2b2a3] hover:text-black transition-all duration-700 w-full sm:w-auto group"
+            >
+              <span className="relative z-10">Descubrir Escorts</span>
+              <div className="absolute inset-0 bg-[#c2b2a3] opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+            </Link>
+          </motion.div>
 
-          <Link
-            to="/booking"
-            className="px-12 py-5 luxury-gradient text-black uppercase tracking-[0.3em] text-xs font-bold hover:scale-105 hover:shadow-[0_0_30px_rgba(194,178,163,0.3)] transition-all duration-300 w-full sm:w-auto"
+          <motion.div
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            transition={{ duration: 0.2 }}
+            className="w-full sm:w-auto"
           >
-            Reservar Cita Exclusiva
-          </Link>
+            <Link
+              to="/booking"
+              className="block px-12 py-5 luxury-gradient text-black uppercase tracking-[0.3em] text-xs font-bold hover:scale-105 hover:shadow-[0_0_30px_rgba(194,178,163,0.3)] transition-all duration-300 w-full sm:w-auto group relative overflow-hidden"
+            >
+              <span className="relative z-10">Reservar Cita Exclusiva</span>
+              <div className="absolute inset-0 bg-gradient-to-r from-[#d4af37] to-[#c2b2a3] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </Link>
+          </motion.div>
         </motion.div>
       </div>
 

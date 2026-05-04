@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Search, Filter, X } from 'lucide-react';
+// import SearchSuggestions from './SearchSuggestions';
 
 interface Model {
   name: string;
@@ -19,8 +20,10 @@ const ModelFilter: React.FC<ModelFilterProps> = ({ models, onFilter }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedNationality, setSelectedNationality] = useState('');
   const [selectedAgeRange, setSelectedAgeRange] = useState('');
+  const [selectedService, setSelectedService] = useState('');
   const [showVIPOnly, setShowVIPOnly] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [showSuggestions, setShowSuggestions] = useState(false);
 
   // Get unique nationalities from models
   const nationalities = [...new Set(models.map(model => model.nationality))];
@@ -47,18 +50,28 @@ const ModelFilter: React.FC<ModelFilterProps> = ({ models, onFilter }) => {
       filtered = filtered.filter(model => model.age >= min && model.age <= max);
     }
 
+    // Filter by service
+    if (selectedService) {
+      filtered = filtered.filter(model => 
+        model.services && model.services.some((service: string) => 
+          service.toLowerCase().includes(selectedService.toLowerCase())
+        )
+      );
+    }
+
     // Filter VIP only
     if (showVIPOnly) {
       filtered = filtered.filter(model => model.vip);
     }
 
     onFilter(filtered);
-  }, [searchTerm, selectedNationality, selectedAgeRange, showVIPOnly, models, onFilter]);
+  }, [searchTerm, selectedNationality, selectedAgeRange, selectedService, showVIPOnly, models, onFilter]);
 
   const clearFilters = () => {
     setSearchTerm('');
     setSelectedNationality('');
     setSelectedAgeRange('');
+    setSelectedService('');
     setShowVIPOnly(false);
   };
 
@@ -66,6 +79,7 @@ const ModelFilter: React.FC<ModelFilterProps> = ({ models, onFilter }) => {
     searchTerm,
     selectedNationality,
     selectedAgeRange,
+    selectedService,
     showVIPOnly
   ].filter(Boolean).length;
 
@@ -75,14 +89,20 @@ const ModelFilter: React.FC<ModelFilterProps> = ({ models, onFilter }) => {
       <div className="flex flex-col sm:flex-row gap-4 mb-4">
         {/* Search */}
         <div className="flex-1 relative">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 z-10" />
           <input
             type="text"
-            placeholder="Buscar por nombre o nacionalidad..."
+            placeholder="Buscar por nombre, nacionalidad o servicio..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
+            onFocus={() => setShowSuggestions(true)}
             className="w-full pl-10 pr-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-purple-500 transition-colors"
           />
+          {/* <SearchSuggestions 
+            searchTerm={searchTerm}
+            onSuggestionSelect={setSearchTerm}
+            models={models}
+          /> */}
         </div>
 
         {/* Filter Toggle Button */}
@@ -113,7 +133,7 @@ const ModelFilter: React.FC<ModelFilterProps> = ({ models, onFilter }) => {
 
       {/* Advanced Filters */}
       {isFilterOpen && (
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-gray-800">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4 border-t border-gray-800">
           {/* Nationality Filter */}
           <div>
             <label className="block text-sm font-medium text-gray-300 mb-2">
@@ -167,6 +187,25 @@ const ModelFilter: React.FC<ModelFilterProps> = ({ models, onFilter }) => {
               {showVIPOnly ? '✨ Solo VIP' : 'Todas las modelos'}
             </button>
           </div>
+
+          {/* Services Filter */}
+          <div>
+            <label className="block text-sm font-medium text-gray-300 mb-2">
+              Servicios
+            </label>
+            <select
+              value={selectedService}
+              onChange={(e) => setSelectedService(e.target.value)}
+              className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-purple-500 transition-colors"
+            >
+              <option value="">Todos los servicios</option>
+              <option value="events">Eventos Sociales</option>
+              <option value="dinners">Cenas de Negocios</option>
+              <option value="gfe">Girlfriend Experience</option>
+              <option value="massages">Masajes Eróticos</option>
+              <option value="travel">Viajes Internacionales</option>
+            </select>
+          </div>
         </div>
       )}
 
@@ -187,6 +226,15 @@ const ModelFilter: React.FC<ModelFilterProps> = ({ models, onFilter }) => {
           {selectedAgeRange && (
             <span className="inline-flex items-center gap-1 px-3 py-1 bg-purple-600/20 border border-purple-600/50 rounded-full text-sm text-purple-300">
               {selectedAgeRange} años
+            </span>
+          )}
+          {selectedService && (
+            <span className="inline-flex items-center gap-1 px-3 py-1 bg-purple-600/20 border border-purple-600/50 rounded-full text-sm text-purple-300">
+              {selectedService === 'events' && '🎉 Eventos'}
+              {selectedService === 'dinners' && '🍽️ Cenas'}
+              {selectedService === 'gfe' && '💕 GFE'}
+              {selectedService === 'massages' && '💆 Masajes'}
+              {selectedService === 'travel' && '✈️ Viajes'}
             </span>
           )}
           {showVIPOnly && (

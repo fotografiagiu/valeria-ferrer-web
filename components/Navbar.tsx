@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X, ChevronDown, Globe, Lock, Clock, Mail, Send, Phone } from 'lucide-react';
@@ -38,13 +37,47 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolled, openMembers }) => {
 
         {/* Desktop Navigation */}
         <div className="hidden lg:flex items-center space-x-10 text-[13px] font-medium tracking-widest uppercase lg:mr-4">
-          <Link to="/" className="hover:text-[#c2b2a3] transition-colors">Inicio</Link>
-          <Link to="/models" className="hover:text-[#c2b2a3] transition-colors">Modelos</Link>
-          <Link to="/blog" className="hover:text-[#c2b2a3] transition-colors">Blog</Link>
-          <Link to="/about" className="hover:text-[#c2b2a3] transition-colors">Agencia</Link>
-          <Link to="/contact" className="hover:text-[#c2b2a3] transition-colors">Contacto</Link>
-          <Link to="/casting" className="hover:text-[#c2b2a3] transition-colors">Casting</Link>
-          <Link to="/booking" className="px-6 py-2 border border-[#c2b2a3]/30 text-[#c2b2a3] hover:bg-[#c2b2a3] hover:text-black transition-all duration-300 rounded-full text-[11px]">Reservar</Link>
+          <div className="hover:-translate-y-0.5 transition-transform duration-200">
+            <Link to="/" className="hover:text-[#c2b2a3] transition-colors relative group">
+              Inicio
+              <span className="absolute bottom-0 left-0 w-0 h-px bg-[#c2b2a3] group-hover:w-full transition-all duration-300"></span>
+            </Link>
+          </div>
+          <div className="hover:-translate-y-0.5 transition-transform duration-200">
+            <Link to="/models" className="hover:text-[#c2b2a3] transition-colors relative group">
+              Modelos
+              <span className="absolute bottom-0 left-0 w-0 h-px bg-[#c2b2a3] group-hover:w-full transition-all duration-300"></span>
+            </Link>
+          </div>
+          <div className="hover:-translate-y-0.5 transition-transform duration-200">
+            <Link to="/blog" className="hover:text-[#c2b2a3] transition-colors relative group">
+              Blog
+              <span className="absolute bottom-0 left-0 w-0 h-px bg-[#c2b2a3] group-hover:w-full transition-all duration-300"></span>
+            </Link>
+          </div>
+          <div className="hover:-translate-y-0.5 transition-transform duration-200">
+            <Link to="/about" className="hover:text-[#c2b2a3] transition-colors relative group">
+              Agencia
+              <span className="absolute bottom-0 left-0 w-0 h-px bg-[#c2b2a3] group-hover:w-full transition-all duration-300"></span>
+            </Link>
+          </div>
+          <div className="hover:-translate-y-0.5 transition-transform duration-200">
+            <Link to="/contact" className="hover:text-[#c2b2a3] transition-colors relative group">
+              Contacto
+              <span className="absolute bottom-0 left-0 w-0 h-px bg-[#c2b2a3] group-hover:w-full transition-all duration-300"></span>
+            </Link>
+          </div>
+          <div className="hover:-translate-y-0.5 transition-transform duration-200">
+            <Link to="/casting" className="hover:text-[#c2b2a3] transition-colors relative group">
+              Casting
+              <span className="absolute bottom-0 left-0 w-0 h-px bg-[#c2b2a3] group-hover:w-full transition-all duration-300"></span>
+            </Link>
+          </div>
+          <div className="hover:-translate-y-0.5 transition-transform duration-200">
+            <Link to="/booking" className="px-6 py-2 border border-[#c2b2a3]/30 text-[#c2b2a3] hover:bg-[#c2b2a3] hover:text-black transition-all duration-300 rounded-full text-[11px] hover:shadow-[0_4px_20px_rgba(194,178,163,0.3)]">
+              Reservar
+            </Link>
+          </div>
         </div>
 
         {/* Right Actions */}
