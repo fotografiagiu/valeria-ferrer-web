@@ -20,6 +20,7 @@ import Chatbot from './components/Chatbot';
 import FloatingContactPopup from './components/FloatingContactPopup';
 import ContentProtection from './components/ContentProtection';
 import AnalyticsTracker from './components/AnalyticsTracker';
+import LocalAnalyticsDashboard from './components/LocalAnalyticsDashboard';
 import { Analytics } from '@vercel/analytics/react';
 
 const App: React.FC = () => {
@@ -58,6 +59,7 @@ const App: React.FC = () => {
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:id" element={<BlogArticle />} />
               <Route path="/district/:districtId" element={<DistrictPage />} />
+              <Route path="/analytics-local" element={<LocalAnalyticsDashboard />} />
               
               {/* SEO Redirects - Redirecciones 301 para URLs alternativas */}
               <Route path="/inicio" element={<Navigate to="/" replace />} />

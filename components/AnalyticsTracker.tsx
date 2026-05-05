@@ -16,6 +16,9 @@ const AnalyticsTracker: React.FC<AnalyticsTrackerProps> = ({ children }) => {
     // Check for consent first
     const hasConsent = localStorage.getItem('analytics-consent') === 'granted';
     
+    // Initialize local tracking regardless of consent
+    initializeLocalTracking();
+    
     if (!hasConsent) {
       // Show consent banner
       const consentBanner = document.createElement('div');
@@ -56,6 +59,78 @@ const AnalyticsTracker: React.FC<AnalyticsTrackerProps> = ({ children }) => {
       initializeAnalytics();
     }
   }, []);
+
+  const initializeLocalTracking = () => {
+    // Local storage tracking without cookies
+    const trackLocalClick = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      const link = target.closest('a') as HTMLAnchorElement;
+      
+      if (link && link.href) {
+        const url = new URL(link.href);
+        let clickType = 'Unknown';
+        
+        // Determine click type
+        if (url.hostname.includes('t.me') || url.hostname.includes('telegram')) {
+          clickType = 'Telegram';
+        } else if (link.href.startsWith('tel:')) {
+          clickType = 'Phone';
+        } else if (url.hostname.includes('wa.me') || url.hostname.includes('whatsapp')) {
+          clickType = 'WhatsApp';
+        } else if (link.href.startsWith('mailto:')) {
+          clickType = 'Email';
+        }
+        
+        if (clickType !== 'Unknown') {
+          // Get existing local data
+          const localData = JSON.parse(localStorage.getItem('local-analytics') || '{}');
+          
+          // Initialize if not exists
+          if (!localData.clicks) localData.clicks = {};
+          if (!localData.clicks[clickType]) localData.clicks[clickType] = 0;
+          if (!localData.daily) localData.daily = {};
+          
+          // Get today's date
+          const today = new Date().toISOString().split('T')[0];
+          if (!localData.daily[today]) {
+            localData.daily[today] = { Telegram: 0, Phone: 0, WhatsApp: 0, Email: 0 };
+          }
+          
+          // Increment counters
+          localData.clicks[clickType]++;
+          localData.daily[today][clickType]++;
+          
+          // Add timestamp for detailed tracking
+          if (!localData.recent) localData.recent = [];
+          localData.recent.unshift({
+            type: clickType,
+            url: link.href,
+            timestamp: new Date().toISOString(),
+            page: window.location.pathname
+          });
+          
+          // Keep only last 100 entries
+          if (localData.recent.length > 100) {
+            localData.recent = localData.recent.slice(0, 100);
+          }
+          
+          // Save to localStorage
+          localStorage.setItem('local-analytics', JSON.stringify(localData));
+          
+          // Console log for debugging
+          console.log(`📊 [LOCAL] ${clickType} click tracked:`, {
+            type: clickType,
+            url: link.href,
+            total: localData.clicks[clickType],
+            today: localData.daily[today][clickType]
+          });
+        }
+      }
+    };
+
+    // Add click listener for local tracking
+    document.addEventListener('click', trackLocalClick);
+  };
 
   const initializeAnalytics = () => {
     // Initialize Google Analytics
