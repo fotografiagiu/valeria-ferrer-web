@@ -13,48 +13,13 @@ declare global {
 
 const AnalyticsTracker: React.FC<AnalyticsTrackerProps> = ({ children }) => {
   useEffect(() => {
-    // Check for consent first
-    const hasConsent = localStorage.getItem('analytics-consent') === 'granted';
-    
-    // Initialize local tracking regardless of consent
+    // Initialize local tracking automatically - no consent needed
     initializeLocalTracking();
     
-    if (!hasConsent) {
-      // Show consent banner
-      const consentBanner = document.createElement('div');
-      consentBanner.id = 'analytics-consent-banner';
-      consentBanner.innerHTML = `
-        <div style="position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.9); color: white; padding: 15px; text-align: center; z-index: 9999; font-size: 14px;">
-          <p style="margin: 0 0 10px 0;">📊 Usamos cookies para analizar el tráfico y mejorar tu experiencia.</p>
-          <button id="accept-analytics" style="background: #c2b2a3; color: black; border: none; padding: 8px 16px; margin-right: 10px; cursor: pointer; border-radius: 4px; font-weight: bold;">
-            Aceptar
-          </button>
-          <button id="reject-analytics" style="background: transparent; color: white; border: 1px solid white; padding: 8px 16px; margin-right: 10px; cursor: pointer; border-radius: 4px;">
-            Rechazar
-          </button>
-        </div>
-      `;
-      document.body.appendChild(consentBanner);
-
-      // Handle consent
-      const acceptBtn = document.getElementById('accept-analytics');
-      const rejectBtn = document.getElementById('reject-analytics');
-
-      acceptBtn?.addEventListener('click', () => {
-        localStorage.setItem('analytics-consent', 'granted');
-        document.getElementById('analytics-consent-banner')?.remove();
-        initializeAnalytics();
-      });
-
-      rejectBtn?.addEventListener('click', () => {
-        localStorage.setItem('analytics-consent', 'rejected');
-        document.getElementById('analytics-consent-banner')?.remove();
-      });
-
-      return;
-    }
-
-    // If consent already granted, initialize analytics
+    // Check for consent for Google Analytics only
+    const hasConsent = localStorage.getItem('analytics-consent') === 'granted';
+    
+    // If consent granted, also initialize Google Analytics
     if (hasConsent) {
       initializeAnalytics();
     }
