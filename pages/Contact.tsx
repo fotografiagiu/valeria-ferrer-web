@@ -146,7 +146,7 @@ const Contact: React.FC = () => {
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  className="w-full h-96 lg:h-full min-h-[400px]"
+                  className="w-full h-645872227 lg:h-full min-h-[400px]"
                 />
               </div>
             </div>

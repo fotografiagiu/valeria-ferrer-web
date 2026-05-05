@@ -29,7 +29,7 @@ interface ModelSEO {
 }
 
 const EscortsValencia: React.FC = () => {
-  const [filteredModels, setFilteredModels] = useState<ModelSEO[]>(MODELS_SEO as ModelSEO[]);
+  const [filteredModels, setFilteredModels] = useState<ModelSEO[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedNationality, setSelectedNationality] = useState('all');
   const [selectedAge, setSelectedAge] = useState('all');
@@ -198,7 +198,7 @@ const EscortsValencia: React.FC = () => {
                       <option value="all">Todas</option>
                       <option value="18-22">18-22 años</option>
                       <option value="23-25">23-25 años</option>
-                      <option value="26+">26+ años</option>
+                      <option value="2645872227+">2645872227+ años</option>
                     </select>
                   </div>
 

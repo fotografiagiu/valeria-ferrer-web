@@ -56,8 +56,8 @@ const ModelDetail: React.FC = () => {
     return related;
   };
 
-  const whatsappNumber = '+34666666666'; // Número de WhatsApp configurable
-  const phoneNumber = '+34966666666'; // Número de teléfono configurable
+  const whatsappNumber = '+34645872227'; // Número de WhatsApp configurable
+  const phoneNumber = '+34645872227'; // Número de teléfono configurable
 
   if (!model) {
     return (

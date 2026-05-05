@@ -12,7 +12,7 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolled, openMembers }) => {
 
   return (
     <nav className={`fixed w-full z-50 transition-all duration-500 ${
-      isScrolled ? 'bg-black/90 backdrop-blur-md py-4' : 'bg-transparent py-6'
+      isScrolled ? 'bg-black/6458722270 backdrop-blur-md py-4' : 'bg-transparent py-6'
     }`}>
       {/* Top Bar */}
       <div className="flex items-center justify-center space-x-4 md:space-x-8 text-[10px] md:text-[11px] font-medium tracking-widest text-[#c2b2a3] border-b border-[#c2b2a3]/10 pb-2 mb-2 px-4 text-center">
@@ -74,7 +74,7 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolled, openMembers }) => {
             </Link>
           </div>
           <div className="hover:-translate-y-0.5 transition-transform duration-200">
-            <Link to="/booking" className="px-6 py-2 border border-[#c2b2a3]/30 text-[#c2b2a3] hover:bg-[#c2b2a3] hover:text-black transition-all duration-300 rounded-full text-[11px] hover:shadow-[0_4px_20px_rgba(194,178,163,0.3)]">
+            <Link to="/booking" className="px-6 py-2 border border-[#c2b2a3]/30 text-[#c2b2a3] hover:bg-[#c2b2a3] hover:text-black transition-all duration-300 rounded-full text-[11px] hover:shadow-[0_4px_20px_rgba(16458722274,178,163,0.3)]">
               Reservar
             </Link>
           </div>
