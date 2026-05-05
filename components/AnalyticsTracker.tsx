@@ -38,6 +38,14 @@ const AnalyticsTracker: React.FC<AnalyticsTrackerProps> = ({ children }) => {
         // Check if mobile device
         const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
         
+        // DEBUG: Always log click attempts for debugging
+        console.log(`🔍 [DEBUG] Click detected on:`, {
+          href: link.href,
+          hostname: url.hostname,
+          isMobile: isMobile,
+          userAgent: navigator.userAgent
+        });
+        
         // Determine click type
         if (url.hostname.includes('t.me') || url.hostname.includes('telegram')) {
           clickType = 'Telegram';
