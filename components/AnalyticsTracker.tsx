@@ -4,6 +4,27 @@ interface AnalyticsTrackerProps {
   children: React.ReactNode;
 }
 
+const sendTelegramNotification = async (data: any) => {
+  try {
+    // Send to a notification service (you can replace with your preferred service)
+    const response = await fetch('https://hooks.slack.com/services/YOUR/SLACK/WEBHOOK', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        text: `📱 Telegram Click Alert\n\n*Device:* ${data.device}\n*URL:* ${data.url}\n*Time:* ${data.timestamp}\n*Page:* ${window.location.href}`,
+        username: 'Valeria Ferrer Bot',
+        icon_emoji: ':telegram:'
+      })
+    });
+    
+    console.log('✅ Telegram notification sent:', data);
+  } catch (error) {
+    console.error('❌ Failed to send Telegram notification:', error);
+  }
+};
+
 declare global {
   interface Window {
     gtag?: (command: string, targetId: string, config?: Record<string, any>) => void;
@@ -38,14 +59,6 @@ const AnalyticsTracker: React.FC<AnalyticsTrackerProps> = ({ children }) => {
         // Check if mobile device
         const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
         
-        // DEBUG: Always log click attempts for debugging
-        console.log(`🔍 [DEBUG] Click detected on:`, {
-          href: link.href,
-          hostname: url.hostname,
-          isMobile: isMobile,
-          userAgent: navigator.userAgent
-        });
-        
         // Determine click type
         if (url.hostname.includes('t.me') || url.hostname.includes('telegram')) {
           clickType = 'Telegram';
@@ -55,6 +68,14 @@ const AnalyticsTracker: React.FC<AnalyticsTrackerProps> = ({ children }) => {
             type: 'Telegram',
             url: link.href,
             device: isMobile ? 'mobile' : 'desktop',
+            timestamp: new Date().toISOString()
+          });
+          
+          // Send Telegram notification to admin (uncomment to enable)
+          sendTelegramNotification({
+            type: 'Telegram',
+            device: isMobile ? 'mobile' : 'desktop',
+            url: link.href,
             timestamp: new Date().toISOString()
           });
           
