@@ -1025,7 +1025,7 @@ const ModelDetail: React.FC = () => {
                     className="inline-flex items-center justify-center px-8 py-4 border border-[#c2b2a3]/30 text-[#c2b2a3] uppercase tracking-[0.3em] text-[8px] font-bold hover:bg-[#c2b2a3] hover:text-black transition-all duration-700"
                   >
                     <Phone size={12} className="mr-2" /> 
-                    <span>Llamada Directa</span>
+                    <span>Click para Llamar</span>
                   </a>
                 </div>
               </div>
