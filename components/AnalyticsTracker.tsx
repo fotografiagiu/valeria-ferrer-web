@@ -38,6 +38,18 @@ const AnalyticsTracker: React.FC<AnalyticsTrackerProps> = ({ children }) => {
         // Determine click type
         if (url.hostname.includes('t.me') || url.hostname.includes('telegram')) {
           clickType = 'Telegram';
+          
+          // Check if mobile device
+          const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+          
+          // Track Telegram clicks with device info
+          console.log(`📱 [${isMobile ? 'MOBILE' : 'DESKTOP'}] Telegram click detected:`, {
+            type: 'Telegram',
+            url: link.href,
+            device: isMobile ? 'mobile' : 'desktop',
+            timestamp: new Date().toISOString()
+          });
+          
         } else if (link.href.startsWith('tel:')) {
           clickType = 'Phone';
         } else if (url.hostname.includes('wa.me') || url.hostname.includes('whatsapp')) {
