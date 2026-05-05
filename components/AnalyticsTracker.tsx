@@ -13,6 +13,51 @@ declare global {
 
 const AnalyticsTracker: React.FC<AnalyticsTrackerProps> = ({ children }) => {
   useEffect(() => {
+    // Check for consent first
+    const hasConsent = localStorage.getItem('analytics-consent') === 'granted';
+    
+    if (!hasConsent) {
+      // Show consent banner
+      const consentBanner = document.createElement('div');
+      consentBanner.id = 'analytics-consent-banner';
+      consentBanner.innerHTML = `
+        <div style="position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.9); color: white; padding: 15px; text-align: center; z-index: 9999; font-size: 14px;">
+          <p style="margin: 0 0 10px 0;">📊 Usamos cookies para analizar el tráfico y mejorar tu experiencia.</p>
+          <button id="accept-analytics" style="background: #c2b2a3; color: black; border: none; padding: 8px 16px; margin-right: 10px; cursor: pointer; border-radius: 4px; font-weight: bold;">
+            Aceptar
+          </button>
+          <button id="reject-analytics" style="background: transparent; color: white; border: 1px solid white; padding: 8px 16px; margin-right: 10px; cursor: pointer; border-radius: 4px;">
+            Rechazar
+          </button>
+        </div>
+      `;
+      document.body.appendChild(consentBanner);
+
+      // Handle consent
+      const acceptBtn = document.getElementById('accept-analytics');
+      const rejectBtn = document.getElementById('reject-analytics');
+
+      acceptBtn?.addEventListener('click', () => {
+        localStorage.setItem('analytics-consent', 'granted');
+        document.getElementById('analytics-consent-banner')?.remove();
+        initializeAnalytics();
+      });
+
+      rejectBtn?.addEventListener('click', () => {
+        localStorage.setItem('analytics-consent', 'rejected');
+        document.getElementById('analytics-consent-banner')?.remove();
+      });
+
+      return;
+    }
+
+    // If consent already granted, initialize analytics
+    if (hasConsent) {
+      initializeAnalytics();
+    }
+  }, []);
+
+  const initializeAnalytics = () => {
     // Initialize Google Analytics
     const GA_MEASUREMENT_ID = 'G-QY07YBB25G'; // Google Analytics Measurement ID
     
@@ -62,11 +107,11 @@ const AnalyticsTracker: React.FC<AnalyticsTrackerProps> = ({ children }) => {
             phone_number: link.href.replace('tel:', ''),
           });
           
-          console.log('📞 Phone click tracked:', link.href);
+          console.log('Phone click tracked:', link.href);
         }
         
         // Track WhatsApp clicks
-        if (link.hostname.includes('wa.me') || link.hostname.includes('whatsapp')) {
+        if (url.hostname.includes('wa.me') || url.hostname.includes('whatsapp')) {
           window.gtag?.('event', 'click', {
             event_category: 'Contact',
             event_label: 'WhatsApp',
@@ -74,7 +119,7 @@ const AnalyticsTracker: React.FC<AnalyticsTrackerProps> = ({ children }) => {
             link_url: link.href,
           });
           
-          console.log('💬 WhatsApp click tracked:', link.href);
+          console.log('WhatsApp click tracked:', link.href);
         }
         
         // Track email clicks
@@ -86,7 +131,7 @@ const AnalyticsTracker: React.FC<AnalyticsTrackerProps> = ({ children }) => {
             email: link.href.replace('mailto:', ''),
           });
           
-          console.log('📧 Email click tracked:', link.href);
+          console.log('Email click tracked:', link.href);
         }
       }
     };
@@ -116,7 +161,7 @@ const AnalyticsTracker: React.FC<AnalyticsTrackerProps> = ({ children }) => {
       document.removeEventListener('click', trackExternalClick);
       window.removeEventListener('popstate', trackPageView);
     };
-  }, []);
+  };
 
   return <>{children}</>;
 };
