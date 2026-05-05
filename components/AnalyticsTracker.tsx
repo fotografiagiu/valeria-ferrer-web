@@ -14,7 +14,7 @@ declare global {
 const AnalyticsTracker: React.FC<AnalyticsTrackerProps> = ({ children }) => {
   useEffect(() => {
     // Initialize Google Analytics
-    const GA_MEASUREMENT_ID = 'G-XXXXXXXXXX'; // Replace with your actual GA4 ID
+    const GA_MEASUREMENT_ID = 'G-QY07YBB25G'; // Google Analytics Measurement ID
     
     // Load gtag script
     const script = document.createElement('script');
