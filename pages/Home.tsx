@@ -8,6 +8,7 @@ import Reviews from '../components/Reviews';
 import modelsData from '../data/models.json';
 import { ArrowRight, Plane, Shield, Heart, Globe, Diamond, ShieldCheck, Star, Send } from 'lucide-react';
 import { motion } from 'framer-motion';
+import LazyImage from '../components/LazyImage';
 
 const Home: React.FC = () => {
   return (

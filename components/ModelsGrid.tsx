@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { MODELS } from '../constants';
 import { Grid3X3, LayoutGrid } from 'lucide-react';
+import LazyImage from './LazyImage';
 
 const ModelCard: React.FC<{ model: any; index: number; isDoubleView?: boolean }> = ({
   model,
@@ -99,29 +100,26 @@ const ModelCard: React.FC<{ model: any; index: number; isDoubleView?: boolean }>
     >
       <Link to={`/models/${adaptedModel.id}`} className="block" itemProp="url">
         <div className="aspect-[2/3] relative overflow-hidden transform-gpu">
-          <img
+          <LazyImage
             src={adaptedModel.image}
             alt={altText}
             title={altText}
-            loading="lazy"
-            width="400"
-            height="600"
-            itemProp="image"
             className={`w-full h-full object-cover transform-gpu will-change-transform transition-transform duration-700 ${
               isHovered ? 'scale-110' : 'scale-100'
             }`}
+            sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+            priority={index < 4} // First 4 images are priority
           />
 
-          <img
+          <LazyImage
             src={adaptedModel.hoverImage}
             alt={hoverAltText}
             title={hoverAltText}
-            loading="lazy"
-            width="400"
-            height="600"
             className={`absolute inset-0 w-full h-full object-cover transform-gpu will-change-opacity transition-opacity duration-700 ${
               isHovered ? 'opacity-100' : 'opacity-0'
             }`}
+            sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+            priority={index < 4}
           />
 
           <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />

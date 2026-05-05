@@ -26,6 +26,12 @@ const LazyImage: React.FC<LazyImageProps> = ({
   const imgRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
+    // Priority images load immediately
+    if (priority) {
+      setIsInView(true);
+      return;
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -34,8 +40,8 @@ const LazyImage: React.FC<LazyImageProps> = ({
         }
       },
       {
-        threshold: 0.1,
-        rootMargin: '50px'
+        threshold: 0.01, // Earlier trigger for better UX
+        rootMargin: '100px 0px 100px 0px' // Larger margin for smoother loading
       }
     );
 
@@ -44,7 +50,7 @@ const LazyImage: React.FC<LazyImageProps> = ({
     }
 
     return () => observer.disconnect();
-  }, []);
+  }, [priority]);
 
   const handleLoad = () => {
     setIsLoaded(true);
@@ -84,16 +90,17 @@ const LazyImage: React.FC<LazyImageProps> = ({
           src={isInView || priority ? src : placeholder}
           alt={alt}
           title={title || alt}
-          className={`transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-70'} ${className}`}
+          className={`transition-all duration-300 ease-out ${isLoaded ? 'opacity-100 scale-100' : 'opacity-60 scale-105'} ${className}`}
           loading={loading}
           sizes={sizes}
           onLoad={handleLoad}
           onError={handleImageError}
           decoding="async"
+          fetchPriority={priority ? 'high' : 'auto'}
         />
       </picture>
       {!isLoaded && (
-        <div className="absolute inset-0 bg-[#111111] animate-pulse" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#111111] to-[#1a1a1a] animate-pulse" />
       )}
     </div>
   );

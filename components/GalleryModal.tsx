@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
+import LazyImage from './LazyImage';
 
 interface GalleryModalProps {
   images: string[];
@@ -254,11 +255,12 @@ const GalleryModal: React.FC<GalleryModalProps> = ({
               onTouchStart={handleTouchStart}
               onTouchEnd={handleTouchEnd}
             >
-              <img
+              <LazyImage
                 src={images[currentIndex]}
                 alt={`${modelName} - Imagen ${currentIndex + 1} de ${images.length}`}
                 className="max-w-full max-h-[70vh] object-contain select-none rounded-lg shadow-2xl"
-                draggable={false}
+                priority={true} // Gallery images are priority when modal is open
+                sizes="90vw"
               />
               
               {/* Image counter */}
@@ -295,18 +297,19 @@ const GalleryModal: React.FC<GalleryModalProps> = ({
                         : 'opacity-60 hover:opacity-80 hover:scale-105'
                     }`}
                   >
-                    <img
+                    <LazyImage
                       src={image}
-                      alt={`Miniatura ${index + 1}`}
+                      alt={`${modelName} - Miniatura ${index + 1}`}
                       className="w-full h-full object-cover"
+                      sizes="64px"
                     />
                   </button>
                 ))}
               </motion.div>
             )}
           </div>
-
-          {/* Click outside to close */}
+          
+          {/* Backdrop click area */}
           <div
             className="absolute inset-0 -z-10"
             onClick={onClose}

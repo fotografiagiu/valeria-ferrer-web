@@ -27,11 +27,39 @@
     <link rel="preload" href="/chicas/kimberly-colombiana-24-años-1-62cm-valencia-ferrer/portada.jpg" as="image">
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500&display=swap" as="style">
     
-    <!-- Critical CSS -->
+    <!-- Critical CSS - Above the fold optimization -->
     <style>
-      body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif; background: #0a0a0a; color: white; }
+      /* Critical rendering path styles */
+      body { 
+        margin: 0; 
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif; 
+        background: #0a0a0a; 
+        color: white; 
+        line-height: 1.6;
+      }
       .loading { opacity: 0; transition: opacity 0.3s; }
       .loaded { opacity: 1; }
+      
+      /* Hero section critical styles */
+      .hero-container { min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+      .hero-title { font-size: clamp(2rem, 8vw, 6rem); font-weight: 700; text-align: center; }
+      .hero-subtitle { font-size: clamp(1rem, 3vw, 1.5rem); opacity: 0.8; text-align: center; }
+      
+      /* Navigation critical styles */
+      .nav-container { position: fixed; top: 0; left: 0; right: 0; z-index: 50; background: rgba(10, 10, 10, 0.95); backdrop-filter: blur(10px); }
+      .nav-content { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; }
+      
+      /* Loading skeleton for images */
+      .image-skeleton { 
+        background: linear-gradient(90deg, #1a1a1a 25%, #2a2a2a 50%, #1a1a1a 75%); 
+        background-size: 200% 100%; 
+        animation: shimmer 1.5s infinite; 
+      }
+      @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+      
+      /* Prevent layout shift */
+      .aspect-container { aspect-ratio: 2/3; overflow: hidden; }
+      .model-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; }
     </style>
     
     <!-- Structured Data JSON-LD - LocalBusiness + Organization -->
