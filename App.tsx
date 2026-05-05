@@ -19,6 +19,7 @@ import MembersModal from './components/MembersModal';
 import Chatbot from './components/Chatbot';
 import FloatingContactPopup from './components/FloatingContactPopup';
 import ContentProtection from './components/ContentProtection';
+import AnalyticsTracker from './components/AnalyticsTracker';
 import { Analytics } from '@vercel/analytics/react';
 
 const App: React.FC = () => {
@@ -34,51 +35,53 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <Router>
-      <div className="min-h-screen bg-[#0a0a0a] text-white overflow-x-hidden">
-        <Navbar 
-          isScrolled={isScrolled} 
-          openMembers={() => setIsMembersModalOpen(true)} 
-        />
-        
-        <main>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/models" element={<Models />} />
-            <Route path="/models/:id" element={<ModelDetail />} />
-            <Route path="/fees" element={<Fees />} />
-            <Route path="/booking" element={<Booking />} />
-            <Route path="/casting" element={<Casting />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/travel" element={<Travel />} />
-            <Route path="/services/:type" element={<ServiceDetail />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/blog/:id" element={<BlogArticle />} />
-            <Route path="/district/:districtId" element={<DistrictPage />} />
-            
-            {/* SEO Redirects - Redirecciones 301 para URLs alternativas */}
-            <Route path="/inicio" element={<Navigate to="/" replace />} />
-            <Route path="/inicio/*" element={<Navigate to="/" replace />} />
-            <Route path="/valencia-casting" element={<Navigate to="/casting" replace />} />
-            
-            {/* Rutas adicionales podrían añadirse aquí siguiendo el mismo patrón */}
-          </Routes>
-        </main>
+    <AnalyticsTracker>
+      <Router>
+        <div className="min-h-screen bg-[#0a0a0a] text-white overflow-x-hidden">
+          <Navbar 
+            isScrolled={isScrolled} 
+            openMembers={() => setIsMembersModalOpen(true)} 
+          />
+          
+          <main>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/models" element={<Models />} />
+              <Route path="/models/:id" element={<ModelDetail />} />
+              <Route path="/fees" element={<Fees />} />
+              <Route path="/booking" element={<Booking />} />
+              <Route path="/casting" element={<Casting />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/travel" element={<Travel />} />
+              <Route path="/services/:type" element={<ServiceDetail />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:id" element={<BlogArticle />} />
+              <Route path="/district/:districtId" element={<DistrictPage />} />
+              
+              {/* SEO Redirects - Redirecciones 301 para URLs alternativas */}
+              <Route path="/inicio" element={<Navigate to="/" replace />} />
+              <Route path="/inicio/*" element={<Navigate to="/" replace />} />
+              <Route path="/valencia-casting" element={<Navigate to="/casting" replace />} />
+              
+              {/* Rutas adicionales podrían añadirse aquí siguiendo el mismo patrón */}
+            </Routes>
+          </main>
 
-        <Footer />
+          <Footer />
 
-        <MembersModal 
-          isOpen={isMembersModalOpen} 
-          onClose={() => setIsMembersModalOpen(false)} 
-        />
+          <MembersModal 
+            isOpen={isMembersModalOpen} 
+            onClose={() => setIsMembersModalOpen(false)} 
+          />
 
-        <Chatbot />
-        <FloatingContactPopup />
-        <ContentProtection />
-        <Analytics />
-      </div>
-    </Router>
+          <Chatbot />
+          <FloatingContactPopup />
+          <ContentProtection />
+          <Analytics />
+        </div>
+      </Router>
+    </AnalyticsTracker>
   );
 };
 
