@@ -864,11 +864,11 @@ const ModelDetail: React.FC = () => {
                     className="w-full h-full object-cover transition-all duration-[2s] group-hover:scale-105"
                     draggable={false}
                   />
-                  {/* Second image overlay on hover */}
-                  {(model.gallery || [])[1] && (
+                  {/* Third image overlay on hover */}
+                  {(model.gallery || [])[2] && (
                     <img 
-                      src={(model.gallery || [])[1]} 
-                      alt={`${model.name} - Segunda imagen`} 
+                      src={(model.gallery || [])[2]} 
+                      alt={`${model.name} - Tercera imagen`} 
                       className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"
                       draggable={false}
                     />
