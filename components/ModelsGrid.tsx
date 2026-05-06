@@ -11,12 +11,26 @@ const ModelCard: React.FC<{ model: any; index: number; isDoubleView?: boolean }>
 }) => {
   const [isHovered, setIsHovered] = useState(false);
 
+  // Extraer directorio del coverImageUrl
+  const getThumbnailPath = (coverImageUrl: string) => {
+    const pathParts = coverImageUrl.split('/');
+    // Si el path contiene 'gallery/', necesitamos el directorio anterior
+    if (pathParts.includes('gallery')) {
+      const galleryIndex = pathParts.indexOf('gallery');
+      const directory = pathParts[galleryIndex - 1]; // Directorio antes de 'gallery'
+      return `/chicas-thumbnails/${directory}/cover-thumbnail.jpg`;
+    } else {
+      const directory = pathParts[pathParts.length - 2]; // Obtener el directorio antes del archivo
+      return `/chicas-thumbnails/${directory}/cover-thumbnail.jpg`;
+    }
+  };
+
   const adaptedModel = {
     id: model.slug,
     name: model.name,
-    image: model.coverImageUrl,
-    hoverImage: model.images?.[1] || model.coverImageUrl,
-    location: model.city || 'Valencia',
+    image: getThumbnailPath(model.coverImageUrl),
+    hoverImage: getThumbnailPath(model.coverImageUrl),
+    location: model.nationality || 'Española',
     featured: model.featured,
   };
 

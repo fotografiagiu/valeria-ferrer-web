@@ -278,7 +278,7 @@ const GalleryModal: React.FC<GalleryModalProps> = ({
               )}
             </motion.div>
 
-            {/* Thumbnails */}
+            {/* Thumbnails - Lazy Loading */}
             {images.length > 1 && (
               <motion.div
                 variants={thumbnailVariants}
@@ -287,24 +287,34 @@ const GalleryModal: React.FC<GalleryModalProps> = ({
                 exit="exit"
                 className="mt-6 flex gap-2 overflow-x-auto py-2 px-4 max-w-[90vw] scrollbar-hide"
               >
-                {images.map((image, index) => (
-                  <button
-                    key={index}
-                    onClick={() => handleThumbnailClick(index)}
-                    className={`flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden transition-all duration-300 ${
-                      index === currentIndex 
-                        ? 'ring-2 ring-[#c2b2a3] scale-110' 
-                        : 'opacity-60 hover:opacity-80 hover:scale-105'
-                    }`}
-                  >
-                    <LazyImage
-                      src={image}
-                      alt={`${modelName} - Miniatura ${index + 1}`}
-                      className="w-full h-full object-cover"
-                      sizes="64px"
-                    />
-                  </button>
-                ))}
+                {images.map((image, index) => {
+                  // Solo cargar thumbnails visibles y adyacentes
+                  const isVisible = Math.abs(index - currentIndex) <= 2;
+                  return (
+                    <button
+                      key={index}
+                      onClick={() => handleThumbnailClick(index)}
+                      className={`flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden transition-all duration-300 ${
+                        index === currentIndex 
+                          ? 'ring-2 ring-[#c2b2a3] scale-110' 
+                          : 'opacity-60 hover:opacity-80 hover:scale-105'
+                      }`}
+                    >
+                      {isVisible ? (
+                        <LazyImage
+                          src={image}
+                          alt={`${modelName} - Miniatura ${index + 1}`}
+                          className="w-full h-full object-cover"
+                          sizes="64px"
+                          priority={index === currentIndex}
+                        />
+                      ) : (
+                        // Placeholder para thumbnails no visibles
+                        <div className="w-full h-full bg-[#111111] animate-pulse" />
+                      )}
+                    </button>
+                  );
+                })}
               </motion.div>
             )}
           </div>
