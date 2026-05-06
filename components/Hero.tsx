@@ -4,22 +4,22 @@ import { motion } from 'framer-motion';
 
 const Hero: React.FC = () => {
   return (
-    <section className="relative h-screen flex items-center justify-center overflow-hidden bg-black">
+    <section className="relative w-screen h-screen flex items-center justify-center overflow-hidden bg-black">
       {/* Background Media - YouTube Embed */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-black/40 z-10"></div>
         
         {/* YouTube Embed */}
-        <div className="absolute inset-0 w-full h-full">
+        <div className="absolute inset-0 w-screen h-screen">
           <iframe
             src="https://www.youtube.com/embed/lor3hN0e600?autoplay=1&mute=1&loop=1&playlist=lor3hN0e600&controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&rel=0"
-            className="w-full h-full"
+            className="w-screen h-screen"
             style={{
-              position: 'absolute',
+              position: 'fixed',
               top: 0,
               left: 0,
-              width: '100%',
-              height: '100%',
+              width: '100vw',
+              height: '100vh',
               objectFit: 'cover'
             }}
             frameBorder="0"
