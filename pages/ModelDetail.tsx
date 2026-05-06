@@ -869,11 +869,11 @@ const ModelDetail: React.FC = () => {
                     <img 
                       src={(model.gallery || [])[1]} 
                       alt={`${model.name} - Segunda imagen`} 
-                      className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                      className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"
                       draggable={false}
                     />
                   )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-20">
                     <div className="absolute bottom-4 left-4 right-4">
                       <p className="text-white text-xs font-light mb-1">Portada editorial</p>
                       <p className="text-white/70 text-[10px]">Click para ver en alta resolución</p>
