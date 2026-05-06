@@ -194,6 +194,16 @@
       "source": "/estefany-model-agency-valencia-vf/",
       "destination": "https://www.valeriaferrer.com/models/estefany",
       "permanent": true
+    },
+    {
+      "source": "/wp-sitemap.xml",
+      "destination": "/sitemap.xml",
+      "permanent": true
+    },
+    {
+      "source": "/sitemap_index.xml",
+      "destination": "/sitemap.xml",
+      "permanent": true
     }
   ],
   "rewrites": [
