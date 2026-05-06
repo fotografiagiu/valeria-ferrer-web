@@ -5,29 +5,23 @@ import { motion } from 'framer-motion';
 const Hero: React.FC = () => {
   return (
     <section className="relative h-screen flex items-center justify-center overflow-hidden bg-black">
-      {/* Background Media - Video */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-black/40 z-10"></div>
 
-        <video
-          src="/video/plaza-escort-valencia-centro-alojamiento.mp4"
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="metadata"
-          onLoadedData={(e) => {
-            e.currentTarget.play().catch(() => {});
+  {/* YouTube Background - Optimized */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-black/60 z-10"></div>
+        <iframe
+          src="https://www.youtube.com/embed/lor3hN0e600?autoplay=1&mute=1&loop=1&playlist=lor3hN0e600&controls=0&disablekb=1&fs=0&iv_load_policy=3&modestbranding=1&rel=0&playsinline=1"
+          title="Background Video"
+          frameBorder="0"
+          allow="autoplay"
+          allowFullScreen
+          className="absolute top-1/2 left-1/2 pointer-events-none w-[400vw] h-[400vh] md:w-[120vw] md:h-[120vh]"
+          style={{
+            transform: 'translate(-50%, -50%) scale(1.2)',
+            opacity: 0.8,
+            border: 'none',
           }}
-          className="w-full h-full object-cover transition-opacity duration-1000"
-          style={{ 
-            objectFit: 'cover',
-            opacity: 0.9
-          } as React.CSSProperties}
-        >
-          <source src="/video/plaza-escort-valencia-centro-alojamiento.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+        />
       </div>
 
       {/* Content */}
