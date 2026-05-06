@@ -26,10 +26,10 @@ const SEOHead: React.FC<SEOHeadProps> = ({ model }) => {
     if (!descriptionMeta) {
       const description = document.createElement('meta');
       description.name = 'description';
-      description.content = model.description || `${model.name}, modelo ${model.nationality || 'Española'} de ${model.age} años. Disponible para acompañamiento exclusivo en ${model.city || 'Valencia'}. Valeria Ferrer Agency.`;
+      description.setAttribute('content', model.description || `${model.name}, escorts Valencia de ${model.age} años. Compañera VIP exclusiva en Valencia. Cenas de negocios, eventos sociales y Girlfriend Experience. ${model.city || 'Valencia'} - Valeria Ferrer Agency.`);
       document.head.appendChild(description);
     } else {
-      descriptionMeta.content = model.description || `${model.name}, modelo ${model.nationality || 'Española'} de ${model.age} años. Disponible para acompañamiento exclusivo en ${model.city || 'Valencia'}. Valeria Ferrer Agency.`;
+      descriptionMeta.setAttribute('content', model.description || `${model.name}, escorts Valencia de ${model.age} años. Compañera VIP exclusiva en Valencia. Cenas de negocios, eventos sociales y Girlfriend Experience. ${model.city || 'Valencia'} - Valeria Ferrer Agency.`);
     }
 
     // Add structured data (JSON-LD) - Enhanced Person schema
@@ -97,7 +97,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({ model }) => {
     if (!ogTitle) {
       const title = document.createElement('meta');
       title.property = 'og:title';
-      title.content = `${model.name} - Modelo Exclusiva en ${model.city || 'Valencia'} | Valeria Ferrer`;
+      title.setAttribute('content', `${model.name} - Escorts Valencia ${model.age} años | Valeria Ferrer`);
       document.head.appendChild(title);
     } else {
       ogTitle.content = `${model.name} - Modelo Exclusiva en ${model.city || 'Valencia'} | Valeria Ferrer`;
@@ -107,7 +107,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({ model }) => {
     if (!ogDescription) {
       const description = document.createElement('meta');
       description.property = 'og:description';
-      description.content = model.description || `Conoce a ${model.name}, modelo ${model.nationality || 'Española'} de ${model.age} años. Experiencia única en ${model.city || 'Valencia'}.`;
+      description.setAttribute('content', model.description || `Conoce a ${model.name}, escorts Valencia de ${model.age} años. Compañera VIP exclusiva en Valencia. Cenas de negocios, eventos sociales y Girlfriend Experience. ${model.city || 'Valencia'} - Valeria Ferrer Agency.`);
       document.head.appendChild(description);
     } else {
       ogDescription.content = model.description || `Conoce a ${model.name}, modelo ${model.nationality || 'Española'} de ${model.age} años. Experiencia única en ${model.city || 'Valencia'}.`;
@@ -128,7 +128,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({ model }) => {
     if (!twitterTitle) {
       const title = document.createElement('meta');
       title.name = 'twitter:title';
-      title.content = `${model.name} - Modelo ${model.nationality || 'Española'} | Valeria Ferrer`;
+      title.setAttribute('content', `${model.name} - Escorts Valencia ${model.age} años | Valeria Ferrer`);
       document.head.appendChild(title);
     } else {
       twitterTitle.content = `${model.name} - Modelo ${model.nationality || 'Española'} | Valeria Ferrer`;
@@ -138,7 +138,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({ model }) => {
     if (!twitterDescription) {
       const description = document.createElement('meta');
       description.name = 'twitter:description';
-      description.content = model.description || `Modelo exclusiva de ${model.age} años en ${model.city || 'Valencia'}`;
+      description.setAttribute('content', model.description || `Escorts Valencia ${model.name} de ${model.age} años. Compañera VIP exclusiva en Valencia. Cenas de negocios, eventos sociales y Girlfriend Experience. ${model.city || 'Valencia'} - Valeria Ferrer Agency.`);
       document.head.appendChild(description);
     } else {
       twitterDescription.content = model.description || `Modelo exclusiva de ${model.age} años en ${model.city || 'Valencia'}`;
