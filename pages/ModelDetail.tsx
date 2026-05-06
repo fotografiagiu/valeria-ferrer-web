@@ -857,25 +857,27 @@ const ModelDetail: React.FC = () => {
                 className="col-span-2 relative overflow-hidden bg-[#111111] group cursor-pointer border border-white/5 rounded-2xl aspect-[3/4]"
                 onClick={() => openGallery(1)}
               >
-                <img 
-                  src={(model.gallery || [])[0]} 
-                  alt={`${model.name} - Portada`} 
-                  className="w-full h-full object-cover transition-all duration-[2s] group-hover:scale-105"
-                  draggable={false}
-                />
-                {/* Second image overlay on hover */}
-                {(model.gallery || [])[1] && (
+                <div className="relative w-full h-full">
                   <img 
-                    src={(model.gallery || [])[1]} 
-                    alt={`${model.name} - Segunda imagen`} 
-                    className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                    src={(model.gallery || [])[0]} 
+                    alt={`${model.name} - Portada`} 
+                    className="w-full h-full object-cover transition-all duration-[2s] group-hover:scale-105"
                     draggable={false}
                   />
-                )}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700">
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <p className="text-white text-xs font-light mb-1">Portada editorial</p>
-                    <p className="text-white/70 text-[10px]">Click para ver en alta resolución</p>
+                  {/* Second image overlay on hover */}
+                  {(model.gallery || [])[1] && (
+                    <img 
+                      src={(model.gallery || [])[1]} 
+                      alt={`${model.name} - Segunda imagen`} 
+                      className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                      draggable={false}
+                    />
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+                    <div className="absolute bottom-4 left-4 right-4">
+                      <p className="text-white text-xs font-light mb-1">Portada editorial</p>
+                      <p className="text-white/70 text-[10px]">Click para ver en alta resolución</p>
+                    </div>
                   </div>
                 </div>
               </div>
