@@ -6,8 +6,10 @@ interface AnalyticsTrackerProps {
 
 const sendTelegramNotification = async (data: any) => {
   try {
-    // Send to a notification service (you can replace with your preferred service)
-    const response = await fetch('https://hooks.slack.com/services/YOUR/SLACK/WEBHOOK', {
+    // Send to a notification service (use environment variable for security)
+    const webhookUrl = process.env.REACT_APP_SLACK_WEBHOOK_URL || 'https://hooks.slack.com/services/YOUR/SLACK/WEBHOOK';
+    
+    const response = await fetch(webhookUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
