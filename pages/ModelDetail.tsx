@@ -843,7 +843,7 @@ const ModelDetail: React.FC = () => {
         <div className="py-8"></div>
 
         {/* Mobile Editorial Gallery */}
-        <div className="lg:hidden space-y-8 mt-12">
+        <div id="gallery" className="lg:hidden space-y-8 mt-12">
           <div className="text-center">
             <h3 className="text-2xl serif text-white uppercase tracking-widest mb-2">Galería Editorial</h3>
             <p className="text-sm text-gray-400 italic">Explora su mundo visual</p>
@@ -1046,7 +1046,7 @@ const ModelDetail: React.FC = () => {
             {getRelatedModels().slice(0, 3).map((relatedModel, idx) => (
               <Link
                 key={relatedModel.id}
-                to={`/models/${relatedModel.id}`}
+                to={`/models/${relatedModel.id}#gallery`}
                 className="group block bg-[#111111] border border-white/5 rounded-2xl overflow-hidden hover:border-[#c2b2a3]/30 transition-all duration-300"
               >
                 <div className="flex">
@@ -1738,7 +1738,7 @@ const ModelDetail: React.FC = () => {
             )}
             
             {/* Editorial Gallery - Desktop */}
-            <div className="space-y-8 mt-12">
+            <div id="gallery" className="space-y-8 mt-12">
               <div className="flex items-center justify-between">
                 <h3 className="text-2xl serif text-white uppercase tracking-widest">Galería Editorial</h3>
                 <p className="text-sm text-gray-400 italic">Explora su mundo visual</p>
@@ -1832,7 +1832,7 @@ const ModelDetail: React.FC = () => {
                 {getRelatedModels().map((relatedModel, idx) => (
                   <Link
                     key={relatedModel.id}
-                    to={`/models/${relatedModel.id}`}
+                    to={`/models/${relatedModel.id}#gallery`}
                     className="group block bg-[#111111] border border-white/5 rounded-2xl overflow-hidden hover:border-[#c2b2a3]/30 transition-all duration-300"
                   >
                     <div className="aspect-[3/4] overflow-hidden">
