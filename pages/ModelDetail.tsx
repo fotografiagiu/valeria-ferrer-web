@@ -37,7 +37,7 @@ const ModelDetail: React.FC = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -1046,7 +1046,7 @@ const ModelDetail: React.FC = () => {
             {getRelatedModels().slice(0, 3).map((relatedModel, idx) => (
               <Link
                 key={relatedModel.id}
-                to={`/models/${relatedModel.id}#gallery`}
+                to={`/models/${relatedModel.id}`}
                 className="group block bg-[#111111] border border-white/5 rounded-2xl overflow-hidden hover:border-[#c2b2a3]/30 transition-all duration-300"
               >
                 <div className="flex">
@@ -1832,7 +1832,7 @@ const ModelDetail: React.FC = () => {
                 {getRelatedModels().map((relatedModel, idx) => (
                   <Link
                     key={relatedModel.id}
-                    to={`/models/${relatedModel.id}#gallery`}
+                    to={`/models/${relatedModel.id}`}
                     className="group block bg-[#111111] border border-white/5 rounded-2xl overflow-hidden hover:border-[#c2b2a3]/30 transition-all duration-300"
                   >
                     <div className="aspect-[3/4] overflow-hidden">
