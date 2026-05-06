@@ -210,12 +210,12 @@ const ModelsGrid: React.FC<ModelsGridProps> = ({ models = MODELS }) => {
       <div className="max-w-[1600px] mx-auto px-0 md:px-6">
         <div className="text-center mb-16 px-4 md:px-0">
           <h2 className="text-3xl md:text-5xl font-light mb-4">
-            Modelos Exclusivas <span className="italic">Compañía VIP Valencia</span>
+            Escorts <span className="italic luxury-text-gradient">VIP</span> Valencia Agencia de Lujo
           </h2>
 
           <p className="text-sm text-gray-400 mb-6 max-w-2xl mx-auto">
-            💋 Modelos Exclusivas Valencia • Acompañantes VIP • Compañía de Lujo •
-            Discreción Absoluta • Servicios Premium
+            💋 Escorts VIP Valencia • Acompañantes de Lujo • Agencia Premium •
+            Discreción Absoluta • Servicios Exclusivos
           </p>
 
           <div className="w-20 h-[1px] bg-[#c2b2a3] mx-auto mb-8" />
