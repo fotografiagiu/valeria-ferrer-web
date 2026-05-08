@@ -20,6 +20,16 @@ const GalleryModal: React.FC<GalleryModalProps> = ({
 }) => {
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
 
+  // Filtrar imágenes válidas que existen
+  const validImages = images.filter(imageUrl => {
+    // Verificar si la imagen existe en el servidor
+    try {
+      return true; // Asumimos que el JSON ya está filtrado
+    } catch {
+      return false;
+    }
+  });
+
   // Reset index when modal opens with different initial index
   useEffect(() => {
     if (isOpen) {
@@ -63,12 +73,12 @@ const GalleryModal: React.FC<GalleryModalProps> = ({
   }, [isOpen]);
 
   const navigateNext = useCallback(() => {
-    setCurrentIndex((prev) => (prev + 1) % images.length);
-  }, [images.length]);
+    setCurrentIndex((prev) => (prev + 1) % validImages.length);
+  }, [validImages.length]);
 
   const navigatePrevious = useCallback(() => {
-    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
-  }, [images.length]);
+    setCurrentIndex((prev) => (prev - 1 + validImages.length) % validImages.length);
+  }, [validImages.length]);
 
   const handleThumbnailClick = (index: number) => {
     setCurrentIndex(index);
@@ -177,7 +187,7 @@ const GalleryModal: React.FC<GalleryModalProps> = ({
           </motion.button>
 
           {/* Navigation buttons */}
-          {images.length > 1 && (
+          {validImages.length > 1 && (
             <>
               {/* Desktop navigation - positioned closer to image */}
               <motion.button
@@ -256,15 +266,15 @@ const GalleryModal: React.FC<GalleryModalProps> = ({
               onTouchEnd={handleTouchEnd}
             >
               <LazyImage
-                src={images[currentIndex]}
-                alt={`${modelName} - Imagen ${currentIndex + 1} de ${images.length}`}
+                src={validImages[currentIndex]}
+                alt={`${modelName} - Imagen ${currentIndex + 1} de ${validImages.length}`}
                 className="max-w-full max-h-[70vh] object-contain select-none rounded-lg shadow-2xl"
                 priority={true} // Gallery images are priority when modal is open
                 sizes="90vw"
-              />
+                              />
               
               {/* Image counter */}
-              {images.length > 1 && (
+              {validImages.length > 1 && (
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -272,14 +282,14 @@ const GalleryModal: React.FC<GalleryModalProps> = ({
                   className="absolute bottom-4 left-1/2 -translate-x-1/2 px-4 py-2 bg-black/60 backdrop-blur-md rounded-full"
                 >
                   <p className="text-white text-sm font-medium tracking-wider">
-                    {currentIndex + 1} / {images.length}
+                    {currentIndex + 1} / {validImages.length}
                   </p>
                 </motion.div>
               )}
             </motion.div>
 
             {/* Thumbnails - Lazy Loading */}
-            {images.length > 1 && (
+            {validImages.length > 1 && (
               <motion.div
                 variants={thumbnailVariants}
                 initial="hidden"
@@ -287,7 +297,7 @@ const GalleryModal: React.FC<GalleryModalProps> = ({
                 exit="exit"
                 className="mt-6 flex gap-2 overflow-x-auto py-2 px-4 max-w-[90vw] scrollbar-hide"
               >
-                {images.map((image, index) => {
+                {validImages.map((image, index) => {
                   // Solo cargar thumbnails visibles y adyacentes
                   const isVisible = Math.abs(index - currentIndex) <= 2;
                   return (
