@@ -235,49 +235,49 @@ const ModelsGrid: React.FC<ModelsGridProps> = ({ models = MODELS }) => {
           <div className="w-20 h-[1px] bg-[#c2b2a3] mx-auto mb-8" />
 
           <div className="flex flex-col justify-center items-center space-y-4 mb-8 md:hidden">
-            <div className="flex items-center space-x-4">
-              <span className="text-[10px] text-[#c2b2a3] uppercase tracking-[0.3em]">
-                Vista:
+            <div className="flex flex-col items-center space-y-3">
+              <span className="text-[12px] text-[#c2b2a3] uppercase tracking-[0.3em] font-bold">
+                VISTA DE FICHAS
               </span>
 
               <div className="flex bg-[#1a1a1a] border border-[#c2b2a3]/20 rounded-full p-1">
                 <button
                   type="button"
                   onClick={() => handleViewChange('normal')}
-                  className={`flex items-center space-x-2 px-4 py-2 rounded-full transition-all duration-300 ${
+                  className={`flex items-center space-x-2 px-5 py-3 rounded-full transition-all duration-300 ${
                     viewMode === 'normal'
-                      ? 'bg-[#c2b2a3] text-black'
-                      : 'text-[#c2b2a3] hover:text-white'
+                      ? 'bg-[#c2b2a3] text-black shadow-md'
+                      : 'text-[#c2b2a3] hover:text-white hover:bg-[#c2b2a3]/10'
                   }`}
                 >
-                  <Grid3X3 size={16} />
-                  <span className="text-[10px] font-medium tracking-[0.2em] uppercase">
-                    Normal
+                  <Grid3X3 size={18} />
+                  <span className="text-[12px] font-bold tracking-[0.2em] uppercase">
+                    Fichas Grandes
                   </span>
                 </button>
 
                 <button
                   type="button"
                   onClick={() => handleViewChange('double')}
-                  className={`flex items-center space-x-2 px-4 py-2 rounded-full transition-all duration-300 ${
+                  className={`flex items-center space-x-2 px-5 py-3 rounded-full transition-all duration-300 ${
                     viewMode === 'double'
-                      ? 'bg-[#c2b2a3] text-black'
-                      : 'text-[#c2b2a3] hover:text-white'
+                      ? 'bg-[#c2b2a3] text-black shadow-md'
+                      : 'text-[#c2b2a3] hover:text-white hover:bg-[#c2b2a3]/10'
                   }`}
                 >
-                  <LayoutGrid size={16} />
-                  <span className="text-[10px] font-medium tracking-[0.2em] uppercase">
-                    2x2
+                  <LayoutGrid size={18} />
+                  <span className="text-[12px] font-bold tracking-[0.2em] uppercase">
+                    Vista 2x2
                   </span>
                 </button>
               </div>
             </div>
 
             <div className="text-center">
-              <p className="text-[10px] text-gray-500 font-light max-w-xs">
+              <p className="text-[11px] text-gray-500 font-medium max-w-xs leading-relaxed">
                 {viewMode === 'normal'
-                  ? 'Visualiza las fichas en grande - Navegación vertical en móvil'
-                  : 'Visualiza las fichas en formato 2x2 - Más modelos visibles'}
+                  ? '🔍 Visualiza las fichas en grande con todos los detalles'
+                  : '📱 Visualiza más modelos en formato 2x2'}
               </p>
             </div>
           </div>

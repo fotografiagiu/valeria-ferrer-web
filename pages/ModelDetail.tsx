@@ -310,6 +310,22 @@ const ModelDetail: React.FC = () => {
               </div>
               <div className="bg-[#111111] border border-white/5 p-3 flex-1">
                 <ul className="text-gray-400 font-light leading-[1.6] space-y-2 text-sm">
+                  {model.name === "Kim" && (
+                    <>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Frescura juvenil con energía tropical vibrante</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Figura esculpida con movimientos naturales</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Sonrisa contagiosa que ilumina cualquier ambiente</span>
+                      </li>
+                    </>
+                  )}
                   {model.name === "Kimberly" && (
                     <>
                       <li className="flex items-start">
@@ -578,6 +594,22 @@ const ModelDetail: React.FC = () => {
               </div>
               <div className="bg-[#111111] border border-white/5 p-3 flex-1">
                 <ul className="text-gray-400 font-light leading-[1.6] space-y-2 text-sm">
+                  {model.name === "Kim" && (
+                    <>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Aventuras inolvidables descubrimientos emocionantes</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Conexiones auténticas espontáneas memorables</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Vitalidad juvenil con complicidad natural</span>
+                      </li>
+                    </>
+                  )}
                   {model.name === "Kimberly" && (
                     <>
                       <li className="flex items-start">
@@ -1218,6 +1250,22 @@ const ModelDetail: React.FC = () => {
                   </div>
                   <div className="bg-[#111111] border border-white/5 p-4 flex-1">
                     <ul className="text-gray-400 font-light leading-[1.7] space-y-2">
+                      {model.name === "Kim" && (
+                        <>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Frescura juvenil con energía tropical vibrante</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Figura esculpida con movimientos naturales</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Sonrisa contagiosa que ilumina cualquier ambiente</span>
+                          </li>
+                        </>
+                      )}
                       {model.name === "Kimberly" && (
                         <>
                           <li className="flex items-start">
@@ -1486,6 +1534,22 @@ const ModelDetail: React.FC = () => {
                   </div>
                   <div className="bg-[#111111] border border-white/5 p-4 flex-1">
                     <ul className="text-gray-400 font-light leading-[1.7] space-y-2">
+                      {model.name === "Kim" && (
+                        <>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Aventuras inolvidables descubrimientos emocionantes</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Conexiones auténticas espontáneas memorables</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Vitalidad juvenil con complicidad natural</span>
+                          </li>
+                        </>
+                      )}
                       {model.name === "Kimberly" && (
                         <>
                           <li className="flex items-start">
