@@ -91,6 +91,39 @@
     </image:image>
   </url>
   
+  <!-- Kim - Nueva Modelo -->
+  <url>
+    <loc>https://www.valeriaferrer.com/models/kim</loc>
+    <lastmod>2026-05-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://www.valeriaferrer.com/chicas/kim-model-agency-valencia-vf/portada.jpg</image:loc>
+      <image:title>Kim - Modelo Colombiana Valencia</image:title>
+      <image:caption>Kim, modelo colombiana de 19 años para compañía exclusiva en Valencia</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.valeriaferrer.com/chicas/kim-model-agency-valencia-vf/1.jpg</image:loc>
+      <image:title>Kim Galería 1 - Joven Colombiana</image:title>
+      <image:caption>Foto profesional de Kim, modelo colombiana para eventos en Valencia</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.valeriaferrer.com/chicas/kim-model-agency-valencia-vf/2.jpg</image:loc>
+      <image:title>Kim Galería 2 - Modelo Exclusiva</image:title>
+      <image:caption>Kim modelo colombiana elegante, perfecta para cenas en Valencia</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.valeriaferrer.com/chicas/kim-model-agency-valencia-vf/3.jpg</image:loc>
+      <image:title>Kim Galería 3 - Compañera Joven</image:title>
+      <image:caption>Modelo Kim para acompañamiento discreto en Valencia</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.valeriaferrer.com/chicas/kim-model-agency-valencia-vf/4.jpg</image:loc>
+      <image:title>Kim Galería 4 - Modelo Tropical</image:title>
+      <image:caption>Kim modelo colombiana vibrante para experiencias únicas</image:caption>
+    </image:image>
+  </url>
+  
   <!-- Modelos Adicionales - Añadidos para indexación completa -->
   <url>
     <loc>https://www.valeriaferrer.com/models/elena</loc>
