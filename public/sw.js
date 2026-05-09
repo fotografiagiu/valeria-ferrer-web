@@ -1,7 +1,6 @@
-const CACHE_NAME = 'valeria-ferrer-v2';
+const CACHE_NAME = 'valeria-ferrer-v3';
 const urlsToCache = [
   '/',
-  '/models',
   '/about',
   '/contact',
   '/booking',
@@ -22,14 +21,29 @@ self.addEventListener('install', event => {
 
 // Fetch event:
 // - Navigation requests: network-first to avoid stale HTML/chunk mismatches
-// - Other GET requests: stale-while-revalidate
+// - Model routes: always network-first to ensure latest content
+// - Static assets: cache-first with network fallback
+// - Dynamic routes: never cache to ensure fresh content
 self.addEventListener('fetch', event => {
   if (event.request.method !== 'GET') {
     return;
   }
 
   const isNavigationRequest = event.request.mode === 'navigate';
+  const isModelRoute = event.request.url.includes('/models/') || 
+                      event.request.url.includes('/chicas/') || 
+                      event.request.url.includes('/chicas-thumbnails/');
+  const isStaticAsset = event.request.url.includes('/assets/') || 
+                       event.request.url.includes('.css') || 
+                       event.request.url.includes('.js');
 
+  // Always fetch model routes from network
+  if (isModelRoute) {
+    event.respondWith(fetch(event.request));
+    return;
+  }
+
+  // Navigation requests: network-first
   if (isNavigationRequest) {
     event.respondWith(
       fetch(event.request)
@@ -45,6 +59,28 @@ self.addEventListener('fetch', event => {
     return;
   }
 
+  // Static assets: cache-first with network fallback for fresh content
+  if (isStaticAsset) {
+    event.respondWith(
+      caches.match(event.request).then(cachedResponse => {
+        const fetchPromise = fetch(event.request).then(networkResponse => {
+          if (!networkResponse || networkResponse.status !== 200) {
+            return networkResponse;
+          }
+          const responseToCache = networkResponse.clone();
+          caches.open(CACHE_NAME).then(cache => {
+            cache.put(event.request, responseToCache);
+          });
+          return networkResponse;
+        });
+
+        return cachedResponse || fetchPromise;
+      })
+    );
+    return;
+  }
+
+  // Other requests: cache-first with network fallback
   event.respondWith(
     caches.match(event.request).then(cachedResponse => {
       const fetchPromise = fetch(event.request).then(networkResponse => {
