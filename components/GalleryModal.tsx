@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import LazyImage from './LazyImage';
+import { getThumbnailPath, getGalleryThumbnailPath } from '../utils/imageUtils';
 
 interface GalleryModalProps {
   images: string[];
@@ -317,6 +318,7 @@ const GalleryModal: React.FC<GalleryModalProps> = ({
                           className="w-full h-full object-cover"
                           sizes="64px"
                           priority={index === currentIndex}
+                          thumbnailSrc={getGalleryThumbnailPath(image, index)}
                         />
                       ) : (
                         // Placeholder para thumbnails no visibles

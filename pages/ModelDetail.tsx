@@ -7,6 +7,7 @@ import LazyImage from '../components/LazyImage';
 import SEOHead from '../components/SEOHead';
 import Breadcrumbs from '../components/Breadcrumbs';
 import AnalyticsEvents from '../components/AnalyticsEvents';
+import { getThumbnailPath, getMobileImageSrc, getGalleryThumbnailPath, getResponsiveSizes, getPriorityLoading } from '../utils/imageUtils';
 
 const ModelDetail: React.FC = () => {
   const { id } = useParams();
@@ -206,9 +207,12 @@ const ModelDetail: React.FC = () => {
               }}
             >
               <LazyImage
-                src={model.image} 
+                src={getMobileImageSrc(model.image, false)}
                 alt={model.name} 
                 className="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-105"
+                sizes={getResponsiveSizes(true)}
+                priority={true}
+                thumbnailSrc={getThumbnailPath(model.image)}
               />
             </div>
             {/* Badge for exclusivity */}
@@ -858,19 +862,23 @@ const ModelDetail: React.FC = () => {
                 onClick={() => openGallery(1)}
               >
                 <div className="relative w-full h-full">
-                  <img 
+                  <LazyImage
                     src={(model.gallery || [])[0]} 
                     alt={`${model.name} - Portada`} 
                     className="w-full h-full object-cover transition-all duration-[2s] group-hover:scale-105"
-                    draggable={false}
+                    priority={true}
+                    sizes="100vw"
+                    thumbnailSrc={getGalleryThumbnailPath((model.gallery || [])[0], 0)}
                   />
                   {/* Third image overlay on hover */}
                   {(model.gallery || [])[2] && (
-                    <img 
+                    <LazyImage
                       src={(model.gallery || [])[2]} 
                       alt={`${model.name} - Tercera imagen`} 
                       className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"
-                      draggable={false}
+                      priority={false}
+                      sizes="100vw"
+                      thumbnailSrc={getGalleryThumbnailPath((model.gallery || [])[2], 2)}
                     />
                   )}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-20">
@@ -890,11 +898,13 @@ const ModelDetail: React.FC = () => {
                 className="relative overflow-hidden bg-[#111111] group cursor-pointer border border-white/5 rounded-2xl aspect-[3/4]"
                 onClick={() => openGallery(idx + 2)}
               >
-                <img 
+                <LazyImage
                   src={img} 
                   alt={`${model.name} - Galería ${idx + 2}`} 
                   className="w-full h-full object-cover transition-all duration-[1.5s] group-hover:scale-110"
-                  draggable={false}
+                  priority={idx < 2} // Solo las primeras 2 imágenes adicionales con prioridad
+                  sizes="50vw"
+                  thumbnailSrc={getGalleryThumbnailPath(img, idx + 2)}
                 />
                 <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
                   <div className="text-white text-[10px] font-light">Ver imagen</div>
@@ -1763,11 +1773,13 @@ const ModelDetail: React.FC = () => {
                     className="col-span-12 lg:col-span-8 row-span-2 relative overflow-hidden bg-[#111111] group cursor-pointer border border-white/5 rounded-2xl"
                     onClick={() => openGallery(1)}
                   >
-                    <img 
+                    <LazyImage
                       src={(model.gallery || [])[0]} 
                       alt={`${model.name} - Portada`} 
                       className="w-full h-full object-cover transition-all duration-[2s] group-hover:scale-105"
-                      draggable={false}
+                      priority={true}
+                      sizes={getResponsiveSizes(false)}
+                      thumbnailSrc={getGalleryThumbnailPath((model.gallery || [])[0], 0)}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700">
                       <div className="absolute bottom-6 left-6 right-6">
@@ -1786,12 +1798,14 @@ const ModelDetail: React.FC = () => {
                       className="relative overflow-hidden bg-[#111111] group cursor-pointer border border-white/5 rounded-2xl aspect-[4/5] lg:aspect-auto"
                       onClick={() => openGallery(idx + 2)}
                     >
-                      <img 
+                      <LazyImage
                         src={img} 
                         alt={`${model.name} - Galería ${idx + 2}`} 
                         className="w-full h-full object-cover transition-all duration-[1.5s] group-hover:scale-110"
-                        draggable={false}
-                      />
+                        priority={idx < 1}
+                        sizes={getResponsiveSizes(false)}
+                        thumbnailSrc={getGalleryThumbnailPath(img, idx + 2)}
+                    />
                       <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
                         <div className="text-white text-xs font-light">Ver imagen</div>
                       </div>
@@ -1808,11 +1822,13 @@ const ModelDetail: React.FC = () => {
                         className="relative overflow-hidden bg-[#111111] group cursor-pointer border border-white/5 rounded-xl flex-shrink-0 w-24 h-32 lg:w-32 lg:h-40"
                         onClick={() => openGallery(idx + 4)}
                       >
-                        <img 
+                        <LazyImage
                           src={img} 
                           alt={`${model.name} - Galería ${idx + 4}`} 
                           className="w-full h-full object-cover transition-all duration-[1s] group-hover:scale-110"
-                          draggable={false}
+                          priority={false}
+                          sizes="(max-width: 768px) 100px, (max-width: 1200px) 128px, 128px"
+                          thumbnailSrc={getGalleryThumbnailPath(img, idx + 4)}
                         />
                         <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                           <Sparkles size={14} className="text-white/80" />

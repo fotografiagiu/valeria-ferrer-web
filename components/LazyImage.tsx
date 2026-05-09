@@ -9,6 +9,7 @@ interface LazyImageProps {
   sizes?: string;
   title?: string;
   loading?: 'lazy' | 'eager';
+  thumbnailSrc?: string;
 }
 
 const LazyImage: React.FC<LazyImageProps> = ({ 
@@ -19,13 +20,23 @@ const LazyImage: React.FC<LazyImageProps> = ({
   priority = false,
   sizes = '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw',
   title,
-  loading = priority ? 'eager' : 'lazy'
+  loading = priority ? 'eager' : 'lazy',
+  thumbnailSrc
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isInView, setIsInView] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const imgRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
+    // Detect mobile device
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
     // Priority images load immediately
     if (priority) {
       setIsInView(true);
@@ -49,7 +60,10 @@ const LazyImage: React.FC<LazyImageProps> = ({
       observer.observe(imgRef.current);
     }
 
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('resize', checkMobile);
+    };
   }, [priority]);
 
   const handleLoad = () => {
@@ -62,6 +76,35 @@ const LazyImage: React.FC<LazyImageProps> = ({
       return originalSrc.replace(/\.(jpg|jpeg|png)$/i, '.webp');
     }
     return originalSrc;
+  };
+
+  // Generate responsive srcset for different screen sizes
+  const generateSrcSet = (originalSrc: string) => {
+    if (!originalSrc || originalSrc.includes('thumbnail')) {
+      return '';
+    }
+
+    // For thumbnails, use smaller sizes
+    if (originalSrc.includes('thumbnail')) {
+      return `${originalSrc} 200w`;
+    }
+
+    const extensions = ['.jpg', '.jpeg', '.png'];
+    const hasValidExtension = extensions.some(ext => originalSrc.includes(ext));
+    
+    if (!hasValidExtension) {
+      return '';
+    }
+
+    // Generate different sizes for responsive images
+    const basePath = originalSrc.replace(/\.(jpg|jpeg|png)$/i, '');
+    
+    return `
+      ${basePath}-400w.jpg 400w,
+      ${basePath}-800w.jpg 800w,
+      ${basePath}-1200w.jpg 1200w,
+      ${originalSrc} 1600w
+    `.trim();
   };
 
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
