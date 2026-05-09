@@ -1,110 +1,109 @@
-const CACHE_NAME = 'valeria-ferrer-v3';
-const urlsToCache = [
-  '/',
-  '/about',
-  '/contact',
-  '/booking',
-  '/fees',
+// Service Worker minimal - solo para assets estáticos con hash
+// No cachea HTML ni rutas dinámicas para evitar contenido antiguo
+
+const CACHE_NAME = 'valeria-ferrer-static-v4';
+const STATIC_ASSETS = [
+  // Solo assets con hash que no cambian entre deploys
+  '/assets/',
+  '/fonts/',
+  '/icons/',
+  '/favicon.ico',
   '/manifest.json'
 ];
 
-// Install event - cache app shell and activate immediately
+// Install event - solo cachea assets estáticos seguros
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
-        return cache.addAll(urlsToCache);
+        // No cacheamos páginas HTML ni rutas dinámicas
+        return cache.addAll(STATIC_ASSETS.filter(url => !url.includes('/')));
       })
   );
   self.skipWaiting();
 });
 
-// Fetch event:
-// - Navigation requests: network-first to avoid stale HTML/chunk mismatches
-// - Model routes: always network-first to ensure latest content
-// - Static assets: cache-first with network fallback
-// - Dynamic routes: never cache to ensure fresh content
+// Fetch event - estrategia específica por tipo de contenido
 self.addEventListener('fetch', event => {
   if (event.request.method !== 'GET') {
     return;
   }
 
-  const isNavigationRequest = event.request.mode === 'navigate';
-  const isModelRoute = event.request.url.includes('/models/') || 
-                      event.request.url.includes('/chicas/') || 
-                      event.request.url.includes('/chicas-thumbnails/');
-  const isStaticAsset = event.request.url.includes('/assets/') || 
-                       event.request.url.includes('.css') || 
-                       event.request.url.includes('.js');
+  const url = new URL(event.request.url);
+  const pathname = url.pathname;
 
-  // Always fetch model routes from network
-  if (isModelRoute) {
+  // NUNCA cachear estas rutas - siempre desde red
+  const neverCacheRoutes = [
+    '/',
+    '/models',
+    '/models/',
+    '/chicas/',
+    '/chicas-thumbnails/',
+    '/about',
+    '/contact',
+    '/booking',
+    '/fees'
+  ];
+
+  const isNeverCacheRoute = neverCacheRoutes.some(route => 
+    pathname === route || pathname.startsWith(route)
+  );
+
+  if (isNeverCacheRoute) {
+    // Siempre desde red para contenido fresco
     event.respondWith(fetch(event.request));
     return;
   }
 
-  // Navigation requests: network-first
-  if (isNavigationRequest) {
-    event.respondWith(
-      fetch(event.request)
-        .then(networkResponse => {
-          const responseToCache = networkResponse.clone();
-          caches.open(CACHE_NAME).then(cache => {
-            cache.put(event.request, responseToCache);
-          });
-          return networkResponse;
-        })
-        .catch(() => caches.match(event.request).then(cached => cached || caches.match('/')))
-    );
-    return;
-  }
+  // Solo cachear assets estáticos con hash (seguros)
+  const isStaticAsset = pathname.includes('/assets/') || 
+                       pathname.includes('/fonts/') ||
+                       pathname.includes('/icons/') ||
+                       pathname.endsWith('.ico') ||
+                       pathname.endsWith('.json');
 
-  // Static assets: cache-first with network fallback for fresh content
   if (isStaticAsset) {
     event.respondWith(
       caches.match(event.request).then(cachedResponse => {
-        const fetchPromise = fetch(event.request).then(networkResponse => {
+        // Cache-first para assets estáticos
+        if (cachedResponse) {
+          return cachedResponse;
+        }
+        
+        // Si no está en cache, fetch y cache
+        return fetch(event.request).then(networkResponse => {
           if (!networkResponse || networkResponse.status !== 200) {
             return networkResponse;
           }
+          
           const responseToCache = networkResponse.clone();
           caches.open(CACHE_NAME).then(cache => {
             cache.put(event.request, responseToCache);
           });
+          
           return networkResponse;
         });
-
-        return cachedResponse || fetchPromise;
       })
     );
     return;
   }
 
-  // Other requests: cache-first with network fallback
+  // Para todo lo demás (imágenes dinámicas, etc): network-first
   event.respondWith(
-    caches.match(event.request).then(cachedResponse => {
-      const fetchPromise = fetch(event.request).then(networkResponse => {
-        if (!networkResponse || networkResponse.status !== 200) {
-          return networkResponse;
-        }
-        const responseToCache = networkResponse.clone();
-        caches.open(CACHE_NAME).then(cache => {
-          cache.put(event.request, responseToCache);
-        });
-        return networkResponse;
-      });
-
-      return cachedResponse || fetchPromise;
+    fetch(event.request).catch(() => {
+      // Solo fallback a cache si falla la red
+      return caches.match(event.request);
     })
   );
 });
 
-// Activate event - clean up old caches
+// Activate event - limpiar caches antiguas
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys().then(cacheNames => {
       return Promise.all(
         cacheNames.map(cacheName => {
+          // Eliminar todas las caches excepto la actual
           if (cacheName !== CACHE_NAME) {
             return caches.delete(cacheName);
           }
