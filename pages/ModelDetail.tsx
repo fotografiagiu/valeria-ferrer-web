@@ -358,6 +358,22 @@ const ModelDetail: React.FC = () => {
                       </li>
                     </>
                   )}
+                  {model.id === "maria-escort-valencia" && (
+                    <>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Picardía elegante con personalidad propia</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Naturalidad cercana y trato divertido</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Chispa imprevisible que deja recuerdo</span>
+                      </li>
+                    </>
+                  )}
                   {model.name === "Silvia" && (
                     <>
                       <li className="flex items-start">
@@ -534,7 +550,7 @@ const ModelDetail: React.FC = () => {
                       </li>
                     </>
                   )}
-                  {model.name === "Maria" && (
+                  {model.name === "Maria" && model.id !== "maria-escort-valencia" && (
                     <>
                       <li className="flex items-start">
                         <span className="text-[#c2b2a3] mr-2">•</span>
@@ -623,6 +639,22 @@ const ModelDetail: React.FC = () => {
                       <li className="flex items-start">
                         <span className="text-[#c2b2a3] mr-2">•</span>
                         <span>Experiencias vibrantes con frescura natural</span>
+                      </li>
+                    </>
+                  )}
+                  {model.id === "maria-escort-valencia" && (
+                    <>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Conexiones reales con química natural</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Momentos de libertad y complicidad</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>Encuentros diferentes, frescos y memorables</span>
                       </li>
                     </>
                   )}
@@ -802,7 +834,7 @@ const ModelDetail: React.FC = () => {
                       </li>
                     </>
                   )}
-                  {model.name === "Maria" && (
+                  {model.name === "Maria" && model.id !== "maria-escort-valencia" && (
                     <>
                       <li className="flex items-start">
                         <span className="text-[#c2b2a3] mr-2">•</span>
@@ -1266,6 +1298,22 @@ const ModelDetail: React.FC = () => {
                           </li>
                         </>
                       )}
+                      {model.id === "maria-escort-valencia" && (
+                        <>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Picardía elegante con personalidad propia</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Naturalidad cercana y trato divertido</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Chispa imprevisible que deja recuerdo</span>
+                          </li>
+                        </>
+                      )}
                       {model.name === "Silvia" && (
                         <>
                           <li className="flex items-start">
@@ -1442,7 +1490,7 @@ const ModelDetail: React.FC = () => {
                           </li>
                         </>
                       )}
-                      {model.name === "Maria" && (
+                      {model.name === "Maria" && model.id !== "maria-escort-valencia" && (
                         <>
                           <li className="flex items-start">
                             <span className="text-[#c2b2a3] mr-2">•</span>
@@ -1531,6 +1579,22 @@ const ModelDetail: React.FC = () => {
                           <li className="flex items-start">
                             <span className="text-[#c2b2a3] mr-2">•</span>
                             <span>Experiencias vibrantes con frescura natural</span>
+                          </li>
+                        </>
+                      )}
+                      {model.id === "maria-escort-valencia" && (
+                        <>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Conexiones reales con química natural</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Momentos de libertad y complicidad</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>Encuentros diferentes, frescos y memorables</span>
                           </li>
                         </>
                       )}
@@ -1710,7 +1774,7 @@ const ModelDetail: React.FC = () => {
                           </li>
                         </>
                       )}
-                      {model.name === "Maria" && (
+                      {model.name === "Maria" && model.id !== "maria-escort-valencia" && (
                         <>
                           <li className="flex items-start">
                             <span className="text-[#c2b2a3] mr-2">•</span>
