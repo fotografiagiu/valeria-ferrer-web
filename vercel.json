@@ -1,6 +1,16 @@
 {
   "redirects": [
     {
+      "source": "/models/maria",
+      "destination": "/models/maria-escort-valencia",
+      "permanent": true
+    },
+    {
+      "source": "/models/maria/",
+      "destination": "/models/maria-escort-valencia",
+      "permanent": true
+    },
+    {
       "source": "/model/:slug*",
       "destination": "https://www.valeriaferrer.com/models/:slug*",
       "permanent": true
