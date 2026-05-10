@@ -11,6 +11,46 @@ interface GalleryModalProps {
   modelName: string;
 }
 
+// Función segura para obtener thumbnails del modal SOLO para Mia
+const getModalThumbnail = (imageUrl: string, modelName: string): string => {
+  // Solo aplicar a Mia, otras modelos usan imagen original
+  if (modelName !== 'Mia') {
+    return imageUrl;
+  }
+  
+  // Mapeo de rutas de Mia a thumbnails
+  if (imageUrl.includes('/chicas/mia-model-agency-valencia-vf/portada.jpg')) {
+    return '/chicas-thumbnails/mia-model-agency-valencia-vf/thumb-portada.jpg';
+  }
+  if (imageUrl.includes('/chicas/mia-model-agency-valencia-vf/gallery/01.jpg')) {
+    return '/chicas-thumbnails/mia-model-agency-valencia-vf/thumb-01.jpg';
+  }
+  if (imageUrl.includes('/chicas/mia-model-agency-valencia-vf/gallery/02.jpg')) {
+    return '/chicas-thumbnails/mia-model-agency-valencia-vf/thumb-02.jpg';
+  }
+  if (imageUrl.includes('/chicas/mia-model-agency-valencia-vf/gallery/03.jpg')) {
+    return '/chicas-thumbnails/mia-model-agency-valencia-vf/thumb-03.jpg';
+  }
+  if (imageUrl.includes('/chicas/mia-model-agency-valencia-vf/gallery/04.jpg')) {
+    return '/chicas-thumbnails/mia-model-agency-valencia-vf/thumb-04.jpg';
+  }
+  if (imageUrl.includes('/chicas/mia-model-agency-valencia-vf/gallery/05.jpg')) {
+    return '/chicas-thumbnails/mia-model-agency-valencia-vf/thumb-05.jpg';
+  }
+  if (imageUrl.includes('/chicas/mia-model-agency-valencia-vf/gallery/06.jpg')) {
+    return '/chicas-thumbnails/mia-model-agency-valencia-vf/thumb-06.jpg';
+  }
+  if (imageUrl.includes('/chicas/mia-model-agency-valencia-vf/gallery/07.jpg')) {
+    return '/chicas-thumbnails/mia-model-agency-valencia-vf/thumb-07.jpg';
+  }
+  if (imageUrl.includes('/chicas/mia-model-agency-valencia-vf/gallery/08.jpg')) {
+    return '/chicas-thumbnails/mia-model-agency-valencia-vf/thumb-08.jpg';
+  }
+  
+  // Fallback: si no coincide, usar imagen original
+  return imageUrl;
+};
+
 const GalleryModal: React.FC<GalleryModalProps> = ({ 
   images, 
   initialIndex, 
@@ -313,7 +353,7 @@ const GalleryModal: React.FC<GalleryModalProps> = ({
                     >
                       {isVisible ? (
                         <LazyImage
-                          src={image}
+                          src={getModalThumbnail(image, modelName)}
                           alt={`${modelName} - Miniatura ${index + 1}`}
                           className="w-full h-full object-cover"
                           sizes="64px"
