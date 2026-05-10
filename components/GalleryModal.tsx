@@ -22,12 +22,13 @@ const GalleryModal: React.FC<GalleryModalProps> = ({
 
   // Filtrar imágenes válidas que existen
   const validImages = images.filter(imageUrl => {
-    // Verificar si la imagen existe en el servidor
-    try {
-      return true; // Asumimos que el JSON ya está filtrado
-    } catch {
-      return false;
-    }
+    // Validación estricta: solo permitir URLs válidas que no sean "/" o vacías
+    return imageUrl && 
+           imageUrl !== "/" && 
+           imageUrl !== "" && 
+           typeof imageUrl === 'string' && 
+           imageUrl.startsWith('/') &&
+           imageUrl.length > 1;
   });
 
   // Reset index when modal opens with different initial index

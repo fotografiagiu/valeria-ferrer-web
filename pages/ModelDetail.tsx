@@ -2053,7 +2053,14 @@ const ModelDetail: React.FC = () => {
 
       {/* Gallery Modal */}
       <GalleryModal
-        images={[model.image, ...(model.gallery || [])].filter(Boolean)}
+        images={[model.image, ...(model.gallery || [])].filter(img => 
+          img && 
+          img !== "/" && 
+          img !== "" && 
+          typeof img === 'string' && 
+          img.startsWith('/') &&
+          img.length > 1
+        )}
         initialIndex={currentImageIndex}
         isOpen={isGalleryOpen}
         onClose={closeGallery}
