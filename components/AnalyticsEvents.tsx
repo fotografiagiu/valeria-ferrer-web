@@ -76,9 +76,32 @@ const AnalyticsEvents: React.FC<AnalyticsEventsProps> = ({
     // Track contact clicks
     const handleContactClick = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
-      if (target.closest('a[href*="t.me"]') || target.closest('a[href*="whatsapp"]')) {
+      const linkElement = target.closest('a');
+      
+      if (!linkElement) return;
+      
+      const href = linkElement.getAttribute('href') || '';
+      let platform: 'telegram' | 'whatsapp' | 'phone' | null = null;
+      
+      // Detect Telegram links
+      if (href.includes('t.me')) {
+        platform = 'telegram';
+      }
+      // Detect WhatsApp links
+      else if (href.includes('whatsapp') || href.includes('wa.me')) {
+        platform = 'whatsapp';
+      }
+      // Detect phone links
+      else if (href.startsWith('tel:')) {
+        platform = 'phone';
+      }
+      
+      if (platform) {
         track('contact_click', {
-          platform: target.closest('a[href*="t.me"]') ? 'telegram' : 'whatsapp',
+          type: platform,
+          platform: platform,
+          location: 'model_profile',
+          modelName: modelName || 'unknown',
           path: window.location.pathname
         });
       }
