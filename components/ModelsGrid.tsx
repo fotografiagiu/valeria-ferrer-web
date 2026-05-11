@@ -14,15 +14,30 @@ const ModelCard: React.FC<{ model: any; index: number; isDoubleView?: boolean }>
   // Extraer directorio del coverImageUrl
   const getThumbnailPath = (coverImageUrl: string) => {
     const pathParts = coverImageUrl.split('/');
-    // Si el path contiene 'gallery/', necesitamos el directorio anterior
-    if (pathParts.includes('gallery')) {
-      const galleryIndex = pathParts.indexOf('gallery');
-      const directory = pathParts[galleryIndex - 1]; // Directorio antes de 'gallery'
-      return `/chicas-thumbnails/${directory}/cover-thumbnail.jpg`;
-    } else {
-      const directory = pathParts[pathParts.length - 2]; // Obtener el directorio antes del archivo
+
+    const optimizedIndex = pathParts.indexOf('chicas-optimized');
+    const chicasIndex = pathParts.indexOf('chicas');
+
+    let baseDirectory = '';
+
+    if (optimizedIndex !== -1) {
+      baseDirectory = pathParts[optimizedIndex + 1];
+    } else if (chicasIndex !== -1) {
+      baseDirectory = pathParts[chicasIndex + 1];
+    }
+
+    if (!baseDirectory) {
+      if (pathParts.includes('gallery')) {
+        const galleryIndex = pathParts.indexOf('gallery');
+        const directory = pathParts[galleryIndex - 1];
+        return `/chicas-thumbnails/${directory}/cover-thumbnail.jpg`;
+      }
+
+      const directory = pathParts[pathParts.length - 2];
       return `/chicas-thumbnails/${directory}/cover-thumbnail.jpg`;
     }
+
+    return `/chicas-thumbnails/${baseDirectory}/cover-thumbnail.jpg`;
   };
 
   const adaptedModel = {
