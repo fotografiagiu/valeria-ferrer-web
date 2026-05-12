@@ -218,6 +218,10 @@
   ],
   "rewrites": [
     {
+      "source": "/google2d9d306c8deb1506.html",
+      "destination": "/google2d9d306c8deb1506.html"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
