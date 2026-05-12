@@ -5,14 +5,26 @@ import Hero from '../components/Hero';
 import ModelsGrid from '../components/ModelsGrid';
 import FAQ from '../components/FAQ';
 import Reviews from '../components/Reviews';
+import PageSEOHead from '../components/PageSEOHead';
 import modelsData from '../data/models.json';
 import { ArrowRight, Plane, Shield, Heart, Globe, Diamond, ShieldCheck, Star, Send } from 'lucide-react';
 import { motion } from 'framer-motion';
 import LazyImage from '../components/LazyImage';
 
 const Home: React.FC = () => {
+  const homeSEOData = {
+    title: "Valeria Ferrer | Escorts y Acompañantes en Valencia",
+    description: "Descubre nuestras escorts y acompañantes exclusivas en Valencia. Modelos sofisticadas para eventos, cenas y momentos especiales. Atención discreta y reserva privada.",
+    canonicalUrl: "https://www.valeriaferrer.com"
+  };
+
   return (
     <div className="overflow-x-hidden">
+      <PageSEOHead 
+        title={homeSEOData.title}
+        description={homeSEOData.description}
+        canonicalUrl={homeSEOData.canonicalUrl}
+      />
       <Hero />
 
       {/* Elite Experience Section */}

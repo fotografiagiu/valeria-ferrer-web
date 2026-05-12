@@ -11,6 +11,7 @@ interface SEOHeadProps {
     services?: string[];
     height?: string | number;
     weight?: string | number;
+    slug?: string;
   };
 }
 
@@ -18,18 +19,56 @@ const SEOHead: React.FC<SEOHeadProps> = ({ model }) => {
   useEffect(() => {
     if (!model) return;
 
+    // Generate SEO data based on model properties and rules
+    const isVIP = model.slug === 'claudia-vip' || model.slug === 'paula-vip';
+    const modelName = model.name;
+    const nationality = model.nationality || 'Española';
+    const city = model.city || 'Valencia';
+    const age = model.age;
+    
+    // Generate title based on VIP rules
+    let title = '';
+    if (isVIP) {
+      // Special handling for Paula VIP to use "Acompañante VIP"
+      if (model.slug === 'paula-vip') {
+        title = `${modelName} VIP | Acompañante VIP en ${city} | Valeria Ferrer`;
+      } else {
+        title = `${modelName} VIP | Modelo VIP en ${city} | Valeria Ferrer`;
+      }
+    } else {
+      // Use elegant vocabulary based on nationality
+      const category = nationality === 'Colombiana' ? 'Escort' : 
+                      nationality === 'Española' ? 'Acompañante' : 'Acompañante';
+      title = `${modelName} | ${category} ${nationality} en ${city} | Valeria Ferrer`;
+    }
+
+    // Generate unique meta description
+    let description = '';
+    if (isVIP) {
+      // Special handling for Paula VIP
+      if (model.slug === 'paula-vip') {
+        description = `${modelName}, acompañante VIP exclusiva de ${age} años en ${city}. Experiencias de lujo, sofisticación refinada y atención discreta. Reserva VIP privada.`;
+      } else {
+        description = `${modelName}, modelo VIP exclusiva de ${age} años en ${city}. Experiencias de lujo, sofisticación internacional y atención discreta. Reserva VIP privada.`;
+      }
+    } else {
+      const category = nationality === 'Colombiana' ? 'escort' : 
+                      nationality === 'Española' ? 'acompañante' : 'acompañante';
+      description = `${modelName}, ${category} ${nationality} de ${age} años en ${city}. Perfil exclusivo, atención discreta y reserva privada para momentos especiales.`;
+    }
+
     // Update document title
-    document.title = `${model.name} - Modelo Exclusiva en ${model.city || 'Valencia'} | Valeria Ferrer`;
+    document.title = title;
 
     // Update or create meta description
     const descriptionMeta = document.querySelector('meta[name="description"]');
     if (!descriptionMeta) {
-      const description = document.createElement('meta');
-      description.name = 'description';
-      description.setAttribute('content', model.description || `${model.name}, escorts Valencia de ${model.age} años. Compañera VIP exclusiva en Valencia. Cenas de negocios, eventos sociales y Girlfriend Experience. ${model.city || 'Valencia'} - Valeria Ferrer Agency.`);
-      document.head.appendChild(description);
+      const desc = document.createElement('meta');
+      desc.name = 'description';
+      desc.setAttribute('content', description);
+      document.head.appendChild(desc);
     } else {
-      descriptionMeta.setAttribute('content', model.description || `${model.name}, escorts Valencia de ${model.age} años. Compañera VIP exclusiva en Valencia. Cenas de negocios, eventos sociales y Girlfriend Experience. ${model.city || 'Valencia'} - Valeria Ferrer Agency.`);
+      descriptionMeta.setAttribute('content', description);
     }
 
     // Add structured data (JSON-LD) - Enhanced Person schema
@@ -93,76 +132,89 @@ const SEOHead: React.FC<SEOHeadProps> = ({ model }) => {
     document.head.appendChild(script);
 
     // Add Open Graph meta tags
-    const ogTitle = document.querySelector('meta[property="og:title"]');
+    const ogTitle = document.querySelector('meta[property="og:title"]') as HTMLMetaElement;
     if (!ogTitle) {
-      const title = document.createElement('meta');
-      title.property = 'og:title';
-      title.setAttribute('content', `${model.name} - Escorts Valencia ${model.age} años | Valeria Ferrer`);
-      document.head.appendChild(title);
+      const titleTag = document.createElement('meta') as HTMLMetaElement;
+      titleTag.setAttribute('property', 'og:title');
+      titleTag.setAttribute('content', title);
+      document.head.appendChild(titleTag);
     } else {
-      ogTitle.content = `${model.name} - Modelo Exclusiva en ${model.city || 'Valencia'} | Valeria Ferrer`;
+      ogTitle.setAttribute('content', title);
     }
 
-    const ogDescription = document.querySelector('meta[property="og:description"]');
+    const ogDescription = document.querySelector('meta[property="og:description"]') as HTMLMetaElement;
     if (!ogDescription) {
-      const description = document.createElement('meta');
-      description.property = 'og:description';
-      description.setAttribute('content', model.description || `Conoce a ${model.name}, escorts Valencia de ${model.age} años. Compañera VIP exclusiva en Valencia. Cenas de negocios, eventos sociales y Girlfriend Experience. ${model.city || 'Valencia'} - Valeria Ferrer Agency.`);
-      document.head.appendChild(description);
+      const desc = document.createElement('meta') as HTMLMetaElement;
+      desc.setAttribute('property', 'og:description');
+      desc.setAttribute('content', description);
+      document.head.appendChild(desc);
     } else {
-      ogDescription.content = model.description || `Conoce a ${model.name}, modelo ${model.nationality || 'Española'} de ${model.age} años. Experiencia única en ${model.city || 'Valencia'}.`;
+      ogDescription.setAttribute('content', description);
     }
 
-    const ogImage = document.querySelector('meta[property="og:image"]');
+    const ogImage = document.querySelector('meta[property="og:image"]') as HTMLMetaElement;
     if (!ogImage) {
-      const image = document.createElement('meta');
-      image.property = 'og:image';
-      image.content = model.image;
+      const image = document.createElement('meta') as HTMLMetaElement;
+      image.setAttribute('property', 'og:image');
+      image.setAttribute('content', model.image);
       document.head.appendChild(image);
     } else {
-      ogImage.content = model.image;
+      ogImage.setAttribute('content', model.image);
     }
 
     // Add Twitter Card meta tags
-    const twitterTitle = document.querySelector('meta[name="twitter:title"]');
+    const twitterTitle = document.querySelector('meta[name="twitter:title"]') as HTMLMetaElement;
     if (!twitterTitle) {
-      const title = document.createElement('meta');
-      title.name = 'twitter:title';
-      title.setAttribute('content', `${model.name} - Escorts Valencia ${model.age} años | Valeria Ferrer`);
-      document.head.appendChild(title);
+      const titleTag = document.createElement('meta') as HTMLMetaElement;
+      titleTag.name = 'twitter:title';
+      titleTag.setAttribute('content', title);
+      document.head.appendChild(titleTag);
     } else {
-      twitterTitle.content = `${model.name} - Modelo ${model.nationality || 'Española'} | Valeria Ferrer`;
+      twitterTitle.setAttribute('content', title);
     }
 
-    const twitterDescription = document.querySelector('meta[name="twitter:description"]');
+    const twitterDescription = document.querySelector('meta[name="twitter:description"]') as HTMLMetaElement;
     if (!twitterDescription) {
-      const description = document.createElement('meta');
-      description.name = 'twitter:description';
-      description.setAttribute('content', model.description || `Escorts Valencia ${model.name} de ${model.age} años. Compañera VIP exclusiva en Valencia. Cenas de negocios, eventos sociales y Girlfriend Experience. ${model.city || 'Valencia'} - Valeria Ferrer Agency.`);
-      document.head.appendChild(description);
+      const desc = document.createElement('meta') as HTMLMetaElement;
+      desc.name = 'twitter:description';
+      desc.setAttribute('content', description);
+      document.head.appendChild(desc);
     } else {
-      twitterDescription.content = model.description || `Modelo exclusiva de ${model.age} años en ${model.city || 'Valencia'}`;
+      twitterDescription.setAttribute('content', description);
     }
 
-    const twitterImage = document.querySelector('meta[name="twitter:image"]');
+    const twitterImage = document.querySelector('meta[name="twitter:image"]') as HTMLMetaElement;
     if (!twitterImage) {
-      const image = document.createElement('meta');
+      const image = document.createElement('meta') as HTMLMetaElement;
       image.name = 'twitter:image';
-      image.content = model.image;
+      image.setAttribute('content', model.image);
       document.head.appendChild(image);
     } else {
-      twitterImage.content = model.image;
+      twitterImage.setAttribute('content', model.image);
     }
 
-    // Add canonical URL
-    const canonicalLink = document.querySelector('link[rel="canonical"]');
+    // Add canonical URL - use actual slug
+    const modelSlug = model.slug || model.name.toLowerCase();
+    const canonicalUrl = `https://www.valeriaferrer.com/models/${modelSlug}`;
+    const canonicalLink = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
     if (!canonicalLink) {
-      const link = document.createElement('link');
+      const link = document.createElement('link') as HTMLLinkElement;
       link.rel = 'canonical';
-      link.href = `https://www.valeriaferrer.com/models/${model.name.toLowerCase()}`;
+      link.href = canonicalUrl;
       document.head.appendChild(link);
     } else {
-      canonicalLink.href = `https://www.valeriaferrer.com/models/${model.name.toLowerCase()}`;
+      canonicalLink.href = canonicalUrl;
+    }
+
+    // Add og:url
+    const ogUrl = document.querySelector('meta[property="og:url"]') as HTMLMetaElement;
+    if (!ogUrl) {
+      const url = document.createElement('meta') as HTMLMetaElement;
+      url.setAttribute('property', 'og:url');
+      url.setAttribute('content', canonicalUrl);
+      document.head.appendChild(url);
+    } else {
+      ogUrl.setAttribute('content', canonicalUrl);
     }
 
     // Cleanup on unmount

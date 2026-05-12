@@ -1,6 +1,7 @@
 
 export interface Model {
   id: string;
+  slug: string;
   name: string;
   age: number;
   height: number | string;

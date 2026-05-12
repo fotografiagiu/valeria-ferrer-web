@@ -3,13 +3,25 @@ import React, { useState, useEffect } from 'react';
 import ModelsGrid from '../components/ModelsGrid';
 import ModelFilter from '../components/ModelFilter';
 import AnimatedCounter from '../components/AnimatedCounter';
+import PageSEOHead from '../components/PageSEOHead';
 import modelsData from '../data/models.json';
 
 const Models: React.FC = () => {
   const [filteredModels, setFilteredModels] = useState<any[]>(modelsData);
 
+  const modelsSEOData = {
+    title: "Modelos y Acompañantes en Valencia | Valeria Ferrer",
+    description: "Explora nuestras modelos exclusivas en Valencia. Perfiles únicos de acompañantes sofisticadas para cenas, eventos y momentos especiales. Reserva privada.",
+    canonicalUrl: "https://www.valeriaferrer.com/models"
+  };
+
   return (
     <div className="pt-24 min-h-screen">
+      <PageSEOHead 
+        title={modelsSEOData.title}
+        description={modelsSEOData.description}
+        canonicalUrl={modelsSEOData.canonicalUrl}
+      />
       <div className="bg-[#111111] py-20 px-6 border-b border-white/5">
         <div className="max-w-[1600px] mx-auto text-center">
           <h1 className="text-4xl md:text-6xl font-light mb-6 tracking-wider">Escorts de Lujo <span className="italic luxury-text-gradient">en Valencia</span></h1>

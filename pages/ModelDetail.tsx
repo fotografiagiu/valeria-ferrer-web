@@ -59,6 +59,27 @@ const ModelDetail: React.FC = () => {
   const whatsappNumber = '+34645872227'; // Número de WhatsApp configurable
   const phoneNumber = '+34645872227'; // Número de teléfono configurable
 
+  // Generate H1 text based on model properties and VIP rules
+  const generateH1Text = () => {
+    const isVIP = model.slug === 'claudia-vip' || model.slug === 'paula-vip';
+    const modelName = model.name;
+    const nationality = model.nationality || 'Española';
+    const city = model.city || 'Valencia';
+    
+    if (isVIP) {
+      // Special handling for Paula VIP
+      if (model.slug === 'paula-vip') {
+        return `${modelName} VIP - Acompañante VIP en ${city}`;
+      } else {
+        return `${modelName} VIP - Modelo VIP en ${city}`;
+      }
+    } else {
+      const category = nationality === 'Colombiana' ? 'Escort' : 
+                      nationality === 'Española' ? 'Acompañante' : 'Acompañante';
+      return `${modelName} - ${category} ${nationality} en ${city}`;
+    }
+  };
+
   if (!model) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center text-center p-6 bg-[#0a0a0a]">
@@ -83,13 +104,8 @@ const ModelDetail: React.FC = () => {
             
             <div className="flex flex-col items-center lg:flex-row lg:items-center lg:justify-center gap-2 lg:gap-4">
               <h1 className="text-4xl lg:text-6xl serif luxury-text-gradient uppercase leading-[0.9] tracking-tighter">
-                {model.name}
+                {generateH1Text()}
               </h1>
-              
-              <div className="flex items-center space-x-2 text-[#c2b2a3]">
-                <MapPin size={16} />
-                <span className="text-lg font-light">{model.city || 'Valencia'}</span>
-              </div>
             </div>
           </div>
         </div>
