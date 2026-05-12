@@ -218,7 +218,7 @@
   ],
   "rewrites": [
     {
-      "source": "/((?!.*\\.html$).*)",
+      "source": "/((?!google2d9d306c8deb1506\\.html$).*)",
       "destination": "/index.html"
     }
   ],
