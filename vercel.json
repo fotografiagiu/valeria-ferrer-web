@@ -222,14 +222,8 @@
       "destination": "/google2d9d306c8deb1506.html"
     },
     {
-      "source": "/(.*)",
-      "destination": "/index.html",
-      "has": [
-        {
-          "type": "header",
-          "key": "x-vercel-file-exists"
-        }
-      ]
+      "source": "/((?!.*\\.(js|css|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot|html|xml|txt|json|webp|avif)$).*)",
+      "destination": "/index.html"
     }
   ],
   "headers": [
