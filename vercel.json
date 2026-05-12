@@ -218,11 +218,7 @@
   ],
   "rewrites": [
     {
-      "source": "/google2d9d306c8deb1506.html",
-      "destination": "/google2d9d306c8deb1506.html"
-    },
-    {
-      "source": "/((?!.*\\.(js|css|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot|html|xml|txt|json|webp|avif)$).*)",
+      "source": "/(.*)",
       "destination": "/index.html"
     }
   ],
