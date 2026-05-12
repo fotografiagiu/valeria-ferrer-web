@@ -102,10 +102,27 @@ const ModelDetail: React.FC = () => {
           {/* Centered Model Name */}
           <div className="text-center mb-2 lg:mb-2">
             
-            <div className="flex flex-col items-center lg:flex-row lg:items-center lg:justify-center gap-2 lg:gap-4">
+            <div className="flex flex-col items-center gap-2">
               <h1 className="text-4xl lg:text-6xl serif luxury-text-gradient uppercase leading-[0.9] tracking-tighter">
-                {generateH1Text()}
+                {model.name}
               </h1>
+              
+              {/* Subtitle with VIP rule */}
+              <div className="flex items-center space-x-2 text-[#c2b2a3] text-sm lg:text-base">
+                {(() => {
+                  const isVIP = model.slug === 'claudia-vip' || model.slug === 'paula-vip';
+                  const nationality = model.nationality || 'Española';
+                  const city = model.city || 'Valencia';
+                  
+                  if (isVIP) {
+                    return `${nationality} VIP en ${city}`;
+                  } else {
+                    const category = nationality === 'Colombiana' ? 'Acompañante' : 
+                                    nationality === 'Española' ? 'Acompañante' : 'Acompañante';
+                    return `${category} ${nationality.toLowerCase()} en ${city}`;
+                  }
+                })()}
+              </div>
             </div>
           </div>
         </div>
