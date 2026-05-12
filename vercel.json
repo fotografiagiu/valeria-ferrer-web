@@ -218,8 +218,18 @@
   ],
   "rewrites": [
     {
-      "source": "/((?!google2d9d306c8deb1506\\.html$).*)",
-      "destination": "/index.html"
+      "source": "/google2d9d306c8deb1506.html",
+      "destination": "/google2d9d306c8deb1506.html"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html",
+      "has": [
+        {
+          "type": "header",
+          "key": "x-vercel-file-exists"
+        }
+      ]
     }
   ],
   "headers": [
