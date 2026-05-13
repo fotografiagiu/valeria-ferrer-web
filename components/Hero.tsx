@@ -1,27 +1,32 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { MapPin, Users, Phone } from 'lucide-react';
 
-const Hero: React.FC = () => {
+const Hero = () => {
   return (
     <section className="relative h-screen flex items-center justify-center overflow-hidden bg-black">
-
-  {/* YouTube Background - Optimized */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-black/60 z-10"></div>
-        <iframe
-          src="https://www.youtube.com/embed/lor3hN0e600?autoplay=1&mute=1&loop=1&playlist=lor3hN0e600&controls=0&disablekb=1&fs=0&iv_load_policy=3&modestbranding=1&rel=0&playsinline=1"
-          title="Background Video"
-          frameBorder="0"
-          allow="autoplay"
-          allowFullScreen
-          className="absolute top-1/2 left-1/2 pointer-events-none w-[400vw] h-[400vh] md:w-[120vw] md:h-[120vh]"
+      {/* Background Media */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        {/* Mobile: imagen estática */}
+        <div
+          className="block md:hidden absolute inset-0 bg-cover bg-center"
           style={{
-            transform: 'translate(-50%, -50%) scale(1.2)',
-            opacity: 0.8,
-            border: 'none',
+            backgroundImage: "url('/images/home-mobile-hero.jpg')"
           }}
         />
+
+        {/* Desktop: YouTube */}
+        <iframe
+          src="https://www.youtube.com/embed/lor3hN0e600?autoplay=1&mute=1&playsinline=1&loop=1&playlist=lor3hN0e600&controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&rel=0&disablekb=1&fs=0"
+          className="hidden md:block absolute top-1/2 left-1/2 w-[125%] h-[125%] -translate-x-1/2 -translate-y-1/2"
+          frameBorder="0"
+          allow="autoplay; encrypted-media; picture-in-picture"
+          allowFullScreen
+          title="Valeria Ferrer Background Video"
+        />
+
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/40 z-10"></div>
       </div>
 
       {/* Content */}
