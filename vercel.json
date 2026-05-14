@@ -21,11 +21,6 @@
       "permanent": true
     },
     {
-      "source": "/blog",
-      "destination": "https://www.valeriaferrer.com/",
-      "permanent": true
-    },
-    {
       "source": "/escort-valencia-contacto",
       "destination": "https://www.valeriaferrer.com/contact",
       "permanent": true
