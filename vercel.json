@@ -499,6 +499,26 @@
       "source": "/carla-model-agency-valencia-vf-2",
       "destination": "https://www.valeriaferrer.com/models/carla",
       "permanent": true
+    },
+    {
+      "source": "/tatiana-vip-model-agency-valencia-2/",
+      "destination": "https://www.valeriaferrer.com/models",
+      "permanent": true
+    },
+    {
+      "source": "/tatiana-vip-model-agency-valencia-2",
+      "destination": "https://www.valeriaferrer.com/models",
+      "permanent": true
+    },
+    {
+      "source": "/gala-escorts-valencia-putas-valencia-2/",
+      "destination": "https://www.valeriaferrer.com/models",
+      "permanent": true
+    },
+    {
+      "source": "/gala-escorts-valencia-putas-valencia-2",
+      "destination": "https://www.valeriaferrer.com/models",
+      "permanent": true
     }
   ],
   "rewrites": [
