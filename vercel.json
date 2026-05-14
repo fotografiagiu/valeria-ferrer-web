@@ -214,6 +214,16 @@
       "source": "/sitemap_index.xml",
       "destination": "/sitemap.xml",
       "permanent": true
+    },
+    {
+      "source": "/kim-model-agency-valencia/",
+      "destination": "https://www.valeriaferrer.com/models/kim",
+      "permanent": true
+    },
+    {
+      "source": "/kim-model-agency-valencia",
+      "destination": "https://www.valeriaferrer.com/models/kim",
+      "permanent": true
     }
   ],
   "rewrites": [
