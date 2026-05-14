@@ -1,5 +1,58 @@
 [
   {
+    "slug": "paula-vip",
+    "name": "Paula (VIP)",
+    "age": 26,
+    "height": "1,60 m",
+    "weight": "50 kg",
+    "nationality": "Española",
+    "city": "Valencia",
+    "profileUrl": "https://www.valeriaferrer.com/paula-vip-model-agency-valencia/",
+    "coverImageUrl": "/chicas-optimized/paula-vip-model-agency-valencia/portada.jpg",
+    "description": "Paula es una presencia VIP en Valencia de esas que no pasan desapercibidas. Elegante, femenina y segura de sí misma, combina una imagen sofisticada con una actitud cercana y envolvente que despierta interés desde el primer momento. Su estilo es refinado, cuidado y magnético, pensado para quienes buscan algo más que una compañía bonita: una mujer con clase, discreción y una energía difícil de olvidar. Paula es ideal para encuentros privados, cenas exclusivas, eventos selectos y momentos especiales donde cada detalle importa.",
+    "essence": "Paula representa el encanto de una mujer VIP con presencia, elegancia y una seguridad natural que se nota sin necesidad de exagerar. Su imagen transmite deseo, sofisticación y calma, una combinación que la convierte en una opción perfecta para quienes valoran la discreción, el buen gusto y una compañía que sabe estar a la altura de cualquier situación.\n\nSu atractivo no está solo en su físico, sino en la forma en la que mira, se mueve y ocupa el espacio. Paula tiene ese tipo de energía que hace que un encuentro se sienta especial desde el principio: femenina, serena, cercana y con una presencia que deja huella. Cada experiencia con ella está pensada para quienes buscan exclusividad, atención al detalle y una conexión elegante, natural y memorable.",
+    "uniquePoints": [
+      "Presencia VIP elegante, femenina y magnética",
+      "Seguridad natural, clase y discreción absoluta",
+      "Una imagen sofisticada que deja huella desde el primer momento"
+    ],
+    "experiencePoints": [
+      "Encuentros privados en Valencia con ambiente exclusivo y cuidado",
+      "Compañía elegante para cenas, eventos y planes de alto nivel",
+      "Una experiencia VIP cercana, seductora y difícil de olvidar"
+    ],
+    "images": [
+      "/chicas-optimized/paula-vip-model-agency-valencia/1.jpg",
+      "/chicas-optimized/paula-vip-model-agency-valencia/2.jpg",
+      "/chicas-optimized/paula-vip-model-agency-valencia/3.jpg",
+      "/chicas-optimized/paula-vip-model-agency-valencia/4.jpg"
+    ],
+    "featured": true,
+    "services": [
+      "Girlfriend Experience",
+      "Cenas de Negocios",
+      "Eventos Sociales",
+      "Acompañamiento Personal"
+    ],
+    "availability": "24h",
+    "languages": [
+      "Español"
+    ],
+    "vip": true,
+    "vipRates": {
+      "30min": "100 €",
+      "45min": "150 €",
+      "1h": "200 €",
+      "2h": "350 €",
+      "3h": "520 €",
+      "salidaHotel": "250 €",
+      "noche": "2000 €",
+      "dia": "3000 €",
+      "dosDias": "4000 €"
+    },
+    "profileImageUrl": "/chicas-optimized/paula-vip-model-agency-valencia/portada.jpg"
+  },
+  {
     "slug": "lana",
     "name": "Lana",
     "age": 23,
@@ -534,51 +587,6 @@
     "languages": [
       "Español"
     ]
-  },
-  {
-    "slug": "paula-vip",
-    "name": "Paula (VIP)",
-    "age": 26,
-    "height": "1,60 m",
-    "weight": "50 kg",
-    "nationality": "Española",
-    "city": "Valencia",
-    "profileUrl": "https://www.valeriaferrer.com/paula-vip-model-agency-valencia/",
-    "coverImageUrl": "/chicas/paula-vip-model-agency-valencia/portada.jpg",
-    "description": "Paula es una española VIP exclusiva que irradia madurez y sofisticación. Su figura esbelta y estilo refinado la distinguen para acompañamiento VIP en Valencia, ofreciendo vivencias refinadas. Cada encuentro con ella está lleno de elegancia y experiencias de lujo. Su presencia transforma momentos especiales en vivencias extraordinarias con clase internacional.",
-    "images": [
-      "/chicas/paula-vip-model-agency-valencia/gallery/01.jpg",
-      "/chicas/paula-vip-model-agency-valencia/gallery/02.jpg",
-      "/chicas/paula-vip-model-agency-valencia/gallery/03.jpg",
-      "/chicas/paula-vip-model-agency-valencia/gallery/04.jpg",
-      "/chicas/paula-vip-model-agency-valencia/gallery/05.jpg",
-      "/chicas/paula-vip-model-agency-valencia/gallery/06.jpg",
-      "/chicas/paula-vip-model-agency-valencia/gallery/07.jpg",
-      "/chicas/paula-vip-model-agency-valencia/gallery/08.jpg"
-    ],
-    "featured": true,
-    "services": [
-      "Girlfriend Experience",
-      "Cenas de Negocios",
-      "Eventos Sociales",
-      "Acompañamiento Personal"
-    ],
-    "availability": "24h",
-    "languages": [
-      "Español"
-    ],
-    "vip": true,
-    "vipRates": {
-      "30min": "100 €",
-      "45min": "150 €",
-      "1h": "200 €",
-      "2h": "350 €",
-      "3h": "520 €",
-      "salidaHotel": "250 €",
-      "noche": "2000 €",
-      "dia": "3000 €",
-      "dosDias": "4000 €"
-    }
   },
   {
     "slug": "naty",
