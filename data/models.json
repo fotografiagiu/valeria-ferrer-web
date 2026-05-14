@@ -1,5 +1,52 @@
 [
   {
+    "slug": "candy-model-agency-valencia-vf",
+    "name": "Candy",
+    "age": 20,
+    "height": "1,62 m",
+    "weight": "50 kg",
+    "nationality": "Venezolana",
+    "city": "Valencia",
+    "profileUrl": "https://www.valeriaferrer.com/candy-model-agency-valencia-vf/",
+    "coverImageUrl": "/chicas/candy-model-agency-valencia-vf/portada.jpg",
+    "profileImageUrl": "/chicas/candy-model-agency-valencia-vf/portada.jpg",
+    "description": "Candy es una modelo venezolana de 20 años en Valencia, con una presencia dulce, natural y elegante. Su imagen combina frescura juvenil, estilo femenino y una actitud cercana que transmite confianza desde el primer momento. Destaca por su belleza latina, su mirada expresiva y una estética cuidada, ideal para quienes buscan una compañía distinguida, agradable y sofisticada en Valencia. Su perfil está pensado para personas que valoran la discreción, el buen trato y una presencia femenina refinada, cercana y con encanto latino.",
+    "essence": "Candy destaca por una belleza venezolana natural, una presencia fresca y una actitud cercana que transmite confianza desde el primer momento. Su imagen combina elegancia, feminidad y un estilo cuidado, pensado para quienes valoran la discreción, el buen trato y una compañía agradable en Valencia. Su encanto está en la naturalidad: una mezcla de dulzura, seguridad y presencia visual que convierte cada encuentro en una experiencia especial.\n\nCon 20 años y una estética refinada, Candy aporta una energía cálida y femenina, ideal para planes tranquilos, momentos privados y experiencias exclusivas. Su perfil encaja con personas que buscan una presencia elegante, discreta y cercana, sin artificios ni excesos. Cada detalle de su imagen está orientado a transmitir comodidad, buen gusto y una sensación de atención personalizada.",
+    "uniquePoints": [
+      "Belleza venezolana natural, dulce y elegante",
+      "Presencia fresca, femenina y cercana desde el primer momento",
+      "Estilo cuidado, sofisticado y con encanto latino"
+    ],
+    "experiencePoints": [
+      "Encuentros exclusivos en Valencia con trato discreto y profesional",
+      "Compañía elegante para momentos especiales y planes privados",
+      "Una experiencia cercana, agradable y cuidada al detalle"
+    ],
+    "images": [
+      "/chicas/candy-model-agency-valencia-vf/1.jpg",
+      "/chicas/candy-model-agency-valencia-vf/2.jpg",
+      "/chicas/candy-model-agency-valencia-vf/3.jpg",
+      "/chicas/candy-model-agency-valencia-vf/4.jpg",
+      "/chicas/candy-model-agency-valencia-vf/5.jpg",
+      "/chicas/candy-model-agency-valencia-vf/6.jpg",
+      "/chicas/candy-model-agency-valencia-vf/7.jpg",
+      "/chicas/candy-model-agency-valencia-vf/8.jpg"
+    ],
+    "services": [
+      "Girlfriend Experience",
+      "Cenas de Negocios",
+      "Eventos Sociales",
+      "Acompañamiento Personal"
+    ],
+    "availability": "24h",
+    "languages": [
+      "Español"
+    ],
+    "isNew": true,
+    "featured": true,
+    "vip": false
+  },
+  {
     "slug": "estefany",
     "name": "Estefany",
     "age": 24,

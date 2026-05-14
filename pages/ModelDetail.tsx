@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { MODELS } from '../constants';
+import modelsJson from '../data/models.json';
 import { ArrowLeft, Check, Calendar, Phone, MapPin, Ruler, User, Star, Sparkles, ChevronLeft, ChevronRight, MessageCircle, Shield, Crown, Clock, Heart } from 'lucide-react';
 import GalleryModal from '../components/GalleryModal';
 import LazyImage from '../components/LazyImage';
@@ -88,6 +89,12 @@ const ModelDetail: React.FC = () => {
       </div>
     );
   }
+
+  const detailRow = (modelsJson as { slug: string; uniquePoints?: string[]; experiencePoints?: string[] }[]).find(
+    (m) => m.slug === model.id
+  );
+  const modelUniquePoints = detailRow?.uniquePoints?.filter((p) => p?.trim());
+  const modelExperiencePoints = detailRow?.experiencePoints?.filter((p) => p?.trim());
 
   return (
     <div className="animate-in fade-in duration-1000 bg-[#0a0a0a] selection:bg-[#c2b2a3]/30">
@@ -343,6 +350,15 @@ const ModelDetail: React.FC = () => {
               </div>
               <div className="bg-[#111111] border border-white/5 p-3 flex-1">
                 <ul className="text-gray-400 font-light leading-[1.6] space-y-2 text-sm">
+                  {modelUniquePoints?.length ? (
+                    modelUniquePoints.map((point, idx) => (
+                      <li key={idx} className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>{point}</span>
+                      </li>
+                    ))
+                  ) : (
+                    <>
                   {model.name === "Kim" && (
                     <>
                       <li className="flex items-start">
@@ -631,6 +647,8 @@ const ModelDetail: React.FC = () => {
                       </li>
                     </>
                   )}
+                    </>
+                  )}
                 </ul>
               </div>
             </div>
@@ -643,6 +661,15 @@ const ModelDetail: React.FC = () => {
               </div>
               <div className="bg-[#111111] border border-white/5 p-3 flex-1">
                 <ul className="text-gray-400 font-light leading-[1.6] space-y-2 text-sm">
+                  {modelExperiencePoints?.length ? (
+                    modelExperiencePoints.map((point, idx) => (
+                      <li key={idx} className="flex items-start">
+                        <span className="text-[#c2b2a3] mr-2">•</span>
+                        <span>{point}</span>
+                      </li>
+                    ))
+                  ) : (
+                    <>
                   {model.name === "Kim" && (
                     <>
                       <li className="flex items-start">
@@ -929,6 +956,8 @@ const ModelDetail: React.FC = () => {
                         <span className="text-[#c2b2a3] mr-2">•</span>
                         <span>Vivencias extraordinarias clase internacional refinada</span>
                       </li>
+                    </>
+                  )}
                     </>
                   )}
                 </ul>
@@ -1315,6 +1344,15 @@ const ModelDetail: React.FC = () => {
                   </div>
                   <div className="bg-[#111111] border border-white/5 p-4 flex-1">
                     <ul className="text-gray-400 font-light leading-[1.7] space-y-2">
+                      {modelUniquePoints?.length ? (
+                        modelUniquePoints.map((point, idx) => (
+                          <li key={idx} className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>{point}</span>
+                          </li>
+                        ))
+                      ) : (
+                        <>
                       {model.name === "Kim" && (
                         <>
                           <li className="flex items-start">
@@ -1603,6 +1641,8 @@ const ModelDetail: React.FC = () => {
                           </li>
                         </>
                       )}
+                        </>
+                      )}
                     </ul>
                   </div>
                 </div>
@@ -1615,6 +1655,15 @@ const ModelDetail: React.FC = () => {
                   </div>
                   <div className="bg-[#111111] border border-white/5 p-4 flex-1">
                     <ul className="text-gray-400 font-light leading-[1.7] space-y-2">
+                      {modelExperiencePoints?.length ? (
+                        modelExperiencePoints.map((point, idx) => (
+                          <li key={idx} className="flex items-start">
+                            <span className="text-[#c2b2a3] mr-2">•</span>
+                            <span>{point}</span>
+                          </li>
+                        ))
+                      ) : (
+                        <>
                       {model.name === "Kim" && (
                         <>
                           <li className="flex items-start">
@@ -1901,6 +1950,8 @@ const ModelDetail: React.FC = () => {
                             <span className="text-[#c2b2a3] mr-2">•</span>
                             <span>Vivencias extraordinarias clase internacional refinada</span>
                           </li>
+                        </>
+                      )}
                         </>
                       )}
                     </ul>
