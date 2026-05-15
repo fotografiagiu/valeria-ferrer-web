@@ -27,7 +27,7 @@ const Footer: React.FC = () => {
           <div className="space-y-6">
             <h4 className="text-xs font-bold tracking-[0.3em] uppercase text-[#c2b2a3]">Escorts Valeria</h4>
             <ul className="space-y-4 text-xs font-light tracking-widest uppercase">
-              <li><a href="/services" className="hover:text-[#c2b2a3] transition-colors">Escorts de Lujo</a></li>
+              <li><a href="/models" className="hover:text-[#c2b2a3] transition-colors">Escorts de Lujo</a></li>
               <li><a href="/services/gfe" className="hover:text-[#c2b2a3] transition-colors">Girlfriend Experience</a></li>
               <li><a href="/services/duo" className="hover:text-[#c2b2a3] transition-colors">Especiales Dúo</a></li>
             </ul>
