@@ -121,6 +121,34 @@ const districtsData: Record<string, DistrictData> = {
   }
 };
 
+const getThumbnailPath = (coverImageUrl: string) => {
+  const pathParts = coverImageUrl.split('/');
+
+  const optimizedIndex = pathParts.indexOf('chicas-optimized');
+  const chicasIndex = pathParts.indexOf('chicas');
+
+  let baseDirectory = '';
+
+  if (optimizedIndex !== -1) {
+    baseDirectory = pathParts[optimizedIndex + 1];
+  } else if (chicasIndex !== -1) {
+    baseDirectory = pathParts[chicasIndex + 1];
+  }
+
+  if (!baseDirectory) {
+    if (pathParts.includes('gallery')) {
+      const galleryIndex = pathParts.indexOf('gallery');
+      const directory = pathParts[galleryIndex - 1];
+      return `/chicas-thumbnails/${directory}/cover-thumbnail.jpg`;
+    }
+
+    const directory = pathParts[pathParts.length - 2];
+    return `/chicas-thumbnails/${directory}/cover-thumbnail.jpg`;
+  }
+
+  return `/chicas-thumbnails/${baseDirectory}/cover-thumbnail.jpg`;
+};
+
 const DistrictPage: React.FC = () => {
   const { districtId } = useParams<{ districtId: string }>();
   const district = districtsData[districtId || ''];
@@ -252,7 +280,7 @@ const DistrictPage: React.FC = () => {
               >
                 <div className="aspect-[2/3] relative overflow-hidden rounded-2xl mb-4">
                   <OptimizedImage
-                    src={model.coverImageUrl}
+                    src={getThumbnailPath(model.coverImageUrl)}
                     alt={`${model.name} - Modelo exclusiva en ${district.name}`}
                     className="w-full h-full transition-transform duration-700 group-hover:scale-105"
                   />
