@@ -36,7 +36,7 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolled, openMembers }) => {
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden lg:flex items-center space-x-10 text-[13px] font-medium tracking-widest uppercase lg:mr-4">
+        <div className="hidden lg:flex items-center space-x-10 text-[13px] font-medium tracking-widest uppercase lg:ml-12 xl:ml-16 2xl:ml-20 lg:mr-4">
           <div className="hover:-translate-y-0.5 transition-transform duration-200">
             <Link to="/" className="hover:text-[#c2b2a3] transition-colors relative group">
               Inicio
