@@ -40,7 +40,7 @@ const Footer: React.FC = () => {
               <li><a href="/booking" className="hover:text-[#c2b2a3] transition-colors">Información de Reserva</a></li>
               <li><a href="/fees" className="hover:text-[#c2b2a3] transition-colors">Honorarios y Tarifas</a></li>
               <li><a href="/members" className="hover:text-[#c2b2a3] transition-colors">Lounge de Miembros <span className="text-[9px] opacity-50">(Próximamente)</span></a></li>
-              <li><a href="/cities" className="hover:text-[#c2b2a3] transition-colors">Guía de Ciudades</a></li>
+              <li><a href="/blog/escorts-russafa-valencia" className="hover:text-[#c2b2a3] transition-colors">Guía de Ciudades</a></li>
             </ul>
           </div>
 
