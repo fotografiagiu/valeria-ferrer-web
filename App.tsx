@@ -19,7 +19,6 @@ import Privacy from './pages/Privacy';
 import Terms from './pages/Terms';
 import Footer from './components/Footer';
 import MembersModal from './components/MembersModal';
-import Chatbot from './components/Chatbot';
 import FloatingContactPopup from './components/FloatingContactPopup';
 import ContentProtection from './components/ContentProtection';
 import AnalyticsTracker from './components/AnalyticsTracker';
@@ -104,7 +103,6 @@ const App: React.FC = () => {
             onClose={() => setIsMembersModalOpen(false)} 
           />
 
-          <Chatbot />
           <FloatingContactPopup />
           <ContentProtection />
           <Analytics />
