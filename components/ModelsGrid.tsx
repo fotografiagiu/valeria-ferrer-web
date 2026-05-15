@@ -240,7 +240,7 @@ const ModelsGrid: React.FC<ModelsGridProps> = ({ models = MODELS }) => {
       <div className="max-w-[1600px] mx-auto px-0 md:px-6">
         <div className="text-center mb-16 px-4 md:px-0">
           <h2 className="text-3xl md:text-5xl font-light mb-4">
-            Escorts <span className="italic luxury-text-gradient">VIP</span> Valencia Agencia de Lujo
+            Escorts <span className="italic luxury-text-gradient inline-block px-1 -translate-x-1">VIP</span> Valencia Agencia de Lujo
           </h2>
 
           <p className="text-sm text-gray-400 mb-6 max-w-2xl mx-auto">
