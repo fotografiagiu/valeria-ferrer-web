@@ -14,7 +14,7 @@ const PageSEOHead: React.FC<PageSEOHeadProps> = ({
   title,
   description,
   keywords,
-  ogImage = 'https://valeriaferrer.com/og-image.jpg',
+  ogImage = 'https://www.valeriaferrer.com/og-image.jpg',
   canonicalUrl,
   type = 'website',
   structuredData

@@ -12,7 +12,7 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolled, openMembers }) => {
 
   return (
     <nav className={`fixed w-full z-50 transition-all duration-500 ${
-      isScrolled ? 'bg-black/6458722270 backdrop-blur-md py-4' : 'bg-transparent py-6'
+      isScrolled ? 'bg-black/70 backdrop-blur-md py-4' : 'bg-transparent py-6'
     }`}>
       {/* Top Bar */}
       <div className="flex items-center justify-center space-x-4 md:space-x-8 text-[10px] md:text-[11px] font-medium tracking-widest text-[#c2b2a3] border-b border-[#c2b2a3]/10 pb-2 mb-2 px-4 text-center">

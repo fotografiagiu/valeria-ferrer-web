@@ -77,13 +77,16 @@ const SEOHead: React.FC<SEOHeadProps> = ({ model }) => {
       existingScript.remove();
     }
 
+    const modelSlug = model.slug || model.name.toLowerCase();
+    const modelProfileUrl = `https://www.valeriaferrer.com/models/${modelSlug}`;
+
     const structuredData = {
       "@context": "https://schema.org",
       "@type": "Person",
       "name": model.name,
       "description": model.description || `Modelo ${model.nationality || 'Española'} de ${model.age} años disponible en ${model.city || 'Valencia'}`,
       "image": model.image,
-      "url": `https://www.valeriaferrer.com/models/${model.name.toLowerCase()}`,
+      "url": modelProfileUrl,
       "jobTitle": "Modelo de Compañía VIP",
       "nationality": model.nationality || "Española",
       "birthDate": new Date(new Date().getFullYear() - model.age, 0, 1).toISOString().split('T')[0],
@@ -121,7 +124,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({ model }) => {
         }
       },
       "sameAs": [
-        `https://www.valeriaferrer.com/models/${model.name.toLowerCase()}`
+        modelProfileUrl
       ]
     };
 
@@ -194,8 +197,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({ model }) => {
     }
 
     // Add canonical URL - use actual slug
-    const modelSlug = model.slug || model.name.toLowerCase();
-    const canonicalUrl = `https://www.valeriaferrer.com/models/${modelSlug}`;
+    const canonicalUrl = modelProfileUrl;
     const canonicalLink = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
     if (!canonicalLink) {
       const link = document.createElement('link') as HTMLLinkElement;
