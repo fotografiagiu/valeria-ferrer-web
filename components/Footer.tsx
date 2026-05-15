@@ -10,7 +10,7 @@ const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-20">
           {/* Brand Info */}
           <div className="space-y-6">
-            <h3 className="text-3xl tracking-[0.1em] font-light luxury-text-gradient uppercase leading-none whitespace-nowrap">Valeria Ferrer</h3>
+            <h3 className="text-2xl xl:text-3xl tracking-[0.06em] font-light luxury-text-gradient uppercase leading-none whitespace-nowrap">Valeria Ferrer</h3>
             <p className="text-xs font-light text-gray-400 leading-relaxed uppercase tracking-wider">
               Exclusiva Agencia de Modelos de Lujo que representa a las mejores modelos en todo el mundo. Redefinimos el acompañamiento de lujo con sofisticación y discreción absoluta.
             </p>
@@ -63,7 +63,7 @@ const Footer: React.FC = () => {
               </a>
               <div className="flex items-center space-x-3">
                 <MapPin size={16} className="text-[#c2b2a3]" />
-                <span className="uppercase">Calle Colón, Valencia • Barcelona • Dubái</span>
+                <span className="uppercase">Calle Colón, Valencia • Barcelona • Madrid</span>
               </div>
             </div>
             <div className="pt-4 border-t border-white/10">
