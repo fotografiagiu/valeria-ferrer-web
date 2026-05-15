@@ -14,6 +14,9 @@ import ServiceDetail from './pages/ServiceDetail';
 import Blog from './pages/Blog';
 import BlogArticle from './pages/BlogArticle';
 import DistrictPage from './pages/DistrictPage';
+import Legal from './pages/Legal';
+import Privacy from './pages/Privacy';
+import Terms from './pages/Terms';
 import Footer from './components/Footer';
 import MembersModal from './components/MembersModal';
 import Chatbot from './components/Chatbot';
@@ -22,6 +25,26 @@ import ContentProtection from './components/ContentProtection';
 import AnalyticsTracker from './components/AnalyticsTracker';
 import LocalAnalyticsDashboard from './components/LocalAnalyticsDashboard';
 import { Analytics } from '@vercel/analytics/react';
+
+/** Ruta /members: enlace desde Footer “Lounge de Miembros”; contenido próximamente. */
+const MembersPage: React.FC = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  return (
+    <div className="min-h-screen bg-[#0a0a0a] text-white pt-32 pb-24 px-6">
+      <div className="max-w-2xl mx-auto text-center">
+        <h1 className="text-3xl md:text-4xl serif luxury-text-gradient uppercase tracking-widest mb-6">
+          Lounge de Miembros
+        </h1>
+        <p className="text-gray-400 font-light text-sm leading-relaxed mb-4">
+          Zona exclusiva para miembros. Estamos preparando esta experiencia.
+        </p>
+        <p className="text-[#c2b2a3] text-xs uppercase tracking-[0.3em]">Próximamente</p>
+      </div>
+    </div>
+  );
+};
 
 const App: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -60,6 +83,10 @@ const App: React.FC = () => {
               <Route path="/blog/:id" element={<BlogArticle />} />
               <Route path="/district/:districtId" element={<DistrictPage />} />
               <Route path="/analytics-local" element={<LocalAnalyticsDashboard />} />
+              <Route path="/legal" element={<Legal />} />
+              <Route path="/privacy" element={<Privacy />} />
+              <Route path="/terms" element={<Terms />} />
+              <Route path="/members" element={<MembersPage />} />
               
               {/* SEO Redirects - Redirecciones 301 para URLs alternativas */}
               <Route path="/inicio" element={<Navigate to="/" replace />} />

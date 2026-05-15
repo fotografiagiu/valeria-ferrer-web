@@ -1,6 +1,7 @@
 
 import React from 'react';
-import { Mail, Phone, Instagram, Twitter, MapPin, Send } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Phone, Instagram, Twitter, MapPin, Send } from 'lucide-react';
 
 const Footer: React.FC = () => {
   return (
@@ -27,9 +28,9 @@ const Footer: React.FC = () => {
           <div className="space-y-6">
             <h4 className="text-xs font-bold tracking-[0.3em] uppercase text-[#c2b2a3]">Escorts Valeria</h4>
             <ul className="space-y-4 text-xs font-light tracking-widest uppercase">
-              <li><a href="/models" className="hover:text-[#c2b2a3] transition-colors">Escorts de Lujo</a></li>
-              <li><a href="/services/gfe" className="hover:text-[#c2b2a3] transition-colors">Girlfriend Experience</a></li>
-              <li><a href="/services/duo" className="hover:text-[#c2b2a3] transition-colors">Especiales Dúo</a></li>
+              <li><Link to="/models" className="hover:text-[#c2b2a3] transition-colors">Escorts de Lujo</Link></li>
+              <li><Link to="/services/gfe" className="hover:text-[#c2b2a3] transition-colors">Girlfriend Experience</Link></li>
+              <li><Link to="/services/duo" className="hover:text-[#c2b2a3] transition-colors">Especiales Dúo</Link></li>
             </ul>
           </div>
 
@@ -37,10 +38,14 @@ const Footer: React.FC = () => {
           <div className="space-y-6">
             <h4 className="text-xs font-bold tracking-[0.3em] uppercase text-[#c2b2a3]">Para Caballeros</h4>
             <ul className="space-y-4 text-xs font-light tracking-widest uppercase">
-              <li><a href="/booking" className="hover:text-[#c2b2a3] transition-colors">Información de Reserva</a></li>
-              <li><a href="/fees" className="hover:text-[#c2b2a3] transition-colors">Honorarios y Tarifas</a></li>
-              <li><a href="/members" className="hover:text-[#c2b2a3] transition-colors">Lounge de Miembros <span className="text-[9px] opacity-50">(Próximamente)</span></a></li>
-              <li><a href="/blog/escorts-russafa-valencia" className="hover:text-[#c2b2a3] transition-colors">Guía de Ciudades</a></li>
+              <li><Link to="/booking" className="hover:text-[#c2b2a3] transition-colors">Información de Reserva</Link></li>
+              <li><Link to="/fees" className="hover:text-[#c2b2a3] transition-colors">Honorarios y Tarifas</Link></li>
+              <li>
+                <Link to="/members" className="hover:text-[#c2b2a3] transition-colors">
+                  Lounge de Miembros <span className="text-[9px] opacity-50">(Próximamente)</span>
+                </Link>
+              </li>
+              <li><Link to="/blog/escorts-russafa-valencia" className="hover:text-[#c2b2a3] transition-colors">Guía de Ciudades</Link></li>
             </ul>
           </div>
 
@@ -70,9 +75,9 @@ const Footer: React.FC = () => {
         <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0 text-[10px] font-medium tracking-[0.3em] uppercase text-gray-600">
           <p>Copyright © 2026 Agencia Valeria Ferrer™ - Todos los derechos reservados</p>
           <div className="flex space-x-8">
-            <a href="/legal" className="hover:text-[#c2b2a3]">Aviso Legal</a>
-            <a href="/privacy" className="hover:text-[#c2b2a3]">Privacidad</a>
-            <a href="/terms" className="hover:text-[#c2b2a3]">Términos</a>
+            <Link to="/legal" className="hover:text-[#c2b2a3]">Aviso Legal</Link>
+            <Link to="/privacy" className="hover:text-[#c2b2a3]">Privacidad</Link>
+            <Link to="/terms" className="hover:text-[#c2b2a3]">Términos</Link>
           </div>
         </div>
       </div>
