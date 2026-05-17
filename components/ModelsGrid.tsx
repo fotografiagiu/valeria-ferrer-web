@@ -300,6 +300,7 @@ const ModelsGrid: React.FC<ModelsGridProps> = ({ models = MODELS }) => {
         </div>
 
         <div
+          id="models-grid-start"
           className={`grid gap-8 md:gap-6 lg:gap-8 ${
             viewMode === 'normal'
               ? 'grid-cols-1 md:grid-cols-3 lg:grid-cols-4'
@@ -319,6 +320,19 @@ const ModelsGrid: React.FC<ModelsGridProps> = ({ models = MODELS }) => {
         <div className="mt-16 text-center px-4 md:px-0">
           <Link
             to="/models"
+            onClick={(event) => {
+              if (window.location.pathname === '/models') {
+                event.preventDefault();
+                const element = document.getElementById('models-grid-start');
+
+                if (element) {
+                  const y = element.getBoundingClientRect().top + window.scrollY - 120;
+                  window.scrollTo({ top: y, behavior: 'smooth' });
+                } else {
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+              }
+            }}
             className="inline-block px-12 py-5 bg-white text-black text-xs font-bold tracking-[0.3em] uppercase hover:bg-[#c2b2a3] transition-colors"
           >
             Ver Todas las Modelos
