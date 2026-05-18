@@ -15,11 +15,27 @@ const ModelDetail: React.FC = () => {
   const model = MODELS.find(m => m.id === id);
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-    const [showContactBar, setShowContactBar] = useState(true);
+  const [showContactBar, setShowContactBar] = useState(true);
   const touchStartRef = useRef<{ x: number; y: number } | null>(null);
 
+  const filterValidImages = (images: string[]) =>
+    images.filter(
+      (img) =>
+        img &&
+        img !== '/' &&
+        img !== '' &&
+        typeof img === 'string' &&
+        img.startsWith('/') &&
+        img.length > 1
+    );
+
+  const getAllModalImages = () =>
+    model ? filterValidImages([model.image, ...(model.gallery || [])]) : [];
+
   const openGallery = (index: number) => {
-    setCurrentImageIndex(index);
+    if (!model) return;
+    const images = getAllModalImages();
+    setCurrentImageIndex(Math.min(Math.max(index, 0), Math.max(images.length - 1, 0)));
     setIsGalleryOpen(true);
   };
 
@@ -1031,7 +1047,7 @@ const ModelDetail: React.FC = () => {
           
           {/* Mobile Gallery Stats */}
           <div className="text-center text-sm text-gray-400">
-            <p>{(model.gallery || []).length + 1} imágenes en alta resolución</p>
+            <p>{(model.gallery || []).length} imágenes en alta resolución</p>
             <p className="text-xs italic mt-1">Click en cualquier imagen para ver en pantalla completa</p>
           </div>
         </div>
@@ -2265,14 +2281,7 @@ const ModelDetail: React.FC = () => {
 
       {/* Gallery Modal */}
       <GalleryModal
-        images={[model.image, ...(model.gallery || [])].filter(img => 
-          img && 
-          img !== "/" && 
-          img !== "" && 
-          typeof img === 'string' && 
-          img.startsWith('/') &&
-          img.length > 1
-        )}
+        images={getAllModalImages()}
         initialIndex={currentImageIndex}
         isOpen={isGalleryOpen}
         onClose={closeGallery}
