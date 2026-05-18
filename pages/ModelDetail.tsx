@@ -265,6 +265,8 @@ const ModelDetail: React.FC = () => {
                 src={model.image} 
                 alt={model.name} 
                 className="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-105"
+                priority={model.slug === 'lana'}
+                loading={model.slug === 'lana' ? 'eager' : 'lazy'}
               />
             </div>
             {/* Badge for exclusivity */}
