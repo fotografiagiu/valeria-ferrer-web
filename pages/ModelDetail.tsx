@@ -106,15 +106,32 @@ const ModelDetail: React.FC = () => {
     );
   }
 
-  const detailRow = (modelsJson as { slug: string; uniquePoints?: string[]; experiencePoints?: string[] }[]).find(
-    (m) => m.slug === model.id
-  );
+  const detailRow = (modelsJson as {
+    slug: string;
+    uniquePoints?: string[];
+    experiencePoints?: string[];
+    essence?: string;
+    nationality?: string;
+    city?: string;
+    seoTitle?: string;
+    seoDescription?: string;
+    shortDescription?: string;
+  }[]).find((m) => m.slug === model.id);
   const modelUniquePoints = detailRow?.uniquePoints?.filter((p) => p?.trim());
   const modelExperiencePoints = detailRow?.experiencePoints?.filter((p) => p?.trim());
+  const modelEssence = detailRow?.essence?.trim();
+  const seoModel = {
+    ...model,
+    nationality: detailRow?.nationality ?? model.nationality,
+    city: detailRow?.city,
+    description: model.description,
+    seoTitle: detailRow?.seoTitle,
+    seoDescription: detailRow?.seoDescription,
+  };
 
   return (
     <div className="animate-in fade-in duration-1000 bg-[#0a0a0a] selection:bg-[#c2b2a3]/30">
-      <SEOHead model={model} />
+      <SEOHead model={seoModel} />
       <AnalyticsEvents modelName={model.name} />
       {/* Header Spacer */}
       <div className="h-32 lg:h-32"></div>
@@ -1341,11 +1358,11 @@ const ModelDetail: React.FC = () => {
                   </p>
                 ))}
               </div>
-              {model.essence && (
+              {modelEssence && (
                 <div className="bg-[#111111] border border-white/5 p-4 flex-1">
                   <h3 className="text-sm text-[#c2b2a3] uppercase tracking-[0.4em] mb-3 font-bold">La Esencia</h3>
                   <p className="text-gray-400 font-light leading-[1.6]">
-                    {model.essence}
+                    {modelEssence}
                   </p>
                 </div>
               )}

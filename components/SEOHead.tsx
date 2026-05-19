@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 interface SEOHeadProps {
   model?: {
     name: string;
-    age: number;
+    age?: number;
     nationality?: string;
     city?: string;
     image: string;
@@ -12,6 +12,8 @@ interface SEOHeadProps {
     height?: string | number;
     weight?: string | number;
     slug?: string;
+    seoTitle?: string;
+    seoDescription?: string;
   };
 }
 
@@ -25,17 +27,19 @@ const SEOHead: React.FC<SEOHeadProps> = ({ model }) => {
     const nationality = model.nationality || 'Española';
     const city = model.city || 'Valencia';
     const age = model.age;
+    const customSeoTitle = model.seoTitle?.trim();
+    const customSeoDescription = model.seoDescription?.trim();
     
     // Generate title based on VIP rules
-    let title = '';
-    if (isVIP) {
+    let title = customSeoTitle || '';
+    if (!title && isVIP) {
       // Special handling for Paula VIP to use "Acompañante VIP"
       if (model.slug === 'paula-vip') {
         title = `${modelName} VIP | Acompañante VIP en ${city} | Valeria Ferrer`;
       } else {
         title = `${modelName} VIP | Modelo VIP en ${city} | Valeria Ferrer`;
       }
-    } else {
+    } else if (!title) {
       // Use elegant vocabulary based on nationality
       const category = nationality === 'Colombiana' ? 'Escort' : 
                       nationality === 'Española' ? 'Acompañante' : 'Acompañante';
@@ -43,18 +47,24 @@ const SEOHead: React.FC<SEOHeadProps> = ({ model }) => {
     }
 
     // Generate unique meta description
-    let description = '';
-    if (isVIP) {
+    let description = customSeoDescription || '';
+    if (!description && isVIP) {
       // Special handling for Paula VIP
       if (model.slug === 'paula-vip') {
         description = `${modelName}, acompañante VIP exclusiva de ${age} años en ${city}. Experiencias de lujo, sofisticación refinada y atención discreta. Reserva VIP privada.`;
       } else {
         description = `${modelName}, modelo VIP exclusiva de ${age} años en ${city}. Experiencias de lujo, sofisticación internacional y atención discreta. Reserva VIP privada.`;
       }
-    } else {
+    } else if (!description) {
       const category = nationality === 'Colombiana' ? 'escort' : 
                       nationality === 'Española' ? 'acompañante' : 'acompañante';
-      description = `${modelName}, ${category} ${nationality} de ${age} años en ${city}. Perfil exclusivo, atención discreta y reserva privada para momentos especiales.`;
+      if (typeof age === 'number' && !Number.isNaN(age)) {
+        description = `${modelName}, ${category} ${nationality} de ${age} años en ${city}. Perfil exclusivo, atención discreta y reserva privada para momentos especiales.`;
+      } else if (model.description?.trim()) {
+        description = model.description.trim().replace(/\s+/g, ' ').slice(0, 160);
+      } else {
+        description = `${modelName}, ${category} ${nationality} en ${city}. Perfil exclusivo, atención discreta y reserva privada para momentos especiales.`;
+      }
     }
 
     // Update document title
@@ -84,12 +94,16 @@ const SEOHead: React.FC<SEOHeadProps> = ({ model }) => {
       "@context": "https://schema.org",
       "@type": "Person",
       "name": model.name,
-      "description": model.description || `Modelo ${model.nationality || 'Española'} de ${model.age} años disponible en ${model.city || 'Valencia'}`,
+      "description": customSeoDescription || model.description || (typeof age === 'number' && !Number.isNaN(age)
+        ? `Modelo ${model.nationality || 'Española'} de ${age} años disponible en ${model.city || 'Valencia'}`
+        : `Modelo ${model.nationality || 'Española'} disponible en ${model.city || 'Valencia'}`),
       "image": model.image,
       "url": modelProfileUrl,
       "jobTitle": "Modelo de Compañía VIP",
       "nationality": model.nationality || "Española",
-      "birthDate": new Date(new Date().getFullYear() - model.age, 0, 1).toISOString().split('T')[0],
+      ...(typeof age === 'number' && !Number.isNaN(age)
+        ? { birthDate: new Date(new Date().getFullYear() - age, 0, 1).toISOString().split('T')[0] }
+        : {}),
       "gender": "Female",
       "address": {
         "@type": "PostalAddress",
