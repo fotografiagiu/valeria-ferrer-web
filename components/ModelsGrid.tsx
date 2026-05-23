@@ -43,8 +43,8 @@ const ModelCard: React.FC<{ model: any; index: number; isDoubleView?: boolean }>
   const adaptedModel = {
     id: model.slug,
     name: model.name,
-    image: getThumbnailPath(model.coverImageUrl),
-    hoverImage: getThumbnailPath(model.coverImageUrl),
+    image: model.slug === "mia" ? model.coverImageUrl : getThumbnailPath(model.coverImageUrl),
+    hoverImage: model.slug === "mia" ? model.coverImageUrl : getThumbnailPath(model.coverImageUrl),
     location: model.nationality || 'Española',
     featured: model.featured,
   };

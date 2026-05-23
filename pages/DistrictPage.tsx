@@ -280,7 +280,7 @@ const DistrictPage: React.FC = () => {
               >
                 <div className="aspect-[2/3] relative overflow-hidden rounded-2xl mb-4">
                   <OptimizedImage
-                    src={getThumbnailPath(model.coverImageUrl)}
+                    src={model.slug === "mia" ? model.coverImageUrl : getThumbnailPath(model.coverImageUrl)}
                     alt={`${model.name} - Modelo exclusiva en ${district.name}`}
                     className="w-full h-full transition-transform duration-700 group-hover:scale-105"
                   />
