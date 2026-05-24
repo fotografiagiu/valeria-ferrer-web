@@ -153,8 +153,7 @@ const ModelCard: React.FC<{ model: any; index: number; isDoubleView?: boolean }>
 
           <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
 
-          {(adaptedModel.name === 'Aura' ||
-            adaptedModel.name === 'Teresa' ||
+          {(adaptedModel.name === 'Teresa' ||
             adaptedModel.name === 'Emma' ||
             adaptedModel.name === 'Kimberly') && (
             <div className="absolute top-2 left-2 md:top-4 md:left-4 z-30">
