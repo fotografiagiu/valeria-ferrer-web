@@ -4,11 +4,21 @@
   "name": "Modelos VIP Valeria Ferrer",
   "description": "Catálogo completo de modelos exclusivas en Valencia",
   "url": "https://valeriaferrer.com/models",
-  "numberOfItems": 24,
+  "numberOfItems": 25,
   "itemListElement": [
     {
       "@type": "ListItem",
       "position": 1,
+      "item": {
+        "@type": "Person",
+        "name": "Flor",
+        "url": "https://www.valeriaferrer.com/models/flor",
+        "image": "https://www.valeriaferrer.com/chicas-optimized/flor-valeria-ferrer-model-agency-valencia/portada.jpg"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
       "item": {
         "@type": "Person",
         "name": "Mónica",
@@ -18,7 +28,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 2,
+      "position": 3,
       "item": {
         "@type": "Person",
         "name": "Fernanda",
@@ -28,7 +38,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 3,
+      "position": 4,
       "item": {
         "@type": "Person",
         "name": "KEY",
@@ -38,7 +48,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 4,
+      "position": 5,
       "item": {
         "@type": "Person",
         "name": "Teresa",
@@ -48,7 +58,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 5,
+      "position": 6,
       "item": {
         "@type": "Person",
         "name": "Emma",
@@ -58,7 +68,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 6,
+      "position": 7,
       "item": {
         "@type": "Person",
         "name": "Gaby",
@@ -68,7 +78,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 7,
+      "position": 8,
       "item": {
         "@type": "Person",
         "name": "Elena",
@@ -78,7 +88,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 8,
+      "position": 9,
       "item": {
         "@type": "Person",
         "name": "Lana",
@@ -88,7 +98,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 9,
+      "position": 10,
       "item": {
         "@type": "Person",
         "name": "Mia",
@@ -98,7 +108,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 10,
+      "position": 11,
       "item": {
         "@type": "Person",
         "name": "Estefany",
@@ -108,7 +118,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 11,
+      "position": 12,
       "item": {
         "@type": "Person",
         "name": "Carla",
@@ -118,7 +128,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 12,
+      "position": 13,
       "item": {
         "@type": "Person",
         "name": "Maria",
@@ -128,7 +138,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 13,
+      "position": 14,
       "item": {
         "@type": "Person",
         "name": "Carlota",
@@ -138,7 +148,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 14,
+      "position": 15,
       "item": {
         "@type": "Person",
         "name": "Claudia (VIP)",
@@ -148,7 +158,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 15,
+      "position": 16,
       "item": {
         "@type": "Person",
         "name": "Silvia",
@@ -158,7 +168,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 16,
+      "position": 17,
       "item": {
         "@type": "Person",
         "name": "Yaiza",
@@ -168,7 +178,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 17,
+      "position": 18,
       "item": {
         "@type": "Person",
         "name": "Andrea",
@@ -178,7 +188,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 18,
+      "position": 19,
       "item": {
         "@type": "Person",
         "name": "Naty",
@@ -188,7 +198,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 19,
+      "position": 20,
       "item": {
         "@type": "Person",
         "name": "Erika",
@@ -198,7 +208,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 20,
+      "position": 21,
       "item": {
         "@type": "Person",
         "name": "Alicia",
@@ -208,7 +218,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 21,
+      "position": 22,
       "item": {
         "@type": "Person",
         "name": "Paula (VIP)",
@@ -218,7 +228,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 22,
+      "position": 23,
       "item": {
         "@type": "Person",
         "name": "Luna",
@@ -228,7 +238,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 23,
+      "position": 24,
       "item": {
         "@type": "Person",
         "name": "Tania",
@@ -238,7 +248,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 24,
+      "position": 25,
       "item": {
         "@type": "Person",
         "name": "Alba (VIP)",

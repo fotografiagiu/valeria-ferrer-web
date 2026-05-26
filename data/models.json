@@ -1,5 +1,54 @@
 [
   {
+    "slug": "flor",
+    "name": "Flor",
+    "age": 24,
+    "height": "1,65 m",
+    "weight": "55 kg",
+    "nationality": "Española",
+    "city": "Valencia",
+    "profileUrl": "https://www.valeriaferrer.com/models/flor/",
+    "coverImageUrl": "/chicas-optimized/flor-valeria-ferrer-model-agency-valencia/portada.jpg",
+    "profileImageUrl": "/chicas-optimized/flor-valeria-ferrer-model-agency-valencia/portada.jpg",
+    "description": "Flor destaca por una presencia natural, femenina y cuidada. Con 24 años, 1,65 m y 55 kg, su estilo combina dulzura, seguridad y una imagen elegante que llama la atención desde el primer momento. Española, cercana y con una actitud tranquila, transmite confianza sin esfuerzo: buena conversación, buen gusto y un trato agradable que hace que cada encuentro se sienta cómodo y especial. Es una opción ideal en Valencia para quienes buscan compañía con encanto, presencia y discreción.",
+    "essence": "El atractivo de Flor está en su equilibrio: feminidad serena, mirada cálida y una elegancia sencilla que no necesita exagerar. Sabe crear un ambiente relajado y cercano, donde la conexión nace con naturalidad y la experiencia se siente personal, cuidada y memorable. Perfecta para quien valora la calma, la buena compañía y una imagen impecable al detalle.",
+    "uniquePoints": [
+      "Presencia natural y femenina con estilo elegante y cuidado",
+      "Actitud tranquila, cercana y segura — ideal para quien busca comodidad y química",
+      "Imagen española con encanto mediterráneo y buen saber estar"
+    ],
+    "experiencePoints": [
+      "Cenas íntimas y encuentros discretos con ambiente relajado y cercano",
+      "Compañía para eventos sociales y planes exclusivos en Valencia",
+      "Acompañamiento personalizado con atención al detalle y trato agradable"
+    ],
+    "images": [
+      "/chicas-optimized/flor-valeria-ferrer-model-agency-valencia/1.jpg",
+      "/chicas-optimized/flor-valeria-ferrer-model-agency-valencia/2.jpg",
+      "/chicas-optimized/flor-valeria-ferrer-model-agency-valencia/3.jpg",
+      "/chicas-optimized/flor-valeria-ferrer-model-agency-valencia/4.jpg",
+      "/chicas-optimized/flor-valeria-ferrer-model-agency-valencia/5.jpg",
+      "/chicas-optimized/flor-valeria-ferrer-model-agency-valencia/6.jpg",
+      "/chicas-optimized/flor-valeria-ferrer-model-agency-valencia/7.jpg",
+      "/chicas-optimized/flor-valeria-ferrer-model-agency-valencia/8.jpg",
+      "/chicas-optimized/flor-valeria-ferrer-model-agency-valencia/9.jpg"
+    ],
+    "services": [
+      "Girlfriend Experience",
+      "Cenas de Negocios",
+      "Eventos Sociales",
+      "Acompañamiento Personal"
+    ],
+    "availability": "24h",
+    "languages": [
+      "Español",
+      "Inglés"
+    ],
+    "isNew": true,
+    "featured": true,
+    "vip": false
+  },
+  {
     "slug": "monica",
     "name": "Mónica",
     "age": 22,
