@@ -7,6 +7,29 @@ interface NavbarProps {
   openMembers: () => void;
 }
 
+const NuevoBadge = () => (
+  <span className="px-1.5 py-0.5 text-[7px] md:text-[8px] tracking-[0.22em] uppercase font-medium rounded-full border border-[#c2b2a3]/30 bg-[#c2b2a3]/10 text-[#c2b2a3]">
+    Nuevo
+  </span>
+);
+
+const NovedadesNavLink: React.FC<{
+  onNavigate?: () => void;
+  showUnderline?: boolean;
+}> = ({ onNavigate, showUnderline = true }) => (
+  <Link
+    to="/novedades"
+    onClick={onNavigate}
+    className="inline-flex items-center gap-2 text-[#c2b2a3] hover:text-white transition-colors relative group"
+  >
+    <span>Novedades</span>
+    <NuevoBadge />
+    {showUnderline && (
+      <span className="absolute -bottom-1 left-0 w-0 h-px bg-[#c2b2a3] group-hover:w-full transition-all duration-300" />
+    )}
+  </Link>
+);
+
 const Navbar: React.FC<NavbarProps> = ({ isScrolled, openMembers }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -48,6 +71,9 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolled, openMembers }) => {
               Modelos
               <span className="absolute bottom-0 left-0 w-0 h-px bg-[#c2b2a3] group-hover:w-full transition-all duration-300"></span>
             </Link>
+          </div>
+          <div className="hover:-translate-y-0.5 transition-transform duration-200">
+            <NovedadesNavLink />
           </div>
           <div className="hover:-translate-y-0.5 transition-transform duration-200">
             <Link to="/blog" className="hover:text-[#c2b2a3] transition-colors relative group">
@@ -115,6 +141,10 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolled, openMembers }) => {
           </div>
           <Link to="/" onClick={() => setIsMobileMenuOpen(false)}>Inicio</Link>
           <Link to="/models" onClick={() => setIsMobileMenuOpen(false)}>Modelos</Link>
+          <NovedadesNavLink
+            onNavigate={() => setIsMobileMenuOpen(false)}
+            showUnderline={false}
+          />
           <Link to="/blog" onClick={() => setIsMobileMenuOpen(false)}>Blog</Link>
           <Link to="/about" onClick={() => setIsMobileMenuOpen(false)}>Agencia</Link>
           <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)}>Contacto</Link>

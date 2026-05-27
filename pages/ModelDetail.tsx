@@ -111,19 +111,7 @@ const ModelDetail: React.FC = () => {
       .slice(0, 3);
   };
 
-  const exploreProfileLinks = model
-    ? getExploreProfileLinks(
-        {
-          slug: model.slug,
-          tags: model.tags,
-          age: model.age,
-          vip: model.vip,
-          isNew: model.isNew,
-          nationality: model.nationality,
-        },
-        { seedKey: `${model.slug}:${new Date().toISOString().slice(0, 10)}` }
-      )
-    : [];
+  const exploreProfileLinks = model ? getExploreProfileLinks() : [];
 
   const whatsappNumber = '+34645872227'; // Número de WhatsApp configurable
   const phoneNumber = '+34645872227'; // Número de teléfono configurable

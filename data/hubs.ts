@@ -54,10 +54,12 @@ function ageNumber(m: Model): number | null {
   return typeof m.age === 'number' ? m.age : null;
 }
 
-/** Umbrales “editoriales” (se pueden ajustar en fase 2 sin tocar páginas). */
+/** Umbrales de edad para hubs Jóvenes / Más maduras. */
 export const HUB_AGE = {
-  youngMax: 24,
-  matureMin: 26,
+  /** Menores de 25 años */
+  youngExclusiveMax: 25,
+  /** 25 años o más */
+  matureMin: 25,
 } as const;
 
 export const HUBS: Record<HubKey, HubDef> = {
@@ -94,7 +96,7 @@ export const HUBS: Record<HubKey, HubDef> = {
   colombianas: {
     key: 'colombianas',
     path: '/colombianas',
-    enabled: false,
+    enabled: true,
     minModels: 6,
     title: 'Colombianas | Valeria Ferrer',
     description:
@@ -109,7 +111,7 @@ export const HUBS: Record<HubKey, HubDef> = {
   espanolas: {
     key: 'espanolas',
     path: '/espanolas',
-    enabled: false,
+    enabled: true,
     minModels: 6,
     title: 'Españolas | Valeria Ferrer',
     description: 'Explora perfiles españolas en Valencia: elegancia natural y una estética premium.',
@@ -126,7 +128,7 @@ export const HUBS: Record<HubKey, HubDef> = {
   jovenes: {
     key: 'jovenes',
     path: '/jovenes',
-    enabled: false,
+    enabled: true,
     minModels: 6,
     title: 'Jóvenes | Valeria Ferrer',
     description:
@@ -137,14 +139,14 @@ export const HUBS: Record<HubKey, HubDef> = {
       'Una selección editorial con un aire más fresco, manteniendo siempre discreción, clase y presencia.',
     filter: (m) => {
       const age = ageNumber(m);
-      return age !== null && age <= HUB_AGE.youngMax;
+      return age !== null && age < HUB_AGE.youngExclusiveMax;
     },
   },
 
   maduras: {
     key: 'maduras',
     path: '/maduras',
-    enabled: false,
+    enabled: true,
     minModels: 6,
     title: 'Más maduras | Valeria Ferrer',
     description: 'Perfiles con una energía más madura y una selección editorial premium en Valencia.',
@@ -170,7 +172,7 @@ export const HUBS: Record<HubKey, HubDef> = {
     introTitle: 'Elegantes',
     introText:
       'Estilo cuidado y presencia impecable, pensadas para cenas, eventos y planes donde el detalle importa.',
-    filter: (_m, ctx) => hasTag(ctx.tags, 'elegante') || hasTag(ctx.tags, 'sofisticada'),
+    filter: (_m, ctx) => hasTag(ctx.tags, 'elegante'),
   },
 
   sociales: {

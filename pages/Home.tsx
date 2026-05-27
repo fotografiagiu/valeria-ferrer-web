@@ -10,6 +10,8 @@ import modelsData from '../data/models.json';
 import { ArrowRight, Plane, Shield, Heart, Globe, Diamond, ShieldCheck, Star, Send } from 'lucide-react';
 import { motion } from 'framer-motion';
 import LazyImage from '../components/LazyImage';
+import ExploreProfilesNav from '../components/ExploreProfilesNav';
+import { getHomeExploreLinks } from '../lib/homeExploreLinks';
 
 const Home: React.FC = () => {
   const homeSEOData = {
@@ -26,6 +28,30 @@ const Home: React.FC = () => {
         canonicalUrl={homeSEOData.canonicalUrl}
       />
       <Hero />
+
+      {/* Novedades + exploración rápida */}
+      <section className="bg-[#111111] border-y border-white/5 py-8 md:py-10">
+        <div className="max-w-[1600px] mx-auto px-6">
+          <div className="max-w-3xl mx-auto text-center mb-8">
+            <p className="text-gray-400 font-light text-sm md:text-base tracking-wide mb-4">
+              Nuevas incorporaciones y mejoras
+            </p>
+            <Link
+              to="/novedades"
+              className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full border border-[#c2b2a3]/35 bg-[#c2b2a3]/10 text-[#c2b2a3] text-[10px] md:text-xs uppercase tracking-[0.32em] font-medium hover:bg-[#c2b2a3]/18 hover:border-[#c2b2a3]/50 hover:text-white transition-all duration-300 shadow-[0_0_24px_-8px_rgba(194,178,163,0.25)]"
+            >
+              Ver novedades
+              <ArrowRight className="w-3.5 h-3.5" strokeWidth={1.5} />
+            </Link>
+          </div>
+
+          <ExploreProfilesNav
+            links={getHomeExploreLinks()}
+            title="Explorar"
+            variant="embedded"
+          />
+        </div>
+      </section>
 
       {/* Elite Experience Section */}
       <section className="py-12 md:py-24 bg-[#0a0a0a] border-b border-white/5">

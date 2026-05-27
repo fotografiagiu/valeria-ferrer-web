@@ -49,13 +49,13 @@ export const EXPLORE_NAV: Record<ExploreNavKey, ExploreNavItem> = {
     key: 'espanolas',
     label: 'Españolas',
     hubPath: '/espanolas',
-    enabled: false,
+    enabled: true,
   },
   colombianas: {
     key: 'colombianas',
     label: 'Colombianas',
     hubPath: '/colombianas',
-    enabled: false,
+    enabled: true,
   },
   latinas: {
     key: 'latinas',
@@ -66,14 +66,14 @@ export const EXPLORE_NAV: Record<ExploreNavKey, ExploreNavItem> = {
   jovenes: {
     key: 'jovenes',
     label: 'Jóvenes',
-    hubPath: '/menores-25',
-    enabled: false,
+    hubPath: '/jovenes',
+    enabled: true,
   },
   maduras: {
     key: 'maduras',
     label: 'Más maduras',
-    hubPath: '/mayores-25',
-    enabled: false,
+    hubPath: '/maduras',
+    enabled: true,
   },
   elegantes: {
     key: 'elegantes',
