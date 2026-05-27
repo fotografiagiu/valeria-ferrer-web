@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import About from './pages/About';
 import Models from './pages/Models';
+import ModelsHub from './pages/ModelsHub';
 import ModelDetail from './pages/ModelDetail';
 import Fees from './pages/Fees';
 import Booking from './pages/Booking';
@@ -72,6 +73,8 @@ const App: React.FC = () => {
               <Route path="/about" element={<About />} />
               <Route path="/models" element={<Models />} />
               <Route path="/models/:id" element={<ModelDetail />} />
+              <Route path="/vip" element={<ModelsHub hubKey="vip" />} />
+              <Route path="/nuevas" element={<ModelsHub hubKey="nuevas" />} />
               <Route path="/fees" element={<Fees />} />
               <Route path="/booking" element={<Booking />} />
               <Route path="/casting" element={<Casting />} />

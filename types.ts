@@ -12,6 +12,8 @@ export interface Model {
   image: string;
   hoverImage: string;
   description: string;
+  tags?: string[];
+  isNew?: boolean;
   bio?: string;
   essence?: string;
   services?: string[];

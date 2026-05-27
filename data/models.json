@@ -44,6 +44,17 @@
       "Español",
       "Inglés"
     ],
+    "tags": [
+      "espanola",
+      "normal",
+      "nueva",
+      "elegante",
+      "cercana",
+      "discreta",
+      "serena",
+      "cenas",
+      "eventos"
+    ],
     "isNew": true,
     "featured": true,
     "vip": false
@@ -91,6 +102,18 @@
     "languages": [
       "Español",
       "Inglés"
+    ],
+    "tags": [
+      "espanola",
+      "normal",
+      "nueva",
+      "sofisticada",
+      "elegante",
+      "discreta",
+      "serena",
+      "cenas",
+      "eventos",
+      "viajes"
     ],
     "isNew": true,
     "featured": true,
@@ -142,6 +165,17 @@
       "Español",
       "Inglés"
     ],
+    "tags": [
+      "colombiana",
+      "normal",
+      "nueva",
+      "seductora",
+      "apasionada",
+      "sofisticada",
+      "serena",
+      "cenas",
+      "viajes"
+    ],
     "isNew": true,
     "featured": true,
     "vip": false
@@ -190,6 +224,17 @@
     "languages": [
       "Español",
       "Inglés"
+    ],
+    "tags": [
+      "colombiana",
+      "normal",
+      "nueva",
+      "social",
+      "divertida",
+      "seductora",
+      "apasionada",
+      "eventos",
+      "cenas"
     ],
     "isNew": true,
     "featured": true,

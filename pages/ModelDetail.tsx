@@ -2,6 +2,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { MODELS } from '../constants';
 import modelsJson from '../data/models.json';
+import { getRecommendedModels } from '../lib/recommendations';
+import { getExploreProfileLinks } from '../lib/exploreProfiles';
+import ExploreProfilesNav from '../components/ExploreProfilesNav';
 import { ArrowLeft, Check, Calendar, Phone, MapPin, Ruler, User, Star, Sparkles, ChevronLeft, ChevronRight, MessageCircle, Shield, Crown, Clock, Heart } from 'lucide-react';
 import GalleryModal from '../components/GalleryModal';
 import LazyImage from '../components/LazyImage';
@@ -66,12 +69,61 @@ const ModelDetail: React.FC = () => {
 
   
   const getRelatedModels = () => {
-    const currentIndex = MODELS.findIndex(m => m.id === id);
-    const related = MODELS.filter((_, index) => index !== currentIndex)
-      .sort(() => Math.random() - 0.5)
+    const current = MODELS.find((m) => m.id === id);
+    if (!current) return [];
+
+    // Stable rotation (daily) to avoid a "fixed block" feeling.
+    const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD (UTC)
+    const recs = getRecommendedModels(current as any, MODELS as any, {
+      seedKey: `${current.slug}:${today}`,
+      mobile: false,
+    });
+
+    // Vite exposes import.meta.env at runtime, but some TS setups may not type it.
+    // We keep this debug-only without changing UI.
+    const isDev = (import.meta as any)?.env?.DEV;
+    if (isDev && recs.length) {
+      // Debug only: explain why, without changing UI
+      // eslint-disable-next-line no-console
+      console.debug(
+        `[recs] ${current.slug} →`,
+        recs.map((r) => ({
+          slug: r.model.slug,
+          pickedFor: r.pickedFor,
+          score: r.score,
+          shared: r.shared,
+          notes: r.notes,
+        }))
+      );
+    }
+
+    if (recs.length) return recs.map((r) => r.model);
+
+    // Fallback: stable shuffle (no random per render)
+    const seed = current.slug.split('').reduce((acc, ch) => acc + ch.charCodeAt(0), 0);
+    return MODELS.filter((m) => m.id !== id)
+      .slice()
+      .sort((a, b) => {
+        const ha = (a.slug.charCodeAt(0) + seed) % 97;
+        const hb = (b.slug.charCodeAt(0) + seed) % 97;
+        return ha - hb;
+      })
       .slice(0, 3);
-    return related;
   };
+
+  const exploreProfileLinks = model
+    ? getExploreProfileLinks(
+        {
+          slug: model.slug,
+          tags: model.tags,
+          age: model.age,
+          vip: model.vip,
+          isNew: model.isNew,
+          nationality: model.nationality,
+        },
+        { seedKey: `${model.slug}:${new Date().toISOString().slice(0, 10)}` }
+      )
+    : [];
 
   const whatsappNumber = '+34645872227'; // Número de WhatsApp configurable
   const phoneNumber = '+34645872227'; // Número de teléfono configurable
@@ -1241,6 +1293,8 @@ const ModelDetail: React.FC = () => {
               </Link>
             ))}
           </div>
+
+          <ExploreProfilesNav links={exploreProfileLinks} className="px-2" />
         </div>
 
       </div>
@@ -2111,6 +2165,8 @@ const ModelDetail: React.FC = () => {
                   </Link>
                 ))}
               </div>
+
+              <ExploreProfilesNav links={exploreProfileLinks} />
             </div>
                         
           </div>
