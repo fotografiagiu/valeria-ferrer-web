@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { MODELS } from '../constants';
 import { Grid3X3, LayoutGrid } from 'lucide-react';
 import LazyImage from './LazyImage';
-import { getModelCoverImage } from '../lib/modelGridImage';
+import { getModelCoverImage, getGalleryImageThumbnail, getModelCoverThumbnailPath } from '../lib/modelGridImage';
 
 const ModelCard: React.FC<{ model: any; index: number; isDoubleView?: boolean }> = ({
   model,
@@ -12,12 +12,12 @@ const ModelCard: React.FC<{ model: any; index: number; isDoubleView?: boolean }>
 }) => {
   const [isHovered, setIsHovered] = useState(false);
 
-  const coverSrc = getModelCoverImage(model.coverImageUrl || model.image || '');
-  const hoverSrc = model.images?.[1]
-    ? getModelCoverImage(model.images[1])
-    : model.hoverImage
-      ? getModelCoverImage(model.hoverImage)
-      : coverSrc;
+  const coverUrl = model.coverImageUrl || model.image || '';
+  const coverSrc = getModelCoverImage(coverUrl);
+  const hoverRaw = model.images?.[1] || model.hoverImage || '';
+  const hoverSrc = hoverRaw
+    ? getGalleryImageThumbnail(hoverRaw)
+    : getModelCoverThumbnailPath(coverUrl);
 
   const adaptedModel = {
     id: model.slug,
