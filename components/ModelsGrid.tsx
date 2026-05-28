@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { MODELS } from '../constants';
 import { Grid3X3, LayoutGrid } from 'lucide-react';
 import LazyImage from './LazyImage';
+import { getModelCoverImage } from '../lib/modelGridImage';
 
 const ModelCard: React.FC<{ model: any; index: number; isDoubleView?: boolean }> = ({
   model,
@@ -11,40 +12,18 @@ const ModelCard: React.FC<{ model: any; index: number; isDoubleView?: boolean }>
 }) => {
   const [isHovered, setIsHovered] = useState(false);
 
-  // Extraer directorio del coverImageUrl
-  const getThumbnailPath = (coverImageUrl: string) => {
-    const pathParts = coverImageUrl.split('/');
-
-    const optimizedIndex = pathParts.indexOf('chicas-optimized');
-    const chicasIndex = pathParts.indexOf('chicas');
-
-    let baseDirectory = '';
-
-    if (optimizedIndex !== -1) {
-      baseDirectory = pathParts[optimizedIndex + 1];
-    } else if (chicasIndex !== -1) {
-      baseDirectory = pathParts[chicasIndex + 1];
-    }
-
-    if (!baseDirectory) {
-      if (pathParts.includes('gallery')) {
-        const galleryIndex = pathParts.indexOf('gallery');
-        const directory = pathParts[galleryIndex - 1];
-        return `/chicas-thumbnails/${directory}/cover-thumbnail.jpg`;
-      }
-
-      const directory = pathParts[pathParts.length - 2];
-      return `/chicas-thumbnails/${directory}/cover-thumbnail.jpg`;
-    }
-
-    return `/chicas-thumbnails/${baseDirectory}/cover-thumbnail.jpg`;
-  };
+  const coverSrc = getModelCoverImage(model.coverImageUrl || model.image || '');
+  const hoverSrc = model.images?.[1]
+    ? getModelCoverImage(model.images[1])
+    : model.hoverImage
+      ? getModelCoverImage(model.hoverImage)
+      : coverSrc;
 
   const adaptedModel = {
     id: model.slug,
     name: model.name,
-    image: model.slug === "mia" ? model.coverImageUrl : getThumbnailPath(model.coverImageUrl),
-    hoverImage: model.slug === "mia" ? model.coverImageUrl : getThumbnailPath(model.coverImageUrl),
+    image: coverSrc,
+    hoverImage: hoverSrc,
     location: model.nationality || 'Española',
     featured: model.featured,
   };

@@ -20,6 +20,7 @@ function toGridModel(m: Model) {
     id: m.slug,
     name: m.name,
     coverImageUrl: m.image,
+    images: m.gallery,
     featured: m.featured,
     nationality: m.nationality,
     age: m.age,

@@ -1,108 +1,42 @@
-import { useEffect, useState, type CSSProperties } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
-const MOBILE_VIDEO_ID = 'j2kjUoDzWEE';
 const DESKTOP_VIDEO_ID = 'lor3hN0e600';
 
 const YT_EMBED_PARAMS =
   'autoplay=1&mute=1&playsinline=1&loop=1&controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&rel=0&disablekb=1&fs=0';
 
-const mobileEmbedSrc = `https://www.youtube-nocookie.com/embed/${MOBILE_VIDEO_ID}?${YT_EMBED_PARAMS}&playlist=${MOBILE_VIDEO_ID}`;
 const desktopEmbedSrc = `https://www.youtube-nocookie.com/embed/${DESKTOP_VIDEO_ID}?${YT_EMBED_PARAMS}&playlist=${DESKTOP_VIDEO_ID}`;
 
+/** Frame del Short móvil — sin iframe (evita crash GPU de Chrome al pinch-zoom). */
 const MOBILE_POSTER = '/images/home-mobile-hero.jpg';
-const DESKTOP_POSTER = `https://i.ytimg.com/vi/${DESKTOP_VIDEO_ID}/hqdefault.jpg`;
-
-const MOBILE_MEDIA_CLASS =
-  'pointer-events-none absolute left-1/2 top-1/2 h-[110%] w-[100vw] min-h-[110%] min-w-[100vw] origin-center object-cover';
-const MOBILE_MEDIA_STYLE: CSSProperties = {
-  transform: 'translate(-50%, -57%) scale(1.04, 1.19)',
-};
-
-function scheduleDeferredMount(onMount: () => void): () => void {
-  let cancelled = false;
-  let done = false;
-
-  const run = () => {
-    if (cancelled || done) return;
-    done = true;
-    onMount();
-  };
-
-  const timeoutId = window.setTimeout(run, 1500);
-  const w = window as Window & {
-    requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number;
-    cancelIdleCallback?: (id: number) => void;
-  };
-  const idleId =
-    typeof w.requestIdleCallback === 'function'
-      ? w.requestIdleCallback(run, { timeout: 2500 })
-      : undefined;
-
-  return () => {
-    cancelled = true;
-    window.clearTimeout(timeoutId);
-    if (idleId !== undefined && w.cancelIdleCallback) {
-      w.cancelIdleCallback(idleId);
-    }
-  };
-}
 
 const Hero = () => {
-  const [loadVideo, setLoadVideo] = useState(false);
-
-  useEffect(() => scheduleDeferredMount(() => setLoadVideo(true)), []);
-
   return (
     <section className="relative flex min-h-[100dvh] h-[100dvh] md:min-h-screen md:h-screen items-center justify-center overflow-hidden bg-black">
-      {/* Background Media — poster first paint, iframe after idle/1.5s */}
+      {/* Background Media */}
       <div className="absolute inset-0 z-0 overflow-hidden bg-black">
-        {/* Mobile */}
+        {/* Mobile: imagen estática (mismo encuadre; iframe YouTube crashea la pestaña al zoom) */}
         <div className="block md:hidden absolute inset-0 overflow-hidden bg-black">
           <img
             src={MOBILE_POSTER}
             alt=""
             decoding="async"
             fetchPriority="high"
-            className={`${MOBILE_MEDIA_CLASS} transition-opacity duration-500 ${
-              loadVideo ? 'opacity-0' : 'opacity-100'
-            }`}
-            style={MOBILE_MEDIA_STYLE}
+            className="pointer-events-none absolute inset-0 h-full w-full object-cover object-[center_42%]"
           />
-          {loadVideo && (
-            <iframe
-              src={mobileEmbedSrc}
-              className={MOBILE_MEDIA_CLASS}
-              style={MOBILE_MEDIA_STYLE}
-              frameBorder="0"
-              allow="autoplay; encrypted-media; picture-in-picture"
-              allowFullScreen
-              title="Valeria Ferrer Background Video Mobile"
-            />
-          )}
         </div>
 
         {/* Desktop */}
         <div className="hidden md:block absolute inset-0 overflow-hidden bg-black">
-          <img
-            src={DESKTOP_POSTER}
-            alt=""
-            decoding="async"
-            className={`pointer-events-none absolute top-1/2 left-1/2 w-[125%] h-[125%] -translate-x-1/2 -translate-y-1/2 object-cover transition-opacity duration-500 ${
-              loadVideo ? 'opacity-0' : 'opacity-100'
-            }`}
+          <iframe
+            src={desktopEmbedSrc}
+            className="pointer-events-none absolute top-1/2 left-1/2 w-[125%] h-[125%] -translate-x-1/2 -translate-y-1/2"
+            frameBorder="0"
+            allow="autoplay; encrypted-media; picture-in-picture"
+            allowFullScreen
+            title="Valeria Ferrer Background Video"
           />
-          {loadVideo && (
-            <iframe
-              src={desktopEmbedSrc}
-              className="pointer-events-none absolute top-1/2 left-1/2 w-[125%] h-[125%] -translate-x-1/2 -translate-y-1/2"
-              frameBorder="0"
-              allow="autoplay; encrypted-media; picture-in-picture"
-              allowFullScreen
-              title="Valeria Ferrer Background Video"
-            />
-          )}
         </div>
 
         {/* Overlay */}

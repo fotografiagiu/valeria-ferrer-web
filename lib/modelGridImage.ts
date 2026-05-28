@@ -1,5 +1,17 @@
-/** Rutas de imagen para cards del catálogo (preview y grid). */
-export function getModelThumbnailPath(coverImageUrl: string): string {
+/** Rutas de imagen: original (chicas) vs comprimida (chicas-thumbnails). */
+
+export function resolveOriginalImageUrl(imageUrl: string): string {
+  if (!imageUrl) return '';
+  return imageUrl.startsWith('/') ? imageUrl : `/${imageUrl}`;
+}
+
+/** Portada / card principal — siempre original alta calidad. */
+export function getModelCoverImage(coverImageUrl: string): string {
+  return resolveOriginalImageUrl(coverImageUrl);
+}
+
+/** Miniatura de portada — solo UI pequeña (mockups, etc.). */
+export function getModelCoverThumbnailPath(coverImageUrl: string): string {
   const pathParts = coverImageUrl.split('/');
 
   const optimizedIndex = pathParts.indexOf('chicas-optimized');
@@ -27,6 +39,26 @@ export function getModelThumbnailPath(coverImageUrl: string): string {
   return `/chicas-thumbnails/${baseDirectory}/cover-thumbnail.jpg`;
 }
 
-export function getModelCardImage(slug: string, coverImageUrl: string): string {
-  return slug === 'mia' ? coverImageUrl : getModelThumbnailPath(coverImageUrl);
+/** Grid de inicio, hubs y catálogo editorial — portada original. */
+export function getModelCardImage(_slug: string, coverImageUrl: string): string {
+  return getModelCoverImage(coverImageUrl);
+}
+
+/**
+ * Miniatura de una imagen de galería (misma convención de nombre en chicas-thumbnails).
+ * Para strips pequeños y carrusel del modal.
+ */
+export function getGalleryImageThumbnail(imageUrl: string): string {
+  const normalized = resolveOriginalImageUrl(imageUrl);
+  if (!normalized || normalized.includes('/chicas-thumbnails/')) {
+    return normalized;
+  }
+
+  if (normalized.endsWith('/portada.jpg')) {
+    return normalized
+      .replace('/chicas/', '/chicas-thumbnails/')
+      .replace('/portada.jpg', '/cover-thumbnail.jpg');
+  }
+
+  return normalized.replace('/chicas/', '/chicas-thumbnails/');
 }

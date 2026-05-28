@@ -6,6 +6,7 @@ import LazyImage from '../components/LazyImage';
 import { MODELS } from '../constants';
 import { EXPLORE_NAV, ExploreNavKey, getExploreHref } from '../data/exploreNav';
 import { getHubModels } from '../lib/hubs';
+import { getModelCoverImage, getModelCoverThumbnailPath } from '../lib/modelGridImage';
 import type { Model } from '../types';
 
 const SEO = {
@@ -24,33 +25,9 @@ const NAV_SHOWCASE_KEYS: ExploreNavKey[] = [
   'sociales',
 ];
 
-function getThumbnailPath(coverImageUrl: string): string {
-  const pathParts = coverImageUrl.split('/');
-  const optimizedIndex = pathParts.indexOf('chicas-optimized');
-  const chicasIndex = pathParts.indexOf('chicas');
-
-  let baseDirectory = '';
-  if (optimizedIndex !== -1) {
-    baseDirectory = pathParts[optimizedIndex + 1];
-  } else if (chicasIndex !== -1) {
-    baseDirectory = pathParts[chicasIndex + 1];
-  }
-
-  if (!baseDirectory) {
-    if (pathParts.includes('gallery')) {
-      const galleryIndex = pathParts.indexOf('gallery');
-      const directory = pathParts[galleryIndex - 1];
-      return `/chicas-thumbnails/${directory}/cover-thumbnail.jpg`;
-    }
-    const directory = pathParts[pathParts.length - 2];
-    return `/chicas-thumbnails/${directory}/cover-thumbnail.jpg`;
-  }
-
-  return `/chicas-thumbnails/${baseDirectory}/cover-thumbnail.jpg`;
-}
-
+/** Cards compactas del listado — thumbnail comprimido (UI pequeña). */
 function modelCardImage(model: Model): string {
-  return model.slug === 'mia' ? model.image : getThumbnailPath(model.image);
+  return getModelCoverThumbnailPath(getModelCoverImage(model.image));
 }
 
 function modelMetaLine(model: Model): string {
@@ -234,8 +211,7 @@ const screenshotPhotoMaskStyle: React.CSSProperties = {
 
 function catalogCoverUrl(model: Model): string {
   const raw = model as Model & { coverImageUrl?: string };
-  const url = raw.coverImageUrl || model.image || '';
-  return url.startsWith('/') ? url : `/${url}`;
+  return getModelCoverImage(raw.coverImageUrl || model.image || '');
 }
 
 function catalogMetaLine(model: Model): string {

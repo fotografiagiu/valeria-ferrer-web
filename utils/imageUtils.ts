@@ -1,42 +1,25 @@
 // Utilidades para optimización de imágenes responsive
 
-export const getThumbnailPath = (imageUrl: string): string => {
+import {
+  getGalleryImageThumbnail,
+  getModelCoverImage,
+  getModelCoverThumbnailPath,
+  resolveOriginalImageUrl,
+} from '../lib/modelGridImage';
+
+export { getGalleryImageThumbnail, getModelCoverImage, getModelCoverThumbnailPath };
+
+/** @deprecated Usar getModelCoverThumbnailPath — solo para previews pequeños */
+export const getThumbnailPath = getModelCoverThumbnailPath;
+
+export const getMobileImageSrc = (imageUrl: string, useThumbnail = false): string => {
   if (!imageUrl) return '';
-  
-  const pathParts = imageUrl.split('/');
-  
-  // Si el path contiene 'gallery/', necesitamos el directorio anterior
-  if (pathParts.includes('gallery')) {
-    const galleryIndex = pathParts.indexOf('gallery');
-    const directory = pathParts[galleryIndex - 1];
-    return `/chicas-thumbnails/${directory}/cover-thumbnail.jpg`;
-  } else {
-    const directory = pathParts[pathParts.length - 2];
-    return `/chicas-thumbnails/${directory}/cover-thumbnail.jpg`;
-  }
+  return useThumbnail ? getModelCoverThumbnailPath(imageUrl) : resolveOriginalImageUrl(imageUrl);
 };
 
-export const getMobileImageSrc = (imageUrl: string, useThumbnail: boolean = true): string => {
-  if (!imageUrl) return '';
-  
-  // En móvil, preferir thumbnails
-  if (useThumbnail) {
-    return getThumbnailPath(imageUrl);
-  }
-  
-  return imageUrl;
-};
-
-export const getGalleryThumbnailPath = (imageUrl: string, index: number): string => {
-  if (!imageUrl) return '';
-  
-  const pathParts = imageUrl.split('/');
-  const directory = pathParts[pathParts.length - 2];
-  
-  // Para thumbnails de galería, usar el nombre original
-  const fileName = pathParts[pathParts.length - 1];
-  
-  return `/chicas-thumbnails/${directory}/gallery-${index + 1}-thumbnail.jpg`;
+/** @deprecated Usar getGalleryImageThumbnail */
+export const getGalleryThumbnailPath = (imageUrl: string, _index: number): string => {
+  return getGalleryImageThumbnail(imageUrl);
 };
 
 export const getResponsiveSizes = (isMobile: boolean = false): string => {
@@ -47,6 +30,5 @@ export const getResponsiveSizes = (isMobile: boolean = false): string => {
 };
 
 export const getPriorityLoading = (index: number, isAboveFold: boolean = false): boolean => {
-  // Prioridad para las primeras 3 imágenes o las que están above the fold
   return index < 3 || isAboveFold;
 };

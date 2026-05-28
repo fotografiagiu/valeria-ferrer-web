@@ -7,6 +7,7 @@ import { getExploreProfileLinks } from '../lib/exploreProfiles';
 import ExploreProfilesNav from '../components/ExploreProfilesNav';
 import { ArrowLeft, Check, Calendar, Phone, MapPin, Ruler, User, Star, Sparkles, ChevronLeft, ChevronRight, MessageCircle, Shield, Crown, Clock, Heart } from 'lucide-react';
 import LazyImage from '../components/LazyImage';
+import { getGalleryImageThumbnail } from '../lib/modelGridImage';
 import SEOHead from '../components/SEOHead';
 import Breadcrumbs from '../components/Breadcrumbs';
 import AnalyticsEvents from '../components/AnalyticsEvents';
@@ -2037,10 +2038,11 @@ const ModelDetail: React.FC = () => {
                         onClick={() => openGallery(idx + 4)}
                       >
                         <img 
-                          src={img} 
+                          src={getGalleryImageThumbnail(img)} 
                           alt={`${model.name} - Galería ${idx + 4}`} 
                           className="w-full h-full object-cover transition-all duration-[1s] group-hover:scale-110"
                           draggable={false}
+                          loading="lazy"
                         />
                         <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                           <Sparkles size={14} className="text-white/80" />

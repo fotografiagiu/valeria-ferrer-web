@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { ArrowLeft, MapPin, Phone, Calendar, Star, Clock, User } from 'lucide-react';
 import modelsData from '../data/models.json';
 import OptimizedImage from '../components/OptimizedImage';
+import { getModelCoverImage } from '../lib/modelGridImage';
 import BlogCard from '../components/BlogCard';
 import AnalyticsEvents from '../components/AnalyticsEvents';
 import blogData from '../data/blog.json';
@@ -121,33 +122,6 @@ const districtsData: Record<string, DistrictData> = {
   }
 };
 
-const getThumbnailPath = (coverImageUrl: string) => {
-  const pathParts = coverImageUrl.split('/');
-
-  const optimizedIndex = pathParts.indexOf('chicas-optimized');
-  const chicasIndex = pathParts.indexOf('chicas');
-
-  let baseDirectory = '';
-
-  if (optimizedIndex !== -1) {
-    baseDirectory = pathParts[optimizedIndex + 1];
-  } else if (chicasIndex !== -1) {
-    baseDirectory = pathParts[chicasIndex + 1];
-  }
-
-  if (!baseDirectory) {
-    if (pathParts.includes('gallery')) {
-      const galleryIndex = pathParts.indexOf('gallery');
-      const directory = pathParts[galleryIndex - 1];
-      return `/chicas-thumbnails/${directory}/cover-thumbnail.jpg`;
-    }
-
-    const directory = pathParts[pathParts.length - 2];
-    return `/chicas-thumbnails/${directory}/cover-thumbnail.jpg`;
-  }
-
-  return `/chicas-thumbnails/${baseDirectory}/cover-thumbnail.jpg`;
-};
 
 const DistrictPage: React.FC = () => {
   const { districtId } = useParams<{ districtId: string }>();
@@ -280,7 +254,7 @@ const DistrictPage: React.FC = () => {
               >
                 <div className="aspect-[2/3] relative overflow-hidden rounded-2xl mb-4">
                   <OptimizedImage
-                    src={model.slug === "mia" ? model.coverImageUrl : getThumbnailPath(model.coverImageUrl)}
+                    src={getModelCoverImage(model.coverImageUrl)}
                     alt={`${model.name} - Modelo exclusiva en ${district.name}`}
                     className="w-full h-full transition-transform duration-700 group-hover:scale-105"
                   />

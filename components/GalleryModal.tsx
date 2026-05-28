@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import LazyImage from './LazyImage';
+import { getGalleryImageThumbnail } from '../lib/modelGridImage';
 
 interface GalleryModalProps {
   images: string[];
@@ -81,12 +82,10 @@ const getModalThumbnail = (imageUrl: string, modelName: string): string => {
     if (imageUrl.includes('/chicas/mia-model-agency-valencia-vf/gallery/08.jpg')) {
       return '/chicas-thumbnails/mia-model-agency-valencia-vf/thumb-08.jpg';
     }
-    // Fallback para Mia: si no coincide, usar imagen original
-    return imageUrl;
+    return getGalleryImageThumbnail(imageUrl);
   }
-  
-  // Fallback general: otras modelos usan imagen original
-  return imageUrl;
+
+  return getGalleryImageThumbnail(imageUrl);
 };
 
 const GalleryModal: React.FC<GalleryModalProps> = ({ 
