@@ -1,43 +1,33 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-
-const DESKTOP_VIDEO_ID = 'lor3hN0e600';
-
-const YT_EMBED_PARAMS =
-  'autoplay=1&mute=1&playsinline=1&loop=1&controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&rel=0&disablekb=1&fs=0';
-
-const desktopEmbedSrc = `https://www.youtube-nocookie.com/embed/${DESKTOP_VIDEO_ID}?${YT_EMBED_PARAMS}&playlist=${DESKTOP_VIDEO_ID}`;
-
-/** Frame del Short móvil — sin iframe (evita crash GPU de Chrome al pinch-zoom). */
-const MOBILE_POSTER = '/images/home-mobile-hero.jpg';
+import { MapPin, Users, Phone } from 'lucide-react';
 
 const Hero = () => {
   return (
-    <section className="relative flex min-h-[100dvh] h-[100dvh] md:min-h-screen md:h-screen items-center justify-center overflow-hidden bg-black">
+    <section className="relative h-screen flex items-center justify-center overflow-hidden bg-black">
       {/* Background Media */}
-      <div className="absolute inset-0 z-0 overflow-hidden bg-black">
-        {/* Mobile: imagen estática (mismo encuadre; iframe YouTube crashea la pestaña al zoom) */}
-        <div className="block md:hidden absolute inset-0 overflow-hidden bg-black">
-          <img
-            src={MOBILE_POSTER}
-            alt=""
-            decoding="async"
-            fetchPriority="high"
-            className="pointer-events-none absolute inset-0 h-full w-full object-cover object-[center_42%]"
-          />
-        </div>
-
-        {/* Desktop */}
-        <div className="hidden md:block absolute inset-0 overflow-hidden bg-black">
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        {/* Mobile: YouTube — option A: 106vw crop, light scale, taller to kill top gap */}
+        <div className="block md:hidden absolute inset-0 overflow-hidden">
           <iframe
-            src={desktopEmbedSrc}
-            className="pointer-events-none absolute top-1/2 left-1/2 w-[125%] h-[125%] -translate-x-1/2 -translate-y-1/2"
+            src="https://www.youtube.com/embed/j2kjUoDzWEE?autoplay=1&mute=1&playsinline=1&loop=1&playlist=j2kjUoDzWEE&controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&rel=0&disablekb=1&fs=0"
+            className="pointer-events-none absolute top-1/2 left-1/2 h-[110%] min-h-[110%] w-[100vw] min-w-[100vw] origin-center scale-x-[1.04] scale-y-[1.19] -translate-x-1/2 -translate-y-[57%]"
             frameBorder="0"
             allow="autoplay; encrypted-media; picture-in-picture"
             allowFullScreen
-            title="Valeria Ferrer Background Video"
+            title="Valeria Ferrer Background Video Mobile"
           />
         </div>
+
+        {/* Desktop: YouTube */}
+        <iframe
+          src="https://www.youtube.com/embed/lor3hN0e600?autoplay=1&mute=1&playsinline=1&loop=1&playlist=lor3hN0e600&controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&rel=0&disablekb=1&fs=0"
+          className="hidden md:block absolute top-1/2 left-1/2 w-[125%] h-[125%] -translate-x-1/2 -translate-y-1/2"
+          frameBorder="0"
+          allow="autoplay; encrypted-media; picture-in-picture"
+          allowFullScreen
+          title="Valeria Ferrer Background Video"
+        />
 
         {/* Overlay */}
         <div className="absolute inset-0 bg-black/40 z-10"></div>
@@ -51,23 +41,28 @@ const Hero = () => {
           transition={{ duration: 1, ease: 'easeOut' }}
           className="text-center mb-8"
         >
+          {/* Main name with better visual organization */}
           <div className="relative inline-block">
             <h1 className="text-5xl md:text-8xl font-light tracking-wider leading-none mb-4">
               <span className="block bg-gradient-to-r from-[#f7e7ce] via-[#e8d4b0] via-[#d4af37] via-[#c2b2a3] to-[#f7e7ce] bg-clip-text text-transparent">
                 Valeria Ferrer
               </span>
             </h1>
-
+            
+            {/* Visual separator */}
             <div className="flex items-center justify-center space-x-4 mb-3">
               <div className="flex-1 h-px bg-gradient-to-r from-transparent via-[#c2b2a3]/30 to-transparent max-w-xs"></div>
               <div className="w-2 h-2 rounded-full bg-[#c2b2a3]/50"></div>
               <div className="flex-1 h-px bg-gradient-to-r from-transparent via-[#c2b2a3]/30 to-transparent max-w-xs"></div>
             </div>
-
+            
+            {/* Subtitle with better positioning */}
             <div className="relative">
               <span className="text-2xl md:text-4xl tracking-[0.4em] font-light text-[#c2b2a3] block">
                 Agencia Premium
               </span>
+              
+              {/* Subtle underline */}
               <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-20 h-px bg-gradient-to-r from-transparent via-[#c2b2a3]/40 to-transparent"></div>
             </div>
           </div>
@@ -120,6 +115,7 @@ const Hero = () => {
         </motion.div>
       </div>
 
+      {/* Decorative scroll indicator */}
       <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center space-y-3 opacity-60">
         <div className="w-[1px] h-24 bg-gradient-to-b from-[#c2b2a3] to-transparent"></div>
         <span className="text-[9px] tracking-[0.6em] uppercase text-[#c2b2a3] font-bold">

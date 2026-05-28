@@ -15,11 +15,6 @@ if ('serviceWorker' in navigator) {
       const cacheNames = await caches.keys();
       await Promise.all(cacheNames.map((cacheName) => caches.delete(cacheName)));
     }
-
-    if (!sessionStorage.getItem('cache-cleared-v1')) {
-      sessionStorage.setItem('cache-cleared-v1', 'true');
-      window.location.reload();
-    }
   });
 }
 
