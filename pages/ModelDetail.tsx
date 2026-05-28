@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { MODELS } from '../constants';
 import modelsJson from '../data/models.json';
@@ -6,11 +6,12 @@ import { getRecommendedModels } from '../lib/recommendations';
 import { getExploreProfileLinks } from '../lib/exploreProfiles';
 import ExploreProfilesNav from '../components/ExploreProfilesNav';
 import { ArrowLeft, Check, Calendar, Phone, MapPin, Ruler, User, Star, Sparkles, ChevronLeft, ChevronRight, MessageCircle, Shield, Crown, Clock, Heart } from 'lucide-react';
-import GalleryModal from '../components/GalleryModal';
 import LazyImage from '../components/LazyImage';
 import SEOHead from '../components/SEOHead';
 import Breadcrumbs from '../components/Breadcrumbs';
 import AnalyticsEvents from '../components/AnalyticsEvents';
+
+const GalleryModal = React.lazy(() => import('../components/GalleryModal'));
 
 const ModelDetail: React.FC = () => {
   const { id } = useParams();
@@ -45,6 +46,8 @@ const ModelDetail: React.FC = () => {
   const closeGallery = () => {
     setIsGalleryOpen(false);
   };
+
+  const modalImages = useMemo(() => getAllModalImages(), [model, id]);
 
   // Find previous and next models
   const currentIndex = MODELS.findIndex(m => m.id === id);
@@ -2343,13 +2346,17 @@ const ModelDetail: React.FC = () => {
       </section>
 
       {/* Gallery Modal */}
-      <GalleryModal
-        images={getAllModalImages()}
-        initialIndex={currentImageIndex}
-        isOpen={isGalleryOpen}
-        onClose={closeGallery}
-        modelName={model.name}
-      />
+      {isGalleryOpen && (
+        <Suspense fallback={null}>
+          <GalleryModal
+            images={modalImages}
+            initialIndex={currentImageIndex}
+            isOpen={isGalleryOpen}
+            onClose={closeGallery}
+            modelName={model.name}
+          />
+        </Suspense>
+      )}
 
           </div>
   );
