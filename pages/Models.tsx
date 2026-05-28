@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import ModelsGrid from '../components/ModelsGrid';
+import CatalogPremiumPreview from '../components/CatalogPremiumPreview';
 import ModelFilter from '../components/ModelFilter';
 import AnimatedCounter from '../components/AnimatedCounter';
 import PageSEOHead from '../components/PageSEOHead';
@@ -51,10 +51,8 @@ const Models: React.FC = () => {
         />
       </div>
 
-      {/* Models Grid with filtered data */}
-      <div className="max-w-[1600px] mx-auto px-6 pb-12">
-        <ModelsGrid models={filteredModels} />
-      </div>
+      {/* PREVIEW: CatalogPremiumPreview (no ModelsGrid) — rama preview/catalog-premium */}
+      <CatalogPremiumPreview models={filteredModels} />
 
 
           </div>

@@ -1,8 +1,9 @@
 import React, { useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ChevronRight, Sparkles } from 'lucide-react';
+import { ArrowRight, ChevronRight, Crown, Sparkles } from 'lucide-react';
 import PageSEOHead from '../components/PageSEOHead';
 import LazyImage from '../components/LazyImage';
+import { MODELS } from '../constants';
 import { EXPLORE_NAV, ExploreNavKey, getExploreHref } from '../data/exploreNav';
 import { getHubModels } from '../lib/hubs';
 import type { Model } from '../types';
@@ -209,6 +210,176 @@ function EditorialCard({
   );
 }
 
+const CATALOGO_EXPERIENCE_BULLETS = [
+  'Diseño editorial premium',
+  'Navegación más cómoda en móvil',
+  'Fichas más visuales e inmersivas',
+  'Acceso rápido a cada perfil',
+] as const;
+
+/** Slugs para la captura de pantalla del catálogo (fotos reales). */
+const CATALOG_SCREENSHOT_SLUGS = ['key', 'flor', 'monica'] as const;
+
+const SCREENSHOT_PHOTO_MASK =
+  'linear-gradient(to right, #000 0%, #000 30%, rgba(0,0,0,0.97) 42%, rgba(0,0,0,0.88) 54%, rgba(0,0,0,0.72) 66%, rgba(0,0,0,0.5) 78%, rgba(0,0,0,0.26) 88%, rgba(0,0,0,0.1) 96%, transparent 100%)';
+
+const screenshotPhotoMaskStyle: React.CSSProperties = {
+  WebkitMaskImage: SCREENSHOT_PHOTO_MASK,
+  maskImage: SCREENSHOT_PHOTO_MASK,
+  WebkitMaskSize: '100% 100%',
+  maskSize: '100% 100%',
+  WebkitMaskRepeat: 'no-repeat',
+  maskRepeat: 'no-repeat',
+};
+
+function catalogCoverUrl(model: Model): string {
+  const raw = model as Model & { coverImageUrl?: string };
+  const url = raw.coverImageUrl || model.image || '';
+  return url.startsWith('/') ? url : `/${url}`;
+}
+
+function catalogMetaLine(model: Model): string {
+  const parts: string[] = [];
+  if (model.age) parts.push(`${model.age} años`);
+  if (model.nationality) parts.push(model.nationality);
+  return parts.join(' · ');
+}
+
+/** Fila miniatura dentro de la captura (no es un enlace suelto). */
+function ScreenshotCatalogRow({ model, tall }: { model: Model; tall?: boolean }) {
+  const cover = catalogCoverUrl(model);
+  const meta = catalogMetaLine(model);
+
+  return (
+    <div
+      className={`relative flex overflow-hidden rounded-lg border border-[#c2b2a3]/22 bg-[#0a0a0a] ${
+        tall ? 'min-h-[72px]' : 'min-h-[58px]'
+      }`}
+    >
+      <div className="pointer-events-none absolute inset-y-3 left-[58%] z-[3] w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-[#c2b2a3]/36 to-transparent" />
+      <div className="relative min-h-full w-[58%] shrink-0 self-stretch overflow-hidden">
+        {cover ? (
+          <img
+            src={cover}
+            alt=""
+            decoding="async"
+            style={screenshotPhotoMaskStyle}
+            className="absolute inset-0 h-full w-full object-cover object-[center_20%]"
+          />
+        ) : null}
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/20 to-transparent" />
+      </div>
+      <div className="relative flex min-w-0 flex-1 flex-col items-center justify-center px-1.5 py-2 text-center">
+        <div className="pointer-events-none absolute inset-x-0 top-1/2 h-[65%] -translate-y-1/2 bg-[radial-gradient(ellipse_at_50%_40%,rgba(194,178,163,0.07),transparent_70%)]" />
+        <p
+          className={`relative serif font-light uppercase leading-none tracking-[0.08em] text-[#ebe3da] ${
+            tall ? 'text-[10px]' : 'text-[9px]'
+          }`}
+        >
+          {model.name}
+        </p>
+        <div className="relative my-0.5 flex w-14 items-center gap-1">
+          <span className="h-px flex-1 bg-gradient-to-r from-transparent to-[#c2b2a3]/45" />
+          <Crown className="h-1.5 w-1.5 shrink-0 text-[#c2b2a3]/60" strokeWidth={1.15} />
+          <span className="h-px flex-1 bg-gradient-to-l from-transparent to-[#c2b2a3]/45" />
+        </div>
+        {meta && (
+          <p className="relative max-w-full truncate text-[5.5px] uppercase tracking-[0.1em] text-[#c2b2a3]/75">
+            {meta}
+          </p>
+        )}
+        <span className="relative mt-1 rounded-full border border-[#c2b2a3]/40 bg-[#c2b2a3]/[0.05] px-1.5 py-px text-[5px] uppercase tracking-[0.14em] text-[#e8ddd2]/90">
+          Ver perfil
+        </span>
+      </div>
+    </div>
+  );
+}
+
+/** Captura de pantalla del listado en móvil — 3 fichas con portadas reales. */
+function CatalogMobileScreenshot() {
+  const previewModels = useMemo(
+    () =>
+      CATALOG_SCREENSHOT_SLUGS.map((slug) => MODELS.find((m) => m.slug === slug)).filter(
+        (m): m is Model => Boolean(m)
+      ),
+    []
+  );
+
+  if (!previewModels.length) return null;
+
+  return (
+    <figure
+      className="mx-auto w-full max-w-[300px]"
+      aria-label="Vista previa del catálogo horizontal en móvil"
+    >
+      <div className="overflow-hidden rounded-[1.35rem] border border-[#c2b2a3]/24 bg-[#060606] p-2 shadow-[0_18px_48px_-16px_rgba(0,0,0,0.92),0_0_32px_-18px_rgba(194,178,163,0.08)]">
+        <div className="mb-2 flex items-center justify-center gap-1.5 py-0.5" aria-hidden>
+          <span className="h-1 w-1 rounded-full bg-[#c2b2a3]/35" />
+          <span className="h-0.5 w-10 rounded-full bg-white/10" />
+          <span className="h-1 w-1 rounded-full bg-[#c2b2a3]/35" />
+        </div>
+        <div className="rounded-xl bg-[#030303] px-2.5 pb-2.5 pt-2">
+          <div className="mb-2 flex items-center gap-2">
+            <span className="h-px flex-1 bg-gradient-to-r from-transparent to-[#c2b2a3]/25" />
+            <span className="text-[6px] uppercase tracking-[0.38em] text-[#c2b2a3]/55">Catálogo</span>
+            <span className="h-px flex-1 bg-gradient-to-l from-transparent to-[#c2b2a3]/25" />
+          </div>
+          <div className="pointer-events-none select-none space-y-1.5">
+            {previewModels.map((model, index) => (
+              <ScreenshotCatalogRow key={model.slug} model={model} tall={index === 0} />
+            ))}
+          </div>
+        </div>
+      </div>
+      <figcaption className="mt-2 text-center text-[8px] uppercase tracking-[0.3em] text-gray-600">
+        Vista previa en móvil
+      </figcaption>
+    </figure>
+  );
+}
+
+function NuevaExperienciaCatalogoBlock() {
+  return (
+    <article className="rounded-2xl border border-[#c2b2a3]/22 bg-[#0c0c0c] p-6 md:p-8">
+      <p className="mb-3 text-[10px] uppercase tracking-[0.35em] text-[#c2b2a3]/75">
+        Catálogo renovado
+      </p>
+      <div className="flex flex-col gap-6 md:grid md:grid-cols-[minmax(0,1fr)_min(320px,38%)] md:items-start md:gap-8 lg:gap-10">
+        <div>
+          <h2 className="serif mb-4 text-2xl font-light tracking-wide md:text-[1.65rem]">
+            Nueva experiencia de catálogo
+          </h2>
+          <p className="mb-5 max-w-2xl text-sm font-light leading-relaxed text-gray-400 md:text-base">
+            Hemos renovado la forma de explorar los perfiles para ofrecer una navegación más visual,
+            elegante y fluida. Ahora cada ficha destaca mejor la imagen, los datos clave y el acceso
+            directo al perfil.
+          </p>
+          <ul className="mb-6 space-y-2">
+            {CATALOGO_EXPERIENCE_BULLETS.map((item) => (
+              <li
+                key={item}
+                className="flex items-start gap-2.5 text-[11px] font-light uppercase tracking-[0.14em] text-gray-500 md:text-xs md:tracking-[0.16em]"
+              >
+                <span className="mt-[0.35rem] h-1 w-1 shrink-0 rotate-45 bg-[#c2b2a3]/55" aria-hidden />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+          <Link
+            to="/models"
+            className="inline-flex items-center gap-2 border border-[#c2b2a3]/35 px-5 py-2.5 text-[10px] font-medium uppercase tracking-[0.28em] text-[#c2b2a3] transition-colors duration-300 hover:border-[#c2b2a3]/55 hover:bg-[#c2b2a3]/[0.06] hover:text-[#ebe3da]"
+          >
+            Ver catálogo
+            <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.25} />
+          </Link>
+        </div>
+        <CatalogMobileScreenshot />
+      </div>
+    </article>
+  );
+}
+
 const Novedades: React.FC = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -262,6 +433,8 @@ const Novedades: React.FC = () => {
             al catálogo mientras ampliamos las secciones dedicadas.
           </p>
         </EditorialCard>
+
+        <NuevaExperienciaCatalogoBlock />
 
         {/* 2. Nuevas incorporaciones */}
         <EditorialCard title="Nuevas incorporaciones" eyebrow="Recién llegadas">
