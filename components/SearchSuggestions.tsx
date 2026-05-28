@@ -19,7 +19,6 @@ const SearchSuggestions: React.FC<SearchSuggestionsProps> = ({
 
   // Trending searches based on popular models and services
   const trendingSearches = [
-    'Kimberly colombiana',
     'escort rusa Valencia',
     'modelo VIP eventos',
     'Girlfriend Experience',

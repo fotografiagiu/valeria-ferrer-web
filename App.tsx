@@ -105,6 +105,10 @@ const App: React.FC = () => {
                 <Route path="/about" element={<About />} />
                 <Route path="/models" element={<Models />} />
                 <Route path="/models/:id" element={<ModelDetail />} />
+                <Route
+                  path="/models/kimberly-colombiana-24-años"
+                  element={<Navigate to="/models" replace />}
+                />
                 <Route path="/vip" element={<ModelsHub hubKey="vip" />} />
                 <Route path="/nuevas" element={<ModelsHub hubKey="nuevas" />} />
                 <Route path="/colombianas" element={<ModelsHub hubKey="colombianas" />} />

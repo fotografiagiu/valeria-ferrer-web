@@ -66,7 +66,6 @@ const AnalyticsDashboard: React.FC = () => {
         dailyData,
         modelViews: [
           { modelName: 'Mia', views: 145 },
-          { modelName: 'Kimberly', views: 132 },
           { modelName: 'Teresa', views: 98 },
           { modelName: 'Elena', views: 87 },
           { modelName: 'Alicia', views: 76 },

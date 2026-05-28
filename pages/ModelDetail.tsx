@@ -453,22 +453,6 @@ const ModelDetail: React.FC = () => {
                       </li>
                     </>
                   )}
-                  {model.name === "Kimberly" && (
-                    <>
-                      <li className="flex items-start">
-                        <span className="text-[#c2b2a3] mr-2">•</span>
-                        <span>Cuerpo escultural que desafía la gravedad</span>
-                      </li>
-                      <li className="flex items-start">
-                        <span className="text-[#c2b2a3] mr-2">•</span>
-                        <span>Mirada penetrante que promete noches inolvidables</span>
-                      </li>
-                      <li className="flex items-start">
-                        <span className="text-[#c2b2a3] mr-2">•</span>
-                        <span>Piel suave como seda y labios hechos para pecar</span>
-                      </li>
-                    </>
-                  )}
                   {model.name === "Alicia" && (
                     <>
                       <li className="flex items-start">
@@ -761,22 +745,6 @@ const ModelDetail: React.FC = () => {
                       <li className="flex items-start">
                         <span className="text-[#c2b2a3] mr-2">•</span>
                         <span>Acompañamiento fresco y exclusivo</span>
-                      </li>
-                    </>
-                  )}
-                  {model.name === "Kimberly" && (
-                    <>
-                      <li className="flex items-start">
-                        <span className="text-[#c2b2a3] mr-2">•</span>
-                        <span>Noches de pasión sin límites ni tabúes</span>
-                      </li>
-                      <li className="flex items-start">
-                        <span className="text-[#c2b2a3] mr-2">•</span>
-                        <span>Juegos sensuales que despertarán tus sentidos</span>
-                      </li>
-                      <li className="flex items-start">
-                        <span className="text-[#c2b2a3] mr-2">•</span>
-                        <span>Secretos íntimos que solo compartirás conmigo</span>
                       </li>
                     </>
                   )}
@@ -1449,22 +1417,6 @@ const ModelDetail: React.FC = () => {
                           </li>
                         </>
                       )}
-                      {model.name === "Kimberly" && (
-                        <>
-                          <li className="flex items-start">
-                            <span className="text-[#c2b2a3] mr-2">•</span>
-                            <span>Sofisticación europea con calidez latina natural</span>
-                          </li>
-                          <li className="flex items-start">
-                            <span className="text-[#c2b2a3] mr-2">•</span>
-                            <span>Inteligencia conversacional y curiosidad cultural</span>
-                          </li>
-                          <li className="flex items-start">
-                            <span className="text-[#c2b2a3] mr-2">•</span>
-                            <span>Estilo único que combina moda colombiana con diseño europeo</span>
-                          </li>
-                        </>
-                      )}
                       {model.name === "Alicia" && (
                         <>
                           <li className="flex items-start">
@@ -1757,22 +1709,6 @@ const ModelDetail: React.FC = () => {
                           <li className="flex items-start">
                             <span className="text-[#c2b2a3] mr-2">•</span>
                             <span>Acompañamiento fresco y exclusivo</span>
-                          </li>
-                        </>
-                      )}
-                      {model.name === "Kimberly" && (
-                        <>
-                          <li className="flex items-start">
-                            <span className="text-[#c2b2a3] mr-2">•</span>
-                            <span>Cenas de negocios con conversaciones profundas</span>
-                          </li>
-                          <li className="flex items-start">
-                            <span className="text-[#c2b2a3] mr-2">•</span>
-                            <span>Experiencias que van más allá de lo físico</span>
-                          </li>
-                          <li className="flex items-start">
-                            <span className="text-[#c2b2a3] mr-2">•</span>
-                            <span>Sensualidad inteligente y complicidad emocional</span>
                           </li>
                         </>
                       )}
