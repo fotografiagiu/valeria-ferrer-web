@@ -7,15 +7,17 @@ const Hero = () => {
     <section className="relative h-screen flex items-center justify-center overflow-hidden bg-black">
       {/* Background Media */}
       <div className="absolute inset-0 z-0 overflow-hidden">
-        {/* Mobile: YouTube */}
-        <iframe
-          src="https://www.youtube.com/embed/lor3hN0e600?autoplay=1&mute=1&playsinline=1&loop=1&playlist=lor3hN0e600&controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&rel=0&disablekb=1&fs=0"
-          className="block md:hidden absolute top-1/2 left-1/2 w-[270%] h-[155%] -translate-x-1/2 -translate-y-1/2"
-          frameBorder="0"
-          allow="autoplay; encrypted-media; picture-in-picture"
-          allowFullScreen
-          title="Valeria Ferrer Background Video Mobile"
-        />
+        {/* Mobile: YouTube — option A: 106vw crop, light scale, taller to kill top gap */}
+        <div className="block md:hidden absolute inset-0 overflow-hidden">
+          <iframe
+            src="https://www.youtube.com/embed/j2kjUoDzWEE?autoplay=1&mute=1&playsinline=1&loop=1&playlist=j2kjUoDzWEE&controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&rel=0&disablekb=1&fs=0"
+            className="pointer-events-none absolute top-1/2 left-1/2 h-[110%] min-h-[110%] w-[100vw] min-w-[100vw] origin-center scale-x-[1.04] scale-y-[1.19] -translate-x-1/2 -translate-y-[57%]"
+            frameBorder="0"
+            allow="autoplay; encrypted-media; picture-in-picture"
+            allowFullScreen
+            title="Valeria Ferrer Background Video Mobile"
+          />
+        </div>
 
         {/* Desktop: YouTube */}
         <iframe
