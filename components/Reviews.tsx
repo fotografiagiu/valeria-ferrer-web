@@ -4,127 +4,177 @@ import { REVIEWS } from '../constants';
 import { Quote, User, Star, ChevronLeft, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
+/** Page size from viewport at first render only — grid columns are pure CSS (no mount reflow). */
+function readItemsToShow(): number {
+  if (typeof window === 'undefined') return 1;
+  if (window.matchMedia('(max-width: 767px)').matches) return 1;
+  if (window.matchMedia('(max-width: 1023px)').matches) return 2;
+  return 3;
+}
+
+const ReviewCard: React.FC<{
+  review: (typeof REVIEWS)[number];
+  className?: string;
+}> = ({ review, className = '' }) => (
+  <div
+    className={`bg-[#0a0a0a] border border-white/5 p-10 relative group hover:border-[#c2b2a3]/30 transition-all duration-500 h-full flex flex-col ${className}`}
+  >
+    <Quote className="absolute top-6 right-6 text-[#c2b2a3]/20" size={40} />
+    <div className="mb-6">
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center space-x-4">
+          <div className="w-16 h-16 rounded-full overflow-hidden border border-[#c2b2a3]/20 bg-[#1a1a1a] flex items-center justify-center">
+            {review.image ? (
+              <img src={review.image} alt={review.author} className="w-full h-full object-cover" />
+            ) : (
+              <User className="text-[#c2b2a3]/40" size={32} />
+            )}
+          </div>
+          <div>
+            <h4 className="font-bold text-[#c2b2a3] tracking-widest text-xs uppercase">{review.author}</h4>
+            <p className="text-[10px] text-gray-500 tracking-[0.2em] uppercase">Cliente Verificado</p>
+          </div>
+        </div>
+        <div className="flex space-x-1">
+          {[...Array(5)].map((_, i) => (
+            <Star
+              key={i}
+              size={16}
+              className={`${i < 5 ? 'text-yellow-400 fill-yellow-400' : 'text-gray-600'} transition-colors`}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+    <div className="flex-grow">
+      <h3 className="text-xl serif italic mb-4 text-white">&ldquo;{review.title}&rdquo;</h3>
+      <p className="text-sm font-light text-gray-400 leading-relaxed italic mb-6">{review.content}</p>
+    </div>
+    <div className="pt-6 border-t border-white/5 flex items-center justify-between mt-auto">
+      <span className="text-[10px] tracking-widest uppercase text-[#c2b2a3] font-medium">
+        Experiencia con {review.modelName}
+      </span>
+      <div className="flex items-center space-x-1">
+        {[...Array(5)].map((_, i) => (
+          <Star
+            key={i}
+            size={12}
+            className={`${i < 5 ? 'text-yellow-400 fill-yellow-400' : 'text-gray-600'} transition-colors`}
+          />
+        ))}
+      </div>
+    </div>
+  </div>
+);
+
 const Reviews: React.FC = () => {
+  const itemsToShow = readItemsToShow();
   const [currentIndex, setCurrentIndex] = useState(0);
-  const reviewsPerPage = {
-    mobile: 1,
-    tablet: 2,
-    desktop: 3
+  const pageCount = Math.ceil(REVIEWS.length / itemsToShow);
+
+  useEffect(() => {
+    let timer: ReturnType<typeof setInterval> | undefined;
+    const start = () => {
+      timer = setInterval(() => {
+        setCurrentIndex((prev) => (prev + 1) % pageCount);
+      }, 5000);
+    };
+    const delayId = window.setTimeout(start, 800);
+    return () => {
+      window.clearTimeout(delayId);
+      if (timer) clearInterval(timer);
+    };
+  }, [pageCount]);
+
+  const buildVisibleReviews = (pageSize: number, page: number) => {
+    const start = page * pageSize;
+    const slice = REVIEWS.slice(start, start + pageSize);
+    if (slice.length < pageSize && REVIEWS.length > pageSize) {
+      slice.push(...REVIEWS.slice(0, pageSize - slice.length));
+    }
+    return slice;
   };
 
-  const [itemsToShow, setItemsToShow] = useState(3);
+  const mobileReviews = buildVisibleReviews(1, currentIndex);
+  const tabletPageCount = Math.ceil(REVIEWS.length / 2);
+  const tabletReviews = buildVisibleReviews(2, currentIndex % tabletPageCount);
+  const desktopPageCount = Math.ceil(REVIEWS.length / 3);
+  const desktopReviews = buildVisibleReviews(3, currentIndex % desktopPageCount);
 
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth < 768) setItemsToShow(reviewsPerPage.mobile);
-      else if (window.innerWidth < 1024) setItemsToShow(reviewsPerPage.tablet);
-      else setItemsToShow(reviewsPerPage.desktop);
-    };
-
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % Math.ceil(REVIEWS.length / itemsToShow));
-    }, 5000);
-    return () => clearInterval(timer);
-  }, [itemsToShow]);
-
-  const visibleReviews = REVIEWS.slice(
-    currentIndex * itemsToShow,
-    (currentIndex + 1) * itemsToShow
-  );
-
-  // If we don't have enough reviews for the last page, wrap around or pad
-  if (visibleReviews.length < itemsToShow && REVIEWS.length > itemsToShow) {
-    const remaining = itemsToShow - visibleReviews.length;
-    visibleReviews.push(...REVIEWS.slice(0, remaining));
-  }
+  const slideMotion = {
+    initial: { opacity: 0, x: 50 },
+    animate: { opacity: 1, x: 0 },
+    exit: { opacity: 0, x: -50 },
+    transition: { duration: 0.8, ease: 'easeInOut' as const },
+  };
 
   return (
     <section className="py-24 bg-[#111111] overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-light mb-4">Reseñas de <span className="italic">Caballeros</span></h2>
+          <h2 className="text-3xl md:text-5xl font-light mb-4">
+            Reseñas de <span className="italic">Caballeros</span>
+          </h2>
           <div className="w-20 h-[1px] bg-[#c2b2a3] mx-auto"></div>
         </div>
 
         <div className="relative h-[450px] md:h-[400px]">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentIndex}
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -50 }}
-              transition={{ duration: 0.8, ease: "easeInOut" }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 absolute inset-0"
-            >
-              {visibleReviews.map((review, idx) => (
-                <div key={`${review.id}-${idx}`} className="bg-[#0a0a0a] border border-white/5 p-10 relative group hover:border-[#c2b2a3]/30 transition-all duration-500 h-full flex flex-col">
-                  <Quote className="absolute top-6 right-6 text-[#c2b2a3]/20" size={40} />
-                  <div className="mb-6">
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="flex items-center space-x-4">
-                        <div className="w-16 h-16 rounded-full overflow-hidden border border-[#c2b2a3]/20 bg-[#1a1a1a] flex items-center justify-center">
-                          {review.image ? (
-                            <img src={review.image} alt={review.author} className="w-full h-full object-cover" />
-                          ) : (
-                            <User className="text-[#c2b2a3]/40" size={32} />
-                          )}
-                        </div>
-                        <div>
-                          <h4 className="font-bold text-[#c2b2a3] tracking-widest text-xs uppercase">{review.author}</h4>
-                          <p className="text-[10px] text-gray-500 tracking-[0.2em] uppercase">Cliente Verificado</p>
-                        </div>
-                      </div>
-                      <div className="flex space-x-1">
-                        {[...Array(5)].map((_, i) => (
-                          <Star
-                            key={i}
-                            size={16}
-                            className={`${i < 5 ? 'text-yellow-400 fill-yellow-400' : 'text-gray-600'} transition-colors`}
-                          />
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex-grow">
-                    <h3 className="text-xl serif italic mb-4 text-white">"{review.title}"</h3>
-                    <p className="text-sm font-light text-gray-400 leading-relaxed italic mb-6">
-                      {review.content}
-                    </p>
-                  </div>
-                  <div className="pt-6 border-t border-white/5 flex items-center justify-between mt-auto">
-                    <span className="text-[10px] tracking-widest uppercase text-[#c2b2a3] font-medium">Experiencia con {review.modelName}</span>
-                    <div className="flex items-center space-x-1">
-                      {[...Array(5)].map((_, i) => (
-                        <Star
-                          key={i}
-                          size={12}
-                          className={`${i < 5 ? 'text-yellow-400 fill-yellow-400' : 'text-gray-600'} transition-colors`}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </motion.div>
-          </AnimatePresence>
+          {/* Móvil: 1 columna (CSS) */}
+          <div className="md:hidden absolute inset-0">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={`m-${currentIndex % REVIEWS.length}`}
+                {...slideMotion}
+                className="absolute inset-0"
+              >
+                {mobileReviews.map((review, idx) => (
+                  <ReviewCard key={`${review.id}-m-${idx}`} review={review} />
+                ))}
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* Tablet: 2 columnas (CSS) */}
+          <div className="hidden md:block lg:hidden absolute inset-0">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={`t-${currentIndex % tabletPageCount}`}
+                {...slideMotion}
+                className="grid grid-cols-2 gap-10 absolute inset-0"
+              >
+                {tabletReviews.map((review, idx) => (
+                  <ReviewCard key={`${review.id}-t-${idx}`} review={review} />
+                ))}
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* Desktop: 3 columnas (CSS) */}
+          <div className="hidden lg:block absolute inset-0">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={`d-${currentIndex % desktopPageCount}`}
+                {...slideMotion}
+                className="grid grid-cols-3 gap-10 absolute inset-0"
+              >
+                {desktopReviews.map((review, idx) => (
+                  <ReviewCard key={`${review.id}-d-${idx}`} review={review} />
+                ))}
+              </motion.div>
+            </AnimatePresence>
+          </div>
         </div>
 
         <div className="flex justify-center items-center mt-12 space-x-6">
           <button
-            onClick={() => setCurrentIndex((prev) => (prev - 1 + Math.ceil(REVIEWS.length / itemsToShow)) % Math.ceil(REVIEWS.length / itemsToShow))}
+            onClick={() => setCurrentIndex((prev) => (prev - 1 + pageCount) % pageCount)}
             className="p-2 rounded-full border border-white/10 hover:border-[#c2b2a3]/30 hover:bg-[#c2b2a3]/5 transition-all duration-300"
           >
             <ChevronLeft size={20} className="text-[#c2b2a3]" />
           </button>
-          
+
           <div className="flex space-x-2">
-            {Array.from({ length: Math.ceil(REVIEWS.length / itemsToShow) }).map((_, i) => (
+            {Array.from({ length: pageCount }).map((_, i) => (
               <button
                 key={i}
                 onClick={() => setCurrentIndex(i)}
@@ -134,9 +184,9 @@ const Reviews: React.FC = () => {
               />
             ))}
           </div>
-          
+
           <button
-            onClick={() => setCurrentIndex((prev) => (prev + 1) % Math.ceil(REVIEWS.length / itemsToShow))}
+            onClick={() => setCurrentIndex((prev) => (prev + 1) % pageCount)}
             className="p-2 rounded-full border border-white/10 hover:border-[#c2b2a3]/30 hover:bg-[#c2b2a3]/5 transition-all duration-300"
           >
             <ChevronRight size={20} className="text-[#c2b2a3]" />

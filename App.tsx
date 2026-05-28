@@ -1,6 +1,7 @@
 import React, { Suspense, useEffect, useMemo, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
+import Home from './pages/Home';
 import Legal from './pages/Legal';
 import Privacy from './pages/Privacy';
 import Terms from './pages/Terms';
@@ -9,7 +10,6 @@ import ContentProtection from './components/ContentProtection';
 import AnalyticsTracker from './components/AnalyticsTracker';
 import { Analytics } from '@vercel/analytics/react';
 
-const Home = React.lazy(() => import('./pages/Home'));
 const About = React.lazy(() => import('./pages/About'));
 const Models = React.lazy(() => import('./pages/Models'));
 const ModelsHub = React.lazy(() => import('./pages/ModelsHub'));
