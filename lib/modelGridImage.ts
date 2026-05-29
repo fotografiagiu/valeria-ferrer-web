@@ -44,6 +44,17 @@ export function getModelCardImage(_slug: string, coverImageUrl: string): string 
   return getModelCoverImage(coverImageUrl);
 }
 
+/** Portada del grid según viewport/modo (móvil 2×2 → cover-thumbnail). */
+export function getModelGridCoverSrc(
+  coverImageUrl: string,
+  options: { useThumbnail: boolean }
+): string {
+  if (!coverImageUrl) return '';
+  return options.useThumbnail
+    ? getModelCoverThumbnailPath(coverImageUrl)
+    : getModelCoverImage(coverImageUrl);
+}
+
 /**
  * Miniatura de una imagen de galería (misma convención de nombre en chicas-thumbnails).
  * Para strips pequeños y carrusel del modal.

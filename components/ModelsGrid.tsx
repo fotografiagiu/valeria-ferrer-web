@@ -1,20 +1,27 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { MODELS } from '../constants';
 import { Grid3X3, LayoutGrid } from 'lucide-react';
 import LazyImage from './LazyImage';
-import { getModelCoverImage, getGalleryImageThumbnail, getModelCoverThumbnailPath } from '../lib/modelGridImage';
+import {
+  getGalleryImageThumbnail,
+  getModelCoverThumbnailPath,
+  getModelGridCoverSrc,
+} from '../lib/modelGridImage';
 
-const ModelCard: React.FC<{ model: any; index: number; isDoubleView?: boolean }> = ({
-  model,
-  index,
-  isDoubleView = false,
-}) => {
+const MOBILE_MQ = '(max-width: 767px)';
+
+const ModelCard: React.FC<{
+  model: any;
+  index: number;
+  isDoubleView?: boolean;
+  useCoverThumbnail?: boolean;
+}> = ({ model, index, isDoubleView = false, useCoverThumbnail = false }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [hoverImageReady, setHoverImageReady] = useState(false);
 
   const coverUrl = model.coverImageUrl || model.image || '';
-  const coverSrc = getModelCoverImage(coverUrl);
+  const coverSrc = getModelGridCoverSrc(coverUrl, { useThumbnail: useCoverThumbnail });
   const hoverRaw = model.images?.[1] || model.hoverImage || '';
   const hoverSrc = hoverRaw
     ? getGalleryImageThumbnail(hoverRaw)
@@ -111,6 +118,7 @@ const ModelCard: React.FC<{ model: any; index: number; isDoubleView?: boolean }>
       <Link to={`/models/${adaptedModel.id}`} className="block" itemProp="url">
         <div className="aspect-[2/3] relative overflow-hidden md:transform-gpu">
           <LazyImage
+            key={coverSrc}
             src={adaptedModel.image}
             alt={altText}
             title={altText}
@@ -214,7 +222,20 @@ interface ModelsGridProps {
 }
 
 const ModelsGrid: React.FC<ModelsGridProps> = ({ models = MODELS }) => {
-  const [viewMode, setViewMode] = useState<'normal' | 'double'>('normal');
+  const [viewMode, setViewMode] = useState<'normal' | 'double'>('double');
+  const [isMobile, setIsMobile] = useState(
+    () => typeof window !== 'undefined' && window.matchMedia(MOBILE_MQ).matches
+  );
+
+  useEffect(() => {
+    const mq = window.matchMedia(MOBILE_MQ);
+    const update = () => setIsMobile(mq.matches);
+    update();
+    mq.addEventListener('change', update);
+    return () => mq.removeEventListener('change', update);
+  }, []);
+
+  const useCoverThumbnail = isMobile && viewMode === 'double';
 
   const handleViewChange = (mode: 'normal' | 'double') => {
     setViewMode(mode);
@@ -298,6 +319,7 @@ const ModelsGrid: React.FC<ModelsGridProps> = ({ models = MODELS }) => {
               model={model}
               index={index}
               isDoubleView={viewMode === 'double'}
+              useCoverThumbnail={useCoverThumbnail}
             />
           ))}
         </div>
