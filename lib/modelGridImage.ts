@@ -10,7 +10,7 @@ export function getModelCoverImage(coverImageUrl: string): string {
   return resolveOriginalImageUrl(coverImageUrl);
 }
 
-/** Miniatura de portada — solo UI pequeña (mockups, etc.). */
+/** Miniatura de portada — solo UI pequeña (mockups, hover, etc.). */
 export function getModelCoverThumbnailPath(coverImageUrl: string): string {
   const pathParts = coverImageUrl.split('/');
 

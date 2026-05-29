@@ -9,6 +9,19 @@ import modelsData from '../data/models.json';
 const Models: React.FC = () => {
   const [filteredModels, setFilteredModels] = useState<any[]>(modelsData);
 
+  useEffect(() => {
+    const scrollToFirstSelection = () => {
+      const firstCard =
+        document.getElementById('models-catalog-selection') ??
+        document.getElementById('catalog-horizontal-preview-root');
+      if (!firstCard) return;
+      const navOffset = 96; // pt-24 — barra fija
+      const top = firstCard.getBoundingClientRect().top + window.scrollY - navOffset;
+      window.scrollTo({ top: Math.max(0, top), left: 0 });
+    };
+    requestAnimationFrame(() => requestAnimationFrame(scrollToFirstSelection));
+  }, []);
+
   const modelsSEOData = {
     title: "Modelos y Acompañantes en Valencia | Valeria Ferrer",
     description: "Explora nuestras modelos exclusivas en Valencia. Perfiles únicos de acompañantes sofisticadas para cenas, eventos y momentos especiales. Reserva privada.",

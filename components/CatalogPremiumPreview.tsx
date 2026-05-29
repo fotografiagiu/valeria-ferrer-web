@@ -246,7 +246,7 @@ const CatalogPremiumPreview: React.FC<Props> = ({ models = [] }) => {
         {hero && (
           <>
             <SectionLabel>Selección</SectionLabel>
-            <div className="mb-8 md:mb-10 lg:mb-12">
+            <div id="models-catalog-selection" className="mb-8 md:mb-10 lg:mb-12">
               <HorizontalEditorialCard model={hero} variant="hero" />
             </div>
           </>

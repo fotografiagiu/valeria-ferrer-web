@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import LazyImage from './LazyImage';
@@ -96,6 +96,7 @@ const GalleryModal: React.FC<GalleryModalProps> = ({
   modelName 
 }) => {
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
+  const modalRef = useRef<HTMLDivElement>(null);
 
   // Filtrar imágenes válidas que existen
   const validImages = images.filter(imageUrl => {
@@ -150,6 +151,26 @@ const GalleryModal: React.FC<GalleryModalProps> = ({
     };
   }, [isOpen]);
 
+  /** Móvil: bloquear pinch-zoom en el lightbox; el swipe sigue por touchstart/end. */
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const mq = window.matchMedia('(max-width: 1023px)');
+    if (!mq.matches) return;
+
+    const el = modalRef.current;
+    if (!el) return;
+
+    const blockPinchZoom = (e: TouchEvent) => {
+      if (e.touches.length > 1) {
+        e.preventDefault();
+      }
+    };
+
+    el.addEventListener('touchmove', blockPinchZoom, { passive: false });
+    return () => el.removeEventListener('touchmove', blockPinchZoom);
+  }, [isOpen]);
+
   const navigateNext = useCallback(() => {
     setCurrentIndex((prev) => (prev + 1) % validImages.length);
   }, [validImages.length]);
@@ -163,11 +184,13 @@ const GalleryModal: React.FC<GalleryModalProps> = ({
   };
 
   const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    if (e.touches.length !== 1) return;
     const touchStartX = e.touches[0].clientX;
     e.currentTarget.setAttribute('data-touch-start', touchStartX.toString());
   }, []);
 
   const handleTouchEnd = useCallback((e: React.TouchEvent) => {
+    if (e.changedTouches.length !== 1) return;
     const touchStartX = e.currentTarget.getAttribute('data-touch-start');
     const touchEndX = e.changedTouches[0].clientX;
     
@@ -245,6 +268,7 @@ const GalleryModal: React.FC<GalleryModalProps> = ({
     <AnimatePresence mode="wait">
       {isOpen && (
         <motion.div
+          ref={modalRef}
           variants={backdropVariants}
           initial="hidden"
           animate="visible"
@@ -339,7 +363,7 @@ const GalleryModal: React.FC<GalleryModalProps> = ({
               initial="hidden"
               animate="visible"
               exit="exit"
-              className="relative max-w-[90vw] max-h-[70vh] mx-auto"
+              className="relative max-w-[90vw] max-h-[70vh] mx-auto max-lg:touch-none"
               onTouchStart={handleTouchStart}
               onTouchEnd={handleTouchEnd}
             >
@@ -373,7 +397,7 @@ const GalleryModal: React.FC<GalleryModalProps> = ({
                 initial="hidden"
                 animate="visible"
                 exit="exit"
-                className="mt-6 flex gap-2 overflow-x-auto py-2 px-4 max-w-[90vw] scrollbar-hide"
+                className="mt-6 flex gap-2 overflow-x-auto py-2 px-4 max-w-[90vw] scrollbar-hide max-lg:touch-pan-x"
               >
                 {validImages.map((image, index) => {
                   // Solo cargar thumbnails visibles y adyacentes

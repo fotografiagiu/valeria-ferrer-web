@@ -11,6 +11,7 @@ const ModelCard: React.FC<{ model: any; index: number; isDoubleView?: boolean }>
   isDoubleView = false,
 }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const [hoverImageReady, setHoverImageReady] = useState(false);
 
   const coverUrl = model.coverImageUrl || model.image || '';
   const coverSrc = getModelCoverImage(coverUrl);
@@ -100,35 +101,38 @@ const ModelCard: React.FC<{ model: any; index: number; isDoubleView?: boolean }>
     <div
       itemScope
       itemType="https://schema.org/Person"
-      className="group relative overflow-hidden bg-[#1a1a1a] rounded-lg shadow-lg hover:shadow-[0_10px_40px_rgba(194,178,163,0.15)] transition-all duration-500 transform-gpu"
-      onMouseEnter={() => setIsHovered(true)}
+      className="group relative overflow-hidden bg-[#1a1a1a] rounded-lg shadow-lg md:hover:shadow-[0_10px_40px_rgba(194,178,163,0.15)] md:transition-shadow md:duration-500"
+      onMouseEnter={() => {
+        setIsHovered(true);
+        setHoverImageReady(true);
+      }}
       onMouseLeave={() => setIsHovered(false)}
-      onTouchStart={() => setIsHovered(true)}
-      onTouchEnd={() => setIsHovered(false)}
     >
       <Link to={`/models/${adaptedModel.id}`} className="block" itemProp="url">
-        <div className="aspect-[2/3] relative overflow-hidden transform-gpu">
+        <div className="aspect-[2/3] relative overflow-hidden md:transform-gpu">
           <LazyImage
             src={adaptedModel.image}
             alt={altText}
             title={altText}
-            className={`w-full h-full object-cover transform-gpu will-change-transform transition-transform duration-700 ${
-              isHovered ? 'scale-110' : 'scale-100'
+            className={`w-full h-full object-cover md:transition-transform md:duration-700 max-md:scale-100 ${
+              isHovered ? 'md:scale-110' : 'md:scale-100'
             }`}
             sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
             priority={index < 4} // First 4 images are priority
           />
 
-          <LazyImage
-            src={adaptedModel.hoverImage}
-            alt={hoverAltText}
-            title={hoverAltText}
-            className={`absolute inset-0 w-full h-full object-cover transform-gpu will-change-opacity transition-opacity duration-700 ${
-              isHovered ? 'opacity-100' : 'opacity-0'
-            }`}
-            sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
-            priority={index < 4}
-          />
+          {hoverImageReady && (
+            <LazyImage
+              src={adaptedModel.hoverImage}
+              alt={hoverAltText}
+              title={hoverAltText}
+              className={`absolute inset-0 w-full h-full object-cover hidden md:block md:transition-opacity md:duration-700 ${
+                isHovered ? 'md:opacity-100' : 'md:opacity-0'
+              }`}
+              sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+              loading="lazy"
+            />
+          )}
 
           <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
 
