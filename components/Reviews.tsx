@@ -1,8 +1,9 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { REVIEWS } from '../constants';
 import { Quote, User, Star, ChevronLeft, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import type { Review } from '../types';
 
 /** Page size from viewport at first render only — grid columns are pure CSS (no mount reflow). */
 function readItemsToShow(): number {
@@ -13,7 +14,7 @@ function readItemsToShow(): number {
 }
 
 const ReviewCard: React.FC<{
-  review: (typeof REVIEWS)[number];
+  review: Review;
   className?: string;
 }> = ({ review, className = '' }) => (
   <div
@@ -32,7 +33,10 @@ const ReviewCard: React.FC<{
           </div>
           <div>
             <h4 className="font-bold text-[#c2b2a3] tracking-widest text-xs uppercase">{review.author}</h4>
-            <p className="text-[10px] text-gray-500 tracking-[0.2em] uppercase">Cliente Verificado</p>
+            <p className="text-[10px] text-gray-500 tracking-[0.2em] uppercase">
+              Cliente verificado
+              {review.publishedLabel ? ` · ${review.publishedLabel}` : ''}
+            </p>
           </div>
         </div>
         <div className="flex space-x-1">
@@ -68,9 +72,17 @@ const ReviewCard: React.FC<{
 );
 
 const Reviews: React.FC = () => {
+  const reviews = useMemo(
+    () =>
+      [...REVIEWS].sort((a, b) =>
+        (b.publishedAt ?? '').localeCompare(a.publishedAt ?? '')
+      ),
+    []
+  );
+
   const itemsToShow = readItemsToShow();
   const [currentIndex, setCurrentIndex] = useState(0);
-  const pageCount = Math.ceil(REVIEWS.length / itemsToShow);
+  const pageCount = Math.ceil(reviews.length / itemsToShow);
 
   useEffect(() => {
     let timer: ReturnType<typeof setInterval> | undefined;
@@ -88,17 +100,17 @@ const Reviews: React.FC = () => {
 
   const buildVisibleReviews = (pageSize: number, page: number) => {
     const start = page * pageSize;
-    const slice = REVIEWS.slice(start, start + pageSize);
-    if (slice.length < pageSize && REVIEWS.length > pageSize) {
-      slice.push(...REVIEWS.slice(0, pageSize - slice.length));
+    const slice = reviews.slice(start, start + pageSize);
+    if (slice.length < pageSize && reviews.length > pageSize) {
+      slice.push(...reviews.slice(0, pageSize - slice.length));
     }
     return slice;
   };
 
   const mobileReviews = buildVisibleReviews(1, currentIndex);
-  const tabletPageCount = Math.ceil(REVIEWS.length / 2);
+  const tabletPageCount = Math.ceil(reviews.length / 2);
   const tabletReviews = buildVisibleReviews(2, currentIndex % tabletPageCount);
-  const desktopPageCount = Math.ceil(REVIEWS.length / 3);
+  const desktopPageCount = Math.ceil(reviews.length / 3);
   const desktopReviews = buildVisibleReviews(3, currentIndex % desktopPageCount);
 
   const slideMotion = {
@@ -123,7 +135,7 @@ const Reviews: React.FC = () => {
           <div className="md:hidden absolute inset-0">
             <AnimatePresence mode="wait">
               <motion.div
-                key={`m-${currentIndex % REVIEWS.length}`}
+                key={`m-${currentIndex % reviews.length}`}
                 {...slideMotion}
                 className="absolute inset-0"
               >

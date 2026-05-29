@@ -34,6 +34,8 @@ export interface Review {
   content: string;
   author: string;
   image?: string;
+  publishedLabel?: string;
+  publishedAt?: string;
 }
 
 export interface FAQ {
