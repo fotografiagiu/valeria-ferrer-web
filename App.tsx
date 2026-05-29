@@ -54,11 +54,31 @@ const App: React.FC = () => {
   const [enableFloatingContact, setEnableFloatingContact] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+    let rafId = 0;
+    let lastScrolled = window.scrollY > 50;
+
+    const updateScrollState = () => {
+      rafId = 0;
+      const next = window.scrollY > 50;
+      if (next === lastScrolled) return;
+      lastScrolled = next;
+      setIsScrolled(next);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    const onScroll = () => {
+      if (rafId) return;
+      rafId = window.requestAnimationFrame(updateScrollState);
+    };
+
+    updateScrollState();
+
+    const scrollOpts: AddEventListenerOptions = { passive: true };
+    window.addEventListener('scroll', onScroll, scrollOpts);
+
+    return () => {
+      window.removeEventListener('scroll', onScroll, scrollOpts);
+      if (rafId) window.cancelAnimationFrame(rafId);
+    };
   }, []);
 
   // Carga diferida: popup flotante no es crítico para el primer paint.
