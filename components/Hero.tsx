@@ -7,10 +7,10 @@ const Hero = () => {
     <section className="relative h-screen flex items-center justify-center overflow-hidden bg-black">
       {/* Background Media */}
       <div className="absolute inset-0 z-0 overflow-hidden">
-        {/* Mobile: YouTube — crop simple sin scale GPU */}
+        {/* Mobile: YouTube — crop lateral + inferior para ocultar UI "Más vídeos" */}
         <iframe
-          src="https://www.youtube.com/embed/j2kjUoDzWEE?autoplay=1&mute=1&playsinline=1&loop=1&playlist=j2kjUoDzWEE&controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&rel=0&disablekb=1&fs=0"
-          className="block md:hidden pointer-events-none absolute top-1/2 left-1/2 w-[270%] h-[155%] -translate-x-1/2 -translate-y-1/2"
+          src="https://www.youtube.com/embed/j2kjUoDzWEE?autoplay=1&mute=1&playsinline=1&loop=1&playlist=j2kjUoDzWEE&controls=0&modestbranding=1&iv_load_policy=3&rel=0&disablekb=1&fs=0&origin=https://www.valeriaferrer.com"
+          className="block md:hidden pointer-events-none absolute top-1/2 left-1/2 w-[205%] h-[118%] min-w-[100vw] min-h-[100vh] -translate-x-[55%] -translate-y-[55%] [clip-path:inset(0_11%_10%_0)]"
           frameBorder="0"
           allow="autoplay; encrypted-media; picture-in-picture"
           allowFullScreen
@@ -111,14 +111,6 @@ const Hero = () => {
             </Link>
           </motion.div>
         </motion.div>
-      </div>
-
-      {/* Decorative scroll indicator */}
-      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center space-y-3 opacity-60">
-        <div className="w-[1px] h-24 bg-gradient-to-b from-[#c2b2a3] to-transparent"></div>
-        <span className="text-[9px] tracking-[0.6em] uppercase text-[#c2b2a3] font-bold">
-          Descubrir más
-        </span>
       </div>
     </section>
   );

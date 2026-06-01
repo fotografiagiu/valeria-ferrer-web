@@ -12,82 +12,6 @@ interface GalleryModalProps {
   modelName: string;
 }
 
-// Función segura para obtener thumbnails del modal para Mia y Kim
-const getModalThumbnail = (imageUrl: string, modelName: string): string => {
-  // Mapeo específico para Kim
-  if (modelName === 'Kim') {
-    if (imageUrl.includes('KIM-3-Model-Agency-Valencia-vertical-principal.jpg')) {
-      return '/chicas-thumbnails/kim-model-agency-valencia-vf/lenceria/thumb-KIM-3-Model-Agency-Valencia-vertical-principal.jpg';
-    }
-    if (imageUrl.includes('KIM-3-Model-Agency-Valencia-10.jpg')) {
-      return '/chicas-thumbnails/kim-model-agency-valencia-vf/lenceria/thumb-KIM-3-Model-Agency-Valencia-10.jpg';
-    }
-    if (imageUrl.includes('KIM-3-Model-Agency-Valencia-11.jpg')) {
-      return '/chicas-thumbnails/kim-model-agency-valencia-vf/lenceria/thumb-KIM-3-Model-Agency-Valencia-11.jpg';
-    }
-    if (imageUrl.includes('KIM-3-Model-Agency-Valencia-12.jpg')) {
-      return '/chicas-thumbnails/kim-model-agency-valencia-vf/lenceria/thumb-KIM-3-Model-Agency-Valencia-12.jpg';
-    }
-    if (imageUrl.includes('KIM-3-Model-Agency-Valencia-13.jpg')) {
-      return '/chicas-thumbnails/kim-model-agency-valencia-vf/lenceria/thumb-KIM-3-Model-Agency-Valencia-13.jpg';
-    }
-    if (imageUrl.includes('KIM-3-Model-Agency-Valencia-14.jpg')) {
-      return '/chicas-thumbnails/kim-model-agency-valencia-vf/lenceria/thumb-KIM-3-Model-Agency-Valencia-14.jpg';
-    }
-    if (imageUrl.includes('KIM-3-Model-Agency-Valencia-15.jpg')) {
-      return '/chicas-thumbnails/kim-model-agency-valencia-vf/lenceria/thumb-KIM-3-Model-Agency-Valencia-15.jpg';
-    }
-    if (imageUrl.includes('KIM-3-Model-Agency-Valencia-06.jpg')) {
-      return '/chicas-thumbnails/kim-model-agency-valencia-vf/lenceria/thumb-KIM-3-Model-Agency-Valencia-06.jpg';
-    }
-    if (imageUrl.includes('KIM-3-Model-Agency-Valencia-07.jpg')) {
-      return '/chicas-thumbnails/kim-model-agency-valencia-vf/lenceria/thumb-KIM-3-Model-Agency-Valencia-07.jpg';
-    }
-    if (imageUrl.includes('KIM-3-Model-Agency-Valencia-08.jpg')) {
-      return '/chicas-thumbnails/kim-model-agency-valencia-vf/lenceria/thumb-KIM-3-Model-Agency-Valencia-08.jpg';
-    }
-    if (imageUrl.includes('KIM-3-Model-Agency-Valencia-09.jpg')) {
-      return '/chicas-thumbnails/kim-model-agency-valencia-vf/lenceria/thumb-KIM-3-Model-Agency-Valencia-09.jpg';
-    }
-    // Fallback para Kim: si no coincide, usar imagen original
-    return imageUrl;
-  }
-  
-  // Mapeo de rutas de Mia a thumbnails (código existente)
-  if (modelName === 'Mia') {
-    if (imageUrl.includes('/chicas/mia-model-agency-valencia-vf/portada.jpg')) {
-      return '/chicas-thumbnails/mia-model-agency-valencia-vf/thumb-portada.jpg';
-    }
-    if (imageUrl.includes('/chicas/mia-model-agency-valencia-vf/gallery/01.jpg')) {
-      return '/chicas-thumbnails/mia-model-agency-valencia-vf/thumb-01.jpg';
-    }
-    if (imageUrl.includes('/chicas/mia-model-agency-valencia-vf/gallery/02.jpg')) {
-      return '/chicas-thumbnails/mia-model-agency-valencia-vf/thumb-02.jpg';
-    }
-    if (imageUrl.includes('/chicas/mia-model-agency-valencia-vf/gallery/03.jpg')) {
-      return '/chicas-thumbnails/mia-model-agency-valencia-vf/thumb-03.jpg';
-    }
-    if (imageUrl.includes('/chicas/mia-model-agency-valencia-vf/gallery/04.jpg')) {
-      return '/chicas-thumbnails/mia-model-agency-valencia-vf/thumb-04.jpg';
-    }
-    if (imageUrl.includes('/chicas/mia-model-agency-valencia-vf/gallery/05.jpg')) {
-      return '/chicas-thumbnails/mia-model-agency-valencia-vf/thumb-05.jpg';
-    }
-    if (imageUrl.includes('/chicas/mia-model-agency-valencia-vf/gallery/06.jpg')) {
-      return '/chicas-thumbnails/mia-model-agency-valencia-vf/thumb-06.jpg';
-    }
-    if (imageUrl.includes('/chicas/mia-model-agency-valencia-vf/gallery/07.jpg')) {
-      return '/chicas-thumbnails/mia-model-agency-valencia-vf/thumb-07.jpg';
-    }
-    if (imageUrl.includes('/chicas/mia-model-agency-valencia-vf/gallery/08.jpg')) {
-      return '/chicas-thumbnails/mia-model-agency-valencia-vf/thumb-08.jpg';
-    }
-    return getGalleryImageThumbnail(imageUrl);
-  }
-
-  return getGalleryImageThumbnail(imageUrl);
-};
-
 const GalleryModal: React.FC<GalleryModalProps> = ({ 
   images, 
   initialIndex, 
@@ -414,7 +338,7 @@ const GalleryModal: React.FC<GalleryModalProps> = ({
                     >
                       {isVisible ? (
                         <LazyImage
-                          src={getModalThumbnail(image, modelName)}
+                          src={getGalleryImageThumbnail(image)}
                           alt={`${modelName} - Miniatura ${index + 1}`}
                           className="w-full h-full object-cover"
                           sizes="64px"

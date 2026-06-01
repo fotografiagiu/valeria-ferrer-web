@@ -57,7 +57,7 @@ export function getModelGridCoverSrc(
 
 /**
  * Miniatura de una imagen de galería (misma convención de nombre en chicas-thumbnails).
- * Para strips pequeños y carrusel del modal.
+ * Usada en strip desktop, carrusel del modal y hover del grid.
  */
 export function getGalleryImageThumbnail(imageUrl: string): string {
   const normalized = resolveOriginalImageUrl(imageUrl);
@@ -65,11 +65,15 @@ export function getGalleryImageThumbnail(imageUrl: string): string {
     return normalized;
   }
 
-  if (normalized.endsWith('/portada.jpg')) {
-    return normalized
-      .replace('/chicas/', '/chicas-thumbnails/')
-      .replace('/portada.jpg', '/cover-thumbnail.jpg');
+  const thumbBase = normalized.replace('/chicas/', '/chicas-thumbnails/');
+
+  if (normalized.endsWith('/portada.jpg') || normalized.endsWith('/portada-nueva.jpg')) {
+    return thumbBase.replace(/\/portada(-nueva)?\.jpg$/, '/cover-thumbnail.jpg');
   }
 
-  return normalized.replace('/chicas/', '/chicas-thumbnails/');
+  if (normalized.endsWith('/cover.jpg')) {
+    return thumbBase.replace('/cover.jpg', '/cover-thumbnail.jpg');
+  }
+
+  return thumbBase;
 }
