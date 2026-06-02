@@ -1,25 +1,99 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { MapPin, Users, Phone } from 'lucide-react';
+
+const MOBILE_HERO_POSTER = '/images/home-mobile-hero.jpg';
+const MOBILE_VIDEO_SRC =
+  'https://www.youtube.com/embed/j2kjUoDzWEE?autoplay=1&mute=1&playsinline=1&loop=1&playlist=j2kjUoDzWEE&controls=0&modestbranding=1&iv_load_policy=3&rel=0&disablekb=1&fs=0&origin=https://www.valeriaferrer.com';
+const DESKTOP_VIDEO_SRC =
+  'https://www.youtube.com/embed/lor3hN0e600?autoplay=1&mute=1&playsinline=1&loop=1&playlist=lor3hN0e600&controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&rel=0&disablekb=1&fs=0';
+
+/** Mismo overscan/crop que el iframe móvil original — aplicado una sola vez al contenedor. */
+const MOBILE_MEDIA_FRAME =
+  'pointer-events-none absolute top-1/2 left-1/2 w-[205%] h-[118%] min-w-[100vw] min-h-[100vh] -translate-x-[55%] -translate-y-[55%] [clip-path:inset(0_11%_10%_0)]';
+
+const MOBILE_MEDIA_FILL = 'absolute inset-0 h-full w-full border-0';
+
+function scheduleMobileVideo(onReady: () => void): () => void {
+  let cancelled = false;
+
+  const run = () => {
+    if (!cancelled) onReady();
+  };
+
+  const timeoutId = window.setTimeout(run, 3000);
+  const w = window as Window & {
+    requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number;
+    cancelIdleCallback?: (id: number) => void;
+  };
+  const idleId =
+    typeof w.requestIdleCallback === 'function'
+      ? w.requestIdleCallback(run, { timeout: 4500 })
+      : undefined;
+
+  return () => {
+    cancelled = true;
+    window.clearTimeout(timeoutId);
+    if (idleId !== undefined && w.cancelIdleCallback) {
+      w.cancelIdleCallback(idleId);
+    }
+  };
+}
 
 const Hero = () => {
+  const [loadMobileVideo, setLoadMobileVideo] = useState(false);
+  const [mobileVideoReady, setMobileVideoReady] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 767px)');
+    if (!mq.matches) return;
+
+    return scheduleMobileVideo(() => setLoadMobileVideo(true));
+  }, []);
+
+  const handleMobileVideoLoad = () => {
+    // Pequeña pausa para que YouTube pinte el primer frame antes del crossfade
+    window.setTimeout(() => setMobileVideoReady(true), 500);
+  };
+
   return (
     <section className="relative h-screen flex items-center justify-center overflow-hidden bg-black">
       {/* Background Media */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
-        {/* Mobile: YouTube — crop lateral + inferior para ocultar UI "Más vídeos" */}
-        <iframe
-          src="https://www.youtube.com/embed/j2kjUoDzWEE?autoplay=1&mute=1&playsinline=1&loop=1&playlist=j2kjUoDzWEE&controls=0&modestbranding=1&iv_load_policy=3&rel=0&disablekb=1&fs=0&origin=https://www.valeriaferrer.com"
-          className="block md:hidden pointer-events-none absolute top-1/2 left-1/2 w-[205%] h-[118%] min-w-[100vw] min-h-[100vh] -translate-x-[55%] -translate-y-[55%] [clip-path:inset(0_11%_10%_0)]"
-          frameBorder="0"
-          allow="autoplay; encrypted-media; picture-in-picture"
-          allowFullScreen
-          title="Valeria Ferrer Background Video Mobile"
-        />
+      <div className="absolute inset-0 z-0 overflow-hidden bg-black">
+        {/* Mobile: poster (LCP) + YouTube en el mismo contenedor recortado */}
+        <div className="block md:hidden absolute inset-0 overflow-hidden" aria-hidden="true">
+          <div className={`${MOBILE_MEDIA_FRAME} overflow-hidden`}>
+            <img
+              src={MOBILE_HERO_POSTER}
+              alt=""
+              decoding="async"
+              fetchPriority="high"
+              loading="eager"
+              width={1280}
+              height={720}
+              className={`${MOBILE_MEDIA_FILL} object-cover object-center transition-opacity duration-1000 ease-out ${
+                mobileVideoReady ? 'opacity-0' : 'opacity-100'
+              }`}
+            />
+
+            {loadMobileVideo ? (
+              <iframe
+                src={MOBILE_VIDEO_SRC}
+                className={`${MOBILE_MEDIA_FILL} transition-opacity duration-1000 ease-out ${
+                  mobileVideoReady ? 'opacity-100' : 'opacity-0'
+                }`}
+                allow="autoplay; encrypted-media; picture-in-picture"
+                allowFullScreen
+                title="Valeria Ferrer Background Video Mobile"
+                onLoad={handleMobileVideoLoad}
+              />
+            ) : null}
+          </div>
+        </div>
 
         {/* Desktop: YouTube */}
         <iframe
-          src="https://www.youtube.com/embed/lor3hN0e600?autoplay=1&mute=1&playsinline=1&loop=1&playlist=lor3hN0e600&controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&rel=0&disablekb=1&fs=0"
+          src={DESKTOP_VIDEO_SRC}
           className="hidden md:block absolute top-1/2 left-1/2 w-[125%] h-[125%] -translate-x-1/2 -translate-y-1/2"
           frameBorder="0"
           allow="autoplay; encrypted-media; picture-in-picture"
@@ -46,20 +120,20 @@ const Hero = () => {
                 Valeria Ferrer
               </span>
             </h1>
-            
+
             {/* Visual separator */}
             <div className="flex items-center justify-center space-x-4 mb-3">
               <div className="flex-1 h-px bg-gradient-to-r from-transparent via-[#c2b2a3]/30 to-transparent max-w-xs"></div>
               <div className="w-2 h-2 rounded-full bg-[#c2b2a3]/50"></div>
               <div className="flex-1 h-px bg-gradient-to-r from-transparent via-[#c2b2a3]/30 to-transparent max-w-xs"></div>
             </div>
-            
+
             {/* Subtitle with better positioning */}
             <div className="relative">
               <span className="text-2xl md:text-4xl tracking-[0.4em] font-light text-[#c2b2a3] block">
                 Agencia Premium
               </span>
-              
+
               {/* Subtle underline */}
               <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-20 h-px bg-gradient-to-r from-transparent via-[#c2b2a3]/40 to-transparent"></div>
             </div>
