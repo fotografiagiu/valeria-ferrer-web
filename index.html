@@ -19,8 +19,8 @@
     <link rel="canonical" href="https://www.valeriaferrer.com" />
     <title>Valeria Ferrer | Escorts y Acompañantes en Valencia</title>
     
-    <!-- Performance: poster LCP móvil (hero) -->
-    <link rel="preload" as="image" href="/images/home-mobile-hero.jpg" media="(max-width: 767px)" fetchpriority="high">
+    <!-- Performance: banner LCP del hero móvil -->
+    <link rel="preload" as="image" href="/images/home-hero-banner-mobile-v2.jpg" media="(max-width: 767px)" fetchpriority="high">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
@@ -43,7 +43,7 @@
         z-index: 1;
       }
 
-      /* Shell LCP móvil — mismo encuadre que Hero.tsx */
+      /* Shell LCP móvil — mismo encuadre que Hero.tsx (object-cover) */
       #hero-lcp-shell {
         display: none;
       }
@@ -69,14 +69,7 @@
 
         #hero-lcp-shell .hero-lcp-frame {
           position: absolute;
-          top: 50%;
-          left: 50%;
-          width: 205%;
-          height: 118%;
-          min-width: 100vw;
-          min-height: 100vh;
-          transform: translate(-55%, -55%);
-          clip-path: inset(0 11% 10% 0);
+          inset: 0;
           overflow: hidden;
         }
 
@@ -93,7 +86,7 @@
         #hero-lcp-shell .hero-lcp-overlay {
           position: absolute;
           inset: 0;
-          background: rgba(0, 0, 0, 0.4);
+          background: linear-gradient(to bottom, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.3) 45%, rgba(0, 0, 0, 0.55));
           pointer-events: none;
         }
       }
@@ -285,12 +278,12 @@
     <div id="hero-lcp-shell" aria-hidden="true">
       <div class="hero-lcp-frame">
         <img
-          src="/images/home-mobile-hero.jpg"
+          src="/images/home-hero-banner-mobile-v2.jpg"
           alt=""
           decoding="async"
           fetchpriority="high"
-          width="1280"
-          height="720"
+          width="576"
+          height="1024"
         />
       </div>
       <div class="hero-lcp-overlay"></div>

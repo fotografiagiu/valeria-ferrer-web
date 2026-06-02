@@ -1,8 +1,11 @@
-import { useEffect, useState, useSyncExternalStore } from 'react';
+import { useEffect, useSyncExternalStore } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 const MOBILE_MQ = '(max-width: 767px)';
+const HERO_BANNER_MOBILE = '/images/home-hero-banner-mobile-v2.jpg';
+const DESKTOP_VIDEO_SRC =
+  'https://www.youtube.com/embed/lor3hN0e600?autoplay=1&mute=1&playsinline=1&loop=1&playlist=lor3hN0e600&controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&rel=0&disablekb=1&fs=0';
 
 function useIsMobileHero(): boolean {
   return useSyncExternalStore(
@@ -15,18 +18,6 @@ function useIsMobileHero(): boolean {
     () => false
   );
 }
-
-const MOBILE_HERO_POSTER = '/images/home-mobile-hero.jpg';
-const MOBILE_VIDEO_SRC =
-  'https://www.youtube.com/embed/j2kjUoDzWEE?autoplay=1&mute=1&playsinline=1&loop=1&playlist=j2kjUoDzWEE&controls=0&modestbranding=1&iv_load_policy=3&rel=0&disablekb=1&fs=0&origin=https://www.valeriaferrer.com';
-const DESKTOP_VIDEO_SRC =
-  'https://www.youtube.com/embed/lor3hN0e600?autoplay=1&mute=1&playsinline=1&loop=1&playlist=lor3hN0e600&controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&rel=0&disablekb=1&fs=0';
-
-/** Mismo overscan/crop que el iframe móvil original — aplicado una sola vez al contenedor. */
-const MOBILE_MEDIA_FRAME =
-  'pointer-events-none absolute top-1/2 left-1/2 w-[205%] h-[118%] min-w-[100vw] min-h-[100vh] -translate-x-[55%] -translate-y-[55%] [clip-path:inset(0_11%_10%_0)]';
-
-const MOBILE_MEDIA_FILL = 'absolute inset-0 h-full w-full border-0';
 
 function hideHeroLcpShell(): void {
   const shell = document.getElementById('hero-lcp-shell');
@@ -47,104 +38,53 @@ function hideHeroLcpShell(): void {
   window.setTimeout(reveal, 32);
 }
 
-function scheduleMobileVideo(onReady: () => void): () => void {
-  let cancelled = false;
-
-  const run = () => {
-    if (!cancelled) onReady();
-  };
-
-  const timeoutId = window.setTimeout(run, 3000);
-  const w = window as Window & {
-    requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number;
-    cancelIdleCallback?: (id: number) => void;
-  };
-  const idleId =
-    typeof w.requestIdleCallback === 'function'
-      ? w.requestIdleCallback(run, { timeout: 4500 })
-      : undefined;
-
-  return () => {
-    cancelled = true;
-    window.clearTimeout(timeoutId);
-    if (idleId !== undefined && w.cancelIdleCallback) {
-      w.cancelIdleCallback(idleId);
-    }
-  };
-}
-
 const Hero = () => {
   const isMobileHero = useIsMobileHero();
-  const [loadMobileVideo, setLoadMobileVideo] = useState(false);
-  const [mobileVideoReady, setMobileVideoReady] = useState(false);
 
   useEffect(() => {
     const mq = window.matchMedia(MOBILE_MQ);
     if (mq.matches) {
       hideHeroLcpShell();
     }
-
-    if (!mq.matches) return;
-
-    return scheduleMobileVideo(() => setLoadMobileVideo(true));
   }, []);
-
-  const handleMobileVideoLoad = () => {
-    // Pequeña pausa para que YouTube pinte el primer frame antes del crossfade
-    window.setTimeout(() => setMobileVideoReady(true), 500);
-  };
 
   return (
     <section className="relative h-screen flex items-center justify-center overflow-hidden bg-black">
       {/* Background Media */}
       <div className="absolute inset-0 z-0 overflow-hidden bg-black">
-        {/* Mobile: poster (LCP) + YouTube en el mismo contenedor recortado */}
-        <div className="block md:hidden absolute inset-0 overflow-hidden" aria-hidden="true">
-          <div className={`${MOBILE_MEDIA_FRAME} overflow-hidden`}>
-            <img
-              src={MOBILE_HERO_POSTER}
-              alt=""
-              decoding="async"
-              fetchPriority="high"
-              loading="eager"
-              width={1280}
-              height={720}
-              className={`${MOBILE_MEDIA_FILL} object-cover object-center transition-opacity duration-1000 ease-out ${
-                mobileVideoReady ? 'opacity-0' : 'opacity-100'
-              }`}
-            />
-
-            {loadMobileVideo ? (
-              <iframe
-                src={MOBILE_VIDEO_SRC}
-                className={`${MOBILE_MEDIA_FILL} transition-opacity duration-1000 ease-out ${
-                  mobileVideoReady ? 'opacity-100' : 'opacity-0'
-                }`}
-                allow="autoplay; encrypted-media; picture-in-picture"
-                allowFullScreen
-                title="Valeria Ferrer Background Video Mobile"
-                onLoad={handleMobileVideoLoad}
-              />
-            ) : null}
-          </div>
-        </div>
+        {/* Móvil: foto compuesta 9:16 — encuadre directo sin recorte extra */}
+        <img
+          src={HERO_BANNER_MOBILE}
+          alt=""
+          decoding="async"
+          fetchPriority="high"
+          loading="eager"
+          width={576}
+          height={1024}
+          aria-hidden="true"
+          className="block md:hidden absolute inset-0 h-full w-full object-cover object-center"
+        />
 
         {/* Desktop: YouTube */}
         <iframe
           src={DESKTOP_VIDEO_SRC}
-          className="hidden md:block absolute top-1/2 left-1/2 w-[125%] h-[125%] -translate-x-1/2 -translate-y-1/2"
+          className="hidden md:block absolute top-1/2 left-1/2 w-[125%] h-[125%] -translate-x-1/2 -translate-y-1/2 pointer-events-none"
           frameBorder="0"
           allow="autoplay; encrypted-media; picture-in-picture"
           allowFullScreen
           title="Valeria Ferrer Background Video"
         />
 
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-black/40 z-10"></div>
+        {/* Overlay — móvil: gradiente suave como referencia; desktop: plano */}
+        <div className="absolute inset-0 z-10 hidden md:block bg-black/40" aria-hidden="true" />
+        <div
+          className="absolute inset-0 z-10 md:hidden bg-gradient-to-b from-black/15 via-black/30 to-black/55"
+          aria-hidden="true"
+        />
       </div>
 
       {/* Content — móvil: visible al montar; desktop: animación framer-motion */}
-      <div className="relative z-20 text-center max-w-5xl px-6">
+      <div className="relative z-20 text-center max-w-5xl px-6 max-md:mt-[4vh]">
         <motion.div
           initial={isMobileHero ? false : { opacity: 0, y: 50 }}
           animate={isMobileHero ? undefined : { opacity: 1, y: 0 }}
@@ -182,7 +122,7 @@ const Hero = () => {
           initial={isMobileHero ? false : { opacity: 0 }}
           animate={isMobileHero ? undefined : { opacity: 1 }}
           transition={isMobileHero ? { duration: 0 } : { duration: 1, delay: 0.5 }}
-          className="text-lg md:text-xl font-light tracking-[0.3em] uppercase text-gray-200 mb-12 drop-shadow-xl"
+          className="text-lg md:text-xl font-light tracking-[0.3em] uppercase text-gray-200 mb-12 drop-shadow-xl max-md:max-w-[17rem] max-md:mx-auto max-md:leading-relaxed max-md:tracking-[0.22em] max-md:text-base"
         >
           Experiencias exclusivas y citas discretas en Valencia
         </motion.p>
