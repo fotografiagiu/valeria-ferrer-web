@@ -32,9 +32,6 @@ const AnalyticsEvents: React.FC<AnalyticsEventsProps> = ({
 
     // Track initial page load
     handleRouteChange();
-
-    // Track route changes
-    handleRouteChange(); // Initial tracking
   }, [location, modelName, serviceType, districtName, blogArticleId]);
 
   useEffect(() => {
@@ -149,24 +146,30 @@ const AnalyticsEvents: React.FC<AnalyticsEventsProps> = ({
     let maxScroll = 0;
     let scrollThresholds = [25, 50, 75, 90];
     let trackedThresholds = new Set<number>();
+    let rafId = 0;
 
     const handleScroll = () => {
-      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const scrollProgress = (window.scrollY / scrollHeight) * 100;
-      
-      if (scrollProgress > maxScroll) {
-        maxScroll = scrollProgress;
-      }
+      if (rafId) return;
+      rafId = window.requestAnimationFrame(() => {
+        rafId = 0;
+        const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+        if (scrollHeight <= 0) return;
+        const scrollProgress = (window.scrollY / scrollHeight) * 100;
 
-      // Track scroll milestones
-      scrollThresholds.forEach(threshold => {
-        if (scrollProgress >= threshold && !trackedThresholds.has(threshold)) {
-          trackedThresholds.add(threshold);
-          track('scroll_depth', {
-            depth: threshold,
-            path: window.location.pathname
-          });
+        if (scrollProgress > maxScroll) {
+          maxScroll = scrollProgress;
         }
+
+        // Track scroll milestones
+        scrollThresholds.forEach((threshold) => {
+          if (scrollProgress >= threshold && !trackedThresholds.has(threshold)) {
+            trackedThresholds.add(threshold);
+            track('scroll_depth', {
+              depth: threshold,
+              path: window.location.pathname,
+            });
+          }
+        });
       });
     };
 
@@ -179,12 +182,13 @@ const AnalyticsEvents: React.FC<AnalyticsEventsProps> = ({
       });
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     window.addEventListener('beforeunload', handleBeforeUnload);
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('beforeunload', handleBeforeUnload);
+      if (rafId) window.cancelAnimationFrame(rafId);
     };
   }, []);
 

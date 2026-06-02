@@ -4,27 +4,13 @@ interface AnalyticsTrackerProps {
   children: React.ReactNode;
 }
 
-const sendTelegramNotification = async (data: any) => {
-  try {
-    // Send to a notification service (use environment variable for security)
-    const webhookUrl = process.env.REACT_APP_SLACK_WEBHOOK_URL || 'https://hooks.slack.com/services/YOUR/SLACK/WEBHOOK';
-    
-    const response = await fetch(webhookUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        text: `📱 Telegram Click Alert\n\n*Device:* ${data.device}\n*URL:* ${data.url}\n*Time:* ${data.timestamp}\n*Page:* ${window.location.href}`,
-        username: 'Valeria Ferrer Bot',
-        icon_emoji: ':telegram:'
-      })
-    });
-    
-    console.log('✅ Telegram notification sent:', data);
-  } catch (error) {
-    console.error('❌ Failed to send Telegram notification:', error);
-  }
+const sendTelegramNotification = async (_data: any) => {
+  // Disabled by default to avoid adding network + main-thread work on tap/click (INP).
+  // Enable only when a real webhook URL is configured.
+  const webhookUrl =
+    process.env.REACT_APP_SLACK_WEBHOOK_URL ||
+    'https://hooks.slack.com/services/YOUR/SLACK/WEBHOOK';
+  if (webhookUrl.includes('/YOUR/SLACK/WEBHOOK')) return;
 };
 
 declare global {
@@ -54,42 +40,20 @@ const AnalyticsTracker: React.FC<AnalyticsTrackerProps> = ({ children }) => {
       const target = event.target as HTMLElement;
       const link = target.closest('a') as HTMLAnchorElement;
       
-      if (link && link.href) {
-        const url = new URL(link.href);
-        let clickType = 'Unknown';
+      if (link && link.getAttribute('href')) {
+        const href = link.getAttribute('href') || '';
+        let clickType: 'Telegram' | 'Phone' | 'WhatsApp' | 'Email' | null = null;
         
         // Check if mobile device
         const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
         
-        // Determine click type
-        if (url.hostname.includes('t.me') || url.hostname.includes('telegram')) {
-          clickType = 'Telegram';
-          
-          // Track Telegram clicks with device info (ALWAYS track regardless of device)
-          console.log(`📱 [${isMobile ? 'MOBILE' : 'DESKTOP'}] Telegram click detected:`, {
-            type: 'Telegram',
-            url: link.href,
-            device: isMobile ? 'mobile' : 'desktop',
-            timestamp: new Date().toISOString()
-          });
-          
-          // Send Telegram notification to admin (uncomment to enable)
-          sendTelegramNotification({
-            type: 'Telegram',
-            device: isMobile ? 'mobile' : 'desktop',
-            url: link.href,
-            timestamp: new Date().toISOString()
-          });
-          
-        } else if (link.href.startsWith('tel:')) {
-          clickType = 'Phone';
-        } else if (url.hostname.includes('wa.me') || url.hostname.includes('whatsapp')) {
-          clickType = 'WhatsApp';
-        } else if (link.href.startsWith('mailto:')) {
-          clickType = 'Email';
-        }
-        
-        if (clickType !== 'Unknown') {
+        // Fast classification without URL parsing (hot path on taps/clicks).
+        if (href.startsWith('tel:')) clickType = 'Phone';
+        else if (href.startsWith('mailto:')) clickType = 'Email';
+        else if (href.includes('t.me/') || href.includes('telegram')) clickType = 'Telegram';
+        else if (href.includes('wa.me/') || href.includes('whatsapp')) clickType = 'WhatsApp';
+
+        if (clickType) {
           // Get existing local data
           const localData = JSON.parse(localStorage.getItem('local-analytics') || '{}');
           
@@ -112,7 +76,7 @@ const AnalyticsTracker: React.FC<AnalyticsTrackerProps> = ({ children }) => {
           if (!localData.recent) localData.recent = [];
           localData.recent.unshift({
             type: clickType,
-            url: link.href,
+            url: href,
             timestamp: new Date().toISOString(),
             page: window.location.pathname
           });
@@ -124,14 +88,16 @@ const AnalyticsTracker: React.FC<AnalyticsTrackerProps> = ({ children }) => {
           
           // Save to localStorage
           localStorage.setItem('local-analytics', JSON.stringify(localData));
-          
-          // Console log for debugging
-          console.log(`📊 [LOCAL] ${clickType} click tracked:`, {
-            type: clickType,
-            url: link.href,
-            total: localData.clicks[clickType],
-            today: localData.daily[today][clickType]
-          });
+
+          if (clickType === 'Telegram') {
+            // Intentionally no-op unless configured, to avoid INP regression on taps.
+            void sendTelegramNotification({
+              type: 'Telegram',
+              device: isMobile ? 'mobile' : 'desktop',
+              url: href,
+              timestamp: new Date().toISOString(),
+            });
+          }
         }
       }
     };

@@ -64,11 +64,28 @@ const ModelDetail: React.FC = () => {
   }, [id]);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setShowContactBar(window.scrollY < 300);
+    let rafId = 0;
+    let last = window.scrollY < 300;
+
+    const update = () => {
+      rafId = 0;
+      const next = window.scrollY < 300;
+      if (next === last) return;
+      last = next;
+      setShowContactBar(next);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    const onScroll = () => {
+      if (rafId) return;
+      rafId = window.requestAnimationFrame(update);
+    };
+
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      if (rafId) window.cancelAnimationFrame(rafId);
+    };
   }, []);
 
   
