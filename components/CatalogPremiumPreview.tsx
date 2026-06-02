@@ -134,7 +134,9 @@ function HorizontalEditorialCard({ model, variant }: HorizontalCardProps) {
             loading={isHero ? 'eager' : 'lazy'}
             decoding="async"
             style={photoFadeMaskStyle}
-            className="absolute inset-0 h-full w-full object-cover object-[center_20%] transition-transform duration-500 ease-out md:duration-[1.1s] md:group-hover:scale-[1.03]"
+            className={`absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-out md:duration-[1.1s] md:group-hover:scale-[1.03] ${
+              model.slug === 'lili' ? 'object-[center_12%]' : 'object-[center_20%]'
+            }`}
           />
         ) : (
           <div className="absolute inset-0 bg-[#141414]" aria-hidden />

@@ -149,7 +149,9 @@ const ModelCard: React.FC<{
             adaptedModel.name === 'Fernanda' ||
             adaptedModel.name === 'KEY' ||
             adaptedModel.name === 'Teresa' ||
-            adaptedModel.name === 'Emma') && (
+            adaptedModel.name === 'Emma' ||
+            adaptedModel.name === 'Lili' ||
+            model.isNew) && (
             <div className="absolute top-2 left-2 md:top-4 md:left-4 z-30">
               <span className="px-2.5 py-1 md:px-3 md:py-1 bg-[#c2b2a3] text-black text-[10px] md:text-[9px] tracking-[0.2em] uppercase font-bold rounded-sm shadow-lg">
                 Nueva
@@ -157,7 +159,7 @@ const ModelCard: React.FC<{
             </div>
           )}
 
-          {((adaptedModel.featured && adaptedModel.name !== 'KEY' && adaptedModel.name !== 'Fernanda' && adaptedModel.name !== 'Mónica' && adaptedModel.name !== 'Flor') || adaptedModel.name.includes('VIP')) && (
+          {((adaptedModel.featured && adaptedModel.name !== 'KEY' && adaptedModel.name !== 'Fernanda' && adaptedModel.name !== 'Mónica' && adaptedModel.name !== 'Flor' && adaptedModel.name !== 'Lili' && !model.isNew) || adaptedModel.name.includes('VIP')) && (
             <div className="absolute top-2 right-2 md:top-4 md:right-4 z-30">
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-[#c2b2a3]/20 to-[#c2b2a3]/10 blur-md" />

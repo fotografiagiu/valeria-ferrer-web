@@ -1,5 +1,57 @@
 [
   {
+    "slug": "lili",
+    "name": "Lili",
+    "age": 21,
+    "height": "1,58 m",
+    "weight": "53 kg",
+    "nationality": "Colombiana",
+    "city": "Valencia",
+    "profileUrl": "https://www.valeriaferrer.com/models/lili/",
+    "coverImageUrl": "/chicas/lili-valeria-ferrer-model-agency-valencia/portada.jpg",
+    "profileImageUrl": "/chicas/lili-valeria-ferrer-model-agency-valencia/portada.jpg",
+    "description": "Lili es una colombiana de 21 años que irrumpe en Valencia con una energía fresca, una sonrisa magnética y una feminidad natural difícil de olvidar. Con 1,58 m y 53 kg, su figura compacta y armoniosa transmite cercanía, sensualidad y ese carisma latino que llena la habitación sin esfuerzo. Joven, espontánea y con una actitud cálida, combina dulzura y picardía en la misma mirada. Ideal para quien busca compañía vibrante, buena conversación y una experiencia auténtica donde la química nace desde el primer instante.",
+    "essence": "El encanto de Lili está en su naturalidad: no necesita artificios para seducir. Tiene esa mezcla de juventud colombiana, calidez genuina y una presencia íntima que hace que cada encuentro se sienta cercano, divertido y muy personal. Sabe crear ambiente, adaptarse a tu ritmo y convertir un plan sencillo en una noche memorable. Perfecta para quien valora la frescura, la complicidad y una compañía que se siente real desde el primer brindis.",
+    "uniquePoints": [
+      "Energía juvenil y carisma colombiano con una sonrisa que conecta al instante",
+      "Figura armoniosa y presencia cercana, ideal para encuentros íntimos y relajados",
+      "Actitud cálida, espontánea y auténtica — química natural sin filtros"
+    ],
+    "experiencePoints": [
+      "Cenas relajadas, copas en terraza y planes con buena vibra en Valencia",
+      "Encuentros privados discretos con ambiente cercano y personal",
+      "Compañía para salidas sociales donde la frescura y el encanto marcan la diferencia"
+    ],
+    "images": [
+      "/chicas/lili-valeria-ferrer-model-agency-valencia/1.jpg",
+      "/chicas/lili-valeria-ferrer-model-agency-valencia/2.jpg"
+    ],
+    "services": [
+      "Girlfriend Experience",
+      "Cenas de Negocios",
+      "Eventos Sociales",
+      "Acompañamiento Personal"
+    ],
+    "availability": "24h",
+    "languages": [
+      "Español",
+      "Inglés"
+    ],
+    "tags": [
+      "colombiana",
+      "normal",
+      "nueva",
+      "joven",
+      "cercana",
+      "discreta",
+      "cenas",
+      "eventos"
+    ],
+    "isNew": true,
+    "featured": true,
+    "vip": false
+  },
+  {
     "slug": "flor",
     "name": "Flor",
     "age": 24,

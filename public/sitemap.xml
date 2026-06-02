@@ -78,6 +78,28 @@
   
   <!-- Perfiles de Modelos con Imágenes -->
   <url>
+    <loc>https://www.valeriaferrer.com/models/lili</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://www.valeriaferrer.com/chicas/lili-valeria-ferrer-model-agency-valencia/portada.jpg</image:loc>
+      <image:title>Lili - Modelo colombiana Valencia</image:title>
+      <image:caption>Lili, modelo colombiana de 21 años para compañía exclusiva en Valencia | Valeria Ferrer</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.valeriaferrer.com/chicas/lili-valeria-ferrer-model-agency-valencia/1.jpg</image:loc>
+      <image:title>Lili Galería 1 - Modelo Valeria Ferrer</image:title>
+      <image:caption>Lili, modelo colombiana elegante en Valencia</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.valeriaferrer.com/chicas/lili-valeria-ferrer-model-agency-valencia/2.jpg</image:loc>
+      <image:title>Lili Galería 2</image:title>
+      <image:caption>Lili, acompañante colombiana en Valencia</image:caption>
+    </image:image>
+  </url>
+
+  <url>
     <loc>https://www.valeriaferrer.com/models/flor</loc>
     <lastmod>2026-05-26</lastmod>
     <changefreq>weekly</changefreq>

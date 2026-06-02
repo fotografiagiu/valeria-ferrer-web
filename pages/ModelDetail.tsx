@@ -342,14 +342,16 @@ const ModelDetail: React.FC = () => {
               <LazyImage
                 src={model.image} 
                 alt={model.name} 
-                className="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-105"
+                className={`w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-105${
+                  model.slug === 'lili' ? ' object-[center_12%]' : ''
+                }`}
                 priority={model.slug === 'lana'}
                 loading={model.slug === 'lana' ? 'eager' : 'lazy'}
               />
             </div>
             {/* Badge for exclusivity */}
             <div className="absolute top-6 left-6 px-4 py-2 bg-black/40 backdrop-blur-md border border-[#c2b2a3]/30 text-[9px] tracking-[0.4em] uppercase font-bold text-[#c2b2a3]">
-              Elección Élite
+              {model.isNew ? 'Nueva' : 'Elección Élite'}
             </div>
             
             {/* Image Counter and Navigation Dots */}
@@ -1338,12 +1340,14 @@ const ModelDetail: React.FC = () => {
                 <img 
                   src={model.image} 
                   alt={model.name} 
-                  className="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-105"
+                  className={`w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-105${
+                    model.slug === 'lili' ? ' object-[center_12%]' : ''
+                  }`}
                 />
                 
                 {/* Badge for exclusivity */}
                 <div className="absolute top-6 left-6 px-4 py-2 bg-black/40 backdrop-blur-md border border-[#c2b2a3]/30 text-[9px] tracking-[0.4em] uppercase font-bold text-[#c2b2a3]">
-                  Elección Élite
+                  {model.isNew ? 'Nueva' : 'Elección Élite'}
                 </div>
                 
                 {/* Image Counter and Navigation Dots - Desktop */}
