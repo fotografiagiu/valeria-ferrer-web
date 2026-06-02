@@ -25,7 +25,6 @@ const Blog = React.lazy(() => import('./pages/Blog'));
 const BlogArticle = React.lazy(() => import('./pages/BlogArticle'));
 const DistrictPage = React.lazy(() => import('./pages/DistrictPage'));
 const EscortsValencia = React.lazy(() => import('./pages/EscortsValencia'));
-const LocalAnalyticsDashboard = React.lazy(() => import('./components/LocalAnalyticsDashboard'));
 const MembersModal = React.lazy(() => import('./components/MembersModal'));
 const FloatingContactPopup = React.lazy(() => import('./components/FloatingContactPopup'));
 
@@ -147,7 +146,6 @@ const App: React.FC = () => {
                 <Route path="/blog" element={<Blog />} />
                 <Route path="/blog/:id" element={<BlogArticle />} />
                 <Route path="/district/:districtId" element={<DistrictPage />} />
-                <Route path="/analytics-local" element={<LocalAnalyticsDashboard />} />
                 <Route path="/legal" element={<Legal />} />
                 <Route path="/privacy" element={<Privacy />} />
                 <Route path="/terms" element={<Terms />} />
