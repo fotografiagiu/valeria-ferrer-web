@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 const MOBILE_MQ = '(max-width: 767px)';
-const HERO_BANNER_MOBILE = '/images/home-hero-banner-mobile-v2.jpg';
+const HERO_BANNER_MOBILE = '/images/home-hero-banner-mobile-v2.png';
 const DESKTOP_VIDEO_SRC =
   'https://www.youtube.com/embed/lor3hN0e600?autoplay=1&mute=1&playsinline=1&loop=1&playlist=lor3hN0e600&controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&rel=0&disablekb=1&fs=0';
 
@@ -52,30 +52,31 @@ const Hero = () => {
     <section className="relative h-screen flex items-center justify-center overflow-hidden bg-black">
       {/* Background Media */}
       <div className="absolute inset-0 z-0 overflow-hidden bg-black">
-        {/* Móvil: foto compuesta 9:16 — encuadre directo sin recorte extra */}
-        <img
-          src={HERO_BANNER_MOBILE}
-          alt=""
-          decoding="async"
-          fetchPriority="high"
-          loading="eager"
-          width={576}
-          height={1024}
-          aria-hidden="true"
-          className="block md:hidden absolute inset-0 h-full w-full object-cover object-center"
-        />
+        {/* Móvil: imagen estática — sin iframe YouTube en el DOM */}
+        {isMobileHero ? (
+          <img
+            src={HERO_BANNER_MOBILE}
+            alt=""
+            decoding="sync"
+            fetchPriority="high"
+            loading="eager"
+            width={576}
+            height={1024}
+            aria-hidden="true"
+            className="absolute inset-0 h-full w-full object-cover object-center"
+          />
+        ) : (
+          <iframe
+            src={DESKTOP_VIDEO_SRC}
+            className="absolute top-1/2 left-1/2 w-[125%] h-[125%] -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+            frameBorder="0"
+            allow="autoplay; encrypted-media; picture-in-picture"
+            allowFullScreen
+            title="Valeria Ferrer Background Video"
+          />
+        )}
 
-        {/* Desktop: YouTube */}
-        <iframe
-          src={DESKTOP_VIDEO_SRC}
-          className="hidden md:block absolute top-1/2 left-1/2 w-[125%] h-[125%] -translate-x-1/2 -translate-y-1/2 pointer-events-none"
-          frameBorder="0"
-          allow="autoplay; encrypted-media; picture-in-picture"
-          allowFullScreen
-          title="Valeria Ferrer Background Video"
-        />
-
-        {/* Overlay — móvil: gradiente suave como referencia; desktop: plano */}
+        {/* Overlay — móvil: gradiente suave; desktop: plano */}
         <div className="absolute inset-0 z-10 hidden md:block bg-black/40" aria-hidden="true" />
         <div
           className="absolute inset-0 z-10 md:hidden bg-gradient-to-b from-black/15 via-black/30 to-black/55"
