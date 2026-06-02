@@ -1,6 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useSyncExternalStore } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+
+const MOBILE_MQ = '(max-width: 767px)';
+
+function useIsMobileHero(): boolean {
+  return useSyncExternalStore(
+    (onStoreChange) => {
+      const mq = window.matchMedia(MOBILE_MQ);
+      mq.addEventListener('change', onStoreChange);
+      return () => mq.removeEventListener('change', onStoreChange);
+    },
+    () => window.matchMedia(MOBILE_MQ).matches,
+    () => false
+  );
+}
 
 const MOBILE_HERO_POSTER = '/images/home-mobile-hero.jpg';
 const MOBILE_VIDEO_SRC =
@@ -13,6 +27,25 @@ const MOBILE_MEDIA_FRAME =
   'pointer-events-none absolute top-1/2 left-1/2 w-[205%] h-[118%] min-w-[100vw] min-h-[100vh] -translate-x-[55%] -translate-y-[55%] [clip-path:inset(0_11%_10%_0)]';
 
 const MOBILE_MEDIA_FILL = 'absolute inset-0 h-full w-full border-0';
+
+function hideHeroLcpShell(): void {
+  const shell = document.getElementById('hero-lcp-shell');
+  if (!shell) return;
+
+  const reveal = () => {
+    shell.classList.add('is-hidden');
+    window.setTimeout(() => shell.remove(), 1100);
+  };
+
+  if (typeof window.requestAnimationFrame === 'function') {
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(reveal);
+    });
+    return;
+  }
+
+  window.setTimeout(reveal, 32);
+}
 
 function scheduleMobileVideo(onReady: () => void): () => void {
   let cancelled = false;
@@ -41,11 +74,16 @@ function scheduleMobileVideo(onReady: () => void): () => void {
 }
 
 const Hero = () => {
+  const isMobileHero = useIsMobileHero();
   const [loadMobileVideo, setLoadMobileVideo] = useState(false);
   const [mobileVideoReady, setMobileVideoReady] = useState(false);
 
   useEffect(() => {
-    const mq = window.matchMedia('(max-width: 767px)');
+    const mq = window.matchMedia(MOBILE_MQ);
+    if (mq.matches) {
+      hideHeroLcpShell();
+    }
+
     if (!mq.matches) return;
 
     return scheduleMobileVideo(() => setLoadMobileVideo(true));
@@ -105,12 +143,12 @@ const Hero = () => {
         <div className="absolute inset-0 bg-black/40 z-10"></div>
       </div>
 
-      {/* Content */}
+      {/* Content — móvil: visible al montar; desktop: animación framer-motion */}
       <div className="relative z-20 text-center max-w-5xl px-6">
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: 'easeOut' }}
+          initial={isMobileHero ? false : { opacity: 0, y: 50 }}
+          animate={isMobileHero ? undefined : { opacity: 1, y: 0 }}
+          transition={isMobileHero ? { duration: 0 } : { duration: 1, ease: 'easeOut' }}
           className="text-center mb-8"
         >
           {/* Main name with better visual organization */}
@@ -141,49 +179,73 @@ const Hero = () => {
         </motion.div>
 
         <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.5 }}
+          initial={isMobileHero ? false : { opacity: 0 }}
+          animate={isMobileHero ? undefined : { opacity: 1 }}
+          transition={isMobileHero ? { duration: 0 } : { duration: 1, delay: 0.5 }}
           className="text-lg md:text-xl font-light tracking-[0.3em] uppercase text-gray-200 mb-12 drop-shadow-xl"
         >
           Experiencias exclusivas y citas discretas en Valencia
         </motion.p>
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
+          initial={isMobileHero ? false : { opacity: 0, scale: 0.9 }}
+          animate={isMobileHero ? undefined : { opacity: 1, scale: 1 }}
+          transition={isMobileHero ? { duration: 0 } : { duration: 0.8, delay: 0.8 }}
           className="flex flex-col sm:flex-row items-center justify-center space-y-5 sm:space-y-0 sm:space-x-8"
         >
-          <motion.div
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            transition={{ duration: 0.2 }}
-            className="w-full sm:w-auto"
-          >
-            <Link
-              to="/models"
-              className="block px-12 py-5 border border-[#c2b2a3] text-[#c2b2a3] uppercase tracking-[0.3em] text-xs backdrop-blur-md hover:bg-[#c2b2a3] hover:text-black transition-all duration-700 w-full sm:w-auto group"
+          {isMobileHero ? (
+            <div className="w-full sm:w-auto">
+              <Link
+                to="/models"
+                className="block px-12 py-5 border border-[#c2b2a3] text-[#c2b2a3] uppercase tracking-[0.3em] text-xs backdrop-blur-md hover:bg-[#c2b2a3] hover:text-black transition-all duration-700 w-full sm:w-auto group"
+              >
+                <span className="relative z-10">Descubrir Escorts</span>
+                <div className="absolute inset-0 bg-[#c2b2a3] opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+              </Link>
+            </div>
+          ) : (
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ duration: 0.2 }}
+              className="w-full sm:w-auto"
             >
-              <span className="relative z-10">Descubrir Escorts</span>
-              <div className="absolute inset-0 bg-[#c2b2a3] opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-            </Link>
-          </motion.div>
+              <Link
+                to="/models"
+                className="block px-12 py-5 border border-[#c2b2a3] text-[#c2b2a3] uppercase tracking-[0.3em] text-xs backdrop-blur-md hover:bg-[#c2b2a3] hover:text-black transition-all duration-700 w-full sm:w-auto group"
+              >
+                <span className="relative z-10">Descubrir Escorts</span>
+                <div className="absolute inset-0 bg-[#c2b2a3] opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+              </Link>
+            </motion.div>
+          )}
 
-          <motion.div
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            transition={{ duration: 0.2 }}
-            className="w-full sm:w-auto"
-          >
-            <Link
-              to="/booking"
-              className="block px-12 py-5 luxury-gradient text-black uppercase tracking-[0.3em] text-xs font-bold hover:scale-105 hover:shadow-[0_0_30px_rgba(194,178,163,0.3)] transition-all duration-300 w-full sm:w-auto group relative overflow-hidden"
+          {isMobileHero ? (
+            <div className="w-full sm:w-auto">
+              <Link
+                to="/booking"
+                className="block px-12 py-5 luxury-gradient text-black uppercase tracking-[0.3em] text-xs font-bold hover:scale-105 hover:shadow-[0_0_30px_rgba(194,178,163,0.3)] transition-all duration-300 w-full sm:w-auto group relative overflow-hidden"
+              >
+                <span className="relative z-10">Reservar Cita Exclusiva</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-[#d4af37] to-[#c2b2a3] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              </Link>
+            </div>
+          ) : (
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ duration: 0.2 }}
+              className="w-full sm:w-auto"
             >
-              <span className="relative z-10">Reservar Cita Exclusiva</span>
-              <div className="absolute inset-0 bg-gradient-to-r from-[#d4af37] to-[#c2b2a3] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            </Link>
-          </motion.div>
+              <Link
+                to="/booking"
+                className="block px-12 py-5 luxury-gradient text-black uppercase tracking-[0.3em] text-xs font-bold hover:scale-105 hover:shadow-[0_0_30px_rgba(194,178,163,0.3)] transition-all duration-300 w-full sm:w-auto group relative overflow-hidden"
+              >
+                <span className="relative z-10">Reservar Cita Exclusiva</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-[#d4af37] to-[#c2b2a3] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              </Link>
+            </motion.div>
+          )}
         </motion.div>
       </div>
     </section>

@@ -26,37 +26,83 @@
     
     <!-- Critical CSS - Above the fold optimization -->
     <style>
-      /* Critical rendering path styles */
-      body { 
-        margin: 0; 
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif; 
-        background: #0a0a0a; 
-        color: white; 
+      html {
+        background: #0a0a0a;
+      }
+
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+        background: #0a0a0a;
+        color: white;
         line-height: 1.6;
       }
-      .loading { opacity: 0; transition: opacity 0.3s; }
-      .loaded { opacity: 1; }
-      
-      /* Hero section critical styles */
-      .hero-container { min-height: 100vh; display: flex; align-items: center; justify-content: center; }
-      .hero-title { font-size: clamp(2rem, 8vw, 6rem); font-weight: 700; text-align: center; }
-      .hero-subtitle { font-size: clamp(1rem, 3vw, 1.5rem); opacity: 0.8; text-align: center; }
-      
-      /* Navigation critical styles */
-      .nav-container { position: fixed; top: 0; left: 0; right: 0; z-index: 50; background: rgba(10, 10, 10, 0.95); backdrop-filter: blur(10px); }
-      .nav-content { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; }
-      
-      /* Loading skeleton for images */
-      .image-skeleton { 
-        background: linear-gradient(90deg, #1a1a1a 25%, #2a2a2a 50%, #1a1a1a 75%); 
-        background-size: 200% 100%; 
-        animation: shimmer 1.5s infinite; 
+
+      #root {
+        position: relative;
+        z-index: 1;
       }
-      @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
-      
-      /* Prevent layout shift */
-      .aspect-container { aspect-ratio: 2/3; overflow: hidden; }
-      .model-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; }
+
+      /* Shell LCP móvil — mismo encuadre que Hero.tsx */
+      #hero-lcp-shell {
+        display: none;
+      }
+
+      @media (max-width: 767px) {
+        #hero-lcp-shell {
+          display: block;
+          position: fixed;
+          inset: 0;
+          z-index: 0;
+          overflow: hidden;
+          background: #000;
+          pointer-events: none;
+          opacity: 1;
+          visibility: visible;
+          transition: opacity 1s ease-out, visibility 0s linear 1s;
+        }
+
+        #hero-lcp-shell.is-hidden {
+          opacity: 0;
+          visibility: hidden;
+        }
+
+        #hero-lcp-shell .hero-lcp-frame {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 205%;
+          height: 118%;
+          min-width: 100vw;
+          min-height: 100vh;
+          transform: translate(-55%, -55%);
+          clip-path: inset(0 11% 10% 0);
+          overflow: hidden;
+        }
+
+        #hero-lcp-shell .hero-lcp-frame img {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+          border: 0;
+        }
+
+        #hero-lcp-shell .hero-lcp-overlay {
+          position: absolute;
+          inset: 0;
+          background: rgba(0, 0, 0, 0.4);
+          pointer-events: none;
+        }
+      }
+
+      @media (min-width: 768px) {
+        #hero-lcp-shell {
+          display: none !important;
+        }
+      }
     </style>
     
     <!-- Structured Data JSON-LD - LocalBusiness + Organization -->
@@ -226,7 +272,8 @@
     }
     </script>
     
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600&display=swap"></noscript>
     <link rel="manifest" href="/manifest.json">
     <meta name="theme-color" content="#c2b2a3">
     <meta name="mobile-web-app-capable" content="yes">
@@ -235,6 +282,27 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   </head>
   <body class="scroll-smooth">
+    <div id="hero-lcp-shell" aria-hidden="true">
+      <div class="hero-lcp-frame">
+        <img
+          src="/images/home-mobile-hero.jpg"
+          alt=""
+          decoding="async"
+          fetchpriority="high"
+          width="1280"
+          height="720"
+        />
+      </div>
+      <div class="hero-lcp-overlay"></div>
+    </div>
+    <script>
+      (function () {
+        var path = window.location.pathname.replace(/\/+$/, '') || '/';
+        var shell = document.getElementById('hero-lcp-shell');
+        if (!shell) return;
+        if (path !== '/') shell.remove();
+      })();
+    </script>
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
       </body>
