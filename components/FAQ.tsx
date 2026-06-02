@@ -8,12 +8,18 @@ const FAQItem: React.FC<{ question: string; answer: string }> = ({ question, ans
 
   return (
     <div className="border-b border-white/10">
-      <button 
+      <button
+        type="button"
         className="w-full py-6 flex items-center justify-between text-left hover:text-[#c2b2a3] transition-colors"
         onClick={() => setIsOpen(!isOpen)}
+        aria-expanded={isOpen}
       >
         <span className="text-lg md:text-xl font-light tracking-wide uppercase">{question}</span>
-        {isOpen ? <ChevronUp size={20} className="text-[#c2b2a3]" /> : <ChevronDown size={20} className="text-[#c2b2a3]" />}
+        {isOpen ? (
+          <ChevronUp size={20} className="text-[#c2b2a3]" aria-hidden="true" />
+        ) : (
+          <ChevronDown size={20} className="text-[#c2b2a3]" aria-hidden="true" />
+        )}
       </button>
       <div className={`overflow-hidden transition-all duration-500 ${isOpen ? 'max-h-[500px] opacity-100 pb-8' : 'max-h-0 opacity-0'}`}>
         <p className="text-gray-400 font-light leading-relaxed">

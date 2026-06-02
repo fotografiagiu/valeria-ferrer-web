@@ -116,7 +116,7 @@ const ExploreProfilesNav: React.FC<Props> = ({
   if (!links.length) return null;
 
   const buttonClass =
-    'explore-nav-btn flex-shrink-0 rounded-full border border-white/10 px-4 py-2 text-[10px] uppercase tracking-[0.22em] text-gray-400 transition-all duration-500 ease-out';
+    'explore-nav-btn flex-shrink-0 rounded-full border border-white/10 px-4 py-2 text-[10px] uppercase tracking-[0.22em] text-gray-300 transition-all duration-500 ease-out';
 
   const buttonClassDesktop =
     'md:px-6 md:py-3 md:text-[11px] md:tracking-[0.28em] md:border-white/15 md:shadow-[0_0_0_0_rgba(194,178,163,0)] md:hover:border-[#c2b2a3]/55 md:hover:text-[#c2b2a3] md:hover:shadow-[0_8px_28px_-8px_rgba(194,178,163,0.22)] md:hover:-translate-y-0.5';
@@ -125,7 +125,7 @@ const ExploreProfilesNav: React.FC<Props> = ({
     if (item.key !== 'vip') return item.label;
     return (
       <>
-        <span className="text-gray-400 group-hover:text-gray-300">Perfiles </span>
+        <span className="text-gray-300 group-hover:text-gray-200">Perfiles </span>
         <span
           className="luxury-text-gradient font-light tracking-[0.35em] drop-shadow-[0_0_10px_rgba(194,178,163,0.28)] transition-[filter] duration-500 group-hover:drop-shadow-[0_0_14px_rgba(194,178,163,0.38)]"
         >
@@ -234,7 +234,7 @@ const ExploreProfilesNav: React.FC<Props> = ({
   return (
     <nav className={wrapperClass} aria-label={title ?? 'Explorar perfiles'}>
       {title !== null && (
-        <p className="text-center text-[10px] uppercase tracking-[0.35em] text-gray-500 mb-5 md:mb-6 md:text-[11px]">
+        <p className="text-center text-[10px] uppercase tracking-[0.35em] text-gray-400 mb-5 md:mb-6 md:text-[11px]">
           {title}
         </p>
       )}

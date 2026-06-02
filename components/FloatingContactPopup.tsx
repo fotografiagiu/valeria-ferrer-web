@@ -38,12 +38,13 @@ const FloatingContactPopup: React.FC = () => {
               {/* Decorative background element */}
               <div className="absolute -top-10 -right-10 w-24 h-24 bg-[#c2b2a3]/5 rounded-full blur-2xl group-hover:bg-[#c2b2a3]/10 transition-colors duration-500"></div>
               
-              <button 
+              <button
+                type="button"
                 onClick={handleClose}
-                className="absolute top-3 right-3 text-gray-500 hover:text-white transition-colors p-1"
-                aria-label="Cerrar"
+                className="absolute top-3 right-3 text-gray-400 hover:text-white transition-colors p-1"
+                aria-label="Cerrar ventana de contacto"
               >
-                <X size={16} />
+                <X size={16} aria-hidden="true" />
               </button>
 
               <div className="relative z-10">
@@ -101,7 +102,7 @@ const FloatingContactPopup: React.FC = () => {
             className="fixed bottom-32 right-0 z-[55] bg-[#c2b2a3] text-black py-3 px-2 rounded-l-xl shadow-2xl flex flex-col items-center space-y-2 hover:bg-white transition-colors duration-300 group"
             aria-label="Abrir contacto"
           >
-            <MessageSquare size={18} className="group-hover:scale-110 transition-transform" />
+            <MessageSquare size={18} className="group-hover:scale-110 transition-transform" aria-hidden="true" />
             <span className="[writing-mode:vertical-rl] text-[9px] font-bold uppercase tracking-widest py-1">Contacto</span>
           </motion.button>
         )}

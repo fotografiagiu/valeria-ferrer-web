@@ -50,9 +50,10 @@ const CookieConsent: React.FC = () => {
             </div>
             
             <div className="flex flex-col sm:flex-row items-center gap-4 w-full md:w-auto">
-              <button 
+              <button
+                type="button"
                 onClick={handleDecline}
-                className="text-[10px] tracking-[0.3em] uppercase text-gray-500 hover:text-white transition-colors px-6 py-3"
+                className="text-[10px] tracking-[0.3em] uppercase text-gray-400 hover:text-white transition-colors px-6 py-3"
               >
                 Configurar
               </button>
@@ -64,11 +65,13 @@ const CookieConsent: React.FC = () => {
               </button>
             </div>
 
-            <button 
+            <button
+              type="button"
               onClick={() => setIsVisible(false)}
-              className="absolute top-4 right-4 text-gray-600 hover:text-white transition-colors"
+              className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
+              aria-label="Cerrar aviso de cookies"
             >
-              <X size={16} />
+              <X size={16} aria-hidden="true" />
             </button>
           </div>
         </motion.div>

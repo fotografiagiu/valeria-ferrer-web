@@ -200,12 +200,12 @@ const ModelCard: React.FC<{
           </p>
 
           {model.age && model.height && (
-            <p className="text-[9px] text-gray-500 mt-2 tracking-[0.1em] uppercase">
+            <p className="text-[9px] text-gray-400 mt-2 tracking-[0.1em] uppercase">
               {model.age} años • {model.height} • {model.nationality || 'Española'}
             </p>
           )}
 
-          <p className="text-[8px] text-gray-600 mt-1 tracking-[0.1em] uppercase">
+          <p className="text-[8px] text-gray-400 mt-1 tracking-[0.1em] uppercase">
             {description}
           </p>
 
@@ -268,13 +268,14 @@ const ModelsGrid: React.FC<ModelsGridProps> = ({ models = MODELS }) => {
                 <button
                   type="button"
                   onClick={() => handleViewChange('normal')}
+                  aria-pressed={viewMode === 'normal'}
                   className={`flex items-center space-x-2 px-5 py-3 rounded-full transition-all duration-300 ${
                     viewMode === 'normal'
                       ? 'bg-[#c2b2a3] text-black shadow-md'
                       : 'text-[#c2b2a3] hover:text-white hover:bg-[#c2b2a3]/10'
                   }`}
                 >
-                  <Grid3X3 size={18} />
+                  <Grid3X3 size={18} aria-hidden="true" />
                   <span className="text-[12px] font-bold tracking-[0.2em] uppercase">
                     Fichas Grandes
                   </span>
@@ -283,13 +284,14 @@ const ModelsGrid: React.FC<ModelsGridProps> = ({ models = MODELS }) => {
                 <button
                   type="button"
                   onClick={() => handleViewChange('double')}
+                  aria-pressed={viewMode === 'double'}
                   className={`flex items-center space-x-2 px-5 py-3 rounded-full transition-all duration-300 ${
                     viewMode === 'double'
                       ? 'bg-[#c2b2a3] text-black shadow-md'
                       : 'text-[#c2b2a3] hover:text-white hover:bg-[#c2b2a3]/10'
                   }`}
                 >
-                  <LayoutGrid size={18} />
+                  <LayoutGrid size={18} aria-hidden="true" />
                   <span className="text-[12px] font-bold tracking-[0.2em] uppercase">
                     Vista 2x2
                   </span>
@@ -298,7 +300,7 @@ const ModelsGrid: React.FC<ModelsGridProps> = ({ models = MODELS }) => {
             </div>
 
             <div className="text-center">
-              <p className="text-[11px] text-gray-500 font-medium max-w-xs leading-relaxed">
+              <p className="text-[11px] text-gray-400 font-medium max-w-xs leading-relaxed">
                 {viewMode === 'normal'
                   ? '🔍 Visualiza las fichas en grande con todos los detalles'
                   : '📱 Visualiza más modelos en formato 2x2'}

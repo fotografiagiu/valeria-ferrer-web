@@ -33,7 +33,7 @@ const ReviewCard: React.FC<{
           </div>
           <div>
             <h4 className="font-bold text-[#c2b2a3] tracking-widest text-xs uppercase">{review.author}</h4>
-            <p className="text-[10px] text-gray-500 tracking-[0.2em] uppercase">
+            <p className="text-[10px] text-gray-400 tracking-[0.2em] uppercase">
               Cliente verificado
               {review.publishedLabel ? ` · ${review.publishedLabel}` : ''}
             </p>
@@ -179,17 +179,22 @@ const Reviews: React.FC = () => {
 
         <div className="flex justify-center items-center mt-12 space-x-6">
           <button
+            type="button"
             onClick={() => setCurrentIndex((prev) => (prev - 1 + pageCount) % pageCount)}
             className="p-2 rounded-full border border-white/10 hover:border-[#c2b2a3]/30 hover:bg-[#c2b2a3]/5 transition-all duration-300"
+            aria-label="Reseña anterior"
           >
-            <ChevronLeft size={20} className="text-[#c2b2a3]" />
+            <ChevronLeft size={20} className="text-[#c2b2a3]" aria-hidden="true" />
           </button>
 
-          <div className="flex space-x-2">
+          <div className="flex space-x-2" role="tablist" aria-label="Paginación de reseñas">
             {Array.from({ length: pageCount }).map((_, i) => (
               <button
                 key={i}
+                type="button"
                 onClick={() => setCurrentIndex(i)}
+                aria-label={`Ir a la reseña ${i + 1} de ${pageCount}`}
+                aria-current={currentIndex === i ? 'true' : undefined}
                 className={`w-2 h-2 rounded-full transition-all duration-300 ${
                   currentIndex === i ? 'bg-[#c2b2a3] w-8' : 'bg-white/20 hover:bg-white/30'
                 }`}
@@ -198,10 +203,12 @@ const Reviews: React.FC = () => {
           </div>
 
           <button
+            type="button"
             onClick={() => setCurrentIndex((prev) => (prev + 1) % pageCount)}
             className="p-2 rounded-full border border-white/10 hover:border-[#c2b2a3]/30 hover:bg-[#c2b2a3]/5 transition-all duration-300"
+            aria-label="Reseña siguiente"
           >
-            <ChevronRight size={20} className="text-[#c2b2a3]" />
+            <ChevronRight size={20} className="text-[#c2b2a3]" aria-hidden="true" />
           </button>
         </div>
       </div>

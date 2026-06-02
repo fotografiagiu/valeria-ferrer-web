@@ -15,11 +15,19 @@ const Footer: React.FC = () => {
               Exclusiva Agencia de Modelos de Lujo que representa a las mejores modelos en todo el mundo. Redefinimos el acompañamiento de lujo con sofisticación y discreción absoluta.
             </p>
             <div className="flex space-x-4 pt-4">
-              <a href="https://instagram.com" className="w-10 h-10 rounded-full bg-[#1a1a1a] flex items-center justify-center text-[#c2b2a3] hover:bg-[#c2b2a3] hover:text-black transition-all">
-                <Instagram size={18} />
+              <a
+                href="https://instagram.com"
+                aria-label="Instagram de Valeria Ferrer"
+                className="w-10 h-10 rounded-full bg-[#1a1a1a] flex items-center justify-center text-[#c2b2a3] hover:bg-[#c2b2a3] hover:text-black transition-all"
+              >
+                <Instagram size={18} aria-hidden="true" />
               </a>
-              <a href="https://twitter.com" className="w-10 h-10 rounded-full bg-[#1a1a1a] flex items-center justify-center text-[#c2b2a3] hover:bg-[#c2b2a3] hover:text-black transition-all">
-                <Twitter size={18} />
+              <a
+                href="https://twitter.com"
+                aria-label="Perfil de X (Twitter) de Valeria Ferrer"
+                className="w-10 h-10 rounded-full bg-[#1a1a1a] flex items-center justify-center text-[#c2b2a3] hover:bg-[#c2b2a3] hover:text-black transition-all"
+              >
+                <Twitter size={18} aria-hidden="true" />
               </a>
             </div>
           </div>
@@ -69,12 +77,12 @@ const Footer: React.FC = () => {
               </div>
             </div>
             <div className="pt-4 border-t border-white/10">
-              <p className="text-[10px] text-gray-500 italic">Calle Colón, Valencia (sin número por privacidad). El número exacto se proporcionará por Telegram o llamada. Discreción absoluta garantizada.</p>
+              <p className="text-[10px] text-gray-400 italic">Calle Colón, Valencia (sin número por privacidad). El número exacto se proporcionará por Telegram o llamada. Discreción absoluta garantizada.</p>
             </div>
           </div>
         </div>
 
-        <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0 text-[10px] font-medium tracking-[0.3em] uppercase text-gray-600">
+        <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0 text-[10px] font-medium tracking-[0.3em] uppercase text-gray-400">
           <p>Copyright © 2026 Agencia Valeria Ferrer™ - Todos los derechos reservados</p>
           <div className="flex space-x-8">
             <Link to="/legal" className="hover:text-[#c2b2a3]">Aviso Legal</Link>
