@@ -56,16 +56,6 @@ export const REVIEWS: Review[] = [
     publishedAt: '2026-05',
   },
   {
-    id: '12',
-    modelName: 'Fernanda',
-    title: 'Química y conversación con chispa',
-    content:
-      'Fernanda tiene una mirada que engancha y un humor fino que relaja el ambiente. Más allá de lo visual, la conexión fue auténtica y la noche se alargó con naturalidad. Experiencia muy personal y cuidada.',
-    author: 'Luis M.',
-    publishedLabel: 'Abril 2026',
-    publishedAt: '2026-04',
-  },
-  {
     id: '13',
     modelName: 'KEY',
     title: 'Energía y buen rollo',

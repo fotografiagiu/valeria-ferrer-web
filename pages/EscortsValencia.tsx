@@ -30,7 +30,6 @@ const SEO = {
 const FEATURED_SLUGS = [
   'flor',
   'monica',
-  'fernanda',
   'key',
   'elena',
   'paula-vip',
