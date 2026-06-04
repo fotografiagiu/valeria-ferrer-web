@@ -14,7 +14,6 @@ Disallow: /src/
 # Permitir indexación de contenido importante
 Allow: /$
 Allow: /models$
-Allow: /model/
 Allow: /about$
 Allow: /contact$
 Allow: /booking$

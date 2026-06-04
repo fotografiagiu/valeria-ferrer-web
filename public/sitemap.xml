@@ -301,7 +301,31 @@
       <image:caption>Los mejores hoteles 5 estrellas de Valencia para experiencias VIP. Suites presidenciales, spa de lujo y total discreción.</image:caption>
     </image:image>
   </url>
-  
+
+  <url>
+    <loc>https://www.valeriaferrer.com/blog/escorts-valencia-centro</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://www.valeriaferrer.com/blog/escorts-valencia-centro-cover.jpg</image:loc>
+      <image:title>Escorts Valencia Centro</image:title>
+      <image:caption>Acompañantes VIP en el casco antiguo y centro histórico de Valencia.</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://www.valeriaferrer.com/blog/escorts-ruzafa-valencia</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://www.valeriaferrer.com/blog/escorts-russafa-valencia-cover.jpg</image:loc>
+      <image:title>Escorts Ruzafa Valencia</image:title>
+      <image:caption>Escorts y acompañantes VIP en el barrio Ruzafa de Valencia.</image:caption>
+    </image:image>
+  </url>
+
   <!-- Kim - Nueva Modelo -->
   <url>
     <loc>https://www.valeriaferrer.com/models/kim</loc>

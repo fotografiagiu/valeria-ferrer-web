@@ -63,7 +63,7 @@ const Breadcrumbs: React.FC<{ modelName?: string }> = ({ modelName }) => {
       "@type": "ListItem",
       "position": index + 1,
       "name": crumb.name,
-      "item": `https://valeriaferrer.com${crumb.path}`
+      "item": `https://www.valeriaferrer.com${crumb.path}`
     }))
   };
 
