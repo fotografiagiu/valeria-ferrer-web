@@ -191,14 +191,26 @@ export const FAQS: FAQ[] = [
 ];
 
 export const FEES = {
-  header: 'Tarifas y Honorarios',
+  header: 'Tarifas',
   description:
-    'Nuestras tarifas reflejan la exclusividad y el alto nivel de nuestras modelos. Todos los honorarios incluyen la gestión de la agencia y la compensación de la modelo.',
+    'Consulta las tarifas orientativas según la duración del encuentro. Los precios pueden variar según la modelo, disponibilidad, tipo de servicio y desplazamiento. Para ver condiciones concretas, revisa la ficha individual de cada modelo o consúltanos directamente.',
   rates: [
-    { duration: '2 Horas', price: 'Desde 800€', note: 'Reserva mínima' },
-    { duration: '4 Horas', price: 'Desde 1.400€', note: 'Ideal para cenas' },
-    { duration: 'Overnight (12h)', price: 'Desde 2.500€', note: 'Noche completa' },
-    { duration: 'Fin de Semana', price: 'Consultar', note: 'Incluye viajes' },
+    { duration: '30 minutos', price: 'Desde 80 €' },
+    { duration: '45 minutos', price: 'Desde 120 €' },
+    { duration: '1 hora', price: 'Desde 150 €' },
+    { duration: '1,5 horas', price: 'Desde 240 €' },
+    { duration: '2 horas', price: 'Desde 300 €' },
+    { duration: '3 horas', price: 'Desde 430 €' },
+    { duration: 'Salida', price: 'Desde 200 €' },
+    { duration: 'Noche / 10h', price: 'Desde 1.200 €' },
+    { duration: '24h', price: 'Desde 2.800 €' },
+  ],
+  conditions: [
+    'Las tarifas son orientativas y pueden variar según la modelo.',
+    'Consulta la ficha individual para ver los precios concretos.',
+    'Los desplazamientos pueden no estar incluidos y se calculan según ubicación.',
+    'Las reservas de larga duración pueden requerir depósito previo.',
+    'Todas las reservas están sujetas a disponibilidad.',
   ],
 };
 
