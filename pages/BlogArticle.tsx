@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Calendar, Clock, User, ArrowLeft, Share2, Heart, Bookmark } from 'lucide-react';
-import SEOHead from '../components/SEOHead';
+import PageSEOHead, { SITE_ORIGIN, toAbsoluteMediaUrl } from '../components/PageSEOHead';
 import OptimizedImage from '../components/OptimizedImage';
 import AnalyticsEvents from '../components/AnalyticsEvents';
 import blogData from '../data/blog.json';
@@ -18,6 +18,11 @@ const BlogArticle: React.FC = () => {
   if (!article) {
     return (
       <div className="min-h-screen bg-[#0a0a0a] pt-24 flex items-center justify-center">
+        <PageSEOHead
+          title="Artículo no encontrado | Blog Valeria Ferrer"
+          description="El artículo solicitado no existe. Explora guías y contenido sobre acompañantes VIP en Valencia."
+          canonicalUrl={`${SITE_ORIGIN}/blog`}
+        />
         <div className="text-center">
           <h1 className="text-2xl font-light text-white mb-4">Artículo no encontrado</h1>
           <Link to="/blog" className="text-[#c2b2a3] hover:text-white transition-colors">
@@ -28,18 +33,33 @@ const BlogArticle: React.FC = () => {
     );
   }
 
-  // Update SEO meta tags
-  useEffect(() => {
-    document.title = article.seo.title;
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute('content', article.seo.description);
-    }
-    const metaKeywords = document.querySelector('meta[name="keywords"]');
-    if (metaKeywords) {
-      metaKeywords.setAttribute('content', article.seo.keywords);
-    }
-  }, [article]);
+  const canonicalUrl = `${SITE_ORIGIN}/blog/${article.id}`;
+  const ogImage = toAbsoluteMediaUrl(article.featuredImage);
+
+  const articleSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: article.title,
+    description: article.seo.description,
+    image: ogImage,
+    author: {
+      '@type': 'Organization',
+      name: article.author,
+    },
+    datePublished: article.date,
+    publisher: {
+      '@type': 'Organization',
+      name: 'Valeria Ferrer',
+      logo: {
+        '@type': 'ImageObject',
+        url: `${SITE_ORIGIN}/favicon.png`,
+      },
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': canonicalUrl,
+    },
+  };
 
   const renderContent = (content: string) => {
     // Convert markdown-like content to HTML
@@ -64,13 +84,14 @@ const BlogArticle: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] pt-24">
-      <SEOHead
+      <PageSEOHead
         title={article.seo.title}
         description={article.seo.description}
         keywords={article.seo.keywords}
-        canonical={`https://valeriaferrer.com/blog/${article.id}`}
-        ogImage={article.featuredImage}
-        article={article}
+        canonicalUrl={canonicalUrl}
+        ogImage={ogImage}
+        type="article"
+        structuredData={articleSchema}
       />
       <AnalyticsEvents blogArticleId={article.id} />
       {/* Hero Section */}

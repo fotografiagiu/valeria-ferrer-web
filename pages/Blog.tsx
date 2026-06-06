@@ -1,8 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Search, Filter, Calendar, User, Clock, ArrowRight } from 'lucide-react';
+import { Search, Filter } from 'lucide-react';
 import BlogCard from '../components/BlogCard';
+import PageSEOHead from '../components/PageSEOHead';
 import blogData from '../data/blog.json';
+
+const BLOG_SEO = {
+  title: 'Blog Valeria Ferrer | Guías y Acompañantes VIP en Valencia',
+  description:
+    'Guías exclusivas sobre escorts y acompañantes VIP en Valencia: zonas, hoteles de lujo, servicios premium y consejos para reservas discretas.',
+  canonicalUrl: 'https://www.valeriaferrer.com/blog',
+};
 
 const Blog: React.FC = () => {
   const [filteredArticles, setFilteredArticles] = useState(blogData);
@@ -35,6 +43,11 @@ const Blog: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] pt-24">
+      <PageSEOHead
+        title={BLOG_SEO.title}
+        description={BLOG_SEO.description}
+        canonicalUrl={BLOG_SEO.canonicalUrl}
+      />
       {/* Hero Section */}
       <section className="bg-[#111111] py-20 px-6 border-b border-white/5">
         <div className="max-w-7xl mx-auto text-center">

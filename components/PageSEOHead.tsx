@@ -1,7 +1,16 @@
 import React, { useEffect } from 'react';
 
-const SITE_ORIGIN = 'https://www.valeriaferrer.com';
-const DEFAULT_OG_IMAGE = `${SITE_ORIGIN}/og-image.jpg`;
+export const SITE_ORIGIN = 'https://www.valeriaferrer.com';
+export const DEFAULT_OG_IMAGE = `${SITE_ORIGIN}/og-image.jpg`;
+
+/** Convierte rutas /public a URL absoluta para og:image y schema. */
+export function toAbsoluteMediaUrl(pathOrUrl: string): string {
+  if (!pathOrUrl) return DEFAULT_OG_IMAGE;
+  if (pathOrUrl.startsWith('http://') || pathOrUrl.startsWith('https://')) {
+    return pathOrUrl;
+  }
+  return `${SITE_ORIGIN}${pathOrUrl.startsWith('/') ? pathOrUrl : `/${pathOrUrl}`}`;
+}
 
 /** Valores por defecto alineados con index.html / home */
 export const DEFAULT_HOME_SEO = {
@@ -127,9 +136,7 @@ const PageSEOHead: React.FC<PageSEOHeadProps> = ({
       structuredData,
     });
 
-    return () => {
-      restoreDefaultHomeHead();
-    };
+    // Sin restore a home: la siguiente ruta con SEO sobrescribe; evita canonical de home en /contact, etc.
   }, [title, description, keywords, ogImage, canonicalUrl, type, structuredData]);
 
   return null;
