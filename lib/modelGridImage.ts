@@ -65,7 +65,9 @@ export function getGalleryImageThumbnail(imageUrl: string): string {
     return normalized;
   }
 
-  const thumbBase = normalized.replace('/chicas/', '/chicas-thumbnails/');
+  const thumbBase = normalized.includes('/chicas-optimized/')
+    ? normalized.replace('/chicas-optimized/', '/chicas-thumbnails/')
+    : normalized.replace('/chicas/', '/chicas-thumbnails/');
 
   if (normalized.endsWith('/portada.jpg') || normalized.endsWith('/portada-nueva.jpg')) {
     return thumbBase.replace(/\/portada(-nueva)?\.jpg$/, '/cover-thumbnail.jpg');

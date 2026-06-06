@@ -9,6 +9,8 @@ interface LazyImageProps {
   sizes?: string;
   title?: string;
   loading?: 'lazy' | 'eager';
+  onImageLoad?: (event: React.SyntheticEvent<HTMLImageElement>) => void;
+  containerClassName?: string;
 }
 
 const LazyImage: React.FC<LazyImageProps> = ({ 
@@ -19,7 +21,9 @@ const LazyImage: React.FC<LazyImageProps> = ({
   priority = false,
   sizes = '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw',
   title,
-  loading = priority ? 'eager' : 'lazy'
+  loading = priority ? 'eager' : 'lazy',
+  onImageLoad,
+  containerClassName = 'overflow-hidden',
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isInView, setIsInView] = useState(false);
@@ -52,8 +56,9 @@ const LazyImage: React.FC<LazyImageProps> = ({
     return () => observer.disconnect();
   }, [priority]);
 
-  const handleLoad = () => {
+  const handleLoad = (event: React.SyntheticEvent<HTMLImageElement>) => {
     setIsLoaded(true);
+    onImageLoad?.(event);
   };
 
   // Generate WebP and fallback sources (only if WebP exists)
@@ -77,7 +82,7 @@ const LazyImage: React.FC<LazyImageProps> = ({
   };
 
   return (
-    <div className="relative overflow-hidden">
+    <div className={`relative ${containerClassName}`}>
       <picture>
         {/* WebP source - only add if we want to use WebP */}
         {/* Temporarily disabled until WebP images are generated */}
