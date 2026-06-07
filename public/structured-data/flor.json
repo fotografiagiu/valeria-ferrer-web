@@ -2,6 +2,7 @@
   "@context": "https://schema.org",
   "@type": "Person",
   "name": "Flor",
+  "description": "Flor destaca por una presencia natural, femenina y cuidada. Con 24 años, 1,65 m y 55 kg, su estilo combina dulzura, seguridad y una imagen elegante que llama la atención desde el primer momento. Española, cercana y con una actitud tranquila, transmite confianza sin esfuerzo: buena conversación, buen gusto y un trato agradable que hace que cada encuentro se sienta cómodo y especial. Es una opción ideal en Valencia para quienes buscan compañía con encanto, presencia y discreción.",
   "url": "https://www.valeriaferrer.com/models/flor",
   "image": [
     "https://www.valeriaferrer.com/chicas-optimized/flor-valeria-ferrer-model-agency-valencia/portada.jpg",
@@ -11,5 +12,32 @@
     "https://www.valeriaferrer.com/chicas-optimized/flor-valeria-ferrer-model-agency-valencia/gallery/04.jpg",
     "https://www.valeriaferrer.com/chicas-optimized/flor-valeria-ferrer-model-agency-valencia/gallery/05.jpg",
     "https://www.valeriaferrer.com/chicas-optimized/flor-valeria-ferrer-model-agency-valencia/gallery/06.jpg"
-  ]
+  ],
+  "nationality": "Española",
+  "jobTitle": "Modelo VIP",
+  "knowsLanguage": [
+    "Español",
+    "Inglés"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "itemOffered": {
+      "@type": "Service",
+      "name": "Acompañamiento Premium",
+      "description": "Servicios exclusivos de acompañamiento con Flor en Valencia"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Valencia"
+    },
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "name": "Contacto Directo",
+      "url": "https://www.valeriaferrer.com/contact"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.valeriaferrer.com/models/flor"
+  }
 }

@@ -2,6 +2,7 @@
   "@context": "https://schema.org",
   "@type": "Person",
   "name": "Mónica",
+  "description": "Mónica es una española de 22 años que deslumbra con su estatura (1,69 m) y una presencia mediterránea impecable en Valencia. Con 62 kg repartidos en una figura esbelta y femenina, combina elegancia natural, piel luminosa y una sonrisa que transmite confianza desde el primer saludo. No es solo una imagen impactante: es conversación fluida, buen gusto y ese punto de calidez española que hace que te sientas cómodo y deseado a la vez. Ideal para quien busca una compañía alta, sofisticada y con carácter para cenas selectas, eventos y encuentros donde la clase se nota sin esfuerzo.",
   "url": "https://www.valeriaferrer.com/models/monica",
   "image": [
     "https://www.valeriaferrer.com/chicas/monica-valeria-ferrer-model-agency-valencia/portada.jpg",
@@ -13,5 +14,32 @@
     "https://www.valeriaferrer.com/chicas/monica-valeria-ferrer-model-agency-valencia/6.jpg",
     "https://www.valeriaferrer.com/chicas/monica-valeria-ferrer-model-agency-valencia/7.jpg",
     "https://www.valeriaferrer.com/chicas/monica-valeria-ferrer-model-agency-valencia/8.jpg"
-  ]
+  ],
+  "nationality": "Española",
+  "jobTitle": "Modelo VIP",
+  "knowsLanguage": [
+    "Español",
+    "Inglés"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "itemOffered": {
+      "@type": "Service",
+      "name": "Acompañamiento Premium",
+      "description": "Servicios exclusivos de acompañamiento con Mónica en Valencia"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Valencia"
+    },
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "name": "Contacto Directo",
+      "url": "https://www.valeriaferrer.com/contact"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.valeriaferrer.com/models/monica"
+  }
 }

@@ -2,21 +2,20 @@
   "@context": "https://schema.org",
   "@type": "Person",
   "name": "Yaiza",
-  "description": "Yaiza es una española joven y vibrante de 22 años. Con 1.65m y 52 kilos, posee una figura equilibrada y un carisma mediterráneo. Su energía natural y estilo único la hacen perfecta para momentos divertidos y relajados.",
-  "url": "https://valeriaferrer.com/model/yaiza",
+  "description": "Yaiza es una española joven y vibrante que irradia carisma mediterráneo. Su figura equilibrada y energía natural la hacen perfecta para eventos sociales en Valencia y momentos divertidos. Cada encuentro con ella está lleno de alegría contagiosa y autenticidad española. Su estilo único transforma celebraciones ordinarias en experiencias inolvidables con vitalidad mediterránea.",
+  "url": "https://www.valeriaferrer.com/models/yaiza",
   "image": [
-    "https://valeriaferrer.com/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/01.jpg",
-    "https://valeriaferrer.com/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/02.jpg",
-    "https://valeriaferrer.com/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/03.jpg",
-    "https://valeriaferrer.com/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/04.jpg",
-    "https://valeriaferrer.com/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/05.jpg",
-    "https://valeriaferrer.com/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/06.jpg",
-    "https://valeriaferrer.com/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/07.jpg",
-    "https://valeriaferrer.com/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/08.jpg",
-    "https://valeriaferrer.com/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/09.jpg",
-    "https://valeriaferrer.com/chicas/yaiza-valeria-ferrer-model-agencia-valencia/gallery/10.jpg",
-    "https://valeriaferrer.com/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/11.jpg",
-    "https://valeriaferrer.com/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/12.jpg"
+    "https://www.valeriaferrer.com/chicas/yaiza-valeria-ferrer-model-agency-valencia/portada.jpg",
+    "https://www.valeriaferrer.com/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/01.jpg",
+    "https://www.valeriaferrer.com/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/02.jpg",
+    "https://www.valeriaferrer.com/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/03.jpg",
+    "https://www.valeriaferrer.com/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/04.jpg",
+    "https://www.valeriaferrer.com/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/05.jpg",
+    "https://www.valeriaferrer.com/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/06.jpg",
+    "https://www.valeriaferrer.com/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/07.jpg",
+    "https://www.valeriaferrer.com/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/08.jpg",
+    "https://www.valeriaferrer.com/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/09.jpg",
+    "https://www.valeriaferrer.com/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/10.jpg"
   ],
   "nationality": "Española",
   "jobTitle": "Modelo VIP",
@@ -37,11 +36,11 @@
     "availableChannel": {
       "@type": "ServiceChannel",
       "name": "Contacto Directo",
-      "url": "https://valeriaferrer.com/contact"
+      "url": "https://www.valeriaferrer.com/contact"
     }
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://valeriaferrer.com/model/yaiza"
+    "@id": "https://www.valeriaferrer.com/models/yaiza"
   }
 }

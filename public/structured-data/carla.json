@@ -2,21 +2,15 @@
   "@context": "https://schema.org",
   "@type": "Person",
   "name": "Carla",
-  "description": "Carla es una española sofisticada de 26 años con una figura esbelta y elegante. Con 1.65m y solo 48 kilos, posee una silueta delicada y un estilo refinado. Perfecta para cenas de negocios o eventos exclusivos.",
-  "url": "https://valeriaferrer.com/model/carla",
+  "description": "Carla es una española que irradia estilo mediterráneo y elegancia natural. Su figura esbelta y carisma auténtico la hacen perfecta para eventos exclusivos y ocasiones únicas. Cada encuentro con ella está lleno de sofisticación y pasión vibrante. Su presencia transforma momentos especiales en experiencias inolvidables con autenticidad española y sensualidad mediterránea. Llámala ahora y descubre el placer mediterráneo.",
+  "url": "https://www.valeriaferrer.com/models/carla",
   "image": [
-    "https://valeriaferrer.com/chicas/carla-model-agency-valencia-vf/gallery/01.jpg",
-    "https://valeriaferrer.com/chicas/carla-model-agency-valencia-vf/gallery/02.jpg",
-    "https://valeriaferrer.com/chicas/carla-model-agency-valencia-vf/gallery/03.jpg",
-    "https://valeriaferrer.com/chicas/carla-model-agency-valencia-vf/gallery/04.jpg",
-    "https://valeriaferrer.com/chicas/carla-model-agency-valencia-vf/gallery/05.jpg",
-    "https://valeriaferrer.com/chicas/carla-model-agency-valencia-vf/gallery/06.jpg",
-    "https://valeriaferrer.com/chicas/carla-model-agency-valencia-vf/gallery/07.jpg",
-    "https://valeriaferrer.com/chicas/carla-model-agency-valencia-vf/gallery/08.jpg",
-    "https://valeriaferrer.com/chicas/carla-model-agency-valencia-vf/gallery/09.jpg",
-    "https://valeriaferrer.com/chicas/carla-model-agency-valencia-vf/gallery/10.jpg",
-    "https://valeriaferrer.com/chicas/carla-model-agency-valencia-vf/gallery/11.jpg",
-    "https://valeriaferrer.com/chicas/carla-model-agency-valencia-vf/gallery/12.jpg"
+    "https://www.valeriaferrer.com/chicas/carla-model-agency-valencia-vf/portada.jpg",
+    "https://www.valeriaferrer.com/chicas/carla-model-agency-valencia-vf/primera.jpg",
+    "https://www.valeriaferrer.com/chicas/carla-model-agency-valencia-vf/1.jpg",
+    "https://www.valeriaferrer.com/chicas/carla-model-agency-valencia-vf/2.jpg",
+    "https://www.valeriaferrer.com/chicas/carla-model-agency-valencia-vf/3.jpg",
+    "https://www.valeriaferrer.com/chicas/carla-model-agency-valencia-vf/4.jpg"
   ],
   "nationality": "Española",
   "jobTitle": "Modelo VIP",
@@ -37,11 +31,11 @@
     "availableChannel": {
       "@type": "ServiceChannel",
       "name": "Contacto Directo",
-      "url": "https://valeriaferrer.com/contact"
+      "url": "https://www.valeriaferrer.com/contact"
     }
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://valeriaferrer.com/model/carla"
+    "@id": "https://www.valeriaferrer.com/models/carla"
   }
 }

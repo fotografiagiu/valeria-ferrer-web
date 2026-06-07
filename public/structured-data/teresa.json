@@ -2,13 +2,13 @@
   "@context": "https://schema.org",
   "@type": "Person",
   "name": "Teresa",
-  "description": "Teresa es una española joven y vibrante de 20 años. Con 1.52m y 45 kg, combina frescura y naturalidad con una energía contagiosa. Perfecta para quienes buscan experiencias auténticas y llenas de vitalidad.",
-  "url": "https://valeriaferrer.com/model/teresa",
+  "description": "Teresa es una joven española que irradia una energía vibrante y carisma natural únicos en Valencia. Con solo 20 años y 1.52m de estatura, esta belleza mediterránea combina la espontaneidad juvenil con una sofisticación que sorprende. Sus ojos verdes transmiten alegría genuina y una curiosidad insaciable por descubrir nuevos rincones de su ciudad adoptada. Teresa no solo es visualmente impresionante, sino una conversadora natural que puede hacer que cualquier momento se sienta especial y auténtico. Su pasión por la cultura valenciana la hace experta en descubrir lugares secretos, desde las mejores horchateras del Carmen hasta los atardeceres en la Malvarrosa. Le encanta crear experiencias únicas que combinen la tradición española con una perspectiva juvenil y refrescante. Su estilo único mezcla moda contemporánea con toques clásicos mediterráneos, creando una estética que es tanto moderna como atemporal. Teresa es perfecta para el caballero que busca no solo belleza física, sino también una conexión auténtica y momentos llenos de risas y complicidad. Llámala ahora y vive la pasión valenciana.",
+  "url": "https://www.valeriaferrer.com/models/teresa",
   "image": [
-    "https://valeriaferrer.com/chicas/teresa-valeria-ferrer-model-agency-valencia/cover.jpg",
-    "https://valeriaferrer.com/chicas/teresa-valeria-ferrer-model-agency-valencia/1.jpg",
-    "https://valeriaferrer.com/chicas/teresa-valeria-ferrer-model-agency-valencia/2.jpg",
-    "https://valeriaferrer.com/chicas/teresa-valeria-ferrer-model-agency-valencia/3.jpg"
+    "https://www.valeriaferrer.com/chicas/teresa-valeria-ferrer-model-agency-valencia/cover.jpg",
+    "https://www.valeriaferrer.com/chicas/teresa-valeria-ferrer-model-agency-valencia/1.jpg",
+    "https://www.valeriaferrer.com/chicas/teresa-valeria-ferrer-model-agency-valencia/2.jpg",
+    "https://www.valeriaferrer.com/chicas/teresa-valeria-ferrer-model-agency-valencia/3.jpg"
   ],
   "nationality": "Española",
   "jobTitle": "Modelo VIP",
@@ -29,11 +29,11 @@
     "availableChannel": {
       "@type": "ServiceChannel",
       "name": "Contacto Directo",
-      "url": "https://valeriaferrer.com/contact"
+      "url": "https://www.valeriaferrer.com/contact"
     }
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://valeriaferrer.com/model/teresa"
+    "@id": "https://www.valeriaferrer.com/models/teresa"
   }
 }

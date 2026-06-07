@@ -2,12 +2,19 @@
   "@context": "https://schema.org",
   "@type": "Person",
   "name": "Elena",
-  "description": "Elena es una española elegante de 24 años. Con 1.68m y 54 kilos, posee una figura armoniosa y estilo mediterráneo sofisticado. Perfecta para cenas íntimas y momentos especiales con clase.",
-  "url": "https://valeriaferrer.com/model/elena",
+  "description": "Elena es una elegante paraguaya que irradia sofisticación y distinción única en Valencia. Con 22 años y 1.72m de estatura, esta belleza exótica combina la calidez latinoamericana con una elegancia natural que cautiva al instante. Sus ojos profundos reflejan una inteligencia aguda y una sensibilidad artística que la distingue de las demás. Elena no solo es visualmente impresionante, sino una conversadora brillante que puede discutir desde arte internacional hasta negocios globales con igual sofisticación. Su pasión por la excelencia se manifiesta en cada gesto, en cada sonrisa, en cada momento compartido. Le encanta explorar la cultura valenciana, siempre buscando nuevas experiencias que enriquezcan su perspectiva del mundo. Su estilo único combina la moda paraguaya contemporánea con diseño clásico europeo, creando una estética que es tanto exótica como refinada. Elena es perfecta para el caballero que busca no solo belleza física, sino también una conexión intelectual y emocional genuina. Llámala ahora y descubre la elegancia paraguaya.",
+  "url": "https://www.valeriaferrer.com/models/elena",
   "image": [
-    "https://valeriaferrer.com/chicas/elena-vf-model-agency-valencia/portada.jpg"
+    "https://www.valeriaferrer.com/chicas/elena-valeria-ferrer-model-agency-valencia/elena-lenceria-08-v2.jpg",
+    "https://www.valeriaferrer.com/chicas/elena-valeria-ferrer-model-agency-valencia/elena-lenceria-02.jpg",
+    "https://www.valeriaferrer.com/chicas/elena-valeria-ferrer-model-agency-valencia/elena-lenceria-03.jpg",
+    "https://www.valeriaferrer.com/chicas/elena-valeria-ferrer-model-agency-valencia/elena-lenceria-04.jpg",
+    "https://www.valeriaferrer.com/chicas/elena-valeria-ferrer-model-agency-valencia/elena-lenceria-05.jpg",
+    "https://www.valeriaferrer.com/chicas/elena-valeria-ferrer-model-agency-valencia/elena-lenceria-06.jpg",
+    "https://www.valeriaferrer.com/chicas/elena-valeria-ferrer-model-agency-valencia/elena-lenceria-07.jpg",
+    "https://www.valeriaferrer.com/chicas/elena-valeria-ferrer-model-agency-valencia/elena-lenceria-01.jpg"
   ],
-  "nationality": "Española",
+  "nationality": "Paraguaya",
   "jobTitle": "Modelo VIP",
   "knowsLanguage": [
     "Español"
@@ -26,11 +33,11 @@
     "availableChannel": {
       "@type": "ServiceChannel",
       "name": "Contacto Directo",
-      "url": "https://valeriaferrer.com/contact"
+      "url": "https://www.valeriaferrer.com/contact"
     }
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://valeriaferrer.com/model/elena"
+    "@id": "https://www.valeriaferrer.com/models/elena"
   }
 }

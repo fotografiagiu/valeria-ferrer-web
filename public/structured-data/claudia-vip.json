@@ -2,10 +2,16 @@
   "@context": "https://schema.org",
   "@type": "Person",
   "name": "Claudia (VIP)",
-  "description": "Claudia es una española VIP de 21 años con 1.67m de estatura. Su figura equilibrada de 55 kilos y estilo sofisticado la hacen perfecta para servicios VIP exclusivos. Experiencias refinadas y memorables garantizadas.",
-  "url": "https://valeriaferrer.com/model/claudia-vip",
+  "description": "Claudia es una española VIP que irradia sofisticación y elegancia exclusiva. Su figura equilibrada y presencia refinada la hacen ideal para acompañamiento de lujo en Valencia. Cada encuentro con ella está lleno de distinción y experiencias únicas. Su estilo VIP transforma momentos especiales en vivencias extraordinarias con clase internacional. Llámala ahora y experimenta el lujo VIP.",
+  "url": "https://www.valeriaferrer.com/models/claudia-vip",
   "image": [
-    "https://valeriaferrer.com/chicas/claudia-vip-model-agency-valencia/portada.jpg"
+    "https://www.valeriaferrer.com/chicas/claudia-vip-model-agency-valencia/portada.jpg",
+    "https://www.valeriaferrer.com/chicas/claudia-vip-model-agency-valencia/2.jpg",
+    "https://www.valeriaferrer.com/chicas/claudia-vip-model-agency-valencia/3.jpg",
+    "https://www.valeriaferrer.com/chicas/claudia-vip-model-agency-valencia/4.jpg",
+    "https://www.valeriaferrer.com/chicas/claudia-vip-model-agency-valencia/5.jpg",
+    "https://www.valeriaferrer.com/chicas/claudia-vip-model-agency-valencia/7.jpg",
+    "https://www.valeriaferrer.com/chicas/claudia-vip-model-agency-valencia/8.jpg"
   ],
   "nationality": "Española",
   "jobTitle": "Modelo VIP",
@@ -26,11 +32,11 @@
     "availableChannel": {
       "@type": "ServiceChannel",
       "name": "Contacto Directo",
-      "url": "https://valeriaferrer.com/contact"
+      "url": "https://www.valeriaferrer.com/contact"
     }
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://valeriaferrer.com/model/claudia-vip"
+    "@id": "https://www.valeriaferrer.com/models/claudia-vip"
   }
 }

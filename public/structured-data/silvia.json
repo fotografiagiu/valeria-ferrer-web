@@ -2,21 +2,16 @@
   "@context": "https://schema.org",
   "@type": "Person",
   "name": "Silvia",
-  "description": "Silvia es una joven venezolana de 19 años con una fresca y juvenil energía. Con 1.60m y una figura delicada de 48 kilos, combina inocencia con un toque de misterio. Perfecta para aventuras emocionantes y nuevas experiencias.",
-  "url": "https://valeriaferrer.com/model/silvia",
+  "description": "Silvia es una venezolana que irradia energía juvenil y carisma fresco. Su figura delicada combina inocencia con misterio, perfecta para aventuras emocionantes. Cada momento con ella está lleno de vitalidad natural y encanto enigmático. Su estilo único transforma encuentros ordinarios en experiencias mágicas con autenticidad latina.",
+  "url": "https://www.valeriaferrer.com/models/silvia",
   "image": [
-    "https://valeriaferrer.com/chicas/silvia-model-agency-valencia/gallery/01.jpg",
-    "https://valeriaferrer.com/chicas/silvia-model-agency-valencia/gallery/02.jpg",
-    "https://valeriaferrer.com/chicas/silvia-model-agency-valencia/gallery/03.jpg",
-    "https://valeriaferrer.com/chicas/silvia-model-agencia-valencia/gallery/04.jpg",
-    "https://valeriaferrer.com/chicas/silvia-model-agency-valencia/gallery/05.jpg",
-    "https://valeriaferrer.com/chicas/silvia-model-agency-valencia/gallery/06.jpg",
-    "https://valeriaferrer.com/chicas/silvia-model-agencia-valencia/gallery/07.jpg",
-    "https://valeriaferrer.com/chicas/silvia-model-agency-valencia/gallery/08.jpg",
-    "https://valeriaferrer.com/chicas/silvia-model-agencia-valencia/gallery/09.jpg",
-    "https://valeriaferrer.com/chicas/silvia-model-agencia-valencia/gallery/10.jpg",
-    "https://valeriaferrer.com/chicas/silvia-model-agencia-valencia/gallery/11.jpg",
-    "https://valeriaferrer.com/chicas/silvia-model-agencia-valencia/gallery/12.jpg"
+    "https://www.valeriaferrer.com/chicas/silvia-model-agency-valencia/portada.jpg",
+    "https://www.valeriaferrer.com/chicas/silvia-model-agency-valencia/gallery/01.jpg",
+    "https://www.valeriaferrer.com/chicas/silvia-model-agency-valencia/gallery/02.jpg",
+    "https://www.valeriaferrer.com/chicas/silvia-model-agency-valencia/gallery/03.jpg",
+    "https://www.valeriaferrer.com/chicas/silvia-model-agency-valencia/gallery/04.jpg",
+    "https://www.valeriaferrer.com/chicas/silvia-model-agency-valencia/gallery/05.jpg",
+    "https://www.valeriaferrer.com/chicas/silvia-model-agency-valencia/gallery/06.jpg"
   ],
   "nationality": "Venezolana",
   "jobTitle": "Modelo VIP",
@@ -37,11 +32,11 @@
     "availableChannel": {
       "@type": "ServiceChannel",
       "name": "Contacto Directo",
-      "url": "https://valeriaferrer.com/contact"
+      "url": "https://www.valeriaferrer.com/contact"
     }
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://valeriaferrer.com/model/silvia"
+    "@id": "https://www.valeriaferrer.com/models/silvia"
   }
 }

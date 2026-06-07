@@ -1,0 +1,44 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Maria",
+  "description": "Maria es de esas mujeres que no se olvidan fácilmente. Tiene una mezcla de elegancia, picardía y naturalidad que hace que cada momento con ella sea diferente. Su encanto está en su forma de ser: cercana, divertida y con ese punto imprevisible que convierte sus locuras en recuerdos difíciles de borrar. Si buscas una experiencia con química, complicidad y una energía que se queda en la cabeza, Maria tiene justo eso.",
+  "url": "https://www.valeriaferrer.com/models/maria-escort-valencia",
+  "image": [
+    "https://www.valeriaferrer.com/chicas/maria-escort-valencia/maria-escort-valencia-portada-ficha.jpg",
+    "https://www.valeriaferrer.com/chicas/maria-escort-valencia/maria-escort-valencia-galeria-01.jpg",
+    "https://www.valeriaferrer.com/chicas/maria-escort-valencia/maria-escort-valencia-galeria-02.jpg",
+    "https://www.valeriaferrer.com/chicas/maria-escort-valencia/maria-escort-valencia-galeria-03.jpg",
+    "https://www.valeriaferrer.com/chicas/maria-escort-valencia/maria-escort-valencia-galeria-04.jpg",
+    "https://www.valeriaferrer.com/chicas/maria-escort-valencia/maria-escort-valencia-galeria-05.jpg",
+    "https://www.valeriaferrer.com/chicas/maria-escort-valencia/maria-escort-valencia-galeria-06.jpg",
+    "https://www.valeriaferrer.com/chicas/maria-escort-valencia/maria-escort-valencia-galeria-07.jpg",
+    "https://www.valeriaferrer.com/chicas/maria-escort-valencia/maria-escort-valencia-galeria-08.jpg"
+  ],
+  "nationality": "Española",
+  "jobTitle": "Modelo VIP",
+  "knowsLanguage": [
+    "Español"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "itemOffered": {
+      "@type": "Service",
+      "name": "Acompañamiento Premium",
+      "description": "Servicios exclusivos de acompañamiento con Maria en Valencia"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Valencia"
+    },
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "name": "Contacto Directo",
+      "url": "https://www.valeriaferrer.com/contact"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.valeriaferrer.com/models/maria-escort-valencia"
+  }
+}

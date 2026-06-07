@@ -2,21 +2,17 @@
   "@context": "https://schema.org",
   "@type": "Person",
   "name": "Alicia",
-  "description": "Alicia es una joven colombiana de 18 años con frescura y belleza exótica. Con 1.68m y 53 kilos, posee una figura delicada y energía contagiosa. Perfecta para experiencias nuevas y emocionantes con toque latino.",
-  "url": "https://valeriaferrer.com/model/alicia",
+  "description": "Alicia es una joven colombiana que irradia frescura y belleza exótica. Su figura delicada y energía contagiosa la hacen perfecta para experiencias nuevas y emocionantes con toque latino. Cada momento con ella está lleno de curiosidad natural y vitalidad juvenil. Su estilo único transforma encuentros ordinarios en aventuras inolvidables con autenticidad tropical.",
+  "url": "https://www.valeriaferrer.com/models/alicia",
   "image": [
-    "https://valeriaferrer.com/chicas/alicia-model-agency-valencia-vf/gallery/01.jpg",
-    "https://valeriaferrer.com/chicas/alicia-model-agency-valencia-vf/gallery/02.jpg",
-    "https://valeriaferrer.com/chicas/alicia-model-agency-valencia-vf/gallery/03.jpg",
-    "https://valeriaferrer.com/chicas/alicia-model-agency-valencia-vf/gallery/04.jpg",
-    "https://valeriaferrer.com/chicas/alicia-model-agency-valencia-vf/gallery/05.jpg",
-    "https://valeriaferrer.com/chicas/alicia-model-agency-valencia-vf/gallery/06.jpg",
-    "https://valeriaferrer.com/chicas/alicia-model-agency-valencia-vf/gallery/07.jpg",
-    "https://valeriaferrer.com/chicas/alicia-model-agency-valencia-vf/gallery/08.jpg",
-    "https://valeriaferrer.com/chicas/alicia-model-agency-valencia-vf/gallery/09.jpg",
-    "https://valeriaferrer.com/chicas/alicia-model-agency-valencia-vf/gallery/10.jpg",
-    "https://valeriaferrer.com/chicas/alicia-model-agency-valencia-vf/gallery/11.jpg",
-    "https://valeriaferrer.com/chicas/alicia-model-agency-valencia-vf/gallery/12.jpg"
+    "https://www.valeriaferrer.com/chicas/alicia-model-agency-valencia-vf/portada.jpg",
+    "https://www.valeriaferrer.com/chicas/alicia-model-agency-valencia-vf/gallery/01.jpg",
+    "https://www.valeriaferrer.com/chicas/alicia-model-agency-valencia-vf/gallery/02.jpg",
+    "https://www.valeriaferrer.com/chicas/alicia-model-agency-valencia-vf/gallery/03.jpg",
+    "https://www.valeriaferrer.com/chicas/alicia-model-agency-valencia-vf/gallery/04.jpg",
+    "https://www.valeriaferrer.com/chicas/alicia-model-agency-valencia-vf/gallery/05.jpg",
+    "https://www.valeriaferrer.com/chicas/alicia-model-agency-valencia-vf/gallery/06.jpg",
+    "https://www.valeriaferrer.com/chicas/alicia-model-agency-valencia-vf/gallery/07.jpg"
   ],
   "nationality": "Colombiana",
   "jobTitle": "Modelo VIP",
@@ -37,11 +33,11 @@
     "availableChannel": {
       "@type": "ServiceChannel",
       "name": "Contacto Directo",
-      "url": "https://valeriaferrer.com/contact"
+      "url": "https://www.valeriaferrer.com/contact"
     }
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://valeriaferrer.com/model/alicia"
+    "@id": "https://www.valeriaferrer.com/models/alicia"
   }
 }

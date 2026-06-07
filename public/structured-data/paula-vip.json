@@ -2,21 +2,24 @@
   "@context": "https://schema.org",
   "@type": "Person",
   "name": "Paula (VIP)",
-  "description": "Paula es una española VIP exclusiva de 26 años. Con 1.60m y 50 kilos, combina madurez con una figura esbelta y sofisticada. Servicio VIP para quienes buscan experiencias refinadas y discretas.",
-  "url": "https://valeriaferrer.com/model/paula-vip",
+  "description": "Paula es una presencia VIP en Valencia de esas que no pasan desapercibidas. Elegante, femenina y segura de sí misma, combina una imagen sofisticada con una actitud cercana y envolvente que despierta interés desde el primer momento. Su estilo es refinado, cuidado y magnético, pensado para quienes buscan algo más que una compañía bonita: una mujer con clase, discreción y una energía difícil de olvidar. Paula es ideal para encuentros privados, cenas exclusivas, eventos selectos y momentos especiales donde cada detalle importa.",
+  "url": "https://www.valeriaferrer.com/models/paula-vip",
   "image": [
-    "https://valeriaferrer.com/chicas/paula-vip-model-agency-valencia/gallery/01.jpg",
-    "https://valeriaferrer.com/chicas/paula-vip-model-agency-valencia/gallery/02.jpg",
-    "https://valeriaferrer.com/chicas/paula-vip-model-agency-valencia/gallery/03.jpg",
-    "https://valeriaferrer.com/chicas/paula-vip-model-agency-valencia/gallery/04.jpg",
-    "https://valeriaferrer.com/chicas/paula-vip-model-agency-valencia/gallery/05.jpg",
-    "https://valeriaferrer.com/chicas/paula-vip-model-agencia-valencia/gallery/06.jpg",
-    "https://valeriaferrer.com/chicas/paula-vip-model-agency-valencia/gallery/07.jpg",
-    "https://valeriaferrer.com/chicas/paula-vip-model-agency-valencia/gallery/08.jpg",
-    "https://valeriaferrer.com/chicas/paula-vip-model-agency-valencia/gallery/09.jpg",
-    "https://valeriaferrer.com/chicas/paula-vip-model-agencia-valencia/gallery/10.jpg",
-    "https://valeriaferrer.com/chicas/paula-vip-model-agency-valencia/gallery/11.jpg",
-    "https://valeriaferrer.com/chicas/paula-vip-model-agency-valencia/gallery/12.jpg"
+    "https://www.valeriaferrer.com/chicas/paula-vip-model-agency-valencia/paula-portada-nueva.jpg",
+    "https://www.valeriaferrer.com/chicas/paula-vip-model-agency-valencia/paula-galeria-nueva-01.jpg",
+    "https://www.valeriaferrer.com/chicas/paula-vip-model-agency-valencia/paula-galeria-nueva-02.jpg",
+    "https://www.valeriaferrer.com/chicas/paula-vip-model-agency-valencia/paula-galeria-nueva-03.jpg",
+    "https://www.valeriaferrer.com/chicas/paula-vip-model-agency-valencia/paula-galeria-nueva-04.jpg",
+    "https://www.valeriaferrer.com/chicas/paula-vip-model-agency-valencia/paula-galeria-nueva-05.jpg",
+    "https://www.valeriaferrer.com/chicas/paula-vip-model-agency-valencia/paula-galeria-nueva-06.jpg",
+    "https://www.valeriaferrer.com/chicas/paula-vip-model-agency-valencia/paula-galeria-nueva-07.jpg",
+    "https://www.valeriaferrer.com/chicas/paula-vip-model-agency-valencia/paula-galeria-nueva-08.jpg",
+    "https://www.valeriaferrer.com/chicas/paula-vip-model-agency-valencia/portada.jpg",
+    "https://www.valeriaferrer.com/chicas/paula-vip-model-agency-valencia/DSC03726.jpg",
+    "https://www.valeriaferrer.com/chicas/paula-vip-model-agency-valencia/1.jpg",
+    "https://www.valeriaferrer.com/chicas/paula-vip-model-agency-valencia/2.jpg",
+    "https://www.valeriaferrer.com/chicas/paula-vip-model-agency-valencia/3.jpg",
+    "https://www.valeriaferrer.com/chicas/paula-vip-model-agency-valencia/4.jpg"
   ],
   "nationality": "Española",
   "jobTitle": "Modelo VIP",
@@ -37,11 +40,11 @@
     "availableChannel": {
       "@type": "ServiceChannel",
       "name": "Contacto Directo",
-      "url": "https://valeriaferrer.com/contact"
+      "url": "https://www.valeriaferrer.com/contact"
     }
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://valeriaferrer.com/model/paula-vip"
+    "@id": "https://www.valeriaferrer.com/models/paula-vip"
   }
 }
