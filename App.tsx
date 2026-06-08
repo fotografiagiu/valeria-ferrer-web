@@ -25,6 +25,7 @@ const Blog = React.lazy(() => import('./pages/Blog'));
 const BlogArticle = React.lazy(() => import('./pages/BlogArticle'));
 const DistrictPage = React.lazy(() => import('./pages/DistrictPage'));
 const EscortsValencia = React.lazy(() => import('./pages/EscortsValencia'));
+const EscortsLujoValencia = React.lazy(() => import('./pages/EscortsLujoValencia'));
 const MembersModal = React.lazy(() => import('./components/MembersModal'));
 const FloatingContactPopup = React.lazy(() => import('./components/FloatingContactPopup'));
 
@@ -126,6 +127,7 @@ const App: React.FC = () => {
                 <Route path="/models" element={<Models />} />
                 <Route path="/models/:id" element={<ModelDetail />} />
                 <Route path="/escorts-valencia" element={<EscortsValencia />} />
+                <Route path="/escorts-de-lujo-valencia" element={<EscortsLujoValencia />} />
                 <Route
                   path="/models/kimberly-colombiana-24-años"
                   element={<Navigate to="/models" replace />}
