@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft, MapPin, Phone, Calendar, Star, Clock, User } from 'lucide-react';
 import modelsData from '../data/models.json';
-import OptimizedImage from '../components/OptimizedImage';
-import { getModelCoverImage } from '../lib/modelGridImage';
+import LazyImage from '../components/LazyImage';
+import { getModelGridCoverSrc } from '../lib/modelGridImage';
+import { getModelProfilePath, getModelSlug, isValidCatalogModel } from '../lib/modelLink';
 import BlogCard from '../components/BlogCard';
 import AnalyticsEvents from '../components/AnalyticsEvents';
 import PageSEOHead, { SITE_ORIGIN } from '../components/PageSEOHead';
@@ -145,10 +146,17 @@ const DistrictPage: React.FC = () => {
     );
   }
 
-  // Filter models available in this district
-  const availableModels = modelsData.filter(model => 
-    model.city === 'Valencia' || model.location?.toLowerCase().includes(district.name.toLowerCase())
-  );
+  // Modelos con slug válido; si el filtro por zona queda vacío, usar destacadas del catálogo.
+  const displayModels = useMemo(() => {
+    const validModels = modelsData.filter(isValidCatalogModel);
+    const byDistrict = validModels.filter(
+      (model) =>
+        model.city === 'Valencia' ||
+        model.location?.toLowerCase().includes(district.name.toLowerCase())
+    );
+    const pool = byDistrict.length > 0 ? byDistrict : validModels;
+    return pool.slice(0, 6);
+  }, [district.name]);
 
   // Filter related blog articles
   const relatedArticles = blogData.filter(article => 
@@ -248,22 +256,41 @@ const DistrictPage: React.FC = () => {
             </p>
           </motion.div>
 
+          {displayModels.length === 0 ? (
+            <div className="text-center">
+              <p className="text-gray-400 mb-8 max-w-xl mx-auto">
+                Consulta nuestro catálogo completo de acompañantes exclusivas en Valencia.
+              </p>
+              <Link
+                to="/models"
+                className="inline-block px-8 py-3 bg-[#c2b2a3] text-black font-bold rounded-full hover:bg-white transition-colors duration-300"
+              >
+                Ver catálogo completo
+              </Link>
+            </div>
+          ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {availableModels.slice(0, 6).map((model, index) => (
+            {displayModels.map((model, index) => {
+              const profilePath = getModelProfilePath(model);
+              if (!profilePath) return null;
+
+              return (
               <motion.div
-                key={model.id}
+                key={getModelSlug(model)}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: index * 0.1 }}
-                className="group cursor-pointer"
-                onClick={() => window.location.href = `/models/${model.id}`}
+                className="group"
               >
+                <Link to={profilePath} className="block cursor-pointer">
                 <div className="aspect-[2/3] relative overflow-hidden rounded-2xl mb-4">
-                  <OptimizedImage
-                    src={getModelCoverImage(model.coverImageUrl)}
+                  <LazyImage
+                    src={getModelGridCoverSrc(model.coverImageUrl, { useThumbnail: false })}
                     alt={`${model.name} - Modelo exclusiva en ${district.name}`}
-                    className="w-full h-full transition-transform duration-700 group-hover:scale-105"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    sizes="(max-width: 768px) 50vw, 33vw"
+                    priority={index < 3}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                   
@@ -272,11 +299,14 @@ const DistrictPage: React.FC = () => {
                     <p className="text-sm text-[#c2b2a3]">{model.age} años • {model.nationality}</p>
                   </div>
                 </div>
+                </Link>
               </motion.div>
-            ))}
+              );
+            })}
           </div>
+          )}
 
-          {availableModels.length > 6 && (
+          {displayModels.length > 0 && modelsData.filter(isValidCatalogModel).length > 6 && (
             <div className="text-center mt-12">
               <Link
                 to="/models"
