@@ -6,6 +6,12 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:seo": "node scripts/generate-sitemap.mjs && node scripts/generate-model-structured-data.mjs",
+    "build:prerender": "node scripts/prerender.mjs",
+    "build:production": "npm run build && npm run build:seo && npm run build:prerender",
+    "vercel-build": "npx playwright install chromium && npm run build:production",
+    "verify:seo-assets": "node scripts/verify-seo-assets.mjs",
+    "verify:prerender": "node scripts/verify-prerender.mjs",
     "lint": "tsc",
     "preview": "vite preview"
   },
@@ -24,6 +30,7 @@
     "@tailwindcss/vite": "^4.2.2",
     "@types/node": "^22.14.0",
     "@vitejs/plugin-react": "^5.0.0",
+    "playwright": "^1.52.0",
     "tailwindcss": "^4.2.2",
     "typescript": "~5.8.2",
     "vite": "^6.2.0"
