@@ -269,7 +269,14 @@ const EscortsValencia: React.FC = () => {
             <Link to="/vip" className="text-[#c2b2a3] hover:text-white underline underline-offset-4 decoration-[#c2b2a3]/40">
               VIP
             </Link>{' '}
-            si buscas un nivel aún más exclusivo. Estamos en Valencia para ofrecerte un servicio premium,
+            si buscas un nivel aún más exclusivo, o nuestras{' '}
+            <Link
+              to="/escorts-de-lujo-valencia"
+              className="text-[#c2b2a3] hover:text-white underline underline-offset-4 decoration-[#c2b2a3]/40"
+            >
+              escorts de lujo en Valencia
+            </Link>{' '}
+            para cenas, eventos y experiencias premium. Estamos en Valencia para ofrecerte un servicio premium,
             humano y absolutamente discreto.
           </p>
         </div>
