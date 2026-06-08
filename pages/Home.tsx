@@ -178,7 +178,7 @@ const Home: React.FC = () => {
       <section className="py-32 relative flex items-center justify-center text-center">
         <div className="absolute inset-0 z-0">
           <img
-            src="https://picsum.photos/seed/cta/1920/600?blur=10"
+            src="/og-image.jpg"
             className="w-full h-full object-cover opacity-20"
             alt="CTA BG"
             loading="lazy"

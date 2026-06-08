@@ -2,9 +2,16 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import PageSEOHead, { SITE_ORIGIN } from '../components/PageSEOHead';
 
 const About: React.FC = () => {
   return (
+    <>
+      <PageSEOHead
+        title="Sobre Valeria Ferrer | Agencia de Modelos de Lujo en Valencia"
+        description="Conoce Valeria Ferrer: agencia de modelos de lujo en Valencia. Perfiles verificados, discreción absoluta y acompañamiento exclusivo de alto standing."
+        canonicalUrl={`${SITE_ORIGIN}/about`}
+      />
     <div className="pt-32 pb-24 overflow-x-hidden">
       {/* Intro Section (Moved from Home) */}
       <section className="py-24 bg-[#0a0a0a]">
@@ -41,7 +48,7 @@ const About: React.FC = () => {
           >
             <div className="aspect-[4/5] border border-[#c2b2a3]/20 p-4">
               <img 
-                src="https://picsum.photos/seed/luxury/800/1000" 
+                src="/og-image.jpg" 
                 alt="Luxury Lifestyle" 
                 className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000"
               />
@@ -100,6 +107,7 @@ const About: React.FC = () => {
         </div>
       </section>
     </div>
+    </>
   );
 };
 

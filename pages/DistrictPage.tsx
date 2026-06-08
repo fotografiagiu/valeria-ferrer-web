@@ -7,6 +7,7 @@ import OptimizedImage from '../components/OptimizedImage';
 import { getModelCoverImage } from '../lib/modelGridImage';
 import BlogCard from '../components/BlogCard';
 import AnalyticsEvents from '../components/AnalyticsEvents';
+import PageSEOHead, { SITE_ORIGIN } from '../components/PageSEOHead';
 import blogData from '../data/blog.json';
 
 interface DistrictData {
@@ -155,6 +156,12 @@ const DistrictPage: React.FC = () => {
   );
 
   return (
+    <>
+      <PageSEOHead
+        title={`Escorts en ${district.name} | Valeria Ferrer Valencia`}
+        description={district.description}
+        canonicalUrl={`${SITE_ORIGIN}/district/${district.id}`}
+      />
     <div className="min-h-screen bg-[#0a0a0a] pt-24">
       <AnalyticsEvents districtName={district.name} />
       {/* Hero Section */}
@@ -448,6 +455,7 @@ const DistrictPage: React.FC = () => {
         </div>
       </section>
     </div>
+    </>
   );
 };
 

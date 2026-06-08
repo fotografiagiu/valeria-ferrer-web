@@ -3,11 +3,18 @@ import React, { useEffect } from 'react';
 import { DOCUMENTATION } from '../constants';
 import { Plane, Globe, Shield, Hotel } from 'lucide-react';
 import { motion } from 'framer-motion';
+import PageSEOHead, { SITE_ORIGIN } from '../components/PageSEOHead';
 
 const Travel: React.FC = () => {
   useEffect(() => { window.scrollTo(0, 0); }, []);
 
   return (
+    <>
+      <PageSEOHead
+        title="Acompañamiento de Viajes | Valeria Ferrer"
+        description="Acompañamiento de lujo sin fronteras. Modelos exclusivas de Valeria Ferrer preparadas para viajar a cualquier destino con elegancia y discreción."
+        canonicalUrl={`${SITE_ORIGIN}/travel`}
+      />
     <div className="pt-32 pb-24 bg-[#0a0a0a] min-h-screen">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-20">
@@ -57,7 +64,7 @@ const Travel: React.FC = () => {
             transition={{ duration: 1 }}
             className="aspect-video bg-[#111111] border border-white/5 relative overflow-hidden"
           >
-            <img src="https://picsum.photos/seed/travel/1200/800" className="w-full h-full object-cover grayscale opacity-50" alt="Travel" />
+            <img src="/og-image.jpg" className="w-full h-full object-cover grayscale opacity-50" alt="Travel" />
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="text-center">
                 <p className="text-4xl serif italic text-white mb-2">"El mundo es su escenario"</p>
@@ -78,6 +85,7 @@ const Travel: React.FC = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

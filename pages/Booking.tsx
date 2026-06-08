@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, Calendar, ShieldCheck, Send } from 'lucide-react';
+import PageSEOHead, { SITE_ORIGIN } from '../components/PageSEOHead';
 
 const Booking: React.FC = () => {
   useEffect(() => { window.scrollTo(0, 0); }, []);
@@ -36,6 +37,12 @@ const Booking: React.FC = () => {
   };
 
   return (
+    <>
+      <PageSEOHead
+        title="Reservas | Valeria Ferrer Valencia"
+        description="Reserva tu experiencia con Valeria Ferrer. Formulario confidencial para solicitar cita con nuestras modelos exclusivas en Valencia."
+        canonicalUrl={`${SITE_ORIGIN}/booking`}
+      />
     <div className="pt-32 pb-24 bg-[#0a0a0a] min-h-screen">
       <div className="max-w-4xl mx-auto px-6">
         <div className="text-center mb-20">
@@ -163,6 +170,7 @@ const Booking: React.FC = () => {
         </motion.form>
       </div>
     </div>
+    </>
   );
 };
 

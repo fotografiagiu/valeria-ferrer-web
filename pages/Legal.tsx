@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import PageSEOHead, { SITE_ORIGIN } from '../components/PageSEOHead';
 
 const Legal: React.FC = () => {
   useEffect(() => {
@@ -6,6 +7,12 @@ const Legal: React.FC = () => {
   }, []);
 
   return (
+    <>
+      <PageSEOHead
+        title="Aviso legal | Valeria Ferrer"
+        description="Aviso legal del sitio web de Valeria Ferrer. Información sobre identificación, finalidad y condiciones de uso del sitio en Valencia."
+        canonicalUrl={`${SITE_ORIGIN}/legal`}
+      />
     <div className="min-h-screen bg-[#0a0a0a] text-white pt-32 pb-24 px-6">
       <div className="max-w-3xl mx-auto">
         <h1 className="text-3xl md:text-4xl serif luxury-text-gradient uppercase tracking-widest mb-4 text-center">
@@ -90,6 +97,7 @@ const Legal: React.FC = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

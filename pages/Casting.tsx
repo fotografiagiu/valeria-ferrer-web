@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Camera, Star, Globe, Heart } from 'lucide-react';
+import PageSEOHead, { SITE_ORIGIN } from '../components/PageSEOHead';
 
 const Casting: React.FC = () => {
   useEffect(() => { window.scrollTo(0, 0); }, []);
@@ -41,6 +42,12 @@ const Casting: React.FC = () => {
   };
 
   return (
+    <>
+      <PageSEOHead
+        title="Casting | Valeria Ferrer Valencia"
+        description="Únete a Valeria Ferrer. Buscamos mujeres excepcionales con elegancia natural para formar parte de la agencia de modelos de lujo más exclusiva de Valencia."
+        canonicalUrl={`${SITE_ORIGIN}/casting`}
+      />
     <div className="pt-32 pb-24 bg-[#0a0a0a] min-h-screen">
       <div className="max-w-4xl mx-auto px-6">
         <div className="text-center mb-20">
@@ -161,6 +168,7 @@ const Casting: React.FC = () => {
         </motion.form>
       </div>
     </div>
+    </>
   );
 };
 

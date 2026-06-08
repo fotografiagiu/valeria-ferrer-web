@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import PageSEOHead, { SITE_ORIGIN } from '../components/PageSEOHead';
 
 const Privacy: React.FC = () => {
   useEffect(() => {
@@ -6,6 +7,12 @@ const Privacy: React.FC = () => {
   }, []);
 
   return (
+    <>
+      <PageSEOHead
+        title="Política de privacidad | Valeria Ferrer"
+        description="Política de privacidad de Valeria Ferrer. Información sobre el tratamiento de datos personales y derechos de los usuarios en Valencia."
+        canonicalUrl={`${SITE_ORIGIN}/privacy`}
+      />
     <div className="min-h-screen bg-[#0a0a0a] text-white pt-32 pb-24 px-6">
       <div className="max-w-3xl mx-auto">
         <h1 className="text-3xl md:text-4xl serif luxury-text-gradient uppercase tracking-widest mb-4 text-center">
@@ -110,6 +117,7 @@ const Privacy: React.FC = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

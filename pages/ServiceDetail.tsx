@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Star, Heart, Users, Utensils, ArrowRight } from 'lucide-react';
+import PageSEOHead, { SITE_ORIGIN } from '../components/PageSEOHead';
 
 const servicesData = {
   gfe: {
@@ -16,7 +17,7 @@ const servicesData = {
       "Complicidad absoluta",
       "Naturalidad en cada momento"
     ],
-    image: "https://picsum.photos/seed/gfe/1200/800"
+    image: "/og-image.jpg"
   },
   duo: {
     title: "Experiencia Dúo",
@@ -29,7 +30,7 @@ const servicesData = {
       "Ambiente de lujo compartido",
       "Experiencia sensorial completa"
     ],
-    image: "https://picsum.photos/seed/duo/1200/800"
+    image: "/og-image.jpg"
   },
   dinner: {
     title: "Acompañante de Cenas",
@@ -42,7 +43,7 @@ const servicesData = {
       "Vestimenta acorde al evento",
       "Discreción en entornos públicos"
     ],
-    image: "https://picsum.photos/seed/dinner/1200/800"
+    image: "/og-image.jpg"
   }
 };
 
@@ -61,6 +62,12 @@ const ServiceDetail: React.FC = () => {
   }
 
   return (
+    <>
+      <PageSEOHead
+        title={`${service.title} | Valeria Ferrer Valencia`}
+        description={service.description}
+        canonicalUrl={`${SITE_ORIGIN}/services/${type}`}
+      />
     <div className="pt-32 pb-24 bg-[#0a0a0a] min-h-screen">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-20">
@@ -130,6 +137,7 @@ const ServiceDetail: React.FC = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

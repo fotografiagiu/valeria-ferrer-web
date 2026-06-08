@@ -1,11 +1,18 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { MapPin, Phone, Mail, Clock, Send, Globe } from 'lucide-react';
+import PageSEOHead, { SITE_ORIGIN } from '../components/PageSEOHead';
 
 const Contact: React.FC = () => {
   useEffect(() => { window.scrollTo(0, 0); }, []);
 
   return (
+    <>
+      <PageSEOHead
+        title="Contacto | Valeria Ferrer Valencia"
+        description="Contacta con Valeria Ferrer en Valencia. Atención exclusiva y discreta por Telegram, teléfono o email para reservas y consultas."
+        canonicalUrl={`${SITE_ORIGIN}/contact`}
+      />
     <div className="pt-32 pb-24 bg-[#0a0a0a] min-h-screen">
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
@@ -205,6 +212,7 @@ const Contact: React.FC = () => {
         </motion.div>
       </div>
     </div>
+    </>
   );
 };
 
