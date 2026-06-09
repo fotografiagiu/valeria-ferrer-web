@@ -34,7 +34,7 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolled, openMembers }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-500 ${
+    <nav className={`fixed w-full z-50 transition-[background-color,padding,backdrop-filter] duration-500 ${
       isScrolled ? 'bg-black/70 backdrop-blur-md py-4' : 'bg-transparent py-6'
     }`}>
       {/* Top Bar */}

@@ -59,7 +59,7 @@
           pointer-events: none;
           opacity: 1;
           visibility: visible;
-          transition: opacity 1s ease-out, visibility 0s linear 1s;
+          transition: opacity 0.4s ease-out, visibility 0s linear 0.4s;
         }
 
         #hero-lcp-shell.is-hidden {
@@ -228,8 +228,8 @@
     }
     </script>
     
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600&display=swap"></noscript>
+    <!-- Mismas familias; solo pesos usados en UI (300–700). CSS pequeño → carga temprana, menos salto tipográfico. -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap">
     <link rel="manifest" href="/manifest.json">
     <meta name="theme-color" content="#c2b2a3">
     <meta name="mobile-web-app-capable" content="yes">

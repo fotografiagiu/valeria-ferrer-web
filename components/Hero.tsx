@@ -25,7 +25,7 @@ function hideHeroLcpShell(): void {
 
   const reveal = () => {
     shell.classList.add('is-hidden');
-    window.setTimeout(() => shell.remove(), 1100);
+    window.setTimeout(() => shell.remove(), 450);
   };
 
   if (typeof window.requestAnimationFrame === 'function') {
