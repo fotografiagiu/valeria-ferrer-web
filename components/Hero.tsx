@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 const MOBILE_MQ = '(max-width: 767px)';
-const HERO_BANNER_MOBILE = '/images/home-hero-banner-mobile-v2.png';
+const HERO_BANNER_MOBILE_WEBP = '/images/home-hero-banner-mobile-v4-premium.webp';
+const HERO_BANNER_MOBILE_FALLBACK = '/images/home-hero-banner-mobile-v4-premium.png';
 const DESKTOP_VIDEO_SRC =
   'https://www.youtube.com/embed/lor3hN0e600?autoplay=1&mute=1&playsinline=1&loop=1&playlist=lor3hN0e600&controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&rel=0&disablekb=1&fs=0';
 
@@ -54,17 +55,20 @@ const Hero = () => {
       <div className="absolute inset-0 z-0 overflow-hidden bg-black">
         {/* Móvil: imagen estática — sin iframe YouTube en el DOM */}
         {isMobileHero ? (
-          <img
-            src={HERO_BANNER_MOBILE}
-            alt=""
-            decoding="sync"
-            fetchPriority="high"
-            loading="eager"
-            width={576}
-            height={1024}
-            aria-hidden="true"
-            className="absolute inset-0 h-full w-full object-cover object-center"
-          />
+          <picture className="absolute inset-0 h-full w-full">
+            <source srcSet={HERO_BANNER_MOBILE_WEBP} type="image/webp" />
+            <img
+              src={HERO_BANNER_MOBILE_FALLBACK}
+              alt=""
+              decoding="sync"
+              fetchPriority="high"
+              loading="eager"
+              width={576}
+              height={1024}
+              aria-hidden="true"
+              className="absolute inset-0 h-full w-full object-cover object-center"
+            />
+          </picture>
         ) : (
           <iframe
             src={DESKTOP_VIDEO_SRC}
