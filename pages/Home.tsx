@@ -43,6 +43,11 @@ function scheduleBelowFoldWork(onReady: () => void): () => void {
 
 const Home: React.FC = () => {
   const exploreLinks = useMemo(() => getHomeExploreLinks(), []);
+  const homeModels = useMemo(() => {
+    const teresa = modelsData.find((m) => m.slug === 'teresa');
+    if (!teresa) return modelsData;
+    return [teresa, ...modelsData.filter((m) => m.slug !== 'teresa')];
+  }, []);
   const [loadExploreNav, setLoadExploreNav] = useState(false);
   const [loadReviews, setLoadReviews] = useState(false);
   const reviewsSentinelRef = useRef<HTMLDivElement>(null);
@@ -163,7 +168,7 @@ const Home: React.FC = () => {
         </a>
       </div>
 
-      <ModelsGrid models={modelsData} />
+      <ModelsGrid models={homeModels} />
 
       <div ref={reviewsSentinelRef} className="min-h-[32rem] md:min-h-[28rem]">
         {loadReviews ? (
