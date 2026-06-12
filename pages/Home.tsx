@@ -45,8 +45,10 @@ const Home: React.FC = () => {
   const exploreLinks = useMemo(() => getHomeExploreLinks(), []);
   const homeModels = useMemo(() => {
     const monica = modelsData.find((m) => m.slug === 'monica');
-    if (!monica) return modelsData;
-    return [monica, ...modelsData.filter((m) => m.slug !== 'monica')];
+    const naty = modelsData.find((m) => m.slug === 'naty');
+    if (!monica || !naty) return modelsData;
+    const rest = modelsData.filter((m) => m.slug !== 'monica' && m.slug !== 'naty');
+    return [monica, naty, ...rest];
   }, []);
   const [loadExploreNav, setLoadExploreNav] = useState(false);
   const [loadReviews, setLoadReviews] = useState(false);
