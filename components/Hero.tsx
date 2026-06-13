@@ -144,7 +144,7 @@ const Hero = () => {
                 to="/models"
                 className="block px-12 py-5 border border-[#c2b2a3] text-[#c2b2a3] uppercase tracking-[0.3em] text-xs backdrop-blur-md hover:bg-[#c2b2a3] hover:text-black transition-all duration-700 w-full sm:w-auto group"
               >
-                <span className="relative z-10">Descubrir Escorts</span>
+                <span className="relative z-10">Chicas disponibles</span>
                 <div className="absolute inset-0 bg-[#c2b2a3] opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
               </Link>
             </div>
@@ -159,7 +159,7 @@ const Hero = () => {
                 to="/models"
                 className="block px-12 py-5 border border-[#c2b2a3] text-[#c2b2a3] uppercase tracking-[0.3em] text-xs backdrop-blur-md hover:bg-[#c2b2a3] hover:text-black transition-all duration-700 w-full sm:w-auto group"
               >
-                <span className="relative z-10">Descubrir Escorts</span>
+                <span className="relative z-10">Chicas disponibles</span>
                 <div className="absolute inset-0 bg-[#c2b2a3] opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
               </Link>
             </motion.div>

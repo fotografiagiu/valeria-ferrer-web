@@ -68,7 +68,7 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolled, openMembers }) => {
           </div>
           <div className="hover:-translate-y-0.5 transition-transform duration-200">
             <Link to="/models" className="hover:text-[#c2b2a3] transition-colors relative group">
-              Modelos
+              Chicas disponibles
               <span className="absolute bottom-0 left-0 w-0 h-px bg-[#c2b2a3] group-hover:w-full transition-all duration-300"></span>
             </Link>
           </div>
@@ -144,7 +144,7 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolled, openMembers }) => {
             </a>
           </div>
           <Link to="/" onClick={() => setIsMobileMenuOpen(false)}>Inicio</Link>
-          <Link to="/models" onClick={() => setIsMobileMenuOpen(false)}>Modelos</Link>
+          <Link to="/models" onClick={() => setIsMobileMenuOpen(false)}>Chicas disponibles</Link>
           <NovedadesNavLink
             onNavigate={() => setIsMobileMenuOpen(false)}
             showUnderline={false}

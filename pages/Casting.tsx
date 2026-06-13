@@ -44,8 +44,8 @@ const Casting: React.FC = () => {
   return (
     <>
       <PageSEOHead
-        title="Casting | Valeria Ferrer Valencia"
-        description="Únete a Valeria Ferrer. Buscamos mujeres excepcionales con elegancia natural para formar parte de la agencia de modelos de lujo más exclusiva de Valencia."
+        title="Casting en Valencia | Valeria Ferrer"
+        description="Información para nuevas candidatas interesadas en formar parte de Valeria Ferrer en Valencia. Contacto privado y proceso discreto."
         canonicalUrl={`${SITE_ORIGIN}/casting`}
       />
     <div className="pt-32 pb-24 bg-[#0a0a0a] min-h-screen">

@@ -25,9 +25,9 @@ import { getModelProfilePath } from '../lib/modelLink';
 import type { Model } from '../types';
 
 const SEO = {
-  title: 'Escorts de lujo en Valencia | Valeria Ferrer',
+  title: 'Escorts de lujo en Valencia | Perfiles VIP',
   description:
-    'Descubre escorts de lujo en Valencia con perfiles seleccionados, atención privada y acompañantes premium para citas exclusivas, eventos, cenas y experiencias discretas.',
+    'Acompañantes premium en Valencia con perfiles cuidados, fotos reales y atención discreta. Consulta disponibilidad y reserva de forma privada.',
   canonicalUrl: 'https://www.valeriaferrer.com/escorts-de-lujo-valencia',
   keywords:
     'escorts de lujo Valencia, escort de lujo Valencia, acompañantes de lujo Valencia, agencia escorts Valencia, modelos premium Valencia',
@@ -246,7 +246,7 @@ const EscortsLujoValencia: React.FC = () => {
               to="/models"
               className="text-[#c2b2a3] hover:text-white underline underline-offset-4 decoration-[#c2b2a3]/40"
             >
-              ver modelos disponibles
+              ver chicas disponibles
             </Link>{' '}
             en el catálogo, consultar{' '}
             <Link
@@ -327,7 +327,7 @@ const EscortsLujoValencia: React.FC = () => {
               to="/models"
               className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.35em] text-[#c2b2a3] hover:text-white transition-colors border-b border-[#c2b2a3]/30 pb-1"
             >
-              Ver modelos disponibles
+              Ver chicas disponibles
               <ChevronRight size={14} />
             </Link>
           </div>
@@ -435,7 +435,7 @@ const EscortsLujoValencia: React.FC = () => {
               to="/models"
               className="inline-flex items-center justify-center px-10 py-4 luxury-gradient text-black text-[10px] font-bold uppercase tracking-[0.35em] hover:scale-[1.02] transition-transform duration-300"
             >
-              Ver modelos disponibles
+              Ver chicas disponibles
             </Link>
             <Link
               to="/booking"
@@ -449,7 +449,7 @@ const EscortsLujoValencia: React.FC = () => {
               Escorts en Valencia
             </Link>
             <Link to="/models" className="hover:text-[#c2b2a3] transition-colors">
-              Catálogo de modelos
+              Chicas disponibles
             </Link>
             <Link to="/fees" className="hover:text-[#c2b2a3] transition-colors">
               Consultar tarifas orientativas

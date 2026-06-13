@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import CatalogPremiumPreview from '../components/CatalogPremiumPreview';
 import ModelFilter from '../components/ModelFilter';
 import AnimatedCounter from '../components/AnimatedCounter';
@@ -23,8 +24,8 @@ const Models: React.FC = () => {
   }, []);
 
   const modelsSEOData = {
-    title: "Modelos y Acompañantes en Valencia | Valeria Ferrer",
-    description: "Explora nuestras modelos exclusivas en Valencia. Perfiles únicos de acompañantes sofisticadas para cenas, eventos y momentos especiales. Reserva privada.",
+    title: "Chicas disponibles en Valencia | Valeria Ferrer",
+    description: "Consulta chicas disponibles en Valencia con fotos reales, perfiles actualizados y contacto discreto. Accede a cada ficha y revisa disponibilidad.",
     canonicalUrl: "https://www.valeriaferrer.com/models"
   };
 
@@ -37,7 +38,7 @@ const Models: React.FC = () => {
       />
       <div className="bg-[#111111] py-20 px-6 border-b border-white/5">
         <div className="max-w-[1600px] mx-auto text-center">
-          <h1 className="text-4xl md:text-6xl font-light mb-6 tracking-wider">Escorts de Lujo <span className="italic luxury-text-gradient">en Valencia</span></h1>
+          <h1 className="text-4xl md:text-6xl font-light mb-6 tracking-wider">Chicas disponibles <span className="italic luxury-text-gradient">en Valencia</span></h1>
           
           {/* Animated Counter */}
           <div className="mb-8">
@@ -47,12 +48,23 @@ const Models: React.FC = () => {
                 duration={2000}
                 className="text-5xl md:text-7xl font-light text-[#c2b2a3]"
               />
-              <span className="text-2xl md:text-3xl font-light text-gray-400">Modelos</span>
+              <span className="text-2xl md:text-3xl font-light text-gray-400">Perfiles</span>
             </div>
             <p className="text-gray-500 font-light uppercase tracking-[0.2em] text-xs mt-2">Disponibles ahora mismo</p>
           </div>
           
-          <p className="text-gray-400 font-light uppercase tracking-[0.3em] text-xs">Las mejores acompañantes VIP y modelos de alto standing. Escorts españolas, rusas y latinas. Discreción garantizada.</p>
+          <p className="text-gray-400 font-light uppercase tracking-[0.3em] text-xs">Perfiles actualizados, fotos reales y contacto discreto. Revisa disponibilidad antes de acceder a cada ficha.</p>
+          <p className="text-gray-500 font-light text-xs md:text-sm mt-6 max-w-2xl mx-auto leading-relaxed">
+            También puedes consultar la página de{' '}
+            <Link to="/escorts-valencia" className="text-[#c2b2a3] hover:text-white underline underline-offset-4 decoration-[#c2b2a3]/40">
+              escorts en Valencia
+            </Link>{' '}
+            o la selección de{' '}
+            <Link to="/escorts-de-lujo-valencia" className="text-[#c2b2a3] hover:text-white underline underline-offset-4 decoration-[#c2b2a3]/40">
+              escorts de lujo en Valencia
+            </Link>{' '}
+            si buscas una experiencia más específica.
+          </p>
         </div>
       </div>
       

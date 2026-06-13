@@ -20,9 +20,9 @@ import { getModelCoverImage, getModelCoverThumbnailPath } from '../lib/modelGrid
 import type { Model } from '../types';
 
 const SEO = {
-  title: 'Escorts en Valencia | Agencia Premium Valeria Ferrer',
+  title: 'Escorts Valencia | Fotos reales y perfiles actualizados',
   description:
-    'Descubre escorts en Valencia con Valeria Ferrer. Modelos exclusivas, acompañantes seleccionadas y reservas privadas con atención discreta.',
+    'Consulta escorts en Valencia con fotos reales, perfiles actualizados y contacto discreto. Revisa disponibilidad y accede a cada ficha.',
   canonicalUrl: 'https://www.valeriaferrer.com/escorts-valencia',
 };
 
@@ -263,7 +263,7 @@ const EscortsValencia: React.FC = () => {
             forma de responder, en el respeto mutuo y en los detalles. Si quieres conocer a nuestras
             modelos destacadas, revisa la selección inferior o visita el{' '}
             <Link to="/models" className="text-[#c2b2a3] hover:text-white underline underline-offset-4 decoration-[#c2b2a3]/40">
-              catálogo completo
+              chicas disponibles
             </Link>
             . También puedes explorar perfiles{' '}
             <Link to="/vip" className="text-[#c2b2a3] hover:text-white underline underline-offset-4 decoration-[#c2b2a3]/40">
@@ -303,7 +303,7 @@ const EscortsValencia: React.FC = () => {
               to="/models"
               className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.35em] text-[#c2b2a3] hover:text-white transition-colors border-b border-[#c2b2a3]/30 pb-1"
             >
-              Ver todas las modelos
+              Ver chicas disponibles
               <ChevronRight size={14} />
             </Link>
           </div>
@@ -401,7 +401,7 @@ const EscortsValencia: React.FC = () => {
             ¿Lista para reservar tu experiencia?
           </h2>
           <p className="text-gray-400 font-light mb-10 leading-relaxed">
-            Explora el catálogo o solicita una cita privada. Te respondemos con rapidez y total
+            Explora los perfiles disponibles o solicita una cita privada. Te respondemos con rapidez y total
             confidencialidad.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-14">
@@ -409,7 +409,7 @@ const EscortsValencia: React.FC = () => {
               to="/models"
               className="inline-flex items-center justify-center px-10 py-4 luxury-gradient text-black text-[10px] font-bold uppercase tracking-[0.35em] hover:scale-[1.02] transition-transform duration-300"
             >
-              Ver modelos
+              Ver chicas disponibles
             </Link>
             <Link
               to="/booking"
@@ -420,7 +420,7 @@ const EscortsValencia: React.FC = () => {
           </div>
           <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-[10px] uppercase tracking-[0.25em] text-gray-500">
             <Link to="/models" className="hover:text-[#c2b2a3] transition-colors">
-              Catálogo de modelos
+              Chicas disponibles
             </Link>
             <Link to="/vip" className="hover:text-[#c2b2a3] transition-colors">
               Perfiles VIP
