@@ -1,6 +1,146 @@
 {
   "redirects": [
     {
+      "source": "/flor-model-agency-valencia-vf",
+      "destination": "https://www.valeriaferrer.com/models/flor",
+      "permanent": true
+    },
+    {
+      "source": "/flor-model-agency-valencia-vf/",
+      "destination": "https://www.valeriaferrer.com/models/flor",
+      "permanent": true
+    },
+    {
+      "source": "/flor-valeria-ferrer-model-agency-valencia",
+      "destination": "https://www.valeriaferrer.com/models/flor",
+      "permanent": true
+    },
+    {
+      "source": "/flor-valeria-ferrer-model-agency-valencia/",
+      "destination": "https://www.valeriaferrer.com/models/flor",
+      "permanent": true
+    },
+    {
+      "source": "/monica-valeria-ferrer-model-agency-valencia",
+      "destination": "https://www.valeriaferrer.com/models/monica",
+      "permanent": true
+    },
+    {
+      "source": "/monica-valeria-ferrer-model-agency-valencia/",
+      "destination": "https://www.valeriaferrer.com/models/monica",
+      "permanent": true
+    },
+    {
+      "source": "/key-valeria-ferrer-model-agency-valencia",
+      "destination": "https://www.valeriaferrer.com/models/key",
+      "permanent": true
+    },
+    {
+      "source": "/key-valeria-ferrer-model-agency-valencia/",
+      "destination": "https://www.valeriaferrer.com/models/key",
+      "permanent": true
+    },
+    {
+      "source": "/lili-valeria-ferrer-model-agency-valencia",
+      "destination": "https://www.valeriaferrer.com/models/lili",
+      "permanent": true
+    },
+    {
+      "source": "/lili-valeria-ferrer-model-agency-valencia/",
+      "destination": "https://www.valeriaferrer.com/models/lili",
+      "permanent": true
+    },
+    {
+      "source": "/teresa-valeria-ferrer-model-agency-valencia",
+      "destination": "https://www.valeriaferrer.com/models/teresa",
+      "permanent": true
+    },
+    {
+      "source": "/teresa-valeria-ferrer-model-agency-valencia/",
+      "destination": "https://www.valeriaferrer.com/models/teresa",
+      "permanent": true
+    },
+    {
+      "source": "/naty-valeria-ferrer-model-agency-valencia-2",
+      "destination": "https://www.valeriaferrer.com/models/naty",
+      "permanent": true
+    },
+    {
+      "source": "/naty-valeria-ferrer-model-agency-valencia-2/",
+      "destination": "https://www.valeriaferrer.com/models/naty",
+      "permanent": true
+    },
+    {
+      "source": "/models/saray",
+      "destination": "https://www.valeriaferrer.com/models",
+      "permanent": true
+    },
+    {
+      "source": "/models/saray/",
+      "destination": "https://www.valeriaferrer.com/models",
+      "permanent": true
+    },
+    {
+      "source": "/models/emily",
+      "destination": "https://www.valeriaferrer.com/models",
+      "permanent": true
+    },
+    {
+      "source": "/models/emily/",
+      "destination": "https://www.valeriaferrer.com/models",
+      "permanent": true
+    },
+    {
+      "source": "/andrea-model-agency-valencia-vf-3",
+      "destination": "https://www.valeriaferrer.com/models",
+      "permanent": true
+    },
+    {
+      "source": "/andrea-model-agency-valencia-vf-3/",
+      "destination": "https://www.valeriaferrer.com/models",
+      "permanent": true
+    },
+    {
+      "source": "/valencia-casting",
+      "destination": "https://www.valeriaferrer.com/casting",
+      "permanent": true
+    },
+    {
+      "source": "/valencia-casting/",
+      "destination": "https://www.valeriaferrer.com/casting",
+      "permanent": true
+    },
+    {
+      "source": "/valencia-casting/:path*",
+      "destination": "https://www.valeriaferrer.com/casting",
+      "permanent": true
+    },
+    {
+      "source": "/inicio",
+      "destination": "https://www.valeriaferrer.com/",
+      "permanent": true
+    },
+    {
+      "source": "/inicio/",
+      "destination": "https://www.valeriaferrer.com/",
+      "permanent": true
+    },
+    {
+      "source": "/inicio/:path*",
+      "destination": "https://www.valeriaferrer.com/",
+      "permanent": true
+    },
+    {
+      "source": "/valencia-presentacion",
+      "destination": "https://www.valeriaferrer.com/",
+      "permanent": true
+    },
+    {
+      "source": "/valencia-presentacion/",
+      "destination": "https://www.valeriaferrer.com/",
+      "permanent": true
+    },
+    {
       "source": "/models/maria",
       "destination": "/models/maria-escort-valencia",
       "permanent": true
@@ -33,11 +173,6 @@
     {
       "source": "/model/:slug*",
       "destination": "https://www.valeriaferrer.com/models/:slug*",
-      "permanent": true
-    },
-    {
-      "source": "/inicio",
-      "destination": "https://www.valeriaferrer.com/",
       "permanent": true
     },
     {
@@ -132,12 +267,12 @@
     },
     {
       "source": "/maria-model-agency-valencia-vf",
-      "destination": "https://www.valeriaferrer.com/models/maria",
+      "destination": "https://www.valeriaferrer.com/models/maria-escort-valencia",
       "permanent": true
     },
     {
       "source": "/maria-model-agency-valencia-vf/",
-      "destination": "https://www.valeriaferrer.com/models/maria",
+      "destination": "https://www.valeriaferrer.com/models/maria-escort-valencia",
       "permanent": true
     },
     {
@@ -188,16 +323,6 @@
     {
       "source": "/paula-vip-model-agency-valencia/",
       "destination": "https://www.valeriaferrer.com/models/paula-vip",
-      "permanent": true
-    },
-    {
-      "source": "/naty-valeria-ferrer-model-agency-valencia-2",
-      "destination": "https://www.valeriaferrer.com/models/naty",
-      "permanent": true
-    },
-    {
-      "source": "/naty-valeria-ferrer-model-agency-valencia-2/",
-      "destination": "https://www.valeriaferrer.com/models/naty",
       "permanent": true
     },
     {
@@ -657,6 +782,16 @@
     },
     {
       "source": "/candy-model-agency-valencia-vf/",
+      "destination": "https://www.valeriaferrer.com/models",
+      "permanent": true
+    },
+    {
+      "source": "/escorts-valencia-universitarias/:path*",
+      "destination": "https://www.valeriaferrer.com/models",
+      "permanent": true
+    },
+    {
+      "source": "/chicas-universitarias-valencia/:path*",
       "destination": "https://www.valeriaferrer.com/models",
       "permanent": true
     }
