@@ -44,11 +44,19 @@ function scheduleBelowFoldWork(onReady: () => void): () => void {
 const Home: React.FC = () => {
   const exploreLinks = useMemo(() => getHomeExploreLinks(), []);
   const homeModels = useMemo(() => {
+    const valentina = modelsData.find((m) => m.slug === 'valentina');
+    const julieta = modelsData.find((m) => m.slug === 'julieta');
     const monica = modelsData.find((m) => m.slug === 'monica');
     const naty = modelsData.find((m) => m.slug === 'naty');
-    if (!monica || !naty) return modelsData;
-    const rest = modelsData.filter((m) => m.slug !== 'monica' && m.slug !== 'naty');
-    return [monica, naty, ...rest];
+    if (!valentina) return modelsData;
+    const rest = modelsData.filter(
+      (m) => !['valentina', 'julieta', 'monica', 'naty'].includes(m.slug)
+    );
+    const ordered = [valentina];
+    if (julieta) ordered.push(julieta);
+    if (monica) ordered.push(monica);
+    if (naty) ordered.push(naty);
+    return [...ordered, ...rest];
   }, []);
   const [loadExploreNav, setLoadExploreNav] = useState(false);
   const [loadReviews, setLoadReviews] = useState(false);

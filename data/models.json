@@ -1,5 +1,113 @@
 [
   {
+    "slug": "valentina",
+    "name": "Valentina",
+    "age": 23,
+    "height": "1,58 m",
+    "weight": "50 kg",
+    "nationality": "Italiana",
+    "city": "Valencia",
+    "profileUrl": "https://www.valeriaferrer.com/models/valentina/",
+    "coverImageUrl": "/chicas-optimized/valentina-valeria-ferrer-model-agency-valencia/portada.jpg",
+    "profileImageUrl": "/chicas-optimized/valentina-valeria-ferrer-model-agency-valencia/portada.jpg",
+    "description": "Valentina es una italiana de 23 años que llega a Valencia con algo poco habitual: 1,58 m, 50 kg y una sensualidad mediterránea que no necesita altura para dominar la habitación. Cuerpo esbelto, piel cuidada y ese punto italiano entre elegancia y provocación que vuelve adictiva su compañía. Pequeña en estatura, enorme en presencia — seductora, cariñosa y con una intensidad contenida que estalla en privado. Si buscas una acompañante italiana en Valencia con clase, fuego y actitud complaciente, Valentina es la rareza que no encuentras en un catálogo cualquiera.",
+    "essence": "Valentina no compite en gritos: conquista en silencio. Tiene esa feminidad italiana que seduce con calma, que en la cena te hace sentir el hombre más interesante de la mesa y en la intimidad suelta una pasión que no ves venir. Sofisticada por fuera, tremenda por dentro — la combinación que hace que una hora se quede corta.",
+    "uniquePoints": [
+      "Italiana con sensualidad mediterránea: elegancia y provocación en la misma sonrisa",
+      "Figura esbelta (1,58 m, 50 kg) con presencia que llena el espacio sin necesitar altura",
+      "Seductora y cariñosa: intensidad contenida que estalla cuando la intimidad llega"
+    ],
+    "experiencePoints": [
+      "Cenas y copas en Valencia con una italiana que sabe flirtear y cuidar cada detalle",
+      "Encuentros íntimos con pasión mediterránea, trato cariñoso y actitud complaciente",
+      "Compañía exclusiva para quien busca algo distinto: europea, refinada y magnética"
+    ],
+    "images": [
+      "/chicas-optimized/valentina-valeria-ferrer-model-agency-valencia/gallery/01.jpg",
+      "/chicas-optimized/valentina-valeria-ferrer-model-agency-valencia/gallery/02.jpg"
+    ],
+    "services": [
+      "Girlfriend Experience",
+      "Cenas de Negocios",
+      "Eventos Sociales",
+      "Acompañamiento Personal"
+    ],
+    "availability": "24h",
+    "languages": [
+      "Español",
+      "Italiano"
+    ],
+    "tags": [
+      "normal",
+      "nueva",
+      "elegante",
+      "sofisticada",
+      "seductora",
+      "apasionada",
+      "cenas",
+      "eventos"
+    ],
+    "isNew": true,
+    "featured": true,
+    "vip": false
+  },
+  {
+    "slug": "julieta",
+    "name": "Julieta",
+    "age": 21,
+    "height": "1,70 m",
+    "weight": "55 kg",
+    "nationality": "Colombiana",
+    "city": "Valencia",
+    "profileUrl": "https://www.valeriaferrer.com/models/julieta/",
+    "coverImageUrl": "/chicas-optimized/julieta-valeria-ferrer-model-agency-valencia/portada.jpg",
+    "profileImageUrl": "/chicas-optimized/julieta-valeria-ferrer-model-agency-valencia/portada.jpg",
+    "description": "Julieta es una colombiana de 21 años que no encaja en el perfil estándar: mide 1,70 m, pesa 55 kg y usa esa estatura alta como carta de presentación. Morena de mirada directa, cuerpo tonificado y una sensualidad latina que se nota sin pedir permiso — joven, apasionada y con actitud juguetona que mezcla dulzura y provocación en el mismo gesto. Si buscas una escort colombiana en Valencia que destaque por presencia, fuego y química real, Julieta es de las que dejan marca. Fotos reales, trato complaciente y una experiencia intensa desde el primer minuto.",
+    "essence": "Con Julieta no hay medias tintas: o te engancha su energía o no estás prestando atención. Es esa colombiana alta que convierte una cena en algo más, que flirtear le sale natural y que en privado sube la temperatura sin perder discreción. Apasionada, seductora y con carácter — el tipo de chica que hace que quieras repetir.",
+    "uniquePoints": [
+      "1,70 m de estatura alta: presencia física que impacta al cruzarte en la puerta",
+      "Sensualidad colombiana con actitud juguetona y mirada que no se aparta",
+      "Joven, apasionada e intensa — fuego latino con trato complaciente y cercano"
+    ],
+    "experiencePoints": [
+      "Girlfriend experience con química real: cercanía, picardía y momentos que se sienten vividos",
+      "Noches de pasión en Valencia: intensidad, sensualidad y discreción a la vez",
+      "Salidas o citas privadas donde su estatura y carisma mandan sin esfuerzo"
+    ],
+    "images": [
+      "/chicas-optimized/julieta-valeria-ferrer-model-agency-valencia/gallery/01.jpg",
+      "/chicas-optimized/julieta-valeria-ferrer-model-agency-valencia/gallery/02.jpg",
+      "/chicas-optimized/julieta-valeria-ferrer-model-agency-valencia/gallery/03.jpg",
+      "/chicas-optimized/julieta-valeria-ferrer-model-agency-valencia/gallery/04.jpg",
+      "/chicas-optimized/julieta-valeria-ferrer-model-agency-valencia/gallery/05.jpg",
+      "/chicas-optimized/julieta-valeria-ferrer-model-agency-valencia/gallery/06.jpg"
+    ],
+    "services": [
+      "Girlfriend Experience",
+      "Cenas de Negocios",
+      "Eventos Sociales",
+      "Acompañamiento Personal"
+    ],
+    "availability": "24h",
+    "languages": [
+      "Español"
+    ],
+    "tags": [
+      "colombiana",
+      "normal",
+      "nueva",
+      "apasionada",
+      "seductora",
+      "divertida",
+      "social",
+      "cenas",
+      "eventos"
+    ],
+    "isNew": true,
+    "featured": true,
+    "vip": false
+  },
+  {
     "slug": "luna",
     "name": "Luna",
     "age": 26,
