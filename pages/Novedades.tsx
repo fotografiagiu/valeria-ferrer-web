@@ -17,8 +17,8 @@ const SEO = {
 };
 
 const NAV_SHOWCASE_KEYS: ExploreNavKey[] = [
-  'vip',
   'nuevas',
+  'vip',
   'espanolas',
   'colombianas',
   'elegantes',
@@ -382,7 +382,7 @@ const Novedades: React.FC = () => {
             Novedades en <span className="italic luxury-text-gradient">Valeria Ferrer</span>
           </h1>
           <p className="text-[10px] uppercase tracking-[0.32em] text-gray-500 text-[#c2b2a3]/55 font-light mb-6">
-            Última actualización · Mayo 2026
+            Última actualización · Junio 2026
           </p>
           <p className="text-gray-400 font-light leading-relaxed text-sm md:text-base">
             Descubre las últimas incorporaciones, mejoras y formas de explorar perfiles dentro de
@@ -393,26 +393,7 @@ const Novedades: React.FC = () => {
       </header>
 
       <div className="max-w-[1200px] mx-auto px-6 py-12 md:py-16 space-y-10 md:space-y-12">
-        {/* 1. Nueva navegación */}
-        <EditorialCard title="Nueva navegación por perfiles" eyebrow="Explorar con un toque">
-          <p className="text-gray-400 font-light text-sm md:text-base leading-relaxed mb-6 max-w-2xl">
-            En cada ficha encontrarás accesos rápidos para descubrir perfiles por estilo, origen y
-            experiencia. Una forma más natural de explorar sin perder la estética premium del sitio.
-          </p>
-          <div className="flex flex-wrap gap-2 justify-center md:justify-start mb-6">
-            {NAV_SHOWCASE_KEYS.map((key) => (
-              <ExplorePill key={key} navKey={key} />
-            ))}
-          </div>
-          <p className="text-[11px] text-gray-500 font-light">
-            VIP y Nuevas incorporaciones ya tienen su propia selección. El resto de accesos te llevan
-            al catálogo mientras ampliamos las secciones dedicadas.
-          </p>
-        </EditorialCard>
-
-        <NuevaExperienciaCatalogoBlock />
-
-        {/* 2. Nuevas incorporaciones */}
+        {/* 1. Nuevas incorporaciones — siempre primero cuando hay perfiles nuevos */}
         <EditorialCard title="Nuevas incorporaciones" eyebrow="Recién llegadas">
           <p className="text-gray-400 font-light text-sm md:text-base leading-relaxed mb-6 max-w-2xl">
             Perfiles recientes con el mismo criterio editorial: presencia, discreción y una imagen
@@ -431,6 +412,25 @@ const Novedades: React.FC = () => {
             <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </EditorialCard>
+
+        {/* 2. Nueva navegación */}
+        <EditorialCard title="Nueva navegación por perfiles" eyebrow="Explorar con un toque">
+          <p className="text-gray-400 font-light text-sm md:text-base leading-relaxed mb-6 max-w-2xl">
+            En cada ficha encontrarás accesos rápidos para descubrir perfiles por estilo, origen y
+            experiencia. Una forma más natural de explorar sin perder la estética premium del sitio.
+          </p>
+          <div className="flex flex-wrap gap-2 justify-center md:justify-start mb-6">
+            {NAV_SHOWCASE_KEYS.map((key) => (
+              <ExplorePill key={key} navKey={key} />
+            ))}
+          </div>
+          <p className="text-[11px] text-gray-500 font-light">
+            Nuevas incorporaciones y perfiles VIP ya tienen su propia selección. El resto de accesos
+            te llevan al catálogo mientras ampliamos las secciones dedicadas.
+          </p>
+        </EditorialCard>
+
+        <NuevaExperienciaCatalogoBlock />
 
         {/* 3. Perfiles VIP */}
         <EditorialCard title="Perfiles VIP" eyebrow="Exclusividad y presencia">
