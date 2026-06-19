@@ -415,7 +415,8 @@
     ],
     "isNew": true,
     "featured": true,
-    "vip": false
+    "vip": false,
+    "active": false
   },
   {
     "slug": "monica",
@@ -931,7 +932,8 @@
       "noche": "2000 €",
       "dia": "3000 €",
       "dosDias": "4000 €"
-    }
+    },
+    "active": false
   },
   {
     "slug": "alicia",
@@ -963,7 +965,8 @@
     "availability": "24h",
     "languages": [
       "Español"
-    ]
+    ],
+    "active": false
   },
   {
     "slug": "silvia",
@@ -1027,7 +1030,8 @@
     "availability": "24h",
     "languages": [
       "Español"
-    ]
+    ],
+    "active": false
   },
   {
     "slug": "erika",

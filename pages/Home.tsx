@@ -6,6 +6,7 @@ import ModelsGrid from '../components/ModelsGrid';
 import FAQ from '../components/FAQ';
 import PageSEOHead from '../components/PageSEOHead';
 import modelsData from '../data/models.json';
+import { filterActiveModels } from '../lib/modelsCatalog';
 import { ArrowRight, Diamond, ShieldCheck, Star, Send } from 'lucide-react';
 import { getHomeExploreLinks } from '../lib/homeExploreLinks';
 
@@ -44,14 +45,15 @@ function scheduleBelowFoldWork(onReady: () => void): () => void {
 const Home: React.FC = () => {
   const exploreLinks = useMemo(() => getHomeExploreLinks(), []);
   const homeModels = useMemo(() => {
-    const cristal = modelsData.find((m) => m.slug === 'cristal');
-    const tiffany = modelsData.find((m) => m.slug === 'tiffany');
-    const valentina = modelsData.find((m) => m.slug === 'valentina');
-    const julieta = modelsData.find((m) => m.slug === 'julieta');
-    const monica = modelsData.find((m) => m.slug === 'monica');
-    const naty = modelsData.find((m) => m.slug === 'naty');
-    if (!cristal) return modelsData;
-    const rest = modelsData.filter(
+    const activeModels = filterActiveModels(modelsData);
+    const cristal = activeModels.find((m) => m.slug === 'cristal');
+    const tiffany = activeModels.find((m) => m.slug === 'tiffany');
+    const valentina = activeModels.find((m) => m.slug === 'valentina');
+    const julieta = activeModels.find((m) => m.slug === 'julieta');
+    const monica = activeModels.find((m) => m.slug === 'monica');
+    const naty = activeModels.find((m) => m.slug === 'naty');
+    if (!cristal) return activeModels;
+    const rest = activeModels.filter(
       (m) => !['cristal', 'tiffany', 'valentina', 'julieta', 'monica', 'naty'].includes(m.slug)
     );
     const ordered = [cristal];

@@ -1,14 +1,16 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import CatalogPremiumPreview from '../components/CatalogPremiumPreview';
 import ModelFilter from '../components/ModelFilter';
 import AnimatedCounter from '../components/AnimatedCounter';
 import PageSEOHead from '../components/PageSEOHead';
 import modelsData from '../data/models.json';
+import { filterActiveModels } from '../lib/modelsCatalog';
 
 const Models: React.FC = () => {
-  const [filteredModels, setFilteredModels] = useState<any[]>(modelsData);
+  const catalogModels = useMemo(() => filterActiveModels(modelsData), []);
+  const [filteredModels, setFilteredModels] = useState<any[]>(catalogModels);
 
   useEffect(() => {
     const scrollToFirstSelection = () => {
@@ -71,7 +73,7 @@ const Models: React.FC = () => {
       {/* Interactive Filter */}
       <div className="max-w-[1600px] mx-auto px-6 py-8">
         <ModelFilter 
-          models={modelsData} 
+          models={catalogModels} 
           onFilter={setFilteredModels} 
         />
       </div>

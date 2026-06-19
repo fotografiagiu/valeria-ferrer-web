@@ -1,7 +1,10 @@
 import { Model, Review, FAQ } from './types';
 import modelsData from './data/models.json';
+import { filterActiveModels } from './lib/modelsCatalog';
 
-export const MODELS: Model[] = (modelsData as any[]).map((item) => ({
+const catalogModels = filterActiveModels(modelsData as { active?: boolean }[]);
+
+export const MODELS: Model[] = catalogModels.map((item) => ({
   id: item.slug,
   slug: item.slug,
   name: item.name,

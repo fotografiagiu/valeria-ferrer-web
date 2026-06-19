@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft, MapPin, Phone, Calendar, Star, Clock, User } from 'lucide-react';
 import modelsData from '../data/models.json';
+import { filterActiveModels } from '../lib/modelsCatalog';
 import LazyImage from '../components/LazyImage';
 import { getModelGridCoverSrc } from '../lib/modelGridImage';
 import { getModelProfilePath, getModelSlug, isValidCatalogModel } from '../lib/modelLink';
@@ -148,7 +149,7 @@ const DistrictPage: React.FC = () => {
 
   // Modelos con slug válido; si el filtro por zona queda vacío, usar destacadas del catálogo.
   const displayModels = useMemo(() => {
-    const validModels = modelsData.filter(isValidCatalogModel);
+    const validModels = filterActiveModels(modelsData).filter(isValidCatalogModel);
     const byDistrict = validModels.filter(
       (model) =>
         model.city === 'Valencia' ||
@@ -306,7 +307,7 @@ const DistrictPage: React.FC = () => {
           </div>
           )}
 
-          {displayModels.length > 0 && modelsData.filter(isValidCatalogModel).length > 6 && (
+          {displayModels.length > 0 && filterActiveModels(modelsData).filter(isValidCatalogModel).length > 6 && (
             <div className="text-center mt-12">
               <Link
                 to="/models"

@@ -79,7 +79,7 @@ function archiveOrphanFiles(activeSlugs) {
   return moved;
 }
 
-const models = readJson(MODELS_PATH);
+const models = readJson(MODELS_PATH).filter((model) => model.active !== false);
 const activeSlugs = new Set(models.map((model) => model.slug));
 
 fs.mkdirSync(STRUCTURED_DATA_DIR, { recursive: true });

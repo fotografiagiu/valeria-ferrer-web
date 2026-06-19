@@ -158,7 +158,7 @@ ${entries.join('\n\n')}
 
 const previousUrls = readPreviousSitemapUrls();
 const previousImages = readPreviousImageLocs();
-const models = readJson(MODELS_PATH);
+const models = readJson(MODELS_PATH).filter((model) => model.active !== false);
 const blogPosts = readJson(BLOG_PATH);
 const sitemapXml = generateSitemap(models, blogPosts);
 

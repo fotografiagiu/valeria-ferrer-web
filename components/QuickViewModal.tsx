@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { X, Phone, MessageCircle, Calendar, MapPin, Heart, Star, ChevronLeft, ChevronRight } from 'lucide-react';
 import LazyImage from './LazyImage';
 import modelsData from '../data/models.json';
+import { filterActiveModels } from '../lib/modelsCatalog';
 
 interface QuickViewModalProps {
   isOpen: boolean;
@@ -13,7 +14,7 @@ const QuickViewModal: React.FC<QuickViewModalProps> = ({ isOpen, onClose, modelI
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   
   // Find the real model data from models.json
-  const model = modelsData.find(m => m.slug === modelId || m.id === modelId);
+  const model = filterActiveModels(modelsData).find(m => m.slug === modelId || m.id === modelId);
   
   // If model not found, show error or return null
   if (!model) {
