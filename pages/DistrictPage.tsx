@@ -92,7 +92,7 @@ const districtsData: Record<string, DistrictData> = {
       { name: 'Mercado de Ruzafa', description: 'Productos locales y gourmet' },
       { name: 'Casa Museo Benlliure', description: 'Casa-museo del pintor valenciano' }
     ],
-    relatedBlogIds: ['escorts-russafa-valencia', 'servicios-acompañamiento-valencia']
+    relatedBlogIds: ['escorts-ruzafa-valencia', 'servicios-acompañamiento-valencia']
   },
   'el-cabanyal': {
     id: 'el-cabanyal',

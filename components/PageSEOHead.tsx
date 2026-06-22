@@ -30,6 +30,8 @@ interface PageSEOHeadProps {
   canonicalUrl?: string;
   type?: 'website' | 'article';
   structuredData?: object;
+  /** Evita indexación en 404 y páginas de error. */
+  noindex?: boolean;
 }
 
 function upsertMetaName(name: string, content: string) {
@@ -62,6 +64,14 @@ function upsertCanonical(href: string) {
   canonical.href = href;
 }
 
+function upsertRobots(noindex: boolean) {
+  if (noindex) {
+    upsertMetaName('robots', 'noindex, follow');
+    return;
+  }
+  document.querySelector('meta[name="robots"]')?.remove();
+}
+
 function removeStructuredData(id: string) {
   document.querySelector(`#${id}`)?.remove();
 }
@@ -74,9 +84,11 @@ function applyHead(meta: {
   ogImage: string;
   type: 'website' | 'article';
   structuredData?: object;
+  noindex?: boolean;
 }) {
   document.title = meta.title;
   upsertMetaName('description', meta.description);
+  upsertRobots(!!meta.noindex);
   if (meta.keywords) {
     upsertMetaName('keywords', meta.keywords);
   }
@@ -112,6 +124,7 @@ export function restoreDefaultHomeHead(): void {
     canonicalUrl: DEFAULT_HOME_SEO.canonicalUrl,
     ogImage: DEFAULT_HOME_SEO.ogImage,
     type: DEFAULT_HOME_SEO.type,
+    noindex: false,
   });
 }
 
@@ -123,6 +136,7 @@ const PageSEOHead: React.FC<PageSEOHeadProps> = ({
   canonicalUrl,
   type = 'website',
   structuredData,
+  noindex = false,
 }) => {
   useEffect(() => {
     const canonical = canonicalUrl || `${SITE_ORIGIN}${window.location.pathname}`;
@@ -134,10 +148,11 @@ const PageSEOHead: React.FC<PageSEOHeadProps> = ({
       ogImage,
       type,
       structuredData,
+      noindex,
     });
 
     // Sin restore a home: la siguiente ruta con SEO sobrescribe; evita canonical de home en /contact, etc.
-  }, [title, description, keywords, ogImage, canonicalUrl, type, structuredData]);
+  }, [title, description, keywords, ogImage, canonicalUrl, type, structuredData, noindex]);
 
   return null;
 };

@@ -86,6 +86,24 @@ const ModelsHub: React.FC<Props> = ({ hubKey }) => {
             />
           </div>
 
+          <p className="text-gray-500 font-light text-xs mt-4 max-w-xl mx-auto leading-relaxed">
+            Consulta también{' '}
+            <Link
+              to="/escorts-valencia"
+              className="text-[#c2b2a3] hover:text-white underline underline-offset-4 decoration-[#c2b2a3]/40"
+            >
+              escorts en Valencia
+            </Link>{' '}
+            y{' '}
+            <Link
+              to="/escorts-de-lujo-valencia"
+              className="text-[#c2b2a3] hover:text-white underline underline-offset-4 decoration-[#c2b2a3]/40"
+            >
+              escorts de lujo
+            </Link>
+            .
+          </p>
+
           <p className="mt-4 md:mt-5">
             <Link
               to="/models"

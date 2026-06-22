@@ -9,6 +9,7 @@ import { ArrowLeft, Check, Calendar, Phone, MapPin, Ruler, User, Star, Sparkles,
 import LazyImage from '../components/LazyImage';
 import { getGalleryImageThumbnail } from '../lib/modelGridImage';
 import SEOHead from '../components/SEOHead';
+import PageSEOHead, { SITE_ORIGIN } from '../components/PageSEOHead';
 import Breadcrumbs from '../components/Breadcrumbs';
 import AnalyticsEvents from '../components/AnalyticsEvents';
 
@@ -160,10 +161,18 @@ const ModelDetail: React.FC = () => {
 
   if (!model) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center text-center p-6 bg-[#0a0a0a]">
-        <h1 className="text-4xl serif mb-4 luxury-text-gradient uppercase tracking-widest">Modelo no encontrada</h1>
-        <Link to="/models" className="text-[#c2b2a3] uppercase tracking-[0.3em] text-xs underline underline-offset-8 decoration-[#c2b2a3]/30">Volver a todas las modelos</Link>
-      </div>
+      <>
+        <PageSEOHead
+          title="Modelo no encontrada | Valeria Ferrer"
+          description="El perfil solicitado no está disponible. Consulta chicas disponibles en Valencia."
+          canonicalUrl={`${SITE_ORIGIN}/models`}
+          noindex
+        />
+        <div className="min-h-screen flex flex-col items-center justify-center text-center p-6 bg-[#0a0a0a]">
+          <h1 className="text-4xl serif mb-4 luxury-text-gradient uppercase tracking-widest">Modelo no encontrada</h1>
+          <Link to="/models" className="text-[#c2b2a3] uppercase tracking-[0.3em] text-xs underline underline-offset-8 decoration-[#c2b2a3]/30">Volver a todas las modelos</Link>
+        </div>
+      </>
     );
   }
 

@@ -22,6 +22,7 @@ const BlogArticle: React.FC = () => {
           title="Artículo no encontrado | Blog Valeria Ferrer"
           description="El artículo solicitado no existe. Explora guías y contenido sobre acompañantes VIP en Valencia."
           canonicalUrl={`${SITE_ORIGIN}/blog`}
+          noindex
         />
         <div className="text-center">
           <h1 className="text-2xl font-light text-white mb-4">Artículo no encontrado</h1>

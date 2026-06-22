@@ -57,7 +57,7 @@ const Footer: React.FC = () => {
                   Lounge de Miembros <span className="text-[9px] opacity-50">(Próximamente)</span>
                 </Link>
               </li>
-              <li><Link to="/blog/escorts-russafa-valencia" className="hover:text-[#c2b2a3] transition-colors">Guía de Ciudades</Link></li>
+              <li><Link to="/blog/escorts-ruzafa-valencia" className="hover:text-[#c2b2a3] transition-colors">Guía de Ciudades</Link></li>
             </ul>
           </div>
 

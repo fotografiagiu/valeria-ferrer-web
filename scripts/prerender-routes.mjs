@@ -11,13 +11,55 @@ export const PRERENDER_ROUTES = [
   {
     path: '/models',
     canonical: `${SITE_ORIGIN}/models`,
-    title: 'Modelos y Acompañantes en Valencia | Valeria Ferrer',
+    title: 'Chicas disponibles en Valencia | Valeria Ferrer',
     timeoutMs: 25000,
   },
   {
     path: '/escorts-valencia',
     canonical: `${SITE_ORIGIN}/escorts-valencia`,
-    title: 'Escorts en Valencia | Agencia Premium Valeria Ferrer',
+    title: 'Escorts Valencia | Fotos reales y perfiles actualizados',
+    timeoutMs: 25000,
+  },
+  {
+    path: '/escorts-de-lujo-valencia',
+    canonical: `${SITE_ORIGIN}/escorts-de-lujo-valencia`,
+    title: 'Escorts de lujo en Valencia | Perfiles VIP',
+    timeoutMs: 25000,
+  },
+  {
+    path: '/casting',
+    canonical: `${SITE_ORIGIN}/casting`,
+    title: 'Casting en Valencia | Valeria Ferrer',
+    timeoutMs: 25000,
+  },
+  {
+    path: '/vip',
+    canonical: `${SITE_ORIGIN}/vip`,
+    title: 'Perfiles VIP | Valeria Ferrer',
+    timeoutMs: 25000,
+  },
+  {
+    path: '/espanolas',
+    canonical: `${SITE_ORIGIN}/espanolas`,
+    title: 'Españolas | Valeria Ferrer',
+    timeoutMs: 25000,
+  },
+  {
+    path: '/jovenes',
+    canonical: `${SITE_ORIGIN}/jovenes`,
+    title: 'Jóvenes | Valeria Ferrer',
+    timeoutMs: 25000,
+  },
+  {
+    path: '/nuevas',
+    canonical: `${SITE_ORIGIN}/nuevas`,
+    title: 'Nuevas incorporaciones | Valeria Ferrer',
+    timeoutMs: 25000,
+  },
+  {
+    path: '/maduras',
+    canonical: `${SITE_ORIGIN}/maduras`,
+    title: 'Más maduras | Valeria Ferrer',
     timeoutMs: 25000,
   },
   {
