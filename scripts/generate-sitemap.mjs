@@ -14,6 +14,7 @@ import {
   readJson,
   toAbsoluteUrl,
   todayIsoDate,
+  writeSeoOutputFile,
 } from './lib/seo-assets.mjs';
 
 const lastmod = todayIsoDate();
@@ -162,8 +163,7 @@ const models = readJson(MODELS_PATH).filter((model) => model.active !== false);
 const blogPosts = readJson(BLOG_PATH);
 const sitemapXml = generateSitemap(models, blogPosts);
 
-fs.mkdirSync(PUBLIC_DIR, { recursive: true });
-fs.writeFileSync(SITEMAP_PATH, sitemapXml);
+writeSeoOutputFile('sitemap.xml', sitemapXml);
 
 const newUrls = new Set();
 const urlRegex = /<loc>(.*?)<\/loc>/g;

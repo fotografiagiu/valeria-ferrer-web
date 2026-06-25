@@ -121,6 +121,26 @@
       "permanent": true
     },
     {
+      "source": "/models/alicia",
+      "destination": "https://www.valeriaferrer.com/models",
+      "permanent": true
+    },
+    {
+      "source": "/models/alicia/",
+      "destination": "https://www.valeriaferrer.com/models",
+      "permanent": true
+    },
+    {
+      "source": "/models/yaiza",
+      "destination": "https://www.valeriaferrer.com/models",
+      "permanent": true
+    },
+    {
+      "source": "/models/yaiza/",
+      "destination": "https://www.valeriaferrer.com/models",
+      "permanent": true
+    },
+    {
       "source": "/gina-model-agency-valencia-vf",
       "destination": "https://www.valeriaferrer.com/models",
       "permanent": true

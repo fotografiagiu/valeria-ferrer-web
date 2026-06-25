@@ -4,6 +4,21 @@ import path from 'path';
 export const SITE_ORIGIN = 'https://www.valeriaferrer.com';
 export const ROOT = process.cwd();
 export const PUBLIC_DIR = path.join(ROOT, 'public');
+export const DIST_DIR = path.join(ROOT, 'dist');
+
+/** Escribe en public/ y, si existe dist/ (post-vite build), replica ahí para producción. */
+export function writeSeoOutputFile(relativePath, content) {
+  const publicFile = path.join(PUBLIC_DIR, relativePath);
+  fs.mkdirSync(path.dirname(publicFile), { recursive: true });
+  fs.writeFileSync(publicFile, content);
+
+  if (fs.existsSync(DIST_DIR)) {
+    const distFile = path.join(DIST_DIR, relativePath);
+    fs.mkdirSync(path.dirname(distFile), { recursive: true });
+    fs.writeFileSync(distFile, content);
+  }
+}
+
 export const MODELS_PATH = path.join(ROOT, 'data', 'models.json');
 export const BLOG_PATH = path.join(ROOT, 'data', 'blog.json');
 export const SITEMAP_PATH = path.join(PUBLIC_DIR, 'sitemap.xml');

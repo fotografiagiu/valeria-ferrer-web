@@ -12,6 +12,7 @@ import {
   filterExistingImages,
   readJson,
   toAbsoluteUrl,
+  writeSeoOutputFile,
 } from './lib/seo-assets.mjs';
 
 function generateModelStructuredData(model, imagePaths) {
@@ -97,8 +98,9 @@ for (const model of models) {
   }
 
   const structuredData = generateModelStructuredData(model, valid);
+  const relativePath = `structured-data/${model.slug}.json`;
   const filePath = path.join(STRUCTURED_DATA_DIR, `${model.slug}.json`);
-  fs.writeFileSync(filePath, `${JSON.stringify(structuredData, null, 2)}\n`);
+  writeSeoOutputFile(relativePath, `${JSON.stringify(structuredData, null, 2)}\n`);
   generated.push(model.slug);
   console.log(`✅ Generated structured data for ${model.name}: ${filePath}`);
 }
@@ -123,7 +125,7 @@ const indexData = {
 };
 
 const indexPath = path.join(STRUCTURED_DATA_DIR, 'models-index.json');
-fs.writeFileSync(indexPath, `${JSON.stringify(indexData, null, 2)}\n`);
+writeSeoOutputFile('structured-data/models-index.json', `${JSON.stringify(indexData, null, 2)}\n`);
 console.log(`✅ Generated models index: ${indexPath}`);
 
 const moved = archiveOrphanFiles(activeSlugs);
