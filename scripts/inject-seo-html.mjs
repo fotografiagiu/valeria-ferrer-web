@@ -7,6 +7,7 @@ import {
   SEO_INJECT_ROUTES,
   routeToDistRelativePath,
 } from './seo-routes.mjs';
+import { STATIC_BODY_BY_PATH } from './seo-static-body.mjs';
 
 const DIST_DIR = path.join(process.cwd(), 'dist');
 const TEMPLATE_PATH = path.join(DIST_DIR, 'index.html');
@@ -48,6 +49,12 @@ function replaceCanonical(html, href) {
   return html.replace(/<link\s+rel=["']canonical["'][^>]*>/i, tag);
 }
 
+function injectStaticBody(html, routePath) {
+  const bodyHtml = STATIC_BODY_BY_PATH[routePath];
+  if (!bodyHtml) return html;
+  return html.replace(/<div id="root">\s*<\/div>/i, `<div id="root">${bodyHtml}</div>`);
+}
+
 function injectSeo(html, route) {
   const canonical = route.canonical;
   let out = html;
@@ -61,6 +68,7 @@ function injectSeo(html, route) {
   out = replaceMetaName(out, 'twitter:title', route.title);
   out = replaceMetaName(out, 'twitter:description', route.description);
   out = replaceMetaName(out, 'twitter:image', route.ogImage || DEFAULT_OG_IMAGE);
+  out = injectStaticBody(out, route.path);
   return out;
 }
 
@@ -81,6 +89,13 @@ function main() {
     fs.writeFileSync(outputPath, html);
     written.push(relativePath);
     console.log(`✅ ${route.path} → dist/${relativePath}`);
+  }
+
+  const staticBodyRoutes = SEO_INJECT_ROUTES.filter((r) => STATIC_BODY_BY_PATH[r.path]).map(
+    (r) => r.path
+  );
+  if (staticBodyRoutes.length) {
+    console.log(`📄 Static body: ${staticBodyRoutes.join(', ')}`);
   }
 
   console.log(`\n🎯 SEO injection complete: ${written.length} routes (home unchanged)`);

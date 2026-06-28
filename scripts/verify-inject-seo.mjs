@@ -7,6 +7,7 @@ import {
   SEO_INJECT_ROUTES,
   routeToDistRelativePath,
 } from './seo-routes.mjs';
+import { STATIC_BODY_CHECKS } from './seo-static-body.mjs';
 
 const DIST_DIR = path.join(process.cwd(), 'dist');
 const errors = [];
@@ -93,6 +94,17 @@ for (const route of SEO_INJECT_ROUTES) {
   if (canonical === HOME_SEO_EXPECTED.canonical) {
     fail(`${label}: canonical must not point to home`);
   }
+
+  const bodyChecks = STATIC_BODY_CHECKS[route.path];
+  if (bodyChecks) {
+    for (const check of bodyChecks) {
+      if (check.pattern.test(html)) {
+        pass(`${label}: static body ${check.label} OK`);
+      } else {
+        fail(`${label}: static body ${check.label} missing`);
+      }
+    }
+  }
 }
 
 const homePath = path.join(DIST_DIR, 'index.html');
@@ -120,6 +132,12 @@ if (!fs.existsSync(homePath)) {
     fail('home: description mismatch');
   } else {
     pass('home: description OK');
+  }
+
+  if (/<main class="static-seo-escorts-valencia"/i.test(homeHtml)) {
+    fail('home: must not contain escorts-valencia static body');
+  } else {
+    pass('home: no static body bleed OK');
   }
 }
 
