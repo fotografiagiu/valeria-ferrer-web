@@ -163,7 +163,8 @@
     ],
     "isNew": true,
     "featured": true,
-    "vip": false
+    "vip": false,
+    "active": false
   },
   {
     "slug": "julieta",
