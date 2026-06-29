@@ -10,13 +10,6 @@ export const SEO_INJECT_ROUTES = [
     canonical: `${SITE_ORIGIN}/models`,
   },
   {
-    path: '/escorts-valencia',
-    title: 'Escorts Valencia | Fotos reales y perfiles actualizados',
-    description:
-      'Consulta escorts en Valencia con fotos reales, perfiles actualizados y contacto discreto. Revisa disponibilidad y accede a cada ficha.',
-    canonical: `${SITE_ORIGIN}/escorts-valencia`,
-  },
-  {
     path: '/escorts-de-lujo-valencia',
     title: 'Escorts de lujo en Valencia | Perfiles VIP',
     description:
