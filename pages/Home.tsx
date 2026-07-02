@@ -46,17 +46,20 @@ const Home: React.FC = () => {
   const exploreLinks = useMemo(() => getHomeExploreLinks(), []);
   const homeModels = useMemo(() => {
     const activeModels = filterActiveModels(modelsData);
+    const adara = activeModels.find((m) => m.slug === 'adara');
     const cristal = activeModels.find((m) => m.slug === 'cristal');
     const tiffany = activeModels.find((m) => m.slug === 'tiffany');
     const valentina = activeModels.find((m) => m.slug === 'valentina');
     const julieta = activeModels.find((m) => m.slug === 'julieta');
     const monica = activeModels.find((m) => m.slug === 'monica');
     const naty = activeModels.find((m) => m.slug === 'naty');
-    if (!cristal) return activeModels;
+    if (!adara && !cristal) return activeModels;
     const rest = activeModels.filter(
-      (m) => !['cristal', 'tiffany', 'valentina', 'julieta', 'monica', 'naty'].includes(m.slug)
+      (m) => !['adara', 'cristal', 'tiffany', 'valentina', 'julieta', 'monica', 'naty'].includes(m.slug)
     );
-    const ordered = [cristal];
+    const ordered = [];
+    if (adara) ordered.push(adara);
+    if (cristal) ordered.push(cristal);
     if (tiffany) ordered.push(tiffany);
     if (valentina) ordered.push(valentina);
     if (julieta) ordered.push(julieta);
