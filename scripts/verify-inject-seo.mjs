@@ -141,22 +141,16 @@ if (!fs.existsSync(homePath)) {
   }
 }
 
-const escortsInjectedPath = path.join(DIST_DIR, 'escorts-valencia/index.html');
-const escortsInjectedTitle = 'Escorts Valencia | Fotos reales y perfiles actualizados';
-if (fs.existsSync(escortsInjectedPath)) {
-  const escortsHtml = fs.readFileSync(escortsInjectedPath, 'utf8');
+const escortsPath = path.join(DIST_DIR, 'escorts-valencia/index.html');
+if (fs.existsSync(escortsPath)) {
+  const escortsHtml = fs.readFileSync(escortsPath, 'utf8');
   if (/<main class="static-seo-escorts-valencia"/i.test(escortsHtml)) {
     fail('/escorts-valencia: must not contain static SEO body');
   } else {
     pass('/escorts-valencia: no static SEO body OK');
   }
-  if (extractTitle(escortsHtml) === escortsInjectedTitle) {
-    fail('/escorts-valencia: must not use injected head SEO title');
-  } else {
-    pass('/escorts-valencia: no injected head SEO OK');
-  }
 } else {
-  pass('/escorts-valencia: no injected dist HTML (SPA shell via rewrite) OK');
+  fail('/escorts-valencia: missing dist/escorts-valencia/index.html');
 }
 
 console.log('\n=== SEO Injection Verification ===\n');
