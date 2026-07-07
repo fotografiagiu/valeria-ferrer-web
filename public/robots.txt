@@ -20,7 +20,6 @@ Allow: /booking$
 
 # Sitemap location
 Sitemap: https://www.valeriaferrer.com/sitemap.xml
-Sitemap: https://www.valeriaferrer.com/image-sitemap.xml
 
 # Google Image Bot específico
 User-agent: Googlebot-Image

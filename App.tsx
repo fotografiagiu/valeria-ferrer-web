@@ -28,6 +28,7 @@ const EscortsValencia = React.lazy(() => import('./pages/EscortsValencia'));
 const EscortsLujoValencia = React.lazy(() => import('./pages/EscortsLujoValencia'));
 const MembersModal = React.lazy(() => import('./components/MembersModal'));
 const FloatingContactPopup = React.lazy(() => import('./components/FloatingContactPopup'));
+import PageSEOHead from './components/PageSEOHead';
 
 /** Ruta /members: enlace desde Footer “Lounge de Miembros”; contenido próximamente. */
 const MembersPage: React.FC = () => {
@@ -35,6 +36,13 @@ const MembersPage: React.FC = () => {
     window.scrollTo(0, 0);
   }, []);
   return (
+    <>
+      <PageSEOHead
+        title="Lounge de Miembros | Valeria Ferrer"
+        description="Zona exclusiva para miembros. Próximamente."
+        canonicalUrl="https://www.valeriaferrer.com/members"
+        noindex
+      />
     <div className="min-h-screen bg-[#0a0a0a] text-white pt-32 pb-24 px-6">
       <div className="max-w-2xl mx-auto text-center">
         <h1 className="text-3xl md:text-4xl serif luxury-text-gradient uppercase tracking-widest mb-6">
@@ -46,6 +54,7 @@ const MembersPage: React.FC = () => {
         <p className="text-[#c2b2a3] text-xs uppercase tracking-[0.3em]">Próximamente</p>
       </div>
     </div>
+    </>
   );
 };
 
