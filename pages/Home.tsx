@@ -5,12 +5,12 @@ import Hero from '../components/Hero';
 import ModelsGrid from '../components/ModelsGrid';
 import FAQ from '../components/FAQ';
 import PageSEOHead from '../components/PageSEOHead';
+import HomeNovedadesStrip from '../components/HomeNovedadesStrip';
 import modelsData from '../data/models.json';
 import { filterActiveModels } from '../lib/modelsCatalog';
-import { ArrowRight, Diamond, ShieldCheck, Star, Send } from 'lucide-react';
+import { Diamond, ShieldCheck, Star, Send } from 'lucide-react';
 import { getHomeExploreLinks } from '../lib/homeExploreLinks';
 
-const ExploreProfilesNav = React.lazy(() => import('../components/ExploreProfilesNav'));
 const Reviews = React.lazy(() => import('../components/Reviews'));
 
 function scheduleBelowFoldWork(onReady: () => void): () => void {
@@ -46,6 +46,7 @@ const Home: React.FC = () => {
   const exploreLinks = useMemo(() => getHomeExploreLinks(), []);
   const homeModels = useMemo(() => {
     const activeModels = filterActiveModels(modelsData);
+    const carolina = activeModels.find((m) => m.slug === 'carolina');
     const adara = activeModels.find((m) => m.slug === 'adara');
     const cristal = activeModels.find((m) => m.slug === 'cristal');
     const tiffany = activeModels.find((m) => m.slug === 'tiffany');
@@ -53,11 +54,15 @@ const Home: React.FC = () => {
     const julieta = activeModels.find((m) => m.slug === 'julieta');
     const monica = activeModels.find((m) => m.slug === 'monica');
     const naty = activeModels.find((m) => m.slug === 'naty');
-    if (!adara && !cristal) return activeModels;
+    if (!carolina && !adara && !cristal) return activeModels;
     const rest = activeModels.filter(
-      (m) => !['adara', 'cristal', 'tiffany', 'valentina', 'julieta', 'monica', 'naty'].includes(m.slug)
+      (m) =>
+        !['carolina', 'adara', 'cristal', 'tiffany', 'valentina', 'julieta', 'monica', 'naty'].includes(
+          m.slug
+        )
     );
     const ordered = [];
+    if (carolina) ordered.push(carolina);
     if (adara) ordered.push(adara);
     if (cristal) ordered.push(cristal);
     if (tiffany) ordered.push(tiffany);
@@ -107,31 +112,7 @@ const Home: React.FC = () => {
       />
       <Hero />
 
-      {/* Novedades + exploración rápida */}
-      <section className="bg-[#111111] border-y border-white/5 py-8 md:py-10">
-        <div className="max-w-[1600px] mx-auto px-6">
-          <div className="max-w-3xl mx-auto text-center mb-8">
-            <p className="text-gray-400 font-light text-sm md:text-base tracking-wide mb-4">
-              Nuevas incorporaciones y mejoras
-            </p>
-            <Link
-              to="/novedades"
-              className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full border border-[#c2b2a3]/35 bg-[#c2b2a3]/10 text-[#c2b2a3] text-[10px] md:text-xs uppercase tracking-[0.32em] font-medium hover:bg-[#c2b2a3]/18 hover:border-[#c2b2a3]/50 hover:text-white transition-all duration-300 shadow-[0_0_24px_-8px_rgba(194,178,163,0.25)]"
-            >
-              Ver novedades
-              <ArrowRight className="w-3.5 h-3.5" strokeWidth={1.5} />
-            </Link>
-          </div>
-
-          <div className="min-h-[5.5rem] md:min-h-[4.5rem]">
-            {loadExploreNav ? (
-              <Suspense fallback={null}>
-                <ExploreProfilesNav links={exploreLinks} title="Explorar" variant="embedded" />
-              </Suspense>
-            ) : null}
-          </div>
-        </div>
-      </section>
+      <HomeNovedadesStrip exploreLinks={exploreLinks} loadExploreNav={loadExploreNav} />
 
       {/* Elite Experience Section — sin Framer en cards (mismo aspecto final) */}
       <section className="py-12 md:py-24 bg-[#0a0a0a] border-b border-white/5">
