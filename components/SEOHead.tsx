@@ -12,6 +12,7 @@ interface SEOHeadProps {
     height?: string | number;
     weight?: string | number;
     slug?: string;
+    vip?: boolean;
     seoTitle?: string;
     seoDescription?: string;
   };
@@ -22,7 +23,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({ model }) => {
     if (!model) return;
 
     // Generate SEO data based on model properties and rules
-    const isVIP = model.slug === 'claudia-vip' || model.slug === 'paula-vip';
+    const isVIP = !!model.vip || model.slug === 'claudia-vip' || model.slug === 'paula-vip';
     const modelName = model.name;
     const nationality = model.nationality || 'Española';
     const city = model.city || 'Valencia';
@@ -33,12 +34,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({ model }) => {
     // Generate title based on VIP rules
     let title = customSeoTitle || '';
     if (!title && isVIP) {
-      // Special handling for Paula VIP to use "Acompañante VIP"
-      if (model.slug === 'paula-vip') {
-        title = `${modelName} VIP | Acompañante VIP en ${city} | Valeria Ferrer`;
-      } else {
-        title = `${modelName} VIP | Modelo VIP en ${city} | Valeria Ferrer`;
-      }
+      title = `${modelName} VIP | Acompañante VIP en ${city} | Valeria Ferrer`;
     } else if (!title) {
       // Use elegant vocabulary based on nationality
       const category = nationality === 'Colombiana' ? 'Escort' : 
@@ -49,12 +45,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({ model }) => {
     // Generate unique meta description
     let description = customSeoDescription || '';
     if (!description && isVIP) {
-      // Special handling for Paula VIP
-      if (model.slug === 'paula-vip') {
-        description = `${modelName}, acompañante VIP exclusiva de ${age} años en ${city}. Experiencias de lujo, sofisticación refinada y atención discreta. Reserva VIP privada.`;
-      } else {
-        description = `${modelName}, modelo VIP exclusiva de ${age} años en ${city}. Experiencias de lujo, sofisticación internacional y atención discreta. Reserva VIP privada.`;
-      }
+      description = `${modelName}, acompañante VIP exclusiva de ${age} años en ${city}. Experiencias de lujo, sofisticación refinada y atención discreta. Reserva VIP privada.`;
     } else if (!description) {
       const category = nationality === 'Colombiana' ? 'escort' : 
                       nationality === 'Española' ? 'acompañante' : 'acompañante';

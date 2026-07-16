@@ -13,7 +13,7 @@ export function sortByCatalogOrder(models: Model[], catalog: Model[] = MODELS): 
 
 export function getHubModels(key: HubKey, models: Model[] = MODELS): Model[] {
   const filtered = getHubModelsFrom(key, models);
-  if (key === 'nuevas') return sortByCatalogOrder(filtered, models);
+  if (key === 'nuevas' || key === 'vip') return sortByCatalogOrder(filtered, models);
   return filtered;
 }
 

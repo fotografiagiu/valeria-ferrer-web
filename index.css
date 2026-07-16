@@ -24,6 +24,95 @@
   .luxury-text-gradient {
     @apply bg-linear-to-br from-[#c2b2a3] to-white bg-clip-text text-transparent;
   }
+
+  /* VIP badge — oro que reluce */
+  .vip-gold-badge {
+    position: relative;
+    overflow: hidden;
+    border-radius: 9999px;
+    border: 1px solid rgba(232, 196, 120, 0.55);
+    background: linear-gradient(
+      135deg,
+      rgba(90, 62, 20, 0.92) 0%,
+      rgba(184, 134, 45, 0.88) 28%,
+      rgba(246, 215, 140, 0.95) 50%,
+      rgba(184, 134, 45, 0.9) 72%,
+      rgba(90, 62, 20, 0.92) 100%
+    );
+    box-shadow:
+      0 0 16px rgba(232, 196, 120, 0.35),
+      0 0 28px rgba(184, 134, 45, 0.18),
+      inset 0 1px 0 rgba(255, 245, 210, 0.45);
+  }
+
+  .vip-gold-badge::after {
+    content: '';
+    position: absolute;
+    inset: -40% -60%;
+    background: linear-gradient(
+      105deg,
+      transparent 35%,
+      rgba(255, 250, 230, 0.55) 48%,
+      rgba(255, 255, 255, 0.75) 50%,
+      rgba(255, 250, 230, 0.45) 52%,
+      transparent 65%
+    );
+    animation: vip-gold-shine 3.2s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  .vip-gold-text {
+    color: #1a1208;
+    font-weight: 600;
+    letter-spacing: 0.28em;
+    text-shadow: 0 1px 0 rgba(255, 240, 200, 0.35);
+  }
+
+  .vip-gold-kicker {
+    background: linear-gradient(
+      90deg,
+      #a67c2a 0%,
+      #f0d78c 35%,
+      #fff6d6 50%,
+      #e8c478 65%,
+      #a67c2a 100%
+    );
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: vip-gold-text-flow 4s ease-in-out infinite;
+    filter: drop-shadow(0 0 8px rgba(232, 196, 120, 0.4));
+  }
+}
+
+@keyframes vip-gold-shine {
+  0% {
+    transform: translateX(-30%) rotate(12deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  45% {
+    transform: translateX(30%) rotate(12deg);
+    opacity: 0.85;
+  }
+  60%,
+  100% {
+    transform: translateX(55%) rotate(12deg);
+    opacity: 0;
+  }
+}
+
+@keyframes vip-gold-text-flow {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
 .markdown-body p {

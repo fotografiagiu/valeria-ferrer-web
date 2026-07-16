@@ -1,0 +1,46 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Yaiza",
+  "description": "Yaiza es una española joven y vibrante que irradia carisma mediterráneo. Su figura equilibrada y energía natural la hacen perfecta para eventos sociales en Valencia y momentos divertidos. Cada encuentro con ella está lleno de alegría contagiosa y autenticidad española. Su estilo único transforma celebraciones ordinarias en experiencias inolvidables con vitalidad mediterránea.",
+  "url": "https://www.valeriaferrer.com/models/yaiza",
+  "image": [
+    "https://www.valeriaferrer.com/chicas/yaiza-valeria-ferrer-model-agency-valencia/portada.jpg",
+    "https://www.valeriaferrer.com/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/01.jpg",
+    "https://www.valeriaferrer.com/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/02.jpg",
+    "https://www.valeriaferrer.com/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/03.jpg",
+    "https://www.valeriaferrer.com/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/04.jpg",
+    "https://www.valeriaferrer.com/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/05.jpg",
+    "https://www.valeriaferrer.com/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/06.jpg",
+    "https://www.valeriaferrer.com/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/07.jpg",
+    "https://www.valeriaferrer.com/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/08.jpg",
+    "https://www.valeriaferrer.com/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/09.jpg",
+    "https://www.valeriaferrer.com/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/10.jpg"
+  ],
+  "nationality": "Española",
+  "jobTitle": "Modelo VIP",
+  "knowsLanguage": [
+    "Español"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "itemOffered": {
+      "@type": "Service",
+      "name": "Acompañamiento Premium",
+      "description": "Servicios exclusivos de acompañamiento con Yaiza en Valencia"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Valencia"
+    },
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "name": "Contacto Directo",
+      "url": "https://www.valeriaferrer.com/contact"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.valeriaferrer.com/models/yaiza"
+  }
+}

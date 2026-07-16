@@ -54,8 +54,8 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 }
 
 function profileKicker(model: CatalogPreviewModel): string | null {
-  if (model.isNew) return 'Nueva';
   if (model.vip) return 'VIP';
+  if (model.isNew) return 'Nueva';
   if (model.featured) return 'Exclusive';
   return null;
 }
@@ -156,7 +156,11 @@ function HorizontalEditorialCard({ model, variant }: HorizontalCardProps) {
 
         <div className="relative z-10 flex w-full min-w-0 max-w-full flex-col items-center">
           {kicker && (
-            <span className="mb-2 text-[7px] uppercase tracking-[0.38em] text-[#c2b2a3]/60 md:mb-2.5 md:text-[8px]">
+            <span
+              className={`mb-2 text-[7px] uppercase tracking-[0.38em] md:mb-2.5 md:text-[8px] ${
+                kicker === 'VIP' ? 'vip-gold-kicker font-medium' : 'text-[#c2b2a3]/60'
+              }`}
+            >
               {kicker}
             </span>
           )}

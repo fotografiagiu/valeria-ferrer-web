@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { MODELS } from '../constants';
-import { Grid3X3, LayoutGrid } from 'lucide-react';
+import { Crown, Grid3X3, LayoutGrid } from 'lucide-react';
 import LazyImage from './LazyImage';
 import {
   getGalleryImageThumbnail,
@@ -34,6 +34,7 @@ const ModelCard: React.FC<{
     hoverImage: hoverSrc,
     location: model.nationality || 'Española',
     featured: model.featured,
+    vip: !!model.vip,
   };
 
   const generateAltText = (
@@ -158,16 +159,20 @@ const ModelCard: React.FC<{
             </div>
           )}
 
-          {((adaptedModel.featured && adaptedModel.name !== 'KEY' && adaptedModel.name !== 'Mónica' && adaptedModel.name !== 'Flor' && adaptedModel.name !== 'Lili' && !model.isNew) || adaptedModel.name.includes('VIP')) && (
+          {(adaptedModel.vip ||
+            adaptedModel.name.includes('VIP') ||
+            (adaptedModel.featured &&
+              adaptedModel.name !== 'KEY' &&
+              adaptedModel.name !== 'Mónica' &&
+              adaptedModel.name !== 'Flor' &&
+              adaptedModel.name !== 'Lili' &&
+              !model.isNew)) && (
             <div className="absolute top-2 right-2 md:top-4 md:right-4 z-30">
-              <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-[#c2b2a3]/20 to-[#c2b2a3]/10 blur-md" />
-                <div className="relative flex items-center space-x-2 px-4 py-2 md:px-6 md:py-3 bg-gradient-to-r from-[#c2b2a3]/10 to-[#c2b2a3]/5 backdrop-blur-sm border border-[#c2b2a3]/30 rounded-full">
-                  <div className="w-3 h-3 bg-[#c2b2a3] rounded-full" />
-                  <span className="text-[#c2b2a3] text-[11px] md:text-[12px] tracking-[0.3em] uppercase font-light">
-                    VIP
-                  </span>
-                </div>
+              <div className="vip-gold-badge relative flex items-center space-x-1.5 px-3 py-1.5 md:space-x-2 md:px-5 md:py-2.5">
+                <Crown className="relative z-[1] w-3 h-3 md:w-3.5 md:h-3.5 text-[#1a1208]" strokeWidth={1.6} />
+                <span className="vip-gold-text relative z-[1] text-[10px] md:text-[11px] uppercase">
+                  VIP
+                </span>
               </div>
             </div>
           )}

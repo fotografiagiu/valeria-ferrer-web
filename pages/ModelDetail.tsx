@@ -140,18 +140,16 @@ const ModelDetail: React.FC = () => {
 
   // Generate H1 text based on model properties and VIP rules
   const generateH1Text = () => {
-    const isVIP = model.slug === 'claudia-vip' || model.slug === 'paula-vip';
+    const isVIP = !!model.vip || model.slug === 'claudia-vip' || model.slug === 'paula-vip';
     const modelName = model.name;
     const nationality = model.nationality || 'Española';
     const city = model.city || 'Valencia';
     
     if (isVIP) {
-      // Special handling for Paula VIP
       if (model.slug === 'paula-vip') {
         return `${modelName} VIP - Acompañante VIP en ${city}`;
-      } else {
-        return `${modelName} VIP - Modelo VIP en ${city}`;
       }
+      return `${modelName} VIP - Acompañante VIP en ${city}`;
     } else {
       const category = nationality === 'Colombiana' ? 'Escort' : 
                       nationality === 'Española' ? 'Acompañante' : 'Acompañante';
@@ -197,6 +195,7 @@ const ModelDetail: React.FC = () => {
     description: model.description,
     seoTitle: detailRow?.seoTitle,
     seoDescription: detailRow?.seoDescription,
+    vip: model.vip,
   };
 
   return (
@@ -220,7 +219,7 @@ const ModelDetail: React.FC = () => {
               {/* Subtitle with VIP rule */}
               <div className="flex items-center space-x-2 text-[#c2b2a3] text-sm lg:text-base">
                 {(() => {
-                  const isVIP = model.slug === 'claudia-vip' || model.slug === 'paula-vip';
+                  const isVIP = !!model.vip || model.slug === 'claudia-vip' || model.slug === 'paula-vip';
                   const nationality = model.nationality || 'Española';
                   const city = model.city || 'Valencia';
                   

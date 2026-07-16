@@ -46,31 +46,25 @@ const Home: React.FC = () => {
   const exploreLinks = useMemo(() => getHomeExploreLinks(), []);
   const homeModels = useMemo(() => {
     const activeModels = filterActiveModels(modelsData);
-    const carolina = activeModels.find((m) => m.slug === 'carolina');
-    const adara = activeModels.find((m) => m.slug === 'adara');
-    const cristal = activeModels.find((m) => m.slug === 'cristal');
-    const tiffany = activeModels.find((m) => m.slug === 'tiffany');
-    const valentina = activeModels.find((m) => m.slug === 'valentina');
-    const julieta = activeModels.find((m) => m.slug === 'julieta');
-    const monica = activeModels.find((m) => m.slug === 'monica');
-    const naty = activeModels.find((m) => m.slug === 'naty');
-    if (!carolina && !adara && !cristal) return activeModels;
-    const rest = activeModels.filter(
-      (m) =>
-        !['carolina', 'adara', 'cristal', 'tiffany', 'valentina', 'julieta', 'monica', 'naty'].includes(
-          m.slug
-        )
-    );
-    const ordered = [];
-    if (carolina) ordered.push(carolina);
-    if (adara) ordered.push(adara);
-    if (cristal) ordered.push(cristal);
-    if (tiffany) ordered.push(tiffany);
-    if (valentina) ordered.push(valentina);
-    if (julieta) ordered.push(julieta);
-    if (monica) ordered.push(monica);
-    if (naty) ordered.push(naty);
-    return [...ordered, ...rest];
+    // Fila 1 (4 cols desktop) + fila 2: Carla, Paula, Silvia
+    const pinOrder = [
+      'carolina',
+      'adara',
+      'cristal',
+      'julieta',
+      'carla',
+      'paula-vip',
+      'silvia',
+      'monica',
+      'naty',
+    ];
+    const pinned = pinOrder
+      .map((slug) => activeModels.find((m) => m.slug === slug))
+      .filter(Boolean);
+    if (pinned.length === 0) return activeModels;
+    const pinnedSlugs = new Set(pinned.map((m) => m.slug));
+    const rest = activeModels.filter((m) => !pinnedSlugs.has(m.slug));
+    return [...pinned, ...rest];
   }, []);
   const [loadExploreNav, setLoadExploreNav] = useState(false);
   const [loadReviews, setLoadReviews] = useState(false);
