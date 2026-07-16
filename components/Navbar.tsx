@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown, Globe, Lock, Clock, Mail, Send, Phone } from 'lucide-react';
 
 interface NavbarProps {
@@ -32,6 +32,15 @@ const NovedadesNavLink: React.FC<{
 
 const Navbar: React.FC<NavbarProps> = ({ isScrolled, openMembers }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
+
+  const handleHomeClick = () => {
+    setIsMobileMenuOpen(false);
+    // Si ya estamos en inicio, el Link no remonta: forzar scroll al top.
+    if (location.pathname === '/' || location.pathname === '') {
+      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    }
+  };
 
   return (
     <nav className={`fixed w-full z-50 transition-[background-color,padding,backdrop-filter] duration-500 ${
@@ -51,7 +60,7 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolled, openMembers }) => {
 
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
-        <Link to="/" className="flex items-center space-x-6 lg:space-x-8 lg:ml-4">
+        <Link to="/" onClick={handleHomeClick} className="flex items-center space-x-6 lg:space-x-8 lg:ml-4">
           <div className="flex flex-col">
             <span className="text-2xl md:text-3xl tracking-[0.05em] font-[300] luxury-text-gradient uppercase leading-none whitespace-nowrap" style={{ fontFamily: 'Playfair Display, serif', letterSpacing: '0.15em', fontWeight: '300' }}>Valeria Ferrer</span>
             <span className="text-[10px] md:text-[11px] tracking-[0.4em] uppercase text-[#c2b2a3] font-medium mt-1">Agencia de Modelos de Lujo</span>
@@ -61,7 +70,7 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolled, openMembers }) => {
         {/* Desktop Navigation */}
         <div className="hidden lg:flex items-center space-x-10 text-[13px] font-medium tracking-widest uppercase lg:ml-12 xl:ml-16 2xl:ml-20 lg:mr-4">
           <div className="hover:-translate-y-0.5 transition-transform duration-200">
-            <Link to="/" className="hover:text-[#c2b2a3] transition-colors relative group">
+            <Link to="/" onClick={handleHomeClick} className="hover:text-[#c2b2a3] transition-colors relative group">
               Inicio
               <span className="absolute bottom-0 left-0 w-0 h-px bg-[#c2b2a3] group-hover:w-full transition-all duration-300"></span>
             </Link>
@@ -143,7 +152,7 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolled, openMembers }) => {
               <span>Telf: 645 872 227</span>
             </a>
           </div>
-          <Link to="/" onClick={() => setIsMobileMenuOpen(false)}>Inicio</Link>
+          <Link to="/" onClick={handleHomeClick}>Inicio</Link>
           <Link to="/models" onClick={() => setIsMobileMenuOpen(false)}>Chicas disponibles</Link>
           <NovedadesNavLink
             onNavigate={() => setIsMobileMenuOpen(false)}
