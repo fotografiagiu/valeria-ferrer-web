@@ -48,6 +48,7 @@ const Home: React.FC = () => {
     const activeModels = filterActiveModels(modelsData);
     // Fila 1 (4 cols desktop) + fila 2: Carla, Paula, Silvia
     const pinOrder = [
+      'laura',
       'carolina',
       'adara',
       'cristal',
