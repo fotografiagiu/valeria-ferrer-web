@@ -12,7 +12,22 @@ export function getModelCoverImage(coverImageUrl: string): string {
 
 /** Miniatura de portada — solo UI pequeña (mockups, hover, etc.). */
 export function getModelCoverThumbnailPath(coverImageUrl: string): string {
-  const pathParts = coverImageUrl.split('/');
+  const normalized = resolveOriginalImageUrl(coverImageUrl);
+
+  // Portadas con nombre propio (p. ej. portada-lenceria-jul2026.jpg): misma ruta en thumbnails.
+  // Evita cache immutable de cover-thumbnail.jpg al renovar fotos.
+  const isGenericCover =
+    /\/portada(-nueva)?\.jpg$/i.test(normalized) || /\/cover\.jpg$/i.test(normalized);
+  if (!isGenericCover) {
+    if (normalized.includes('/chicas-optimized/')) {
+      return normalized.replace('/chicas-optimized/', '/chicas-thumbnails/');
+    }
+    if (normalized.includes('/chicas/')) {
+      return normalized.replace('/chicas/', '/chicas-thumbnails/');
+    }
+  }
+
+  const pathParts = normalized.split('/');
 
   const optimizedIndex = pathParts.indexOf('chicas-optimized');
   const chicasIndex = pathParts.indexOf('chicas');
