@@ -201,7 +201,7 @@ export const FEES = {
     { duration: '30 minutos', price: 'Desde 80 €' },
     { duration: '45 minutos', price: 'Desde 120 €' },
     { duration: '1 hora', price: 'Desde 150 €' },
-    { duration: '1,5 horas', price: 'Desde 240 €' },
+    { duration: '1,5 horas', price: 'Desde 230 €' },
     { duration: '2 horas', price: 'Desde 300 €' },
     { duration: '3 horas', price: 'Desde 430 €' },
     { duration: 'Salida', price: 'Desde 200 €' },

@@ -1130,7 +1130,7 @@ const ModelDetail: React.FC = () => {
                       <div className="p-4 space-y-1">
                         <div className="flex justify-between items-center py-3 border-b border-white/5">
                           <span className="text-xs text-gray-400 tracking-[0.1em]">1 hora</span>
-                          <span className="text-sm font-light luxury-text-gradient">{model.vipRates?.["1h"] || "180 €"}</span>
+                          <span className="text-sm font-light luxury-text-gradient">{model.vipRates?.["1h"] || "200 €"}</span>
                         </div>
                         <div className="flex justify-between items-center py-3 border-b border-white/5">
                           <span className="text-xs text-gray-400 tracking-[0.1em]">45 minutos</span>
@@ -1138,7 +1138,11 @@ const ModelDetail: React.FC = () => {
                         </div>
                         <div className="flex justify-between items-center py-3 border-b border-white/5">
                           <span className="text-xs text-gray-400 tracking-[0.1em]">30 minutos</span>
-                          <span className="text-sm font-light luxury-text-gradient">{model.vipRates?.["30min"] || "120 €"}</span>
+                          <span className="text-sm font-light luxury-text-gradient">{model.vipRates?.["30min"] || "100 €"}</span>
+                        </div>
+                        <div className="flex justify-between items-center py-3 border-b border-white/5">
+                          <span className="text-xs text-gray-400 tracking-[0.1em]">1,5 horas</span>
+                          <span className="text-sm font-light luxury-text-gradient">{model.vipRates?.["1.5h"] || "300 €"}</span>
                         </div>
                         <div className="flex justify-between items-center py-3 border-b border-white/5">
                           <span className="text-xs text-gray-400 tracking-[0.1em]">2 horas</span>
@@ -1186,7 +1190,7 @@ const ModelDetail: React.FC = () => {
                         </div>
                         <div className="flex justify-between items-center py-3 border-b border-white/5">
                           <span className="text-xs text-gray-400 tracking-[0.1em]">1,5 horas</span>
-                          <span className="text-sm font-light luxury-text-gradient">240 €</span>
+                          <span className="text-sm font-light luxury-text-gradient">230 €</span>
                         </div>
                         <div className="flex justify-between items-center py-3">
                           <span className="text-xs text-gray-400 tracking-[0.1em]">2 horas</span>
@@ -2162,35 +2166,39 @@ const ModelDetail: React.FC = () => {
                   <>
                     <div className="flex justify-between items-center py-2 border-b border-white/5">
                       <span className="text-sm text-gray-400">1 hora</span>
-                      <span className="text-white font-light">{model.vipRates?.["1h"] || "180"} €</span>
+                      <span className="text-white font-light">{model.vipRates?.["1h"] || "200 €"}</span>
                     </div>
                     <div className="flex justify-between items-center py-2 border-b border-white/5">
                       <span className="text-sm text-gray-400">45 minutos</span>
-                      <span className="text-white font-light">{model.vipRates?.["45min"] || "150"} €</span>
+                      <span className="text-white font-light">{model.vipRates?.["45min"] || "150 €"}</span>
                     </div>
                     <div className="flex justify-between items-center py-2 border-b border-white/5">
                       <span className="text-sm text-gray-400">30 minutos</span>
-                      <span className="text-white font-light">{model.vipRates?.["30min"] || "120"} €</span>
+                      <span className="text-white font-light">{model.vipRates?.["30min"] || "100 €"}</span>
+                    </div>
+                    <div className="flex justify-between items-center py-2 border-b border-white/5">
+                      <span className="text-sm text-gray-400">1,5 horas</span>
+                      <span className="text-white font-light">{model.vipRates?.["1.5h"] || "300 €"}</span>
                     </div>
                     <div className="flex justify-between items-center py-2 border-b border-white/5">
                       <span className="text-sm text-gray-400">2 horas</span>
-                      <span className="text-white font-light">{model.vipRates?.["2h"] || "350"} €</span>
+                      <span className="text-white font-light">{model.vipRates?.["2h"] || "350 €"}</span>
                     </div>
                     <div className="flex justify-between items-center py-2 border-b border-white/5">
                       <span className="text-sm text-gray-400">3 horas</span>
-                      <span className="text-white font-light">{model.vipRates?.["3h"] || "520"} €</span>
+                      <span className="text-white font-light">{model.vipRates?.["3h"] || "520 €"}</span>
                     </div>
                     <div className="flex justify-between items-center py-2 border-b border-white/5">
                       <span className="text-sm text-gray-400">Salida hotel</span>
-                      <span className="text-white font-light">{model.vipRates?.["salidaHotel"] || "250"} €</span>
+                      <span className="text-white font-light">{model.vipRates?.["salidaHotel"] || "250 €"}</span>
                     </div>
                     <div className="flex justify-between items-center py-2 border-b border-white/5">
                       <span className="text-sm text-gray-400">Noche (10h)</span>
-                      <span className="text-white font-light">{model.vipRates?.["noche"] || "2.000"} €</span>
+                      <span className="text-white font-light">{model.vipRates?.["noche"] || "2.000 €"}</span>
                     </div>
                     <div className="flex justify-between items-center py-2">
                       <span className="text-sm text-gray-400">Todo el día (24h)</span>
-                      <span className="text-white font-light">{model.vipRates?.["dia"] || "3.000"} €</span>
+                      <span className="text-white font-light">{model.vipRates?.["dia"] || "3.000 €"}</span>
                     </div>
                   </>
                 ) : (
@@ -2210,7 +2218,7 @@ const ModelDetail: React.FC = () => {
                     </div>
                     <div className="flex justify-between items-center py-2 border-b border-white/5">
                       <span className="text-sm text-gray-400">1,5 horas</span>
-                      <span className="text-white font-light">240 €</span>
+                      <span className="text-white font-light">230 €</span>
                     </div>
                     <div className="flex justify-between items-center py-2 border-b border-white/5">
                       <span className="text-sm text-gray-400">2 horas</span>
