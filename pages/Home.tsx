@@ -49,7 +49,6 @@ const Home: React.FC = () => {
     // Fila 1 (4 cols desktop) + fila 2: Carla, Paula, Silvia
     const pinOrder = [
       'carolina',
-      'laura',
       'adara',
       'cristal',
       'julieta',
