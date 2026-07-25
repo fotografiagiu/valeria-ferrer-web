@@ -80,8 +80,9 @@ const NovedadesFloatingBanner: React.FC = () => {
           aria-labelledby={titleId}
           className={[
             'fixed z-[60] pointer-events-auto',
-            'left-4 right-4 bottom-5',
-            'md:left-auto md:right-6 md:bottom-6 md:w-[min(100%,22.5rem)]',
+            /* Ambos a la derecha: Novedades arriba, Contacto abajo (bottom-24). */
+            'left-4 right-4 bottom-[calc(6rem+15.5rem+1cm)]',
+            'md:left-auto md:right-6 md:bottom-[calc(6rem+16rem+2cm)] md:w-[min(100%,22.5rem)]',
             'animate-[novedades-banner-in_0.45s_ease-out_both]',
             'motion-reduce:animate-none',
           ].join(' ')}
@@ -172,8 +173,8 @@ const NovedadesFloatingBanner: React.FC = () => {
           onClick={expand}
           className={[
             'fixed right-0 z-[60]',
-            /* Encima de Contacto (bottom-32) + altura pestaña + gap 0.5cm / 1cm */
-            'bottom-[calc(8rem+9.25rem+0.5cm)] md:bottom-[calc(8rem+9.25rem+1cm)]',
+            /* Encima de Contacto (bottom-32) + altura pestaña + gap 1cm / 2cm */
+            'bottom-[calc(8rem+11.5rem+1cm)] md:bottom-[calc(8rem+11.5rem+2cm)]',
             'bg-[#c2b2a3] text-black py-3 px-2 rounded-l-xl shadow-2xl',
             'flex flex-col items-center space-y-2',
             'hover:bg-white transition-colors duration-300 group',
