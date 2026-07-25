@@ -97,12 +97,25 @@ const photoFadeMaskStyle: React.CSSProperties = {
   maskRepeat: 'no-repeat',
 };
 
+/** Focal point por modelo en el listado horizontal (object-cover). */
+const COVER_OBJECT_POSITION: Record<string, string> = {
+  lili: 'object-[center_12%]',
+  /** Portada sentada: el 20% dejaba casi solo techo/pared. */
+  naty: 'object-[center_64%]',
+  /** Portada de rodillas: bajar el foco para ver más torso/cuerpo. */
+  monica: 'object-[center_52%]',
+};
+
+const TALLER_COVER_SLUGS = new Set(['naty', 'monica']);
+
 /** Card horizontal: foto izquierda + panel derecho, integrados. */
 function HorizontalEditorialCard({ model, variant }: HorizontalCardProps) {
   const isHero = variant === 'hero';
   const imageSrc = resolveCoverUrl(model.coverImageUrl);
   const meta = profileMetaLine(model);
   const kicker = profileKicker(model);
+  const objectPos = COVER_OBJECT_POSITION[model.slug] ?? 'object-[center_20%]';
+  const tallerCover = TALLER_COVER_SLUGS.has(model.slug);
 
   return (
     <Link
@@ -112,7 +125,9 @@ function HorizontalEditorialCard({ model, variant }: HorizontalCardProps) {
       className={`group relative flex min-h-[inherit] flex-row overflow-hidden rounded-2xl border border-[#c2b2a3]/28 bg-[#0a0a0a] transition-[border-color,box-shadow,transform] duration-500 ease-out md:duration-700 md:ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:-translate-y-0.5 md:hover:border-[#c2b2a3]/45 md:hover:shadow-[0_22px_56px_-18px_rgba(0,0,0,0.9),0_0_32px_-14px_rgba(194,178,163,0.14)] ${
         isHero
           ? 'min-h-[220px] md:min-h-[272px] lg:min-h-[288px]'
-          : 'min-h-[184px] md:min-h-[212px] lg:min-h-[224px]'
+          : tallerCover
+            ? 'min-h-[216px] md:min-h-[248px] lg:min-h-[260px]'
+            : 'min-h-[184px] md:min-h-[212px] lg:min-h-[224px]'
       }`}
     >
       {/* Línea champagne en la unión — sobre el desvanecido, no un corte */}
@@ -134,9 +149,7 @@ function HorizontalEditorialCard({ model, variant }: HorizontalCardProps) {
             loading={isHero ? 'eager' : 'lazy'}
             decoding="async"
             style={photoFadeMaskStyle}
-            className={`absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-out md:duration-[1.1s] md:group-hover:scale-[1.03] ${
-              model.slug === 'lili' ? 'object-[center_12%]' : 'object-[center_20%]'
-            }`}
+            className={`absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-out md:duration-[1.1s] md:group-hover:scale-[1.03] ${objectPos}`}
           />
         ) : (
           <div className="absolute inset-0 bg-[#141414]" aria-hidden />
