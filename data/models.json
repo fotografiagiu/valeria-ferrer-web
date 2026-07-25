@@ -1,7 +1,7 @@
 [
   {
     "slug": "carolina",
-    "name": "Carolina (VIP)",
+    "name": "Carolina",
     "age": 21,
     "height": "1,60 m",
     "weight": "50 kg",
@@ -56,7 +56,7 @@
     ],
     "tags": [
       "colombiana",
-      "vip",
+      "normal",
       "nueva",
       "apasionada",
       "seductora",
@@ -67,19 +67,7 @@
     ],
     "isNew": true,
     "featured": true,
-    "vip": true,
-    "vipRates": {
-      "30min": "100 €",
-      "45min": "150 €",
-      "1h": "200 €",
-      "1.5h": "300 €",
-      "2h": "350 €",
-      "3h": "520 €",
-      "salidaHotel": "250 €",
-      "noche": "2000 €",
-      "dia": "3000 €",
-      "dosDias": "4000 €"
-    }
+    "vip": false
   },
   {
     "slug": "laura",
