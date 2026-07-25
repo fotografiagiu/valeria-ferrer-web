@@ -24,7 +24,7 @@ function generateModelStructuredData(model, imagePaths) {
     url: `${SITE_ORIGIN}/models/${model.slug}`,
     image: imagePaths.map(toAbsoluteUrl),
     nationality: model.nationality,
-    jobTitle: 'Modelo VIP',
+    jobTitle: model.vip === true ? 'Modelo VIP' : 'Modelo',
     knowsLanguage: model.languages || ['Español'],
     offers: {
       '@type': 'Offer',
@@ -108,7 +108,7 @@ for (const model of models) {
 const indexData = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
-  name: 'Modelos VIP Valeria Ferrer',
+  name: 'Modelos Valeria Ferrer',
   description: 'Catálogo completo de modelos exclusivas en Valencia',
   url: `${SITE_ORIGIN}/models`,
   numberOfItems: models.length,

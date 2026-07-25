@@ -18,7 +18,7 @@ export const SEO_INJECT_ROUTES = [
   },
   {
     path: '/escorts-de-lujo-valencia',
-    title: 'Escorts de lujo en Valencia | Perfiles VIP',
+    title: 'Escorts de lujo en Valencia | Selección premium',
     description:
       'Acompañantes premium en Valencia con perfiles cuidados, fotos reales y atención discreta. Consulta disponibilidad y reserva de forma privada.',
     canonical: `${SITE_ORIGIN}/escorts-de-lujo-valencia`,

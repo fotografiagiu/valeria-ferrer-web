@@ -23,7 +23,7 @@ export const PRERENDER_ROUTES = [
   {
     path: '/escorts-de-lujo-valencia',
     canonical: `${SITE_ORIGIN}/escorts-de-lujo-valencia`,
-    title: 'Escorts de lujo en Valencia | Perfiles VIP',
+    title: 'Escorts de lujo en Valencia | Selección premium',
     timeoutMs: 25000,
   },
   {
