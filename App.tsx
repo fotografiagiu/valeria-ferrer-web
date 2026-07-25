@@ -28,6 +28,7 @@ const EscortsValencia = React.lazy(() => import('./pages/EscortsValencia'));
 const EscortsLujoValencia = React.lazy(() => import('./pages/EscortsLujoValencia'));
 const MembersModal = React.lazy(() => import('./components/MembersModal'));
 const FloatingContactPopup = React.lazy(() => import('./components/FloatingContactPopup'));
+const NovedadesFloatingBanner = React.lazy(() => import('./components/NovedadesFloatingBanner'));
 import PageSEOHead from './components/PageSEOHead';
 
 /** Ruta /members: enlace desde Footer “Lounge de Miembros”; contenido próximamente. */
@@ -62,6 +63,7 @@ const App: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMembersModalOpen, setIsMembersModalOpen] = useState(false);
   const [enableFloatingContact, setEnableFloatingContact] = useState(false);
+  const [enableNovedadesBanner, setEnableNovedadesBanner] = useState(false);
 
   useEffect(() => {
     let rafId = 0;
@@ -108,6 +110,12 @@ const App: React.FC = () => {
         window.cancelIdleCallback(idleId);
       }
     };
+  }, []);
+
+  // Precarga el chunk del banner; el componente aplica su propio delay (≈2,5s).
+  useEffect(() => {
+    const t = window.setTimeout(() => setEnableNovedadesBanner(true), 1200);
+    return () => window.clearTimeout(t);
   }, []);
 
   const routeFallback = useMemo(
@@ -183,6 +191,11 @@ const App: React.FC = () => {
           {enableFloatingContact && (
             <Suspense fallback={null}>
               <FloatingContactPopup />
+            </Suspense>
+          )}
+          {enableNovedadesBanner && (
+            <Suspense fallback={null}>
+              <NovedadesFloatingBanner />
             </Suspense>
           )}
           <ContentProtection />

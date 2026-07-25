@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Send, Phone, Calendar, X, MessageSquare } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { FLOATING_SIDE_TABS } from '../lib/floatingSideTabs';
 
 const FloatingContactPopup: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -99,7 +100,7 @@ const FloatingContactPopup: React.FC = () => {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 20 }}
             onClick={handleOpen}
-            className="fixed bottom-32 right-0 z-[55] bg-[#c2b2a3] text-black py-3 px-2 rounded-l-xl shadow-2xl flex flex-col items-center space-y-2 hover:bg-white transition-colors duration-300 group"
+            className={`fixed ${FLOATING_SIDE_TABS.contactBottomClass} right-0 z-[55] bg-[#c2b2a3] text-black py-3 px-2 rounded-l-xl shadow-2xl flex flex-col items-center space-y-2 hover:bg-white transition-colors duration-300 group`}
             aria-label="Abrir contacto"
           >
             <MessageSquare size={18} className="group-hover:scale-110 transition-transform" aria-hidden="true" />
