@@ -112,9 +112,9 @@ const App: React.FC = () => {
     };
   }, []);
 
-  // Precarga el chunk del banner; el componente aplica su propio delay (≈2,5s).
+  // Precarga el chunk del banner; el componente aplica su propio delay.
   useEffect(() => {
-    const t = window.setTimeout(() => setEnableNovedadesBanner(true), 1200);
+    const t = window.setTimeout(() => setEnableNovedadesBanner(true), 600);
     return () => window.clearTimeout(t);
   }, []);
 

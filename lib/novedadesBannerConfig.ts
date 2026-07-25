@@ -8,8 +8,8 @@ export const NOVEDADES_BANNER = {
   storageKey: 'vf-novedades-banner-minimized-v1',
   /** Reservado (la pestaña ya no bloquea el salto al cargar). */
   dismissDays: 7,
-  /** Retraso tras la carga (ms). Alineado con el popup de contacto (~2s). */
-  delayMs: 2000,
+  /** Retraso tras montar el banner (ms). Total ≈ preload App (~0,6s) + esto. */
+  delayMs: 900,
   badge: 'NOVEDAD',
   title: 'Carolina, nueva incorporación',
   text: 'Ya puedes ver su ficha.',
