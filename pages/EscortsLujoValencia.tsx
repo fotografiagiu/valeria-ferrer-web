@@ -22,10 +22,11 @@ import LazyImage from '../components/LazyImage';
 import { MODELS } from '../constants';
 import { getModelCoverImage, getModelCoverThumbnailPath } from '../lib/modelGridImage';
 import { getModelProfilePath } from '../lib/modelLink';
+import { isModelActive } from '../lib/modelsCatalog';
 import type { Model } from '../types';
 
 const SEO = {
-  title: 'Escorts de lujo en Valencia | Perfiles VIP',
+  title: 'Escorts de lujo en Valencia | Selección premium',
   description:
     'Acompañantes premium en Valencia con perfiles cuidados, fotos reales y atención discreta. Consulta disponibilidad y reserva de forma privada.',
   canonicalUrl: 'https://www.valeriaferrer.com/escorts-de-lujo-valencia',
@@ -33,7 +34,8 @@ const SEO = {
     'escorts de lujo Valencia, escort de lujo Valencia, acompañantes de lujo Valencia, agencia escorts Valencia, modelos premium Valencia',
 };
 
-const FEATURED_SLUGS = ['luna', 'naty', 'flor', 'lili', 'monica', 'key'] as const;
+/** Selección editorial de lujo (VIP solo si model.vip === true). Sin solape con el hub genérico. */
+const FEATURED_SLUGS = ['paula-vip', 'luna', 'naty', 'cristal', 'adara', 'julieta'] as const;
 
 const EXPERIENCES = [
   { icon: Wine, label: 'Cenas privadas en restaurantes y terrazas selectas' },
@@ -45,12 +47,12 @@ const EXPERIENCES = [
 ] as const;
 
 const LOCAL_ZONES = [
-  'Valencia centro y Ciutat Vella',
-  'Ruzafa',
-  'El Carmen',
-  'Ciudad de las Artes y Ciencias',
   'Hoteles boutique del centro histórico',
-  'Desplazamientos bajo consulta en la ciudad',
+  'Restaurantes y terrazas selectas',
+  'Eventos, galas y ocasiones especiales',
+  'Ciudad de las Artes y Ciencias',
+  'Espacios privados bajo consulta',
+  'Desplazamientos acordados en la ciudad',
 ] as const;
 
 const FAQ_ITEMS = [
@@ -67,12 +69,7 @@ const FAQ_ITEMS = [
   {
     question: '¿Las reservas son privadas?',
     answer:
-      'La confidencialidad es esencial. La comunicación es directa por Telegram o teléfono, sin intermediarios innecesarios, y cada solicitud se gestiona con total discreción desde el primer mensaje.',
-  },
-  {
-    question: '¿En qué zonas de Valencia están disponibles?',
-    answer:
-      'Coordinamos citas en Valencia centro, Ruzafa, El Carmen, Ciudad de las Artes, hoteles boutique y otras zonas de la ciudad. Confirma tu ubicación al reservar y te indicamos disponibilidad.',
+      'Sí. La comunicación es directa por Telegram o teléfono y cada solicitud se gestiona con confidencialidad desde el primer mensaje.',
   },
   {
     question: '¿Cómo contacto con Valeria Ferrer?',
@@ -158,7 +155,7 @@ const FeaturedModelCard: React.FC<{ model: Model; index: number }> = ({ model, i
           priority={index < 4}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
-        {model.vip && (
+        {model.vip === true && (
           <span className="absolute top-3 right-3 px-2 py-0.5 bg-red-900/40 border border-red-500/30 text-red-300 text-[8px] uppercase tracking-[0.25em] rounded-sm">
             VIP
           </span>
@@ -185,7 +182,9 @@ const EscortsLujoValencia: React.FC = () => {
 
   const featuredModels = useMemo(() => {
     const bySlug = new Map(MODELS.map((m) => [m.slug, m]));
-    return FEATURED_SLUGS.map((slug) => bySlug.get(slug)).filter((m): m is Model => Boolean(m));
+    return FEATURED_SLUGS.map((slug) => bySlug.get(slug)).filter(
+      (m): m is Model => Boolean(m) && isModelActive(m)
+    );
   }, []);
 
   const faqSchema = useMemo(() => buildFaqSchema(), []);
@@ -311,10 +310,10 @@ const EscortsLujoValencia: React.FC = () => {
         <div className="max-w-[1400px] mx-auto">
           <div className="text-center mb-10 md:mb-12">
             <h2 className="text-3xl md:text-4xl font-light tracking-wide mb-4">
-              Modelos de lujo <span className="italic luxury-text-gradient">destacadas</span>
+              Selección de <span className="italic luxury-text-gradient">lujo</span>
             </h2>
             <p className="text-gray-500 text-xs uppercase tracking-[0.3em] max-w-xl mx-auto">
-              Perfiles premium con galería completa — selección Valeria Ferrer
+              Perfiles destacados para experiencias premium
             </p>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">

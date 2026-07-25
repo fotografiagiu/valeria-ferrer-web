@@ -37,22 +37,35 @@ const ModelCard: React.FC<{
     vip: !!model.vip,
   };
 
+  const isVip = adaptedModel.vip === true;
+
   const generateAltText = (
     modelName: string,
     location: string,
     nationality?: string,
     age?: number
   ) => {
-    const variations = [
-      `${modelName} - Acompañante VIP en ${location}`,
-      `${modelName} - Modelo de compañía en ${location}`,
-      `${modelName} - Chica exclusiva ${location}`,
-      `${modelName} - Compañera de lujo ${location}`,
-      `${modelName} - Modelo VIP ${nationality ? nationality : ''} ${location}`.trim(),
-      `${modelName} - Acompañamiento discreto ${location}`,
-      `${modelName} - Modelo profesional ${location}`,
-      `${modelName} - Chica de alta gama ${location}`,
-    ];
+    const variations = isVip
+      ? [
+          `${modelName} - Acompañante VIP en ${location}`,
+          `${modelName} - Modelo de compañía en ${location}`,
+          `${modelName} - Chica exclusiva ${location}`,
+          `${modelName} - Compañera de lujo ${location}`,
+          `${modelName} - Modelo VIP ${nationality ? nationality : ''} ${location}`.trim(),
+          `${modelName} - Acompañamiento discreto ${location}`,
+          `${modelName} - Modelo profesional ${location}`,
+          `${modelName} - Chica de alta gama ${location}`,
+        ]
+      : [
+          `${modelName} - Acompañante de ${location}`,
+          `${modelName} - Modelo de compañía en ${location}`,
+          `${modelName} - Chica exclusiva ${location}`,
+          `${modelName} - Compañera de lujo ${location}`,
+          `${modelName} - Modelo ${nationality ? nationality : ''} ${location}`.trim(),
+          `${modelName} - Acompañamiento discreto ${location}`,
+          `${modelName} - Modelo profesional ${location}`,
+          `${modelName} - Chica de alta gama ${location}`,
+        ];
 
     const variationIndex = (modelName.charCodeAt(0) + index) % variations.length;
     return variations[variationIndex];
@@ -65,7 +78,7 @@ const ModelCard: React.FC<{
       `${modelName} - Fotos profesionales ${location}`,
       `${modelName} - Imágenes exclusivas`,
       `${modelName} - Galería de alta calidad`,
-      `${modelName} - Sesión VIP ${location}`,
+      isVip ? `${modelName} - Sesión VIP ${location}` : `${modelName} - Sesión exclusiva ${location}`,
       `${modelName} - Fotografías profesionales`,
       `${modelName} - Colección exclusiva`,
     ];
@@ -75,16 +88,27 @@ const ModelCard: React.FC<{
   };
 
   const generateDescription = (modelName: string, location: string, nationality?: string) => {
-    const variations = [
-      `Modelo exclusiva ${location} • Compañía VIP`,
-      `Acompañante de lujo ${location} • Alta gama`,
-      `Chica profesional ${location} • Discreción`,
-      `Modelo VIP ${location} • Experiencia única`,
-      `Compañera exclusiva ${location} • Lujo`,
-      `Modelo de alta clase ${location} • Elegancia`,
-      `Acompañamiento premium ${location} • Sofisticación`,
-      `Chica discreta ${location} • Profesionalismo`,
-    ];
+    const variations = isVip
+      ? [
+          `Modelo exclusiva ${location} • Compañía VIP`,
+          `Acompañante de lujo ${location} • Alta gama`,
+          `Chica profesional ${location} • Discreción`,
+          `Modelo VIP ${location} • Experiencia única`,
+          `Compañera exclusiva ${location} • Lujo`,
+          `Modelo de alta clase ${location} • Elegancia`,
+          `Acompañamiento premium ${location} • Sofisticación`,
+          `Chica discreta ${location} • Profesionalismo`,
+        ]
+      : [
+          `Modelo exclusiva ${location} • Compañía exclusiva`,
+          `Acompañante de lujo ${location} • Alta gama`,
+          `Chica profesional ${location} • Discreción`,
+          `Modelo ${location} • Experiencia única`,
+          `Compañera exclusiva ${location} • Lujo`,
+          `Modelo de alta clase ${location} • Elegancia`,
+          `Acompañamiento premium ${location} • Sofisticación`,
+          `Chica discreta ${location} • Profesionalismo`,
+        ];
 
     const variationIndex = (modelName.charCodeAt(2) + index) % variations.length;
     return variations[variationIndex];
@@ -159,14 +183,7 @@ const ModelCard: React.FC<{
             </div>
           )}
 
-          {(adaptedModel.vip ||
-            adaptedModel.name.includes('VIP') ||
-            (adaptedModel.featured &&
-              adaptedModel.name !== 'KEY' &&
-              adaptedModel.name !== 'Mónica' &&
-              adaptedModel.name !== 'Flor' &&
-              adaptedModel.name !== 'Lili' &&
-              !model.isNew)) && (
+          {adaptedModel.vip === true && (
             <div className="absolute top-2 right-2 md:top-4 md:right-4 z-30">
               <div className="vip-gold-badge relative flex items-center space-x-1.5 px-3 py-1.5 md:space-x-2 md:px-5 md:py-2.5">
                 <Crown className="relative z-[1] w-3 h-3 md:w-3.5 md:h-3.5 text-[#1a1208]" strokeWidth={1.6} />
@@ -252,12 +269,11 @@ const ModelsGrid: React.FC<ModelsGridProps> = ({ models = MODELS }) => {
       <div className="max-w-[1600px] mx-auto px-0 md:px-6">
         <div className="text-center mb-16 px-4 md:px-0">
           <h2 className="text-3xl md:text-5xl font-light mb-4">
-            Escorts <span className="italic luxury-text-gradient inline-block px-1 -translate-x-1">VIP</span> Valencia Agencia de Lujo
+            Chicas <span className="italic luxury-text-gradient inline-block px-1">disponibles</span>
           </h2>
 
           <p className="text-sm text-gray-400 mb-6 max-w-2xl mx-auto">
-            💋 Escorts VIP Valencia • Acompañantes de Lujo • Agencia Premium •
-            Discreción Absoluta • Servicios Exclusivos
+            Selección Valeria Ferrer · Fotos reales · Reserva discreta
           </p>
 
           <div className="w-20 h-[1px] bg-[#c2b2a3] mx-auto mb-8" />

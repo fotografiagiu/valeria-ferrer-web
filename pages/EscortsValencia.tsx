@@ -26,15 +26,15 @@ const SEO = {
   canonicalUrl: 'https://www.valeriaferrer.com/escorts-valencia',
 };
 
-/** Perfiles con galería y portada de alta calidad — solo lectura de MODELS. */
+/** Catálogo genérico — sin solape con el hub de lujo. */
 const FEATURED_SLUGS = [
-  'flor',
-  'monica',
-  'key',
   'elena',
-  'paula-vip',
   'lana',
-  'maria-escort-valencia',
+  'monica',
+  'carolina',
+  'silvia',
+  'carla',
+  'kim',
 ] as const;
 
 const TRUST_POINTS = [
@@ -72,14 +72,9 @@ const FAQ_ITEMS = [
       'Atendemos en Valencia ciudad y zonas cercanas: Centro, Ruzafa, El Carmen, Ciudad de las Artes, Campanar, Cortes Valencianas, playa y alrededores. Indícanos tu ubicación al reservar y te confirmamos disponibilidad.',
   },
   {
-    question: '¿Ofrecéis acompañantes para cenas o eventos?',
-    answer:
-      'Sí. Muchas de nuestras modelos están habituadas a cenas, eventos sociales y acompañamiento de viaje. Cuéntanos el contexto del encuentro y te recomendamos el perfil más adecuado.',
-  },
-  {
     question: '¿La reserva es discreta?',
     answer:
-      'La discreción es parte esencial del servicio. La comunicación es directa, sin intermediarios innecesarios, y tratamos cada solicitud con confidencialidad desde el primer contacto.',
+      'Sí. La comunicación es directa por Telegram o teléfono y cada solicitud se trata con confidencialidad desde el primer contacto.',
   },
 ] as const;
 
@@ -151,7 +146,7 @@ const FeaturedModelCard: React.FC<{ model: Model; index: number }> = ({ model, i
         priority={index < 4}
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
-      {model.vip && (
+      {model.vip === true && (
         <span className="absolute top-3 right-3 px-2 py-0.5 bg-red-900/40 border border-red-500/30 text-red-300 text-[8px] uppercase tracking-[0.25em] rounded-sm">
           VIP
         </span>
@@ -261,23 +256,18 @@ const EscortsValencia: React.FC = () => {
           <p>
             En Valeria Ferrer creemos que una buena experiencia empieza mucho antes del encuentro: en la
             forma de responder, en el respeto mutuo y en los detalles. Si quieres conocer a nuestras
-            modelos destacadas, revisa la selección inferior o visita el{' '}
+            modelos destacadas, revisa la selección inferior o visita{' '}
             <Link to="/models" className="text-[#c2b2a3] hover:text-white underline underline-offset-4 decoration-[#c2b2a3]/40">
               chicas disponibles
             </Link>
-            . También puedes explorar perfiles{' '}
-            <Link to="/vip" className="text-[#c2b2a3] hover:text-white underline underline-offset-4 decoration-[#c2b2a3]/40">
-              VIP
-            </Link>{' '}
-            si buscas un nivel aún más exclusivo, o nuestras{' '}
+            . Si buscas cenas, eventos o un nivel más exclusivo, consulta nuestras{' '}
             <Link
               to="/escorts-de-lujo-valencia"
               className="text-[#c2b2a3] hover:text-white underline underline-offset-4 decoration-[#c2b2a3]/40"
             >
               escorts de lujo en Valencia
-            </Link>{' '}
-            para cenas, eventos y experiencias premium. Estamos en Valencia para ofrecerte un servicio premium,
-            humano y absolutamente discreto.
+            </Link>
+            . Estamos en Valencia para ofrecerte un servicio premium, humano y absolutamente discreto.
           </p>
         </div>
       </section>
@@ -316,7 +306,7 @@ const EscortsValencia: React.FC = () => {
           <div className="flex items-center gap-3 justify-center mb-8 text-[#c2b2a3]">
             <MapPin size={22} strokeWidth={1.25} />
             <h2 className="text-2xl md:text-3xl font-light tracking-wide text-center text-white">
-              Escorts en Valencia ciudad y zonas exclusivas
+              Escorts en Valencia ciudad y barrios
             </h2>
           </div>
           <p className="text-gray-400 font-light leading-relaxed text-center mb-10 max-w-2xl mx-auto">
@@ -422,8 +412,8 @@ const EscortsValencia: React.FC = () => {
             <Link to="/models" className="hover:text-[#c2b2a3] transition-colors">
               Chicas disponibles
             </Link>
-            <Link to="/vip" className="hover:text-[#c2b2a3] transition-colors">
-              Perfiles VIP
+            <Link to="/escorts-de-lujo-valencia" className="hover:text-[#c2b2a3] transition-colors">
+              Escorts de lujo en Valencia
             </Link>
             <Link to="/contact" className="hover:text-[#c2b2a3] transition-colors">
               Contacto

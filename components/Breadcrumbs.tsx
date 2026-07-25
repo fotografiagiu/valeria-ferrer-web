@@ -22,10 +22,10 @@ const Breadcrumbs: React.FC<{ modelName?: string }> = ({ modelName }) => {
       if (pathSegments[0] === 'models') {
         if (pathSegments.length === 1) {
           // /models page
-          breadcrumbs.push({ name: 'Escorts VIP', path: '/models', current: true });
+          breadcrumbs.push({ name: 'Chicas disponibles', path: '/models', current: true });
         } else if (pathSegments.length === 2 && modelName) {
           // /models/[model] page
-          breadcrumbs.push({ name: 'Escorts VIP', path: '/models' });
+          breadcrumbs.push({ name: 'Chicas disponibles', path: '/models' });
           breadcrumbs.push({ 
             name: modelName, 
             path: `/models/${pathSegments[1]}`, 

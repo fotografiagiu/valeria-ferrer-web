@@ -90,7 +90,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({ model }) => {
         : `Modelo ${model.nationality || 'Española'} disponible en ${model.city || 'Valencia'}`),
       "image": model.image,
       "url": modelProfileUrl,
-      "jobTitle": "Modelo de Compañía VIP",
+      "jobTitle": isVIP ? "Modelo de Compañía VIP" : "Modelo",
       "nationality": model.nationality || "Española",
       ...(typeof age === 'number' && !Number.isNaN(age)
         ? { birthDate: new Date(new Date().getFullYear() - age, 0, 1).toISOString().split('T')[0] }
