@@ -242,9 +242,15 @@ const ModelCard: React.FC<{
 
 interface ModelsGridProps {
   models?: any[];
+  heading?: string;
+  subtitle?: string;
 }
 
-const ModelsGrid: React.FC<ModelsGridProps> = ({ models = MODELS }) => {
+const ModelsGrid: React.FC<ModelsGridProps> = ({
+  models = MODELS,
+  heading = 'Chicas disponibles',
+  subtitle = 'Selección Valeria Ferrer · Fotos reales · Reserva discreta',
+}) => {
   const [viewMode, setViewMode] = useState<'normal' | 'double'>('double');
   const [isMobile, setIsMobile] = useState(
     () => typeof window !== 'undefined' && window.matchMedia(MOBILE_MQ).matches
@@ -269,11 +275,21 @@ const ModelsGrid: React.FC<ModelsGridProps> = ({ models = MODELS }) => {
       <div className="max-w-[1600px] mx-auto px-0 md:px-6">
         <div className="text-center mb-16 px-4 md:px-0">
           <h2 className="text-3xl md:text-5xl font-light mb-4">
-            Chicas <span className="italic luxury-text-gradient inline-block px-1">disponibles</span>
+            {heading === 'Chicas disponibles' ? (
+              <>
+                Chicas <span className="italic luxury-text-gradient inline-block px-1">disponibles</span>
+              </>
+            ) : heading === 'Escorts en Valencia' ? (
+              <>
+                Escorts en <span className="italic luxury-text-gradient inline-block px-1">Valencia</span>
+              </>
+            ) : (
+              heading
+            )}
           </h2>
 
           <p className="text-sm text-gray-400 mb-6 max-w-2xl mx-auto">
-            Selección Valeria Ferrer · Fotos reales · Reserva discreta
+            {subtitle}
           </p>
 
           <div className="w-20 h-[1px] bg-[#c2b2a3] mx-auto mb-8" />

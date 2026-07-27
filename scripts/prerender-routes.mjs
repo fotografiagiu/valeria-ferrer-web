@@ -15,12 +15,6 @@ export const PRERENDER_ROUTES = [
     timeoutMs: 25000,
   },
   {
-    path: '/escorts-valencia',
-    canonical: `${SITE_ORIGIN}/escorts-valencia`,
-    title: 'Escorts Valencia | Fotos reales y perfiles actualizados',
-    timeoutMs: 25000,
-  },
-  {
     path: '/escorts-de-lujo-valencia',
     canonical: `${SITE_ORIGIN}/escorts-de-lujo-valencia`,
     title: 'Escorts de lujo en Valencia | Selección premium',

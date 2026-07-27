@@ -37,7 +37,7 @@ const Footer: React.FC = () => {
             <h4 className="text-xs font-bold tracking-[0.3em] uppercase text-[#c2b2a3]">Escorts Valeria</h4>
             <ul className="space-y-4 text-xs font-light tracking-widest uppercase">
               <li><Link to="/models" className="hover:text-[#c2b2a3] transition-colors">Chicas disponibles</Link></li>
-              <li><Link to="/escorts-valencia" className="hover:text-[#c2b2a3] transition-colors">Escorts en Valencia</Link></li>
+              <li><Link to="/" className="hover:text-[#c2b2a3] transition-colors">Escorts en Valencia</Link></li>
               <li><Link to="/escorts-de-lujo-valencia" className="hover:text-[#c2b2a3] transition-colors">Escorts de lujo en Valencia</Link></li>
               <li><Link to="/novedades" className="hover:text-[#c2b2a3] transition-colors">Novedades</Link></li>
               <li><Link to="/casting" className="hover:text-[#c2b2a3] transition-colors">Casting</Link></li>

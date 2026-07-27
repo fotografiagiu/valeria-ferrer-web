@@ -241,6 +241,16 @@
       "permanent": true
     },
     {
+      "source": "/escorts-valencia",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/escorts-valencia/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
       "source": "/escorts-valencia-casting",
       "destination": "https://www.valeriaferrer.com/casting",
       "permanent": true

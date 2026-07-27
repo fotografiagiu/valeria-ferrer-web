@@ -143,14 +143,9 @@ if (!fs.existsSync(homePath)) {
 
 const escortsPath = path.join(DIST_DIR, 'escorts-valencia/index.html');
 if (fs.existsSync(escortsPath)) {
-  const escortsHtml = fs.readFileSync(escortsPath, 'utf8');
-  if (/<main class="static-seo-escorts-valencia"/i.test(escortsHtml)) {
-    fail('/escorts-valencia: must not contain static SEO body');
-  } else {
-    pass('/escorts-valencia: no static SEO body OK');
-  }
+  fail('/escorts-valencia: dist page must not exist (hub consolidates to home via 301)');
 } else {
-  fail('/escorts-valencia: missing dist/escorts-valencia/index.html');
+  pass('/escorts-valencia: no prerendered/indexable page OK');
 }
 
 console.log('\n=== SEO Injection Verification ===\n');

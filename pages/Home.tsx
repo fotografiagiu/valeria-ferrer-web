@@ -162,23 +162,12 @@ const Home: React.FC = () => {
         </a>
       </div>
 
-      {/* Anclas de intención: cede genéricos y lujo a sus hubs (sin más copy) */}
+      {/* Anclas de intención: lujo y catálogo (genérico consolidado en Home) */}
       <nav
         aria-label="Explorar por intención"
         className="bg-[#0a0a0a] py-5 px-6 border-b border-white/5 text-center"
       >
         <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[11px] uppercase tracking-[0.22em] text-gray-500">
-          <li>
-            <Link
-              to="/escorts-valencia"
-              className="text-[#c2b2a3] hover:text-white transition-colors underline underline-offset-4 decoration-[#c2b2a3]/35"
-            >
-              Escorts en Valencia
-            </Link>
-          </li>
-          <li className="hidden sm:inline text-white/15" aria-hidden="true">
-            ·
-          </li>
           <li>
             <Link
               to="/escorts-de-lujo-valencia"
@@ -201,7 +190,11 @@ const Home: React.FC = () => {
         </ul>
       </nav>
 
-      <ModelsGrid models={homeModels} />
+      <ModelsGrid
+        models={homeModels}
+        heading="Escorts en Valencia"
+        subtitle="Selección Valeria Ferrer · Fotos reales · Reserva discreta"
+      />
 
       <div ref={reviewsSentinelRef} className="min-h-[32rem] md:min-h-[28rem]">
         {loadReviews ? (

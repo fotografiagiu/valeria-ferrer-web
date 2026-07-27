@@ -51,7 +51,7 @@ const EscortDetail: React.FC = () => {
   const nextModel = currentIndex < MODELS_SEO.length - 1 ? MODELS_SEO[currentIndex + 1] : null;
 
   const navigateToModel = (modelSlug: string) => {
-    navigate(`/escorts-valencia/${modelSlug}`);
+    navigate(`/models/${modelSlug}`);
   };
 
   useEffect(() => {
@@ -68,7 +68,7 @@ const EscortDetail: React.FC = () => {
         <div className="min-h-screen flex flex-col items-center justify-center text-center p-6 bg-[#0a0a0a]">
           <h1 className="text-4xl serif mb-4 luxury-text-gradient uppercase tracking-widest">Escort no encontrada</h1>
           <p className="text-gray-400 mb-8">La escort que buscas no está disponible o ha sido eliminada.</p>
-          <Link to="/escorts-valencia" className="text-[#c2b2a3] uppercase tracking-[0.3em] text-xs underline underline-offset-8 decoration-[#c2b2a3]/30">
+          <Link to="/" className="text-[#c2b2a3] uppercase tracking-[0.3em] text-xs underline underline-offset-8 decoration-[#c2b2a3]/30">
             Ver todas las escorts
           </Link>
         </div>
@@ -134,7 +134,7 @@ const EscortDetail: React.FC = () => {
           <nav className="flex items-center space-x-2 text-sm text-gray-400">
             <Link to="/" className="hover:text-white transition-colors">Inicio</Link>
             <span>/</span>
-            <Link to="/escorts-valencia" className="hover:text-white transition-colors">Escorts Valencia</Link>
+            <Link to="/" className="hover:text-white transition-colors">Escorts Valencia</Link>
             <span>/</span>
             <span className="text-white">{model.name}</span>
           </nav>
@@ -225,7 +225,7 @@ const EscortDetail: React.FC = () => {
                   {model.services.map((service, idx) => (
                     <Link
                       key={idx}
-                      to={`/escorts-valencia?service=${encodeURIComponent(service)}`}
+                      to={`/models?service=${encodeURIComponent(service)}`}
                       className="px-4 py-2 bg-[#111111] border border-[#c2b2a3]/20 text-[#c2b2a3] hover:bg-[#c2b2a3]/10 hover:border-[#c2b2a3]/40 transition-all rounded-full text-sm"
                     >
                       {service}
@@ -311,7 +311,7 @@ const EscortDetail: React.FC = () => {
                     .map((relatedModel) => (
                       <Link
                         key={relatedModel.slug}
-                        to={`/escorts-valencia/${relatedModel.slug}`}
+                        to={`/models/${relatedModel.slug}`}
                         className="flex items-center space-x-3 p-3 bg-black/30 rounded-lg hover:bg-black/50 transition-colors"
                       >
                         <img

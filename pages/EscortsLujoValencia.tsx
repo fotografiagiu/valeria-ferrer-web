@@ -444,7 +444,7 @@ const EscortsLujoValencia: React.FC = () => {
             </Link>
           </div>
           <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-[10px] uppercase tracking-[0.25em] text-gray-500">
-            <Link to="/escorts-valencia" className="hover:text-[#c2b2a3] transition-colors">
+            <Link to="/" className="hover:text-[#c2b2a3] transition-colors">
               Escorts en Valencia
             </Link>
             <Link to="/models" className="hover:text-[#c2b2a3] transition-colors">

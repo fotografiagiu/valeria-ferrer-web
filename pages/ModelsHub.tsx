@@ -89,7 +89,7 @@ const ModelsHub: React.FC<Props> = ({ hubKey }) => {
           <p className="text-gray-500 font-light text-xs mt-4 max-w-xl mx-auto leading-relaxed">
             Consulta también{' '}
             <Link
-              to="/escorts-valencia"
+              to="/"
               className="text-[#c2b2a3] hover:text-white underline underline-offset-4 decoration-[#c2b2a3]/40"
             >
               escorts en Valencia

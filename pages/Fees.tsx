@@ -195,7 +195,7 @@ const Fees: React.FC = () => {
                 <Link to="/models" className="hover:text-[#c2b2a3] transition-colors">
                   Ver modelos
                 </Link>
-                <Link to="/escorts-valencia" className="hover:text-[#c2b2a3] transition-colors">
+                <Link to="/" className="hover:text-[#c2b2a3] transition-colors">
                   Escorts en Valencia
                 </Link>
                 <Link to="/booking" className="hover:text-[#c2b2a3] transition-colors">

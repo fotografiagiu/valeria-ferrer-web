@@ -58,7 +58,7 @@ const Models: React.FC = () => {
           <p className="text-gray-400 font-light uppercase tracking-[0.3em] text-xs">Perfiles actualizados, fotos reales y contacto discreto. Revisa disponibilidad antes de acceder a cada ficha.</p>
           <p className="text-gray-500 font-light text-xs md:text-sm mt-6 max-w-2xl mx-auto leading-relaxed">
             También puedes consultar la página de{' '}
-            <Link to="/escorts-valencia" className="text-[#c2b2a3] hover:text-white underline underline-offset-4 decoration-[#c2b2a3]/40">
+            <Link to="/" className="text-[#c2b2a3] hover:text-white underline underline-offset-4 decoration-[#c2b2a3]/40">
               escorts en Valencia
             </Link>{' '}
             o la selección de{' '}
