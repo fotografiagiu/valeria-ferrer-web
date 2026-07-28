@@ -46,8 +46,9 @@ const Home: React.FC = () => {
   const exploreLinks = useMemo(() => getHomeExploreLinks(), []);
   const homeModels = useMemo(() => {
     const activeModels = filterActiveModels(modelsData);
-    // Fila 1 (4 cols desktop) + fila 2: Carla, Paula, Silvia
+    // Fila 1 (4 cols desktop) + fila 2: el resto del pin manual
     const pinOrder = [
+      'salome',
       'carolina',
       'adara',
       'cristal',
