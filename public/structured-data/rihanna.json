@@ -1,0 +1,44 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Rihanna",
+  "description": "Rihanna es una dominicana de 24 años, 1,68 m y 54 kg, con una presencia poderosa y luminosa que se nota al instante. Cabello afro, mirada segura y una energía caribeña intensa que mezcla picardía, estilo y sensualidad sin esfuerzo. Si buscas una escort dominicana en Valencia con fotos reales, actitud atrevida y mucho carácter, Rihanna es la novedad que abre el catálogo.",
+  "url": "https://www.valeriaferrer.com/models/rihanna",
+  "image": [
+    "https://www.valeriaferrer.com/chicas/rihanna-valeria-ferrer-model-agency-valencia/portada.jpg",
+    "https://www.valeriaferrer.com/chicas/rihanna-valeria-ferrer-model-agency-valencia/gallery/01.jpg",
+    "https://www.valeriaferrer.com/chicas/rihanna-valeria-ferrer-model-agency-valencia/gallery/02.jpg",
+    "https://www.valeriaferrer.com/chicas/rihanna-valeria-ferrer-model-agency-valencia/gallery/03.jpg",
+    "https://www.valeriaferrer.com/chicas/rihanna-valeria-ferrer-model-agency-valencia/gallery/04.jpg",
+    "https://www.valeriaferrer.com/chicas/rihanna-valeria-ferrer-model-agency-valencia/gallery/05.jpg",
+    "https://www.valeriaferrer.com/chicas/rihanna-valeria-ferrer-model-agency-valencia/gallery/06.jpg",
+    "https://www.valeriaferrer.com/chicas/rihanna-valeria-ferrer-model-agency-valencia/gallery/07.jpg",
+    "https://www.valeriaferrer.com/chicas/rihanna-valeria-ferrer-model-agency-valencia/gallery/08.jpg"
+  ],
+  "nationality": "Dominicana",
+  "jobTitle": "Modelo",
+  "knowsLanguage": [
+    "Español"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "itemOffered": {
+      "@type": "Service",
+      "name": "Acompañamiento Premium",
+      "description": "Servicios exclusivos de acompañamiento con Rihanna en Valencia"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Valencia"
+    },
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "name": "Contacto Directo",
+      "url": "https://www.valeriaferrer.com/contact"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.valeriaferrer.com/models/rihanna"
+  }
+}
