@@ -1,7 +1,19 @@
-import React, { useCallback, useEffect, useId, useState } from 'react';
+import React, { useCallback, useEffect, useId, useMemo, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Sparkles, X } from 'lucide-react';
+import { MODELS } from '../constants';
 import { NOVEDADES_BANNER as CFG } from '../lib/novedadesBannerConfig';
+import { getModelCoverThumbnailPath } from '../lib/modelGridImage';
+
+type NovedadSlide = {
+  slug: string;
+  name: string;
+  title: string;
+  text: string;
+  imageSrc: string;
+  imageAlt: string;
+  href: string;
+};
 
 function persistMinimized(): void {
   try {
@@ -19,12 +31,32 @@ function clearMinimized(): void {
   }
 }
 
+function buildSlides(): NovedadSlide[] {
+  return MODELS.filter((m) => m.isNew)
+    .slice(0, CFG.rotateCount)
+    .map((m) => {
+      const place = m.nationality || 'Valencia';
+      return {
+        slug: m.slug || m.id,
+        name: m.name,
+        title: m.name,
+        text: `Nueva incorporación · ${place}`,
+        imageSrc: getModelCoverThumbnailPath(m.image),
+        imageAlt: `${m.name}, nueva modelo en Valeria Ferrer Valencia`,
+        href: `/models/${m.slug || m.id}`,
+      };
+    });
+}
+
 const NovedadesFloatingBanner: React.FC = () => {
   const location = useLocation();
   const titleId = useId();
+  const slides = useMemo(() => buildSlides(), []);
   const [ready, setReady] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [showMinimized, setShowMinimized] = useState(false);
+  const [index, setIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
 
   const hideOnRoute =
     location.pathname === '/novedades' ||
@@ -44,7 +76,7 @@ const NovedadesFloatingBanner: React.FC = () => {
 
   // Como Contacto: al cargar la página siempre salta el panel (no arranca minimizado).
   useEffect(() => {
-    if (!CFG.enabled || hideOnRoute) {
+    if (!CFG.enabled || hideOnRoute || slides.length === 0) {
       setReady(false);
       setIsOpen(false);
       setShowMinimized(false);
@@ -58,7 +90,7 @@ const NovedadesFloatingBanner: React.FC = () => {
     }, CFG.delayMs);
 
     return () => window.clearTimeout(showTimer);
-  }, [hideOnRoute]);
+  }, [hideOnRoute, slides.length]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -69,7 +101,28 @@ const NovedadesFloatingBanner: React.FC = () => {
     return () => window.removeEventListener('keydown', onKey);
   }, [isOpen, minimize]);
 
-  if (!CFG.enabled || hideOnRoute || !ready) return null;
+  useEffect(() => {
+    if (!isOpen || paused || slides.length < 2) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const timer = window.setInterval(() => {
+      setIndex((i) => (i + 1) % slides.length);
+    }, CFG.rotateMs);
+
+    return () => window.clearInterval(timer);
+  }, [isOpen, paused, slides.length]);
+
+  // Precarga la siguiente miniatura
+  useEffect(() => {
+    if (slides.length < 2) return;
+    const next = slides[(index + 1) % slides.length];
+    const img = new Image();
+    img.src = next.imageSrc;
+  }, [index, slides]);
+
+  if (!CFG.enabled || hideOnRoute || !ready || slides.length === 0) return null;
+
+  const slide = slides[index] ?? slides[0];
 
   return (
     <>
@@ -78,6 +131,15 @@ const NovedadesFloatingBanner: React.FC = () => {
           role="dialog"
           aria-modal="false"
           aria-labelledby={titleId}
+          aria-roledescription="carrusel"
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+          onFocusCapture={() => setPaused(true)}
+          onBlurCapture={(e) => {
+            if (!e.currentTarget.contains(e.relatedTarget as Node | null)) {
+              setPaused(false);
+            }
+          }}
           className={[
             'fixed z-[60] pointer-events-auto',
             /* Ambos a la derecha: Novedades arriba, Contacto abajo (bottom-24). */
@@ -109,31 +171,45 @@ const NovedadesFloatingBanner: React.FC = () => {
             </button>
 
             <div className="relative z-10 flex gap-3 p-3.5 pr-10">
-              <div className="shrink-0 w-[4.5rem] h-[5.75rem] md:w-[5rem] md:h-[6.25rem] rounded-xl overflow-hidden border border-white/10 bg-black/40">
-                <img
-                  src={CFG.imageSrc}
-                  alt={CFG.imageAlt}
-                  width={80}
-                  height={100}
-                  loading="lazy"
-                  decoding="async"
-                  className="h-full w-full object-cover"
-                />
+              <div className="relative shrink-0 w-[4.5rem] h-[5.75rem] md:w-[5rem] md:h-[6.25rem] rounded-xl overflow-hidden border border-white/10 bg-black/40">
+                {slides.map((s, i) => (
+                  <img
+                    key={s.slug}
+                    src={s.imageSrc}
+                    alt={i === index ? s.imageAlt : ''}
+                    width={80}
+                    height={100}
+                    loading={i === 0 ? 'eager' : 'lazy'}
+                    decoding="async"
+                    aria-hidden={i !== index}
+                    className={[
+                      'absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ease-out',
+                      i === index ? 'opacity-100' : 'opacity-0',
+                    ].join(' ')}
+                  />
+                ))}
               </div>
 
               <div className="min-w-0 flex-1 flex flex-col justify-center gap-1.5 py-0.5">
                 <p className="inline-flex items-center gap-1.5 text-[9px] uppercase tracking-[0.28em] text-[#c2b2a3] font-medium">
                   <Sparkles className="w-3 h-3 shrink-0 opacity-80" strokeWidth={1.5} aria-hidden />
                   {CFG.badge}
+                  <span className="text-[#c2b2a3]/55 tracking-[0.12em] normal-case">
+                    {index + 1}/{slides.length}
+                  </span>
                 </p>
                 <h2
                   id={titleId}
-                  className="text-[13px] md:text-sm font-light text-white leading-snug tracking-wide"
+                  className="text-[13px] md:text-sm font-light text-white leading-snug tracking-wide transition-opacity duration-500"
+                  key={`title-${slide.slug}`}
                 >
-                  {CFG.title}
+                  {slide.title}
                 </h2>
-                <p className="text-[11px] text-gray-400 font-light leading-relaxed">
-                  {CFG.text}
+                <p
+                  className="text-[11px] text-gray-400 font-light leading-relaxed"
+                  key={`text-${slide.slug}`}
+                >
+                  {slide.text}
                 </p>
                 <p className="text-[11px] leading-snug">
                   <span className="text-[#c2b2a3]/80 uppercase tracking-[0.18em] text-[9px] font-medium mr-1.5">
@@ -147,20 +223,43 @@ const NovedadesFloatingBanner: React.FC = () => {
                   </span>
                 </p>
 
-                <Link
-                  to={CFG.ctaHref}
-                  onClick={minimize}
-                  className={[
-                    'mt-1.5 inline-flex self-start items-center justify-center',
-                    'rounded-full px-4 py-2',
-                    'bg-[#c2b2a3] text-black text-[9px] md:text-[10px] font-semibold uppercase tracking-[0.22em]',
-                    'hover:bg-white hover:shadow-[0_0_24px_-6px_rgba(194,178,163,0.55)]',
-                    'transition-all duration-300',
-                    'novedades-banner-cta',
-                  ].join(' ')}
-                >
-                  {CFG.ctaLabel}
-                </Link>
+                <div className="mt-1.5 flex items-center gap-2.5">
+                  <Link
+                    to={slide.href}
+                    onClick={minimize}
+                    className={[
+                      'inline-flex self-start items-center justify-center',
+                      'rounded-full px-4 py-2',
+                      'bg-[#c2b2a3] text-black text-[9px] md:text-[10px] font-semibold uppercase tracking-[0.22em]',
+                      'hover:bg-white hover:shadow-[0_0_24px_-6px_rgba(194,178,163,0.55)]',
+                      'transition-all duration-300',
+                      'novedades-banner-cta',
+                    ].join(' ')}
+                  >
+                    {CFG.ctaLabel}
+                  </Link>
+
+                  {slides.length > 1 && (
+                    <div className="flex items-center gap-1" role="tablist" aria-label="Novedades">
+                      {slides.map((s, i) => (
+                        <button
+                          key={s.slug}
+                          type="button"
+                          role="tab"
+                          aria-selected={i === index}
+                          aria-label={`Ver ${s.name}`}
+                          onClick={() => setIndex(i)}
+                          className={[
+                            'h-1.5 rounded-full transition-all duration-300',
+                            i === index
+                              ? 'w-4 bg-[#c2b2a3]'
+                              : 'w-1.5 bg-white/25 hover:bg-white/45',
+                          ].join(' ')}
+                        />
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>
