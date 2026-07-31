@@ -50,13 +50,13 @@ const Home: React.FC = () => {
     const pinOrder = [
       'salome',
       'carolina',
-      'adara',
-      'cristal',
+      'paula-vip',
+      'teresa',
       'julieta',
       'carla',
-      'paula-vip',
+      'kim',
       'silvia',
-      'monica',
+      'estefany',
       'naty',
     ];
     const pinned = pinOrder
