@@ -362,6 +362,10 @@ const Novedades: React.FC = () => {
   }, []);
 
   const newModels = useMemo(() => getHubModels('nuevas'), []);
+  const galleryUpdates = useMemo(
+    () => MODELS.filter((m) => Boolean(m.galleryUpdated)),
+    []
+  );
 
   return (
     <div className="pt-24 min-h-screen bg-[#0a0a0a]">
@@ -412,6 +416,41 @@ const Novedades: React.FC = () => {
             <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </EditorialCard>
+
+        {galleryUpdates.length > 0 ? (
+          <EditorialCard title="Galerías renovadas" eyebrow="Sesión reciente">
+            <p className="text-gray-400 font-light text-sm md:text-base leading-relaxed mb-6 max-w-2xl">
+              Perfiles con nuevas imágenes de sesión, manteniendo el mismo criterio editorial de
+              fotos reales y presentación cuidada.
+            </p>
+            <ul className="space-y-4">
+              {galleryUpdates.map((model) => (
+                <li key={model.slug}>
+                  <Link
+                    to={`/models/${model.slug}`}
+                    className="group flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 rounded-xl border border-white/5 bg-[#0a0a0a]/60 px-5 py-4 transition-colors hover:border-[#c2b2a3]/30"
+                  >
+                    <div>
+                      <p className="text-[10px] uppercase tracking-[0.28em] text-[#c2b2a3]/75 mb-1">
+                        Galería actualizada · {model.galleryUpdated}
+                      </p>
+                      <p className="serif text-xl text-white tracking-wide group-hover:text-[#e8ddd2] transition-colors">
+                        {model.name}
+                      </p>
+                      <p className="text-sm text-gray-500 font-light mt-1">
+                        Nuevas imágenes disponibles en su ficha.
+                      </p>
+                    </div>
+                    <span className="inline-flex items-center gap-2 text-[#c2b2a3] text-[10px] uppercase tracking-[0.28em] group-hover:text-white transition-colors">
+                      Ver galería
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </EditorialCard>
+        ) : null}
 
         {/* 2. Nueva navegación */}
         <EditorialCard title="Nueva navegación por perfiles" eyebrow="Explorar con un toque">

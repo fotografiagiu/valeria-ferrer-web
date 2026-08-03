@@ -359,7 +359,7 @@ const ModelDetail: React.FC = () => {
             </div>
             {/* Badge for exclusivity */}
             <div className="absolute top-6 left-6 px-4 py-2 bg-black/40 backdrop-blur-md border border-[#c2b2a3]/30 text-[9px] tracking-[0.4em] uppercase font-bold text-[#c2b2a3]">
-              {model.isNew ? 'Nueva' : 'Elección Élite'}
+              {model.galleryUpdated ? 'Actualizada' : model.isNew ? 'Nueva' : 'Elección Élite'}
             </div>
             
             {/* Image Counter and Navigation Dots */}
@@ -1046,6 +1046,11 @@ const ModelDetail: React.FC = () => {
         <div id="gallery" className="lg:hidden space-y-8 mt-12">
           <div className="text-center">
             <h3 className="text-2xl serif text-white uppercase tracking-widest mb-2">Galería Editorial</h3>
+            {model.galleryUpdated ? (
+              <p className="text-[10px] uppercase tracking-[0.32em] text-[#c2b2a3]/80 mb-1">
+                Galería actualizada · {model.galleryUpdated}
+              </p>
+            ) : null}
             <p className="text-sm text-gray-400 italic">Explora su mundo visual</p>
           </div>
           
@@ -1359,7 +1364,7 @@ const ModelDetail: React.FC = () => {
                 
                 {/* Badge for exclusivity */}
                 <div className="absolute top-6 left-6 px-4 py-2 bg-black/40 backdrop-blur-md border border-[#c2b2a3]/30 text-[9px] tracking-[0.4em] uppercase font-bold text-[#c2b2a3]">
-                  {model.isNew ? 'Nueva' : 'Elección Élite'}
+                  {model.galleryUpdated ? 'Actualizada' : model.isNew ? 'Nueva' : 'Elección Élite'}
                 </div>
                 
                 {/* Image Counter and Navigation Dots - Desktop */}
@@ -2012,9 +2017,16 @@ const ModelDetail: React.FC = () => {
             
             {/* Editorial Gallery - Desktop */}
             <div id="gallery" className="space-y-8 mt-12">
-              <div className="flex items-center justify-between">
-                <h3 className="text-2xl serif text-white uppercase tracking-widest">Galería Editorial</h3>
-                <p className="text-sm text-gray-400 italic">Explora su mundo visual</p>
+              <div className="flex items-end justify-between gap-4">
+                <div>
+                  <h3 className="text-2xl serif text-white uppercase tracking-widest">Galería Editorial</h3>
+                  {model.galleryUpdated ? (
+                    <p className="mt-2 text-[10px] uppercase tracking-[0.32em] text-[#c2b2a3]/80">
+                      Galería actualizada · {model.galleryUpdated}
+                    </p>
+                  ) : null}
+                </div>
+                <p className="text-sm text-gray-400 italic shrink-0">Explora su mundo visual</p>
               </div>
               
               {/* Magazine-style Gallery Layout */}

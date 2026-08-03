@@ -19,6 +19,7 @@ export const MODELS: Model[] = catalogModels.map((item) => ({
   gallery: item.images || [],
   videos: item.videos || [],
   isNew: item.isNew || false,
+  galleryUpdated: item.galleryUpdated || undefined,
   vip: item.vip || false,
   vipRates: item.vipRates || {},
   services: item.services || [],

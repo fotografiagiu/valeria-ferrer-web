@@ -16,6 +16,7 @@ export type CatalogPreviewModel = {
   city?: string;
   featured?: boolean;
   isNew?: boolean;
+  galleryUpdated?: string;
   vip?: boolean;
 };
 
@@ -55,6 +56,7 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 
 function profileKicker(model: CatalogPreviewModel): string | null {
   if (model.vip) return 'VIP';
+  if (model.galleryUpdated) return 'Actualizada';
   if (model.isNew) return 'Nueva';
   if (model.featured) return 'Exclusive';
   return null;

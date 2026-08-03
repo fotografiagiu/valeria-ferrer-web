@@ -14,6 +14,8 @@ export interface Model {
   description: string;
   tags?: string[];
   isNew?: boolean;
+  /** Etiqueta de galería renovada, p. ej. "Agosto 2026". */
+  galleryUpdated?: string;
   bio?: string;
   essence?: string;
   services?: string[];

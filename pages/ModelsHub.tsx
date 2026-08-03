@@ -25,6 +25,9 @@ function toGridModel(m: Model) {
     nationality: m.nationality,
     age: m.age,
     height: m.height,
+    isNew: m.isNew,
+    galleryUpdated: m.galleryUpdated,
+    vip: m.vip,
   };
 }
 
