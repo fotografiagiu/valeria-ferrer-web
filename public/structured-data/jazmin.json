@@ -1,0 +1,41 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Jazmín",
+  "description": "Jazmín es una venezolana rubia de 23 años, 1,63 m y 50 kg, con ojos claros y una presencia que corta el aire. Figura fina, mirada directa y una sensualidad joven que se impone sin esfuerzo: lencería, estilo y esa actitud latina que convierte una foto en ganas de citar. Si buscas una escort venezolana rubia en Valencia con fotos reales, cuerpo delicado y mucha química, Jazmín es la novedad que abre el catálogo.",
+  "url": "https://www.valeriaferrer.com/models/jazmin",
+  "image": [
+    "https://www.valeriaferrer.com/chicas/jazmin-valeria-ferrer-model-agency-valencia/portada.jpg",
+    "https://www.valeriaferrer.com/chicas/jazmin-valeria-ferrer-model-agency-valencia/gallery/01.jpg",
+    "https://www.valeriaferrer.com/chicas/jazmin-valeria-ferrer-model-agency-valencia/gallery/02.jpg",
+    "https://www.valeriaferrer.com/chicas/jazmin-valeria-ferrer-model-agency-valencia/gallery/03.jpg",
+    "https://www.valeriaferrer.com/chicas/jazmin-valeria-ferrer-model-agency-valencia/gallery/04.jpg",
+    "https://www.valeriaferrer.com/chicas/jazmin-valeria-ferrer-model-agency-valencia/gallery/05.jpg"
+  ],
+  "nationality": "Venezolana",
+  "jobTitle": "Modelo",
+  "knowsLanguage": [
+    "Español"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "itemOffered": {
+      "@type": "Service",
+      "name": "Acompañamiento Premium",
+      "description": "Servicios exclusivos de acompañamiento con Jazmín en Valencia"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Valencia"
+    },
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "name": "Contacto Directo",
+      "url": "https://www.valeriaferrer.com/contact"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.valeriaferrer.com/models/jazmin"
+  }
+}

@@ -112,6 +112,7 @@ const Booking: React.FC = () => {
                 className="w-full bg-transparent border-b border-white/20 py-3 focus:outline-none focus:border-[#c2b2a3] transition-colors appearance-none"
               >
                 <option value="" className="bg-[#111111]">Seleccione una escort</option>
+                <option value="jazmin" className="bg-[#111111]">Jazmín</option>
                 <option value="ariel" className="bg-[#111111]">Ariel</option>
                 <option value="maria" className="bg-[#111111]">Maria</option>
                 <option value="carlota" className="bg-[#111111]">Carlota</option>
