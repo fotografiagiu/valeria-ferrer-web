@@ -51,8 +51,6 @@ const Home: React.FC = () => {
       'jazmin',
       'rihanna',
       'julieta',
-      'sofia',
-      'salome',
       'carolina',
       'paula-vip',
       'teresa',

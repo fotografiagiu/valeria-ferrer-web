@@ -227,7 +227,8 @@
     ],
     "isNew": true,
     "featured": true,
-    "vip": false
+    "vip": false,
+    "active": false
   },
   {
     "slug": "salome",
@@ -302,7 +303,8 @@
     "isNew": true,
     "galleryUpdated": "Agosto 2026",
     "featured": true,
-    "vip": false
+    "vip": false,
+    "active": false
   },
   {
     "slug": "carolina",
@@ -1287,7 +1289,8 @@
     ],
     "isNew": true,
     "featured": true,
-    "vip": false
+    "vip": false,
+    "active": false
   },
   {
     "slug": "carla",
