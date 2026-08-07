@@ -27,7 +27,6 @@ export const ARCHIVE_DIR = path.join(ROOT, '_archive', 'structured-data');
 
 export const ORPHAN_STRUCTURED_DATA = [
   'alba-vip',
-  'andrea',
   'carlota',
   'emma',
   'gaby-vip',
