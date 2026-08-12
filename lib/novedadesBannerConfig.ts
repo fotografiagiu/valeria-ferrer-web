@@ -5,7 +5,7 @@
 export const NOVEDADES_BANNER = {
   enabled: true,
   /** Incrementar (v2, v3…) si quieres forzar el panel abierto tras un cambio de campaña. */
-  storageKey: 'vf-novedades-banner-minimized-v4',
+  storageKey: 'vf-novedades-banner-minimized-v5',
   /** Reservado (la pestaña ya no bloquea el salto al cargar). */
   dismissDays: 7,
   /** Retraso tras montar el banner (ms). Total ≈ preload App (~0,6s) + esto. */
