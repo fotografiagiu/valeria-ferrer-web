@@ -50,7 +50,8 @@ const Home: React.FC = () => {
     const pinOrder = [
       'vero',
       'zoe',
-      'pamela',
+      'luna',
+      'kim',
       'andrea',
       'jazmin',
       'rihanna',
@@ -58,7 +59,6 @@ const Home: React.FC = () => {
       'carolina',
       'paula-vip',
       'teresa',
-      'kim',
       'silvia',
       'estefany',
       'naty',
