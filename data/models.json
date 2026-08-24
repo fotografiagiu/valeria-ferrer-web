@@ -391,8 +391,7 @@
     ],
     "isNew": true,
     "featured": true,
-    "vip": false,
-    "active": false
+    "vip": false
   },
   {
     "slug": "salome",
