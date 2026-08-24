@@ -1683,5 +1683,30 @@
     "languages": [
       "Español"
     ]
+  },
+  {
+    "slug": "coral",
+    "name": "Coral",
+    "age": 22,
+    "height": "1,65 m",
+    "weight": "52 kg",
+    "nationality": "Española",
+    "city": "Valencia",
+    "profileUrl": "https://www.valeriaferrer.com/models/coral/",
+    "coverImageUrl": "/chicas/coral-valeria-ferrer-model-agency-valencia/portada.jpg",
+    "profileImageUrl": "/chicas/coral-valeria-ferrer-model-agency-valencia/portada.jpg",
+    "description": "Coral — ficha operativa interna (app). No publicada en la web.",
+    "images": [],
+    "services": [
+      "Girlfriend Experience",
+      "Cenas de Negocios",
+      "Eventos Sociales",
+      "Acompañamiento Personal"
+    ],
+    "availability": "24h",
+    "languages": [
+      "Español"
+    ],
+    "active": false
   }
 ]
