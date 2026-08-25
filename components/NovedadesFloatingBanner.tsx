@@ -32,9 +32,15 @@ function clearMinimized(): void {
 }
 
 function buildSlides(): NovedadSlide[] {
-  return MODELS.filter((m) => m.isNew)
-    .slice(0, CFG.rotateCount)
-    .map((m) => {
+  const featured = CFG.featuredSlugs;
+  const models =
+    featured && featured.length > 0
+      ? featured
+          .map((slug) => MODELS.find((m) => (m.slug || m.id) === slug))
+          .filter((m): m is (typeof MODELS)[number] => Boolean(m))
+      : MODELS.filter((m) => m.isNew).slice(0, CFG.rotateCount);
+
+  return models.map((m) => {
       const place = m.nationality || 'Valencia';
       return {
         slug: m.slug || m.id,

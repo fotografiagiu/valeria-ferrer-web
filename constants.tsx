@@ -30,6 +30,16 @@ export const MODELS: Model[] = catalogModels.map((item) => ({
 
 export const REVIEWS: Review[] = [
   {
+    id: '35',
+    modelName: 'Paris',
+    title: 'Elegante y guapísima',
+    content:
+      'Paris tiene un rollo muy premium: se viste de negro, te mira a los ojos y ya estás enganchado. Maja, fina y en persona mejor que en las fotos. Muy contento.',
+    author: 'Iván R.',
+    publishedLabel: 'Agosto 2026',
+    publishedAt: '2026-08',
+  },
+  {
     id: '34',
     modelName: 'Barbie',
     title: 'Parece buena chica',
