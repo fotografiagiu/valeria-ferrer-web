@@ -11,114 +11,14 @@
       "position": 1,
       "item": {
         "@type": "Person",
-        "name": "Vero",
-        "url": "https://www.valeriaferrer.com/models/vero",
-        "image": "https://www.valeriaferrer.com/chicas/vero-valeria-ferrer-model-agency-valencia/portada.jpg"
+        "name": "Barbie",
+        "url": "https://www.valeriaferrer.com/models/barbie",
+        "image": "https://www.valeriaferrer.com/chicas/barbie-valeria-ferrer-model-agency-valencia/portada.jpg"
       }
     },
     {
       "@type": "ListItem",
       "position": 2,
-      "item": {
-        "@type": "Person",
-        "name": "Zoe",
-        "url": "https://www.valeriaferrer.com/models/zoe",
-        "image": "https://www.valeriaferrer.com/chicas/zoe-valeria-ferrer-model-agency-valencia/portada-rojo-ago2026.jpg"
-      }
-    },
-    {
-      "@type": "ListItem",
-      "position": 3,
-      "item": {
-        "@type": "Person",
-        "name": "Andrea",
-        "url": "https://www.valeriaferrer.com/models/andrea",
-        "image": "https://www.valeriaferrer.com/chicas/andrea-model-agency-valencia-vf-3/portada.jpg"
-      }
-    },
-    {
-      "@type": "ListItem",
-      "position": 4,
-      "item": {
-        "@type": "Person",
-        "name": "Jazmín",
-        "url": "https://www.valeriaferrer.com/models/jazmin",
-        "image": "https://www.valeriaferrer.com/chicas/jazmin-valeria-ferrer-model-agency-valencia/portada.jpg"
-      }
-    },
-    {
-      "@type": "ListItem",
-      "position": 5,
-      "item": {
-        "@type": "Person",
-        "name": "Rihanna",
-        "url": "https://www.valeriaferrer.com/models/rihanna",
-        "image": "https://www.valeriaferrer.com/chicas/rihanna-valeria-ferrer-model-agency-valencia/portada.jpg"
-      }
-    },
-    {
-      "@type": "ListItem",
-      "position": 6,
-      "item": {
-        "@type": "Person",
-        "name": "Julieta",
-        "url": "https://www.valeriaferrer.com/models/julieta",
-        "image": "https://www.valeriaferrer.com/chicas/julieta-valeria-ferrer-model-agency-valencia/portada.jpg"
-      }
-    },
-    {
-      "@type": "ListItem",
-      "position": 7,
-      "item": {
-        "@type": "Person",
-        "name": "Sofía",
-        "url": "https://www.valeriaferrer.com/models/sofia",
-        "image": "https://www.valeriaferrer.com/chicas/sofia-valeria-ferrer-model-agency-valencia/portada.jpg"
-      }
-    },
-    {
-      "@type": "ListItem",
-      "position": 8,
-      "item": {
-        "@type": "Person",
-        "name": "Carolina",
-        "url": "https://www.valeriaferrer.com/models/carolina",
-        "image": "https://www.valeriaferrer.com/chicas/carolina-valeria-ferrer-model-agency-valencia/portada-lenceria-jul2026.jpg"
-      }
-    },
-    {
-      "@type": "ListItem",
-      "position": 9,
-      "item": {
-        "@type": "Person",
-        "name": "Kim",
-        "url": "https://www.valeriaferrer.com/models/kim",
-        "image": "https://www.valeriaferrer.com/chicas/kim-model-agency-valencia-vf/portada.jpg"
-      }
-    },
-    {
-      "@type": "ListItem",
-      "position": 10,
-      "item": {
-        "@type": "Person",
-        "name": "Teresa",
-        "url": "https://www.valeriaferrer.com/models/teresa",
-        "image": "https://www.valeriaferrer.com/chicas/teresa-valeria-ferrer-model-agency-valencia/portada.jpg"
-      }
-    },
-    {
-      "@type": "ListItem",
-      "position": 11,
-      "item": {
-        "@type": "Person",
-        "name": "Paula (VIP)",
-        "url": "https://www.valeriaferrer.com/models/paula-vip",
-        "image": "https://www.valeriaferrer.com/chicas/paula-vip-model-agency-valencia/paula-portada-nueva.jpg"
-      }
-    },
-    {
-      "@type": "ListItem",
-      "position": 12,
       "item": {
         "@type": "Person",
         "name": "Luna",
@@ -128,7 +28,117 @@
     },
     {
       "@type": "ListItem",
+      "position": 3,
+      "item": {
+        "@type": "Person",
+        "name": "Mia",
+        "url": "https://www.valeriaferrer.com/models/mia",
+        "image": "https://www.valeriaferrer.com/chicas/mia-model-agency-valencia-vf/portada-pasillo-ago2026.jpg"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "item": {
+        "@type": "Person",
+        "name": "Sofía",
+        "url": "https://www.valeriaferrer.com/models/sofia",
+        "image": "https://www.valeriaferrer.com/chicas/sofia-valeria-ferrer-model-agency-valencia/portada.jpg"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 5,
+      "item": {
+        "@type": "Person",
+        "name": "Vero",
+        "url": "https://www.valeriaferrer.com/models/vero",
+        "image": "https://www.valeriaferrer.com/chicas/vero-valeria-ferrer-model-agency-valencia/portada.jpg"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 6,
+      "item": {
+        "@type": "Person",
+        "name": "Zoe",
+        "url": "https://www.valeriaferrer.com/models/zoe",
+        "image": "https://www.valeriaferrer.com/chicas/zoe-valeria-ferrer-model-agency-valencia/portada-rojo-ago2026.jpg"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 7,
+      "item": {
+        "@type": "Person",
+        "name": "Andrea",
+        "url": "https://www.valeriaferrer.com/models/andrea",
+        "image": "https://www.valeriaferrer.com/chicas/andrea-model-agency-valencia-vf-3/portada.jpg"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 8,
+      "item": {
+        "@type": "Person",
+        "name": "Jazmín",
+        "url": "https://www.valeriaferrer.com/models/jazmin",
+        "image": "https://www.valeriaferrer.com/chicas/jazmin-valeria-ferrer-model-agency-valencia/portada.jpg"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 9,
+      "item": {
+        "@type": "Person",
+        "name": "Rihanna",
+        "url": "https://www.valeriaferrer.com/models/rihanna",
+        "image": "https://www.valeriaferrer.com/chicas/rihanna-valeria-ferrer-model-agency-valencia/portada.jpg"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 10,
+      "item": {
+        "@type": "Person",
+        "name": "Julieta",
+        "url": "https://www.valeriaferrer.com/models/julieta",
+        "image": "https://www.valeriaferrer.com/chicas/julieta-valeria-ferrer-model-agency-valencia/portada.jpg"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 11,
+      "item": {
+        "@type": "Person",
+        "name": "Carolina",
+        "url": "https://www.valeriaferrer.com/models/carolina",
+        "image": "https://www.valeriaferrer.com/chicas/carolina-valeria-ferrer-model-agency-valencia/portada-lenceria-jul2026.jpg"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 12,
+      "item": {
+        "@type": "Person",
+        "name": "Teresa",
+        "url": "https://www.valeriaferrer.com/models/teresa",
+        "image": "https://www.valeriaferrer.com/chicas/teresa-valeria-ferrer-model-agency-valencia/portada.jpg"
+      }
+    },
+    {
+      "@type": "ListItem",
       "position": 13,
+      "item": {
+        "@type": "Person",
+        "name": "Paula (VIP)",
+        "url": "https://www.valeriaferrer.com/models/paula-vip",
+        "image": "https://www.valeriaferrer.com/chicas/paula-vip-model-agency-valencia/paula-portada-nueva.jpg"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 14,
       "item": {
         "@type": "Person",
         "name": "Naty",
@@ -138,22 +148,12 @@
     },
     {
       "@type": "ListItem",
-      "position": 14,
+      "position": 15,
       "item": {
         "@type": "Person",
         "name": "Estefany",
         "url": "https://www.valeriaferrer.com/models/estefany",
         "image": "https://www.valeriaferrer.com/chicas/estefany-model-agency-valencia-vf/portada-nueva.jpg"
-      }
-    },
-    {
-      "@type": "ListItem",
-      "position": 15,
-      "item": {
-        "@type": "Person",
-        "name": "Mia",
-        "url": "https://www.valeriaferrer.com/models/mia",
-        "image": "https://www.valeriaferrer.com/chicas/mia-model-agency-valencia-vf/portada-pasillo-ago2026.jpg"
       }
     },
     {

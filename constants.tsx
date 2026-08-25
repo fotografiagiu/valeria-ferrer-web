@@ -30,6 +30,16 @@ export const MODELS: Model[] = catalogModels.map((item) => ({
 
 export const REVIEWS: Review[] = [
   {
+    id: '34',
+    modelName: 'Barbie',
+    title: 'Parece buena chica',
+    content:
+      'Barbie tiene un rollo colegiala que engancha: mirada dulce, muy guapa y un cuerpo que no te esperas. Maja, fácil de hablar y la cita se pasó volando. Repito.',
+    author: 'Marcos D.',
+    publishedLabel: 'Agosto 2026',
+    publishedAt: '2026-08',
+  },
+  {
     id: '20',
     modelName: 'Luna',
     title: 'Menuda tarde',
