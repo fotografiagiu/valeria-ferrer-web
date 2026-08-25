@@ -30,154 +30,144 @@ export const MODELS: Model[] = catalogModels.map((item) => ({
 
 export const REVIEWS: Review[] = [
   {
-    id: '10',
-    modelName: 'Flor',
-    title: 'Calma y elegancia natural',
-    content:
-      'Flor transmite una serenidad que se agradece desde el primer minuto. Cena tranquila en el centro, conversación fluida y una presencia impecable sin artificios. Muy recomendable si buscas discreción y trato cercano.',
-    author: 'Daniel H.',
-    publishedLabel: 'Mayo 2026',
-    publishedAt: '2026-05',
-  },
-  {
-    id: '11',
-    modelName: 'Mónica',
-    title: 'Presencia y clase mediterránea',
-    content:
-      'Mónica destaca por su estatura y su manera de estar: segura, educada y muy agradable. La velada fue sofisticada sin rigidez; se nota buen gusto en cada detalle. Repetiría sin dudarlo.',
-    author: 'Andrés C.',
-    publishedLabel: 'Mayo 2026',
-    publishedAt: '2026-05',
-  },
-  {
-    id: '16',
-    modelName: 'Claudia (VIP)',
-    title: 'Nivel VIP de verdad',
-    content:
-      'Claudia reúne presencia, estilo y una atención al detalle poco habitual. La experiencia se sintió exclusiva de principio a fin, con la discreción que exige este tipo de servicio. A la altura de lo que promete la agencia.',
-    author: 'Enrique D.',
-    publishedLabel: 'Mayo 2026',
-    publishedAt: '2026-05',
-  },
-  {
-    id: '13',
-    modelName: 'KEY',
-    title: 'Energía y buen rollo',
-    content:
-      'KEY llega con una sonrisa que cambia el ambiente. Divertida, espontánea y muy presente; ideal si buscas una salida con ritmo y buena vibra. Las fotos corresponden con la realidad.',
-    author: 'Pablo R.',
-    publishedLabel: 'Abril 2026',
-    publishedAt: '2026-04',
-  },
-  {
-    id: '14',
-    modelName: 'Teresa',
-    title: 'Trato impecable',
-    content:
-      'Teresa fue puntual, educada y muy atenta en todo momento. La experiencia fue relajada, con conversación agradable y total discreción. Justo lo que esperaba de una agencia de este nivel.',
-    author: 'Iván S.',
-    publishedLabel: 'Abril 2026',
-    publishedAt: '2026-04',
-  },
-  {
-    id: '15',
+    id: '20',
     modelName: 'Luna',
-    title: 'Dulzura y naturalidad',
+    title: 'Menuda tarde',
     content:
-      'Luna es cercana y fácil de estar. Me hizo sentir cómodo desde el saludo; el encuentro fue sencillo, elegante y sin presiones. Una compañía muy agradable para una tarde en Valencia.',
-    author: 'Raúl V.',
+      'Quedamos en una terraza del centro y en nada ya estábamos riéndonos como si nos conociéramos de siempre. Luna es súper fácil de hablar, no va a mil por hora y se nota que le gusta Valencia. Salí con una sonrisa, de verdad. Repito seguro.',
+    author: 'Héctor M.',
+    publishedLabel: 'Agosto 2026',
+    publishedAt: '2026-08',
+  },
+  {
+    id: '21',
+    modelName: 'Mia',
+    title: 'Tal cual las fotos',
+    content:
+      'Mia llegó puntual y es ella, no hay truco. Tiene un rollo muy guapo, habla sin parar (en el buen sentido) y se adapta a lo que le digas. Yo quería una noche light y lo clavó. Muy contento.',
+    author: 'Óscar L.',
+    publishedLabel: 'Agosto 2026',
+    publishedAt: '2026-08',
+  },
+  {
+    id: '22',
+    modelName: 'Sofía',
+    title: 'Muy cercana',
+    content:
+      'Sofía es un encanto. Cena, un paseíto y a hablar de todo. Nada de poses raras, se ve a gusto y eso te relaja. Ya le he dicho a la agencia que quiero otra con ella.',
+    author: 'Nico B.',
+    publishedLabel: 'Agosto 2026',
+    publishedAt: '2026-08',
+  },
+  {
+    id: '23',
+    modelName: 'Vero',
+    title: 'Qué presencia',
+    content:
+      'Vero entra y se nota. Española, segura, sin inventarse nada. Venía de un viaje de curro y necesitaba desconectar… y vaya si desconecté. Discreta y top.',
+    author: 'Guille F.',
+    publishedLabel: 'Julio 2026',
+    publishedAt: '2026-07',
+  },
+  {
+    id: '24',
+    modelName: 'Zoe',
+    title: 'Alta y con mucho rollo',
+    content:
+      'Zoe es altísima y encima súper maja. Fuimos a cenar y luego a un sitio de cócteles y encajó perfecto, cero vergüenza. Todo claro, sin prisas. La agencia va bien y ella es real.',
+    author: 'Tomás E.',
+    publishedLabel: 'Julio 2026',
+    publishedAt: '2026-07',
+  },
+  {
+    id: '25',
+    modelName: 'Andrea',
+    title: 'Se puede hablar de todo',
+    content:
+      'Con Andrea no te aburres. Tiene humor, calma y se nota que ha vivido. No es de esas citas de relleno: te ríes, charlas y te sientes a gusto. Si te gusta que haya conversación, esta.',
+    author: 'Álvaro P.',
+    publishedLabel: 'Junio 2026',
+    publishedAt: '2026-06',
+  },
+  {
+    id: '26',
+    modelName: 'Jazmín',
+    title: 'Me levantó el ánimo',
+    content:
+      'Jazmín tiene una energía buenísima, sin ser pesada. Divertida, atenta y en persona está igual o mejor que en las fotos. Lo pillamos con poco tiempo y aun así todo fino: mensaje, llegada y listo.',
+    author: 'Bruno S.',
+    publishedLabel: 'Junio 2026',
+    publishedAt: '2026-06',
+  },
+  {
+    id: '27',
+    modelName: 'Paula (VIP)',
+    title: 'Otro nivel',
+    content:
+      'Paula es VIP de verdad, no de postureo. Llega hecha un pincel, hotel de lujo y todo cuadrado. Si quieres algo más premium en Valencia, esta.',
+    author: 'Ricardo A.',
+    publishedLabel: 'Mayo 2026',
+    publishedAt: '2026-05',
+  },
+  {
+    id: '28',
+    modelName: 'Rihanna',
+    title: 'Muy buena onda',
+    content:
+      'Rihanna va al grano y se nota. Pedí algo más informal y lo clavó: risas, cero rareza. Las fotos son reales, en persona incluso mejor. Me lo pasé genial.',
+    author: 'Diego N.',
+    publishedLabel: 'Mayo 2026',
+    publishedAt: '2026-05',
+  },
+  {
+    id: '29',
+    modelName: 'Julieta',
+    title: 'Joven pero con cabeza',
+    content:
+      'Julieta me sorprendió. Es joven, sí, pero educada y con mucho criterio. Fue una cita cortita y aun así salí muy contento. La próxima con más tiempo.',
+    author: 'Mateo C.',
+    publishedLabel: 'Abril 2026',
+    publishedAt: '2026-04',
+  },
+  {
+    id: '30',
+    modelName: 'Carolina',
+    title: 'Sin prisas',
+    content:
+      'Carolina va con calma, sin frases de manual ni nada forzado. Una tarde tranquila por el centro, justo lo que buscaba. Acerté.',
+    author: 'Nacho R.',
+    publishedLabel: 'Abril 2026',
+    publishedAt: '2026-04',
+  },
+  {
+    id: '31',
+    modelName: 'Naty',
+    title: 'Pasión a tope',
+    content:
+      'Naty tiene fuego, pero sin pasarse: apasionada, educada y puntual. Esa noche me salvó el viaje a Valencia. Agencia fiable, sin dramas.',
+    author: 'Jorge V.',
     publishedLabel: 'Marzo 2026',
     publishedAt: '2026-03',
   },
   {
-    id: '9',
-    modelName: 'Alicia',
-    title: 'Dulzura infinita',
+    id: '32',
+    modelName: 'Elena',
+    title: 'Clase y conversación',
     content:
-      'Alicia es un encanto de mujer. Muy dulce y cariñosa, me hizo sentir muy cómodo desde el primer minuto. Totalmente recomendable.',
-    author: 'Miguel A.',
-    publishedLabel: 'Noviembre 2025',
-    publishedAt: '2025-11',
+      'Elena tiene mucha clase. Se habla bien con ella, nada vulgar, y para una cena larga va de cine. De las mejores que he pillado por aquí.',
+    author: 'Sebas Q.',
+    publishedLabel: 'Febrero 2026',
+    publishedAt: '2026-02',
   },
   {
-    id: '8',
-    modelName: 'Tatiana (VIP)',
-    title: 'Exclusividad máxima',
+    id: '33',
+    modelName: 'Adara',
+    title: 'Distinta y agradable',
     content:
-      'Tatiana es simplemente otro nivel. La exclusividad que ofrece la agencia se nota en cada detalle. Una chica bellísima y muy atenta.',
-    author: 'Fernando S.',
-    publishedLabel: 'Octubre 2025',
-    publishedAt: '2025-10',
-  },
-  {
-    id: '7',
-    modelName: 'Erika',
-    title: 'Elegancia y discreción',
-    content:
-      'Erika es una profesional de los pies a la cabeza. Muy discreta y con una conversación muy interesante. Una velada perfecta en todos los sentidos.',
-    author: 'Antonio P.',
-    publishedLabel: 'Agosto 2025',
-    publishedAt: '2025-08',
-  },
-  {
-    id: '6',
-    modelName: 'Naty',
-    title: 'Energía positiva',
-    content:
-      'Naty es pura alegría. Desde que nos vimos la conexión fue total. Es una mujer muy atractiva y divertida, hizo que mi viaje a Valencia fuera perfecto.',
-    author: 'Roberto G.',
-    publishedLabel: 'Mayo 2025',
-    publishedAt: '2025-05',
-  },
-  {
-    id: '5',
-    modelName: 'Mariana',
-    title: 'Belleza y simpatía',
-    content:
-      'Mariana es una chica excepcional. Muy puntual, educada y con un físico de infarto. Me sorprendió gratamente su madurez a pesar de su juventud.',
-    author: 'Sergio V.',
-    publishedLabel: 'Marzo 2025',
-    publishedAt: '2025-03',
-  },
-  {
-    id: '4',
-    modelName: 'Yaiza',
-    title: 'Dulzura y frescura',
-    content:
-      'Yaiza es encantadora. Tiene una sonrisa que ilumina todo y un trato muy dulce. Fue un placer compartir unas horas con ella, se nota que las fotos son 100% reales.',
-    author: 'David L.',
-    publishedLabel: 'Enero 2025',
-    publishedAt: '2025-01',
-  },
-  {
-    id: '3',
-    modelName: 'Carlota',
-    title: 'Impresionante presencia',
-    content:
-      'Carlota te deja sin palabras desde el primer momento. Su altura y porte son increíbles, pero lo mejor es su cercanía. Una experiencia VIP de verdad.',
-    author: 'Marc T.',
-    publishedLabel: 'Septiembre 2024',
-    publishedAt: '2024-09',
-  },
-  {
-    id: '2',
-    modelName: 'Maria',
-    title: 'Sofisticación pura',
-    content:
-      'Maria es la definición de clase. Buscaba una cena tranquila con buena conversación y superó todas mis expectativas. Es una mujer bellísima y muy inteligente.',
-    author: 'Javier M.',
-    publishedLabel: 'Agosto 2024',
-    publishedAt: '2024-08',
-  },
-  {
-    id: '1',
-    modelName: 'Ariel',
-    title: 'Una experiencia inolvidable',
-    content:
-      'Ariel es simplemente espectacular. Su elegancia y trato son de otro nivel. Pasamos una velada increíble en Valencia, es una mujer muy culta y encantadora. Repetiré sin duda.',
-    author: 'Carlos R.',
-    publishedLabel: 'Junio 2024',
-    publishedAt: '2024-06',
+      'Adara se sale un poco del resto y se nota. Puntual, discreta y con un estilo propio. Todo limpio de principio a fin, sin rarezas. Recomendada.',
+    author: 'Hugo T.',
+    publishedLabel: 'Enero 2026',
+    publishedAt: '2026-01',
   },
 ];
 

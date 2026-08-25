@@ -102,6 +102,9 @@ const Hero = () => {
               <span className="block bg-gradient-to-r from-[#f7e7ce] via-[#e8d4b0] via-[#d4af37] via-[#c2b2a3] to-[#f7e7ce] bg-clip-text text-transparent">
                 Valeria Ferrer
               </span>
+              <span className="mt-4 md:mt-5 block text-base md:text-2xl tracking-[0.22em] md:tracking-[0.28em] font-light text-[#c2b2a3] uppercase">
+                Escorts de lujo en Valencia
+              </span>
             </h1>
 
             {/* Visual separator */}
@@ -111,15 +114,9 @@ const Hero = () => {
               <div className="flex-1 h-px bg-gradient-to-r from-transparent via-[#c2b2a3]/30 to-transparent max-w-xs"></div>
             </div>
 
-            {/* Subtitle with better positioning */}
-            <div className="relative">
-              <span className="text-2xl md:text-4xl tracking-[0.4em] font-light text-[#c2b2a3] block">
-                Agencia Premium
-              </span>
-
-              {/* Subtle underline */}
-              <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-20 h-px bg-gradient-to-r from-transparent via-[#c2b2a3]/40 to-transparent"></div>
-            </div>
+            <p className="text-[11px] md:text-sm tracking-[0.35em] font-light text-[#c2b2a3]/80 uppercase">
+              Agencia Premium
+            </p>
           </div>
         </motion.div>
 
