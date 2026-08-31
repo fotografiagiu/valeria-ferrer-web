@@ -1169,6 +1169,36 @@
       "source": "/chicas-universitarias-valencia/:path*",
       "destination": "https://www.valeriaferrer.com/models",
       "permanent": true
+    },
+    {
+      "source": "/marta-valeria-ferrer-model-agency-valencia",
+      "destination": "https://www.valeriaferrer.com/models/marta",
+      "permanent": true
+    },
+    {
+      "source": "/marta-valeria-ferrer-model-agency-valencia/",
+      "destination": "https://www.valeriaferrer.com/models/marta",
+      "permanent": true
+    },
+    {
+      "source": "/marta-valeria-ferrer-model-agency-valencia/:path*",
+      "destination": "https://www.valeriaferrer.com/models/marta",
+      "permanent": true
+    },
+    {
+      "source": "/marta-model-agency-valencia-vf",
+      "destination": "https://www.valeriaferrer.com/models/marta",
+      "permanent": true
+    },
+    {
+      "source": "/marta-model-agency-valencia-vf/",
+      "destination": "https://www.valeriaferrer.com/models/marta",
+      "permanent": true
+    },
+    {
+      "source": "/marta-model-agency-valencia-vf/:path*",
+      "destination": "https://www.valeriaferrer.com/models/marta",
+      "permanent": true
     }
   ],
   "rewrites": [
