@@ -1171,6 +1171,36 @@
       "permanent": true
     },
     {
+      "source": "/veronica-valeria-ferrer-model-agency-valencia",
+      "destination": "https://www.valeriaferrer.com/models/veronica",
+      "permanent": true
+    },
+    {
+      "source": "/veronica-valeria-ferrer-model-agency-valencia/",
+      "destination": "https://www.valeriaferrer.com/models/veronica",
+      "permanent": true
+    },
+    {
+      "source": "/veronica-valeria-ferrer-model-agency-valencia/:path*",
+      "destination": "https://www.valeriaferrer.com/models/veronica",
+      "permanent": true
+    },
+    {
+      "source": "/veronica-model-agency-valencia-vf",
+      "destination": "https://www.valeriaferrer.com/models/veronica",
+      "permanent": true
+    },
+    {
+      "source": "/veronica-model-agency-valencia-vf/",
+      "destination": "https://www.valeriaferrer.com/models/veronica",
+      "permanent": true
+    },
+    {
+      "source": "/veronica-model-agency-valencia-vf/:path*",
+      "destination": "https://www.valeriaferrer.com/models/veronica",
+      "permanent": true
+    },
+    {
       "source": "/marta-valeria-ferrer-model-agency-valencia",
       "destination": "https://www.valeriaferrer.com/models/marta",
       "permanent": true

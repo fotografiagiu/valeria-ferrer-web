@@ -1,0 +1,42 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Veronica",
+  "description": "Veronica es colombiana, 20 años, 1,61 m y 60 kg: cuerpo compacto con curvas de verdad, piel bronceada y una cara que mezcla dulzura y descaro. Pelo negro con onda, joyas doradas, tatuajes discretos y un book que salta del vestido rosa de encaje al bikini en cubierta con ciudad de fondo. Escort colombiana en Valencia con fotos reales y ese rollo viajera-glam que no se parece a ninguna otra ficha del catálogo.",
+  "url": "https://www.valeriaferrer.com/models/veronica",
+  "image": [
+    "https://www.valeriaferrer.com/chicas/veronica-valeria-ferrer-model-agency-valencia/portada.jpg",
+    "https://www.valeriaferrer.com/chicas/veronica-valeria-ferrer-model-agency-valencia/gallery/01.jpg",
+    "https://www.valeriaferrer.com/chicas/veronica-valeria-ferrer-model-agency-valencia/gallery/02.jpg",
+    "https://www.valeriaferrer.com/chicas/veronica-valeria-ferrer-model-agency-valencia/gallery/03.jpg",
+    "https://www.valeriaferrer.com/chicas/veronica-valeria-ferrer-model-agency-valencia/gallery/04.jpg",
+    "https://www.valeriaferrer.com/chicas/veronica-valeria-ferrer-model-agency-valencia/gallery/05.jpg",
+    "https://www.valeriaferrer.com/chicas/veronica-valeria-ferrer-model-agency-valencia/gallery/06.jpg"
+  ],
+  "nationality": "Colombiana",
+  "jobTitle": "Modelo",
+  "knowsLanguage": [
+    "Español"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "itemOffered": {
+      "@type": "Service",
+      "name": "Acompañamiento Premium",
+      "description": "Servicios exclusivos de acompañamiento con Veronica en Valencia"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Valencia"
+    },
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "name": "Contacto Directo",
+      "url": "https://www.valeriaferrer.com/contact"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.valeriaferrer.com/models/veronica"
+  }
+}
