@@ -31,7 +31,6 @@ const FEATURED_SLUGS = [
   'elena',
   'lana',
   'monica',
-  'carolina',
   'silvia',
   'carla',
   'kim',

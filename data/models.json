@@ -851,7 +851,8 @@
     ],
     "isNew": true,
     "featured": true,
-    "vip": false
+    "vip": false,
+    "active": false
   },
   {
     "slug": "laura",
@@ -1361,7 +1362,8 @@
     "availability": "24h",
     "languages": [
       "Español"
-    ]
+    ],
+    "active": false
   },
   {
     "slug": "key",
