@@ -147,7 +147,28 @@ Documentado aquí; **no tocado en Fase 2**.
 
 ---
 
-## Crear Neon (PENDIENTE — no hacerlo aún)
+## Deploy Vercel (Fase 2 — solo API)
+
+Root Directory: `panel`
+
+`vercel.json` fija:
+- `framework: null` (no preset estático)
+- `outputDirectory: null` (no exige `public/` ni `dist/`)
+- `buildCommand`: snapshot + check + typecheck
+- función `api/index.ts` + rewrite `/(.*)` → `/api`
+
+### Ajustes manuales en Project Settings → Build & Output Settings
+
+Si el dashboard aún tiene valores por defecto, **Override** y deja:
+
+| Campo | Valor |
+|--------|--------|
+| Framework Preset | **Other** |
+| Build Command | *(usar vercel.json — o el mismo `npm run build`)* |
+| Output Directory | **vacío** (Override ON, campo en blanco). **No** `public` |
+| Install Command | `npm install` |
+
+Sin esto, Vercel puede seguir buscando `public/` aunque el build de TypeScript pase.
 
 Cuando apruebes:
 
