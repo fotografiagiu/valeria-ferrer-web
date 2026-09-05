@@ -1,10 +1,42 @@
 {
-  "generatedAt": "2026-09-05T20:10:16.306Z",
+  "generatedAt": "2026-09-05T22:19:23.722Z",
   "sourcePath": "data/models.json",
-  "sourceHash": "d6ea678285664174a80591ff94113a2d122800f012e1c0948b5622e8a04f6aa7",
-  "modelCount": 39,
-  "activeCount": 23,
+  "sourceHash": "6940e3e79af02be49e771d635bb8cbc615bf1ed0b63ff652dbf23ea34fb1a5d6",
+  "modelCount": 41,
+  "activeCount": 25,
   "models": [
+    {
+      "slug": "sara",
+      "name": "Sara",
+      "coverImageUrl": "/chicas/sara-valeria-ferrer-model-agency-valencia/portada.jpg",
+      "images": [
+        "/chicas/sara-valeria-ferrer-model-agency-valencia/gallery/01.jpg",
+        "/chicas/sara-valeria-ferrer-model-agency-valencia/gallery/02.jpg",
+        "/chicas/sara-valeria-ferrer-model-agency-valencia/gallery/03.jpg",
+        "/chicas/sara-valeria-ferrer-model-agency-valencia/gallery/04.jpg",
+        "/chicas/sara-valeria-ferrer-model-agency-valencia/gallery/05.jpg",
+        "/chicas/sara-valeria-ferrer-model-agency-valencia/gallery/06.jpg",
+        "/chicas/sara-valeria-ferrer-model-agency-valencia/gallery/07.jpg"
+      ]
+    },
+    {
+      "slug": "danna",
+      "name": "Danna",
+      "coverImageUrl": "/chicas/danna-valeria-ferrer-model-agency-valencia/portada.jpg",
+      "images": [
+        "/chicas/danna-valeria-ferrer-model-agency-valencia/gallery/01.jpg",
+        "/chicas/danna-valeria-ferrer-model-agency-valencia/gallery/02.jpg",
+        "/chicas/danna-valeria-ferrer-model-agency-valencia/gallery/03.jpg",
+        "/chicas/danna-valeria-ferrer-model-agency-valencia/gallery/04.jpg",
+        "/chicas/danna-valeria-ferrer-model-agency-valencia/gallery/05.jpg",
+        "/chicas/danna-valeria-ferrer-model-agency-valencia/gallery/06.jpg",
+        "/chicas/danna-valeria-ferrer-model-agency-valencia/gallery/07.jpg",
+        "/chicas/danna-valeria-ferrer-model-agency-valencia/gallery/08.jpg",
+        "/chicas/danna-valeria-ferrer-model-agency-valencia/gallery/09.jpg",
+        "/chicas/danna-valeria-ferrer-model-agency-valencia/gallery/10.jpg",
+        "/chicas/danna-valeria-ferrer-model-agency-valencia/gallery/11.jpg"
+      ]
+    },
     {
       "slug": "veronica",
       "name": "Veronica",

@@ -12,7 +12,7 @@ export const NOVEDADES_BANNER = {
   delayMs: 900,
   badge: 'NOVEDAD',
   /** Slugs que rotan en el popup (orden de aparición). */
-  featuredSlugs: ['veronica', 'marta'] as const,
+  featuredSlugs: ['sara', 'danna', 'veronica'] as const,
   /** Cuántas novedades rotan en el popup. */
   rotateCount: 2,
   /** Intervalo entre slides (ms). */

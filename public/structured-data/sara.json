@@ -1,0 +1,43 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Sara",
+  "description": "¿Buscas una colombiana en Valencia con sonrisa fácil y ganas de verdad? Sara, 26 años, llega con energía, cercanía y una química que te empuja a escribir. No es una ficha fría: es la escort latina que convierte un hola en quedada. Si quieres un encuentro intenso, cercano y difícil de olvidar — contáctala ya.",
+  "url": "https://www.valeriaferrer.com/models/sara",
+  "image": [
+    "https://www.valeriaferrer.com/chicas/sara-valeria-ferrer-model-agency-valencia/portada.jpg",
+    "https://www.valeriaferrer.com/chicas/sara-valeria-ferrer-model-agency-valencia/gallery/01.jpg",
+    "https://www.valeriaferrer.com/chicas/sara-valeria-ferrer-model-agency-valencia/gallery/02.jpg",
+    "https://www.valeriaferrer.com/chicas/sara-valeria-ferrer-model-agency-valencia/gallery/03.jpg",
+    "https://www.valeriaferrer.com/chicas/sara-valeria-ferrer-model-agency-valencia/gallery/04.jpg",
+    "https://www.valeriaferrer.com/chicas/sara-valeria-ferrer-model-agency-valencia/gallery/05.jpg",
+    "https://www.valeriaferrer.com/chicas/sara-valeria-ferrer-model-agency-valencia/gallery/06.jpg",
+    "https://www.valeriaferrer.com/chicas/sara-valeria-ferrer-model-agency-valencia/gallery/07.jpg"
+  ],
+  "nationality": "Colombiana",
+  "jobTitle": "Modelo",
+  "knowsLanguage": [
+    "Español"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "itemOffered": {
+      "@type": "Service",
+      "name": "Acompañamiento Premium",
+      "description": "Servicios exclusivos de acompañamiento con Sara en Valencia"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Valencia"
+    },
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "name": "Contacto Directo",
+      "url": "https://www.valeriaferrer.com/contact"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.valeriaferrer.com/models/sara"
+  }
+}

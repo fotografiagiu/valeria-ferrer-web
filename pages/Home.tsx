@@ -48,8 +48,10 @@ const Home: React.FC = () => {
     const activeModels = filterActiveModels(modelsData);
     // Fila 1 (4 cols desktop) + fila 2: el resto del pin manual
     const pinOrder = [
+      'sara',
+      'danna',
       'veronica',
-      'carla',
+      'jazmin',
       'marta',
       'luna',
       'silvia',
@@ -58,7 +60,7 @@ const Home: React.FC = () => {
       'zoe',
       'alicia',
       'andrea',
-      'jazmin',
+      'carla',
       'rihanna',
       'julieta',
       'paula-vip',
