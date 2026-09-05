@@ -61,6 +61,37 @@
     "vip": false
   },
   {
+    "slug": "carla",
+    "name": "Carla",
+    "age": 26,
+    "height": "1,65 m",
+    "weight": "48 kg",
+    "nationality": "Española",
+    "city": "Valencia",
+    "profileUrl": "https://www.valeriaferrer.com/carla-model-agency-valencia-vf/",
+    "coverImageUrl": "/chicas/carla-model-agency-valencia-vf/portada.jpg",
+    "description": "Carla es una española que irradia estilo mediterráneo y elegancia natural. Su figura esbelta y carisma auténtico la hacen perfecta para eventos exclusivos y ocasiones únicas. Cada encuentro con ella está lleno de sofisticación y pasión vibrante. Su presencia transforma momentos especiales en experiencias inolvidables con autenticidad española y sensualidad mediterránea. Llámala ahora y descubre el placer mediterráneo.",
+    "essence": "El estilo de Carla combina elegancia mediterránea con una pasión vibrante que transforma cada encuentro en una experiencia inolvidable. Su carisma natural y figura estilizada generan encuentros únicos llenos de autenticidad española que seducen y cautivan. Cada momento se enriquece con su perspectiva mediterránea y energía vital que crea ambientes de sofisticación y pasión. Carla es experta en crear atmósferas de elegancia y sensualidad donde cada instante se siente especial y auténtico. Su filosofía se basa en la pasión: cada experiencia es única porque cada persona merece lo mejor. Ya sea en un evento exclusivo, una cena romántica o un momento íntimo, Carla adapta su energía mediterránea para crear la experiencia perfecta para ti. Su elegancia no es una fachada, sino una extensión natural de su personalidad apasionada y sofisticada.",
+    "images": [
+      "/chicas/carla-model-agency-valencia-vf/portada.jpg",
+      "/chicas/carla-model-agency-valencia-vf/primera.jpg",
+      "/chicas/carla-model-agency-valencia-vf/1.jpg",
+      "/chicas/carla-model-agency-valencia-vf/2.jpg",
+      "/chicas/carla-model-agency-valencia-vf/3.jpg",
+      "/chicas/carla-model-agency-valencia-vf/4.jpg"
+    ],
+    "services": [
+      "Girlfriend Experience",
+      "Cenas de Negocios",
+      "Eventos Sociales",
+      "Acompañamiento Personal"
+    ],
+    "availability": "24h",
+    "languages": [
+      "Español"
+    ]
+  },
+  {
     "slug": "marta",
     "name": "Marta",
     "age": 22,
@@ -1704,37 +1735,6 @@
     "featured": true,
     "vip": false,
     "active": false
-  },
-  {
-    "slug": "carla",
-    "name": "Carla",
-    "age": 26,
-    "height": "1,65 m",
-    "weight": "48 kg",
-    "nationality": "Española",
-    "city": "Valencia",
-    "profileUrl": "https://www.valeriaferrer.com/carla-model-agency-valencia-vf/",
-    "coverImageUrl": "/chicas/carla-model-agency-valencia-vf/portada.jpg",
-    "description": "Carla es una española que irradia estilo mediterráneo y elegancia natural. Su figura esbelta y carisma auténtico la hacen perfecta para eventos exclusivos y ocasiones únicas. Cada encuentro con ella está lleno de sofisticación y pasión vibrante. Su presencia transforma momentos especiales en experiencias inolvidables con autenticidad española y sensualidad mediterránea. Llámala ahora y descubre el placer mediterráneo.",
-    "essence": "El estilo de Carla combina elegancia mediterránea con una pasión vibrante que transforma cada encuentro en una experiencia inolvidable. Su carisma natural y figura estilizada generan encuentros únicos llenos de autenticidad española que seducen y cautivan. Cada momento se enriquece con su perspectiva mediterránea y energía vital que crea ambientes de sofisticación y pasión. Carla es experta en crear atmósferas de elegancia y sensualidad donde cada instante se siente especial y auténtico. Su filosofía se basa en la pasión: cada experiencia es única porque cada persona merece lo mejor. Ya sea en un evento exclusivo, una cena romántica o un momento íntimo, Carla adapta su energía mediterránea para crear la experiencia perfecta para ti. Su elegancia no es una fachada, sino una extensión natural de su personalidad apasionada y sofisticada.",
-    "images": [
-      "/chicas/carla-model-agency-valencia-vf/portada.jpg",
-      "/chicas/carla-model-agency-valencia-vf/primera.jpg",
-      "/chicas/carla-model-agency-valencia-vf/1.jpg",
-      "/chicas/carla-model-agency-valencia-vf/2.jpg",
-      "/chicas/carla-model-agency-valencia-vf/3.jpg",
-      "/chicas/carla-model-agency-valencia-vf/4.jpg"
-    ],
-    "services": [
-      "Girlfriend Experience",
-      "Cenas de Negocios",
-      "Eventos Sociales",
-      "Acompañamiento Personal"
-    ],
-    "availability": "24h",
-    "languages": [
-      "Español"
-    ]
   },
   {
     "slug": "claudia-vip",
