@@ -1,0 +1,40 @@
+{
+  "name": "valeria-ferrer-panel",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "catalog:snapshot": "tsx scripts/catalog-snapshot.ts",
+    "catalog:check": "tsx scripts/catalog-check.ts",
+    "catalog:sync": "tsx scripts/catalog-sync.ts",
+    "catalog:sync:dry": "tsx scripts/catalog-sync.ts --dry-run",
+    "seed:overrides": "tsx scripts/seed-overrides.ts",
+    "seed:overrides:dry": "tsx scripts/seed-overrides.ts --dry-run",
+    "staff:create": "tsx scripts/create-staff-user.ts",
+    "print:order": "tsx scripts/print-effective-order.ts",
+    "pretest": "npm run catalog:snapshot",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "build": "npm run catalog:snapshot && npm run catalog:check && tsc --noEmit",
+    "dev:api": "tsx watch src/dev-server.ts"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.14.3",
+    "@neondatabase/serverless": "^1.0.0",
+    "bcryptjs": "^3.0.2",
+    "drizzle-orm": "^0.44.2",
+    "hono": "^4.7.10",
+    "ws": "^8.18.2",
+    "zod": "^3.25.28"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "^0.3.2",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/node": "^22.14.0",
+    "@types/ws": "^8.18.1",
+    "tsx": "^4.19.4",
+    "typescript": "~5.8.2",
+    "vitest": "^3.1.4"
+  }
+}
