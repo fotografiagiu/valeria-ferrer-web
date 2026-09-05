@@ -68,7 +68,9 @@ describe('catalog:sync', () => {
     expect(row?.displayOrder).toBe(maxBefore + 1);
     expect(row?.coverImagePath).toBe('/chicas/nueva-test/portada.jpg');
 
-    expect(after.find((r) => r.slug === 'veronica')?.displayOrder).toBe(1);
+    // Seed order is HOME_PIN_ORDER: sara=1, danna=2, veronica=3 — must not reshuffle.
+    expect(after.find((r) => r.slug === 'sara')?.displayOrder).toBe(1);
+    expect(after.find((r) => r.slug === 'veronica')?.displayOrder).toBe(3);
   });
 
   it('sets display_order NULL when deactivated and renumbers actives 1..N', async () => {
@@ -133,6 +135,8 @@ describe('catalog:sync', () => {
     expect(after.find((r) => r.slug === 'nueva-test')?.displayOrder).toBeLessThan(
       after.find((r) => r.slug === 'erika')!.displayOrder as number
     );
-    expect(beforeActive.find((r) => r.slug === 'veronica')?.displayOrder).toBe(1);
+    // Kept actives retain seed positions (sara still #1) while erika appends at end.
+    expect(beforeActive.find((r) => r.slug === 'sara')?.displayOrder).toBe(1);
+    expect(beforeActive.find((r) => r.slug === 'veronica')?.displayOrder).toBe(3);
   });
 });

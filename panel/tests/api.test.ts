@@ -83,7 +83,8 @@ describe('auth + order + cover API', () => {
     expect(res.status).toBe(200);
     const body = await json(res);
     expect(body.orderVersion).toBe(1);
-    expect(body.models[0].slug).toBe('veronica');
+    // Seeded from computeEffectiveHomeOrder → HOME_PIN_ORDER (sara first).
+    expect(body.models[0].slug).toBe('sara');
     expect(body.models[0].allowedCoverPaths.length).toBeGreaterThan(0);
   });
 
@@ -136,8 +137,10 @@ describe('auth + order + cover API', () => {
 
     const pub = await app.request('http://localhost/api/public/overrides');
     const pubBody = await json(pub);
-    expect(pubBody.models[1].slug).toBe('marta');
-    expect(pubBody.models[2].slug).toBe('jazmin');
+    // After swapping seed positions 1↔2: [sara, veronica, danna, ...]
+    expect(pubBody.models[0].slug).toBe('sara');
+    expect(pubBody.models[1].slug).toBe('veronica');
+    expect(pubBody.models[2].slug).toBe('danna');
   });
 
   it('rejects foreign cover path', async () => {
