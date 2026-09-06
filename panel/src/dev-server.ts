@@ -1,9 +1,11 @@
 import { serve } from '@hono/node-server';
+import { loadLocalEnv } from '../scripts/lib/loadLocalEnv.js';
 import { createApp } from './app.js';
 import { getDb } from './db/client.js';
 import { writeSnapshot } from './lib/catalogSnapshot.js';
 import { loadEnv } from './lib/env.js';
 
+loadLocalEnv();
 writeSnapshot();
 const env = loadEnv();
 const app = createApp({ db: getDb(), env });

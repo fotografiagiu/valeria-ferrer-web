@@ -1,23 +1,36 @@
 import type { Context } from 'hono';
 import type { PanelEnv } from './env.js';
 
-/** Staff write endpoints: Origin must match PANEL_ORIGIN (same-origin panel ↔ API). */
+function originAllowed(origin: string, allowed: readonly string[]): boolean {
+  const normalized = origin.replace(/\/$/, '');
+  return allowed.includes(normalized);
+}
+
+function refererAllowed(referer: string, allowed: readonly string[]): boolean {
+  return allowed.some((origin) => referer.startsWith(`${origin}/`) || referer === origin);
+}
+
+/**
+ * Staff write endpoints: Origin/Referer must match an allowed staff origin.
+ * Allowed = PANEL_ORIGIN ∪ https://$VERCEL_URL ∪ https://$VERCEL_BRANCH_URL (when set).
+ * No wildcard *.vercel.app — Preview stays same-deployment only.
+ */
 export function assertStaffWriteOrigin(
   c: Context,
   env: PanelEnv
 ): { ok: true } | { ok: false; status: 403; error: string } {
   const origin = c.req.header('origin');
   const referer = c.req.header('referer');
+  const allowed = env.staffWriteOrigins;
 
   if (origin) {
-    if (origin.replace(/\/$/, '') !== env.panelOrigin) {
+    if (!originAllowed(origin, allowed)) {
       return { ok: false, status: 403, error: 'invalid origin' };
     }
     return { ok: true };
   }
 
-  // Some clients omit Origin on same-site navigations; accept Referer as fallback.
-  if (referer && referer.startsWith(`${env.panelOrigin}/`)) {
+  if (referer && refererAllowed(referer, allowed)) {
     return { ok: true };
   }
 

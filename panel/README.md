@@ -175,8 +175,8 @@ Cuando apruebes:
 1. Vercel → proyecto **panel** → Storage → crear **Neon** (Marketplace) exclusivo VF  
 2. Copiar `DATABASE_URL` solo a env del proyecto panel (Preview + Production)  
 3. Añadir también `SESSION_SECRET`, `PANEL_ORIGIN`, `PUBLIC_WEB_ORIGINS`  
-4. Aplicar migración: `psql $DATABASE_URL -f db/migrations/0001_init.sql`  
-   (o script migrate cuando lo añadamos)  
+4. Aplicar migración: `npm run db:migrate` (usa `DATABASE_URL_UNPOOLED` + preflight)  
+   (o `psql "$DATABASE_URL_UNPOOLED" -f db/migrations/0001_init.sql`)  
 5. `npm run seed:overrides`  
 6. `npm run staff:create -- ...`  
 7. Tests de humo contra staging  
@@ -187,6 +187,17 @@ Cuando apruebes:
 
 ## Variables (nombres)
 
-Ver `.env.example`: `DATABASE_URL`, `SESSION_SECRET`, `STAFF_COOKIE_NAME`, `STAFF_SESSION_TTL_HOURS`, `PANEL_ORIGIN`, `PUBLIC_WEB_ORIGINS`.
+Ver `.env.example`: `DATABASE_URL`, `DATABASE_URL_UNPOOLED`, `SESSION_SECRET`, `STAFF_COOKIE_NAME`, `STAFF_SESSION_TTL_HOURS`, `PANEL_ORIGIN`, `PUBLIC_WEB_ORIGINS`.
 
 Nunca `VITE_*` con secretos.
+
+### Env + Neon helpers (sin imprimir secretos)
+
+```bash
+npm run env:session-secret   # genera SESSION_SECRET (stdout → pegar en Vercel)
+npm run env:check            # confirma variables presentes (no imprime valores)
+npm run db:preflight         # conecta con UNPOOLED, verifica tablas objetivo ausentes
+npm run db:migrate           # preflight + aplica db/migrations/0001_init.sql
+```
+
+`db:migrate` / `db:preflight` usan **solo** `DATABASE_URL_UNPOOLED`, no hacen DROP ni seed.

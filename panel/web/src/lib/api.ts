@@ -1,0 +1,94 @@
+export type StaffUser = {
+  id: string;
+  username: string;
+  displayName: string;
+};
+
+export type StaffCatalogModel = {
+  slug: string;
+  name: string;
+  displayOrder: number;
+  coverImagePath: string;
+  coverVersion: number;
+  allowedCoverPaths: string[];
+};
+
+export type StaffCatalogResponse = {
+  orderVersion: number;
+  missingOverrides: string[];
+  models: StaffCatalogModel[];
+};
+
+export class ApiError extends Error {
+  status: number;
+  body: unknown;
+
+  constructor(status: number, message: string, body?: unknown) {
+    super(message);
+    this.name = 'ApiError';
+    this.status = status;
+    this.body = body;
+  }
+}
+
+async function parseJson(res: Response): Promise<unknown> {
+  try {
+    return await res.json();
+  } catch {
+    return null;
+  }
+}
+
+async function request<T>(path: string, init?: RequestInit): Promise<T> {
+  const res = await fetch(path, {
+    credentials: 'include',
+    ...init,
+    headers: {
+      ...(init?.body ? { 'Content-Type': 'application/json' } : {}),
+      ...(init?.headers || {}),
+    },
+  });
+
+  const body = await parseJson(res);
+  if (!res.ok) {
+    const message =
+      body && typeof body === 'object' && 'error' in body && typeof (body as { error: unknown }).error === 'string'
+        ? (body as { error: string }).error
+        : `HTTP ${res.status}`;
+    throw new ApiError(res.status, message, body);
+  }
+  return body as T;
+}
+
+export function login(username: string, password: string) {
+  return request<StaffUser>('/api/staff/login', {
+    method: 'POST',
+    body: JSON.stringify({ username, password }),
+  });
+}
+
+export function logout() {
+  return request<{ ok: true }>('/api/staff/logout', { method: 'POST' });
+}
+
+export function getMe() {
+  return request<StaffUser>('/api/staff/me');
+}
+
+export function getCatalog() {
+  return request<StaffCatalogResponse>('/api/staff/catalog');
+}
+
+export function putOrder(version: number, orderedSlugs: string[]) {
+  return request<{ ok: true; orderVersion: number }>('/api/staff/order', {
+    method: 'PUT',
+    body: JSON.stringify({ version, orderedSlugs }),
+  });
+}
+
+export function putCover(slug: string, coverImagePath: string, version: number) {
+  return request<{ ok: true; coverVersion: number; coverImagePath: string }>('/api/staff/cover', {
+    method: 'PUT',
+    body: JSON.stringify({ slug, coverImagePath, version }),
+  });
+}
