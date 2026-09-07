@@ -21,7 +21,11 @@ export const coverBodySchema = z
 
 export const loginBodySchema = z
   .object({
-    username: z.string().min(1).max(64),
+    username: z
+      .string()
+      .max(64)
+      .transform((value) => value.trim())
+      .refine((value) => value.length > 0),
     password: z.string().min(1).max(200),
   })
   .strict();

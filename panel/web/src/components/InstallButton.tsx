@@ -18,7 +18,7 @@ function isStandalone(): boolean {
   );
 }
 
-/** Android install prompt. Renders nothing where the browser can't install. */
+/** Install prompt for Android and desktop. Renders nothing where unsupported. */
 export function InstallButton() {
   const [promptEvent, setPromptEvent] = useState<InstallPromptEvent | null>(
     () => window.__vfInstallPrompt
@@ -42,7 +42,7 @@ export function InstallButton() {
 
   if (isStandalone()) return null;
   if (installed) {
-    return <p className="install-hint">App instalada. Ábrela desde el icono del móvil.</p>;
+    return <p className="install-hint">App instalada. Ábrela desde su icono.</p>;
   }
   if (!promptEvent) return null;
 
@@ -56,7 +56,7 @@ export function InstallButton() {
 
   return (
     <button type="button" className="install-btn" onClick={onInstall}>
-      Instalar app en este móvil
+      Instalar la app en este móvil
     </button>
   );
 }

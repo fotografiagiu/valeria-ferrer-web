@@ -1,6 +1,6 @@
 import { Hono } from 'hono';
 import { getCookie } from 'hono/cookie';
-import { eq } from 'drizzle-orm';
+import { sql } from 'drizzle-orm';
 import type { AppDb } from './db/client.js';
 import { staffUsers } from './db/schema.js';
 import { appendAudit } from './lib/audit.js';
@@ -130,10 +130,12 @@ export function createApp(options: CreateAppOptions) {
     const parsed = loginBodySchema.safeParse(body);
     if (!parsed.success) return c.json({ error: 'invalid body' }, 400);
 
+    // Phone keyboards capitalise the first letter, so the username must match
+    // regardless of case.
     const users = await db
       .select()
       .from(staffUsers)
-      .where(eq(staffUsers.username, parsed.data.username))
+      .where(sql`lower(${staffUsers.username}) = lower(${parsed.data.username})`)
       .limit(1);
     const user = users[0];
     const ok =

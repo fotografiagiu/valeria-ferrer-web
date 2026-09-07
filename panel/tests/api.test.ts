@@ -76,6 +76,15 @@ describe('auth + order + cover API', () => {
     cookie = setCookie.split(';')[0];
   });
 
+  it('accepts the username with any casing and surrounding spaces', async () => {
+    const res = await app.request('http://localhost/api/staff/login', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ username: '  Encargada1 ', password: 'test-password-ok' }),
+    });
+    expect(res.status).toBe(200);
+  });
+
   it('returns staff catalog with allowlists', async () => {
     const res = await app.request('http://localhost/api/staff/catalog', {
       headers: { cookie },
