@@ -32,7 +32,6 @@ describe('effective Home order', () => {
     expect(order.slice(0, activePins.length)).toEqual(activePins);
     expect(order[0]).toBe('sara');
     expect(order[1]).toBe('danna');
-    expect(order[2]).toBe('veronica');
     expect(order.indexOf('alicia')).toBe(activePins.indexOf('alicia'));
     expect(order).toHaveLength(readSnapshot().activeCount);
   });

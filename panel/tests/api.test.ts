@@ -146,10 +146,8 @@ describe('auth + order + cover API', () => {
 
     const pub = await app.request('http://localhost/api/public/overrides');
     const pubBody = await json(pub);
-    // After swapping seed positions 1↔2: [sara, veronica, danna, ...]
-    expect(pubBody.models[0].slug).toBe('sara');
-    expect(pubBody.models[1].slug).toBe('veronica');
-    expect(pubBody.models[2].slug).toBe('danna');
+    // The public order must mirror exactly the order just saved.
+    expect(pubBody.models.map((m: { slug: string }) => m.slug)).toEqual(swapped);
   });
 
   it('rejects foreign cover path', async () => {

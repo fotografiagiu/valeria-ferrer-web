@@ -1,6 +1,7 @@
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { createTestDb, type AppDb } from '../src/db/client.js';
 import { writeSnapshot, readSnapshot } from '../src/lib/catalogSnapshot.js';
+import { computeEffectiveHomeOrder } from '../src/lib/effectiveOrder.js';
 import {
   seedOverridesFromEffectiveOrder,
   syncCatalogOverrides,
@@ -25,6 +26,12 @@ beforeAll(async () => {
 afterAll(async () => {
   await close();
 });
+
+/** Seeded positions follow the effective home order, so assert against it
+ * instead of slugs that can be deactivated later. */
+function seededOrder(): string[] {
+  return computeEffectiveHomeOrder(readSnapshot().models);
+}
 
 describe('catalog:sync', () => {
   it('dry-run reports no additions on current catalog', async () => {
@@ -68,9 +75,10 @@ describe('catalog:sync', () => {
     expect(row?.displayOrder).toBe(maxBefore + 1);
     expect(row?.coverImagePath).toBe('/chicas/nueva-test/portada.jpg');
 
-    // Seed order is HOME_PIN_ORDER: sara=1, danna=2, veronica=3 — must not reshuffle.
-    expect(after.find((r) => r.slug === 'sara')?.displayOrder).toBe(1);
-    expect(after.find((r) => r.slug === 'veronica')?.displayOrder).toBe(3);
+    // Seed order comes from HOME_PIN_ORDER and must not reshuffle.
+    const seeded = seededOrder();
+    expect(after.find((r) => r.slug === seeded[0])?.displayOrder).toBe(1);
+    expect(after.find((r) => r.slug === seeded[2])?.displayOrder).toBe(3);
   });
 
   it('sets display_order NULL when deactivated and renumbers actives 1..N', async () => {
@@ -135,8 +143,9 @@ describe('catalog:sync', () => {
     expect(after.find((r) => r.slug === 'nueva-test')?.displayOrder).toBeLessThan(
       after.find((r) => r.slug === 'erika')!.displayOrder as number
     );
-    // Kept actives retain seed positions (sara still #1) while erika appends at end.
-    expect(beforeActive.find((r) => r.slug === 'sara')?.displayOrder).toBe(1);
-    expect(beforeActive.find((r) => r.slug === 'veronica')?.displayOrder).toBe(3);
+    // Kept actives retain seed positions while erika appends at end.
+    const seeded = seededOrder();
+    expect(beforeActive.find((r) => r.slug === seeded[0])?.displayOrder).toBe(1);
+    expect(beforeActive.find((r) => r.slug === seeded[2])?.displayOrder).toBe(3);
   });
 });
