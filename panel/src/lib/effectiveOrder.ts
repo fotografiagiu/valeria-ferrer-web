@@ -1,5 +1,5 @@
 /**
- * Must stay identical to pages/Home.tsx pinOrder until Fase 4 unifies them.
+ * Must stay identical to lib/catalogOverrides.ts HOME_PIN_ORDER (static Home fallback).
  * Seed / display_order use this + remaining active models in models.json order.
  */
 export const HOME_PIN_ORDER: readonly string[] = [

@@ -15,6 +15,8 @@ type ToastState = { message: string; tone: 'success' | 'error' } | null;
 
 export function App() {
   const [bootstrapping, setBootstrapping] = useState(true);
+  const [bootError, setBootError] = useState<string | null>(null);
+  const [bootRetry, setBootRetry] = useState(0);
   const [user, setUser] = useState<StaffUser | null>(null);
   const [models, setModels] = useState<StaffCatalogModel[]>([]);
   const [orderVersion, setOrderVersion] = useState(1);
@@ -55,14 +57,30 @@ export function App() {
 
   useEffect(() => {
     let cancelled = false;
+    setBootstrapping(true);
+    setBootError(null);
     (async () => {
       try {
         const me = await getMe();
         if (cancelled) return;
         setUser(me);
+        setBootError(null);
         await loadCatalog();
-      } catch {
-        if (!cancelled) setUser(null);
+      } catch (err) {
+        if (cancelled) return;
+        setUser(null);
+        // 401 / unauthorized → show login (not an error screen)
+        if (err instanceof ApiError && err.status === 401) {
+          setBootError(null);
+        } else if (err instanceof ApiError) {
+          const detail =
+            err.status > 0
+              ? `No se pudo verificar la sesión (HTTP ${err.status}).`
+              : err.message;
+          setBootError(detail);
+        } else {
+          setBootError('No se pudo verificar la sesión.');
+        }
       } finally {
         if (!cancelled) setBootstrapping(false);
       }
@@ -70,7 +88,7 @@ export function App() {
     return () => {
       cancelled = true;
     };
-  }, [loadCatalog]);
+  }, [loadCatalog, bootRetry]);
 
   async function onLogout() {
     try {
@@ -86,6 +104,17 @@ export function App() {
     return <div className="loading-center">Cargando…</div>;
   }
 
+  if (bootError) {
+    return (
+      <div className="loading-center boot-error">
+        <p>{bootError}</p>
+        <button type="button" className="ghost-btn" onClick={() => setBootRetry((n) => n + 1)}>
+          Reintentar
+        </button>
+      </div>
+    );
+  }
+
   if (!user) {
     return (
       <>
@@ -93,6 +122,7 @@ export function App() {
         <LoginScreen
           onLoggedIn={async (nextUser) => {
             setUser(nextUser);
+            setBootError(null);
             await loadCatalog();
           }}
         />

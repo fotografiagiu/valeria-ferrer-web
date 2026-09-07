@@ -1,18 +1,30 @@
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
+import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
-import { Pool } from '@neondatabase/serverless';
+import { Pool, neonConfig } from '@neondatabase/serverless';
 import { drizzle as drizzleNeon } from 'drizzle-orm/neon-serverless';
-import { drizzle as drizzlePglite } from 'drizzle-orm/pglite';
-import { PGlite } from '@electric-sql/pglite';
 import * as schema from './schema.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const require = createRequire(import.meta.url);
 export const MIGRATION_SQL_PATH = path.resolve(__dirname, '../../db/migrations/0001_init.sql');
 
-export type AppDb =
-  | ReturnType<typeof drizzleNeon<typeof schema>>
-  | ReturnType<typeof drizzlePglite<typeof schema>>;
+/**
+ * Neon WebSocket Pool (supports transactions for order/cover writes).
+ * On Vercel serverless, prefer HTTP for non-transaction queries to avoid WS hangs.
+ */
+if (process.env.VERCEL || process.env.VERCEL_ENV) {
+  neonConfig.poolQueryViaFetch = true;
+}
+
+try {
+  neonConfig.webSocketConstructor = require('ws');
+} catch {
+  // Reads still work via poolQueryViaFetch on Vercel.
+}
+
+export type AppDb = ReturnType<typeof drizzleNeon<typeof schema>>;
 
 let singleton: AppDb | null = null;
 
@@ -25,18 +37,7 @@ export function createNeonDb(databaseUrl: string): AppDb {
   return drizzleNeon(pool, { schema });
 }
 
-export async function createTestDb(): Promise<{ db: AppDb; close: () => Promise<void> }> {
-  const client = new PGlite();
-  await client.exec(getMigrationSql());
-  const db = drizzlePglite(client, { schema });
-  return {
-    db,
-    close: async () => {
-      await client.close();
-    },
-  };
-}
-
+/** Runtime DB: pooled DATABASE_URL only (never UNPOOLED / DDL URL). */
 export function getDb(): AppDb {
   if (singleton) return singleton;
   const url = process.env.DATABASE_URL || process.env.DATABASE_URL_DEV;

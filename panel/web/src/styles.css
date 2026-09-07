@@ -479,6 +479,23 @@ img {
   gap: 10px;
 }
 
+.boot-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  max-width: 22rem;
+  margin: 0 auto;
+  padding: 24px;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.boot-error p {
+  margin: 0;
+  line-height: 1.45;
+}
+
 .loading-center {
   min-height: 50vh;
   display: grid;

@@ -1,17 +1,25 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
-  "buildCommand": "npm run catalog:snapshot && npm run catalog:check && npm run typecheck && npm run build:web",
-  "outputDirectory": "web/dist",
+  "buildCommand": "npm run catalog:snapshot && npm run catalog:check && npm run typecheck && npm run build:web && rm -rf public && mkdir -p public && cp -R web/dist/. public/",
+  "outputDirectory": "public",
   "installCommand": "npm install",
   "functions": {
-    "api/index.ts": {
+    "api/health.ts": { "maxDuration": 10 },
+    "api/public/overrides.ts": {
+      "maxDuration": 30,
+      "includeFiles": "generated/**"
+    },
+    "api/[[...route]].ts": {
+      "maxDuration": 30,
+      "includeFiles": "generated/**"
+    },
+    "api/staff/*.ts": {
       "maxDuration": 30,
       "includeFiles": "generated/**"
     }
   },
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api" },
     { "source": "/((?!api/).*)", "destination": "/index.html" }
   ],
   "headers": [

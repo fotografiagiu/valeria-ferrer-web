@@ -31,6 +31,8 @@ export class ApiError extends Error {
   }
 }
 
+const DEFAULT_TIMEOUT_MS = 12_000;
+
 async function parseJson(res: Response): Promise<unknown> {
   try {
     return await res.json();
@@ -39,15 +41,30 @@ async function parseJson(res: Response): Promise<unknown> {
   }
 }
 
-async function request<T>(path: string, init?: RequestInit): Promise<T> {
-  const res = await fetch(path, {
-    credentials: 'include',
-    ...init,
-    headers: {
-      ...(init?.body ? { 'Content-Type': 'application/json' } : {}),
-      ...(init?.headers || {}),
-    },
-  });
+async function request<T>(path: string, init?: RequestInit & { timeoutMs?: number }): Promise<T> {
+  const { timeoutMs = DEFAULT_TIMEOUT_MS, ...fetchInit } = init || {};
+  const controller = new AbortController();
+  const timer = window.setTimeout(() => controller.abort(), timeoutMs);
+
+  let res: Response;
+  try {
+    res = await fetch(path, {
+      credentials: 'include',
+      ...fetchInit,
+      signal: controller.signal,
+      headers: {
+        ...(fetchInit.body ? { 'Content-Type': 'application/json' } : {}),
+        ...(fetchInit.headers || {}),
+      },
+    });
+  } catch (err) {
+    if (err instanceof DOMException && err.name === 'AbortError') {
+      throw new ApiError(0, 'La solicitud tardó demasiado. Revisa la conexión e inténtalo de nuevo.');
+    }
+    throw new ApiError(0, 'No se pudo conectar con el servidor.');
+  } finally {
+    window.clearTimeout(timer);
+  }
 
   const body = await parseJson(res);
   if (!res.ok) {
