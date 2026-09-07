@@ -1,5 +1,6 @@
 import { FormEvent, useState } from 'react';
 import { ApiError, login, type StaffUser } from '../lib/api';
+import { InstallButton } from './InstallButton';
 
 type Props = {
   onLoggedIn: (user: StaffUser) => void;
@@ -71,6 +72,8 @@ export function LoginScreen({ onLoggedIn }: Props) {
         <button className="primary-btn" type="submit" disabled={busy || !username || !password}>
           {busy ? 'Entrando…' : 'Entrar'}
         </button>
+
+        <InstallButton />
       </form>
     </div>
   );

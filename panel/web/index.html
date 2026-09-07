@@ -25,6 +25,16 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      // Chrome can fire this before React mounts, and the event cannot be
+      // retrieved later, so hold on to it for the install button.
+      window.__vfInstallPrompt = null;
+      window.addEventListener('beforeinstallprompt', function (event) {
+        event.preventDefault();
+        window.__vfInstallPrompt = event;
+        window.dispatchEvent(new Event('vf-install-ready'));
+      });
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

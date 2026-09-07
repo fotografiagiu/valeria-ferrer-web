@@ -217,6 +217,27 @@ img {
   border: 1px solid var(--gold-line);
 }
 
+.install-btn {
+  width: 100%;
+  margin-top: 12px;
+  padding: 14px 18px;
+  border-radius: 14px;
+  background: transparent;
+  border: 1px solid var(--gold-line);
+  color: var(--gold);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+}
+
+.install-hint {
+  margin: 14px 0 0;
+  text-align: center;
+  color: var(--success);
+  font-size: 0.75rem;
+}
+
 .error-text {
   color: var(--danger);
   font-size: 0.85rem;
