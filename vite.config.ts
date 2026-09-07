@@ -5,10 +5,19 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig(({ mode }) => {
     const env = loadEnv(mode, '.', '');
+    const overridesProxyTarget =
+      env.VITE_OVERRIDES_PROXY_TARGET || 'https://valeria-ferrer-panel.vercel.app';
     return {
       server: {
         port: 3000,
         host: '0.0.0.0',
+        proxy: {
+          // Dev same-origin fetch → real panel (Production by default; override for local :8787).
+          '/api/public': {
+            target: overridesProxyTarget,
+            changeOrigin: true,
+          },
+        },
       },
       build: {
         rollupOptions: {

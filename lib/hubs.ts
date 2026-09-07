@@ -3,7 +3,7 @@ import { MODELS } from '../constants';
 import type { HubKey } from '../data/hubs';
 import { getHubDef, getHubModelsFrom } from '../data/hubs';
 
-/** Respeta el orden de `models.json`: las fichas nuevas arriba del JSON salen primero. */
+/** Orden relativo según el catálogo pasado (JSON estático o overrides ya aplicados). */
 export function sortByCatalogOrder(models: Model[], catalog: Model[] = MODELS): Model[] {
   const order = new Map(catalog.map((m, index) => [m.slug, index]));
   return [...models].sort(

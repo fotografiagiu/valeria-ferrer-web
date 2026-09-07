@@ -7,6 +7,8 @@ import PageSEOHead from '../components/PageSEOHead';
 import type { HubKey } from '../data/hubs';
 import { getHubDef } from '../data/hubs';
 import { getHubModels } from '../lib/hubs';
+import { MODELS } from '../constants';
+import { useCatalogWithOverrides } from '../hooks/useCatalogWithOverrides';
 import type { Model } from '../types';
 
 type Props = {
@@ -38,7 +40,8 @@ const ModelsHub: React.FC<Props> = ({ hubKey }) => {
     window.scrollTo(0, 0);
   }, [hubKey]);
 
-  const hubModels = useMemo(() => getHubModels(hubKey), [hubKey]);
+  const catalogModels = useCatalogWithOverrides(MODELS);
+  const hubModels = useMemo(() => getHubModels(hubKey, catalogModels), [hubKey, catalogModels]);
   const gridModels = useMemo(() => hubModels.map(toGridModel), [hubModels]);
 
   if (!hub.enabled) {

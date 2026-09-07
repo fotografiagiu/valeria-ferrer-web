@@ -27,3 +27,6 @@ dist-ssr
 **/.env
 .env*.local
 .windsurf/
+.env*
+!.env.production
+!.env.example

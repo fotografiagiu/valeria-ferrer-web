@@ -8,6 +8,7 @@ import PageSEOHead from '../components/PageSEOHead';
 import HomeNovedadesStrip from '../components/HomeNovedadesStrip';
 import modelsData from '../data/models.json';
 import { filterActiveModels } from '../lib/modelsCatalog';
+import { useCatalogWithOverrides } from '../hooks/useCatalogWithOverrides';
 import { Diamond, ShieldCheck, Star, Send } from 'lucide-react';
 import { getHomeExploreLinks } from '../lib/homeExploreLinks';
 
@@ -44,38 +45,8 @@ function scheduleBelowFoldWork(onReady: () => void): () => void {
 
 const Home: React.FC = () => {
   const exploreLinks = useMemo(() => getHomeExploreLinks(), []);
-  const homeModels = useMemo(() => {
-    const activeModels = filterActiveModels(modelsData);
-    // Fila 1 (4 cols desktop) + fila 2: el resto del pin manual
-    const pinOrder = [
-      'sara',
-      'danna',
-      'veronica',
-      'jazmin',
-      'marta',
-      'luna',
-      'silvia',
-      'adara',
-      'vero',
-      'zoe',
-      'alicia',
-      'andrea',
-      'carla',
-      'rihanna',
-      'julieta',
-      'paula-vip',
-      'teresa',
-      'mia',
-      'naty',
-    ];
-    const pinned = pinOrder
-      .map((slug) => activeModels.find((m) => m.slug === slug))
-      .filter(Boolean);
-    if (pinned.length === 0) return activeModels;
-    const pinnedSlugs = new Set(pinned.map((m) => m.slug));
-    const rest = activeModels.filter((m) => !pinnedSlugs.has(m.slug));
-    return [...pinned, ...rest];
-  }, []);
+  const activeModels = useMemo(() => filterActiveModels(modelsData), []);
+  const homeModels = useCatalogWithOverrides(activeModels, { homePinFallback: true });
   const [loadExploreNav, setLoadExploreNav] = useState(false);
   const [loadReviews, setLoadReviews] = useState(false);
   const reviewsSentinelRef = useRef<HTMLDivElement>(null);

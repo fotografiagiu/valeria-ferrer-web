@@ -7,10 +7,16 @@ import AnimatedCounter from '../components/AnimatedCounter';
 import PageSEOHead from '../components/PageSEOHead';
 import modelsData from '../data/models.json';
 import { filterActiveModels } from '../lib/modelsCatalog';
+import { useCatalogWithOverrides } from '../hooks/useCatalogWithOverrides';
 
 const Models: React.FC = () => {
-  const catalogModels = useMemo(() => filterActiveModels(modelsData), []);
+  const staticCatalog = useMemo(() => filterActiveModels(modelsData), []);
+  const catalogModels = useCatalogWithOverrides(staticCatalog);
   const [filteredModels, setFilteredModels] = useState<any[]>(catalogModels);
+
+  useEffect(() => {
+    setFilteredModels(catalogModels);
+  }, [catalogModels]);
 
   useEffect(() => {
     const scrollToFirstSelection = () => {

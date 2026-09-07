@@ -14,8 +14,9 @@ export function getModelCoverImage(coverImageUrl: string): string {
 export function getModelCoverThumbnailPath(coverImageUrl: string): string {
   const normalized = resolveOriginalImageUrl(coverImageUrl);
 
-  // Portadas con nombre propio (p. ej. portada-lenceria-jul2026.jpg): misma ruta en thumbnails.
-  // Evita cache immutable de cover-thumbnail.jpg al renovar fotos.
+  // Solo `portada.jpg` / `portada-nueva.jpg` / `cover.jpg` → cover-thumbnail.jpg.
+  // Portadas dinámicas del panel (galería u otro nombre) NUNCA se sustituyen por
+  // un cover-thumbnail.jpg antiguo: misma ruta bajo chicas-thumbnails/.
   const isGenericCover =
     /\/portada(-nueva)?\.jpg$/i.test(normalized) || /\/cover\.jpg$/i.test(normalized);
   if (!isGenericCover) {
@@ -25,6 +26,8 @@ export function getModelCoverThumbnailPath(coverImageUrl: string): string {
     if (normalized.includes('/chicas/')) {
       return normalized.replace('/chicas/', '/chicas-thumbnails/');
     }
+    // Ruta no-chicas: usar original (mejor que inventar cover-thumbnail).
+    return normalized;
   }
 
   const pathParts = normalized.split('/');
