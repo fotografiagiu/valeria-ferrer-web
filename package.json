@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "build:seo": "node scripts/generate-sitemap.mjs && node scripts/generate-model-structured-data.mjs",
+    "build": "vite build && node scripts/generate-app-catalog.mjs",
+    "build:seo": "node scripts/generate-sitemap.mjs && node scripts/generate-model-structured-data.mjs && node scripts/generate-app-catalog.mjs",
+    "build:app-catalog": "node scripts/generate-app-catalog.mjs",
     "build:inject-seo": "node scripts/inject-seo-html.mjs",
     "build:prerender": "node scripts/prerender.mjs",
     "build:production": "npm run build && npm run build:seo && npm run build:inject-seo",

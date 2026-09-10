@@ -1,0 +1,337 @@
+{
+  "generatedAt": "2026-09-10T11:19:33.989Z",
+  "source": "valeria-ferrer-web",
+  "method": "build-app-catalog",
+  "models": [
+    {
+      "slug": "sara",
+      "name": "Sara",
+      "active": true,
+      "vip": false
+    },
+    {
+      "slug": "danna",
+      "name": "Danna",
+      "active": true,
+      "vip": false
+    },
+    {
+      "slug": "veronica",
+      "name": "Veronica",
+      "active": false,
+      "vip": false
+    },
+    {
+      "slug": "jazmin",
+      "name": "Jazmín",
+      "active": true,
+      "vip": false
+    },
+    {
+      "slug": "marta",
+      "name": "Marta",
+      "active": true,
+      "vip": false
+    },
+    {
+      "slug": "paris",
+      "name": "Paris",
+      "active": false,
+      "vip": false
+    },
+    {
+      "slug": "barbie",
+      "name": "Barbie",
+      "active": false,
+      "vip": false
+    },
+    {
+      "slug": "luna",
+      "name": "Luna",
+      "active": true,
+      "vip": false
+    },
+    {
+      "slug": "silvia",
+      "name": "Silvia",
+      "active": true,
+      "vip": false
+    },
+    {
+      "slug": "adara",
+      "name": "Adara",
+      "active": true,
+      "vip": false
+    },
+    {
+      "slug": "vero",
+      "name": "Vero",
+      "active": true,
+      "vip": false
+    },
+    {
+      "slug": "zoe",
+      "name": "Zoe",
+      "active": true,
+      "vip": false
+    },
+    {
+      "slug": "andrea",
+      "name": "Andrea",
+      "active": true,
+      "vip": false
+    },
+    {
+      "slug": "carla",
+      "name": "Carla",
+      "active": true,
+      "vip": false
+    },
+    {
+      "slug": "rihanna",
+      "name": "Rihanna",
+      "active": true,
+      "vip": false
+    },
+    {
+      "slug": "julieta",
+      "name": "Julieta",
+      "active": true,
+      "vip": false
+    },
+    {
+      "slug": "salome",
+      "name": "Salomé",
+      "active": false,
+      "vip": false
+    },
+    {
+      "slug": "carolina",
+      "name": "Carolina",
+      "active": false,
+      "vip": false
+    },
+    {
+      "slug": "laura",
+      "name": "Laura",
+      "active": false,
+      "vip": false
+    },
+    {
+      "slug": "kim",
+      "name": "Kim",
+      "active": false,
+      "vip": false
+    },
+    {
+      "slug": "teresa",
+      "name": "Teresa",
+      "active": true,
+      "vip": false
+    },
+    {
+      "slug": "tiffany",
+      "name": "Tiffany",
+      "active": false,
+      "vip": false
+    },
+    {
+      "slug": "paula-vip",
+      "name": "Paula (VIP)",
+      "active": true,
+      "vip": true,
+      "rateExceptions": [
+        {
+          "serviceTypeId": "30min",
+          "totalCents": 10000
+        },
+        {
+          "serviceTypeId": "45min",
+          "totalCents": 15000
+        },
+        {
+          "serviceTypeId": "60min",
+          "totalCents": 20000
+        },
+        {
+          "serviceTypeId": "90min",
+          "totalCents": 30000
+        },
+        {
+          "serviceTypeId": "120min",
+          "totalCents": 35000
+        },
+        {
+          "serviceTypeId": "180min",
+          "totalCents": 52000
+        },
+        {
+          "serviceTypeId": "salida",
+          "totalCents": 25000
+        },
+        {
+          "serviceTypeId": "noche",
+          "totalCents": 200000
+        },
+        {
+          "serviceTypeId": "dia",
+          "totalCents": 300000
+        },
+        {
+          "serviceTypeId": "dosDias",
+          "totalCents": 400000
+        }
+      ]
+    },
+    {
+      "slug": "valentina",
+      "name": "Valentina",
+      "active": false,
+      "vip": false
+    },
+    {
+      "slug": "naty",
+      "name": "Naty",
+      "active": true,
+      "vip": false
+    },
+    {
+      "slug": "flor",
+      "name": "Flor",
+      "active": false,
+      "vip": false
+    },
+    {
+      "slug": "lili",
+      "name": "Lili",
+      "active": false,
+      "vip": false
+    },
+    {
+      "slug": "estefany",
+      "name": "Estefany",
+      "active": false,
+      "vip": false
+    },
+    {
+      "slug": "key",
+      "name": "KEY",
+      "active": false,
+      "vip": false
+    },
+    {
+      "slug": "elena",
+      "name": "Elena",
+      "active": true,
+      "vip": false
+    },
+    {
+      "slug": "lana",
+      "name": "Lana",
+      "active": true,
+      "vip": false
+    },
+    {
+      "slug": "monica",
+      "name": "Mónica",
+      "active": true,
+      "vip": false
+    },
+    {
+      "slug": "maria-escort-valencia",
+      "name": "Maria",
+      "active": false,
+      "vip": false
+    },
+    {
+      "slug": "sofia",
+      "name": "Sofía",
+      "active": true,
+      "vip": false
+    },
+    {
+      "slug": "cristal",
+      "name": "Cristal",
+      "active": false,
+      "vip": false
+    },
+    {
+      "slug": "claudia-vip",
+      "name": "Claudia (VIP)",
+      "active": false,
+      "vip": true,
+      "rateExceptions": [
+        {
+          "serviceTypeId": "30min",
+          "totalCents": 10000
+        },
+        {
+          "serviceTypeId": "45min",
+          "totalCents": 15000
+        },
+        {
+          "serviceTypeId": "60min",
+          "totalCents": 20000
+        },
+        {
+          "serviceTypeId": "90min",
+          "totalCents": 30000
+        },
+        {
+          "serviceTypeId": "120min",
+          "totalCents": 35000
+        },
+        {
+          "serviceTypeId": "180min",
+          "totalCents": 52000
+        },
+        {
+          "serviceTypeId": "salida",
+          "totalCents": 25000
+        },
+        {
+          "serviceTypeId": "noche",
+          "totalCents": 200000
+        },
+        {
+          "serviceTypeId": "dia",
+          "totalCents": 300000
+        },
+        {
+          "serviceTypeId": "dosDias",
+          "totalCents": 400000
+        }
+      ]
+    },
+    {
+      "slug": "alicia",
+      "name": "Alicia",
+      "active": true,
+      "vip": false
+    },
+    {
+      "slug": "mia",
+      "name": "Mia",
+      "active": true,
+      "vip": false
+    },
+    {
+      "slug": "yaiza",
+      "name": "Yaiza",
+      "active": true,
+      "vip": false
+    },
+    {
+      "slug": "erika",
+      "name": "Erika",
+      "active": true,
+      "vip": false
+    },
+    {
+      "slug": "coral",
+      "name": "Coral",
+      "active": false,
+      "vip": false
+    }
+  ]
+}

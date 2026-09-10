@@ -3,6 +3,7 @@
 import fs from 'fs';
 import path from 'path';
 import {
+  APP_CATALOG_RELATIVE_PATH,
   ARCHIVE_DIR,
   MODELS_PATH,
   PUBLIC_DIR,
@@ -201,6 +202,107 @@ for (const orphan of ORPHAN_STRUCTURED_DATA) {
     fail(`Orphan still active: ${orphan}.json`);
   } else if (fs.existsSync(archivePath)) {
     pass(`Orphan archived: ${orphan}.json`);
+  }
+}
+
+const APP_CATALOG_ALLOWED_KEYS = new Set([
+  'slug',
+  'name',
+  'active',
+  'vip',
+  'rateExceptions',
+]);
+const APP_CATALOG_FORBIDDEN_KEYS = [
+  'description',
+  'essence',
+  'images',
+  'coverImageUrl',
+  'profileImageUrl',
+  'profileUrl',
+  'age',
+  'height',
+  'weight',
+];
+
+const appCatalogPath = path.join(PUBLIC_DIR, APP_CATALOG_RELATIVE_PATH);
+if (!fs.existsSync(appCatalogPath)) {
+  fail('app-catalog.json not found');
+} else {
+  const catalog = readJson(appCatalogPath);
+  if (!Array.isArray(catalog.models)) {
+    fail('app-catalog.json models is not an array');
+  } else {
+    const catalogSlugs = catalog.models.map((model) => model.slug);
+    const expectedSlugs = models.map((model) => model.slug);
+
+    if (catalog.models.length !== models.length) {
+      fail(
+        `app-catalog models=${catalog.models.length}, expected ${models.length} (including inactive)`
+      );
+    } else {
+      pass(`app-catalog includes all ${models.length} models (active and inactive)`);
+    }
+
+    if (JSON.stringify(catalogSlugs) !== JSON.stringify(expectedSlugs)) {
+      fail('app-catalog slug order does not match data/models.json');
+    } else {
+      pass('app-catalog slug order matches data/models.json');
+    }
+
+    const inactiveInSource = models.filter((model) => model.active === false);
+    const inactiveInCatalog = catalog.models.filter((model) => model.active === false);
+    if (inactiveInSource.length === 0) {
+      fail('models.json unexpectedly has zero inactive models');
+    } else if (inactiveInCatalog.length !== inactiveInSource.length) {
+      fail(
+        `app-catalog inactive=${inactiveInCatalog.length}, expected ${inactiveInSource.length}`
+      );
+    } else {
+      pass(`app-catalog keeps ${inactiveInCatalog.length} inactive models with active:false`);
+    }
+
+    for (const slug of ['kim', 'tiffany', 'paula-vip', 'sara']) {
+      const entry = catalog.models.find((model) => model.slug === slug);
+      if (!entry) {
+        fail(`${slug} missing from app-catalog.json`);
+        continue;
+      }
+      if (typeof entry.slug !== 'string' || typeof entry.name !== 'string' || typeof entry.active !== 'boolean') {
+        fail(`${slug} is missing slug/name/active in app-catalog.json`);
+      }
+    }
+
+    const kim = catalog.models.find((model) => model.slug === 'kim');
+    if (kim && kim.active !== false) {
+      fail('Kim must be published as active:false in app-catalog.json');
+    } else if (kim) {
+      pass('Kim is present in app-catalog with active:false');
+    }
+
+    const paula = catalog.models.find((model) => model.slug === 'paula-vip');
+    if (!paula?.rateExceptions?.length) {
+      fail('Paula VIP is missing rateExceptions in app-catalog.json');
+    } else {
+      const hour = paula.rateExceptions.find((item) => item.serviceTypeId === '60min');
+      if (!hour || hour.totalCents !== 20000) {
+        fail('Paula VIP 60min exception is missing or not 20000 cents');
+      } else {
+        pass('Paula VIP rateExceptions include 60min at 20000 cents');
+      }
+    }
+
+    let leakedFields = 0;
+    for (const entry of catalog.models) {
+      for (const key of Object.keys(entry)) {
+        if (!APP_CATALOG_ALLOWED_KEYS.has(key) || APP_CATALOG_FORBIDDEN_KEYS.includes(key)) {
+          leakedFields += 1;
+          fail(`app-catalog ${entry.slug} includes unexpected field ${key}`);
+        }
+      }
+    }
+    if (leakedFields === 0) {
+      pass('app-catalog.json only exposes operational fields');
+    }
   }
 }
 

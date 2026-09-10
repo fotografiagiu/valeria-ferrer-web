@@ -22,6 +22,7 @@ export function writeSeoOutputFile(relativePath, content) {
 export const MODELS_PATH = path.join(ROOT, 'data', 'models.json');
 export const BLOG_PATH = path.join(ROOT, 'data', 'blog.json');
 export const SITEMAP_PATH = path.join(PUBLIC_DIR, 'sitemap.xml');
+export const APP_CATALOG_RELATIVE_PATH = 'app-catalog.json';
 export const STRUCTURED_DATA_DIR = path.join(PUBLIC_DIR, 'structured-data');
 export const ARCHIVE_DIR = path.join(ROOT, '_archive', 'structured-data');
 
