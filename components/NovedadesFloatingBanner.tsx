@@ -4,6 +4,7 @@ import { Sparkles, X } from 'lucide-react';
 import { MODELS } from '../constants';
 import { NOVEDADES_BANNER as CFG } from '../lib/novedadesBannerConfig';
 import { getModelCoverThumbnailPath } from '../lib/modelGridImage';
+import { ACTIVE_PROMO, isPromoLive } from '../lib/promoPopupConfig';
 
 type NovedadSlide = {
   slug: string;
@@ -63,6 +64,7 @@ const NovedadesFloatingBanner: React.FC = () => {
   const [showMinimized, setShowMinimized] = useState(false);
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [promoActive, setPromoActive] = useState(() => isPromoLive(ACTIVE_PROMO));
 
   const hideOnRoute =
     location.pathname === '/novedades' ||
@@ -80,9 +82,37 @@ const NovedadesFloatingBanner: React.FC = () => {
     setIsOpen(true);
   }, []);
 
+  // Mientras la oferta promocional esté activa, no mostrar el banner de novedades.
+  useEffect(() => {
+    const syncPromo = () => setPromoActive(isPromoLive(ACTIVE_PROMO));
+    syncPromo();
+
+    const start = Date.parse(ACTIVE_PROMO.startsAt);
+    const end = Date.parse(ACTIVE_PROMO.endsAt);
+    const now = Date.now();
+    const timers: number[] = [];
+
+    if (Number.isFinite(start) && now < start) {
+      timers.push(window.setTimeout(syncPromo, start - now));
+    }
+    if (Number.isFinite(end) && now < end) {
+      timers.push(window.setTimeout(syncPromo, end - now));
+    }
+
+    const onVisibility = () => {
+      if (document.visibilityState === 'visible') syncPromo();
+    };
+    document.addEventListener('visibilitychange', onVisibility);
+
+    return () => {
+      timers.forEach((id) => window.clearTimeout(id));
+      document.removeEventListener('visibilitychange', onVisibility);
+    };
+  }, []);
+
   // Como Contacto: al cargar la página siempre salta el panel (no arranca minimizado).
   useEffect(() => {
-    if (!CFG.enabled || hideOnRoute || slides.length === 0) {
+    if (!CFG.enabled || hideOnRoute || promoActive || slides.length === 0) {
       setReady(false);
       setIsOpen(false);
       setShowMinimized(false);
@@ -96,7 +126,7 @@ const NovedadesFloatingBanner: React.FC = () => {
     }, CFG.delayMs);
 
     return () => window.clearTimeout(showTimer);
-  }, [hideOnRoute, slides.length]);
+  }, [hideOnRoute, promoActive, slides.length]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -126,7 +156,7 @@ const NovedadesFloatingBanner: React.FC = () => {
     img.src = next.imageSrc;
   }, [index, slides]);
 
-  if (!CFG.enabled || hideOnRoute || !ready || slides.length === 0) return null;
+  if (!CFG.enabled || hideOnRoute || promoActive || !ready || slides.length === 0) return null;
 
   const slide = slides[index] ?? slides[0];
 
