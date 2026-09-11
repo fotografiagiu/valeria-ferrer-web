@@ -211,12 +211,12 @@ const APP_CATALOG_ALLOWED_KEYS = new Set([
   'active',
   'vip',
   'rateExceptions',
+  'coverImageUrl',
+  'images',
 ]);
 const APP_CATALOG_FORBIDDEN_KEYS = [
   'description',
   'essence',
-  'images',
-  'coverImageUrl',
   'profileImageUrl',
   'profileUrl',
   'age',
@@ -232,6 +232,12 @@ if (!fs.existsSync(appCatalogPath)) {
   if (!Array.isArray(catalog.models)) {
     fail('app-catalog.json models is not an array');
   } else {
+    if (typeof catalog.catalogVersion !== 'string' || !catalog.catalogVersion) {
+      fail('app-catalog.json missing catalogVersion');
+    } else {
+      pass('app-catalog.json includes catalogVersion');
+    }
+
     const catalogSlugs = catalog.models.map((model) => model.slug);
     const expectedSlugs = models.map((model) => model.slug);
 
@@ -292,6 +298,7 @@ if (!fs.existsSync(appCatalogPath)) {
     }
 
     let leakedFields = 0;
+    let missingMedia = 0;
     for (const entry of catalog.models) {
       for (const key of Object.keys(entry)) {
         if (!APP_CATALOG_ALLOWED_KEYS.has(key) || APP_CATALOG_FORBIDDEN_KEYS.includes(key)) {
@@ -299,9 +306,27 @@ if (!fs.existsSync(appCatalogPath)) {
           fail(`app-catalog ${entry.slug} includes unexpected field ${key}`);
         }
       }
+      if (entry.coverImageUrl != null && typeof entry.coverImageUrl !== 'string') {
+        missingMedia += 1;
+        fail(`app-catalog ${entry.slug} has invalid coverImageUrl`);
+      }
+      if (!Array.isArray(entry.images)) {
+        missingMedia += 1;
+        fail(`app-catalog ${entry.slug} is missing images[]`);
+      } else if (entry.images.some((img) => typeof img !== 'string' || !img.startsWith('/'))) {
+        missingMedia += 1;
+        fail(`app-catalog ${entry.slug} has invalid images[] paths`);
+      }
+      if (entry.active !== false && !entry.coverImageUrl) {
+        missingMedia += 1;
+        fail(`app-catalog active model ${entry.slug} missing coverImageUrl`);
+      }
     }
     if (leakedFields === 0) {
       pass('app-catalog.json only exposes operational fields');
+    }
+    if (missingMedia === 0) {
+      pass('app-catalog.json includes coverImageUrl + images[] for operational sync');
     }
   }
 }
