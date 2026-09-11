@@ -8,6 +8,8 @@ import Terms from './pages/Terms';
 import Footer from './components/Footer';
 import ContentProtection from './components/ContentProtection';
 import AnalyticsTracker from './components/AnalyticsTracker';
+import PageSEOHead from './components/PageSEOHead';
+import PromoPopup from './components/PromoPopup';
 import { Analytics } from '@vercel/analytics/react';
 
 const About = React.lazy(() => import('./pages/About'));
@@ -28,7 +30,6 @@ const EscortsLujoValencia = React.lazy(() => import('./pages/EscortsLujoValencia
 const MembersModal = React.lazy(() => import('./components/MembersModal'));
 const FloatingContactPopup = React.lazy(() => import('./components/FloatingContactPopup'));
 const NovedadesFloatingBanner = React.lazy(() => import('./components/NovedadesFloatingBanner'));
-import PageSEOHead from './components/PageSEOHead';
 
 /** Ruta /members: enlace desde Footer “Lounge de Miembros”; contenido próximamente. */
 const MembersPage: React.FC = () => {
@@ -196,6 +197,7 @@ const App: React.FC = () => {
               <NovedadesFloatingBanner />
             </Suspense>
           )}
+          <PromoPopup />
           <ContentProtection />
           <Analytics />
         </div>
