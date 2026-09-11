@@ -1,10 +1,22 @@
 {
-  "generatedAt": "2026-09-07T16:07:29.557Z",
+  "generatedAt": "2026-09-11T20:18:51.081Z",
   "sourcePath": "data/models.json",
-  "sourceHash": "e2b45496098de13c99fe464bbb779c2c5f10bdeac0997e8160075ab8c021c0f4",
-  "modelCount": 41,
-  "activeCount": 24,
+  "sourceHash": "ae222e641fc371916cdd199728ef76fa49069e8d94c09a6cb48895166f9f89bb",
+  "modelCount": 42,
+  "activeCount": 25,
   "models": [
+    {
+      "slug": "karen",
+      "name": "Karen",
+      "coverImageUrl": "/chicas/karen-valeria-ferrer-model-agency-valencia/portada.jpg",
+      "images": [
+        "/chicas/karen-valeria-ferrer-model-agency-valencia/gallery/01.jpg",
+        "/chicas/karen-valeria-ferrer-model-agency-valencia/gallery/02.jpg",
+        "/chicas/karen-valeria-ferrer-model-agency-valencia/gallery/03.jpg",
+        "/chicas/karen-valeria-ferrer-model-agency-valencia/gallery/04.jpg",
+        "/chicas/karen-valeria-ferrer-model-agency-valencia/gallery/05.jpg"
+      ]
+    },
     {
       "slug": "sara",
       "name": "Sara",
