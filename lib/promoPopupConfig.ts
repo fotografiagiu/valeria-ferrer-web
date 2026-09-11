@@ -5,19 +5,17 @@ export type PromoPopupConfig = {
   endsAt: string
   enabled: boolean
   ctaHref: string
+  bannerText: string
 }
 
 export const ACTIVE_PROMO: PromoPopupConfig = {
-  id: 'promo-2026-09-11-duo',
-  image: '/promos/promo-duo.webp',
+  id: 'promo-2026-09-11-duo-3h',
+  image: '/promos/promo-duo.webp?v=3h',
   startsAt: '2026-09-11T17:15:00+02:00',
   endsAt: '2026-09-11T20:15:00+02:00',
   enabled: true,
   ctaHref: '/booking',
-}
-
-export function promoClosedStorageKey(promoId: string): string {
-  return `promo-closed:${promoId}`
+  bannerText: 'Oferta dúplex · Oferta activa · Ver oferta',
 }
 
 export function isPromoLive(promo: PromoPopupConfig, now = Date.now()): boolean {

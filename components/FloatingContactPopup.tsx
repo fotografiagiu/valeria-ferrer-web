@@ -3,6 +3,12 @@ import React, { useState, useEffect } from 'react';
 import { Send, Phone, Calendar, X, MessageSquare } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FLOATING_SIDE_TABS } from '../lib/floatingSideTabs';
+import {
+  OFFICIAL_PHONE_LABEL,
+  OFFICIAL_PHONE_TEL,
+  OFFICIAL_TELEGRAM_HANDLE,
+  OFFICIAL_TELEGRAM_URL,
+} from '../lib/officialContact';
 
 const FloatingContactPopup: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -56,7 +62,7 @@ const FloatingContactPopup: React.FC = () => {
 
                 <div className="space-y-3">
                   <a 
-                    href="https://t.me/Valeriaferreeer" 
+                    href={OFFICIAL_TELEGRAM_URL} 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="flex items-center justify-between w-full bg-[#c2b2a3] text-black py-3 px-4 rounded-xl text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-white transition-all duration-300 group/btn"
@@ -65,16 +71,16 @@ const FloatingContactPopup: React.FC = () => {
                       <Send size={14} className="mr-3" />
                       <span>Telegram</span>
                     </div>
-                    <span className="text-[8px] opacity-60">@Valeriaferreeer</span>
+                    <span className="text-[8px] opacity-60">{OFFICIAL_TELEGRAM_HANDLE}</span>
                   </a>
 
                   <a 
-                    href="tel:645872227"
+                    href={OFFICIAL_PHONE_TEL}
                     className="flex items-center justify-between w-full bg-white/5 border border-white/10 text-white py-3 px-4 rounded-xl text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-white/10 transition-all duration-300"
                   >
                     <div className="flex items-center">
                       <Phone size={14} className="mr-3 text-[#c2b2a3]" />
-                      <span>645 872 227</span>
+                      <span>{OFFICIAL_PHONE_LABEL}</span>
                     </div>
                   </a>
 
