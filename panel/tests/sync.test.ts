@@ -203,4 +203,98 @@ describe('catalog:sync', () => {
     const after = (await listOverrides(db)).find((r) => r.slug === target)!;
     expect(after.coverImagePath).toBe(model.coverImageUrl);
   });
+
+  it('two concurrent syncs for the same new girl leave one row and do not throw', async () => {
+    const models = [
+      ...readSnapshot().models,
+      {
+        slug: 'concurrent-nueva',
+        name: 'Concurrent Nueva',
+        active: true,
+        coverImageUrl: '/chicas/concurrent-nueva/portada.jpg',
+        images: ['/chicas/concurrent-nueva/gallery/01.jpg'],
+      },
+    ];
+
+    const results = await Promise.all([
+      syncCatalogOverrides({ db, snapshotModels: models, dryRun: false }),
+      syncCatalogOverrides({ db, snapshotModels: models, dryRun: false }),
+    ]);
+
+    expect(results).toHaveLength(2);
+    for (const report of results) {
+      expect(report.dryRun).toBe(false);
+      expect(report.activeOrderAfter).toContain('concurrent-nueva');
+    }
+
+    const rows = (await listOverrides(db)).filter((r) => r.slug === 'concurrent-nueva');
+    expect(rows).toHaveLength(1);
+    expect(rows[0]?.displayOrder).not.toBeNull();
+    expect(rows[0]?.coverImagePath).toBe('/chicas/concurrent-nueva/portada.jpg');
+
+    const active = await listActiveOrderedOverrides(db);
+    const hits = active.filter((r) => r.slug === 'concurrent-nueva');
+    expect(hits).toHaveLength(1);
+    expect(hits[0]?.displayOrder).toBe(active.length);
+  });
+
+  it('ON CONFLICT upsert does not overwrite an existing staff cover', async () => {
+    const { eq } = await import('drizzle-orm');
+    const { modelOverrides } = await import('../src/db/schema.js');
+    const staffCover = '/chicas/conflict-cover/staff.jpg';
+    const catalogCover = '/chicas/conflict-cover/portada.jpg';
+
+    await db.insert(modelOverrides).values({
+      slug: 'conflict-cover',
+      displayOrder: null,
+      coverImagePath: staffCover,
+      coverVersion: 4,
+      updatedBy: null,
+    });
+
+    // Pretend both syncs "missed" the row in their planning read by using a catalog
+    // where the slug is active; sync will classify as reactivation (row exists) OR
+    // if we delete from planning... Force the upsert path by calling sync while the
+    // row exists — reactivation must keep staff cover.
+    const models = [
+      ...readSnapshot().models,
+      {
+        slug: 'conflict-cover',
+        name: 'Conflict Cover',
+        active: true,
+        coverImageUrl: catalogCover,
+        images: [staffCover, catalogCover],
+      },
+    ];
+
+    await syncCatalogOverrides({ db, snapshotModels: models, dryRun: false });
+
+    const row = (await listOverrides(db)).find((r) => r.slug === 'conflict-cover')!;
+    expect(row.coverImagePath).toBe(staffCover);
+    expect(row.coverVersion).toBe(4);
+    expect(row.displayOrder).not.toBeNull();
+
+    // Simulate the exact race insert path: another sync still thinks it is "added".
+    // Upsert must not clobber staff cover.
+    await db
+      .insert(modelOverrides)
+      .values({
+        slug: 'conflict-cover',
+        displayOrder: null,
+        coverImagePath: catalogCover,
+        coverVersion: 1,
+        updatedBy: null,
+      })
+      .onConflictDoUpdate({
+        target: modelOverrides.slug,
+        set: {
+          updatedAt: new Date(),
+          updatedBy: null,
+        },
+      });
+
+    const afterRace = (await listOverrides(db)).find((r) => r.slug === 'conflict-cover')!;
+    expect(afterRace.coverImagePath).toBe(staffCover);
+    expect(afterRace.coverVersion).toBe(4);
+  });
 });

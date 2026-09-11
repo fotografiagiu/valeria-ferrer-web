@@ -213,7 +213,8 @@ export type SyncReport = {
 
 /**
  * Sync Neon overrides against live/snapshot catalog:
- * - new active → insert at END (cover = catalog coverImageUrl)
+ * - new active → upsert at END (cover = catalog coverImageUrl on insert only)
+ * - concurrent syncs for the same new slug are idempotent (ON CONFLICT, no 500)
  * - reactivated (had override, order NULL) → END (do not restore old position)
  * - deactivated → display_order NULL, keep cover/history (do not delete)
  * - remaining actives → renumber 1..N preserving relative order + staff covers
@@ -303,7 +304,8 @@ export async function syncCatalogOverrides(params: {
         .where(eq(modelOverrides.slug, row.slug));
     }
 
-    // 2) Insert brand-new actives
+    // 2) Ensure brand-new actives exist (idempotent under concurrent syncs).
+    // ON CONFLICT: never overwrite staff cover/order — only refresh metadata.
     for (const slug of added) {
       const model = bySlug.get(slug)!;
       const cover = model.coverImageUrl;
@@ -311,13 +313,22 @@ export async function syncCatalogOverrides(params: {
       if (!allowedCoverPaths(model).includes(cover)) {
         throw new BadRequestError(`invalid cover for ${slug}`);
       }
-      await tx.insert(modelOverrides).values({
-        slug,
-        displayOrder: null,
-        coverImagePath: cover,
-        coverVersion: 1,
-        updatedBy: params.staffUserId ?? null,
-      });
+      await tx
+        .insert(modelOverrides)
+        .values({
+          slug,
+          displayOrder: null,
+          coverImagePath: cover,
+          coverVersion: 1,
+          updatedBy: params.staffUserId ?? null,
+        })
+        .onConflictDoUpdate({
+          target: modelOverrides.slug,
+          set: {
+            updatedAt: new Date(),
+            updatedBy: params.staffUserId ?? null,
+          },
+        });
     }
 
     // 3) Reset covers that left the allowlist (preserve valid staff choices)
