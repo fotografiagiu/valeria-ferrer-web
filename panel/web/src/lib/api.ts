@@ -19,6 +19,19 @@ export type StaffCatalogResponse = {
   models: StaffCatalogModel[];
 };
 
+export type ActivityItem = {
+  id: string;
+  at: string;
+  slug: string | null;
+  subject: string;
+  summary: string;
+  automatic: boolean;
+};
+
+export type ActivityResponse = {
+  items: ActivityItem[];
+};
+
 export class ApiError extends Error {
   status: number;
   body: unknown;
@@ -94,6 +107,10 @@ export function getMe() {
 
 export function getCatalog() {
   return request<StaffCatalogResponse>('/api/staff/catalog');
+}
+
+export function getActivity(limit = 30) {
+  return request<ActivityResponse>(`/api/staff/activity?limit=${limit}`);
 }
 
 export function putOrder(version: number, orderedSlugs: string[]) {

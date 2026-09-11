@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
+import { ActivityFeed } from './components/ActivityFeed';
 import { CatalogScreen } from './components/CatalogScreen';
 import { LoginScreen } from './components/LoginScreen';
 import { Toast } from './components/Toast';
@@ -178,6 +179,8 @@ export function App() {
         {!loadingCatalog && !catalogError && models.length === 0 ? (
           <div className="loading-center">No hay fichas activas</div>
         ) : null}
+
+        <ActivityFeed />
       </main>
     </div>
   );

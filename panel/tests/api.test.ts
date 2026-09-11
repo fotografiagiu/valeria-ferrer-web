@@ -210,6 +210,25 @@ describe('auth + order + cover API', () => {
     expect(actions).toContain('catalog.seed');
   });
 
+  it('returns formatted recent activity without auth noise', async () => {
+    const res = await app.request('http://localhost/api/staff/activity?limit=30', {
+      headers: { cookie },
+    });
+    expect(res.status).toBe(200);
+    const body = await json(res);
+    expect(Array.isArray(body.items)).toBe(true);
+    expect(body.items.length).toBeGreaterThan(0);
+    expect(body.items.every((item: { summary: string }) => !/login|logout/i.test(item.summary))).toBe(
+      true
+    );
+    expect(
+      body.items.some(
+        (item: { subject: string; summary: string }) =>
+          item.summary === 'portada cambiada' || item.summary.includes('posición')
+      )
+    ).toBe(true);
+  });
+
   it('public overrides require no auth', async () => {
     const res = await app.request('http://localhost/api/public/overrides');
     expect(res.status).toBe(200);

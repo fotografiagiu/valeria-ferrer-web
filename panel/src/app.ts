@@ -36,6 +36,7 @@ import {
   type StaffIdentity,
 } from './lib/session.js';
 import { coverBodySchema, loginBodySchema, orderBodySchema } from './lib/validation.js';
+import { listRecentActivity } from './lib/activityFeed.js';
 
 export type AppVariables = {
   staff: StaffIdentity;
@@ -262,6 +263,24 @@ export function createApp(options: CreateAppOptions) {
       username: staff.username,
       displayName: staff.displayName,
     });
+  });
+
+  app.get('/api/staff/activity', async (c) => {
+    const staff = await requireStaff(c);
+    if (!staff) return c.json({ error: 'unauthorized' }, 401);
+
+    const rawLimit = Number(c.req.query('limit') || 30);
+    const limit = Number.isFinite(rawLimit) ? rawLimit : 30;
+
+    const catalog = await resolveCatalogModels({
+      injectedModels: options.catalogModels,
+      skipLiveCatalog: options.skipLiveCatalog,
+      skipSnapshotFreshness: options.skipSnapshotFreshness,
+      fetchImpl: options.fetchImpl,
+    });
+    const names = new Map(catalog.models.map((m) => [m.slug, m.name]));
+    const items = await listRecentActivity(db, { limit, names });
+    return c.json({ items });
   });
 
   // --- Staff catalog (read) ---
