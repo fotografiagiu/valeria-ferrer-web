@@ -89,8 +89,10 @@ export async function fetchLiveAppCatalog(options?: {
     const response = await fetchImpl(url, {
       method: 'GET',
       signal: controller.signal,
-      headers: { Accept: 'application/json' },
-      cache: 'no-store',
+      headers: {
+        Accept: 'application/json',
+        'Cache-Control': 'no-cache',
+      },
     });
     if (!response.ok) {
       return { ok: false, reason: `live catalog HTTP ${response.status}` };
