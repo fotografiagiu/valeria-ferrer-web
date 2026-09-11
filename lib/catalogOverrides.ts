@@ -24,6 +24,7 @@ type CatalogLike = {
 
 /** Home pin fallback — must stay aligned with panel effectiveOrder until overrides load. */
 export const HOME_PIN_ORDER: readonly string[] = [
+  'karen',
   'sara',
   'danna',
   'veronica',
@@ -66,7 +67,8 @@ function withCoverOverride<T extends CatalogLike>(model: T, coverImagePath: stri
 
 /**
  * Apply display_order + cover_image_path to active catalog models.
- * Unknown override slugs are skipped; models missing from overrides keep relative order at the end.
+ * Models missing from overrides normally go at the end — except those listed in
+ * HOME_PIN_ORDER, which stay at the front until the panel includes them.
  */
 export function applyCatalogOverrides<T extends CatalogLike>(
   models: T[],
@@ -87,11 +89,18 @@ export function applyCatalogOverrides<T extends CatalogLike>(
     ordered.push(cover ? withCoverOverride(model, cover) : model);
   }
 
-  for (const model of models) {
-    if (!seen.has(model.slug)) ordered.push(model);
+  const missing = models.filter((m) => !seen.has(m.slug));
+  const missingBySlug = new Map(missing.map((m) => [m.slug, m]));
+  const leadingPins: T[] = [];
+  for (const slug of HOME_PIN_ORDER) {
+    const model = missingBySlug.get(slug);
+    if (!model) continue;
+    leadingPins.push(model);
+    missingBySlug.delete(slug);
   }
+  const trailing = missing.filter((m) => missingBySlug.has(m.slug));
 
-  return ordered;
+  return [...leadingPins, ...ordered, ...trailing];
 }
 
 export const PRODUCTION_OVERRIDES_URL =

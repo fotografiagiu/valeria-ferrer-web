@@ -38,6 +38,7 @@ export function useCatalogWithOverrides<T extends CatalogLike>(
     if (overrideRows?.length) {
       return applyCatalogOverrides(staticModels, overrideRows);
     }
+    // Sin overrides del panel: orden de models.json + pins de home.
     return homePinFallback ? applyHomePinOrder(staticModels) : staticModels;
   }, [staticModels, overrideRows, homePinFallback]);
 }

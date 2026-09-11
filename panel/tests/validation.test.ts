@@ -24,7 +24,7 @@ describe('catalog snapshot', () => {
 });
 
 describe('effective Home order', () => {
-  it('matches HOME_PIN_ORDER + rest (canonical Home pin, currently sara first)', () => {
+  it('matches HOME_PIN_ORDER + rest (canonical Home pin, currently karen first)', () => {
     writeSnapshot();
     const order = computeEffectiveHomeOrder(readSnapshot().models);
     const activePins = HOME_PIN_ORDER.filter((slug) => order.includes(slug));
