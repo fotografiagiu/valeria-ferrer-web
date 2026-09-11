@@ -205,16 +205,19 @@ export type SyncReport = {
   reactivatedAtEnd: string[];
   /** Now inactive / missing — display_order set to NULL, row kept */
   deactivated: string[];
+  /** Staff cover left the allowlist → reset to catalog coverImageUrl */
+  coversReset: string[];
   activeOrderAfter: string[];
   orderVersionBumped: boolean;
 };
 
 /**
- * Admin sync against snapshot:
- * - new active → insert at END
+ * Sync Neon overrides against live/snapshot catalog:
+ * - new active → insert at END (cover = catalog coverImageUrl)
  * - reactivated (had override, order NULL) → END (do not restore old position)
- * - deactivated → display_order NULL, keep cover/history
- * - remaining actives → renumber 1..N preserving relative order
+ * - deactivated → display_order NULL, keep cover/history (do not delete)
+ * - remaining actives → renumber 1..N preserving relative order + staff covers
+ * - if staff cover is no longer in allowlist → reset to coverImageUrl
  * - bumps order_version when the active set/order skeleton changes
  */
 export async function syncCatalogOverrides(params: {
@@ -234,6 +237,7 @@ export async function syncCatalogOverrides(params: {
   const keptActive: string[] = [];
   const reactivatedAtEnd: string[] = [];
   const added: string[] = [];
+  const coversReset: string[] = [];
 
   for (const row of existing) {
     if (!activeSlugSet.has(row.slug)) {
@@ -248,6 +252,16 @@ export async function syncCatalogOverrides(params: {
   for (const model of active) {
     if (!existingBySlug.has(model.slug)) {
       added.push(model.slug);
+    }
+  }
+
+  for (const row of existing) {
+    if (!activeSlugSet.has(row.slug)) continue;
+    const model = bySlug.get(row.slug);
+    if (!model) continue;
+    const allowed = allowedCoverPaths(model);
+    if (!allowed.includes(row.coverImagePath)) {
+      coversReset.push(row.slug);
     }
   }
 
@@ -274,6 +288,7 @@ export async function syncCatalogOverrides(params: {
       keptActive,
       reactivatedAtEnd,
       deactivated,
+      coversReset,
       activeOrderAfter,
       orderVersionBumped: structuralChange,
     };
@@ -305,7 +320,24 @@ export async function syncCatalogOverrides(params: {
       });
     }
 
-    // 3) Assign 1..N to final active order
+    // 3) Reset covers that left the allowlist (preserve valid staff choices)
+    for (const slug of coversReset) {
+      const model = bySlug.get(slug)!;
+      const cover = model.coverImageUrl;
+      if (!cover) throw new BadRequestError(`active model ${slug} has no coverImageUrl`);
+      const row = existingBySlug.get(slug)!;
+      await tx
+        .update(modelOverrides)
+        .set({
+          coverImagePath: cover,
+          coverVersion: row.coverVersion + 1,
+          updatedAt: new Date(),
+          updatedBy: params.staffUserId ?? null,
+        })
+        .where(eq(modelOverrides.slug, slug));
+    }
+
+    // 4) Assign 1..N to final active order
     let order = 1;
     for (const slug of activeOrderAfter) {
       await tx
@@ -342,6 +374,7 @@ export async function syncCatalogOverrides(params: {
       after: {
         added,
         reactivatedAtEnd,
+        coversReset,
         activeOrderAfter,
         orderVersionBumped: structuralChange,
       },
@@ -354,6 +387,7 @@ export async function syncCatalogOverrides(params: {
     keptActive,
     reactivatedAtEnd,
     deactivated,
+    coversReset,
     activeOrderAfter,
     orderVersionBumped: structuralChange,
   };

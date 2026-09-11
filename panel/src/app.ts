@@ -5,12 +5,14 @@ import type { AppDb } from './db/client.js';
 import { staffUsers } from './db/schema.js';
 import { appendAudit } from './lib/audit.js';
 import {
-  assertSnapshotFresh,
-  readSnapshot,
-} from './lib/catalogSnapshot.js';
+  getLastSyncedCatalogVersion,
+  markCatalogSynced,
+  resolveCatalogModels,
+} from './lib/catalogSource.js';
 import { corsHeadersForPublicOverrides, assertStaffWriteOrigin } from './lib/csrf.js';
 import {
   allowedCoverPaths,
+  type CatalogModelLite,
 } from './lib/effectiveOrder.js';
 import { loadEnv, type PanelEnv } from './lib/env.js';
 import {
@@ -20,6 +22,7 @@ import {
   getPublicOverrides,
   listOverrides,
   replaceOrder,
+  syncCatalogOverrides,
   updateCover,
 } from './lib/overridesService.js';
 import { verifyPassword } from './lib/password.js';
@@ -41,8 +44,13 @@ export type AppVariables = {
 export type CreateAppOptions = {
   db: AppDb;
   env?: PanelEnv;
-  /** When true, skip snapshot freshness (tests may inject models via readSnapshot mock). */
+  /** When true, skip snapshot freshness for snapshot fallback. */
   skipSnapshotFreshness?: boolean;
+  /** Skip live app-catalog fetch (tests / offline). */
+  skipLiveCatalog?: boolean;
+  /** Inject catalog models (tests). */
+  catalogModels?: CatalogModelLite[];
+  fetchImpl?: typeof fetch;
 };
 
 function clientMeta(c: { req: { header: (n: string) => string | undefined } }) {
@@ -57,11 +65,67 @@ export function createApp(options: CreateAppOptions) {
   const { db } = options;
   const app = new Hono<{ Variables: AppVariables }>();
 
-  function getSnapshotModels() {
-    if (!options.skipSnapshotFreshness) {
-      assertSnapshotFresh();
+  async function getCatalogModels(): Promise<CatalogModelLite[]> {
+    const resolved = await resolveCatalogModels({
+      injectedModels: options.catalogModels,
+      skipLiveCatalog: options.skipLiveCatalog,
+      skipSnapshotFreshness: options.skipSnapshotFreshness,
+      fetchImpl: options.fetchImpl,
+    });
+    return resolved.models;
+  }
+
+  /**
+   * Keep Neon overrides aligned with the live/fallback catalog.
+   * Idempotent: only writes when catalog version changed or overrides are missing.
+   */
+  async function ensureCatalogSynced(staffUserId?: string | null) {
+    const resolved = await resolveCatalogModels({
+      injectedModels: options.catalogModels,
+      skipLiveCatalog: options.skipLiveCatalog,
+      skipSnapshotFreshness: options.skipSnapshotFreshness,
+      fetchImpl: options.fetchImpl,
+    });
+
+    const overrides = await listOverrides(db);
+    const overrideBySlug = new Map(overrides.map((o) => [o.slug, o]));
+    const activeModels = resolved.models.filter((m) => m.active !== false);
+    const activeSlugSet = new Set(activeModels.map((m) => m.slug));
+    const bySlug = new Map(resolved.models.map((m) => [m.slug, m]));
+
+    const missing = activeModels.some((m) => {
+      const o = overrideBySlug.get(m.slug);
+      return !o || o.displayOrder == null;
+    });
+    const staleActive = overrides.some(
+      (o) => o.displayOrder != null && !activeSlugSet.has(o.slug)
+    );
+    const invalidCover = overrides.some((o) => {
+      if (!activeSlugSet.has(o.slug)) return false;
+      const model = bySlug.get(o.slug);
+      if (!model) return false;
+      return !allowedCoverPaths(model).includes(o.coverImagePath);
+    });
+    const versionChanged =
+      resolved.catalogVersion != null &&
+      resolved.catalogVersion !== getLastSyncedCatalogVersion();
+
+    if (
+      missing ||
+      staleActive ||
+      invalidCover ||
+      versionChanged ||
+      getLastSyncedCatalogVersion() == null
+    ) {
+      await syncCatalogOverrides({
+        db,
+        snapshotModels: resolved.models,
+        staffUserId: staffUserId ?? null,
+      });
+      markCatalogSynced(resolved.catalogVersion);
     }
-    return readSnapshot().models;
+
+    return resolved;
   }
 
   async function requireStaff(c: {
@@ -83,12 +147,16 @@ export function createApp(options: CreateAppOptions) {
     const headers = corsHeadersForPublicOverrides(c.req.header('origin'), env);
     try {
       const payload = await getPublicOverrides(db);
+      const catalog = await resolveCatalogModels({
+        injectedModels: options.catalogModels,
+        skipLiveCatalog: options.skipLiveCatalog,
+        skipSnapshotFreshness: options.skipSnapshotFreshness,
+        fetchImpl: options.fetchImpl,
+      });
       const activeSlugs = new Set(
-        readSnapshot()
-          .models.filter((m) => m.active !== false)
-          .map((m) => m.slug)
+        catalog.models.filter((m) => m.active !== false).map((m) => m.slug)
       );
-      // Public = intersection of ordered overrides + currently active in snapshot
+      // Public = intersection of ordered overrides + currently active in catalog
       const models = payload.models
         .filter((m) => activeSlugs.has(m.slug) && m.displayOrder != null)
         .sort((a, b) => a.displayOrder - b.displayOrder)
@@ -201,7 +269,8 @@ export function createApp(options: CreateAppOptions) {
     const staff = await requireStaff(c);
     if (!staff) return c.json({ error: 'unauthorized' }, 401);
 
-    const models = getSnapshotModels();
+    const resolved = await ensureCatalogSynced(staff.id);
+    const models = resolved.models;
     const activeModels = models.filter((m) => m.active !== false);
     const overrides = await listOverrides(db);
     const overrideBySlug = new Map(overrides.map((o) => [o.slug, o]));
@@ -232,6 +301,8 @@ export function createApp(options: CreateAppOptions) {
 
     return c.json({
       orderVersion,
+      catalogSource: resolved.source,
+      catalogVersion: resolved.catalogVersion,
       missingOverrides,
       models: items,
     });
@@ -258,7 +329,7 @@ export function createApp(options: CreateAppOptions) {
     if (!parsed.success) return c.json({ error: 'invalid body', details: parsed.error.flatten() }, 400);
 
     const meta = clientMeta(c);
-    const activeModels = getSnapshotModels().filter((m) => m.active !== false);
+    const activeModels = (await getCatalogModels()).filter((m) => m.active !== false);
 
     try {
       const result = await replaceOrder({
@@ -306,7 +377,7 @@ export function createApp(options: CreateAppOptions) {
         slug: parsed.data.slug,
         coverImagePath: parsed.data.coverImagePath,
         version: parsed.data.version,
-        snapshotModels: getSnapshotModels(),
+        snapshotModels: await getCatalogModels(),
         staffUserId: staff.id,
         ip: meta.ip,
         userAgent: meta.userAgent,

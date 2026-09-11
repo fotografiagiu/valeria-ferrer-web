@@ -148,4 +148,59 @@ describe('catalog:sync', () => {
     expect(beforeActive.find((r) => r.slug === seeded[0])?.displayOrder).toBe(1);
     expect(beforeActive.find((r) => r.slug === seeded[2])?.displayOrder).toBe(3);
   });
+
+  it('preserves staff cover when still in allowlist', async () => {
+    const seeded = seededOrder();
+    const target =
+      seeded.find((slug) => {
+        const m = readSnapshot().models.find((x) => x.slug === slug);
+        return (m?.images?.length || 0) > 1;
+      }) || seeded[0];
+    const model = readSnapshot().models.find((m) => m.slug === target)!;
+    const alt = (model.images || []).find((img) => img !== model.coverImageUrl) || model.images![0];
+    expect(alt).toBeTruthy();
+
+    const { eq } = await import('drizzle-orm');
+    const { modelOverrides } = await import('../src/db/schema.js');
+    const before = (await listOverrides(db)).find((r) => r.slug === target)!;
+    await db
+      .update(modelOverrides)
+      .set({ coverImagePath: alt!, coverVersion: before.coverVersion + 1 })
+      .where(eq(modelOverrides.slug, target));
+
+    const report = await syncCatalogOverrides({
+      db,
+      snapshotModels: readSnapshot().models,
+      dryRun: false,
+    });
+    expect(report.coversReset).not.toContain(target);
+
+    const after = (await listOverrides(db)).find((r) => r.slug === target)!;
+    expect(after.coverImagePath).toBe(alt);
+  });
+
+  it('resets cover when staff choice leaves the allowlist', async () => {
+    const seeded = seededOrder();
+    const target = seeded[2];
+    const snap = readSnapshot().models;
+    const model = snap.find((m) => m.slug === target)!;
+    const stale = '/chicas/stale-cover-removed.jpg';
+
+    const { eq } = await import('drizzle-orm');
+    const { modelOverrides } = await import('../src/db/schema.js');
+    await db
+      .update(modelOverrides)
+      .set({ coverImagePath: stale })
+      .where(eq(modelOverrides.slug, target));
+
+    const report = await syncCatalogOverrides({
+      db,
+      snapshotModels: snap,
+      dryRun: false,
+    });
+    expect(report.coversReset).toContain(target);
+
+    const after = (await listOverrides(db)).find((r) => r.slug === target)!;
+    expect(after.coverImagePath).toBe(model.coverImageUrl);
+  });
 });

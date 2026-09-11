@@ -46,6 +46,7 @@ beforeAll(async () => {
       STAFF_SESSION_TTL_HOURS: '12',
     }),
     skipSnapshotFreshness: false,
+    skipLiveCatalog: true,
   });
 });
 
@@ -93,7 +94,7 @@ describe('auth + order + cover API', () => {
     const body = await json(res);
     expect(body.orderVersion).toBe(1);
     // Seeded from computeEffectiveHomeOrder → HOME_PIN_ORDER (karen first).
-    expect(body.models[0].slug).toBe('sara');
+    expect(body.models[0].slug).toBe('karen');
     expect(body.models[0].allowedCoverPaths.length).toBeGreaterThan(0);
   });
 

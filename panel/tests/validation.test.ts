@@ -30,8 +30,9 @@ describe('effective Home order', () => {
     const activePins = HOME_PIN_ORDER.filter((slug) => order.includes(slug));
     // Seed/effective order must track Home pinOrder (Sara + Danna were pinned intentionally).
     expect(order.slice(0, activePins.length)).toEqual(activePins);
-    expect(order[0]).toBe('sara');
-    expect(order[1]).toBe('danna');
+    expect(order[0]).toBe('karen');
+    expect(order[1]).toBe('sara');
+    expect(order[2]).toBe('danna');
     expect(order.indexOf('alicia')).toBe(activePins.indexOf('alicia'));
     expect(order).toHaveLength(readSnapshot().activeCount);
   });
