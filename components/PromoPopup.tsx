@@ -117,9 +117,47 @@ const PromoPopup: React.FC<{ promo?: PromoPopupConfig }> = ({ promo = ACTIVE_PRO
         <button
           type="button"
           onClick={reopenPopup}
-          className="fixed left-0 right-0 top-[5.75rem] md:top-[7.25rem] z-[52] flex items-center justify-center gap-2 border-b border-[#c2b2a3]/25 bg-black/85 px-3 py-2 text-center text-[11px] sm:text-xs tracking-[0.12em] text-[#c2b2a3] backdrop-blur-md hover:bg-black hover:text-white transition-colors"
+          className="promo-mini-banner fixed left-0 right-0 top-[5.75rem] md:top-[7.25rem] z-[52] flex items-center justify-center gap-2 overflow-hidden border-b border-[#d946ef]/40 bg-[#1a0618]/92 px-3 py-2.5 text-center text-[11px] sm:text-xs tracking-[0.14em] text-[#f5d0fe] backdrop-blur-md hover:bg-[#2a0a24] hover:text-white transition-colors"
         >
-          <span>{promo.bannerText}</span>
+          <span className="relative z-[1]">{promo.bannerText}</span>
+          <style>{`
+            @keyframes promo-banner-shimmer {
+              0% { transform: translateX(-120%); opacity: 0; }
+              18% { opacity: 0.85; }
+              42% { opacity: 0.55; }
+              70% { transform: translateX(120%); opacity: 0; }
+              100% { transform: translateX(120%); opacity: 0; }
+            }
+            @keyframes promo-banner-glow {
+              0%, 100% { box-shadow: inset 0 0 0 0 rgba(217, 70, 239, 0); }
+              35% { box-shadow: inset 0 0 28px 0 rgba(217, 70, 239, 0.28); }
+            }
+            .promo-mini-banner {
+              animation: promo-banner-glow 2.8s ease-in-out infinite;
+            }
+            .promo-mini-banner::before {
+              content: '';
+              position: absolute;
+              inset: 0;
+              width: 42%;
+              background: linear-gradient(
+                105deg,
+                transparent 0%,
+                rgba(244, 114, 182, 0.08) 28%,
+                rgba(232, 121, 249, 0.55) 50%,
+                rgba(244, 114, 182, 0.08) 72%,
+                transparent 100%
+              );
+              animation: promo-banner-shimmer 3.4s ease-in-out infinite;
+              pointer-events: none;
+            }
+            @media (prefers-reduced-motion: reduce) {
+              .promo-mini-banner,
+              .promo-mini-banner::before {
+                animation: none;
+              }
+            }
+          `}</style>
         </button>
       ) : null}
 
