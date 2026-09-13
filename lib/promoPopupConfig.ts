@@ -10,7 +10,7 @@ export type PromoPopupConfig = {
 
 export const ACTIVE_PROMO: PromoPopupConfig = {
   id: 'promo-2026-09-13-duo',
-  image: '/promos/promo-duo.webp?v=duplex-chosen-3h',
+  image: '/promos/promo-duo.webp?v=duplex-original-3h',
   startsAt: '2026-09-13T20:55:00+02:00',
   endsAt: '2026-09-13T23:55:00+02:00',
   enabled: true,
