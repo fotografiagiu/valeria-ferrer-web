@@ -9,13 +9,13 @@ export type PromoPopupConfig = {
 }
 
 export const ACTIVE_PROMO: PromoPopupConfig = {
-  id: 'promo-2026-09-11-copa',
-  image: '/promos/promo-copa.webp',
-  startsAt: '2026-09-11T21:38:00+02:00',
-  endsAt: '2026-09-12T00:38:00+02:00',
+  id: 'promo-2026-09-13-duo',
+  image: '/promos/promo-duo.webp?v=aprovecha-3h',
+  startsAt: '2026-09-13T20:55:00+02:00',
+  endsAt: '2026-09-13T23:55:00+02:00',
   enabled: true,
   ctaHref: '/booking',
-  bannerText: '🥂 Copa de invitación · Oferta activa · Ver oferta',
+  bannerText: 'Oferta dúplex · Aprovecha en estas 3 horas · Ver oferta',
 }
 
 export function isPromoLive(promo: PromoPopupConfig, now = Date.now()): boolean {
