@@ -25,6 +25,16 @@ export default defineConfig(({ mode }) => {
       outDir: path.join(__dirname, 'dist'),
       emptyOutDir: true,
       sourcemap: false,
+      // Do not preload catalog/dnd on the login-critical path.
+      modulePreload: {
+        resolveDependencies: (_filename, deps) =>
+          deps.filter(
+            (dep) =>
+              !dep.includes('dnd-') &&
+              !dep.includes('CatalogScreen') &&
+              !dep.includes('ActivityFeed')
+          ),
+      },
       rollupOptions: {
         output: {
           manualChunks(id) {
