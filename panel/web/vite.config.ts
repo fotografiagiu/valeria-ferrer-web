@@ -25,22 +25,17 @@ export default defineConfig(({ mode }) => {
       outDir: path.join(__dirname, 'dist'),
       emptyOutDir: true,
       sourcemap: false,
-      // Do not preload catalog/dnd on the login-critical path.
+      // Do not preload catalog chunks on the login-critical path.
+      // Avoid manualChunks for @dnd-kit: it pulled React into that chunk and
+      // forced the login bundle to download dnd just to import React.
       modulePreload: {
         resolveDependencies: (_filename, deps) =>
           deps.filter(
             (dep) =>
-              !dep.includes('dnd-') &&
               !dep.includes('CatalogScreen') &&
-              !dep.includes('ActivityFeed')
+              !dep.includes('ActivityFeed') &&
+              !dep.includes('dnd-')
           ),
-      },
-      rollupOptions: {
-        output: {
-          manualChunks(id) {
-            if (id.includes('node_modules/@dnd-kit')) return 'dnd';
-          },
-        },
       },
     },
   };
