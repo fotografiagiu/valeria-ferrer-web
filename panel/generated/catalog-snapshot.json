@@ -1,13 +1,14 @@
 {
-  "generatedAt": "2026-09-11T20:35:06.415Z",
+  "generatedAt": "2026-09-14T08:32:29.283Z",
   "sourcePath": "data/models.json",
-  "sourceHash": "ae222e641fc371916cdd199728ef76fa49069e8d94c09a6cb48895166f9f89bb",
+  "sourceHash": "58a624c1bfeb99388bfd7bf490282facf3267db082fa63b674282e3bd30c2eb5",
   "modelCount": 42,
-  "activeCount": 25,
+  "activeCount": 24,
   "models": [
     {
       "slug": "karen",
       "name": "Karen",
+      "active": false,
       "coverImageUrl": "/chicas/karen-valeria-ferrer-model-agency-valencia/portada.jpg",
       "images": [
         "/chicas/karen-valeria-ferrer-model-agency-valencia/gallery/01.jpg",

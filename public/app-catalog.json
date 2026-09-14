@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-09-11T20:32:20.875Z",
-  "catalogVersion": "ae222e641fc371916cdd199728ef76fa49069e8d94c09a6cb48895166f9f89bb",
+  "generatedAt": "2026-09-14T08:30:00.869Z",
+  "catalogVersion": "58a624c1bfeb99388bfd7bf490282facf3267db082fa63b674282e3bd30c2eb5",
   "source": "valeria-ferrer-web",
   "method": "build-app-catalog",
   "models": [
     {
       "slug": "karen",
       "name": "Karen",
-      "active": true,
+      "active": false,
       "vip": false,
       "coverImageUrl": "/chicas/karen-valeria-ferrer-model-agency-valencia/portada.jpg",
       "images": [
