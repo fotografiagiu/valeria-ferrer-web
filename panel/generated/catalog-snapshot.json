@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-09-14T08:32:29.283Z",
+  "generatedAt": "2026-09-14T19:34:12.425Z",
   "sourcePath": "data/models.json",
-  "sourceHash": "58a624c1bfeb99388bfd7bf490282facf3267db082fa63b674282e3bd30c2eb5",
+  "sourceHash": "79d130b05bd8faa254e79d15f570c83691f251ce8b6b9fc44283988de76ca0bb",
   "modelCount": 42,
-  "activeCount": 24,
+  "activeCount": 25,
   "models": [
     {
       "slug": "karen",
@@ -467,7 +467,6 @@
     {
       "slug": "estefany",
       "name": "Estefany",
-      "active": false,
       "coverImageUrl": "/chicas/estefany-model-agency-valencia-vf/portada-nueva.jpg",
       "images": [
         "/chicas/estefany-model-agency-valencia-vf/2.jpg",

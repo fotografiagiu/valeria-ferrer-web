@@ -28,7 +28,7 @@ export const HOME_PIN_ORDER: readonly string[] = [
   'danna',
   'veronica',
   'jazmin',
-  'marta',
+  'estefany',
   'luna',
   'silvia',
   'adara',
