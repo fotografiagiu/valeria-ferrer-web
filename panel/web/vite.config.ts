@@ -25,6 +25,13 @@ export default defineConfig(({ mode }) => {
       outDir: path.join(__dirname, 'dist'),
       emptyOutDir: true,
       sourcemap: false,
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (id.includes('node_modules/@dnd-kit')) return 'dnd';
+          },
+        },
+      },
     },
   };
 });

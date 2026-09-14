@@ -6,6 +6,12 @@ import { loadEnv } from '../../src/lib/env.js';
 /** Never let a stalled request reach the platform gateway timeout. */
 const HANDLER_TIMEOUT_MS = 20_000;
 
+const UNAUTH_FAST_PATHS = new Set([
+  '/api/staff/me',
+  '/api/staff/catalog',
+  '/api/staff/activity',
+]);
+
 let cachedApp: ReturnType<typeof createApp> | null = null;
 
 function getApp() {
@@ -13,6 +19,21 @@ function getApp() {
     cachedApp = createApp({ db: getDb(), env: loadEnv() });
   }
   return cachedApp;
+}
+
+function cookieName(): string {
+  return process.env.STAFF_COOKIE_NAME || 'vf_staff_session';
+}
+
+/** True when a non-empty staff session cookie is present (no DB). */
+function hasStaffSessionCookie(cookieHeader: string | undefined): boolean {
+  if (!cookieHeader) return false;
+  const name = cookieName();
+  for (const part of cookieHeader.split(';')) {
+    const [rawKey, ...rest] = part.trim().split('=');
+    if (rawKey === name && rest.join('=').length > 0) return true;
+  }
+  return false;
 }
 
 /**
@@ -82,6 +103,21 @@ export default async function staffApiHandler(
   res: VercelResponse
 ): Promise<void> {
   try {
+    const method = (req.method || 'GET').toUpperCase();
+    const pathOnly = (req.url || '/').split('?')[0];
+    // Unauthenticated GETs must not pay Neon/Hono cold-init just to return 401.
+    if (
+      method === 'GET' &&
+      UNAUTH_FAST_PATHS.has(pathOnly) &&
+      !hasStaffSessionCookie(
+        typeof req.headers.cookie === 'string' ? req.headers.cookie : undefined
+      )
+    ) {
+      res.setHeader('Cache-Control', 'no-store');
+      res.status(401).json({ error: 'unauthorized' });
+      return;
+    }
+
     const app = getApp();
     const webRes = await Promise.race([
       app.fetch(toWebRequest(req)),

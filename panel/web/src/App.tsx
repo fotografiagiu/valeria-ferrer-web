@@ -1,6 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
-import { ActivityFeed } from './components/ActivityFeed';
-import { CatalogScreen } from './components/CatalogScreen';
+import { lazy, Suspense, useCallback, useEffect, useState } from 'react';
 import { LoginScreen } from './components/LoginScreen';
 import { Toast } from './components/Toast';
 import {
@@ -11,6 +9,13 @@ import {
   type StaffCatalogModel,
   type StaffUser,
 } from './lib/api';
+
+const CatalogScreen = lazy(() =>
+  import('./components/CatalogScreen').then((m) => ({ default: m.CatalogScreen }))
+);
+const ActivityFeed = lazy(() =>
+  import('./components/ActivityFeed').then((m) => ({ default: m.ActivityFeed }))
+);
 
 type ToastState = { message: string; tone: 'success' | 'error' } | null;
 
@@ -66,6 +71,8 @@ export function App() {
         if (cancelled) return;
         setUser(me);
         setBootError(null);
+        // Show shell immediately after session check — do not wait for catalog.
+        setBootstrapping(false);
         await loadCatalog();
       } catch (err) {
         if (cancelled) return;
@@ -165,22 +172,26 @@ export function App() {
         ) : null}
 
         {!catalogError && models.length > 0 ? (
-          <CatalogScreen
-            key={catalogKey}
-            initialModels={models}
-            orderVersion={orderVersion}
-            onOrderVersion={setOrderVersion}
-            onModelsChange={setModels}
-            onToast={showToast}
-            onReload={loadCatalog}
-          />
+          <Suspense fallback={<div className="loading-center">Cargando fichas…</div>}>
+            <CatalogScreen
+              key={catalogKey}
+              initialModels={models}
+              orderVersion={orderVersion}
+              onOrderVersion={setOrderVersion}
+              onModelsChange={setModels}
+              onToast={showToast}
+              onReload={loadCatalog}
+            />
+          </Suspense>
         ) : null}
 
         {!loadingCatalog && !catalogError && models.length === 0 ? (
           <div className="loading-center">No hay fichas activas</div>
         ) : null}
 
-        <ActivityFeed />
+        <Suspense fallback={null}>
+          <ActivityFeed />
+        </Suspense>
       </main>
     </div>
   );

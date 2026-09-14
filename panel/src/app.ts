@@ -88,7 +88,7 @@ export function createApp(options: CreateAppOptions) {
       fetchImpl: options.fetchImpl,
     });
 
-    const overrides = await listOverrides(db);
+    let overrides = await listOverrides(db);
     const overrideBySlug = new Map(overrides.map((o) => [o.slug, o]));
     const activeModels = resolved.models.filter((m) => m.active !== false);
     const activeSlugSet = new Set(activeModels.map((m) => m.slug));
@@ -124,9 +124,11 @@ export function createApp(options: CreateAppOptions) {
         staffUserId: staffUserId ?? null,
       });
       markCatalogSynced(resolved.catalogVersion);
+      // Sync may rewrite rows — re-read once so the handler can reuse this list.
+      overrides = await listOverrides(db);
     }
 
-    return resolved;
+    return { ...resolved, overrides };
   }
 
   async function requireStaff(c: {
@@ -291,7 +293,7 @@ export function createApp(options: CreateAppOptions) {
     const resolved = await ensureCatalogSynced(staff.id);
     const models = resolved.models;
     const activeModels = models.filter((m) => m.active !== false);
-    const overrides = await listOverrides(db);
+    const overrides = resolved.overrides;
     const overrideBySlug = new Map(overrides.map((o) => [o.slug, o]));
     const orderVersion = await getOrderVersion(db);
 
