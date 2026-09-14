@@ -3,7 +3,7 @@
  * but never caches /api/ responses: session state and catalog order must
  * always come from the server.
  */
-const CACHE = 'vf-panel-shell-v1';
+const CACHE = 'vf-panel-shell-v2';
 const SHELL = [
   '/',
   '/manifest.webmanifest',

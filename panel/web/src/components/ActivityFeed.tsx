@@ -1,21 +1,16 @@
 import { useCallback, useEffect, useState } from 'react';
 import { ApiError, getActivity, type ActivityItem } from '../lib/api';
 
+/** Time only — the feed is limited to the last 24h. */
 function formatWhen(iso: string): string {
   const date = new Date(iso);
   if (Number.isNaN(date.getTime())) return iso;
-  const weekday = new Intl.DateTimeFormat('es-ES', {
-    timeZone: 'Europe/Madrid',
-    weekday: 'long',
-  }).format(date);
-  const time = new Intl.DateTimeFormat('es-ES', {
+  return new Intl.DateTimeFormat('es-ES', {
     timeZone: 'Europe/Madrid',
     hour: '2-digit',
     minute: '2-digit',
     hour12: false,
   }).format(date);
-  const day = weekday.charAt(0).toUpperCase() + weekday.slice(1);
-  return `${day} ${time}`;
 }
 
 export function ActivityFeed() {
@@ -27,7 +22,7 @@ export function ActivityFeed() {
     setLoading(true);
     setError(null);
     try {
-      const res = await getActivity(30);
+      const res = await getActivity(40);
       setItems(res.items);
     } catch (err) {
       if (err instanceof ApiError && err.status === 401) {
@@ -63,7 +58,7 @@ export function ActivityFeed() {
       {error ? <p className="activity-error">{error}</p> : null}
 
       {!loading && !error && items.length === 0 ? (
-        <p className="activity-empty">Todavía no hay cambios registrados.</p>
+        <p className="activity-empty">Sin cambios en las últimas 24 h</p>
       ) : null}
 
       {items.length > 0 ? (
@@ -75,9 +70,16 @@ export function ActivityFeed() {
                 <span className={`activity-subject${item.automatic ? ' system' : ''}`}>
                   {item.subject}
                 </span>
-                <span className="activity-sep">—</span>
+                <span className="activity-sep">·</span>
                 <span className="activity-summary">{item.summary}</span>
               </div>
+              {item.details && item.details.length > 0 ? (
+                <ul className="activity-details">
+                  {item.details.map((line) => (
+                    <li key={line}>{line}</li>
+                  ))}
+                </ul>
+              ) : null}
             </li>
           ))}
         </ul>

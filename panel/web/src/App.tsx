@@ -181,6 +181,10 @@ export function App() {
               onModelsChange={setModels}
               onToast={showToast}
               onReload={loadCatalog}
+              onUnauthorized={() => {
+                setUser(null);
+                setModels([]);
+              }}
             />
           </Suspense>
         ) : null}

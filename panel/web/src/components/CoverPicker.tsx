@@ -8,9 +8,17 @@ type Props = {
   onUpdated: (slug: string, coverImagePath: string, coverVersion: number) => void;
   onToast: (message: string, tone?: 'success' | 'error') => void;
   onConflict: () => void;
+  onUnauthorized?: () => void;
 };
 
-export function CoverPicker({ model, onClose, onUpdated, onToast, onConflict }: Props) {
+export function CoverPicker({
+  model,
+  onClose,
+  onUpdated,
+  onToast,
+  onConflict,
+  onUnauthorized,
+}: Props) {
   const [pendingPath, setPendingPath] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [coverVersion, setCoverVersion] = useState(model.coverVersion);
@@ -33,7 +41,10 @@ export function CoverPicker({ model, onClose, onUpdated, onToast, onConflict }: 
       onUpdated(model.slug, result.coverImagePath, result.coverVersion);
       onToast(`✓ Portada de ${model.name} actualizada`, 'success');
     } catch (err) {
-      if (err instanceof ApiError && err.status === 409) {
+      if (err instanceof ApiError && err.status === 401) {
+        onToast(err.message, 'error');
+        onUnauthorized?.();
+      } else if (err instanceof ApiError && err.status === 409) {
         onToast('Los datos cambiaron. Recarga el catálogo.', 'error');
         onConflict();
       } else if (err instanceof ApiError) {

@@ -26,6 +26,7 @@ type Props = {
   onModelsChange: (models: StaffCatalogModel[]) => void;
   onToast: (message: string, tone?: 'success' | 'error') => void;
   onReload: () => void;
+  onUnauthorized?: () => void;
 };
 
 function DragHandleIcon() {
@@ -100,6 +101,7 @@ export function CatalogScreen({
   onModelsChange,
   onToast,
   onReload,
+  onUnauthorized,
 }: Props) {
   const [models, setModels] = useState(initialModels);
   const [savedOrder, setSavedOrder] = useState(initialModels.map((m) => m.slug));
@@ -148,7 +150,10 @@ export function CatalogScreen({
       setSavedOrder(models.map((m) => m.slug));
       onToast('✓ Cambios guardados', 'success');
     } catch (err) {
-      if (err instanceof ApiError && err.status === 409) {
+      if (err instanceof ApiError && err.status === 401) {
+        onToast(err.message, 'error');
+        onUnauthorized?.();
+      } else if (err instanceof ApiError && err.status === 409) {
         setConflict(true);
         onToast('Los datos cambiaron. Recarga el catálogo.', 'error');
       } else if (err instanceof ApiError) {
@@ -218,6 +223,7 @@ export function CatalogScreen({
           onClose={() => setSelected(null)}
           onUpdated={onCoverUpdated}
           onToast={onToast}
+          onUnauthorized={onUnauthorized}
           onConflict={() => {
             setConflict(true);
             setSelected(null);

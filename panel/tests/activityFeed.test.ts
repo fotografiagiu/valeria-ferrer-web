@@ -4,6 +4,7 @@ import { formatActivityItems } from '../src/lib/activityFeed.js';
 const names = new Map([
   ['karen', 'Karen'],
   ['sara', 'Sara'],
+  ['erika', 'Erika'],
   ['claudia', 'Claudia'],
 ]);
 
@@ -39,13 +40,13 @@ describe('formatActivityItems', () => {
         at: '2026-09-11T10:42:00.000Z',
         slug: 'sara',
         subject: 'Sara',
-        summary: 'portada cambiada',
+        summary: 'portada actualizada',
         automatic: false,
       },
     ]);
   });
 
-  it('expands order.replace into per-girl position lines', () => {
+  it('collapses order.replace into one summary card with preview details', () => {
     const items = formatActivityItems(
       [
         {
@@ -56,26 +57,64 @@ describe('formatActivityItems', () => {
           staffUserId: 'staff-1',
           before: [
             { slug: 'sara', displayOrder: 1 },
-            { slug: 'karen', displayOrder: 25 },
+            { slug: 'erika', displayOrder: 2 },
+            { slug: 'karen', displayOrder: 3 },
+            { slug: 'claudia', displayOrder: 4 },
           ],
           after: [
-            { slug: 'karen', displayOrder: 6 },
-            { slug: 'sara', displayOrder: 1 },
+            { slug: 'erika', displayOrder: 1 },
+            { slug: 'sara', displayOrder: 2 },
+            { slug: 'karen', displayOrder: 3 },
+            { slug: 'claudia', displayOrder: 4 },
           ],
         },
       ],
       { names, limit: 30 }
     );
 
-    expect(items).toContainEqual({
-      id: '10:order:karen',
-      at: '2026-09-11T11:05:00.000Z',
-      slug: 'karen',
-      subject: 'Karen',
-      summary: 'posición 25 → 6',
+    expect(items).toHaveLength(1);
+    expect(items[0]).toMatchObject({
+      id: '10:order',
+      subject: 'Orden de fichas',
+      summary: '2 posiciones modificadas',
       automatic: false,
     });
-    expect(items.some((item) => item.slug === 'sara')).toBe(false);
+    expect(items[0].details?.[0]).toContain('Erika');
+    expect(items[0].details?.[1]).toContain('Sara');
+  });
+
+  it('uses a single line when only one position changes', () => {
+    const items = formatActivityItems(
+      [
+        {
+          id: 11,
+          createdAt: new Date('2026-09-11T11:06:00.000Z'),
+          action: 'order.replace',
+          modelSlug: null,
+          staffUserId: 'staff-1',
+          before: [
+            { slug: 'sara', displayOrder: 1 },
+            { slug: 'karen', displayOrder: 25 },
+          ],
+          after: [
+            { slug: 'sara', displayOrder: 1 },
+            { slug: 'karen', displayOrder: 6 },
+          ],
+        },
+      ],
+      { names, limit: 30 }
+    );
+
+    expect(items).toEqual([
+      {
+        id: '11:order',
+        at: '2026-09-11T11:06:00.000Z',
+        slug: null,
+        subject: 'Orden de fichas',
+        summary: 'Karen 25 → 6',
+        automatic: false,
+      },
+    ]);
   });
 
   it('expands catalog.sync added as Sistema lines', () => {

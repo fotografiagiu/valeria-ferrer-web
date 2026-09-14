@@ -224,7 +224,9 @@ describe('auth + order + cover API', () => {
     expect(
       body.items.some(
         (item: { subject: string; summary: string }) =>
-          item.summary === 'portada cambiada' || item.summary.includes('posición')
+          item.summary === 'portada actualizada' ||
+          item.subject === 'Orden de fichas' ||
+          item.summary.includes('posición')
       )
     ).toBe(true);
   });

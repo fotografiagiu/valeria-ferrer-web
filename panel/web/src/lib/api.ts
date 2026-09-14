@@ -25,6 +25,7 @@ export type ActivityItem = {
   slug: string | null;
   subject: string;
   summary: string;
+  details?: string[];
   automatic: boolean;
 };
 
@@ -81,10 +82,19 @@ async function request<T>(path: string, init?: RequestInit & { timeoutMs?: numbe
 
   const body = await parseJson(res);
   if (!res.ok) {
-    const message =
+    let message =
       body && typeof body === 'object' && 'error' in body && typeof (body as { error: unknown }).error === 'string'
         ? (body as { error: string }).error
         : `HTTP ${res.status}`;
+    if (res.status === 401 && (message === 'unauthorized' || message === 'invalid credentials')) {
+      message =
+        message === 'invalid credentials'
+          ? 'Usuario o contraseña incorrectos'
+          : 'Sesión caducada. Vuelve a iniciar sesión.';
+    }
+    if (res.status === 403 && (message === 'invalid origin' || message === 'missing origin')) {
+      message = 'No se pudo verificar el origen de la petición. Recarga la app e inténtalo de nuevo.';
+    }
     throw new ApiError(res.status, message, body);
   }
   return body as T;
@@ -109,7 +119,7 @@ export function getCatalog() {
   return request<StaffCatalogResponse>('/api/staff/catalog');
 }
 
-export function getActivity(limit = 30) {
+export function getActivity(limit = 40) {
   return request<ActivityResponse>(`/api/staff/activity?limit=${limit}`);
 }
 

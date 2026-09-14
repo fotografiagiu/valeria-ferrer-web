@@ -1,23 +1,30 @@
-import { desc } from 'drizzle-orm';
+import { and, desc, gte } from 'drizzle-orm';
 import type { AppDb } from '../db/client.js';
 import { auditLog } from '../db/schema.js';
 
 /** Auth + seed noise — not shown in Actividad reciente. */
-const EXCLUDED_ACTIONS = new Set([
+export const EXCLUDED_ACTIONS = new Set([
   'auth.login',
   'auth.logout',
   'auth.login_failed',
   'catalog.seed',
 ]);
 
+/** UI window for Actividad reciente (audit_log rows older than this stay in DB). */
+export const ACTIVITY_WINDOW_MS = 24 * 60 * 60 * 1000;
+
+const ORDER_DETAIL_PREVIEW = 3;
+
 export type ActivityItem = {
-  /** Stable id for React keys (`auditId:line`). */
+  /** Stable id for React keys. */
   id: string;
   at: string;
   slug: string | null;
-  /** Girl display name, or "Sistema" for automatic bulk events. */
+  /** Short title: girl name, "Orden de fichas", or "Sistema". */
   subject: string;
   summary: string;
+  /** Optional compact lines under the summary (order diffs). */
+  details?: string[];
   automatic: boolean;
 };
 
@@ -59,9 +66,21 @@ function displayName(slug: string, names: Map<string, string>): string {
   return names.get(slug) || slug;
 }
 
+function formatOrderChangeLine(
+  change: { slug: string; from: number | null; to: number | null },
+  names: Map<string, string>
+): string {
+  const name = displayName(change.slug, names);
+  if (change.from != null && change.to != null) return `${name} ${change.from} → ${change.to}`;
+  if (change.to == null && change.from != null) return `${name} sacada del orden`;
+  if (change.from == null && change.to != null) return `${name} añadida en ${change.to}`;
+  return name;
+}
+
 /**
- * Expand raw audit_log rows into short human-readable activity lines.
+ * Expand raw audit_log rows into short human-readable activity cards.
  * Does not change how events are written — read-time formatting only.
+ * One GUARDAR ORDEN → one card (not one line per girl).
  */
 export function formatActivityItems(
   rows: AuditRow[],
@@ -71,7 +90,7 @@ export function formatActivityItems(
   }
 ): ActivityItem[] {
   const names = options?.names ?? new Map<string, string>();
-  const limit = options?.limit ?? 30;
+  const limit = options?.limit ?? 40;
   const items: ActivityItem[] = [];
 
   for (const row of rows) {
@@ -91,7 +110,7 @@ export function formatActivityItems(
         at,
         slug,
         subject: displayName(slug, names),
-        summary: 'portada cambiada',
+        summary: 'portada actualizada',
         automatic,
       });
     } else if (row.action === 'order.replace') {
@@ -105,38 +124,31 @@ export function formatActivityItems(
         if (from === to) continue;
         changes.push({ slug, from, to });
       }
+      if (changes.length === 0) continue;
       changes.sort((a, b) => (a.to ?? 9999) - (b.to ?? 9999));
-      for (const change of changes) {
-        if (items.length >= limit) break;
-        if (change.from != null && change.to != null) {
-          push({
-            id: `${baseId}:order:${change.slug}`,
-            at,
-            slug: change.slug,
-            subject: displayName(change.slug, names),
-            summary: `posición ${change.from} → ${change.to}`,
-            automatic,
-          });
-        } else if (change.to == null && change.from != null) {
-          push({
-            id: `${baseId}:order-out:${change.slug}`,
-            at,
-            slug: change.slug,
-            subject: displayName(change.slug, names),
-            summary: 'sacada del orden',
-            automatic,
-          });
-        } else if (change.from == null && change.to != null) {
-          push({
-            id: `${baseId}:order-in:${change.slug}`,
-            at,
-            slug: change.slug,
-            subject: displayName(change.slug, names),
-            summary: `añadida en posición ${change.to}`,
-            automatic,
-          });
-        }
+
+      const details: string[] = [];
+      const preview = changes.slice(0, ORDER_DETAIL_PREVIEW);
+      for (const change of preview) {
+        details.push(formatOrderChangeLine(change, names));
       }
+      const remaining = changes.length - preview.length;
+      if (remaining > 0) {
+        details.push(`+ ${remaining} cambio${remaining === 1 ? '' : 's'} más`);
+      }
+
+      push({
+        id: `${baseId}:order`,
+        at,
+        slug: null,
+        subject: 'Orden de fichas',
+        summary:
+          changes.length === 1
+            ? details[0] ?? '1 posición modificada'
+            : `${changes.length} posiciones modificadas`,
+        details: changes.length > 1 ? details : undefined,
+        automatic,
+      });
     } else if (row.action === 'catalog.sync') {
       const after = asRecord(row.after);
       const added = stringList(after?.added);
@@ -173,7 +185,6 @@ export function formatActivityItems(
           automatic: true,
         });
       }
-      // `before.deactivated` lists every inactive slug on each sync — too noisy for this feed.
     }
 
     if (items.length >= limit) break;
@@ -187,10 +198,16 @@ export async function listRecentActivity(
   options?: {
     limit?: number;
     names?: Map<string, string>;
+    /** Inclusive lower bound; defaults to now − 24h. */
+    since?: Date;
+    now?: Date;
   }
 ): Promise<ActivityItem[]> {
-  const limit = Math.min(Math.max(options?.limit ?? 30, 1), 100);
-  const rawLimit = Math.min(Math.max(limit * 3, 40), 200);
+  const limit = Math.min(Math.max(options?.limit ?? 40, 1), 100);
+  const now = options?.now ?? new Date();
+  const since = options?.since ?? new Date(now.getTime() - ACTIVITY_WINDOW_MS);
+  // Enough raw rows for sync/auth noise within the window; formatting collapses order events.
+  const rawLimit = Math.min(Math.max(limit * 2, 40), 120);
 
   const rows = await db
     .select({
@@ -203,10 +220,9 @@ export async function listRecentActivity(
       after: auditLog.after,
     })
     .from(auditLog)
+    .where(and(gte(auditLog.createdAt, since)))
     .orderBy(desc(auditLog.createdAt), desc(auditLog.id))
     .limit(rawLimit);
 
   return formatActivityItems(rows, { names: options?.names, limit });
 }
-
-export { EXCLUDED_ACTIONS };

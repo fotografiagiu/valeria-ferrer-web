@@ -10,10 +10,20 @@ function refererAllowed(referer: string, allowed: readonly string[]): boolean {
   return allowed.some((origin) => referer.startsWith(`${origin}/`) || referer === origin);
 }
 
+function requestDeploymentOrigin(c: Context): string | null {
+  const host = (c.req.header('x-forwarded-host') || c.req.header('host') || '')
+    .split(',')[0]
+    .trim();
+  if (!host) return null;
+  const proto = (c.req.header('x-forwarded-proto') || 'https').split(',')[0].trim() || 'https';
+  return `${proto}://${host}`;
+}
+
 /**
  * Staff write endpoints: Origin/Referer must match an allowed staff origin.
- * Allowed = PANEL_ORIGIN ∪ https://$VERCEL_URL ∪ https://$VERCEL_BRANCH_URL (when set).
- * No wildcard *.vercel.app — Preview stays same-deployment only.
+ * Allowed = PANEL_ORIGIN ∪ https://$VERCEL_URL ∪ https://$VERCEL_BRANCH_URL
+ * ∪ this deployment's own Host (so preview/custom aliases keep working).
+ * No wildcard *.vercel.app.
  */
 export function assertStaffWriteOrigin(
   c: Context,
@@ -21,9 +31,12 @@ export function assertStaffWriteOrigin(
 ): { ok: true } | { ok: false; status: 403; error: string } {
   const origin = c.req.header('origin');
   const referer = c.req.header('referer');
-  const allowed = env.staffWriteOrigins;
+  const allowed = [...env.staffWriteOrigins];
+  const deploymentOrigin = requestDeploymentOrigin(c);
+  if (deploymentOrigin) allowed.push(deploymentOrigin);
 
-  if (origin) {
+  // Opaque "null" Origin (some installed WebViews) is not a real site origin.
+  if (origin && origin !== 'null') {
     if (!originAllowed(origin, allowed)) {
       return { ok: false, status: 403, error: 'invalid origin' };
     }
@@ -36,6 +49,12 @@ export function assertStaffWriteOrigin(
 
   // Local curl/tests: allow missing Origin when not in production.
   if (!env.isProd) {
+    return { ok: true };
+  }
+
+  // Some mobile WebViews omit Origin on same-site PUT. If this request is aimed
+  // at our own Host and carries a session cookie, treat it as same-site.
+  if (deploymentOrigin && c.req.header('cookie')) {
     return { ok: true };
   }
 

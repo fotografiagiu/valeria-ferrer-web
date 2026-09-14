@@ -26,10 +26,11 @@ function cookieName(): string {
 }
 
 /** True when a non-empty staff session cookie is present (no DB). */
-function hasStaffSessionCookie(cookieHeader: string | undefined): boolean {
-  if (!cookieHeader) return false;
+function hasStaffSessionCookie(cookieHeader: string | string[] | undefined): boolean {
+  const joined = cookieHeaderFrom(cookieHeader);
+  if (!joined) return false;
   const name = cookieName();
-  for (const part of cookieHeader.split(';')) {
+  for (const part of joined.split(';')) {
     const [rawKey, ...rest] = part.trim().split('=');
     if (rawKey === name && rest.join('=').length > 0) return true;
   }
@@ -53,6 +54,16 @@ function bodyFrom(req: VercelRequest): string | Buffer | undefined {
   return JSON.stringify(parsed);
 }
 
+function cookieHeaderFrom(
+  value: string | string[] | undefined
+): string | undefined {
+  if (typeof value === 'string' && value.trim()) return value;
+  if (Array.isArray(value) && value.length > 0) {
+    return value.filter((v) => typeof v === 'string' && v.trim()).join('; ');
+  }
+  return undefined;
+}
+
 function toWebRequest(req: VercelRequest): Request {
   const proto = String(req.headers['x-forwarded-proto'] || 'https').split(',')[0];
   const host = String(req.headers['x-forwarded-host'] || req.headers.host || 'localhost');
@@ -64,6 +75,11 @@ function toWebRequest(req: VercelRequest): Request {
     const lower = key.toLowerCase();
     // Length/encoding describe the original stream, not the rebuilt body.
     if (lower === 'content-length' || lower === 'transfer-encoding') continue;
+    if (lower === 'cookie') {
+      const joined = cookieHeaderFrom(value as string | string[] | undefined);
+      if (joined) headers.set('cookie', joined);
+      continue;
+    }
     if (Array.isArray(value)) {
       for (const v of value) headers.append(key, v);
     } else {
@@ -80,7 +96,7 @@ function toWebRequest(req: VercelRequest): Request {
 }
 
 async function sendWebResponse(res: VercelResponse, webRes: Response): Promise<void> {
-  const setCookie =
+  const setCookies =
     typeof (webRes.headers as { getSetCookie?: () => string[] }).getSetCookie === 'function'
       ? (webRes.headers as { getSetCookie: () => string[] }).getSetCookie()
       : [];
@@ -89,8 +105,13 @@ async function sendWebResponse(res: VercelResponse, webRes: Response): Promise<v
     if (key.toLowerCase() === 'set-cookie') return;
     res.setHeader(key, value);
   });
-  if (setCookie.length > 0) {
-    res.setHeader('Set-Cookie', setCookie);
+
+  if (setCookies.length > 0) {
+    res.setHeader('Set-Cookie', setCookies);
+  } else {
+    // Fallback when getSetCookie() is empty but Set-Cookie exists as a single header.
+    const single = webRes.headers.get('set-cookie');
+    if (single) res.setHeader('Set-Cookie', single);
   }
 
   res.status(webRes.status);
@@ -109,9 +130,7 @@ export default async function staffApiHandler(
     if (
       method === 'GET' &&
       UNAUTH_FAST_PATHS.has(pathOnly) &&
-      !hasStaffSessionCookie(
-        typeof req.headers.cookie === 'string' ? req.headers.cookie : undefined
-      )
+      !hasStaffSessionCookie(req.headers.cookie as string | string[] | undefined)
     ) {
       res.setHeader('Cache-Control', 'no-store');
       res.status(401).json({ error: 'unauthorized' });

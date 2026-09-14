@@ -31,12 +31,14 @@ import {
   buildClearSessionCookie,
   buildSessionCookie,
   createSession,
+  readCookie,
   resolveSession,
   revokeSessionByToken,
   type StaffIdentity,
 } from './lib/session.js';
 import { coverBodySchema, loginBodySchema, orderBodySchema } from './lib/validation.js';
 import { listRecentActivity } from './lib/activityFeed.js';
+import { readSnapshot } from './lib/catalogSnapshot.js';
 
 export type AppVariables = {
   staff: StaffIdentity;
@@ -134,7 +136,11 @@ export function createApp(options: CreateAppOptions) {
   async function requireStaff(c: {
     req: { header: (n: string) => string | undefined };
   }): Promise<StaffIdentity | null> {
-    const token = getCookie(c as any, env.cookieName);
+    // Prefer Hono helper; fall back to raw Cookie header (Vercel/Node adapters
+    // sometimes expose cookies in a shape getCookie misses).
+    const token =
+      getCookie(c as any, env.cookieName) ||
+      readCookie(c.req.header('cookie'), env.cookieName);
     return resolveSession(db, token);
   }
 
@@ -271,16 +277,14 @@ export function createApp(options: CreateAppOptions) {
     const staff = await requireStaff(c);
     if (!staff) return c.json({ error: 'unauthorized' }, 401);
 
-    const rawLimit = Number(c.req.query('limit') || 30);
-    const limit = Number.isFinite(rawLimit) ? rawLimit : 30;
+    const rawLimit = Number(c.req.query('limit') || 40);
+    const limit = Number.isFinite(rawLimit) ? rawLimit : 40;
 
-    const catalog = await resolveCatalogModels({
-      injectedModels: options.catalogModels,
-      skipLiveCatalog: options.skipLiveCatalog,
-      skipSnapshotFreshness: options.skipSnapshotFreshness,
-      fetchImpl: options.fetchImpl,
-    });
-    const names = new Map(catalog.models.map((m) => [m.slug, m.name]));
+    // Snapshot names only — avoid a live app-catalog fetch on every activity poll.
+    const snap = options.catalogModels
+      ? { models: options.catalogModels }
+      : readSnapshot();
+    const names = new Map(snap.models.map((m) => [m.slug, m.name]));
     const items = await listRecentActivity(db, { limit, names });
     return c.json({ items });
   });
