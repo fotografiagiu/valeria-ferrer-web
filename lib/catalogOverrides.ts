@@ -66,8 +66,9 @@ function withCoverOverride<T extends CatalogLike>(model: T, coverImagePath: stri
 
 /**
  * Apply display_order + cover_image_path to active catalog models.
- * Models missing from overrides normally go at the end — except those listed in
- * HOME_PIN_ORDER, which stay at the front until the panel includes them.
+ * Models missing from overrides go at the end (same as panel catalog:sync).
+ * Do not prepend HOME_PIN misses — that desynced the public grid from the panel
+ * (e.g. a reactivated ficha briefly appeared first on the web).
  */
 export function applyCatalogOverrides<T extends CatalogLike>(
   models: T[],
@@ -88,18 +89,8 @@ export function applyCatalogOverrides<T extends CatalogLike>(
     ordered.push(cover ? withCoverOverride(model, cover) : model);
   }
 
-  const missing = models.filter((m) => !seen.has(m.slug));
-  const missingBySlug = new Map(missing.map((m) => [m.slug, m]));
-  const leadingPins: T[] = [];
-  for (const slug of HOME_PIN_ORDER) {
-    const model = missingBySlug.get(slug);
-    if (!model) continue;
-    leadingPins.push(model);
-    missingBySlug.delete(slug);
-  }
-  const trailing = missing.filter((m) => missingBySlug.has(m.slug));
-
-  return [...leadingPins, ...ordered, ...trailing];
+  const trailing = models.filter((m) => !seen.has(m.slug));
+  return [...ordered, ...trailing];
 }
 
 export const PRODUCTION_OVERRIDES_URL =
