@@ -4,7 +4,7 @@
   "name": "Modelos Valeria Ferrer",
   "description": "Catálogo completo de modelos exclusivas en Valencia",
   "url": "https://www.valeriaferrer.com/models",
-  "numberOfItems": 24,
+  "numberOfItems": 25,
   "itemListElement": [
     {
       "@type": "ListItem",
@@ -171,6 +171,16 @@
       "position": 17,
       "item": {
         "@type": "Person",
+        "name": "Estefany",
+        "url": "https://www.valeriaferrer.com/models/estefany",
+        "image": "https://www.valeriaferrer.com/chicas/estefany-model-agency-valencia-vf/portada-nueva.jpg"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 18,
+      "item": {
+        "@type": "Person",
         "name": "Elena",
         "url": "https://www.valeriaferrer.com/models/elena",
         "image": "https://www.valeriaferrer.com/chicas/elena-valeria-ferrer-model-agency-valencia/elena-lenceria-08-v2.jpg"
@@ -178,7 +188,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 18,
+      "position": 19,
       "item": {
         "@type": "Person",
         "name": "Lana",
@@ -188,7 +198,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 19,
+      "position": 20,
       "item": {
         "@type": "Person",
         "name": "Mónica",
@@ -198,7 +208,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 20,
+      "position": 21,
       "item": {
         "@type": "Person",
         "name": "Sofía",
@@ -208,7 +218,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 21,
+      "position": 22,
       "item": {
         "@type": "Person",
         "name": "Alicia",
@@ -218,7 +228,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 22,
+      "position": 23,
       "item": {
         "@type": "Person",
         "name": "Mia",
@@ -228,7 +238,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 23,
+      "position": 24,
       "item": {
         "@type": "Person",
         "name": "Yaiza",
@@ -238,7 +248,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 24,
+      "position": 25,
       "item": {
         "@type": "Person",
         "name": "Erika",
