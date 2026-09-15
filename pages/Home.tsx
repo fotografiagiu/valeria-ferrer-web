@@ -72,7 +72,7 @@ const Home: React.FC = () => {
   }, []);
 
   const homeSEOData = {
-    title: 'Valeria Ferrer | Escorts y Acompañantes en Valencia',
+    title: 'Valeria Ferrer | Escorts en Valencia',
     description:
       'Descubre nuestras escorts y acompañantes exclusivas en Valencia. Modelos sofisticadas para eventos, cenas y momentos especiales. Atención discreta y reserva privada.',
     canonicalUrl: 'https://www.valeriaferrer.com',

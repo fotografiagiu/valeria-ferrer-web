@@ -103,7 +103,7 @@ const Hero = () => {
                 Valeria Ferrer
               </span>
               <span className="mt-4 md:mt-5 block text-base md:text-2xl tracking-[0.22em] md:tracking-[0.28em] font-light text-[#c2b2a3] uppercase">
-                Escorts de lujo en Valencia
+                Escorts en Valencia
               </span>
             </h1>
 

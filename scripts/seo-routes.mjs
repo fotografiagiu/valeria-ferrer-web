@@ -62,7 +62,7 @@ export const DEFAULT_OG_IMAGE = `${SITE_ORIGIN}/og-image.jpg`;
 
 /** Valores esperados de la home en dist/index.html (no se reescribe). */
 export const HOME_SEO_EXPECTED = {
-  title: 'Valeria Ferrer | Escorts y Acompañantes en Valencia',
+  title: 'Valeria Ferrer | Escorts en Valencia',
   description:
     'Descubre nuestras escorts y acompañantes exclusivas en Valencia. Modelos sofisticadas para eventos, cenas y momentos especiales. Atención discreta y reserva privada.',
   canonical: SITE_ORIGIN,

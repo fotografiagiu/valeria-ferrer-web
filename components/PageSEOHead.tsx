@@ -14,7 +14,7 @@ export function toAbsoluteMediaUrl(pathOrUrl: string): string {
 
 /** Valores por defecto alineados con index.html / home */
 export const DEFAULT_HOME_SEO = {
-  title: 'Valeria Ferrer | Escorts y Acompañantes en Valencia',
+  title: 'Valeria Ferrer | Escorts en Valencia',
   description:
     'Descubre nuestras escorts y acompañantes exclusivas en Valencia. Modelos sofisticadas para eventos, cenas y momentos especiales. Atención discreta y reserva privada.',
   canonicalUrl: SITE_ORIGIN,

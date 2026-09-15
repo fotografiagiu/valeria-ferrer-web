@@ -5,7 +5,7 @@ export const PRERENDER_ROUTES = [
   {
     path: '/',
     canonical: SITE_ORIGIN,
-    title: 'Valeria Ferrer | Escorts y Acompañantes en Valencia',
+    title: 'Valeria Ferrer | Escorts en Valencia',
     timeoutMs: 25000,
   },
   {
