@@ -22,6 +22,8 @@ import { CoverPicker } from './CoverPicker';
 type Props = {
   initialModels: StaffCatalogModel[];
   orderVersion: number;
+  /** True while catalog membership ensure is running — blocks GUARDAR ORDEN. */
+  orderSaveLocked?: boolean;
   onOrderVersion: (version: number) => void;
   onModelsChange: (models: StaffCatalogModel[]) => void;
   onToast: (message: string, tone?: 'success' | 'error') => void;
@@ -97,6 +99,7 @@ function SortableCard({
 export function CatalogScreen({
   initialModels,
   orderVersion,
+  orderSaveLocked = false,
   onOrderVersion,
   onModelsChange,
   onToast,
@@ -135,7 +138,7 @@ export function CatalogScreen({
   }
 
   async function saveOrder() {
-    if (!dirty || saving) return;
+    if (!dirty || saving || orderSaveLocked) return;
     const ok = window.confirm('¿Guardar el nuevo orden de las fichas?');
     if (!ok) return;
 
@@ -210,9 +213,9 @@ export function CatalogScreen({
             type="button"
             className="primary-btn"
             onClick={saveOrder}
-            disabled={!dirty || saving || conflict}
+            disabled={!dirty || saving || conflict || orderSaveLocked}
           >
-            {saving ? 'Guardando…' : 'GUARDAR ORDEN'}
+            {orderSaveLocked ? 'Esperando catálogo…' : saving ? 'Guardando…' : 'GUARDAR ORDEN'}
           </button>
         </div>
       </div>

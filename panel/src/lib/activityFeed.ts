@@ -149,7 +149,7 @@ export function formatActivityItems(
         details: changes.length > 1 ? details : undefined,
         automatic,
       });
-    } else if (row.action === 'catalog.sync') {
+    } else if (row.action === 'catalog.sync' || row.action === 'catalog.ensure') {
       const after = asRecord(row.after);
       const added = stringList(after?.added);
       const reactivated = stringList(after?.reactivatedAtEnd);

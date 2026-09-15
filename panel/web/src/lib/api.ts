@@ -16,6 +16,7 @@ export type StaffCatalogModel = {
 export type StaffCatalogResponse = {
   orderVersion: number;
   missingOverrides: string[];
+  needsEnsure?: boolean;
   models: StaffCatalogModel[];
 };
 
@@ -117,6 +118,17 @@ export function getMe() {
 
 export function getCatalog() {
   return request<StaffCatalogResponse>('/api/staff/catalog');
+}
+
+export function ensureCatalog() {
+  return request<{
+    ok: true;
+    wrote: boolean;
+    catalog: StaffCatalogResponse;
+  }>('/api/staff/catalog/ensure', {
+    method: 'POST',
+    body: JSON.stringify({}),
+  });
 }
 
 export function getActivity(limit = 40) {

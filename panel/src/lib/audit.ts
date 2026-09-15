@@ -8,6 +8,7 @@ export type AuditAction =
   | 'order.replace'
   | 'cover.update'
   | 'catalog.sync'
+  | 'catalog.ensure'
   | 'catalog.seed';
 
 export async function appendAudit(

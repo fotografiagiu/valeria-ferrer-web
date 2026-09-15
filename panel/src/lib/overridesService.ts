@@ -1,4 +1,4 @@
-import { asc, eq, isNotNull } from 'drizzle-orm';
+import { asc, eq, isNotNull, sql } from 'drizzle-orm';
 import type { AppDb } from '../db/client.js';
 import { catalogMeta, modelOverrides } from '../db/schema.js';
 import { appendAudit } from './audit.js';
@@ -8,6 +8,8 @@ import {
   type CatalogModelLite,
 } from './effectiveOrder.js';
 import { validateCoverChange, validateOrderedSlugs } from './validation.js';
+
+type OverrideRow = Awaited<ReturnType<typeof listOverrides>>[number];
 
 export class ConflictError extends Error {
   status = 409 as const;
@@ -31,6 +33,13 @@ export async function getOrderVersion(db: AppDb): Promise<number> {
     await db.insert(catalogMeta).values({ id: 1, orderVersion: 1 });
     return 1;
   }
+  return rows[0].orderVersion;
+}
+
+/** Read-only order version — never inserts catalog_meta. */
+export async function readOrderVersion(db: AppDb): Promise<number> {
+  const rows = await db.select().from(catalogMeta).where(eq(catalogMeta.id, 1)).limit(1);
+  if (!rows[0]) throw new BadRequestError('catalog_meta missing');
   return rows[0].orderVersion;
 }
 
@@ -198,8 +207,10 @@ export async function updateCover(params: {
 
 export type SyncReport = {
   dryRun: boolean;
+  /** True only when the ensure transaction performed data writes. */
+  wrote: boolean;
   added: string[];
-  /** Already active with a position — left in place until renumber pass */
+  /** Already active with a position — left untouched */
   keptActive: string[];
   /** Were inactive (NULL order) and are active again → appended at end */
   reactivatedAtEnd: string[];
@@ -207,31 +218,32 @@ export type SyncReport = {
   deactivated: string[];
   /** Staff cover left the allowlist → reset to catalog coverImageUrl */
   coversReset: string[];
+  /** Planned active order after ensure (kept relative + appends); may contain gaps in display_order values */
   activeOrderAfter: string[];
   orderVersionBumped: boolean;
 };
 
-/**
- * Sync Neon overrides against live/snapshot catalog:
- * - new active → upsert at END (cover = catalog coverImageUrl on insert only)
- * - concurrent syncs for the same new slug are idempotent (ON CONFLICT, no 500)
- * - reactivated (had override, order NULL) → END (do not restore old position)
- * - deactivated → display_order NULL, keep cover/history (do not delete)
- * - remaining actives → renumber 1..N preserving relative order + staff covers
- * - if staff cover is no longer in allowlist → reset to coverImageUrl
- * - bumps order_version when the active set/order skeleton changes
- */
-export async function syncCatalogOverrides(params: {
-  db: AppDb;
-  snapshotModels: CatalogModelLite[];
-  dryRun?: boolean;
-  staffUserId?: string | null;
-}): Promise<SyncReport> {
-  const dryRun = Boolean(params.dryRun);
-  const active = params.snapshotModels.filter((m) => m.active !== false);
+export type MembershipPlan = {
+  added: string[];
+  keptActive: string[];
+  reactivatedAtEnd: string[];
+  deactivated: string[];
+  coversReset: string[];
+  activeOrderAfter: string[];
+  /** Any Neon write needed (structural membership or invalid cover). */
+  hasDrift: boolean;
+  /** Bumps orderVersion when true (add / reactivate / deactivate-with-order). */
+  structuralChange: boolean;
+};
+
+/** Pure plan from catalog + override rows. catalogVersion alone never creates drift. */
+export function planCatalogMembership(
+  snapshotModels: CatalogModelLite[],
+  existing: OverrideRow[]
+): MembershipPlan {
+  const active = snapshotModels.filter((m) => m.active !== false);
   const activeSlugSet = new Set(active.map((m) => m.slug));
-  const bySlug = new Map(params.snapshotModels.map((m) => [m.slug, m]));
-  const existing = await listOverrides(params.db);
+  const bySlug = new Map(snapshotModels.map((m) => [m.slug, m]));
   const existingBySlug = new Map(existing.map((r) => [r.slug, r]));
 
   const deactivated: string[] = [];
@@ -242,7 +254,7 @@ export async function syncCatalogOverrides(params: {
 
   for (const row of existing) {
     if (!activeSlugSet.has(row.slug)) {
-      deactivated.push(row.slug);
+      if (row.displayOrder != null) deactivated.push(row.slug);
     } else if (row.displayOrder == null) {
       reactivatedAtEnd.push(row.slug);
     } else {
@@ -260,53 +272,108 @@ export async function syncCatalogOverrides(params: {
     if (!activeSlugSet.has(row.slug)) continue;
     const model = bySlug.get(row.slug);
     if (!model) continue;
-    const allowed = allowedCoverPaths(model);
-    if (!allowed.includes(row.coverImagePath)) {
+    if (!allowedCoverPaths(model).includes(row.coverImagePath)) {
       coversReset.push(row.slug);
     }
   }
 
-  // Preserve relative order of currently positioned actives, then append reactivated + new
   const keptSorted = existing
     .filter((r) => keptActive.includes(r.slug))
     .sort((a, b) => (a.displayOrder ?? 0) - (b.displayOrder ?? 0))
     .map((r) => r.slug);
 
   const activeOrderAfter = [...keptSorted, ...reactivatedAtEnd, ...added];
-
   const structuralChange =
-    added.length > 0 ||
-    reactivatedAtEnd.length > 0 ||
-    deactivated.some((slug) => {
-      const row = existingBySlug.get(slug);
-      return row && row.displayOrder != null;
-    });
+    added.length > 0 || reactivatedAtEnd.length > 0 || deactivated.length > 0;
+  const hasDrift = structuralChange || coversReset.length > 0;
 
-  if (dryRun) {
-    return {
-      dryRun: true,
-      added,
-      keptActive,
-      reactivatedAtEnd,
-      deactivated,
-      coversReset,
-      activeOrderAfter,
-      orderVersionBumped: structuralChange,
-    };
+  return {
+    added,
+    keptActive,
+    reactivatedAtEnd,
+    deactivated,
+    coversReset,
+    activeOrderAfter,
+    hasDrift,
+    structuralChange,
+  };
+}
+
+function reportFromPlan(
+  plan: MembershipPlan,
+  dryRun: boolean,
+  wrote: boolean
+): SyncReport {
+  return {
+    dryRun,
+    wrote,
+    added: plan.added,
+    keptActive: plan.keptActive,
+    reactivatedAtEnd: plan.reactivatedAtEnd,
+    deactivated: plan.deactivated,
+    coversReset: plan.coversReset,
+    activeOrderAfter: plan.activeOrderAfter,
+    orderVersionBumped: wrote && plan.structuralChange,
+  };
+}
+
+/**
+ * Incremental catalog membership ensure (NOT a full order rewrite):
+ * - new active → INSERT + display_order = MAX+1
+ * - reactivated (NULL order) → MAX+1 (do not restore old position)
+ * - deactivated with order → display_order NULL only on that row
+ * - kept actives → NEVER touch display_order
+ * - invalid cover → reset that row only
+ * - no real drift → CERO writes (no transaction)
+ * - catalogVersion alone is irrelevant here
+ */
+export async function ensureCatalogMembership(params: {
+  db: AppDb;
+  snapshotModels: CatalogModelLite[];
+  dryRun?: boolean;
+  staffUserId?: string | null;
+}): Promise<SyncReport> {
+  const dryRun = Boolean(params.dryRun);
+  const existing = await listOverrides(params.db);
+  const plan = planCatalogMembership(params.snapshotModels, existing);
+
+  if (!plan.hasDrift) {
+    return reportFromPlan(plan, dryRun, false);
   }
 
+  if (dryRun) {
+    return reportFromPlan(plan, true, false);
+  }
+
+  const bySlug = new Map(params.snapshotModels.map((m) => [m.slug, m]));
+
+  let finalPlan = plan;
+  let wrote = false;
+  let bumped = false;
+
   await params.db.transaction(async (tx) => {
-    // 1) Null out everyone first
-    for (const row of existing) {
-      await tx
-        .update(modelOverrides)
-        .set({ displayOrder: null, updatedAt: new Date() })
-        .where(eq(modelOverrides.slug, row.slug));
+    // Serialize concurrent ensures so MAX+1 assignments cannot collide.
+    await tx.execute(sql`select id from catalog_meta where id = 1 for update`);
+
+    const fresh = await tx.select().from(modelOverrides);
+    finalPlan = planCatalogMembership(params.snapshotModels, fresh);
+    if (!finalPlan.hasDrift) {
+      return;
     }
 
-    // 2) Ensure brand-new actives exist (idempotent under concurrent syncs).
-    // ON CONFLICT: never overwrite staff cover/order — only refresh metadata.
-    for (const slug of added) {
+    wrote = true;
+    const freshBySlug = new Map(fresh.map((r) => [r.slug, r]));
+
+    // 1) Deactivate: NULL only those rows (do not renumber others).
+    for (const slug of finalPlan.deactivated) {
+      await tx
+        .update(modelOverrides)
+        .set({ displayOrder: null, updatedAt: new Date(), updatedBy: params.staffUserId ?? null })
+        .where(eq(modelOverrides.slug, slug));
+    }
+
+    // 2) Insert brand-new actives (idempotent). Do not set order yet.
+    for (const slug of finalPlan.added) {
       const model = bySlug.get(slug)!;
       const cover = model.coverImageUrl;
       if (!cover) throw new BadRequestError(`active model ${slug} has no coverImageUrl`);
@@ -331,40 +398,52 @@ export async function syncCatalogOverrides(params: {
         });
     }
 
-    // 3) Reset covers that left the allowlist (preserve valid staff choices)
-    for (const slug of coversReset) {
+    // 3) Reset invalid covers row-locally (never touch valid staff covers).
+    for (const slug of finalPlan.coversReset) {
       const model = bySlug.get(slug)!;
       const cover = model.coverImageUrl;
       if (!cover) throw new BadRequestError(`active model ${slug} has no coverImageUrl`);
-      const row = existingBySlug.get(slug)!;
+      const row = freshBySlug.get(slug);
+      const coverVersion = row ? row.coverVersion + 1 : 1;
       await tx
         .update(modelOverrides)
         .set({
           coverImagePath: cover,
-          coverVersion: row.coverVersion + 1,
+          coverVersion,
           updatedAt: new Date(),
           updatedBy: params.staffUserId ?? null,
         })
         .where(eq(modelOverrides.slug, slug));
     }
 
-    // 4) Assign 1..N to final active order
-    let order = 1;
-    for (const slug of activeOrderAfter) {
+    // 4) Append reactivated + newly added at MAX(display_order)+1 without touching kept rows.
+    const orderedNow = await tx
+      .select()
+      .from(modelOverrides)
+      .where(isNotNull(modelOverrides.displayOrder));
+    let nextOrder =
+      orderedNow.reduce((max, r) => Math.max(max, r.displayOrder as number), 0) + 1;
+
+    const toAppend = [...finalPlan.reactivatedAtEnd, ...finalPlan.added];
+    for (const slug of toAppend) {
+      // Skip if a concurrent ensure already assigned a position.
+      const current = (
+        await tx.select().from(modelOverrides).where(eq(modelOverrides.slug, slug)).limit(1)
+      )[0];
+      if (current?.displayOrder != null) continue;
+
       await tx
         .update(modelOverrides)
         .set({
-          displayOrder: order,
+          displayOrder: nextOrder,
           updatedAt: new Date(),
           updatedBy: params.staffUserId ?? null,
         })
         .where(eq(modelOverrides.slug, slug));
-      order += 1;
+      nextOrder += 1;
     }
 
-    // deactivated remain NULL (already nulled in step 1)
-
-    if (structuralChange) {
+    if (finalPlan.structuralChange) {
       const metaRows = await tx.select().from(catalogMeta).where(eq(catalogMeta.id, 1)).limit(1);
       const meta = metaRows[0];
       if (meta) {
@@ -372,36 +451,57 @@ export async function syncCatalogOverrides(params: {
           .update(catalogMeta)
           .set({ orderVersion: meta.orderVersion + 1, updatedAt: new Date() })
           .where(eq(catalogMeta.id, 1));
+        bumped = true;
       }
     }
 
     await appendAudit(tx as unknown as AppDb, {
       staffUserId: params.staffUserId ?? null,
-      action: 'catalog.sync',
+      action: 'catalog.ensure',
       before: {
-        keptActive,
-        deactivated,
+        keptActive: finalPlan.keptActive,
+        deactivated: finalPlan.deactivated,
       },
       after: {
-        added,
-        reactivatedAtEnd,
-        coversReset,
-        activeOrderAfter,
-        orderVersionBumped: structuralChange,
+        added: finalPlan.added,
+        reactivatedAtEnd: finalPlan.reactivatedAtEnd,
+        coversReset: finalPlan.coversReset,
+        activeOrderAfter: finalPlan.activeOrderAfter,
+        orderVersionBumped: bumped,
       },
     });
   });
 
-  return {
-    dryRun: false,
-    added,
-    keptActive,
-    reactivatedAtEnd,
-    deactivated,
-    coversReset,
-    activeOrderAfter,
-    orderVersionBumped: structuralChange,
-  };
+  // Recompute activeOrderAfter from DB when we wrote (gaps preserved).
+  if (wrote) {
+    const afterRows = await listActiveOrderedOverrides(params.db);
+    return {
+      dryRun: false,
+      wrote: true,
+      added: finalPlan.added,
+      keptActive: finalPlan.keptActive,
+      reactivatedAtEnd: finalPlan.reactivatedAtEnd,
+      deactivated: finalPlan.deactivated,
+      coversReset: finalPlan.coversReset,
+      activeOrderAfter: afterRows.map((r) => r.slug),
+      orderVersionBumped: bumped,
+    };
+  }
+
+  return reportFromPlan(finalPlan, false, false);
+}
+
+/**
+ * @deprecated Prefer ensureCatalogMembership. Kept as an alias for CLI/scripts;
+ * no longer performs global null-all + renumber 1..N.
+ */
+export async function syncCatalogOverrides(params: {
+  db: AppDb;
+  snapshotModels: CatalogModelLite[];
+  dryRun?: boolean;
+  staffUserId?: string | null;
+}): Promise<SyncReport> {
+  return ensureCatalogMembership(params);
 }
 
 /** Initial seed from effective Home order. */

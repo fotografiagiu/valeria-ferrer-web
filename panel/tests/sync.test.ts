@@ -1,12 +1,15 @@
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
+import { eq } from 'drizzle-orm';
 import { createTestDb, type AppDb } from '../src/db/client.js';
+import { auditLog, catalogMeta, modelOverrides } from '../src/db/schema.js';
 import { writeSnapshot, readSnapshot } from '../src/lib/catalogSnapshot.js';
 import { computeEffectiveHomeOrder } from '../src/lib/effectiveOrder.js';
 import {
   seedOverridesFromEffectiveOrder,
-  syncCatalogOverrides,
+  ensureCatalogMembership,
   listOverrides,
   listActiveOrderedOverrides,
+  getOrderVersion,
 } from '../src/lib/overridesService.js';
 
 let db: AppDb;
@@ -33,20 +36,60 @@ function seededOrder(): string[] {
   return computeEffectiveHomeOrder(readSnapshot().models);
 }
 
-describe('catalog:sync', () => {
-  it('dry-run reports no additions on current catalog', async () => {
-    const report = await syncCatalogOverrides({
+async function snapshotOrders(): Promise<Map<string, number | null>> {
+  const rows = await listOverrides(db);
+  return new Map(rows.map((r) => [r.slug, r.displayOrder]));
+}
+
+/** Keep extras from prior tests active so cover-only checks do not deactivate them. */
+async function catalogWithCurrentExtras() {
+  const snap = readSnapshot().models;
+  const bySlug = new Map(snap.map((m) => [m.slug, m]));
+  const models = [...snap];
+  for (const row of await listOverrides(db)) {
+    if (row.displayOrder == null || bySlug.has(row.slug)) continue;
+    models.push({
+      slug: row.slug,
+      name: row.slug,
+      active: true,
+      coverImageUrl: row.coverImagePath,
+      images: [row.coverImagePath],
+    });
+  }
+  return models;
+}
+
+describe('catalog:ensure (incremental)', () => {
+  it('dry-run / no-drift reports zero writes on current catalog', async () => {
+    const beforeOrders = await snapshotOrders();
+    const beforeVersion = await getOrderVersion(db);
+    const beforeAudit = (await db.select().from(auditLog)).length;
+
+    const dry = await ensureCatalogMembership({
       db,
       snapshotModels: readSnapshot().models,
       dryRun: true,
     });
-    expect(report.added).toEqual([]);
-    expect(report.keptActive.length).toBe(readSnapshot().activeCount);
-    expect(report.orderVersionBumped).toBe(false);
+    expect(dry.added).toEqual([]);
+    expect(dry.wrote).toBe(false);
+    expect(dry.orderVersionBumped).toBe(false);
+
+    const live = await ensureCatalogMembership({
+      db,
+      snapshotModels: readSnapshot().models,
+      dryRun: false,
+    });
+    expect(live.wrote).toBe(false);
+    expect(live.orderVersionBumped).toBe(false);
+
+    expect(await snapshotOrders()).toEqual(beforeOrders);
+    expect(await getOrderVersion(db)).toBe(beforeVersion);
+    expect((await db.select().from(auditLog)).length).toBe(beforeAudit);
   });
 
-  it('adds a brand-new active model at the end without reshuffling kept actives', async () => {
+  it('adds a brand-new active model at the end without moving kept actives', async () => {
     const before = await listActiveOrderedOverrides(db);
+    const ordersBefore = new Map(before.map((r) => [r.slug, r.displayOrder as number]));
     const maxBefore = Math.max(...before.map((r) => r.displayOrder as number));
 
     const models = [
@@ -60,12 +103,13 @@ describe('catalog:sync', () => {
       },
     ];
 
-    const report = await syncCatalogOverrides({
+    const report = await ensureCatalogMembership({
       db,
       snapshotModels: models,
       dryRun: false,
     });
 
+    expect(report.wrote).toBe(true);
     expect(report.added).toEqual(['nueva-test']);
     expect(report.activeOrderAfter.at(-1)).toBe('nueva-test');
     expect(report.orderVersionBumped).toBe(true);
@@ -75,13 +119,19 @@ describe('catalog:sync', () => {
     expect(row?.displayOrder).toBe(maxBefore + 1);
     expect(row?.coverImagePath).toBe('/chicas/nueva-test/portada.jpg');
 
-    // Seed order comes from HOME_PIN_ORDER and must not reshuffle.
-    const seeded = seededOrder();
-    expect(after.find((r) => r.slug === seeded[0])?.displayOrder).toBe(1);
-    expect(after.find((r) => r.slug === seeded[2])?.displayOrder).toBe(3);
+    for (const [slug, order] of ordersBefore) {
+      expect(after.find((r) => r.slug === slug)?.displayOrder).toBe(order);
+    }
   });
 
-  it('sets display_order NULL when deactivated and renumbers actives 1..N', async () => {
+  it('sets display_order NULL when deactivated without renumbering others', async () => {
+    const before = await listActiveOrderedOverrides(db);
+    const erikaBefore = before.find((r) => r.slug === 'erika');
+    expect(erikaBefore?.displayOrder).not.toBeNull();
+    const othersBefore = new Map(
+      before.filter((r) => r.slug !== 'erika').map((r) => [r.slug, r.displayOrder as number])
+    );
+
     const models = readSnapshot().models.map((m) =>
       m.slug === 'erika' ? { ...m, active: false } : m
     );
@@ -93,7 +143,7 @@ describe('catalog:sync', () => {
       images: [],
     });
 
-    const report = await syncCatalogOverrides({
+    const report = await ensureCatalogMembership({
       db,
       snapshotModels: models,
       dryRun: false,
@@ -108,13 +158,19 @@ describe('catalog:sync', () => {
 
     const active = await listActiveOrderedOverrides(db);
     expect(active.map((r) => r.slug)).not.toContain('erika');
-    active.forEach((r, i) => {
-      expect(r.displayOrder).toBe(i + 1);
-    });
+    for (const [slug, order] of othersBefore) {
+      expect(active.find((r) => r.slug === slug)?.displayOrder).toBe(order);
+    }
+    // Gaps are allowed (no global 1..N renumber).
+    const orders = active.map((r) => r.displayOrder as number);
+    expect(new Set(orders).size).toBe(orders.length);
   });
 
-  it('reactivates at END without restoring old position', async () => {
-    // erika currently inactive (NULL). Activate again — must append at end.
+  it('reactivates at END without restoring old position or moving others', async () => {
+    const beforeActive = await listActiveOrderedOverrides(db);
+    const ordersBefore = new Map(beforeActive.map((r) => [r.slug, r.displayOrder as number]));
+    const maxBefore = Math.max(...beforeActive.map((r) => r.displayOrder as number));
+
     const models = readSnapshot().models.map((m) =>
       m.slug === 'erika' ? { ...m, active: true } : m
     );
@@ -126,8 +182,7 @@ describe('catalog:sync', () => {
       images: [],
     });
 
-    const beforeActive = await listActiveOrderedOverrides(db);
-    const report = await syncCatalogOverrides({
+    const report = await ensureCatalogMembership({
       db,
       snapshotModels: models,
       dryRun: false,
@@ -138,15 +193,11 @@ describe('catalog:sync', () => {
 
     const after = await listActiveOrderedOverrides(db);
     expect(after.at(-1)?.slug).toBe('erika');
-    expect(after.at(-1)?.displayOrder).toBe(after.length);
-    // Previous last active (nueva-test) should still be before erika
-    expect(after.find((r) => r.slug === 'nueva-test')?.displayOrder).toBeLessThan(
-      after.find((r) => r.slug === 'erika')!.displayOrder as number
-    );
-    // Kept actives retain seed positions while erika appends at end.
-    const seeded = seededOrder();
-    expect(beforeActive.find((r) => r.slug === seeded[0])?.displayOrder).toBe(1);
-    expect(beforeActive.find((r) => r.slug === seeded[2])?.displayOrder).toBe(3);
+    expect(after.at(-1)?.displayOrder).toBe(maxBefore + 1);
+
+    for (const [slug, order] of ordersBefore) {
+      expect(after.find((r) => r.slug === slug)?.displayOrder).toBe(order);
+    }
   });
 
   it('preserves staff cover when still in allowlist', async () => {
@@ -160,51 +211,52 @@ describe('catalog:sync', () => {
     const alt = (model.images || []).find((img) => img !== model.coverImageUrl) || model.images![0];
     expect(alt).toBeTruthy();
 
-    const { eq } = await import('drizzle-orm');
-    const { modelOverrides } = await import('../src/db/schema.js');
     const before = (await listOverrides(db)).find((r) => r.slug === target)!;
     await db
       .update(modelOverrides)
       .set({ coverImagePath: alt!, coverVersion: before.coverVersion + 1 })
       .where(eq(modelOverrides.slug, target));
 
-    const report = await syncCatalogOverrides({
+    const report = await ensureCatalogMembership({
       db,
-      snapshotModels: readSnapshot().models,
+      snapshotModels: await catalogWithCurrentExtras(),
       dryRun: false,
     });
+    expect(report.wrote).toBe(false);
     expect(report.coversReset).not.toContain(target);
 
     const after = (await listOverrides(db)).find((r) => r.slug === target)!;
     expect(after.coverImagePath).toBe(alt);
   });
 
-  it('resets cover when staff choice leaves the allowlist', async () => {
+  it('resets cover when staff choice leaves the allowlist without moving order', async () => {
     const seeded = seededOrder();
     const target = seeded[2];
-    const snap = readSnapshot().models;
+    const snap = await catalogWithCurrentExtras();
     const model = snap.find((m) => m.slug === target)!;
     const stale = '/chicas/stale-cover-removed.jpg';
+    const orderBefore = (await listOverrides(db)).find((r) => r.slug === target)!.displayOrder;
 
-    const { eq } = await import('drizzle-orm');
-    const { modelOverrides } = await import('../src/db/schema.js');
     await db
       .update(modelOverrides)
       .set({ coverImagePath: stale })
       .where(eq(modelOverrides.slug, target));
 
-    const report = await syncCatalogOverrides({
+    const report = await ensureCatalogMembership({
       db,
       snapshotModels: snap,
       dryRun: false,
     });
+    expect(report.wrote).toBe(true);
     expect(report.coversReset).toContain(target);
+    expect(report.orderVersionBumped).toBe(false);
 
     const after = (await listOverrides(db)).find((r) => r.slug === target)!;
     expect(after.coverImagePath).toBe(model.coverImageUrl);
+    expect(after.displayOrder).toBe(orderBefore);
   });
 
-  it('two concurrent syncs for the same new girl leave one row and do not throw', async () => {
+  it('two concurrent ensures for the same new girl leave one row and unique order', async () => {
     const models = [
       ...readSnapshot().models,
       {
@@ -217,30 +269,24 @@ describe('catalog:sync', () => {
     ];
 
     const results = await Promise.all([
-      syncCatalogOverrides({ db, snapshotModels: models, dryRun: false }),
-      syncCatalogOverrides({ db, snapshotModels: models, dryRun: false }),
+      ensureCatalogMembership({ db, snapshotModels: models, dryRun: false }),
+      ensureCatalogMembership({ db, snapshotModels: models, dryRun: false }),
     ]);
 
     expect(results).toHaveLength(2);
-    for (const report of results) {
-      expect(report.dryRun).toBe(false);
-      expect(report.activeOrderAfter).toContain('concurrent-nueva');
-    }
 
     const rows = (await listOverrides(db)).filter((r) => r.slug === 'concurrent-nueva');
     expect(rows).toHaveLength(1);
     expect(rows[0]?.displayOrder).not.toBeNull();
-    expect(rows[0]?.coverImagePath).toBe('/chicas/concurrent-nueva/portada.jpg');
 
     const active = await listActiveOrderedOverrides(db);
+    const orders = active.map((r) => r.displayOrder as number);
+    expect(new Set(orders).size).toBe(orders.length);
     const hits = active.filter((r) => r.slug === 'concurrent-nueva');
     expect(hits).toHaveLength(1);
-    expect(hits[0]?.displayOrder).toBe(active.length);
   });
 
   it('ON CONFLICT upsert does not overwrite an existing staff cover', async () => {
-    const { eq } = await import('drizzle-orm');
-    const { modelOverrides } = await import('../src/db/schema.js');
     const staffCover = '/chicas/conflict-cover/staff.jpg';
     const catalogCover = '/chicas/conflict-cover/portada.jpg';
 
@@ -252,10 +298,6 @@ describe('catalog:sync', () => {
       updatedBy: null,
     });
 
-    // Pretend both syncs "missed" the row in their planning read by using a catalog
-    // where the slug is active; sync will classify as reactivation (row exists) OR
-    // if we delete from planning... Force the upsert path by calling sync while the
-    // row exists — reactivation must keep staff cover.
     const models = [
       ...readSnapshot().models,
       {
@@ -267,34 +309,11 @@ describe('catalog:sync', () => {
       },
     ];
 
-    await syncCatalogOverrides({ db, snapshotModels: models, dryRun: false });
+    await ensureCatalogMembership({ db, snapshotModels: models, dryRun: false });
 
     const row = (await listOverrides(db)).find((r) => r.slug === 'conflict-cover')!;
     expect(row.coverImagePath).toBe(staffCover);
     expect(row.coverVersion).toBe(4);
     expect(row.displayOrder).not.toBeNull();
-
-    // Simulate the exact race insert path: another sync still thinks it is "added".
-    // Upsert must not clobber staff cover.
-    await db
-      .insert(modelOverrides)
-      .values({
-        slug: 'conflict-cover',
-        displayOrder: null,
-        coverImagePath: catalogCover,
-        coverVersion: 1,
-        updatedBy: null,
-      })
-      .onConflictDoUpdate({
-        target: modelOverrides.slug,
-        set: {
-          updatedAt: new Date(),
-          updatedBy: null,
-        },
-      });
-
-    const afterRace = (await listOverrides(db)).find((r) => r.slug === 'conflict-cover')!;
-    expect(afterRace.coverImagePath).toBe(staffCover);
-    expect(afterRace.coverVersion).toBe(4);
   });
 });

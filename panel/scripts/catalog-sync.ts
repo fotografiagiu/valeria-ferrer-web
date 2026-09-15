@@ -2,7 +2,7 @@
 import { getDb } from '../src/db/client.js';
 import { resolveCatalogModels } from '../src/lib/catalogSource.js';
 import { writeSnapshot } from '../src/lib/catalogSnapshot.js';
-import { syncCatalogOverrides } from '../src/lib/overridesService.js';
+import { ensureCatalogMembership } from '../src/lib/overridesService.js';
 
 const dryRun = process.argv.includes('--dry-run');
 const preferSnapshot = process.argv.includes('--snapshot');
@@ -19,7 +19,7 @@ console.log(
 );
 
 const db = getDb();
-const report = await syncCatalogOverrides({
+const report = await ensureCatalogMembership({
   db,
   snapshotModels: resolved.models,
   dryRun,
@@ -28,4 +28,6 @@ const report = await syncCatalogOverrides({
 console.log(JSON.stringify(report, null, 2));
 if (dryRun) {
   console.log('(dry-run: no DB writes)');
+} else if (!report.wrote) {
+  console.log('(no drift — zero writes)');
 }

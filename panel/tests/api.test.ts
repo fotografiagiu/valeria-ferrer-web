@@ -264,3 +264,140 @@ describe('inactive models', () => {
     }
   });
 });
+
+describe('GET catalog read-only + POST ensure', () => {
+  it('GET /api/staff/catalog never writes (including after cold-start cache reset)', async () => {
+    const { resetCatalogSourceCacheForTests } = await import('../src/lib/catalogSource.js');
+    const { listOverrides } = await import('../src/lib/overridesService.js');
+    const { auditLog, modelOverrides, catalogMeta } = await import('../src/db/schema.js');
+
+    async function fingerprint() {
+      const overrides = await listOverrides(db);
+      const meta = await db.select().from(catalogMeta);
+      const audits = await db.select().from(auditLog);
+      return {
+        orders: overrides
+          .map((r) => `${r.slug}:${r.displayOrder}:${r.coverImagePath}:${r.coverVersion}`)
+          .sort(),
+        orderVersion: meta[0]?.orderVersion,
+        auditCount: audits.length,
+        overrideUpdated: overrides.map((r) => r.updatedAt?.toISOString?.() ?? '').sort(),
+      };
+    }
+
+    const before = await fingerprint();
+    resetCatalogSourceCacheForTests();
+
+    for (let i = 0; i < 3; i++) {
+      const res = await app.request('http://localhost/api/staff/catalog', { headers: { cookie } });
+      expect(res.status).toBe(200);
+      const body = await json(res);
+      expect(body.needsEnsure).toBe(false);
+      expect(body.missingOverrides).toEqual([]);
+    }
+
+    expect(await fingerprint()).toEqual(before);
+    void modelOverrides;
+  });
+
+  it('POST ensure with no drift writes nothing', async () => {
+    const { listOverrides } = await import('../src/lib/overridesService.js');
+    const { auditLog, catalogMeta } = await import('../src/db/schema.js');
+    const beforeOverrides = await listOverrides(db);
+    const beforeAudit = (await db.select().from(auditLog)).length;
+    const beforeVersion = (await db.select().from(catalogMeta))[0]!.orderVersion;
+
+    const res = await app.request('http://localhost/api/staff/catalog/ensure', {
+      method: 'POST',
+      headers: {
+        cookie,
+        'content-type': 'application/json',
+        origin: 'http://localhost:8787',
+      },
+      body: '{}',
+    });
+    expect(res.status).toBe(200);
+    const body = await json(res);
+    expect(body.wrote).toBe(false);
+    expect(body.catalog.needsEnsure).toBe(false);
+
+    expect((await listOverrides(db)).map((r) => `${r.slug}:${r.displayOrder}`).sort()).toEqual(
+      beforeOverrides.map((r) => `${r.slug}:${r.displayOrder}`).sort()
+    );
+    expect((await db.select().from(auditLog)).length).toBe(beforeAudit);
+    expect((await db.select().from(catalogMeta))[0]!.orderVersion).toBe(beforeVersion);
+  });
+
+  it('ensure → drag save via PUT /order → public overrides mirrors saved order', async () => {
+    const snap = readSnapshot();
+    const injected = [
+      ...snap.models,
+      {
+        slug: 'ensure-api-nueva',
+        name: 'Ensure API Nueva',
+        active: true as const,
+        coverImageUrl: '/chicas/ensure-api-nueva/portada.jpg',
+        images: ['/chicas/ensure-api-nueva/gallery/01.jpg'],
+      },
+    ];
+
+    const ensureApp = createApp({
+      db,
+      env: loadEnv({
+        NODE_ENV: 'test',
+        SESSION_SECRET: 'test-session-secret-at-least-32-chars',
+        PANEL_ORIGIN: 'http://localhost:8787',
+        PUBLIC_WEB_ORIGINS: 'http://localhost:5173',
+        STAFF_COOKIE_NAME: 'vf_staff_session',
+        STAFF_SESSION_TTL_HOURS: '12',
+      }),
+      skipSnapshotFreshness: true,
+      skipLiveCatalog: true,
+      catalogModels: injected,
+    });
+
+    const catalogBefore = await json(
+      await ensureApp.request('http://localhost/api/staff/catalog', { headers: { cookie } })
+    );
+    expect(catalogBefore.needsEnsure).toBe(true);
+    expect(catalogBefore.missingOverrides).toContain('ensure-api-nueva');
+    expect(catalogBefore.models.find((m: any) => m.slug === 'ensure-api-nueva')).toBeUndefined();
+
+    const ensured = await json(
+      await ensureApp.request('http://localhost/api/staff/catalog/ensure', {
+        method: 'POST',
+        headers: {
+          cookie,
+          'content-type': 'application/json',
+          origin: 'http://localhost:8787',
+        },
+        body: '{}',
+      })
+    );
+    expect(ensured.wrote).toBe(true);
+    expect(ensured.catalog.models.at(-1).slug).toBe('ensure-api-nueva');
+    expect(ensured.catalog.needsEnsure).toBe(false);
+
+    const orderedSlugs = ensured.catalog.models.map((m: any) => m.slug);
+    // Move nueva to position 0 (encargada decision)
+    const moved = [orderedSlugs[orderedSlugs.length - 1], ...orderedSlugs.slice(0, -1)];
+
+    const save = await ensureApp.request('http://localhost/api/staff/order', {
+      method: 'PUT',
+      headers: {
+        cookie,
+        'content-type': 'application/json',
+        origin: 'http://localhost:8787',
+      },
+      body: JSON.stringify({
+        version: ensured.catalog.orderVersion,
+        orderedSlugs: moved,
+      }),
+    });
+    expect(save.status).toBe(200);
+
+    const pub = await json(await ensureApp.request('http://localhost/api/public/overrides'));
+    expect(pub.models.map((m: { slug: string }) => m.slug)).toEqual(moved);
+    expect(pub.models[0].slug).toBe('ensure-api-nueva');
+  });
+});

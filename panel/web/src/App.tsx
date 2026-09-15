@@ -1,8 +1,9 @@
-import { lazy, Suspense, useCallback, useEffect, useState } from 'react';
+import { lazy, Suspense, useCallback, useEffect, useRef, useState } from 'react';
 import { LoginScreen } from './components/LoginScreen';
 import { Toast } from './components/Toast';
 import {
   ApiError,
+  ensureCatalog,
   getCatalog,
   getMe,
   logout,
@@ -27,26 +28,59 @@ export function App() {
   const [models, setModels] = useState<StaffCatalogModel[]>([]);
   const [orderVersion, setOrderVersion] = useState(1);
   const [loadingCatalog, setLoadingCatalog] = useState(false);
+  const [ensuring, setEnsuring] = useState(false);
   const [catalogError, setCatalogError] = useState<string | null>(null);
   const [toast, setToast] = useState<ToastState>(null);
   const [catalogKey, setCatalogKey] = useState(0);
+  const ensureInFlight = useRef(false);
 
   const showToast = useCallback((message: string, tone: 'success' | 'error' = 'success') => {
     setToast({ message, tone });
     window.setTimeout(() => setToast(null), 2800);
   }, []);
 
+  const applyCatalog = useCallback(
+    (catalog: { models: StaffCatalogModel[]; orderVersion: number }) => {
+      setModels(catalog.models);
+      setOrderVersion(catalog.orderVersion);
+      setCatalogKey((k) => k + 1);
+    },
+    []
+  );
+
   const loadCatalog = useCallback(async () => {
     setLoadingCatalog(true);
     setCatalogError(null);
     try {
-      const catalog = await getCatalog();
-      setModels(catalog.models);
-      setOrderVersion(catalog.orderVersion);
-      setCatalogKey((k) => k + 1);
-      if (catalog.missingOverrides.length > 0) {
-        showToast(`Faltan overrides: ${catalog.missingOverrides.join(', ')}`, 'error');
+      let catalog = await getCatalog();
+
+      const needsEnsure =
+        catalog.needsEnsure === true || (catalog.missingOverrides?.length ?? 0) > 0;
+
+      if (needsEnsure && !ensureInFlight.current) {
+        ensureInFlight.current = true;
+        setEnsuring(true);
+        try {
+          const ensured = await ensureCatalog();
+          catalog = ensured.catalog;
+        } catch (err) {
+          if (err instanceof ApiError && err.status === 401) {
+            setUser(null);
+            setCatalogError(null);
+            return;
+          }
+          const message =
+            err instanceof ApiError ? err.message : 'No se pudo sincronizar el catálogo';
+          setCatalogError(message);
+          showToast(message, 'error');
+          return;
+        } finally {
+          ensureInFlight.current = false;
+          setEnsuring(false);
+        }
       }
+
+      applyCatalog(catalog);
     } catch (err) {
       if (err instanceof ApiError && err.status === 401) {
         setUser(null);
@@ -58,8 +92,9 @@ export function App() {
       }
     } finally {
       setLoadingCatalog(false);
+      setEnsuring(false);
     }
-  }, [showToast]);
+  }, [applyCatalog, showToast]);
 
   useEffect(() => {
     let cancelled = false;
@@ -147,7 +182,12 @@ export function App() {
           <div className="sub">{user.displayName}</div>
         </div>
         <div className="header-actions">
-          <button type="button" className="ghost-btn" onClick={loadCatalog} disabled={loadingCatalog}>
+          <button
+            type="button"
+            className="ghost-btn"
+            onClick={loadCatalog}
+            disabled={loadingCatalog || ensuring}
+          >
             Recargar
           </button>
           <button type="button" className="ghost-btn" onClick={onLogout}>
@@ -157,15 +197,21 @@ export function App() {
       </header>
 
       <main className="main">
-        {loadingCatalog && models.length === 0 ? (
-          <div className="loading-center">Cargando fichas…</div>
+        {(loadingCatalog || ensuring) && models.length === 0 ? (
+          <div className="loading-center">
+            {ensuring ? 'Incorporando fichas nuevas…' : 'Cargando fichas…'}
+          </div>
+        ) : null}
+
+        {ensuring && models.length > 0 ? (
+          <div className="conflict-banner">Incorporando fichas del catálogo…</div>
         ) : null}
 
         {catalogError ? (
           <div className="conflict-banner">
             {catalogError}
             <br />
-            <button type="button" onClick={loadCatalog}>
+            <button type="button" onClick={loadCatalog} disabled={ensuring}>
               Reintentar
             </button>
           </div>
@@ -177,6 +223,7 @@ export function App() {
               key={catalogKey}
               initialModels={models}
               orderVersion={orderVersion}
+              orderSaveLocked={ensuring}
               onOrderVersion={setOrderVersion}
               onModelsChange={setModels}
               onToast={showToast}
@@ -189,7 +236,7 @@ export function App() {
           </Suspense>
         ) : null}
 
-        {!loadingCatalog && !catalogError && models.length === 0 ? (
+        {!loadingCatalog && !ensuring && !catalogError && models.length === 0 ? (
           <div className="loading-center">No hay fichas activas</div>
         ) : null}
 

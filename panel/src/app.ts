@@ -4,11 +4,7 @@ import { sql } from 'drizzle-orm';
 import type { AppDb } from './db/client.js';
 import { staffUsers } from './db/schema.js';
 import { appendAudit } from './lib/audit.js';
-import {
-  getLastSyncedCatalogVersion,
-  markCatalogSynced,
-  resolveCatalogModels,
-} from './lib/catalogSource.js';
+import { resolveCatalogModels } from './lib/catalogSource.js';
 import { corsHeadersForPublicOverrides, assertStaffWriteOrigin } from './lib/csrf.js';
 import {
   allowedCoverPaths,
@@ -18,11 +14,12 @@ import { loadEnv, type PanelEnv } from './lib/env.js';
 import {
   BadRequestError,
   ConflictError,
-  getOrderVersion,
+  ensureCatalogMembership,
   getPublicOverrides,
   listOverrides,
+  planCatalogMembership,
+  readOrderVersion,
   replaceOrder,
-  syncCatalogOverrides,
   updateCover,
 } from './lib/overridesService.js';
 import { verifyPassword } from './lib/password.js';
@@ -63,6 +60,50 @@ function clientMeta(c: { req: { header: (n: string) => string | undefined } }) {
   };
 }
 
+function buildStaffCatalogPayload(
+  models: CatalogModelLite[],
+  overrides: Awaited<ReturnType<typeof listOverrides>>,
+  orderVersion: number,
+  catalogSource: string,
+  catalogVersion: string | null
+) {
+  const activeModels = models.filter((m) => m.active !== false);
+  const overrideBySlug = new Map(overrides.map((o) => [o.slug, o]));
+  const plan = planCatalogMembership(models, overrides);
+
+  const missingOverrides = activeModels
+    .map((m) => m.slug)
+    .filter((slug) => {
+      const o = overrideBySlug.get(slug);
+      return !o || o.displayOrder == null;
+    });
+
+  const items = activeModels
+    .map((m) => {
+      const o = overrideBySlug.get(m.slug);
+      if (!o || o.displayOrder == null) return null;
+      return {
+        slug: m.slug,
+        name: m.name,
+        displayOrder: o.displayOrder as number,
+        coverImagePath: o.coverImagePath,
+        coverVersion: o.coverVersion,
+        allowedCoverPaths: allowedCoverPaths(m),
+      };
+    })
+    .filter((x): x is NonNullable<typeof x> => x != null)
+    .sort((a, b) => a.displayOrder - b.displayOrder);
+
+  return {
+    orderVersion,
+    catalogSource,
+    catalogVersion,
+    missingOverrides,
+    needsEnsure: plan.hasDrift,
+    models: items,
+  };
+}
+
 export function createApp(options: CreateAppOptions) {
   const env = options.env ?? loadEnv();
   const { db } = options;
@@ -76,61 +117,6 @@ export function createApp(options: CreateAppOptions) {
       fetchImpl: options.fetchImpl,
     });
     return resolved.models;
-  }
-
-  /**
-   * Keep Neon overrides aligned with the live/fallback catalog.
-   * Idempotent: only writes when catalog version changed or overrides are missing.
-   */
-  async function ensureCatalogSynced(staffUserId?: string | null) {
-    const resolved = await resolveCatalogModels({
-      injectedModels: options.catalogModels,
-      skipLiveCatalog: options.skipLiveCatalog,
-      skipSnapshotFreshness: options.skipSnapshotFreshness,
-      fetchImpl: options.fetchImpl,
-    });
-
-    let overrides = await listOverrides(db);
-    const overrideBySlug = new Map(overrides.map((o) => [o.slug, o]));
-    const activeModels = resolved.models.filter((m) => m.active !== false);
-    const activeSlugSet = new Set(activeModels.map((m) => m.slug));
-    const bySlug = new Map(resolved.models.map((m) => [m.slug, m]));
-
-    const missing = activeModels.some((m) => {
-      const o = overrideBySlug.get(m.slug);
-      return !o || o.displayOrder == null;
-    });
-    const staleActive = overrides.some(
-      (o) => o.displayOrder != null && !activeSlugSet.has(o.slug)
-    );
-    const invalidCover = overrides.some((o) => {
-      if (!activeSlugSet.has(o.slug)) return false;
-      const model = bySlug.get(o.slug);
-      if (!model) return false;
-      return !allowedCoverPaths(model).includes(o.coverImagePath);
-    });
-    const versionChanged =
-      resolved.catalogVersion != null &&
-      resolved.catalogVersion !== getLastSyncedCatalogVersion();
-
-    if (
-      missing ||
-      staleActive ||
-      invalidCover ||
-      versionChanged ||
-      getLastSyncedCatalogVersion() == null
-    ) {
-      await syncCatalogOverrides({
-        db,
-        snapshotModels: resolved.models,
-        staffUserId: staffUserId ?? null,
-      });
-      markCatalogSynced(resolved.catalogVersion);
-      // Sync may rewrite rows — re-read once so the handler can reuse this list.
-      overrides = await listOverrides(db);
-    }
-
-    return { ...resolved, overrides };
   }
 
   async function requireStaff(c: {
@@ -289,48 +275,74 @@ export function createApp(options: CreateAppOptions) {
     return c.json({ items });
   });
 
-  // --- Staff catalog (read) ---
+  // --- Staff catalog (READ ONLY — never writes Neon) ---
   app.get('/api/staff/catalog', async (c) => {
     const staff = await requireStaff(c);
     if (!staff) return c.json({ error: 'unauthorized' }, 401);
 
-    const resolved = await ensureCatalogSynced(staff.id);
-    const models = resolved.models;
-    const activeModels = models.filter((m) => m.active !== false);
-    const overrides = resolved.overrides;
-    const overrideBySlug = new Map(overrides.map((o) => [o.slug, o]));
-    const orderVersion = await getOrderVersion(db);
-
-    const missingOverrides = activeModels
-      .map((m) => m.slug)
-      .filter((slug) => {
-        const o = overrideBySlug.get(slug);
-        return !o || o.displayOrder == null;
-      });
-
-    const items = activeModels
-      .map((m) => {
-        const o = overrideBySlug.get(m.slug);
-        if (!o || o.displayOrder == null) return null;
-        return {
-          slug: m.slug,
-          name: m.name,
-          displayOrder: o.displayOrder as number,
-          coverImagePath: o.coverImagePath,
-          coverVersion: o.coverVersion,
-          allowedCoverPaths: allowedCoverPaths(m),
-        };
-      })
-      .filter((x): x is NonNullable<typeof x> => x != null)
-      .sort((a, b) => a.displayOrder - b.displayOrder);
-
-    return c.json({
-      orderVersion,
-      catalogSource: resolved.source,
-      catalogVersion: resolved.catalogVersion,
-      missingOverrides,
-      models: items,
+    const resolved = await resolveCatalogModels({
+      injectedModels: options.catalogModels,
+      skipLiveCatalog: options.skipLiveCatalog,
+      skipSnapshotFreshness: options.skipSnapshotFreshness,
+      fetchImpl: options.fetchImpl,
     });
+    const overrides = await listOverrides(db);
+    const orderVersion = await readOrderVersion(db);
+
+    return c.json(
+      buildStaffCatalogPayload(
+        resolved.models,
+        overrides,
+        orderVersion,
+        resolved.source,
+        resolved.catalogVersion
+      )
+    );
+  });
+
+  // --- Incremental membership ensure (explicit write) ---
+  app.post('/api/staff/catalog/ensure', async (c) => {
+    const originCheck = assertStaffWriteOrigin(c, env);
+    if (!originCheck.ok) return c.json({ error: originCheck.error }, originCheck.status);
+
+    const staff = await requireStaff(c);
+    if (!staff) return c.json({ error: 'unauthorized' }, 401);
+
+    const rl = await hitRateLimit(db, `write:${staff.id}`, 60, 60 * 1000);
+    if (!rl.allowed) return c.json({ error: 'rate limit' }, 429);
+
+    const resolved = await resolveCatalogModels({
+      injectedModels: options.catalogModels,
+      skipLiveCatalog: options.skipLiveCatalog,
+      skipSnapshotFreshness: options.skipSnapshotFreshness,
+      fetchImpl: options.fetchImpl,
+    });
+
+    try {
+      const report = await ensureCatalogMembership({
+        db,
+        snapshotModels: resolved.models,
+        staffUserId: staff.id,
+      });
+      const overrides = await listOverrides(db);
+      const orderVersion = await readOrderVersion(db);
+      return c.json({
+        ok: true,
+        wrote: report.wrote,
+        report,
+        catalog: buildStaffCatalogPayload(
+          resolved.models,
+          overrides,
+          orderVersion,
+          resolved.source,
+          resolved.catalogVersion
+        ),
+      });
+    } catch (err) {
+      if (err instanceof BadRequestError) return c.json({ error: err.message }, 400);
+      console.error(err);
+      return c.json({ error: 'internal error' }, 500);
+    }
   });
 
   // --- Staff writes ---
