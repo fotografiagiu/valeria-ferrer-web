@@ -1,10 +1,31 @@
 {
-  "generatedAt": "2026-09-14T20:39:01.394Z",
+  "generatedAt": "2026-09-16T00:10:58.741Z",
   "sourcePath": "data/models.json",
-  "sourceHash": "79d130b05bd8faa254e79d15f570c83691f251ce8b6b9fc44283988de76ca0bb",
-  "modelCount": 42,
-  "activeCount": 25,
+  "sourceHash": "c8e90d8cd59ccc08713cc1418fda02a27b9844876220152752970cd0e9310730",
+  "modelCount": 43,
+  "activeCount": 26,
   "models": [
+    {
+      "slug": "bea",
+      "name": "Bea",
+      "active": true,
+      "coverImageUrl": "/chicas/bea-model-agency-valencia-vf/portada.jpg",
+      "images": [
+        "/chicas/bea-model-agency-valencia-vf/gallery/01.jpg",
+        "/chicas/bea-model-agency-valencia-vf/gallery/02.jpg",
+        "/chicas/bea-model-agency-valencia-vf/gallery/03.jpg",
+        "/chicas/bea-model-agency-valencia-vf/gallery/04.jpg",
+        "/chicas/bea-model-agency-valencia-vf/gallery/05.jpg",
+        "/chicas/bea-model-agency-valencia-vf/gallery/06.jpg",
+        "/chicas/bea-model-agency-valencia-vf/gallery/07.jpg",
+        "/chicas/bea-model-agency-valencia-vf/gallery/08.jpg",
+        "/chicas/bea-model-agency-valencia-vf/gallery/09.jpg",
+        "/chicas/bea-model-agency-valencia-vf/gallery/10.jpg",
+        "/chicas/bea-model-agency-valencia-vf/gallery/11.jpg",
+        "/chicas/bea-model-agency-valencia-vf/gallery/12.jpg",
+        "/chicas/bea-model-agency-valencia-vf/gallery/13.jpg"
+      ]
+    },
     {
       "slug": "karen",
       "name": "Karen",

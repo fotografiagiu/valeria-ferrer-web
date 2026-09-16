@@ -1,5 +1,76 @@
 [
   {
+    "slug": "bea",
+    "name": "Bea",
+    "age": 25,
+    "height": "1,60 m",
+    "weight": "60 kg",
+    "nationality": "Venezolana",
+    "city": "Valencia",
+    "profileUrl": "https://www.valeriaferrer.com/models/bea/",
+    "coverImageUrl": "/chicas/bea-model-agency-valencia-vf/portada.jpg",
+    "profileImageUrl": "/chicas/bea-model-agency-valencia-vf/portada.jpg",
+    "description": "Bea no pide permiso: entra, te mira y ya estás dentro. Venezolana de 25, 1,60 m de pura actitud — compacta, sí, pero con una intensidad que llena la habitación. Esa mezcla de fuego caribeño y trato fácil que convierte un mensaje en cita antes de que lo pienses dos veces. Fotos reales. Si te va la latina que enciende Valencia y no se queda a medias, escribe: Bea no promete… te lo demuestra.",
+    "essence": "Bea vende la cita con la mirada. Venezolana de 25, cercana y directa: sabe cuándo provocar y cuándo bajar el ritmo para que el momento se alargue solo. Ideal si quieres un privado en Valencia con alguien que se nota de verdad — sensualidad clara, complicidad rápida y cero postureo. No es la ficha que lees y olvidas: es la que te empuja a reservar.",
+    "uniquePoints": [
+      "Venezolana de 25 en Valencia — presencia que corta el scroll",
+      "1,60 m y 60 kg de actitud: compacta, intensa y difícil de olvidar",
+      "Mirada segura + trato fácil: engancha sin teatro y te deja con ganas"
+    ],
+    "experiencePoints": [
+      "Privado con chispa latina: cercana, apasionada y sin prisas",
+      "Cena, evento o encuentro íntimo con química que se nota al instante",
+      "Plan en Valencia con una venezolana que conecta rápido y deja ganas de más"
+    ],
+    "images": [
+      "/chicas/bea-model-agency-valencia-vf/gallery/15.jpg",
+      "/chicas/bea-model-agency-valencia-vf/gallery/07.jpg",
+      "/chicas/bea-model-agency-valencia-vf/gallery/01.jpg",
+      "/chicas/bea-model-agency-valencia-vf/gallery/08.jpg",
+      "/chicas/bea-model-agency-valencia-vf/gallery/03.jpg",
+      "/chicas/bea-model-agency-valencia-vf/gallery/04.jpg",
+      "/chicas/bea-model-agency-valencia-vf/gallery/02.jpg",
+      "/chicas/bea-model-agency-valencia-vf/gallery/05.jpg",
+      "/chicas/bea-model-agency-valencia-vf/gallery/06.jpg",
+      "/chicas/bea-model-agency-valencia-vf/gallery/09.jpg",
+      "/chicas/bea-model-agency-valencia-vf/gallery/10.jpg",
+      "/chicas/bea-model-agency-valencia-vf/gallery/11.jpg",
+      "/chicas/bea-model-agency-valencia-vf/gallery/12.jpg",
+      "/chicas/bea-model-agency-valencia-vf/gallery/13.jpg",
+      "/chicas/bea-model-agency-valencia-vf/gallery/14.jpg"
+    ],
+    "services": [
+      "Girlfriend Experience",
+      "Cenas de Negocios",
+      "Eventos Sociales",
+      "Acompañamiento Personal",
+      "Masajes Sensuales"
+    ],
+    "availability": "24h",
+    "languages": [
+      "Español"
+    ],
+    "tags": [
+      "venezolana",
+      "latina",
+      "nueva",
+      "joven",
+      "guapa",
+      "atractiva",
+      "seductora",
+      "cercana",
+      "intensa",
+      "social",
+      "cenas",
+      "eventos",
+      "valencia"
+    ],
+    "isNew": true,
+    "featured": true,
+    "vip": false,
+    "active": true
+  },
+  {
     "slug": "karen",
     "name": "Karen",
     "age": 23,
