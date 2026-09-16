@@ -2,7 +2,11 @@ import React, { useCallback, useEffect, useId, useMemo, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Sparkles, X } from 'lucide-react';
 import { MODELS } from '../constants';
-import { NOVEDADES_BANNER as CFG } from '../lib/novedadesBannerConfig';
+import {
+  NOVEDADES_BANNER as CFG,
+  isNovedadesBannerDismissed,
+  isNovedadesBannerLive,
+} from '../lib/novedadesBannerConfig';
 import { getModelCoverThumbnailPath } from '../lib/modelGridImage';
 import { ACTIVE_PROMO, isPromoLive } from '../lib/promoPopupConfig';
 
@@ -110,22 +114,43 @@ const NovedadesFloatingBanner: React.FC = () => {
     };
   }, []);
 
-  // Como Contacto: al cargar la página siempre salta el panel (no arranca minimizado).
+  // Campaña activa + respeto dismissDays tras cerrar (no molestar en cada visita).
   useEffect(() => {
-    if (!CFG.enabled || hideOnRoute || promoActive || slides.length === 0) {
+    const campaignLive = isNovedadesBannerLive(CFG);
+    if (!campaignLive || hideOnRoute || promoActive || slides.length === 0) {
       setReady(false);
       setIsOpen(false);
       setShowMinimized(false);
       return;
     }
 
+    const dismissed = isNovedadesBannerDismissed(CFG);
     const showTimer = window.setTimeout(() => {
       setReady(true);
-      setIsOpen(true);
-      setShowMinimized(false);
+      if (dismissed) {
+        setIsOpen(false);
+        setShowMinimized(true);
+      } else {
+        setIsOpen(true);
+        setShowMinimized(false);
+      }
     }, CFG.delayMs);
 
-    return () => window.clearTimeout(showTimer);
+    const end = Date.parse(CFG.endsAt);
+    const msLeft = end - Date.now();
+    const endTimer =
+      Number.isFinite(msLeft) && msLeft > 0 && msLeft < 2147483647
+        ? window.setTimeout(() => {
+            setReady(false);
+            setIsOpen(false);
+            setShowMinimized(false);
+          }, msLeft)
+        : 0;
+
+    return () => {
+      window.clearTimeout(showTimer);
+      if (endTimer) window.clearTimeout(endTimer);
+    };
   }, [hideOnRoute, promoActive, slides.length]);
 
   useEffect(() => {
@@ -156,7 +181,9 @@ const NovedadesFloatingBanner: React.FC = () => {
     img.src = next.imageSrc;
   }, [index, slides]);
 
-  if (!CFG.enabled || hideOnRoute || promoActive || !ready || slides.length === 0) return null;
+  if (!isNovedadesBannerLive(CFG) || hideOnRoute || promoActive || !ready || slides.length === 0) {
+    return null;
+  }
 
   const slide = slides[index] ?? slides[0];
 
