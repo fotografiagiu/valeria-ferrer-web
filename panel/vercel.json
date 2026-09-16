@@ -17,6 +17,10 @@
     "api/staff/*.ts": {
       "maxDuration": 30,
       "includeFiles": "generated/**"
+    },
+    "api/staff/catalog/*.ts": {
+      "maxDuration": 30,
+      "includeFiles": "generated/**"
     }
   },
   "rewrites": [

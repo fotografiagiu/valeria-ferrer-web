@@ -1,4 +1,4 @@
-import handler from '../_lib/staffApiHandler.js';
+import handler from '../../_lib/staffApiHandler.js';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
