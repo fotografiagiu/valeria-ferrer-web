@@ -1,29 +1,43 @@
 {
-  "generatedAt": "2026-09-16T00:10:58.741Z",
+  "generatedAt": "2026-09-18T21:05:22.541Z",
   "sourcePath": "data/models.json",
-  "sourceHash": "c8e90d8cd59ccc08713cc1418fda02a27b9844876220152752970cd0e9310730",
-  "modelCount": 43,
-  "activeCount": 26,
+  "sourceHash": "a16ea2d9be86b6e590ef561fd93a9cf1692f65f951b8ffc7d2bd30b78d68fae5",
+  "modelCount": 44,
+  "activeCount": 27,
   "models": [
+    {
+      "slug": "lola",
+      "name": "Lola",
+      "active": true,
+      "coverImageUrl": "/chicas/lola-model-agency-valencia-vf/portada.jpg",
+      "images": [
+        "/chicas/lola-model-agency-valencia-vf/gallery/01.jpg",
+        "/chicas/lola-model-agency-valencia-vf/gallery/02.jpg",
+        "/chicas/lola-model-agency-valencia-vf/gallery/03.jpg",
+        "/chicas/lola-model-agency-valencia-vf/gallery/04.jpg"
+      ]
+    },
     {
       "slug": "bea",
       "name": "Bea",
       "active": true,
       "coverImageUrl": "/chicas/bea-model-agency-valencia-vf/portada.jpg",
       "images": [
+        "/chicas/bea-model-agency-valencia-vf/gallery/15.jpg",
+        "/chicas/bea-model-agency-valencia-vf/gallery/07.jpg",
         "/chicas/bea-model-agency-valencia-vf/gallery/01.jpg",
-        "/chicas/bea-model-agency-valencia-vf/gallery/02.jpg",
+        "/chicas/bea-model-agency-valencia-vf/gallery/08.jpg",
         "/chicas/bea-model-agency-valencia-vf/gallery/03.jpg",
         "/chicas/bea-model-agency-valencia-vf/gallery/04.jpg",
+        "/chicas/bea-model-agency-valencia-vf/gallery/02.jpg",
         "/chicas/bea-model-agency-valencia-vf/gallery/05.jpg",
         "/chicas/bea-model-agency-valencia-vf/gallery/06.jpg",
-        "/chicas/bea-model-agency-valencia-vf/gallery/07.jpg",
-        "/chicas/bea-model-agency-valencia-vf/gallery/08.jpg",
         "/chicas/bea-model-agency-valencia-vf/gallery/09.jpg",
         "/chicas/bea-model-agency-valencia-vf/gallery/10.jpg",
         "/chicas/bea-model-agency-valencia-vf/gallery/11.jpg",
         "/chicas/bea-model-agency-valencia-vf/gallery/12.jpg",
-        "/chicas/bea-model-agency-valencia-vf/gallery/13.jpg"
+        "/chicas/bea-model-agency-valencia-vf/gallery/13.jpg",
+        "/chicas/bea-model-agency-valencia-vf/gallery/14.jpg"
       ]
     },
     {
