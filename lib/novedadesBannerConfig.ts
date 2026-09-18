@@ -4,7 +4,7 @@
  * Tras `endsAt` el popup se desactiva solo (no molesta al cliente).
  */
 export const NOVEDADES_BANNER = {
-  enabled: true,
+  enabled: false,
   /**
    * Ventana de campaña (Europe/Madrid).
    * Tras endsAt el banner no se muestra a nadie.
