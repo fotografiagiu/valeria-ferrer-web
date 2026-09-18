@@ -9,10 +9,10 @@ export type PromoPopupConfig = {
 }
 
 export const ACTIVE_PROMO: PromoPopupConfig = {
-  id: 'promo-2026-09-14-copa',
+  id: 'promo-2026-09-18-copa',
   image: '/promos/promo-copa.webp?v=copa-sin-3h',
-  startsAt: '2026-09-14T00:40:00+02:00',
-  endsAt: '2026-09-14T04:40:00+02:00',
+  startsAt: '2026-09-18T23:50:00+02:00',
+  endsAt: '2026-09-22T23:59:59+02:00',
   enabled: true,
   ctaHref: '/booking',
   bannerText: '🥂 Copa de invitación · Oferta activa · Ver oferta',

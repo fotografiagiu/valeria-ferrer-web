@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-09-18T21:05:22.541Z",
+  "generatedAt": "2026-09-18T23:51:10.613Z",
   "sourcePath": "data/models.json",
-  "sourceHash": "a16ea2d9be86b6e590ef561fd93a9cf1692f65f951b8ffc7d2bd30b78d68fae5",
-  "modelCount": 44,
-  "activeCount": 27,
+  "sourceHash": "fc17ee9b471b97686f44055d3ba80b993464063f3f7f8d432ab04d6efd8a92d1",
+  "modelCount": 45,
+  "activeCount": 28,
   "models": [
     {
       "slug": "lola",
@@ -15,6 +15,31 @@
         "/chicas/lola-model-agency-valencia-vf/gallery/02.jpg",
         "/chicas/lola-model-agency-valencia-vf/gallery/03.jpg",
         "/chicas/lola-model-agency-valencia-vf/gallery/04.jpg"
+      ]
+    },
+    {
+      "slug": "sofia",
+      "name": "Sofía",
+      "active": true,
+      "coverImageUrl": "/chicas/sofia-valeria-ferrer-model-agency-valencia/portada.jpg",
+      "images": [
+        "/chicas/sofia-valeria-ferrer-model-agency-valencia/gallery/01.jpg",
+        "/chicas/sofia-valeria-ferrer-model-agency-valencia/gallery/02.jpg",
+        "/chicas/sofia-valeria-ferrer-model-agency-valencia/gallery/03.jpg",
+        "/chicas/sofia-valeria-ferrer-model-agency-valencia/gallery/04.jpg"
+      ]
+    },
+    {
+      "slug": "ana",
+      "name": "Ana",
+      "active": true,
+      "coverImageUrl": "/chicas/ana-model-agency-valencia-vf/portada.jpg",
+      "images": [
+        "/chicas/ana-model-agency-valencia-vf/gallery/01.jpg",
+        "/chicas/ana-model-agency-valencia-vf/gallery/02.jpg",
+        "/chicas/ana-model-agency-valencia-vf/gallery/03.jpg",
+        "/chicas/ana-model-agency-valencia-vf/gallery/04.jpg",
+        "/chicas/ana-model-agency-valencia-vf/gallery/05.jpg"
       ]
     },
     {
@@ -600,16 +625,6 @@
         "/chicas/maria-escort-valencia/maria-escort-valencia-galeria-07.jpg",
         "/chicas/maria-escort-valencia/maria-escort-valencia-galeria-08.jpg",
         "/chicas/maria-escort-valencia/maria-escort-valencia-portada-ficha.jpg"
-      ]
-    },
-    {
-      "slug": "sofia",
-      "name": "Sofía",
-      "coverImageUrl": "/chicas/sofia-valeria-ferrer-model-agency-valencia/portada.jpg",
-      "images": [
-        "/chicas/sofia-valeria-ferrer-model-agency-valencia/gallery/01.jpg",
-        "/chicas/sofia-valeria-ferrer-model-agency-valencia/gallery/02.jpg",
-        "/chicas/sofia-valeria-ferrer-model-agency-valencia/gallery/03.jpg"
       ]
     },
     {

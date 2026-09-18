@@ -1,6 +1,16 @@
 {
   "redirects": [
     {
+      "source": "/ana-model-agency-valencia-vf",
+      "destination": "https://www.valeriaferrer.com/models/ana",
+      "permanent": true
+    },
+    {
+      "source": "/ana-model-agency-valencia-vf/",
+      "destination": "https://www.valeriaferrer.com/models/ana",
+      "permanent": true
+    },
+    {
       "source": "/lola-model-agency-valencia-vf",
       "destination": "https://www.valeriaferrer.com/models/lola",
       "permanent": true

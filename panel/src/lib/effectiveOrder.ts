@@ -4,6 +4,8 @@
  */
 export const HOME_PIN_ORDER: readonly string[] = [
   'lola',
+  'sofia',
+  'ana',
   'bea',
   'sara',
   'danna',
