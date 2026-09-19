@@ -1,6 +1,26 @@
 {
   "redirects": [
     {
+      "source": "/models/sofia",
+      "destination": "https://www.valeriaferrer.com/models/sofia1",
+      "permanent": true
+    },
+    {
+      "source": "/models/sofia/",
+      "destination": "https://www.valeriaferrer.com/models/sofia1",
+      "permanent": true
+    },
+    {
+      "source": "/sofia1-model-agency-valencia-vf",
+      "destination": "https://www.valeriaferrer.com/models/sofia1",
+      "permanent": true
+    },
+    {
+      "source": "/sofia1-model-agency-valencia-vf/",
+      "destination": "https://www.valeriaferrer.com/models/sofia1",
+      "permanent": true
+    },
+    {
       "source": "/ana-model-agency-valencia-vf",
       "destination": "https://www.valeriaferrer.com/models/ana",
       "permanent": true

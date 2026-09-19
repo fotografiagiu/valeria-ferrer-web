@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-09-19T00:08:01.416360Z",
+  "generatedAt": "2026-09-19T00:14:27.486Z",
   "sourcePath": "data/models.json",
-  "sourceHash": "66f74d8a03409714084ceb9ca9492e66e99ddfe4f928ada135fada84b2fefe8a",
+  "sourceHash": "692c38b66740620a073077b229cfa499ed8a8c5cdbc264106a3995c786436be7",
   "modelCount": 45,
   "activeCount": 28,
   "models": [
@@ -18,15 +18,15 @@
       ]
     },
     {
-      "slug": "sofia",
+      "slug": "sofia1",
       "name": "Sofía",
       "active": true,
-      "coverImageUrl": "/chicas/sofia-valeria-ferrer-model-agency-valencia/portada-sep2026.jpg",
+      "coverImageUrl": "/chicas/sofia1-model-agency-valencia-vf/portada.jpg",
       "images": [
-        "/chicas/sofia-valeria-ferrer-model-agency-valencia/gallery/01-sep2026.jpg",
-        "/chicas/sofia-valeria-ferrer-model-agency-valencia/gallery/02-sep2026.jpg",
-        "/chicas/sofia-valeria-ferrer-model-agency-valencia/gallery/03-sep2026.jpg",
-        "/chicas/sofia-valeria-ferrer-model-agency-valencia/gallery/04-sep2026.jpg"
+        "/chicas/sofia1-model-agency-valencia-vf/gallery/01.jpg",
+        "/chicas/sofia1-model-agency-valencia-vf/gallery/02.jpg",
+        "/chicas/sofia1-model-agency-valencia-vf/gallery/03.jpg",
+        "/chicas/sofia1-model-agency-valencia-vf/gallery/04.jpg"
       ]
     },
     {

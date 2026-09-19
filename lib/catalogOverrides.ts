@@ -25,7 +25,7 @@ type CatalogLike = {
 /** Home pin fallback — must stay aligned with panel effectiveOrder until overrides load. */
 export const HOME_PIN_ORDER: readonly string[] = [
   'lola',
-  'sofia',
+  'sofia1',
   'ana',
   'bea',
   'sara',
@@ -74,6 +74,11 @@ function withCoverOverride<T extends CatalogLike>(model: T, coverImagePath: stri
  * Do not prepend HOME_PIN misses — that desynced the public grid from the panel
  * (e.g. a reactivated ficha briefly appeared first on the web).
  */
+const OVERRIDE_SLUG_ALIASES: Record<string, string> = {
+  // Renamed to bust immutable CDN cache on /chicas/sofia-… paths.
+  sofia: 'sofia1',
+};
+
 export function applyCatalogOverrides<T extends CatalogLike>(
   models: T[],
   overrides: PublicOverrideRow[] | null | undefined
@@ -86,11 +91,17 @@ export function applyCatalogOverrides<T extends CatalogLike>(
 
   const sorted = [...overrides].sort((a, b) => a.displayOrder - b.displayOrder);
   for (const row of sorted) {
-    const model = bySlug.get(row.slug);
+    const resolvedSlug = OVERRIDE_SLUG_ALIASES[row.slug] ?? row.slug;
+    const model = bySlug.get(resolvedSlug);
     if (!model) continue;
-    seen.add(row.slug);
+    seen.add(resolvedSlug);
     const cover = row.coverImagePath?.trim();
-    ordered.push(cover ? withCoverOverride(model, cover) : model);
+    // Ignore stale cover paths from the retired sofia slug/folder.
+    const coverIsStale =
+      !!cover &&
+      (cover.includes('/sofia-valeria-ferrer-model-agency-valencia/') ||
+        (resolvedSlug === 'sofia1' && row.slug === 'sofia'));
+    ordered.push(cover && !coverIsStale ? withCoverOverride(model, cover) : model);
   }
 
   const trailing = models.filter((m) => !seen.has(m.slug));

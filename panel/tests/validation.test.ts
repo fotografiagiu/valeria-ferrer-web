@@ -31,7 +31,7 @@ describe('effective Home order', () => {
     // Seed/effective order must track Home pinOrder (Lola pinned first as nueva).
     expect(order.slice(0, activePins.length)).toEqual(activePins);
     expect(order[0]).toBe('lola');
-    expect(order[1]).toBe('sofia');
+    expect(order[1]).toBe('sofia1');
     expect(order[2]).toBe('ana');
     expect(order.indexOf('alicia')).toBe(activePins.indexOf('alicia'));
     expect(order).toHaveLength(readSnapshot().activeCount);
