@@ -1473,7 +1473,19 @@
     "availability": "24h",
     "languages": [
       "Español"
-    ]
+    ],
+    "tags": [
+      "espanola",
+      "actualizada",
+      "vuelve",
+      "joven",
+      "valencia"
+    ],
+    "isNew": false,
+    "galleryUpdated": "Septiembre 2026",
+    "featured": true,
+    "vip": false,
+    "active": true
   },
   {
     "slug": "tiffany",
