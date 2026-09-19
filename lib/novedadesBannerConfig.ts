@@ -4,15 +4,15 @@
  * Tras `endsAt` el popup se desactiva solo (no molesta al cliente).
  */
 export const NOVEDADES_BANNER = {
-  enabled: false,
+  enabled: true,
   /**
    * Ventana de campaña (Europe/Madrid).
    * Tras endsAt el banner no se muestra a nadie.
    */
-  startsAt: '2026-09-16T10:00:00+02:00',
-  endsAt: '2026-09-20T23:59:59+02:00',
+  startsAt: '2026-09-19T00:00:00+02:00',
+  endsAt: '2026-09-26T23:59:59+02:00',
   /** Incrementar (v2, v3…) si quieres forzar el panel abierto tras un cambio de campaña. */
-  storageKey: 'vf-novedades-banner-minimized-v12',
+  storageKey: 'vf-novedades-banner-minimized-v13',
   /**
    * Tras cerrar/minimizar, no volver a abrir el popup automáticamente
    * durante estos días (solo pestaña lateral).
@@ -22,7 +22,7 @@ export const NOVEDADES_BANNER = {
   delayMs: 900,
   badge: 'NOVEDAD',
   /** Slugs que rotan en el popup (orden de aparición). */
-  featuredSlugs: ['bea', 'marta'] as const,
+  featuredSlugs: ['ana', 'sofia1'] as const,
   /** Cuántas novedades rotan en el popup. */
   rotateCount: 2,
   /** Intervalo entre slides (ms). */

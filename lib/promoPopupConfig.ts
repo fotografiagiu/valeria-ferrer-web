@@ -13,7 +13,7 @@ export const ACTIVE_PROMO: PromoPopupConfig = {
   image: '/promos/promo-copa.webp?v=copa-sin-3h',
   startsAt: '2026-09-18T23:50:00+02:00',
   endsAt: '2026-09-22T23:59:59+02:00',
-  enabled: true,
+  enabled: false,
   ctaHref: '/booking',
   bannerText: '🥂 Copa de invitación · Oferta activa · Ver oferta',
 }
