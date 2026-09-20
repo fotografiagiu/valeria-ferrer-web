@@ -8,11 +8,24 @@ export type PromoPopupConfig = {
   bannerText: string
 }
 
+/**
+ * Copas / invitación — campaña temporal (3 horas).
+ *
+ * Para activar en producción, cambia SOLO estos dos campos (zona Madrid +02:00):
+ *   startsAt  → momento exacto de inicio
+ *   endsAt    → startsAt + 3 horas
+ * y pon enabled: true.
+ *
+ * Ejemplo (NO usar hasta decidir horario):
+ *   startsAt: '2026-09-20T21:00:00+02:00'
+ *   endsAt:   '2026-09-21T00:00:00+02:00'
+ */
 export const ACTIVE_PROMO: PromoPopupConfig = {
-  id: 'promo-2026-09-18-copa',
-  image: '/promos/promo-copa.webp?v=copa-sin-3h',
-  startsAt: '2026-09-18T23:50:00+02:00',
-  endsAt: '2026-09-22T23:59:59+02:00',
+  id: 'promo-2026-09-copas-3h',
+  image: '/promos/promo-copa.webp?v=copa-3h',
+  // PLACEHOLDERS — sustituir juntos antes de activar (ventana de 3h).
+  startsAt: '2026-09-20T00:00:00+02:00',
+  endsAt: '2026-09-20T03:00:00+02:00',
   enabled: false,
   ctaHref: '/booking',
   bannerText: '🥂 Copa de invitación · Oferta activa · Ver oferta',
