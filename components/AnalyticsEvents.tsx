@@ -76,6 +76,9 @@ const AnalyticsEvents: React.FC<AnalyticsEventsProps> = ({
       const linkElement = target.closest('a');
       
       if (!linkElement) return;
+
+      // Promo contacts are tracked in PromoPopup with location=promo_popup.
+      if (linkElement.closest('[data-promo-contact="true"]')) return;
       
       const href = linkElement.getAttribute('href') || '';
       let platform: 'telegram' | 'whatsapp' | 'phone' | null = null;
