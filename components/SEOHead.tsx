@@ -15,6 +15,8 @@ interface SEOHeadProps {
     vip?: boolean;
     seoTitle?: string;
     seoDescription?: string;
+    /** false = no presentar Offer / disponibilidad activa en JSON-LD. */
+    active?: boolean;
   };
 }
 
@@ -24,6 +26,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({ model }) => {
 
     // Generate SEO data based on model properties and rules
     const isVIP = !!model.vip || model.slug === 'claudia-vip' || model.slug === 'paula-vip';
+    const isAvailable = model.active !== false;
     const modelName = model.name;
     const nationality = model.nationality || 'Española';
     const city = model.city || 'Valencia';
@@ -81,7 +84,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({ model }) => {
     const modelSlug = model.slug || model.name.toLowerCase();
     const modelProfileUrl = `https://www.valeriaferrer.com/models/${modelSlug}`;
 
-    const structuredData = {
+    const structuredData: Record<string, unknown> = {
       "@context": "https://schema.org",
       "@type": "Person",
       "name": model.name,
@@ -103,7 +106,13 @@ const SEOHead: React.FC<SEOHeadProps> = ({ model }) => {
         "addressCountry": "ES"
       },
       "knowsLanguage": ["Spanish", "English"],
-      "offers": {
+      "sameAs": [
+        modelProfileUrl
+      ]
+    };
+
+    if (isAvailable) {
+      structuredData.offers = {
         "@type": "Offer",
         "description": "Servicios de acompañamiento exclusivos y discreción absoluta",
         "areaServed": model.city || 'Valencia',
@@ -119,19 +128,16 @@ const SEOHead: React.FC<SEOHeadProps> = ({ model }) => {
           "description": "Servicios de acompañamiento de lujo con modelo exclusiva",
           "serviceType": "Companion Services"
         }
-      },
-      "hasOccupation": {
+      };
+      structuredData.hasOccupation = {
         "@type": "Occupation",
         "description": "Modelo de compañía y acompañante VIP",
         "occupationLocation": {
           "@type": "City",
           "name": model.city || 'Valencia'
         }
-      },
-      "sameAs": [
-        modelProfileUrl
-      ]
-    };
+      };
+    }
 
     const script = document.createElement('script');
     script.type = 'application/ld+json';

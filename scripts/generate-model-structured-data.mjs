@@ -15,8 +15,8 @@ import {
   writeSeoOutputFile,
 } from './lib/seo-assets.mjs';
 
-function generateModelStructuredData(model, imagePaths) {
-  return {
+function generateModelStructuredData(model, imagePaths, { includeOffer = true } = {}) {
+  const data = {
     '@context': 'https://schema.org',
     '@type': 'Person',
     name: model.name,
@@ -26,7 +26,10 @@ function generateModelStructuredData(model, imagePaths) {
     nationality: model.nationality,
     jobTitle: model.vip === true ? 'Modelo VIP' : 'Modelo',
     knowsLanguage: model.languages || ['Español'],
-    offers: {
+  };
+
+  if (includeOffer) {
+    data.offers = {
       '@type': 'Offer',
       itemOffered: {
         '@type': 'Service',
@@ -42,12 +45,15 @@ function generateModelStructuredData(model, imagePaths) {
         name: 'Contacto Directo',
         url: `${SITE_ORIGIN}/contact`,
       },
-    },
-    mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': `${SITE_ORIGIN}/models/${model.slug}`,
-    },
+    };
+  }
+
+  data.mainEntityOfPage = {
+    '@type': 'WebPage',
+    '@id': `${SITE_ORIGIN}/models/${model.slug}`,
   };
+
+  return data;
 }
 
 function archiveOrphanFiles(activeSlugs) {
@@ -80,14 +86,21 @@ function archiveOrphanFiles(activeSlugs) {
   return moved;
 }
 
-const models = readJson(MODELS_PATH).filter((model) => model.active !== false);
-const activeSlugs = new Set(models.map((model) => model.slug));
+const allModels = readJson(MODELS_PATH);
+const models = allModels.filter((model) => model.active !== false);
+const retainedModels = allModels.filter(
+  (model) => model.active === false && model.keepPublicSeoPage === true && model.slug
+);
+const publicStructuredSlugs = new Set([
+  ...models.map((model) => model.slug),
+  ...retainedModels.map((model) => model.slug),
+]);
 
 fs.mkdirSync(STRUCTURED_DATA_DIR, { recursive: true });
 
 const generated = [];
 
-for (const model of models) {
+function writeModelStructuredData(model, { includeOffer }) {
   const { valid, missing } = filterExistingImages(
     collectModelImagePaths(model),
     model.slug
@@ -97,12 +110,22 @@ for (const model of models) {
     console.warn(`⚠️  ${model.slug}: skipped ${missing.length} missing image(s) in structured data`);
   }
 
-  const structuredData = generateModelStructuredData(model, valid);
+  const structuredData = generateModelStructuredData(model, valid, { includeOffer });
   const relativePath = `structured-data/${model.slug}.json`;
   const filePath = path.join(STRUCTURED_DATA_DIR, `${model.slug}.json`);
   writeSeoOutputFile(relativePath, `${JSON.stringify(structuredData, null, 2)}\n`);
   generated.push(model.slug);
-  console.log(`✅ Generated structured data for ${model.name}: ${filePath}`);
+  console.log(
+    `✅ Generated structured data for ${model.name}${includeOffer ? '' : ' (retained, no Offer)'}: ${filePath}`
+  );
+}
+
+for (const model of models) {
+  writeModelStructuredData(model, { includeOffer: true });
+}
+
+for (const model of retainedModels) {
+  writeModelStructuredData(model, { includeOffer: false });
 }
 
 const indexData = {
@@ -128,7 +151,7 @@ const indexPath = path.join(STRUCTURED_DATA_DIR, 'models-index.json');
 writeSeoOutputFile('structured-data/models-index.json', `${JSON.stringify(indexData, null, 2)}\n`);
 console.log(`✅ Generated models index: ${indexPath}`);
 
-const moved = archiveOrphanFiles(activeSlugs);
+const moved = archiveOrphanFiles(publicStructuredSlugs);
 
 console.log(`\n🎯 Generated structured data for ${generated.length} models`);
 console.log(`📁 Active files: public/structured-data/*.json (${generated.length + 1} including index)`);

@@ -2,31 +2,80 @@ import { Model, Review, FAQ } from './types';
 import modelsData from './data/models.json';
 import { filterActiveModels } from './lib/modelsCatalog';
 
-const catalogModels = filterActiveModels(modelsData as { active?: boolean }[]);
+type CatalogRow = {
+  slug: string;
+  name: string;
+  age: number;
+  height?: string | number;
+  weight?: string | number;
+  nationality?: string;
+  city?: string;
+  description?: string;
+  coverImageUrl?: string;
+  images?: string[];
+  videos?: string[];
+  isNew?: boolean;
+  galleryUpdated?: string;
+  vip?: boolean;
+  vipRates?: Record<string, string>;
+  services?: string[];
+  availability?: string | Record<string, unknown>;
+  languages?: string[];
+  featured?: boolean;
+  tags?: string[];
+  active?: boolean;
+  keepPublicSeoPage?: boolean;
+};
 
-export const MODELS: Model[] = catalogModels.map((item) => ({
-  id: item.slug,
-  slug: item.slug,
-  name: item.name,
-  age: item.age,
-  height: item.height,
-  weight: item.weight,
-  nationality: item.nationality,
-  location: item.city ? `${item.city} | Centro` : 'Valencia | Centro',
-  description: item.description || '',
-  image: item.coverImageUrl || item.images?.[0] || '',
-  hoverImage: item.images?.[1] || item.coverImageUrl || item.images?.[0] || '',
-  gallery: item.images || [],
-  videos: item.videos || [],
-  isNew: item.isNew || false,
-  galleryUpdated: item.galleryUpdated || undefined,
-  vip: item.vip || false,
-  vipRates: item.vipRates || {},
-  services: item.services || [],
-  availability: item.availability || {},
-  featured: item.featured || false,
-  tags: item.tags || [],
-}));
+function mapCatalogRow(item: CatalogRow): Model {
+  return {
+    id: item.slug,
+    slug: item.slug,
+    name: item.name,
+    age: item.age,
+    height: item.height,
+    weight: item.weight,
+    nationality: item.nationality,
+    location: item.city ? `${item.city} | Centro` : 'Valencia | Centro',
+    city: item.city,
+    description: item.description || '',
+    image: item.coverImageUrl || item.images?.[0] || '',
+    hoverImage: item.images?.[1] || item.coverImageUrl || item.images?.[0] || '',
+    gallery: item.images || [],
+    videos: item.videos || [],
+    isNew: item.isNew || false,
+    galleryUpdated: item.galleryUpdated || undefined,
+    vip: item.vip || false,
+    vipRates: item.vipRates || {},
+    services: item.services || [],
+    availability: (item.availability as string) || {},
+    languages: item.languages || [],
+    featured: item.featured || false,
+    tags: item.tags || [],
+    active: item.active !== false,
+    keepPublicSeoPage: item.keepPublicSeoPage === true,
+  };
+}
+
+const allCatalogRows = modelsData as CatalogRow[];
+const catalogModels = filterActiveModels(allCatalogRows);
+
+/** Modelos disponibles (listados, hubs, booking). */
+export const MODELS: Model[] = catalogModels.map(mapCatalogRow);
+
+/** Fichas inactivas que conservan URL pública (sin listado ni reserva). */
+export const SEO_RETAINED_MODELS: Model[] = allCatalogRows
+  .filter((item) => item.active === false && item.keepPublicSeoPage === true && item.slug)
+  .map(mapCatalogRow);
+
+/** Lookup para /models/{slug}: activas + retenidas. */
+export function getModelForDetail(slug: string | undefined): Model | undefined {
+  if (!slug) return undefined;
+  return (
+    MODELS.find((m) => m.id === slug || m.slug === slug) ||
+    SEO_RETAINED_MODELS.find((m) => m.id === slug || m.slug === slug)
+  );
+}
 
 export const REVIEWS: Review[] = [
   {

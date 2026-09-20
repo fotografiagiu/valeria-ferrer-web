@@ -3,7 +3,6 @@
  * Seed / display_order use this + remaining active models in models.json order.
  */
 export const HOME_PIN_ORDER: readonly string[] = [
-  'lola',
   'sofia1',
   'ana',
   'bea',
@@ -23,7 +22,6 @@ export const HOME_PIN_ORDER: readonly string[] = [
   'rihanna',
   'julieta',
   'paula-vip',
-  'teresa',
   'mia',
   'naty',
 ] as const;

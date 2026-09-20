@@ -24,6 +24,10 @@ export interface Model {
   gallery?: string[];
   featured?: boolean;
   vip?: boolean;
+  /** false = no listados / no booking; la ficha puede seguir en /models/{slug} si keepPublicSeoPage. */
+  active?: boolean;
+  /** Conservar ficha pública aunque active sea false. */
+  keepPublicSeoPage?: boolean;
   vipRates?: {
     [key: string]: string;
   };

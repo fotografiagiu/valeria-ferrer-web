@@ -1,6 +1,6 @@
 import React, { Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { MODELS } from '../constants';
+import { MODELS, getModelForDetail } from '../constants';
 import modelsJson from '../data/models.json';
 import { getRecommendedModels } from '../lib/recommendations';
 import { getExploreProfileLinks } from '../lib/exploreProfiles';
@@ -18,7 +18,8 @@ const GalleryModal = React.lazy(() => import('../components/GalleryModal'));
 const ModelDetail: React.FC = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const model = MODELS.find(m => m.id === id);
+  const model = getModelForDetail(id);
+  const isAvailable = model?.active !== false;
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showContactBar, setShowContactBar] = useState(true);
@@ -196,6 +197,7 @@ const ModelDetail: React.FC = () => {
     seoTitle: detailRow?.seoTitle,
     seoDescription: detailRow?.seoDescription,
     vip: model.vip,
+    active: model.active,
   };
 
   return (
@@ -215,6 +217,20 @@ const ModelDetail: React.FC = () => {
               <h1 className="text-4xl lg:text-6xl serif luxury-text-gradient uppercase leading-[0.9] tracking-tighter">
                 {model.name}
               </h1>
+
+              {!isAvailable && (
+                <div className="mt-4 max-w-xl mx-auto space-y-4">
+                  <p className="text-sm tracking-[0.2em] uppercase text-[#c2b2a3]/90">
+                    Actualmente no disponible
+                  </p>
+                  <Link
+                    to="/models"
+                    className="inline-flex items-center justify-center px-8 py-3 border border-[#c2b2a3]/40 text-[#c2b2a3] uppercase tracking-[0.25em] text-[10px] font-medium hover:bg-[#c2b2a3] hover:text-black transition-all duration-500"
+                  >
+                    Ver modelos disponibles
+                  </Link>
+                </div>
+              )}
               
               {/* Subtitle with VIP rule */}
               <div className="flex items-center space-x-2 text-[#c2b2a3] text-sm lg:text-base">
@@ -237,7 +253,8 @@ const ModelDetail: React.FC = () => {
         </div>
       </div>
 
-      {/* Fixed Contact Bar */}
+      {/* Fixed Contact Bar — solo modelos disponibles */}
+      {isAvailable && (
       <div className={`fixed bottom-0 left-0 right-0 bg-[#0a0a0a]/95 backdrop-blur-lg border-t border-white/10 z-50 transition-transform duration-300 ${
         showContactBar ? 'translate-y-0' : 'translate-y-full'
       }`}>
@@ -269,12 +286,13 @@ const ModelDetail: React.FC = () => {
           </div>
         </div>
       </div>
+      )}
 
       {/* Breadcrumbs */}
       <Breadcrumbs modelName={model?.name} />
 
       {/* Mobile Layout - Old Style */}
-      <div className="lg:hidden max-w-7xl mx-auto px-6 pb-32 pt-10">
+      <div className={`lg:hidden max-w-7xl mx-auto px-6 ${isAvailable ? 'pb-32' : 'pb-16'} pt-10`}>
         {/* Model Navigation - Modern Minimalist Design */}
         <div className="mb-6">
           <div className="flex items-center justify-between bg-[#111111]/50 backdrop-blur-sm border border-white/5 rounded-2xl p-4">
@@ -1234,6 +1252,8 @@ const ModelDetail: React.FC = () => {
                   * Todas las tarifas son en euros • Servicios adicionales disponibles • Consultar condiciones
                 </p>
                 <div className="flex flex-col md:flex-row gap-4 justify-center">
+                  {isAvailable ? (
+                    <>
                   <Link 
                     to="/booking" 
                     className="inline-flex items-center justify-center px-8 py-4 luxury-gradient text-black font-bold uppercase tracking-[0.4em] text-[8px] hover:scale-[1.02] transition-all duration-500"
@@ -1247,6 +1267,15 @@ const ModelDetail: React.FC = () => {
                     <Phone size={12} className="mr-2" /> 
                     <span>Click para Llamar</span>
                   </a>
+                    </>
+                  ) : (
+                  <Link 
+                    to="/models" 
+                    className="inline-flex items-center justify-center px-8 py-4 border border-[#c2b2a3]/40 text-[#c2b2a3] uppercase tracking-[0.3em] text-[8px] font-bold hover:bg-[#c2b2a3] hover:text-black transition-all duration-700"
+                  >
+                    Ver modelos disponibles
+                  </Link>
+                  )}
                 </div>
               </div>
             </div>
@@ -2277,6 +2306,8 @@ const ModelDetail: React.FC = () => {
             <div className="bg-[#111111] border border-white/5 p-4 flex-1">
               <h4 className="text-lg font-bold text-white uppercase tracking-widest mb-6">Contacto</h4>
               <div className="space-y-3">
+                {isAvailable ? (
+                  <>
                 <a 
                   href="tel:645872227" 
                   className="flex items-center text-[#c2b2a3] hover:text-white transition-colors"
@@ -2293,6 +2324,15 @@ const ModelDetail: React.FC = () => {
                   <Phone size={16} className="mr-3" /> 
                   @Valeriaferreeer
                 </a>
+                  </>
+                ) : (
+                <Link
+                  to="/models"
+                  className="inline-flex items-center text-[#c2b2a3] hover:text-white transition-colors uppercase tracking-widest text-xs"
+                >
+                  Ver modelos disponibles
+                </Link>
+                )}
               </div>
             </div>
             
@@ -2313,12 +2353,21 @@ const ModelDetail: React.FC = () => {
       {/* Request Meeting Button */}
       <section className="py-16 bg-[#0a0a0a]">
         <div className="max-w-4xl mx-auto px-6 text-center">
+          {isAvailable ? (
           <Link 
             to="/booking" 
             className="inline-flex items-center justify-center px-16 py-6 luxury-gradient text-black font-bold uppercase tracking-[0.4em] text-[10px] hover:scale-[1.02] transition-all duration-500 shadow-xl"
           >
             Solicitar Encuentro
           </Link>
+          ) : (
+          <Link 
+            to="/models" 
+            className="inline-flex items-center justify-center px-16 py-6 border border-[#c2b2a3]/40 text-[#c2b2a3] font-bold uppercase tracking-[0.4em] text-[10px] hover:bg-[#c2b2a3] hover:text-black transition-all duration-500"
+          >
+            Ver modelos disponibles
+          </Link>
+          )}
         </div>
       </section>
 

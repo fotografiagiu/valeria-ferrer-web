@@ -55,10 +55,11 @@
       "eventos",
       "valencia"
     ],
-    "isNew": true,
-    "featured": true,
+    "isNew": false,
+    "featured": false,
     "vip": false,
-    "active": true
+    "active": false,
+    "keepPublicSeoPage": true
   },
   {
     "slug": "sofia1",
@@ -1483,9 +1484,10 @@
     ],
     "isNew": false,
     "galleryUpdated": "Septiembre 2026",
-    "featured": true,
+    "featured": false,
     "vip": false,
-    "active": true
+    "active": false,
+    "keepPublicSeoPage": true
   },
   {
     "slug": "tiffany",

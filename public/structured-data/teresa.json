@@ -22,23 +22,6 @@
   "knowsLanguage": [
     "Español"
   ],
-  "offers": {
-    "@type": "Offer",
-    "itemOffered": {
-      "@type": "Service",
-      "name": "Acompañamiento Premium",
-      "description": "Servicios exclusivos de acompañamiento con Teresa en Valencia"
-    },
-    "areaServed": {
-      "@type": "City",
-      "name": "Valencia"
-    },
-    "availableChannel": {
-      "@type": "ServiceChannel",
-      "name": "Contacto Directo",
-      "url": "https://www.valeriaferrer.com/contact"
-    }
-  },
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": "https://www.valeriaferrer.com/models/teresa"
