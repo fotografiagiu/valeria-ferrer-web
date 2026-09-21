@@ -625,9 +625,11 @@
       "cenas",
       "eventos"
     ],
-    "isNew": true,
-    "featured": true,
-    "vip": false
+    "isNew": false,
+    "featured": false,
+    "vip": false,
+    "active": false,
+    "keepPublicSeoPage": true
   },
   {
     "slug": "paris",

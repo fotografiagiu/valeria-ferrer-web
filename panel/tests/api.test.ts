@@ -93,8 +93,8 @@ describe('auth + order + cover API', () => {
     expect(res.status).toBe(200);
     const body = await json(res);
     expect(body.orderVersion).toBe(1);
-    // Seeded from computeEffectiveHomeOrder → HOME_PIN_ORDER (bea first).
-    expect(body.models[0].slug).toBe('bea');
+    // Seeded from computeEffectiveHomeOrder → HOME_PIN_ORDER (sofia1 first).
+    expect(body.models[0].slug).toBe('sofia1');
     expect(body.models[0].allowedCoverPaths.length).toBeGreaterThan(0);
   });
 

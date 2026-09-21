@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-09-19T03:56:32.289237Z",
+  "generatedAt": "2026-09-21T06:53:50.548Z",
   "sourcePath": "data/models.json",
-  "sourceHash": "b4f0d71d646827fe1973b8314e059c2713bd8bb506073afc7634ec872afc6414",
+  "sourceHash": "a639a74fa815c9c29600c8de8b961df475f1fcf4cfa6ddfaa68d7a7e13918a6e",
   "modelCount": 45,
-  "activeCount": 26,
+  "activeCount": 25,
   "models": [
     {
       "slug": "lola",
@@ -151,7 +151,7 @@
     {
       "slug": "marta",
       "name": "Marta",
-      "active": true,
+      "active": false,
       "coverImageUrl": "/chicas/marta-valeria-ferrer-model-agency-valencia/portada.jpg",
       "images": [
         "/chicas/marta-valeria-ferrer-model-agency-valencia/gallery/01.jpg",

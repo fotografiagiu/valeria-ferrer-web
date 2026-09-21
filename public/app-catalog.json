@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-09-20T01:29:27.103Z",
-  "catalogVersion": "b4f0d71d646827fe1973b8314e059c2713bd8bb506073afc7634ec872afc6414",
+  "generatedAt": "2026-09-21T06:53:12.103Z",
+  "catalogVersion": "a639a74fa815c9c29600c8de8b961df475f1fcf4cfa6ddfaa68d7a7e13918a6e",
   "source": "valeria-ferrer-web",
   "method": "build-app-catalog",
   "models": [
@@ -159,7 +159,7 @@
     {
       "slug": "marta",
       "name": "Marta",
-      "active": true,
+      "active": false,
       "vip": false,
       "coverImageUrl": "/chicas/marta-valeria-ferrer-model-agency-valencia/portada.jpg",
       "images": [
