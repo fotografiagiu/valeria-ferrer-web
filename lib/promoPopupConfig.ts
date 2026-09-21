@@ -8,15 +8,15 @@ export type PromoPopupConfig = {
   bannerText: string
 }
 
-/** Copas / invitación — ventana de exactamente 3 horas (Madrid +02:00). */
+/** Dúplex — ventana de exactamente 3 horas (Madrid +02:00). */
 export const ACTIVE_PROMO: PromoPopupConfig = {
-  id: 'promo-2026-09-21-copa-evening',
-  image: '/promos/promo-copa.webp?v=copa-sin-3h',
+  id: 'promo-2026-09-21-duplex-evening',
+  image: '/promos/promo-duo.webp?v=duplex-original-3h',
   startsAt: '2026-09-21T23:00:00+02:00',
   endsAt: '2026-09-22T02:00:00+02:00',
   enabled: true,
   ctaHref: '/booking',
-  bannerText: '🥂 Copa de invitación · Oferta activa · Ver oferta',
+  bannerText: 'Oferta dúplex · Aprovecha en estas 3 horas · Ver oferta',
 }
 
 export function isPromoLive(promo: PromoPopupConfig, now = Date.now()): boolean {
