@@ -9,7 +9,10 @@ export type AuditAction =
   | 'cover.update'
   | 'catalog.sync'
   | 'catalog.ensure'
-  | 'catalog.seed';
+  | 'catalog.seed'
+  | 'promotion.activate'
+  | 'promotion.deactivate'
+  | 'promotion.replace';
 
 export async function appendAudit(
   db: AppDb,

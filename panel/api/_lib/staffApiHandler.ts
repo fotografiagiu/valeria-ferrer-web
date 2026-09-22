@@ -10,6 +10,7 @@ const UNAUTH_FAST_PATHS = new Set([
   '/api/staff/me',
   '/api/staff/catalog',
   '/api/staff/activity',
+  '/api/staff/promotion',
 ]);
 
 let cachedApp: ReturnType<typeof createApp> | null = null;

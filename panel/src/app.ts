@@ -5,7 +5,7 @@ import type { AppDb } from './db/client.js';
 import { staffUsers } from './db/schema.js';
 import { appendAudit } from './lib/audit.js';
 import { resolveCatalogModels } from './lib/catalogSource.js';
-import { corsHeadersForPublicOverrides, assertStaffWriteOrigin } from './lib/csrf.js';
+import { corsHeadersForPublicOverrides, corsHeadersForPublicPromotion, assertStaffWriteOrigin } from './lib/csrf.js';
 import {
   allowedCoverPaths,
   type CatalogModelLite,
@@ -33,7 +33,13 @@ import {
   revokeSessionByToken,
   type StaffIdentity,
 } from './lib/session.js';
-import { coverBodySchema, loginBodySchema, orderBodySchema } from './lib/validation.js';
+import { coverBodySchema, loginBodySchema, orderBodySchema, promotionBodySchema } from './lib/validation.js';
+import {
+  activatePromotion,
+  deactivatePromotion,
+  getPublicPromotion,
+  getStaffPromotionState,
+} from './lib/webPromotion.js';
 import { listRecentActivity } from './lib/activityFeed.js';
 import { readSnapshot } from './lib/catalogSnapshot.js';
 
@@ -173,6 +179,23 @@ export function createApp(options: CreateAppOptions) {
     } catch (err) {
       console.error(err);
       return c.json({ error: 'overrides unavailable' }, 503, headers);
+    }
+  });
+
+  // --- Public read-only web promotion (Copas / Duples) ---
+  app.options('/api/public/promotion', (c) => {
+    const headers = corsHeadersForPublicPromotion(c.req.header('origin'), env);
+    return new Response(null, { status: 204, headers });
+  });
+
+  app.get('/api/public/promotion', async (c) => {
+    const headers = corsHeadersForPublicPromotion(c.req.header('origin'), env);
+    try {
+      const payload = await getPublicPromotion(db);
+      return c.json(payload, 200, headers);
+    } catch (err) {
+      console.error(err);
+      return c.json({ error: 'promotion unavailable' }, 503, headers);
     }
   });
 
@@ -423,6 +446,69 @@ export function createApp(options: CreateAppOptions) {
     } catch (err) {
       if (err instanceof ConflictError) return c.json({ error: err.message }, 409);
       if (err instanceof BadRequestError) return c.json({ error: err.message }, 400);
+      console.error(err);
+      return c.json({ error: 'internal error' }, 500);
+    }
+  });
+
+  // --- Staff web promotion ---
+  app.get('/api/staff/promotion', async (c) => {
+    const staff = await requireStaff(c);
+    if (!staff) return c.json({ error: 'unauthorized' }, 401);
+    try {
+      const state = await getStaffPromotionState(db);
+      return c.json(state);
+    } catch (err) {
+      console.error(err);
+      return c.json({ error: 'internal error' }, 500);
+    }
+  });
+
+  app.put('/api/staff/promotion', async (c) => {
+    const originCheck = assertStaffWriteOrigin(c, env);
+    if (!originCheck.ok) return c.json({ error: originCheck.error }, originCheck.status);
+
+    const staff = await requireStaff(c);
+    if (!staff) return c.json({ error: 'unauthorized' }, 401);
+
+    const rl = await hitRateLimit(db, `write:${staff.id}`, 60, 60 * 1000);
+    if (!rl.allowed) return c.json({ error: 'rate limit' }, 429);
+
+    let body: unknown;
+    try {
+      body = await c.req.json();
+    } catch {
+      return c.json({ error: 'invalid json' }, 400);
+    }
+    const parsed = promotionBodySchema.safeParse(body);
+    if (!parsed.success) {
+      return c.json({ error: 'invalid body', details: parsed.error.flatten() }, 400);
+    }
+
+    const meta = clientMeta(c);
+    try {
+      if (parsed.data.action === 'deactivate') {
+        const result = await deactivatePromotion({
+          db,
+          staffUserId: staff.id,
+          ip: meta.ip,
+          userAgent: meta.userAgent,
+        });
+        const history = (await getStaffPromotionState(db)).history;
+        return c.json({ ok: true, ...result, history });
+      }
+
+      const result = await activatePromotion({
+        db,
+        promotion: parsed.data.promotion,
+        durationHours: parsed.data.durationHours,
+        staffUserId: staff.id,
+        ip: meta.ip,
+        userAgent: meta.userAgent,
+      });
+      const history = (await getStaffPromotionState(db)).history;
+      return c.json({ ok: true, ...result, history });
+    } catch (err) {
       console.error(err);
       return c.json({ error: 'internal error' }, 500);
     }

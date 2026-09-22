@@ -30,6 +30,21 @@ export const loginBodySchema = z
   })
   .strict();
 
+export const promotionBodySchema = z.discriminatedUnion('action', [
+  z
+    .object({
+      action: z.literal('activate'),
+      promotion: z.enum(['copas', 'duples']),
+      durationHours: z.union([z.literal(1), z.literal(3), z.literal(4)]),
+    })
+    .strict(),
+  z
+    .object({
+      action: z.literal('deactivate'),
+    })
+    .strict(),
+]);
+
 export type OrderValidationOk = { ok: true; orderedSlugs: string[] };
 export type OrderValidationErr = { ok: false; status: 400; error: string };
 export type CoverValidationOk = { ok: true; slug: string; coverImagePath: string };

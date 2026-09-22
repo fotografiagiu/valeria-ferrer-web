@@ -66,3 +66,15 @@ export const rateLimitBuckets = pgTable('rate_limit_buckets', {
   hitCount: integer('hit_count').notNull().default(0),
   windowStart: timestamp('window_start', { withTimezone: true }).notNull().defaultNow(),
 });
+
+/** Singleton row (id=1): remote control for public-site Copas / Duples promos. */
+export const webPromotion = pgTable('web_promotion', {
+  id: smallint('id').primaryKey().default(sql`1`),
+  activePromotion: text('active_promotion').notNull().default('none'),
+  startsAt: timestamp('starts_at', { withTimezone: true }),
+  endsAt: timestamp('ends_at', { withTimezone: true }),
+  durationHours: integer('duration_hours'),
+  promoId: text('promo_id'),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
+  updatedBy: uuid('updated_by').references(() => staffUsers.id),
+});
