@@ -7,10 +7,24 @@
  */
 const BASE = process.env.SMOKE_PANEL_URL || 'http://localhost:8787';
 
+type JsonBody = Record<string, unknown> & {
+  active?: boolean;
+  activePromotion?: string;
+  effective?: {
+    active?: boolean;
+    activePromotion?: string;
+    endsAt?: string;
+    durationHours?: number;
+  };
+  history?: Array<{ action?: string }>;
+};
+
 async function json(res: Response) {
-  const body = await res.json();
+  const body = (await res.json()) as JsonBody;
   return { status: res.status, body, setCookie: res.headers.get('set-cookie') || '' };
 }
+
+const noStore: RequestInit = { headers: { 'Cache-Control': 'no-store' } };
 
 function assert(cond: unknown, msg: string): asserts cond {
   if (!cond) throw new Error(msg);
@@ -21,7 +35,7 @@ async function main() {
 
   // CASE 1 — initial
   {
-    const pub = await json(await fetch(`${BASE}/api/public/promotion`, { cache: 'no-store' }));
+    const pub = await json(await fetch(`${BASE}/api/public/promotion`, noStore));
     assert(pub.status === 200, `public status ${pub.status}`);
     assert(pub.body.active === false, 'expected inactive');
     assert(pub.body.activePromotion === 'none', 'expected none');
@@ -63,9 +77,9 @@ async function main() {
       })
     );
     assert(res.status === 200, `activate copas ${res.status} ${JSON.stringify(res.body)}`);
-    assert(res.body.effective.activePromotion === 'copas', 'copas not active');
-    assert(res.body.effective.durationHours === 1, 'duration not 1h');
-    const pub = await json(await fetch(`${BASE}/api/public/promotion`, { cache: 'no-store' }));
+    assert(res.body.effective?.activePromotion === 'copas', 'copas not active');
+    assert(res.body.effective?.durationHours === 1, 'duration not 1h');
+    const pub = await json(await fetch(`${BASE}/api/public/promotion`, noStore));
     assert(pub.body.active === true && pub.body.activePromotion === 'copas', 'public not copas');
     results.push('CASE2 activate copas 1h OK');
   }
@@ -80,9 +94,9 @@ async function main() {
       })
     );
     assert(res.status === 200, `replace ${res.status}`);
-    assert(res.body.effective.activePromotion === 'duples', 'duples not active');
+    assert(res.body.effective?.activePromotion === 'duples', 'duples not active');
     assert(res.body.history?.[0]?.action === 'promotion.replace', 'expected replace audit');
-    const pub = await json(await fetch(`${BASE}/api/public/promotion`, { cache: 'no-store' }));
+    const pub = await json(await fetch(`${BASE}/api/public/promotion`, noStore));
     assert(pub.body.activePromotion === 'duples', 'public not duples');
     results.push('CASE3 replace duples 3h OK');
   }
@@ -97,7 +111,7 @@ async function main() {
       })
     );
     assert(res.status === 200, `deactivate ${res.status}`);
-    const pub = await json(await fetch(`${BASE}/api/public/promotion`, { cache: 'no-store' }));
+    const pub = await json(await fetch(`${BASE}/api/public/promotion`, noStore));
     assert(pub.body.active === false && pub.body.activePromotion === 'none', 'still active');
     results.push('CASE4 deactivate OK');
   }
@@ -111,12 +125,12 @@ async function main() {
         body: JSON.stringify({ action: 'activate', promotion: 'copas', durationHours: 1 }),
       })
     );
-    assert(res.body.effective.active === true, 'should be live now');
-    const ends = Date.parse(res.body.effective.endsAt);
+    assert(res.body.effective?.active === true, 'should be live now');
+    const ends = Date.parse(String(res.body.effective?.endsAt));
     assert(Number.isFinite(ends) && ends > Date.now(), 'endsAt not in future');
     const staleEnds = Date.now() - 1000;
     const stillShows =
-      res.body.effective.activePromotion === 'copas' &&
+      res.body.effective?.activePromotion === 'copas' &&
       Number.isFinite(staleEnds) &&
       Date.now() < staleEnds;
     assert(!stillShows, 'stale endsAt must not keep promo live');
