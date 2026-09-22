@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-09-21T06:53:12.103Z",
-  "catalogVersion": "a639a74fa815c9c29600c8de8b961df475f1fcf4cfa6ddfaa68d7a7e13918a6e",
+  "generatedAt": "2026-09-22T21:46:13.029Z",
+  "catalogVersion": "15b93c38da00c920e6edcab34b0fda2cc417a67d5367707e9fea268317786dd3",
   "source": "valeria-ferrer-web",
   "method": "build-app-catalog",
   "models": [
@@ -28,6 +28,38 @@
         "/chicas/sofia1-model-agency-valencia-vf/gallery/02.jpg",
         "/chicas/sofia1-model-agency-valencia-vf/gallery/03.jpg",
         "/chicas/sofia1-model-agency-valencia-vf/gallery/04.jpg"
+      ]
+    },
+    {
+      "slug": "cristal2",
+      "name": "Cristal",
+      "active": true,
+      "vip": false,
+      "coverImageUrl": "/chicas/cristal2-model-agency-valencia-vf/portada.jpg",
+      "images": [
+        "/chicas/cristal2-model-agency-valencia-vf/gallery/01.jpg",
+        "/chicas/cristal2-model-agency-valencia-vf/gallery/02.jpg",
+        "/chicas/cristal2-model-agency-valencia-vf/gallery/03.jpg",
+        "/chicas/cristal2-model-agency-valencia-vf/gallery/04.jpg",
+        "/chicas/cristal2-model-agency-valencia-vf/gallery/05.jpg",
+        "/chicas/cristal2-model-agency-valencia-vf/gallery/06.jpg"
+      ]
+    },
+    {
+      "slug": "carolina2",
+      "name": "Carolina",
+      "active": true,
+      "vip": false,
+      "coverImageUrl": "/chicas/carolina2-model-agency-valencia-vf/portada.jpg",
+      "images": [
+        "/chicas/carolina2-model-agency-valencia-vf/gallery/01.jpg",
+        "/chicas/carolina2-model-agency-valencia-vf/gallery/02.jpg",
+        "/chicas/carolina2-model-agency-valencia-vf/gallery/03.jpg",
+        "/chicas/carolina2-model-agency-valencia-vf/gallery/04.jpg",
+        "/chicas/carolina2-model-agency-valencia-vf/gallery/05.jpg",
+        "/chicas/carolina2-model-agency-valencia-vf/gallery/06.jpg",
+        "/chicas/carolina2-model-agency-valencia-vf/gallery/07.jpg",
+        "/chicas/carolina2-model-agency-valencia-vf/gallery/08.jpg"
       ]
     },
     {
