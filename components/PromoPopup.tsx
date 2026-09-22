@@ -1,22 +1,29 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { Phone, Send, X } from 'lucide-react'
+import { track } from '@vercel/analytics'
 import {
   OFFICIAL_PHONE_LABEL,
   OFFICIAL_PHONE_TEL,
   OFFICIAL_TELEGRAM_HANDLE,
   OFFICIAL_TELEGRAM_URL,
 } from '../lib/officialContact'
+import { isPromoLive, type PromoPopupConfig } from '../lib/promoPopupConfig'
 import {
-  ACTIVE_PROMO,
-  isPromoLive,
-  type PromoPopupConfig,
-} from '../lib/promoPopupConfig'
+  getCachedPromotion,
+  startPromotionWatcher,
+  subscribePromotion,
+} from '../lib/webPromotionRemote'
 
 type PromoView = 'hidden' | 'popup' | 'banner'
 
-const PromoPopup: React.FC<{ promo?: PromoPopupConfig }> = ({ promo = ACTIVE_PROMO }) => {
+const PromoPopup: React.FC = () => {
+  const [promo, setPromo] = useState<PromoPopupConfig | null>(() => getCachedPromotion())
   const [view, setView] = useState<PromoView>('hidden')
   const [contactOpen, setContactOpen] = useState(false)
+
+  useEffect(() => startPromotionWatcher(), [])
+
+  useEffect(() => subscribePromotion(setPromo), [])
 
   const syncVisibility = useCallback(() => {
     if (!isPromoLive(promo)) {
@@ -24,7 +31,7 @@ const PromoPopup: React.FC<{ promo?: PromoPopupConfig }> = ({ promo = ACTIVE_PRO
       setView('hidden')
       return
     }
-    // Always reopen the large popup on a fresh page load.
+    // Always reopen the large popup on a fresh page load / new promo id.
     // Minimize only lives in memory until the next navigation/reload.
     setView((current) => (current === 'banner' ? 'banner' : 'popup'))
   }, [promo])
@@ -56,8 +63,31 @@ const PromoPopup: React.FC<{ promo?: PromoPopupConfig }> = ({ promo = ACTIVE_PRO
     setContactOpen(false)
   }, [])
 
+  const trackPromoContact = useCallback(
+    (type: 'telegram' | 'phone') => {
+      if (!promo) return
+      track('contact_click', {
+        type,
+        platform: type,
+        location: 'promo_popup',
+        path: window.location.pathname,
+        promoId: promo.id,
+        promotionType: promo.kind,
+      })
+    },
+    [promo],
+  )
+
+  // Reset minimize state when the remote promo identity changes (Copas ↔ Duples).
+  useEffect(() => {
+    setContactOpen(false)
+    setView('hidden')
+  }, [promo?.id])
+
   useEffect(() => {
     syncVisibility()
+
+    if (!promo) return
 
     const start = Date.parse(promo.startsAt)
     const end = Date.parse(promo.endsAt)
@@ -85,7 +115,7 @@ const PromoPopup: React.FC<{ promo?: PromoPopupConfig }> = ({ promo = ACTIVE_PRO
       timers.forEach((id) => window.clearTimeout(id))
       document.removeEventListener('visibilitychange', onVisibility)
     }
-  }, [promo.endsAt, promo.startsAt, syncVisibility])
+  }, [promo, syncVisibility])
 
   useEffect(() => {
     if (view !== 'popup') return
@@ -109,7 +139,7 @@ const PromoPopup: React.FC<{ promo?: PromoPopupConfig }> = ({ promo = ACTIVE_PRO
     }
   }, [closeContact, contactOpen, minimizePromo, view])
 
-  if (view === 'hidden') return null
+  if (!promo || view === 'hidden') return null
 
   return (
     <>
@@ -238,6 +268,8 @@ const PromoPopup: React.FC<{ promo?: PromoPopupConfig }> = ({ promo = ACTIVE_PRO
             <div className="space-y-3">
               <a
                 href={OFFICIAL_PHONE_TEL}
+                data-promo-contact="true"
+                onClick={() => trackPromoContact('phone')}
                 className="flex items-center justify-between w-full bg-white/5 border border-white/10 text-white py-3 px-4 rounded-xl text-[11px] font-bold uppercase tracking-[0.18em] hover:bg-white/10 transition-colors"
               >
                 <span className="flex items-center">
@@ -250,6 +282,8 @@ const PromoPopup: React.FC<{ promo?: PromoPopupConfig }> = ({ promo = ACTIVE_PRO
                 href={OFFICIAL_TELEGRAM_URL}
                 target="_blank"
                 rel="noopener noreferrer"
+                data-promo-contact="true"
+                onClick={() => trackPromoContact('telegram')}
                 className="flex items-center justify-between w-full bg-[#c2b2a3] text-black py-3 px-4 rounded-xl text-[11px] font-bold uppercase tracking-[0.18em] hover:bg-white transition-colors"
               >
                 <span className="flex items-center">
