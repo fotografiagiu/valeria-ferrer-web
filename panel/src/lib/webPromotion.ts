@@ -150,7 +150,7 @@ function historySummary(params: {
   endsAt: string | null;
 }): string {
   const label = (p: PromotionType | null) =>
-    p === 'copas' ? 'COPAS' : p === 'duples' ? 'DUPLES' : 'ninguna';
+    p === 'copas' ? 'COPAS' : p === 'duples' ? 'DUPLEX' : 'ninguna';
   const ends =
     params.endsAt != null
       ? new Date(params.endsAt).toLocaleString('es-ES', {

@@ -25,7 +25,7 @@ const CREATIVES: Record<
     hint: 'Copa de invitación',
   },
   duples: {
-    title: 'DUPLES',
+    title: 'DUPLEX',
     image: '/promos/promo-duo.webp',
     hint: 'Oferta dúplex',
   },
@@ -145,7 +145,7 @@ export function PromotionScreen({ onToast, onUnauthorized }: Props) {
       setState(next);
       setModal(null);
       onToast(
-        modal.promotion === 'copas' ? 'Publicidad COPAS activada' : 'Publicidad DUPLES activada'
+        modal.promotion === 'copas' ? 'Publicidad COPAS activada' : 'Publicidad DUPLEX activada'
       );
     } catch (err) {
       if (err instanceof ApiError && err.status === 401) {
@@ -185,7 +185,7 @@ export function PromotionScreen({ onToast, onUnauthorized }: Props) {
         <div>
           <h2 id="promo-web-title">Publicidad web</h2>
           <p className="promo-section-sub">
-            Control remoto de Copas y Duples · sin commit ni deploy
+            Control remoto de Copas y Duplex · sin commit ni deploy
           </p>
         </div>
         <button type="button" className="ghost-btn" onClick={() => void refresh()} disabled={loading || busy}>
@@ -199,7 +199,7 @@ export function PromotionScreen({ onToast, onUnauthorized }: Props) {
           <span className="promo-status-value muted">Cargando…</span>
         ) : live && activeType && activeType !== 'none' ? (
           <span className="promo-status-value live">
-            ● {activeType === 'copas' ? 'COPAS' : 'DUPLES'} activa
+            ● {activeType === 'copas' ? 'COPAS' : 'DUPLEX'} activa
             <span className="promo-status-meta">
               Finaliza {formatEndsAt(effective?.endsAt ?? null)} · Quedan{' '}
               {formatRemaining(effective?.endsAt ?? null, now)}
@@ -295,7 +295,7 @@ export function PromotionScreen({ onToast, onUnauthorized }: Props) {
             </h3>
             {modal.mode === 'replace' && live && effective?.activePromotion !== 'none' ? (
               <p className="promo-modal-warn">
-                {effective?.activePromotion === 'copas' ? 'COPAS' : 'DUPLES'} está activa hasta{' '}
+                {effective?.activePromotion === 'copas' ? 'COPAS' : 'DUPLEX'} está activa hasta{' '}
                 {formatEndsAt(effective?.endsAt ?? null)}. ¿Quieres sustituirla por{' '}
                 {CREATIVES[modal.promotion].title}?
               </p>
@@ -332,7 +332,7 @@ export function PromotionScreen({ onToast, onUnauthorized }: Props) {
         <div className="promo-modal-backdrop" role="presentation">
           <div className="promo-modal" role="dialog" aria-modal="true" aria-labelledby="promo-off-title">
             <h3 id="promo-off-title">Desactivar publicidad</h3>
-            <p className="muted">La web dejará de mostrar Copas/Duples y Novedades volverá a su comportamiento normal.</p>
+            <p className="muted">La web dejará de mostrar Copas/Duplex y Novedades volverá a su comportamiento normal.</p>
             <div className="promo-modal-actions">
               <button type="button" className="ghost-btn" disabled={busy} onClick={() => setConfirmOff(false)}>
                 Cancelar
