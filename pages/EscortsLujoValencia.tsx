@@ -35,7 +35,7 @@ const SEO = {
 };
 
 /** Selección editorial de lujo (VIP solo si model.vip === true). Sin solape con el hub genérico. */
-const FEATURED_SLUGS = ['paula-vip', 'luna', 'naty', 'cristal', 'adara', 'julieta'] as const;
+const FEATURED_SLUGS = ['paula-vip', 'lia', 'luna', 'naty', 'cristal', 'adara', 'julieta'] as const;
 
 const EXPERIENCES = [
   { icon: Wine, label: 'Cenas privadas en restaurantes y terrazas selectas' },

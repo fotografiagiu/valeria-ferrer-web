@@ -1,0 +1,45 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Lía",
+  "description": "Lía es una española de 20 años, 1,69 m y 52 kg, con un cuerpo fino que se impone solo y una presencia VIP imposible de ignorar. Mirada que te clava, sensualidad elegante y esa cercanía que convierte el privado en algo que se disfruta de verdad. Joven, intensa y con ganas de que la cites. Fotos reales. Si en Valencia buscas una escort VIP española que deje huella, Lía está lista para ti.",
+  "url": "https://www.valeriaferrer.com/models/lia",
+  "image": [
+    "https://www.valeriaferrer.com/chicas/lia-valeria-ferrer-model-agency-valencia/portada.jpg",
+    "https://www.valeriaferrer.com/chicas/lia-valeria-ferrer-model-agency-valencia/gallery/01.jpg",
+    "https://www.valeriaferrer.com/chicas/lia-valeria-ferrer-model-agency-valencia/gallery/02.jpg",
+    "https://www.valeriaferrer.com/chicas/lia-valeria-ferrer-model-agency-valencia/gallery/03.jpg",
+    "https://www.valeriaferrer.com/chicas/lia-valeria-ferrer-model-agency-valencia/gallery/04.jpg",
+    "https://www.valeriaferrer.com/chicas/lia-valeria-ferrer-model-agency-valencia/gallery/05.jpg",
+    "https://www.valeriaferrer.com/chicas/lia-valeria-ferrer-model-agency-valencia/gallery/06.jpg",
+    "https://www.valeriaferrer.com/chicas/lia-valeria-ferrer-model-agency-valencia/gallery/07.jpg",
+    "https://www.valeriaferrer.com/chicas/lia-valeria-ferrer-model-agency-valencia/gallery/08.jpg"
+  ],
+  "nationality": "Española",
+  "jobTitle": "Modelo VIP",
+  "knowsLanguage": [
+    "Español",
+    "Inglés"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "itemOffered": {
+      "@type": "Service",
+      "name": "Acompañamiento Premium",
+      "description": "Servicios exclusivos de acompañamiento con Lía en Valencia"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Valencia"
+    },
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "name": "Contacto Directo",
+      "url": "https://www.valeriaferrer.com/contact"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.valeriaferrer.com/models/lia"
+  }
+}

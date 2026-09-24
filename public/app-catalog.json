@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-09-24T18:43:31.531Z",
-  "catalogVersion": "18401cce4ce29c1c31455a5951f4951baf6f2c8b12f1df5893ceaa5aeb32374e",
+  "generatedAt": "2026-09-24T21:16:40.055Z",
+  "catalogVersion": "872a59ea2c94ff44726580b2d9fd531240679903ffe4d9c5d7e80bbd1acb3c66",
   "source": "valeria-ferrer-web",
   "method": "build-app-catalog",
   "models": [
@@ -62,6 +62,65 @@
         "/chicas/carolina2-model-agency-valencia-vf/gallery/07-sep2026.jpg",
         "/chicas/carolina2-model-agency-valencia-vf/gallery/08-sep2026.jpg",
         "/chicas/carolina2-model-agency-valencia-vf/gallery/09-sep2026.jpg"
+      ]
+    },
+    {
+      "slug": "lia",
+      "name": "Lía",
+      "active": true,
+      "vip": true,
+      "coverImageUrl": "/chicas/lia-valeria-ferrer-model-agency-valencia/portada.jpg",
+      "images": [
+        "/chicas/lia-valeria-ferrer-model-agency-valencia/gallery/01.jpg",
+        "/chicas/lia-valeria-ferrer-model-agency-valencia/gallery/02.jpg",
+        "/chicas/lia-valeria-ferrer-model-agency-valencia/gallery/03.jpg",
+        "/chicas/lia-valeria-ferrer-model-agency-valencia/gallery/04.jpg",
+        "/chicas/lia-valeria-ferrer-model-agency-valencia/gallery/05.jpg",
+        "/chicas/lia-valeria-ferrer-model-agency-valencia/gallery/06.jpg",
+        "/chicas/lia-valeria-ferrer-model-agency-valencia/gallery/07.jpg",
+        "/chicas/lia-valeria-ferrer-model-agency-valencia/gallery/08.jpg"
+      ],
+      "rateExceptions": [
+        {
+          "serviceTypeId": "30min",
+          "totalCents": 10000
+        },
+        {
+          "serviceTypeId": "45min",
+          "totalCents": 15000
+        },
+        {
+          "serviceTypeId": "60min",
+          "totalCents": 20000
+        },
+        {
+          "serviceTypeId": "90min",
+          "totalCents": 30000
+        },
+        {
+          "serviceTypeId": "120min",
+          "totalCents": 35000
+        },
+        {
+          "serviceTypeId": "180min",
+          "totalCents": 52000
+        },
+        {
+          "serviceTypeId": "salida",
+          "totalCents": 25000
+        },
+        {
+          "serviceTypeId": "noche",
+          "totalCents": 200000
+        },
+        {
+          "serviceTypeId": "dia",
+          "totalCents": 300000
+        },
+        {
+          "serviceTypeId": "dosDias",
+          "totalCents": 400000
+        }
       ]
     },
     {
