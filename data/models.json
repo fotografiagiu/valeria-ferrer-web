@@ -875,7 +875,7 @@
     "tags": [
       "filipina",
       "normal",
-      "nueva",
+      "actualizada",
       "elegante",
       "seductora",
       "cercana",
@@ -883,9 +883,10 @@
       "cenas",
       "eventos"
     ],
-    "isNew": true,
+    "isNew": false,
     "featured": true,
-    "vip": false
+    "vip": false,
+    "galleryUpdated": "Septiembre 2026"
   },
   {
     "slug": "vero",
