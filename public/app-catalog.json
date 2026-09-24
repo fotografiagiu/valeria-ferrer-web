@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-09-19T03:56:32.272Z",
-  "catalogVersion": "b016294275481eaa03d0803089e6ae9b298bd803721f3d907604eebf0bb0c1ba",
+  "generatedAt": "2026-09-24T11:14:10.512Z",
+  "catalogVersion": "d34e30db5a170c9c75f0f1e0a9fc9cf4dfca98a18f1a0be21720582c58da0998",
   "source": "valeria-ferrer-web",
   "method": "build-app-catalog",
   "models": [
@@ -251,7 +251,18 @@
         "/chicas/adara-valeria-ferrer-model-agency-valencia/gallery/03.jpg",
         "/chicas/adara-valeria-ferrer-model-agency-valencia/gallery/04.jpg",
         "/chicas/adara-valeria-ferrer-model-agency-valencia/gallery/05.jpg",
-        "/chicas/adara-valeria-ferrer-model-agency-valencia/gallery/06.jpg"
+        "/chicas/adara-valeria-ferrer-model-agency-valencia/gallery/06.jpg",
+        "/chicas/adara-valeria-ferrer-model-agency-valencia/gallery/07.jpg",
+        "/chicas/adara-valeria-ferrer-model-agency-valencia/gallery/08.jpg",
+        "/chicas/adara-valeria-ferrer-model-agency-valencia/gallery/09.jpg",
+        "/chicas/adara-valeria-ferrer-model-agency-valencia/gallery/10.jpg",
+        "/chicas/adara-valeria-ferrer-model-agency-valencia/gallery/11.jpg",
+        "/chicas/adara-valeria-ferrer-model-agency-valencia/gallery/12.jpg",
+        "/chicas/adara-valeria-ferrer-model-agency-valencia/gallery/13.jpg",
+        "/chicas/adara-valeria-ferrer-model-agency-valencia/gallery/14.jpg",
+        "/chicas/adara-valeria-ferrer-model-agency-valencia/gallery/15.jpg",
+        "/chicas/adara-valeria-ferrer-model-agency-valencia/gallery/16.jpg",
+        "/chicas/adara-valeria-ferrer-model-agency-valencia/gallery/17.jpg"
       ]
     },
     {
