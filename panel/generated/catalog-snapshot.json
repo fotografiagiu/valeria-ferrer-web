@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-09-24T21:16:55.812Z",
+  "generatedAt": "2026-09-24T23:16:59.084Z",
   "sourcePath": "data/models.json",
-  "sourceHash": "872a59ea2c94ff44726580b2d9fd531240679903ffe4d9c5d7e80bbd1acb3c66",
+  "sourceHash": "6fe1859645fe88d75deb3a8f3f64025fcac90936e05815ca9714351922f1a45f",
   "modelCount": 48,
   "activeCount": 31,
   "models": [
@@ -586,8 +586,21 @@
     {
       "slug": "estefany",
       "name": "Estefany",
-      "coverImageUrl": "/chicas/estefany-model-agency-valencia-vf/portada-nueva.jpg",
+      "coverImageUrl": "/chicas/estefany-model-agency-valencia-vf/portada-sep2026.jpg",
       "images": [
+        "/chicas/estefany-model-agency-valencia-vf/nuevas/01.jpg",
+        "/chicas/estefany-model-agency-valencia-vf/nuevas/02.jpg",
+        "/chicas/estefany-model-agency-valencia-vf/nuevas/03.jpg",
+        "/chicas/estefany-model-agency-valencia-vf/nuevas/04.jpg",
+        "/chicas/estefany-model-agency-valencia-vf/nuevas/05.jpg",
+        "/chicas/estefany-model-agency-valencia-vf/nuevas/06.jpg",
+        "/chicas/estefany-model-agency-valencia-vf/nuevas/07.jpg",
+        "/chicas/estefany-model-agency-valencia-vf/nuevas/08.jpg",
+        "/chicas/estefany-model-agency-valencia-vf/nuevas/09.jpg",
+        "/chicas/estefany-model-agency-valencia-vf/nuevas/10.jpg",
+        "/chicas/estefany-model-agency-valencia-vf/nuevas/11.jpg",
+        "/chicas/estefany-model-agency-valencia-vf/nuevas/12.jpg",
+        "/chicas/estefany-model-agency-valencia-vf/portada-nueva.jpg",
         "/chicas/estefany-model-agency-valencia-vf/2.jpg",
         "/chicas/estefany-model-agency-valencia-vf/3.jpg",
         "/chicas/estefany-model-agency-valencia-vf/4.jpg",
