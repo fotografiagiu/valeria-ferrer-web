@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-09-24T18:43:31.958Z",
+  "generatedAt": "2026-09-24T21:16:55.812Z",
   "sourcePath": "data/models.json",
-  "sourceHash": "18401cce4ce29c1c31455a5951f4951baf6f2c8b12f1df5893ceaa5aeb32374e",
-  "modelCount": 47,
-  "activeCount": 30,
+  "sourceHash": "872a59ea2c94ff44726580b2d9fd531240679903ffe4d9c5d7e80bbd1acb3c66",
+  "modelCount": 48,
+  "activeCount": 31,
   "models": [
     {
       "slug": "lola",
@@ -59,6 +59,21 @@
         "/chicas/carolina2-model-agency-valencia-vf/gallery/07-sep2026.jpg",
         "/chicas/carolina2-model-agency-valencia-vf/gallery/08-sep2026.jpg",
         "/chicas/carolina2-model-agency-valencia-vf/gallery/09-sep2026.jpg"
+      ]
+    },
+    {
+      "slug": "lia",
+      "name": "Lía",
+      "coverImageUrl": "/chicas/lia-valeria-ferrer-model-agency-valencia/portada.jpg",
+      "images": [
+        "/chicas/lia-valeria-ferrer-model-agency-valencia/gallery/01.jpg",
+        "/chicas/lia-valeria-ferrer-model-agency-valencia/gallery/02.jpg",
+        "/chicas/lia-valeria-ferrer-model-agency-valencia/gallery/03.jpg",
+        "/chicas/lia-valeria-ferrer-model-agency-valencia/gallery/04.jpg",
+        "/chicas/lia-valeria-ferrer-model-agency-valencia/gallery/05.jpg",
+        "/chicas/lia-valeria-ferrer-model-agency-valencia/gallery/06.jpg",
+        "/chicas/lia-valeria-ferrer-model-agency-valencia/gallery/07.jpg",
+        "/chicas/lia-valeria-ferrer-model-agency-valencia/gallery/08.jpg"
       ]
     },
     {

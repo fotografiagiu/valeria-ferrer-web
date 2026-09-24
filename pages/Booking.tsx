@@ -120,7 +120,7 @@ const Booking: React.FC = () => {
                 <option value="mariana" className="bg-[#111111]">Mariana</option>
                 <option value="naty" className="bg-[#111111]">Naty</option>
                 <option value="erika" className="bg-[#111111]">Erika</option>
-                <option value="tatiana" className="bg-[#111111]">Tatiana (VIP)</option>
+                <option value="lia" className="bg-[#111111]">Lía (VIP)</option>
                 <option value="alicia" className="bg-[#111111]">Alicia</option>
                 <option value="paula" className="bg-[#111111]">Paula (VIP)</option>
                 <option value="luna" className="bg-[#111111]">Luna</option>
