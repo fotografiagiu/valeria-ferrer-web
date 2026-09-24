@@ -10,6 +10,7 @@ import {
   listOverrides,
   listActiveOrderedOverrides,
   getOrderVersion,
+  planCatalogMembership,
 } from '../src/lib/overridesService.js';
 
 let db: AppDb;
@@ -198,6 +199,36 @@ describe('catalog:ensure (incremental)', () => {
     for (const [slug, order] of ordersBefore) {
       expect(after.find((r) => r.slug === slug)?.displayOrder).toBe(order);
     }
+  });
+
+  it('does not auto-reactivate staff-hidden fichas', async () => {
+    await db
+      .update(modelOverrides)
+      .set({ displayOrder: null, staffHidden: true })
+      .where(eq(modelOverrides.slug, 'sofia1'));
+
+    const existing = await listOverrides(db);
+    const plan = planCatalogMembership(readSnapshot().models, existing);
+    expect(plan.reactivatedAtEnd).not.toContain('sofia1');
+    expect(plan.activeOrderAfter).not.toContain('sofia1');
+
+    const dry = await ensureCatalogMembership({
+      db,
+      snapshotModels: readSnapshot().models,
+      dryRun: true,
+    });
+    expect(dry.reactivatedAtEnd).not.toContain('sofia1');
+
+    // Restore for later tests
+    const max =
+      Math.max(
+        0,
+        ...(await listActiveOrderedOverrides(db)).map((r) => r.displayOrder as number)
+      ) + 1;
+    await db
+      .update(modelOverrides)
+      .set({ displayOrder: max, staffHidden: false })
+      .where(eq(modelOverrides.slug, 'sofia1'));
   });
 
   it('preserves staff cover when still in allowlist', async () => {

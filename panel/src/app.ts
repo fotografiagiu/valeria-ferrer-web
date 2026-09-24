@@ -19,6 +19,7 @@ import {
   listOverrides,
   planCatalogMembership,
   readOrderVersion,
+  removeModelFromCatalog,
   replaceOrder,
   updateCover,
 } from './lib/overridesService.js';
@@ -33,7 +34,12 @@ import {
   revokeSessionByToken,
   type StaffIdentity,
 } from './lib/session.js';
-import { coverBodySchema, loginBodySchema, orderBodySchema } from './lib/validation.js';
+import {
+  coverBodySchema,
+  loginBodySchema,
+  orderBodySchema,
+  removeModelBodySchema,
+} from './lib/validation.js';
 import { listRecentActivity } from './lib/activityFeed.js';
 import { readSnapshot } from './lib/catalogSnapshot.js';
 
@@ -75,7 +81,10 @@ function buildStaffCatalogPayload(
     .map((m) => m.slug)
     .filter((slug) => {
       const o = overrideBySlug.get(slug);
-      return !o || o.displayOrder == null;
+      if (!o) return true;
+      // Staff-hidden is intentional — do not treat as "needs ensure".
+      if (o.staffHidden) return false;
+      return o.displayOrder == null;
     });
 
   const items = activeModels
@@ -166,6 +175,7 @@ export function createApp(options: CreateAppOptions) {
           orderVersion: payload.orderVersion,
           updatedAt: payload.updatedAt,
           models,
+          hiddenSlugs: payload.hiddenSlugs.filter((slug) => activeSlugs.has(slug)),
         },
         200,
         headers
@@ -427,6 +437,47 @@ export function createApp(options: CreateAppOptions) {
       return c.json({ error: 'internal error' }, 500);
     }
   });
+
+
+  app.post('/api/staff/catalog/remove', async (c) => {
+    const originCheck = assertStaffWriteOrigin(c, env);
+    if (!originCheck.ok) return c.json({ error: originCheck.error }, originCheck.status);
+
+    const staff = await requireStaff(c);
+    if (!staff) return c.json({ error: 'unauthorized' }, 401);
+
+    const rl = await hitRateLimit(db, `write:${staff.id}`, 60, 60 * 1000);
+    if (!rl.allowed) return c.json({ error: 'rate limit' }, 429);
+
+    let body: unknown;
+    try {
+      body = await c.req.json();
+    } catch {
+      return c.json({ error: 'invalid json' }, 400);
+    }
+    const parsed = removeModelBodySchema.safeParse(body);
+    if (!parsed.success) return c.json({ error: 'invalid body', details: parsed.error.flatten() }, 400);
+
+    const meta = clientMeta(c);
+
+    try {
+      const result = await removeModelFromCatalog({
+        db,
+        slug: parsed.data.slug,
+        version: parsed.data.version,
+        staffUserId: staff.id,
+        ip: meta.ip,
+        userAgent: meta.userAgent,
+      });
+      return c.json({ ok: true, orderVersion: result.orderVersion });
+    } catch (err) {
+      if (err instanceof ConflictError) return c.json({ error: err.message }, 409);
+      if (err instanceof BadRequestError) return c.json({ error: err.message }, 400);
+      console.error(err);
+      return c.json({ error: 'internal error' }, 500);
+    }
+  });
+
 
   return app;
 }

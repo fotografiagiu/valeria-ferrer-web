@@ -260,7 +260,7 @@ img {
 
 .model-card {
   display: grid;
-  grid-template-columns: 56px 84px 1fr 36px;
+  grid-template-columns: 56px 84px 1fr auto;
   gap: 12px;
   align-items: center;
   padding: 12px;
@@ -318,6 +318,31 @@ img {
   font-size: 0.72rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+
+.model-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.trash-btn {
+  width: 36px;
+  height: 56px;
+  display: grid;
+  place-items: center;
+  color: var(--danger);
+  opacity: 0.85;
+}
+
+.trash-btn:hover,
+.trash-btn:focus-visible {
+  opacity: 1;
+}
+
+.trash-btn svg {
+  width: 20px;
+  height: 20px;
 }
 
 .drag-handle {
@@ -644,4 +669,64 @@ img {
 
 .activity-error {
   color: var(--danger);
+}
+
+
+.danger-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 18px;
+  border-radius: 999px;
+  background: rgba(217, 138, 138, 0.18);
+  border: 1px solid rgba(217, 138, 138, 0.55);
+  color: #f0cfcf;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.danger-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.promo-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: rgba(0, 0, 0, 0.72);
+  display: grid;
+  place-items: center;
+  padding: 20px;
+}
+
+.promo-modal {
+  width: min(420px, 100%);
+  padding: 22px 20px 18px;
+  border-radius: 18px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--gold-line);
+  box-shadow: var(--shadow);
+}
+
+.promo-modal h3 {
+  margin: 0 0 10px;
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 1.25rem;
+}
+
+.promo-modal-warn {
+  margin: 0 0 18px;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.promo-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
 }
