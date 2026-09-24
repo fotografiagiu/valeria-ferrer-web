@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-09-24T18:34:32.344Z",
+  "generatedAt": "2026-09-24T18:43:31.958Z",
   "sourcePath": "data/models.json",
-  "sourceHash": "6e8c2a64c259585e27b77c60b4dc6fd77453785f56005d36e216743dbacc9108",
+  "sourceHash": "18401cce4ce29c1c31455a5951f4951baf6f2c8b12f1df5893ceaa5aeb32374e",
   "modelCount": 47,
   "activeCount": 30,
   "models": [
@@ -33,30 +33,32 @@
       "slug": "cristal2",
       "name": "Cristal",
       "active": true,
-      "coverImageUrl": "/chicas/cristal2-model-agency-valencia-vf/portada.jpg",
+      "coverImageUrl": "/chicas/cristal2-model-agency-valencia-vf/portada-sep2026.jpg",
       "images": [
-        "/chicas/cristal2-model-agency-valencia-vf/gallery/01.jpg",
-        "/chicas/cristal2-model-agency-valencia-vf/gallery/02.jpg",
-        "/chicas/cristal2-model-agency-valencia-vf/gallery/03.jpg",
-        "/chicas/cristal2-model-agency-valencia-vf/gallery/04.jpg",
-        "/chicas/cristal2-model-agency-valencia-vf/gallery/05.jpg",
-        "/chicas/cristal2-model-agency-valencia-vf/gallery/06.jpg"
+        "/chicas/cristal2-model-agency-valencia-vf/gallery/01-sep2026.jpg",
+        "/chicas/cristal2-model-agency-valencia-vf/gallery/02-sep2026.jpg",
+        "/chicas/cristal2-model-agency-valencia-vf/gallery/03-sep2026.jpg",
+        "/chicas/cristal2-model-agency-valencia-vf/gallery/04-sep2026.jpg",
+        "/chicas/cristal2-model-agency-valencia-vf/gallery/05-sep2026.jpg",
+        "/chicas/cristal2-model-agency-valencia-vf/gallery/06-sep2026.jpg",
+        "/chicas/cristal2-model-agency-valencia-vf/gallery/07-sep2026.jpg"
       ]
     },
     {
       "slug": "carolina2",
       "name": "Carolina",
       "active": true,
-      "coverImageUrl": "/chicas/carolina2-model-agency-valencia-vf/portada.jpg",
+      "coverImageUrl": "/chicas/carolina2-model-agency-valencia-vf/portada-sep2026.jpg",
       "images": [
-        "/chicas/carolina2-model-agency-valencia-vf/gallery/01.jpg",
-        "/chicas/carolina2-model-agency-valencia-vf/gallery/02.jpg",
-        "/chicas/carolina2-model-agency-valencia-vf/gallery/03.jpg",
-        "/chicas/carolina2-model-agency-valencia-vf/gallery/04.jpg",
-        "/chicas/carolina2-model-agency-valencia-vf/gallery/05.jpg",
-        "/chicas/carolina2-model-agency-valencia-vf/gallery/06.jpg",
-        "/chicas/carolina2-model-agency-valencia-vf/gallery/07.jpg",
-        "/chicas/carolina2-model-agency-valencia-vf/gallery/08.jpg"
+        "/chicas/carolina2-model-agency-valencia-vf/gallery/01-sep2026.jpg",
+        "/chicas/carolina2-model-agency-valencia-vf/gallery/02-sep2026.jpg",
+        "/chicas/carolina2-model-agency-valencia-vf/gallery/03-sep2026.jpg",
+        "/chicas/carolina2-model-agency-valencia-vf/gallery/04-sep2026.jpg",
+        "/chicas/carolina2-model-agency-valencia-vf/gallery/05-sep2026.jpg",
+        "/chicas/carolina2-model-agency-valencia-vf/gallery/06-sep2026.jpg",
+        "/chicas/carolina2-model-agency-valencia-vf/gallery/07-sep2026.jpg",
+        "/chicas/carolina2-model-agency-valencia-vf/gallery/08-sep2026.jpg",
+        "/chicas/carolina2-model-agency-valencia-vf/gallery/09-sep2026.jpg"
       ]
     },
     {
