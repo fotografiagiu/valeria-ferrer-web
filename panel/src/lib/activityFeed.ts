@@ -185,6 +185,18 @@ export function formatActivityItems(
           automatic: true,
         });
       }
+    } else if (row.action === 'catalog.remove') {
+      const slug = row.modelSlug || String(asRecord(row.after)?.slug || '');
+      if (slug) {
+        push({
+          id: `${baseId}:remove`,
+          at,
+          slug,
+          subject: displayName(slug, names),
+          summary: 'eliminada del catálogo (web + panel)',
+          automatic: false,
+        });
+      }
     }
 
     if (items.length >= limit) break;

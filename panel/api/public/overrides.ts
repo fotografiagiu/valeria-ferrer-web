@@ -99,6 +99,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       ORDER BY display_order ASC
     `;
 
+    const hiddenRows = await sql`
+      SELECT slug
+      FROM model_overrides
+      WHERE staff_hidden = true
+      ORDER BY slug ASC
+    `;
+
     const active = await loadActiveSlugSet();
 
     const models = (
@@ -111,11 +118,18 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         coverImagePath: r.cover_image_path,
       }));
 
+    const hiddenSlugs = (
+      hiddenRows as Array<{ slug: string }>
+    )
+      .map((r) => r.slug)
+      .filter((slug) => (active ? active.has(slug) : true));
+
     const m0 = meta[0] as { order_version?: number; updated_at?: Date | string } | undefined;
     res.status(200).json({
       orderVersion: Number(m0?.order_version ?? 0),
       updatedAt: m0?.updated_at ? new Date(m0.updated_at).toISOString() : new Date().toISOString(),
       models,
+      hiddenSlugs,
     });
   } catch (err) {
     console.error('public overrides failed', err);

@@ -13,6 +13,8 @@ export type PublicOverridesPayload = {
   orderVersion: number;
   updatedAt: string;
   models: PublicOverrideRow[];
+  /** Slugs staff removed from panel — hide from public grids even if still in models.json. */
+  hiddenSlugs?: string[];
 };
 
 type CatalogLike = {
@@ -84,17 +86,24 @@ const OVERRIDE_SLUG_ALIASES: Record<string, string> = {
 
 export function applyCatalogOverrides<T extends CatalogLike>(
   models: T[],
-  overrides: PublicOverrideRow[] | null | undefined
+  overrides: PublicOverrideRow[] | null | undefined,
+  hiddenSlugs?: string[] | null
 ): T[] {
   if (!overrides?.length) return models;
 
-  const bySlug = new Map(models.map((m) => [m.slug, m]));
+  const hidden = new Set(hiddenSlugs ?? []);
+  const visibleModels = hidden.size
+    ? models.filter((m) => !hidden.has(m.slug))
+    : models;
+
+  const bySlug = new Map(visibleModels.map((m) => [m.slug, m]));
   const ordered: T[] = [];
   const seen = new Set<string>();
 
   const sorted = [...overrides].sort((a, b) => a.displayOrder - b.displayOrder);
   for (const row of sorted) {
     const resolvedSlug = OVERRIDE_SLUG_ALIASES[row.slug] ?? row.slug;
+    if (hidden.has(resolvedSlug)) continue;
     const model = bySlug.get(resolvedSlug);
     if (!model) continue;
     seen.add(resolvedSlug);
@@ -107,7 +116,7 @@ export function applyCatalogOverrides<T extends CatalogLike>(
     ordered.push(cover && !coverIsStale ? withCoverOverride(model, cover) : model);
   }
 
-  const trailing = models.filter((m) => !seen.has(m.slug));
+  const trailing = visibleModels.filter((m) => !seen.has(m.slug));
   return [...ordered, ...trailing];
 }
 
@@ -138,9 +147,10 @@ let overridesPromise: Promise<PublicOverridesPayload | null> | null = null;
 
 function isValidOverridesPayload(data: unknown): data is PublicOverridesPayload {
   if (!data || typeof data !== 'object') return false;
-  const models = (data as PublicOverridesPayload).models;
+  const payload = data as PublicOverridesPayload;
+  const models = payload.models;
   if (!Array.isArray(models) || models.length === 0) return false;
-  return models.every(
+  const modelsOk = models.every(
     (m) =>
       m &&
       typeof m.slug === 'string' &&
@@ -150,6 +160,12 @@ function isValidOverridesPayload(data: unknown): data is PublicOverridesPayload 
       typeof m.coverImagePath === 'string' &&
       m.coverImagePath.length > 0
   );
+  if (!modelsOk) return false;
+  if (payload.hiddenSlugs != null) {
+    if (!Array.isArray(payload.hiddenSlugs)) return false;
+    if (!payload.hiddenSlugs.every((s) => typeof s === 'string' && s.length > 0)) return false;
+  }
+  return true;
 }
 
 async function fetchPublicOverridesOnce(): Promise<PublicOverridesPayload | null> {

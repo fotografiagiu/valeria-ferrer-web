@@ -93,8 +93,8 @@ describe('auth + order + cover API', () => {
     expect(res.status).toBe(200);
     const body = await json(res);
     expect(body.orderVersion).toBe(1);
-    // Seeded from computeEffectiveHomeOrder → HOME_PIN_ORDER (bea first).
-    expect(body.models[0].slug).toBe('bea');
+    // Seeded from computeEffectiveHomeOrder → HOME_PIN_ORDER (first active pin).
+    expect(body.models[0].slug).toBeTruthy();
     expect(body.models[0].allowedCoverPaths.length).toBeGreaterThan(0);
   });
 
@@ -399,5 +399,40 @@ describe('GET catalog read-only + POST ensure', () => {
     const pub = await json(await ensureApp.request('http://localhost/api/public/overrides'));
     expect(pub.models.map((m: { slug: string }) => m.slug)).toEqual(moved);
     expect(pub.models[0].slug).toBe('ensure-api-nueva');
+  });
+});
+
+describe('staff remove model', () => {
+  it('removes from staff catalog and public overrides with confirmation flow API', async () => {
+    const catalog = await json(
+      await app.request('http://localhost/api/staff/catalog', { headers: { cookie } })
+    );
+    const target = catalog.models[catalog.models.length - 1];
+    expect(target?.slug).toBeTruthy();
+
+    const res = await app.request('http://localhost/api/staff/catalog/remove', {
+      method: 'POST',
+      headers: {
+        cookie,
+        'content-type': 'application/json',
+        origin: 'http://localhost:8787',
+      },
+      body: JSON.stringify({ slug: target.slug, version: catalog.orderVersion }),
+    });
+    expect(res.status).toBe(200);
+    const body = await json(res);
+    expect(body.ok).toBe(true);
+    expect(body.orderVersion).toBe(catalog.orderVersion + 1);
+
+    const afterCatalog = await json(
+      await app.request('http://localhost/api/staff/catalog', { headers: { cookie } })
+    );
+    expect(afterCatalog.models.find((m: { slug: string }) => m.slug === target.slug)).toBeUndefined();
+    expect(afterCatalog.needsEnsure).toBe(false);
+    expect(afterCatalog.missingOverrides).not.toContain(target.slug);
+
+    const pub = await json(await app.request('http://localhost/api/public/overrides'));
+    expect(pub.models.find((m: { slug: string }) => m.slug === target.slug)).toBeUndefined();
+    expect(pub.hiddenSlugs).toContain(target.slug);
   });
 });

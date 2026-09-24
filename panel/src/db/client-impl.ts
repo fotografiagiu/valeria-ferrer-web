@@ -9,6 +9,10 @@ import * as schema from './schema.js';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const require = createRequire(import.meta.url);
 export const MIGRATION_SQL_PATH = path.resolve(__dirname, '../../db/migrations/0001_init.sql');
+export const MIGRATION_003_SQL_PATH = path.resolve(
+  __dirname,
+  '../../db/migrations/0003_staff_hidden.sql'
+);
 
 /**
  * Neon WebSocket Pool (supports transactions for order/cover writes).
@@ -29,7 +33,13 @@ export type AppDb = ReturnType<typeof drizzleNeon<typeof schema>>;
 let singleton: AppDb | null = null;
 
 export function getMigrationSql(): string {
-  return readFileSync(MIGRATION_SQL_PATH, 'utf8');
+  const init = readFileSync(MIGRATION_SQL_PATH, 'utf8');
+  const staffHidden = readFileSync(MIGRATION_003_SQL_PATH, 'utf8');
+  return `${init}\n\n${staffHidden}`;
+}
+
+export function getStaffHiddenMigrationSql(): string {
+  return readFileSync(MIGRATION_003_SQL_PATH, 'utf8');
 }
 
 export function createNeonDb(databaseUrl: string): AppDb {

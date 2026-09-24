@@ -148,3 +148,11 @@ export function putCover(slug: string, coverImagePath: string, version: number) 
     body: JSON.stringify({ slug, coverImagePath, version }),
   });
 }
+
+export function removeCatalogModel(slug: string, version: number) {
+  return request<{ ok: true; orderVersion: number }>('/api/staff/catalog/remove', {
+    method: 'POST',
+    body: JSON.stringify({ slug, version }),
+  });
+}
+

@@ -12,13 +12,16 @@ import SEOHead from '../components/SEOHead';
 import PageSEOHead, { SITE_ORIGIN } from '../components/PageSEOHead';
 import Breadcrumbs from '../components/Breadcrumbs';
 import AnalyticsEvents from '../components/AnalyticsEvents';
+import { useIsStaffHiddenSlug } from '../hooks/useCatalogWithOverrides';
 
 const GalleryModal = React.lazy(() => import('../components/GalleryModal'));
 
 const ModelDetail: React.FC = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const model = MODELS.find(m => m.id === id);
+  const found = MODELS.find(m => m.id === id);
+  const staffHidden = useIsStaffHiddenSlug(found?.slug || id);
+  const model = staffHidden ? undefined : found;
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showContactBar, setShowContactBar] = useState(true);

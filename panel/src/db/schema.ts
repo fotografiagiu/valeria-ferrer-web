@@ -45,6 +45,11 @@ export const modelOverrides = pgTable('model_overrides', {
   displayOrder: integer('display_order'),
   coverImagePath: text('cover_image_path').notNull(),
   coverVersion: integer('cover_version').notNull().default(1),
+  /**
+   * Staff removed this ficha from the panel (and public web via hiddenSlugs).
+   * Keep the row; ensure must NOT auto-reactivate while this is true.
+   */
+  staffHidden: boolean('staff_hidden').notNull().default(false),
   updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
   updatedBy: uuid('updated_by').references(() => staffUsers.id),
 });

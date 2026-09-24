@@ -15,7 +15,7 @@ import {
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { useMemo, useState } from 'react';
-import { ApiError, putOrder, type StaffCatalogModel } from '../lib/api';
+import { ApiError, putOrder, removeCatalogModel, type StaffCatalogModel } from '../lib/api';
 import { formatOrderNumber, publicAssetUrl } from '../lib/assets';
 import { CoverPicker } from './CoverPicker';
 
@@ -44,14 +44,30 @@ function DragHandleIcon() {
   );
 }
 
+function TrashIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path
+        d="M4 7h16M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2M8 7l1 12a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1l1-12"
+        stroke="currentColor"
+        strokeWidth="1.7"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 function SortableCard({
   model,
   index,
   onOpenCover,
+  onRequestRemove,
 }: {
   model: StaffCatalogModel;
   index: number;
   onOpenCover: (model: StaffCatalogModel) => void;
+  onRequestRemove: (model: StaffCatalogModel) => void;
 }) {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
     id: model.slug,
@@ -82,16 +98,29 @@ function SortableCard({
         <p className="name">{model.name}</p>
         <p className="slug">tocar · portada</p>
       </div>
-      <button
-        type="button"
-        className="drag-handle"
-        aria-label={`Arrastrar ${model.name}`}
-        onClick={(e) => e.stopPropagation()}
-        {...attributes}
-        {...listeners}
-      >
-        <DragHandleIcon />
-      </button>
+      <div className="model-card-actions">
+        <button
+          type="button"
+          className="trash-btn"
+          aria-label={`Eliminar ${model.name}`}
+          onClick={(e) => {
+            e.stopPropagation();
+            onRequestRemove(model);
+          }}
+        >
+          <TrashIcon />
+        </button>
+        <button
+          type="button"
+          className="drag-handle"
+          aria-label={`Arrastrar ${model.name}`}
+          onClick={(e) => e.stopPropagation()}
+          {...attributes}
+          {...listeners}
+        >
+          <DragHandleIcon />
+        </button>
+      </div>
     </article>
   );
 }
@@ -111,6 +140,8 @@ export function CatalogScreen({
   const [saving, setSaving] = useState(false);
   const [conflict, setConflict] = useState(false);
   const [selected, setSelected] = useState<StaffCatalogModel | null>(null);
+  const [pendingRemove, setPendingRemove] = useState<StaffCatalogModel | null>(null);
+  const [removing, setRemoving] = useState(false);
 
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 6 } }),
@@ -179,6 +210,41 @@ export function CatalogScreen({
     );
   }
 
+  async function confirmRemove() {
+    if (!pendingRemove || removing || orderSaveLocked) return;
+    if (dirty) {
+      onToast('Guarda o descarta el orden antes de eliminar.', 'error');
+      return;
+    }
+
+    setRemoving(true);
+    try {
+      const result = await removeCatalogModel(pendingRemove.slug, orderVersion);
+      const next = models.filter((m) => m.slug !== pendingRemove.slug);
+      applyLocalModels(next);
+      setSavedOrder(next.map((m) => m.slug));
+      onOrderVersion(result.orderVersion);
+      setPendingRemove(null);
+      if (selected?.slug === pendingRemove.slug) setSelected(null);
+      onToast(`✓ ${pendingRemove.name} eliminada del catálogo`, 'success');
+    } catch (err) {
+      if (err instanceof ApiError && err.status === 401) {
+        onToast(err.message, 'error');
+        onUnauthorized?.();
+      } else if (err instanceof ApiError && err.status === 409) {
+        setConflict(true);
+        setPendingRemove(null);
+        onToast('Los datos cambiaron. Recarga el catálogo.', 'error');
+      } else if (err instanceof ApiError) {
+        onToast(err.message, 'error');
+      } else {
+        onToast('No se pudo eliminar el perfil', 'error');
+      }
+    } finally {
+      setRemoving(false);
+    }
+  }
+
   return (
     <>
       {conflict ? (
@@ -200,6 +266,7 @@ export function CatalogScreen({
                 model={model}
                 index={index}
                 onOpenCover={setSelected}
+                onRequestRemove={setPendingRemove}
               />
             ))}
           </div>
@@ -232,6 +299,41 @@ export function CatalogScreen({
             setSelected(null);
           }}
         />
+      ) : null}
+
+      {pendingRemove ? (
+        <div className="promo-modal-backdrop" role="presentation">
+          <div
+            className="promo-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="remove-model-title"
+          >
+            <h3 id="remove-model-title">¿Realmente desea eliminar este perfil?</h3>
+            <p className="promo-modal-warn">
+              Se quitará <strong>{pendingRemove.name}</strong> del panel y dejará de mostrarse en la
+              página web.
+            </p>
+            <div className="promo-modal-actions">
+              <button
+                type="button"
+                className="ghost-btn"
+                disabled={removing}
+                onClick={() => setPendingRemove(null)}
+              >
+                Cancelar
+              </button>
+              <button
+                type="button"
+                className="danger-btn"
+                disabled={removing || orderSaveLocked}
+                onClick={() => void confirmRemove()}
+              >
+                {removing ? 'Eliminando…' : 'Eliminar'}
+              </button>
+            </div>
+          </div>
+        </div>
       ) : null}
     </>
   );

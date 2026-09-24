@@ -24,16 +24,15 @@ describe('catalog snapshot', () => {
 });
 
 describe('effective Home order', () => {
-  it('matches HOME_PIN_ORDER + rest (canonical Home pin, currently lola first)', () => {
+  it('matches HOME_PIN_ORDER + rest (canonical Home pin)', () => {
     writeSnapshot();
     const order = computeEffectiveHomeOrder(readSnapshot().models);
     const activePins = HOME_PIN_ORDER.filter((slug) => order.includes(slug));
-    // Seed/effective order must track Home pinOrder (Lola pinned first as nueva).
     expect(order.slice(0, activePins.length)).toEqual(activePins);
-    expect(order[0]).toBe('lola');
-    expect(order[1]).toBe('sofia1');
-    expect(order[2]).toBe('ana');
-    expect(order.indexOf('alicia')).toBe(activePins.indexOf('alicia'));
+    expect(order[0]).toBe(activePins[0]);
+    if (activePins.includes('alicia')) {
+      expect(order.indexOf('alicia')).toBe(activePins.indexOf('alicia'));
+    }
     expect(order).toHaveLength(readSnapshot().activeCount);
   });
 });

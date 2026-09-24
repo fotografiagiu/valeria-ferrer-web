@@ -256,7 +256,10 @@ export function planCatalogMembership(
     if (!activeSlugSet.has(row.slug)) {
       if (row.displayOrder != null) deactivated.push(row.slug);
     } else if (row.displayOrder == null) {
-      reactivatedAtEnd.push(row.slug);
+      // Staff-removed fichas stay parked even if still active in models.json.
+      if (!row.staffHidden) {
+        reactivatedAtEnd.push(row.slug);
+      }
     } else {
       keptActive.push(row.slug);
     }
@@ -565,7 +568,12 @@ export async function seedOverridesFromEffectiveOrder(params: {
 export async function getPublicOverrides(db: AppDb) {
   const version = await getOrderVersion(db);
   const rows = await listActiveOrderedOverrides(db);
+  const allRows = await listOverrides(db);
   const meta = await db.select().from(catalogMeta).where(eq(catalogMeta.id, 1)).limit(1);
+  const hiddenSlugs = allRows
+    .filter((r) => r.staffHidden)
+    .map((r) => r.slug)
+    .sort();
   return {
     orderVersion: version,
     updatedAt: meta[0]?.updatedAt?.toISOString?.() ?? new Date().toISOString(),
@@ -574,5 +582,83 @@ export async function getPublicOverrides(db: AppDb) {
       displayOrder: r.displayOrder as number,
       coverImagePath: r.coverImagePath,
     })),
+    hiddenSlugs,
   };
+}
+
+/**
+ * Staff remove: park override (display_order NULL + staff_hidden) so the ficha
+ * leaves the panel list and the public web (via hiddenSlugs). Row is kept.
+ */
+export async function removeModelFromCatalog(params: {
+  db: AppDb;
+  slug: string;
+  version: number;
+  staffUserId: string;
+  ip?: string | null;
+  userAgent?: string | null;
+}): Promise<{ orderVersion: number }> {
+  const slug = params.slug.trim();
+  if (!slug) throw new BadRequestError('slug required');
+
+  return params.db.transaction(async (tx) => {
+    const metaRows = await tx.select().from(catalogMeta).where(eq(catalogMeta.id, 1)).limit(1);
+    const meta = metaRows[0];
+    if (!meta) throw new BadRequestError('catalog_meta missing');
+    if (meta.orderVersion !== params.version) {
+      throw new ConflictError(
+        `order version conflict: expected ${meta.orderVersion}, got ${params.version}`
+      );
+    }
+
+    const rows = await tx
+      .select()
+      .from(modelOverrides)
+      .where(eq(modelOverrides.slug, slug))
+      .limit(1);
+    const row = rows[0];
+    if (!row) {
+      throw new BadRequestError(`override missing for ${slug}; run npm run catalog:sync`);
+    }
+    if (row.displayOrder == null && row.staffHidden) {
+      throw new BadRequestError(`${slug} ya está eliminada del catálogo`);
+    }
+    if (row.displayOrder == null) {
+      throw new BadRequestError(`${slug} no está activa en el catálogo del panel`);
+    }
+
+    const before = {
+      slug: row.slug,
+      displayOrder: row.displayOrder,
+      staffHidden: row.staffHidden,
+    };
+
+    await tx
+      .update(modelOverrides)
+      .set({
+        displayOrder: null,
+        staffHidden: true,
+        updatedAt: new Date(),
+        updatedBy: params.staffUserId,
+      })
+      .where(eq(modelOverrides.slug, slug));
+
+    const newVersion = meta.orderVersion + 1;
+    await tx
+      .update(catalogMeta)
+      .set({ orderVersion: newVersion, updatedAt: new Date() })
+      .where(eq(catalogMeta.id, 1));
+
+    await appendAudit(tx as unknown as AppDb, {
+      staffUserId: params.staffUserId,
+      action: 'catalog.remove',
+      modelSlug: slug,
+      before,
+      after: { slug, displayOrder: null, staffHidden: true },
+      ip: params.ip,
+      userAgent: params.userAgent,
+    });
+
+    return { orderVersion: newVersion };
+  });
 }
