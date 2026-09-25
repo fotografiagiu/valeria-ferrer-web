@@ -46,6 +46,11 @@ export const modelOverrides = pgTable('model_overrides', {
   coverImagePath: text('cover_image_path').notNull(),
   coverVersion: integer('cover_version').notNull().default(1),
   /**
+   * Ordered gallery paths after the cover (public ModelDetail gallery).
+   * NULL = use catalog `images` order. Paths must stay in the allowlist.
+   */
+  galleryImagePaths: jsonb('gallery_image_paths').$type<string[] | null>(),
+  /**
    * Staff removed this ficha from the panel (and public web via hiddenSlugs).
    * Keep the row; ensure must NOT auto-reactivate while this is true.
    */

@@ -7,6 +7,7 @@ export type AuditAction =
   | 'auth.login_failed'
   | 'order.replace'
   | 'cover.update'
+  | 'gallery.reorder'
   | 'catalog.sync'
   | 'catalog.ensure'
   | 'catalog.seed'

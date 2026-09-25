@@ -7,7 +7,7 @@ import {
   computeEffectiveHomeOrder,
   type CatalogModelLite,
 } from './effectiveOrder.js';
-import { validateCoverChange, validateOrderedSlugs } from './validation.js';
+import { validateCoverChange, validateGalleryOrder, validateOrderedSlugs } from './validation.js';
 
 type OverrideRow = Awaited<ReturnType<typeof listOverrides>>[number];
 
@@ -181,10 +181,24 @@ export async function updateCover(params: {
     }
 
     const newVersion = row.coverVersion + 1;
+    const previousGallery = asPathArray(row.galleryImagePaths);
+    let nextGallery: string[] | null = previousGallery;
+    if (previousGallery) {
+      const withoutNewCover = previousGallery.filter((p) => p !== params.coverImagePath);
+      if (
+        row.coverImagePath !== params.coverImagePath &&
+        !withoutNewCover.includes(row.coverImagePath)
+      ) {
+        withoutNewCover.unshift(row.coverImagePath);
+      }
+      nextGallery = withoutNewCover;
+    }
+
     await tx
       .update(modelOverrides)
       .set({
         coverImagePath: params.coverImagePath,
+        galleryImagePaths: nextGallery,
         coverVersion: newVersion,
         updatedAt: new Date(),
         updatedBy: params.staffUserId,
@@ -195,13 +209,113 @@ export async function updateCover(params: {
       staffUserId: params.staffUserId,
       action: 'cover.update',
       modelSlug: params.slug,
-      before: { coverImagePath: row.coverImagePath, coverVersion: row.coverVersion },
-      after: { coverImagePath: params.coverImagePath, coverVersion: newVersion },
+      before: {
+        coverImagePath: row.coverImagePath,
+        galleryImagePaths: previousGallery,
+        coverVersion: row.coverVersion,
+      },
+      after: {
+        coverImagePath: params.coverImagePath,
+        galleryImagePaths: nextGallery,
+        coverVersion: newVersion,
+      },
       ip: params.ip,
       userAgent: params.userAgent,
     });
 
     return { coverVersion: newVersion, coverImagePath: params.coverImagePath };
+  });
+}
+
+function asPathArray(value: unknown): string[] | null {
+  if (value == null) return null;
+  if (!Array.isArray(value)) return null;
+  const paths = value.filter((p): p is string => typeof p === 'string' && p.length > 0);
+  return paths;
+}
+
+/**
+ * Persist full photo order for a ficha.
+ * orderedImagePaths[0] → cover; rest → gallery_image_paths.
+ * Bumps coverVersion (same optimistic lock as cover-only updates).
+ */
+export async function updateGalleryOrder(params: {
+  db: AppDb;
+  slug: string;
+  orderedImagePaths: string[];
+  version: number;
+  snapshotModels: CatalogModelLite[];
+  staffUserId: string;
+  ip?: string | null;
+  userAgent?: string | null;
+}): Promise<{
+  coverVersion: number;
+  coverImagePath: string;
+  galleryImagePaths: string[];
+}> {
+  const check = validateGalleryOrder(
+    params.slug,
+    params.orderedImagePaths,
+    params.snapshotModels
+  );
+  if (!check.ok) throw new BadRequestError(check.error);
+
+  return params.db.transaction(async (tx) => {
+    const rows = await tx
+      .select()
+      .from(modelOverrides)
+      .where(eq(modelOverrides.slug, params.slug))
+      .limit(1);
+    const row = rows[0];
+    if (!row) {
+      throw new BadRequestError(
+        `override missing for ${params.slug}; run npm run catalog:sync`
+      );
+    }
+    if (row.displayOrder == null) {
+      throw new BadRequestError(`slug is not in active catalog: ${params.slug}`);
+    }
+    if (row.coverVersion !== params.version) {
+      throw new ConflictError(
+        `cover version conflict: expected ${row.coverVersion}, got ${params.version}`
+      );
+    }
+
+    const newVersion = row.coverVersion + 1;
+    await tx
+      .update(modelOverrides)
+      .set({
+        coverImagePath: check.coverImagePath,
+        galleryImagePaths: check.galleryImagePaths,
+        coverVersion: newVersion,
+        updatedAt: new Date(),
+        updatedBy: params.staffUserId,
+      })
+      .where(eq(modelOverrides.slug, params.slug));
+
+    await appendAudit(tx as unknown as AppDb, {
+      staffUserId: params.staffUserId,
+      action: 'gallery.reorder',
+      modelSlug: params.slug,
+      before: {
+        coverImagePath: row.coverImagePath,
+        galleryImagePaths: asPathArray(row.galleryImagePaths),
+        coverVersion: row.coverVersion,
+      },
+      after: {
+        coverImagePath: check.coverImagePath,
+        galleryImagePaths: check.galleryImagePaths,
+        coverVersion: newVersion,
+      },
+      ip: params.ip,
+      userAgent: params.userAgent,
+    });
+
+    return {
+      coverVersion: newVersion,
+      coverImagePath: check.coverImagePath,
+      galleryImagePaths: check.galleryImagePaths,
+    };
   });
 }
 
@@ -581,6 +695,7 @@ export async function getPublicOverrides(db: AppDb) {
       slug: r.slug,
       displayOrder: r.displayOrder as number,
       coverImagePath: r.coverImagePath,
+      galleryImagePaths: asPathArray(r.galleryImagePaths),
     })),
     hiddenSlugs,
   };

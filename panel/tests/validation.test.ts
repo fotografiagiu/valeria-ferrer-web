@@ -7,9 +7,11 @@ import {
 import { writeSnapshot, readSnapshot, assertSnapshotFresh } from '../src/lib/catalogSnapshot.js';
 import {
   validateCoverChange,
+  validateGalleryOrder,
   validateOrderedSlugs,
   orderBodySchema,
   coverBodySchema,
+  galleryBodySchema,
 } from '../src/lib/validation.js';
 
 describe('catalog snapshot', () => {
@@ -75,8 +77,40 @@ describe('validateCoverChange', () => {
   });
 });
 
+describe('validateGalleryOrder', () => {
+  it('requires a full allowlist permutation; index 0 is cover', () => {
+    writeSnapshot();
+    const models = readSnapshot().models;
+    const jazmin = models.find((m) => m.slug === 'jazmin')!;
+    const allowed = allowedCoverPaths(jazmin);
+    expect(allowed.length).toBeGreaterThan(2);
+
+    const rotated = [...allowed.slice(1), allowed[0]];
+    const ok = validateGalleryOrder('jazmin', rotated, models);
+    expect(ok.ok).toBe(true);
+    if (ok.ok) {
+      expect(ok.coverImagePath).toBe(rotated[0]);
+      expect(ok.galleryImagePaths).toEqual(rotated.slice(1));
+    }
+
+    expect(validateGalleryOrder('jazmin', allowed.slice(1), models).ok).toBe(false);
+    expect(
+      validateGalleryOrder('jazmin', [...allowed, '/chicas/other/nope.jpg'], models).ok
+    ).toBe(false);
+  });
+});
+
 describe('strict schemas', () => {
   it('rejects unknown keys', () => {
+    expect(
+      galleryBodySchema.safeParse({
+        slug: 'jazmin',
+        orderedImagePaths: ['/a.jpg'],
+        version: 1,
+        extra: true,
+      }).success
+    ).toBe(false);
+
     expect(
       orderBodySchema.safeParse({
         version: 1,

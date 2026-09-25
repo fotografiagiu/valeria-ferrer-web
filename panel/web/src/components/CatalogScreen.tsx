@@ -16,7 +16,7 @@ import {
 import { CSS } from '@dnd-kit/utilities';
 import { useMemo, useState } from 'react';
 import { ApiError, putOrder, removeCatalogModel, type StaffCatalogModel } from '../lib/api';
-import { formatOrderNumber, publicAssetUrl } from '../lib/assets';
+import { formatOrderNumber, publicThumbUrl } from '../lib/assets';
 import { CoverPicker } from './CoverPicker';
 
 type Props = {
@@ -88,7 +88,7 @@ function SortableCard({
       <div className="order-num">{formatOrderNumber(index + 1)}</div>
       <img
         className="cover-thumb"
-        src={publicAssetUrl(model.coverImagePath)}
+        src={publicThumbUrl(model.coverImagePath)}
         alt=""
         loading="lazy"
         decoding="async"
@@ -96,7 +96,7 @@ function SortableCard({
       />
       <div className="model-meta">
         <p className="name">{model.name}</p>
-        <p className="slug">tocar · portada</p>
+        <p className="slug">tocar · fotos</p>
       </div>
       <div className="model-card-actions">
         <button
@@ -200,13 +200,20 @@ export function CatalogScreen({
     }
   }
 
-  function onCoverUpdated(slug: string, coverImagePath: string, coverVersion: number) {
+  function onCoverUpdated(
+    slug: string,
+    coverImagePath: string,
+    coverVersion: number,
+    galleryImagePaths: string[]
+  ) {
     const next = models.map((m) =>
-      m.slug === slug ? { ...m, coverImagePath, coverVersion } : m
+      m.slug === slug ? { ...m, coverImagePath, coverVersion, galleryImagePaths } : m
     );
     applyLocalModels(next);
     setSelected((prev) =>
-      prev && prev.slug === slug ? { ...prev, coverImagePath, coverVersion } : prev
+      prev && prev.slug === slug
+        ? { ...prev, coverImagePath, coverVersion, galleryImagePaths }
+        : prev
     );
   }
 

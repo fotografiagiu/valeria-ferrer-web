@@ -10,6 +10,8 @@ export type StaffCatalogModel = {
   displayOrder: number;
   coverImagePath: string;
   coverVersion: number;
+  /** Ordered gallery after cover; null = catalog default. */
+  galleryImagePaths: string[] | null;
   allowedCoverPaths: string[];
 };
 
@@ -146,6 +148,18 @@ export function putCover(slug: string, coverImagePath: string, version: number) 
   return request<{ ok: true; coverVersion: number; coverImagePath: string }>('/api/staff/cover', {
     method: 'PUT',
     body: JSON.stringify({ slug, coverImagePath, version }),
+  });
+}
+
+export function putGallery(slug: string, orderedImagePaths: string[], version: number) {
+  return request<{
+    ok: true;
+    coverVersion: number;
+    coverImagePath: string;
+    galleryImagePaths: string[];
+  }>('/api/staff/gallery', {
+    method: 'PUT',
+    body: JSON.stringify({ slug, orderedImagePaths, version }),
   });
 }
 

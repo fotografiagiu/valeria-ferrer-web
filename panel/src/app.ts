@@ -22,6 +22,7 @@ import {
   removeModelFromCatalog,
   replaceOrder,
   updateCover,
+  updateGalleryOrder,
 } from './lib/overridesService.js';
 import { verifyPassword } from './lib/password.js';
 import { hitRateLimit } from './lib/rateLimit.js';
@@ -36,6 +37,7 @@ import {
 } from './lib/session.js';
 import {
   coverBodySchema,
+  galleryBodySchema,
   loginBodySchema,
   orderBodySchema,
   removeModelBodySchema,
@@ -97,6 +99,9 @@ function buildStaffCatalogPayload(
         displayOrder: o.displayOrder as number,
         coverImagePath: o.coverImagePath,
         coverVersion: o.coverVersion,
+        galleryImagePaths: Array.isArray(o.galleryImagePaths)
+          ? o.galleryImagePaths.filter((p): p is string => typeof p === 'string' && p.length > 0)
+          : null,
         allowedCoverPaths: allowedCoverPaths(m),
       };
     })
@@ -168,6 +173,9 @@ export function createApp(options: CreateAppOptions) {
           slug: m.slug,
           displayOrder: m.displayOrder,
           coverImagePath: m.coverImagePath,
+          ...(m.galleryImagePaths?.length
+            ? { galleryImagePaths: m.galleryImagePaths }
+            : {}),
         }));
 
       return c.json(
@@ -438,6 +446,47 @@ export function createApp(options: CreateAppOptions) {
     }
   });
 
+
+  app.put('/api/staff/gallery', async (c) => {
+    const originCheck = assertStaffWriteOrigin(c, env);
+    if (!originCheck.ok) return c.json({ error: originCheck.error }, originCheck.status);
+
+    const staff = await requireStaff(c);
+    if (!staff) return c.json({ error: 'unauthorized' }, 401);
+
+    const rl = await hitRateLimit(db, `write:${staff.id}`, 60, 60 * 1000);
+    if (!rl.allowed) return c.json({ error: 'rate limit' }, 429);
+
+    let body: unknown;
+    try {
+      body = await c.req.json();
+    } catch {
+      return c.json({ error: 'invalid json' }, 400);
+    }
+    const parsed = galleryBodySchema.safeParse(body);
+    if (!parsed.success) return c.json({ error: 'invalid body', details: parsed.error.flatten() }, 400);
+
+    const meta = clientMeta(c);
+
+    try {
+      const result = await updateGalleryOrder({
+        db,
+        slug: parsed.data.slug,
+        orderedImagePaths: parsed.data.orderedImagePaths,
+        version: parsed.data.version,
+        snapshotModels: await getCatalogModels(),
+        staffUserId: staff.id,
+        ip: meta.ip,
+        userAgent: meta.userAgent,
+      });
+      return c.json({ ok: true, ...result });
+    } catch (err) {
+      if (err instanceof ConflictError) return c.json({ error: err.message }, 409);
+      if (err instanceof BadRequestError) return c.json({ error: err.message }, 400);
+      console.error(err);
+      return c.json({ error: 'internal error' }, 500);
+    }
+  });
 
   app.post('/api/staff/catalog/remove', async (c) => {
     const originCheck = assertStaffWriteOrigin(c, env);

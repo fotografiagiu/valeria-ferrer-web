@@ -38,7 +38,7 @@ export function LoginScreen({ onLoggedIn }: Props) {
           <div className="label">Gestión de fichas</div>
         </div>
 
-        <p className="hint-text">Acceso exclusivo para encargadas. Solo orden y portadas.</p>
+        <p className="hint-text">Acceso exclusivo para encargadas. Orden, portadas y fotos.</p>
 
         {error ? <p className="error-text">{error}</p> : null}
 
