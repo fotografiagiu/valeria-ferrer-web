@@ -8,7 +8,12 @@ import {
   isNovedadesBannerLive,
 } from '../lib/novedadesBannerConfig';
 import { getModelCoverThumbnailPath } from '../lib/modelGridImage';
-import { ACTIVE_PROMO, isPromoLive } from '../lib/promoPopupConfig';
+import { isPromoLive } from '../lib/promoPopupConfig';
+import {
+  getCachedPromotion,
+  startPromotionWatcher,
+  subscribePromotion,
+} from '../lib/webPromotionRemote';
 
 type NovedadSlide = {
   slug: string;
@@ -68,7 +73,7 @@ const NovedadesFloatingBanner: React.FC = () => {
   const [showMinimized, setShowMinimized] = useState(false);
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
-  const [promoActive, setPromoActive] = useState(() => isPromoLive(ACTIVE_PROMO));
+  const [promoActive, setPromoActive] = useState(() => isPromoLive(getCachedPromotion()));
 
   const hideOnRoute =
     location.pathname === '/novedades' ||
@@ -87,31 +92,12 @@ const NovedadesFloatingBanner: React.FC = () => {
   }, []);
 
   // Mientras la oferta promocional esté activa, no mostrar el banner de novedades.
+  useEffect(() => startPromotionWatcher(), []);
+
   useEffect(() => {
-    const syncPromo = () => setPromoActive(isPromoLive(ACTIVE_PROMO));
-    syncPromo();
-
-    const start = Date.parse(ACTIVE_PROMO.startsAt);
-    const end = Date.parse(ACTIVE_PROMO.endsAt);
-    const now = Date.now();
-    const timers: number[] = [];
-
-    if (Number.isFinite(start) && now < start) {
-      timers.push(window.setTimeout(syncPromo, start - now));
-    }
-    if (Number.isFinite(end) && now < end) {
-      timers.push(window.setTimeout(syncPromo, end - now));
-    }
-
-    const onVisibility = () => {
-      if (document.visibilityState === 'visible') syncPromo();
-    };
-    document.addEventListener('visibilitychange', onVisibility);
-
-    return () => {
-      timers.forEach((id) => window.clearTimeout(id));
-      document.removeEventListener('visibilitychange', onVisibility);
-    };
+    return subscribePromotion((promo) => {
+      setPromoActive(isPromoLive(promo));
+    });
   }, []);
 
   // Campaña activa + respeto dismissDays tras cerrar (no molestar en cada visita).

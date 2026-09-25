@@ -36,7 +36,7 @@ export function loadLocalEnv(): void {
       ) {
         value = value.slice(1, -1);
       }
-      if (process.env[key] === undefined) {
+      if (!process.env[key]?.trim()) {
         process.env[key] = value;
       }
     }

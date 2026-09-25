@@ -4,6 +4,7 @@ API + persistencia para que las encargadas cambien **solo**:
 
 1. `display_order` (orden del catálogo)
 2. `cover_image_path` (referencia a una foto ya existente)
+3. **Publicidad web** (Copas / Duples) vía Neon — sin commit/deploy de la web
 
 **No** modifica `public/chicas/`, Git, ni el runtime de `www.valeriaferrer.com` (eso es Fase 4).
 
@@ -52,14 +53,23 @@ En local/CI con acceso al monorepo, `catalog:snapshot` siempre regenera desde el
 |--------|------|------|
 | GET | `/api/health` | no |
 | GET | `/api/public/overrides` | no (CORS allowlist) |
+| GET | `/api/public/promotion` | no (CORS allowlist, `Cache-Control: no-store`) |
 | POST | `/api/staff/login` | no (rate limit) |
 | POST | `/api/staff/logout` | cookie |
 | GET | `/api/staff/me` | cookie |
 | GET | `/api/staff/catalog` | cookie |
 | PUT | `/api/staff/order` | cookie + Origin | body `{ version, orderedSlugs }` |
 | PUT | `/api/staff/cover` | cookie + Origin | body `{ slug, coverImagePath, version }` |
+| GET | `/api/staff/promotion` | cookie |
+| PUT | `/api/staff/promotion` | cookie + Origin | body activate/deactivate |
 
 No existe `PATCH /model/:id`.
+
+Migración aditiva publicidad:
+
+```bash
+npm run db:migrate:promotion   # crea tabla web_promotion (IF NOT EXISTS)
+```
 
 ---
 
