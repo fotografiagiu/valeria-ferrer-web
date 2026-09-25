@@ -17,6 +17,9 @@ const CatalogScreen = lazy(() =>
 const ActivityFeed = lazy(() =>
   import('./components/ActivityFeed').then((m) => ({ default: m.ActivityFeed }))
 );
+const PromotionScreen = lazy(() =>
+  import('./components/PromotionScreen').then((m) => ({ default: m.PromotionScreen }))
+);
 
 type ToastState = { message: string; tone: 'success' | 'error' } | null;
 
@@ -197,6 +200,16 @@ export function App() {
       </header>
 
       <main className="main">
+        <Suspense fallback={<div className="loading-center">Cargando publicidad…</div>}>
+          <PromotionScreen
+            onToast={showToast}
+            onUnauthorized={() => {
+              setUser(null);
+              setModels([]);
+            }}
+          />
+        </Suspense>
+
         {(loadingCatalog || ensuring) && models.length === 0 ? (
           <div className="loading-center">
             {ensuring ? 'Incorporando fichas nuevas…' : 'Cargando fichas…'}
