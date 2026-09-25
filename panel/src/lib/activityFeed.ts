@@ -113,6 +113,17 @@ export function formatActivityItems(
         summary: 'portada actualizada',
         automatic,
       });
+    } else if (row.action === 'gallery.reorder') {
+      const slug = row.modelSlug;
+      if (!slug) continue;
+      push({
+        id: `${baseId}:gallery`,
+        at,
+        slug,
+        subject: displayName(slug, names),
+        summary: 'galería reordenada',
+        automatic,
+      });
     } else if (row.action === 'order.replace') {
       const before = orderMap(row.before);
       const after = orderMap(row.after);

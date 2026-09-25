@@ -28,7 +28,8 @@
     "dev": "concurrently -k -n api,web -c gold,cyan \"npm run dev:api\" \"npm run dev:web\"",
     "build:web": "vite build --config web/vite.config.ts",
     "build": "npm run build:web",
-    "db:migrate:staff-hidden": "tsx scripts/db-migrate-staff-hidden.ts"
+    "db:migrate:staff-hidden": "tsx scripts/db-migrate-staff-hidden.ts",
+    "db:migrate:gallery-paths": "tsx scripts/db-migrate-gallery-paths.ts"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",

@@ -13,6 +13,10 @@ export const MIGRATION_003_SQL_PATH = path.resolve(
   __dirname,
   '../../db/migrations/0003_staff_hidden.sql'
 );
+export const MIGRATION_004_SQL_PATH = path.resolve(
+  __dirname,
+  '../../db/migrations/0004_gallery_image_paths.sql'
+);
 
 /**
  * Neon WebSocket Pool (supports transactions for order/cover writes).
@@ -35,11 +39,16 @@ let singleton: AppDb | null = null;
 export function getMigrationSql(): string {
   const init = readFileSync(MIGRATION_SQL_PATH, 'utf8');
   const staffHidden = readFileSync(MIGRATION_003_SQL_PATH, 'utf8');
-  return `${init}\n\n${staffHidden}`;
+  const gallery = readFileSync(MIGRATION_004_SQL_PATH, 'utf8');
+  return `${init}\n\n${staffHidden}\n\n${gallery}`;
 }
 
 export function getStaffHiddenMigrationSql(): string {
   return readFileSync(MIGRATION_003_SQL_PATH, 'utf8');
+}
+
+export function getGalleryImagePathsMigrationSql(): string {
+  return readFileSync(MIGRATION_004_SQL_PATH, 'utf8');
 }
 
 export function createNeonDb(databaseUrl: string): AppDb {

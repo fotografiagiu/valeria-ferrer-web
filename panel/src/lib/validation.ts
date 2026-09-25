@@ -19,6 +19,15 @@ export const coverBodySchema = z
   })
   .strict();
 
+/** Full photo order for a ficha: index 0 = portada, rest = gallery. */
+export const galleryBodySchema = z
+  .object({
+    slug: z.string().min(1),
+    orderedImagePaths: z.array(z.string().min(1)).min(1),
+    version: z.number().int().positive(),
+  })
+  .strict();
+
 export const removeModelBodySchema = z
   .object({
     slug: z.string().min(1),
@@ -56,6 +65,13 @@ export type OrderValidationOk = { ok: true; orderedSlugs: string[] };
 export type OrderValidationErr = { ok: false; status: 400; error: string };
 export type CoverValidationOk = { ok: true; slug: string; coverImagePath: string };
 export type CoverValidationErr = { ok: false; status: 400; error: string };
+export type GalleryValidationOk = {
+  ok: true;
+  slug: string;
+  coverImagePath: string;
+  galleryImagePaths: string[];
+};
+export type GalleryValidationErr = { ok: false; status: 400; error: string };
 
 /**
  * orderedSlugs must be exactly the active set: same size, no dupes, no missing, no extras, all active.
@@ -123,3 +139,63 @@ export function validateCoverChange(
 
   return { ok: true, slug, coverImagePath };
 }
+
+/**
+ * orderedImagePaths must be a permutation of the allowlist (same set, no dupes).
+ * Index 0 becomes cover; the rest become galleryImagePaths.
+ */
+export function validateGalleryOrder(
+  slug: string,
+  orderedImagePaths: string[],
+  snapshotModels: CatalogModelLite[]
+): GalleryValidationOk | GalleryValidationErr {
+  const model = snapshotModels.find((m) => m.slug === slug);
+  if (!model) {
+    return { ok: false, status: 400, error: `unknown slug: ${slug}` };
+  }
+  if (model.active === false) {
+    return { ok: false, status: 400, error: `slug is inactive: ${slug}` };
+  }
+
+  const allowed = allowedCoverPaths(model);
+  if (allowed.length === 0) {
+    return { ok: false, status: 400, error: `no images in catalog for ${slug}` };
+  }
+  if (orderedImagePaths.length !== allowed.length) {
+    return {
+      ok: false,
+      status: 400,
+      error: `orderedImagePaths length ${orderedImagePaths.length} != allowlist ${allowed.length}`,
+    };
+  }
+
+  const allowedSet = new Set(allowed);
+  const seen = new Set<string>();
+  for (const path of orderedImagePaths) {
+    if (seen.has(path)) {
+      return { ok: false, status: 400, error: `duplicate image path: ${path}` };
+    }
+    seen.add(path);
+    if (!allowedSet.has(path)) {
+      return {
+        ok: false,
+        status: 400,
+        error: `image path not in allowlist for ${slug}: ${path}`,
+      };
+    }
+  }
+
+  for (const path of allowed) {
+    if (!seen.has(path)) {
+      return { ok: false, status: 400, error: `missing allowlist path: ${path}` };
+    }
+  }
+
+  return {
+    ok: true,
+    slug,
+    coverImagePath: orderedImagePaths[0],
+    galleryImagePaths: orderedImagePaths.slice(1),
+  };
+}
+

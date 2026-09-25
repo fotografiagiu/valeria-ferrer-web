@@ -7,6 +7,8 @@ export type PublicOverrideRow = {
   slug: string;
   displayOrder: number;
   coverImagePath: string;
+  /** Ordered gallery after cover; omit/null = catalog default images order. */
+  galleryImagePaths?: string[] | null;
 };
 
 export type PublicOverridesPayload = {
@@ -22,6 +24,7 @@ type CatalogLike = {
   coverImageUrl?: string;
   image?: string;
   hoverImage?: string;
+  gallery?: string[];
 };
 
 /** Home pin fallback — must stay aligned with panel effectiveOrder until overrides load. */
@@ -73,6 +76,22 @@ function withCoverOverride<T extends CatalogLike>(model: T, coverImagePath: stri
   return next;
 }
 
+function withGalleryOverride<T extends CatalogLike>(
+  model: T,
+  coverImagePath: string,
+  galleryImagePaths: string[] | null | undefined
+): T {
+  let next = withCoverOverride(model, coverImagePath);
+  if (!galleryImagePaths?.length) return next;
+
+  const gallery = galleryImagePaths.filter((p) => p && p !== coverImagePath);
+  next = { ...next, gallery };
+  if ('hoverImage' in next || model.hoverImage !== undefined) {
+    (next as CatalogLike).hoverImage = gallery[0] || coverImagePath;
+  }
+  return next;
+}
+
 /**
  * Apply display_order + cover_image_path to active catalog models.
  * Models missing from overrides go at the end (same as panel catalog:sync).
@@ -113,7 +132,11 @@ export function applyCatalogOverrides<T extends CatalogLike>(
       !!cover &&
       (cover.includes('/sofia-valeria-ferrer-model-agency-valencia/') ||
         (resolvedSlug === 'sofia1' && row.slug === 'sofia'));
-    ordered.push(cover && !coverIsStale ? withCoverOverride(model, cover) : model);
+    ordered.push(
+      cover && !coverIsStale
+        ? withGalleryOverride(model, cover, row.galleryImagePaths)
+        : model
+    );
   }
 
   const trailing = visibleModels.filter((m) => !seen.has(m.slug));
@@ -158,7 +181,10 @@ function isValidOverridesPayload(data: unknown): data is PublicOverridesPayload 
       typeof m.displayOrder === 'number' &&
       Number.isFinite(m.displayOrder) &&
       typeof m.coverImagePath === 'string' &&
-      m.coverImagePath.length > 0
+      m.coverImagePath.length > 0 &&
+      (m.galleryImagePaths == null ||
+        (Array.isArray(m.galleryImagePaths) &&
+          m.galleryImagePaths.every((p) => typeof p === 'string' && p.length > 0)))
   );
   if (!modelsOk) return false;
   if (payload.hiddenSlugs != null) {

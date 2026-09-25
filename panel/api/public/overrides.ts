@@ -93,7 +93,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       SELECT order_version, updated_at FROM catalog_meta WHERE id = 1 LIMIT 1
     `;
     const rows = await sql`
-      SELECT slug, display_order, cover_image_path
+      SELECT slug, display_order, cover_image_path, gallery_image_paths
       FROM model_overrides
       WHERE display_order IS NOT NULL
       ORDER BY display_order ASC
@@ -109,14 +109,26 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const active = await loadActiveSlugSet();
 
     const models = (
-      rows as Array<{ slug: string; display_order: number; cover_image_path: string }>
+      rows as Array<{
+        slug: string;
+        display_order: number;
+        cover_image_path: string;
+        gallery_image_paths: string[] | null;
+      }>
     )
       .filter((r) => (active ? active.has(r.slug) : true))
-      .map((r) => ({
-        slug: r.slug,
-        displayOrder: Number(r.display_order),
-        coverImagePath: r.cover_image_path,
-      }));
+      .map((r) => {
+        const gallery =
+          Array.isArray(r.gallery_image_paths) && r.gallery_image_paths.length > 0
+            ? r.gallery_image_paths.filter((p) => typeof p === 'string' && p.length > 0)
+            : null;
+        return {
+          slug: r.slug,
+          displayOrder: Number(r.display_order),
+          coverImagePath: r.cover_image_path,
+          ...(gallery?.length ? { galleryImagePaths: gallery } : {}),
+        };
+      });
 
     const hiddenSlugs = (
       hiddenRows as Array<{ slug: string }>

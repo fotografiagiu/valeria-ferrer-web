@@ -201,12 +201,46 @@ describe('auth + order + cover API', () => {
     expect(body.coverVersion).toBe(jazmin.coverVersion + 1);
   });
 
+  it('reorders gallery photos and exposes them on public overrides', async () => {
+    const catalog = await json(
+      await app.request('http://localhost/api/staff/catalog', { headers: { cookie } })
+    );
+    const jazmin = catalog.models.find((m: any) => m.slug === 'jazmin');
+    expect(jazmin.allowedCoverPaths.length).toBeGreaterThan(2);
+    const rotated = [...jazmin.allowedCoverPaths.slice(1), jazmin.allowedCoverPaths[0]];
+
+    const res = await app.request('http://localhost/api/staff/gallery', {
+      method: 'PUT',
+      headers: {
+        cookie,
+        'content-type': 'application/json',
+        origin: 'http://localhost:8787',
+      },
+      body: JSON.stringify({
+        slug: 'jazmin',
+        orderedImagePaths: rotated,
+        version: jazmin.coverVersion,
+      }),
+    });
+    expect(res.status).toBe(200);
+    const body = await json(res);
+    expect(body.coverImagePath).toBe(rotated[0]);
+    expect(body.galleryImagePaths).toEqual(rotated.slice(1));
+    expect(body.coverVersion).toBe(jazmin.coverVersion + 1);
+
+    const pub = await json(await app.request('http://localhost/api/public/overrides'));
+    const row = pub.models.find((m: any) => m.slug === 'jazmin');
+    expect(row.coverImagePath).toBe(rotated[0]);
+    expect(row.galleryImagePaths).toEqual(rotated.slice(1));
+  });
+
   it('writes append-only audit rows', async () => {
     const rows = await db.select().from(auditLog);
     const actions = rows.map((r) => r.action);
     expect(actions).toContain('auth.login');
     expect(actions).toContain('order.replace');
     expect(actions).toContain('cover.update');
+    expect(actions).toContain('gallery.reorder');
     expect(actions).toContain('catalog.seed');
   });
 

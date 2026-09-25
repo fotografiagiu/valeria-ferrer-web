@@ -2,6 +2,8 @@ export {
   createNeonDb,
   getDb,
   getMigrationSql,
+  getStaffHiddenMigrationSql,
+  getGalleryImagePathsMigrationSql,
   MIGRATION_SQL_PATH,
   resetDbSingleton,
   setDbForTests,
