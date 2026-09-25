@@ -392,7 +392,6 @@ const GalleryModal: React.FC<GalleryModalProps> = ({
                 }`}
               >
                 {validImages.map((image, index) => {
-                  const isVisible = Math.abs(index - currentIndex) <= 2;
                   return (
                     <button
                       key={index}
@@ -403,17 +402,13 @@ const GalleryModal: React.FC<GalleryModalProps> = ({
                           : 'opacity-60 hover:opacity-80 hover:scale-105'
                       }`}
                     >
-                      {isVisible ? (
-                        <LazyImage
-                          src={getGalleryImageThumbnail(image)}
-                          alt={`${modelName} - Miniatura ${index + 1}`}
-                          className="w-full h-full object-cover"
-                          sizes="64px"
-                          priority={index === currentIndex}
-                        />
-                      ) : (
-                        <div className="w-full h-full bg-[#111111] animate-pulse" />
-                      )}
+                      <LazyImage
+                        src={getGalleryImageThumbnail(image)}
+                        alt={`${modelName} - Miniatura ${index + 1}`}
+                        className="w-full h-full object-cover"
+                        sizes="64px"
+                        priority={index === currentIndex}
+                      />
                     </button>
                   );
                 })}
