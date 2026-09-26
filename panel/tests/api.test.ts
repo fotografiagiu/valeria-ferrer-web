@@ -469,4 +469,53 @@ describe('staff remove model', () => {
     expect(pub.models.find((m: { slug: string }) => m.slug === target.slug)).toBeUndefined();
     expect(pub.hiddenSlugs).toContain(target.slug);
   });
+
+  it('allows reorder after staff remove (orderable set excludes staffHidden)', async () => {
+    const catalog = await json(
+      await app.request('http://localhost/api/staff/catalog', { headers: { cookie } })
+    );
+    const target = catalog.models[catalog.models.length - 1];
+    expect(target?.slug).toBeTruthy();
+
+    const remove = await app.request('http://localhost/api/staff/catalog/remove', {
+      method: 'POST',
+      headers: {
+        cookie,
+        'content-type': 'application/json',
+        origin: 'http://localhost:8787',
+      },
+      body: JSON.stringify({ slug: target.slug, version: catalog.orderVersion }),
+    });
+    expect(remove.status).toBe(200);
+    const removeBody = await json(remove);
+
+    const afterRemove = await json(
+      await app.request('http://localhost/api/staff/catalog', { headers: { cookie } })
+    );
+    expect(afterRemove.orderVersion).toBe(removeBody.orderVersion);
+    expect(afterRemove.models.find((m: { slug: string }) => m.slug === target.slug)).toBeUndefined();
+
+    const slugs = afterRemove.models.map((m: { slug: string }) => m.slug);
+    expect(slugs.length).toBeGreaterThan(1);
+    const moved = [slugs[slugs.length - 1], ...slugs.slice(0, -1)];
+
+    const save = await app.request('http://localhost/api/staff/order', {
+      method: 'PUT',
+      headers: {
+        cookie,
+        'content-type': 'application/json',
+        origin: 'http://localhost:8787',
+      },
+      body: JSON.stringify({ version: afterRemove.orderVersion, orderedSlugs: moved }),
+    });
+    expect(save.status).toBe(200);
+    const saveBody = await json(save);
+    expect(saveBody.orderVersion).toBe(afterRemove.orderVersion + 1);
+
+    const pub = await json(await app.request('http://localhost/api/public/overrides'));
+    expect(pub.models.map((m: { slug: string }) => m.slug)).toEqual(moved);
+    expect(pub.models[0].slug).toBe(moved[0]);
+    expect(pub.hiddenSlugs).toContain(target.slug);
+    expect(pub.models.find((m: { slug: string }) => m.slug === target.slug)).toBeUndefined();
+  });
 });

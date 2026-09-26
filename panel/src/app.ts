@@ -384,7 +384,15 @@ export function createApp(options: CreateAppOptions) {
     if (!parsed.success) return c.json({ error: 'invalid body', details: parsed.error.flatten() }, 400);
 
     const meta = clientMeta(c);
-    const activeModels = (await getCatalogModels()).filter((m) => m.active !== false);
+    // Orderable set = active catalog minus staff-hidden (same as GET /staff/catalog).
+    // After remove, hidden slugs stay active in models.json but leave the panel list;
+    // requiring them here made every save return 400.
+    const staffHidden = new Set(
+      (await listOverrides(db)).filter((o) => o.staffHidden).map((o) => o.slug)
+    );
+    const activeModels = (await getCatalogModels()).filter(
+      (m) => m.active !== false && !staffHidden.has(m.slug)
+    );
 
     try {
       const result = await replaceOrder({
