@@ -74,7 +74,8 @@ export type GalleryValidationOk = {
 export type GalleryValidationErr = { ok: false; status: 400; error: string };
 
 /**
- * orderedSlugs must be exactly the active set: same size, no dupes, no missing, no extras, all active.
+ * orderedSlugs must be exactly the orderable set passed in (active catalog minus
+ * staff-hidden): same size, no dupes, no missing, no extras.
  */
 export function validateOrderedSlugs(
   orderedSlugs: string[],
@@ -87,7 +88,7 @@ export function validateOrderedSlugs(
     return {
       ok: false,
       status: 400,
-      error: `orderedSlugs length ${orderedSlugs.length} != active count ${activeSlugs.length}`,
+      error: `orderedSlugs length ${orderedSlugs.length} != orderable count ${activeSlugs.length}`,
     };
   }
 
