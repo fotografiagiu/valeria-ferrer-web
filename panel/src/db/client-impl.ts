@@ -9,6 +9,10 @@ import * as schema from './schema.js';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const require = createRequire(import.meta.url);
 export const MIGRATION_SQL_PATH = path.resolve(__dirname, '../../db/migrations/0001_init.sql');
+export const MIGRATION_002_SQL_PATH = path.resolve(
+  __dirname,
+  '../../db/migrations/0002_web_promotion.sql'
+);
 export const MIGRATION_003_SQL_PATH = path.resolve(
   __dirname,
   '../../db/migrations/0003_staff_hidden.sql'
@@ -38,9 +42,14 @@ let singleton: AppDb | null = null;
 
 export function getMigrationSql(): string {
   const init = readFileSync(MIGRATION_SQL_PATH, 'utf8');
+  const promo = readFileSync(MIGRATION_002_SQL_PATH, 'utf8');
   const staffHidden = readFileSync(MIGRATION_003_SQL_PATH, 'utf8');
   const gallery = readFileSync(MIGRATION_004_SQL_PATH, 'utf8');
-  return `${init}\n\n${staffHidden}\n\n${gallery}`;
+  return `${init}\n\n${promo}\n\n${staffHidden}\n\n${gallery}`;
+}
+
+export function getPromotionMigrationSql(): string {
+  return readFileSync(MIGRATION_002_SQL_PATH, 'utf8');
 }
 
 export function getStaffHiddenMigrationSql(): string {

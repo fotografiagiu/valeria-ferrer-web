@@ -2,9 +2,11 @@ export {
   createNeonDb,
   getDb,
   getMigrationSql,
+  getPromotionMigrationSql,
   getStaffHiddenMigrationSql,
   getGalleryImagePathsMigrationSql,
   MIGRATION_SQL_PATH,
+  MIGRATION_002_SQL_PATH,
   resetDbSingleton,
   setDbForTests,
 } from './client-impl.js';

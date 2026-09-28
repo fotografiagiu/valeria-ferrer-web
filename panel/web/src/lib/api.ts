@@ -170,3 +170,61 @@ export function removeCatalogModel(slug: string, version: number) {
   });
 }
 
+export type PromotionType = 'none' | 'copas' | 'duples';
+export type ActivatablePromotion = 'copas' | 'duples';
+export type PromotionDurationHours = 1 | 3 | 4;
+
+export type EffectivePromotion = {
+  activePromotion: PromotionType;
+  active: boolean;
+  startsAt: string | null;
+  endsAt: string | null;
+  durationHours: number | null;
+  promoId: string | null;
+  updatedAt: string;
+};
+
+export type StoredPromotion = {
+  activePromotion: PromotionType;
+  startsAt: string | null;
+  endsAt: string | null;
+  durationHours: number | null;
+  promoId: string | null;
+  updatedAt: string;
+  updatedBy: string | null;
+};
+
+export type PromotionHistoryItem = {
+  at: string;
+  actor: string | null;
+  action: string;
+  promotion: PromotionType | null;
+  previousPromotion: PromotionType | null;
+  durationHours: number | null;
+  endsAt: string | null;
+  summary: string;
+};
+
+export type StaffPromotionResponse = {
+  stored: StoredPromotion;
+  effective: EffectivePromotion;
+  history: PromotionHistoryItem[];
+};
+
+export function getPromotion() {
+  return request<StaffPromotionResponse>('/api/staff/promotion');
+}
+
+export function activatePromotion(promotion: ActivatablePromotion, durationHours: PromotionDurationHours) {
+  return request<StaffPromotionResponse & { ok: true }>('/api/staff/promotion', {
+    method: 'PUT',
+    body: JSON.stringify({ action: 'activate', promotion, durationHours }),
+  });
+}
+
+export function deactivatePromotion() {
+  return request<StaffPromotionResponse & { ok: true }>('/api/staff/promotion', {
+    method: 'PUT',
+    body: JSON.stringify({ action: 'deactivate' }),
+  });
+}

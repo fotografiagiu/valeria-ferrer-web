@@ -23,13 +23,16 @@
     "env:session-secret": "tsx scripts/gen-session-secret.ts",
     "db:preflight": "tsx scripts/db-migrate.ts --preflight",
     "db:migrate": "tsx scripts/db-migrate.ts --apply",
+    "db:migrate:promotion": "tsx scripts/db-migrate-promotion.ts",
     "dev:api": "tsx watch src/dev-server.ts",
     "dev:web": "vite --config web/vite.config.ts",
     "dev": "concurrently -k -n api,web -c gold,cyan \"npm run dev:api\" \"npm run dev:web\"",
     "build:web": "vite build --config web/vite.config.ts",
     "build": "npm run build:web",
     "db:migrate:staff-hidden": "tsx scripts/db-migrate-staff-hidden.ts",
-    "db:migrate:gallery-paths": "tsx scripts/db-migrate-gallery-paths.ts"
+    "db:migrate:gallery-paths": "tsx scripts/db-migrate-gallery-paths.ts",
+    "smoke:promotion:server": "tsx scripts/smoke-promotion-server.ts",
+    "smoke:promotion:api": "tsx scripts/smoke-promotion-api.ts"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
