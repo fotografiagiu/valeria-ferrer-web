@@ -31,6 +31,19 @@
       ]
     },
     {
+      "slug": "melody",
+      "name": "Melody",
+      "active": true,
+      "vip": false,
+      "coverImageUrl": "/chicas/melody-model-agency-valencia-vf/portada.jpg",
+      "images": [
+        "/chicas/melody-model-agency-valencia-vf/gallery/01.jpg",
+        "/chicas/melody-model-agency-valencia-vf/gallery/02.jpg",
+        "/chicas/melody-model-agency-valencia-vf/gallery/03.jpg",
+        "/chicas/melody-model-agency-valencia-vf/gallery/04.jpg"
+      ]
+    },
+    {
       "slug": "cristal2",
       "name": "Cristal",
       "active": true,

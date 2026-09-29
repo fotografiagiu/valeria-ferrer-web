@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-09-24T23:27:16.186Z",
+  "generatedAt": "2026-09-29T08:09:30.973Z",
   "sourcePath": "data/models.json",
   "sourceHash": "423947bbe56d13588f62b2fb3e4fe1baa7c2e0d7102a104b18631791075d6231",
-  "modelCount": 48,
-  "activeCount": 31,
+  "modelCount": 49,
+  "activeCount": 32,
   "models": [
     {
       "slug": "lola",
@@ -28,6 +28,18 @@
         "/chicas/sofia1-model-agency-valencia-vf/gallery/03.jpg",
         "/chicas/sofia1-model-agency-valencia-vf/gallery/04.jpg"
       ]
+    },
+    {
+      "slug": "melody",
+      "name": "Melody",
+      "coverImageUrl": "/chicas/melody-model-agency-valencia-vf/portada.jpg",
+      "images": [
+        "/chicas/melody-model-agency-valencia-vf/gallery/01.jpg",
+        "/chicas/melody-model-agency-valencia-vf/gallery/02.jpg",
+        "/chicas/melody-model-agency-valencia-vf/gallery/03.jpg",
+        "/chicas/melody-model-agency-valencia-vf/gallery/04.jpg"
+      ],
+      "active": true
     },
     {
       "slug": "cristal2",
