@@ -16,8 +16,12 @@ export function publicThumbUrl(path: string): string {
   let thumb = normalized;
   if (normalized.includes('/chicas/')) {
     thumb = normalized.replace('/chicas/', '/chicas-thumbnails/');
-    if (/\/portada(-nueva)?\.jpg$/i.test(normalized) || /\/cover\.jpg$/i.test(normalized)) {
-      thumb = thumb.replace(/\/(portada(-nueva)?|cover)\.jpg$/i, '/cover-thumbnail.jpg');
+    if (
+      /\/portada(-nueva)?\.jpg$/i.test(normalized) ||
+      /\/portada-[^/]+\.jpg$/i.test(normalized) ||
+      /\/cover\.jpg$/i.test(normalized)
+    ) {
+      thumb = thumb.replace(/\/(portada(-nueva)?|portada-[^/]+|cover)\.jpg$/i, '/cover-thumbnail.jpg');
     }
   }
   return publicAssetUrl(thumb);

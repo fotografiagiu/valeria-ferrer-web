@@ -18,7 +18,9 @@ export function getModelCoverThumbnailPath(coverImageUrl: string): string {
   // Portadas dinámicas del panel (galería u otro nombre) NUNCA se sustituyen por
   // un cover-thumbnail.jpg antiguo: misma ruta bajo chicas-thumbnails/.
   const isGenericCover =
-    /\/portada(-nueva)?\.jpg$/i.test(normalized) || /\/cover\.jpg$/i.test(normalized);
+    /\/portada(-nueva)?\.jpg$/i.test(normalized) ||
+    /\/portada-[^/]+\.jpg$/i.test(normalized) ||
+    /\/cover\.jpg$/i.test(normalized);
   if (!isGenericCover) {
     if (normalized.includes('/chicas-optimized/')) {
       return normalized.replace('/chicas-optimized/', '/chicas-thumbnails/');
