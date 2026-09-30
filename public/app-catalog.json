@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-09-30T15:33:10.901Z",
-  "catalogVersion": "6164c3be696283c031dea320d409c6fda78021c5a5572e69ae62e77bf4d510ae",
+  "generatedAt": "2026-09-30T16:10:59.848Z",
+  "catalogVersion": "76fa642d8ab2929c4ccbe3644fe8893ba3428b3ec13eb8a4f8d869862ca5746c",
   "source": "valeria-ferrer-web",
   "method": "build-app-catalog",
   "models": [
@@ -39,7 +39,7 @@
     {
       "slug": "lola",
       "name": "Lola",
-      "active": true,
+      "active": false,
       "vip": false,
       "coverImageUrl": "/chicas/lola-model-agency-valencia-vf/portada.jpg",
       "images": [
@@ -52,7 +52,7 @@
     {
       "slug": "sofia1",
       "name": "Sofía",
-      "active": true,
+      "active": false,
       "vip": false,
       "coverImageUrl": "/chicas/sofia1-model-agency-valencia-vf/portada.jpg",
       "images": [
@@ -78,7 +78,7 @@
     {
       "slug": "cristal2",
       "name": "Cristal",
-      "active": true,
+      "active": false,
       "vip": false,
       "coverImageUrl": "/chicas/cristal2-model-agency-valencia-vf/portada-sep2026.jpg",
       "images": [
@@ -94,7 +94,7 @@
     {
       "slug": "carolina2",
       "name": "Carolina",
-      "active": true,
+      "active": false,
       "vip": false,
       "coverImageUrl": "/chicas/carolina2-model-agency-valencia-vf/portada-sep2026.jpg",
       "images": [
@@ -223,7 +223,7 @@
     {
       "slug": "sara",
       "name": "Sara",
-      "active": true,
+      "active": false,
       "vip": false,
       "coverImageUrl": "/chicas/sara-valeria-ferrer-model-agency-valencia/portada.jpg",
       "images": [
@@ -239,7 +239,7 @@
     {
       "slug": "danna",
       "name": "Danna",
-      "active": true,
+      "active": false,
       "vip": false,
       "coverImageUrl": "/chicas/danna-valeria-ferrer-model-agency-valencia/portada.jpg",
       "images": [
@@ -280,7 +280,7 @@
     {
       "slug": "jazmin",
       "name": "Jazmín",
-      "active": true,
+      "active": false,
       "vip": false,
       "coverImageUrl": "/chicas/jazmin-valeria-ferrer-model-agency-valencia/portada.jpg",
       "images": [
@@ -297,7 +297,7 @@
     {
       "slug": "marta",
       "name": "Marta",
-      "active": true,
+      "active": false,
       "vip": false,
       "coverImageUrl": "/chicas/marta-valeria-ferrer-model-agency-valencia/portada.jpg",
       "images": [
@@ -409,7 +409,7 @@
     {
       "slug": "vero",
       "name": "Vero",
-      "active": true,
+      "active": false,
       "vip": false,
       "coverImageUrl": "/chicas/vero-valeria-ferrer-model-agency-valencia/portada.jpg",
       "images": [
@@ -465,7 +465,7 @@
     {
       "slug": "rihanna",
       "name": "Rihanna",
-      "active": true,
+      "active": false,
       "vip": false,
       "coverImageUrl": "/chicas/rihanna-valeria-ferrer-model-agency-valencia/portada.jpg",
       "images": [
@@ -593,7 +593,7 @@
     {
       "slug": "teresa",
       "name": "Teresa",
-      "active": true,
+      "active": false,
       "vip": false,
       "coverImageUrl": "/chicas/teresa-valeria-ferrer-model-agency-valencia/portada.jpg",
       "images": [
