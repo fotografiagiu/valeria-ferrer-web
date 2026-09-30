@@ -1,0 +1,59 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Gaby",
+  "description": "Gaby es colombiana de 22 años, 1,64 m y 55 kg: joven, latina y con una presencia que se nota al instante. Mirada directa, cuerpo marcado y esa energía colombiana que te empuja a escribir. Novedad en Valencia — cercana, seductora y con ganas de verdad. Fotos reales. Si buscas una escort colombiana joven para un encuentro intenso y fácil de conectar, Gaby está lista.",
+  "url": "https://www.valeriaferrer.com/models/gaby",
+  "image": [
+    "https://www.valeriaferrer.com/chicas/gaby-valeria-ferrer-model-agency-valencia/portada.jpg",
+    "https://www.valeriaferrer.com/chicas/gaby-valeria-ferrer-model-agency-valencia/gallery/01.jpg",
+    "https://www.valeriaferrer.com/chicas/gaby-valeria-ferrer-model-agency-valencia/gallery/02.jpg",
+    "https://www.valeriaferrer.com/chicas/gaby-valeria-ferrer-model-agency-valencia/gallery/03.jpg",
+    "https://www.valeriaferrer.com/chicas/gaby-valeria-ferrer-model-agency-valencia/gallery/04.jpg",
+    "https://www.valeriaferrer.com/chicas/gaby-valeria-ferrer-model-agency-valencia/gallery/05.jpg",
+    "https://www.valeriaferrer.com/chicas/gaby-valeria-ferrer-model-agency-valencia/gallery/06.jpg",
+    "https://www.valeriaferrer.com/chicas/gaby-valeria-ferrer-model-agency-valencia/gallery/07.jpg",
+    "https://www.valeriaferrer.com/chicas/gaby-valeria-ferrer-model-agency-valencia/gallery/08.jpg",
+    "https://www.valeriaferrer.com/chicas/gaby-valeria-ferrer-model-agency-valencia/gallery/09.jpg",
+    "https://www.valeriaferrer.com/chicas/gaby-valeria-ferrer-model-agency-valencia/gallery/10.jpg",
+    "https://www.valeriaferrer.com/chicas/gaby-valeria-ferrer-model-agency-valencia/gallery/11.jpg",
+    "https://www.valeriaferrer.com/chicas/gaby-valeria-ferrer-model-agency-valencia/gallery/12.jpg",
+    "https://www.valeriaferrer.com/chicas/gaby-valeria-ferrer-model-agency-valencia/gallery/13.jpg",
+    "https://www.valeriaferrer.com/chicas/gaby-valeria-ferrer-model-agency-valencia/gallery/14.jpg",
+    "https://www.valeriaferrer.com/chicas/gaby-valeria-ferrer-model-agency-valencia/gallery/15.jpg",
+    "https://www.valeriaferrer.com/chicas/gaby-valeria-ferrer-model-agency-valencia/gallery/16.jpg",
+    "https://www.valeriaferrer.com/chicas/gaby-valeria-ferrer-model-agency-valencia/gallery/17.jpg",
+    "https://www.valeriaferrer.com/chicas/gaby-valeria-ferrer-model-agency-valencia/gallery/18.jpg",
+    "https://www.valeriaferrer.com/chicas/gaby-valeria-ferrer-model-agency-valencia/gallery/19.jpg",
+    "https://www.valeriaferrer.com/chicas/gaby-valeria-ferrer-model-agency-valencia/gallery/20.jpg",
+    "https://www.valeriaferrer.com/chicas/gaby-valeria-ferrer-model-agency-valencia/gallery/21.jpg",
+    "https://www.valeriaferrer.com/chicas/gaby-valeria-ferrer-model-agency-valencia/gallery/22.jpg",
+    "https://www.valeriaferrer.com/chicas/gaby-valeria-ferrer-model-agency-valencia/gallery/23.jpg"
+  ],
+  "nationality": "Colombiana",
+  "jobTitle": "Modelo",
+  "knowsLanguage": [
+    "Español"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "itemOffered": {
+      "@type": "Service",
+      "name": "Acompañamiento Premium",
+      "description": "Servicios exclusivos de acompañamiento con Gaby en Valencia"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Valencia"
+    },
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "name": "Contacto Directo",
+      "url": "https://www.valeriaferrer.com/contact"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.valeriaferrer.com/models/gaby"
+  }
+}

@@ -29,6 +29,7 @@ type CatalogLike = {
 
 /** Home pin fallback — must stay aligned with panel effectiveOrder until overrides load. */
 export const HOME_PIN_ORDER: readonly string[] = [
+  'gaby',
   'lola',
   'sofia1',
   'cristal2',
