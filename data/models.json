@@ -137,7 +137,7 @@
     "isNew": true,
     "featured": true,
     "vip": false,
-    "active": true
+    "active": false
   },
   {
     "slug": "sofia1",
@@ -198,7 +198,7 @@
     "isNew": true,
     "featured": true,
     "vip": false,
-    "active": true
+    "active": false
   },
   {
     "slug": "melody",
@@ -319,7 +319,7 @@
     "featured": true,
     "isNew": true,
     "vip": false,
-    "active": true
+    "active": false
   },
   {
     "slug": "carolina2",
@@ -384,7 +384,7 @@
     "featured": true,
     "isNew": true,
     "vip": false,
-    "active": true
+    "active": false
   },
   {
     "slug": "lia",
@@ -713,7 +713,8 @@
     ],
     "isNew": true,
     "featured": true,
-    "vip": false
+    "vip": false,
+    "active": false
   },
   {
     "slug": "danna",
@@ -779,7 +780,8 @@
     ],
     "isNew": true,
     "featured": true,
-    "vip": false
+    "vip": false,
+    "active": false
   },
   {
     "slug": "veronica",
@@ -905,7 +907,8 @@
     ],
     "isNew": true,
     "featured": true,
-    "vip": false
+    "vip": false,
+    "active": false
   },
   {
     "slug": "marta",
@@ -963,7 +966,8 @@
     ],
     "isNew": true,
     "featured": true,
-    "vip": false
+    "vip": false,
+    "active": false
   },
   {
     "slug": "paris",
@@ -1279,7 +1283,8 @@
     ],
     "isNew": true,
     "featured": true,
-    "vip": false
+    "vip": false,
+    "active": false
   },
   {
     "slug": "zoe",
@@ -1479,7 +1484,8 @@
     ],
     "isNew": true,
     "featured": true,
-    "vip": false
+    "vip": false,
+    "active": false
   },
   {
     "slug": "julieta",
@@ -1837,7 +1843,7 @@
     "galleryUpdated": "Septiembre 2026",
     "featured": true,
     "vip": false,
-    "active": true
+    "active": false
   },
   {
     "slug": "tiffany",
