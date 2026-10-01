@@ -1,9 +1,25 @@
 {
-  "generatedAt": "2026-09-30T16:28:38.769Z",
-  "catalogVersion": "d4c406809f1b07f7add960c5643bc5a5abb73d29a037a21767f7eaae0cc4fbd0",
+  "generatedAt": "2026-10-01T22:49:31.408Z",
+  "catalogVersion": "8aaaa166b86c",
   "source": "valeria-ferrer-web",
   "method": "build-app-catalog",
   "models": [
+    {
+      "slug": "laura2",
+      "name": "Laura",
+      "active": true,
+      "coverImageUrl": "/chicas/laura2-model-agency-valencia-vf/portada-oct2026.jpg",
+      "images": [
+        "/chicas/laura2-model-agency-valencia-vf/gallery/07-oct2026.jpg",
+        "/chicas/laura2-model-agency-valencia-vf/gallery/01-oct2026.jpg",
+        "/chicas/laura2-model-agency-valencia-vf/gallery/02-oct2026.jpg",
+        "/chicas/laura2-model-agency-valencia-vf/gallery/03-oct2026.jpg",
+        "/chicas/laura2-model-agency-valencia-vf/gallery/04-oct2026.jpg",
+        "/chicas/laura2-model-agency-valencia-vf/gallery/05-oct2026.jpg",
+        "/chicas/laura2-model-agency-valencia-vf/gallery/06-oct2026.jpg"
+      ],
+      "vip": false
+    },
     {
       "slug": "adara",
       "name": "Adara",
