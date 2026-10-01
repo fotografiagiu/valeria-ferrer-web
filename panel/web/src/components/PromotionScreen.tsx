@@ -26,7 +26,7 @@ const CREATIVES: Record<
   },
   duples: {
     title: 'DUPLEX',
-    image: '/promos/promo-duo.webp',
+    image: '/promos/promo-duplex-precios-oct2026.webp',
     hint: 'Oferta dúplex',
   },
 };

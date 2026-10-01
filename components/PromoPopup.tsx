@@ -228,8 +228,8 @@ const PromoPopup: React.FC = () => {
                 src={promo.image}
                 alt="Oferta especial Valeria Ferrer. Reserva ahora."
                 className="block h-auto w-full max-h-[82dvh] object-contain bg-black"
-                width={1024}
-                height={576}
+                width={promo.imageWidth}
+                height={promo.imageHeight}
               />
               <span className="sr-only">Reserva ahora</span>
             </button>

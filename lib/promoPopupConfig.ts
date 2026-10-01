@@ -4,6 +4,9 @@ export type PromoPopupConfig = {
   id: string
   kind: PromoKind
   image: string
+  /** Intrinsic pixel size of the creative (helps CLS; prices stay baked in the asset). */
+  imageWidth: number
+  imageHeight: number
   startsAt: string
   endsAt: string
   enabled: boolean
@@ -19,12 +22,16 @@ export const PROMO_CREATIVES: Record<
   copas: {
     kind: 'copas',
     image: '/promos/promo-copa.webp',
+    imageWidth: 1024,
+    imageHeight: 576,
     ctaHref: '/booking',
     bannerText: '🥂 Copa de invitación · Oferta activa · Ver oferta',
   },
   duples: {
     kind: 'duples',
-    image: '/promos/promo-duo.webp',
+    image: '/promos/promo-duplex-precios-oct2026.webp',
+    imageWidth: 1024,
+    imageHeight: 682,
     ctaHref: '/booking',
     bannerText: 'Oferta dúplex · Oferta activa · Ver oferta',
   },
@@ -38,18 +45,6 @@ export type RemotePromotionPayload = {
   durationHours?: number | null
   promoId?: string | null
   updatedAt?: string | null
-}
-
-/** Hardcoded fallback is OFF — remote panel state owns activation. */
-export const ACTIVE_PROMO: PromoPopupConfig = {
-  id: 'promo-remote-idle',
-  kind: 'copas',
-  image: PROMO_CREATIVES.copas.image,
-  startsAt: '1970-01-01T00:00:00.000Z',
-  endsAt: '1970-01-01T00:00:00.000Z',
-  enabled: false,
-  ctaHref: '/booking',
-  bannerText: PROMO_CREATIVES.copas.bannerText,
 }
 
 export function isPromoLive(promo: PromoPopupConfig | null | undefined, now = Date.now()): boolean {

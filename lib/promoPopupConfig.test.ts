@@ -45,6 +45,8 @@ test('duples live → promo config', () => {
   )
   assert.ok(promo)
   assert.equal(promo.kind, 'duples')
+  assert.equal(promo.image.includes('promo-duplex-precios-oct2026'), true)
+  assert.equal(promo.image.includes('promo-duo.webp'), false)
   assert.equal(isPromoLive(promo, now), true)
 })
 
@@ -67,6 +69,8 @@ test('isPromoLive hides expired mini-banner candidate', () => {
     id: 'x',
     kind: 'copas',
     image: '/promos/promo-copa.webp',
+    imageWidth: 1024,
+    imageHeight: 576,
     startsAt: '2026-09-23T08:00:00.000Z',
     endsAt: '2026-09-23T11:00:00.000Z',
     enabled: true,
