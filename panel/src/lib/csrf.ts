@@ -76,3 +76,20 @@ export function corsHeadersForPublicOverrides(
   }
   return headers;
 }
+
+/** Public promotion state must stay fresh (panel toggle → web). */
+export function corsHeadersForPublicPromotion(
+  requestOrigin: string | undefined,
+  env: PanelEnv
+): Record<string, string> {
+  const headers: Record<string, string> = {
+    'Access-Control-Allow-Methods': 'GET, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Cache-Control': 'no-store, max-age=0',
+  };
+  if (requestOrigin && env.publicWebOrigins.includes(requestOrigin)) {
+    headers['Access-Control-Allow-Origin'] = requestOrigin;
+    headers['Vary'] = 'Origin';
+  }
+  return headers;
+}
