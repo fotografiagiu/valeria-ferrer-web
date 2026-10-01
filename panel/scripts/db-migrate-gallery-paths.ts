@@ -8,12 +8,11 @@
 import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { neonConfig, Pool } from '@neondatabase/serverless';
-import ws from 'ws';
+import pg from 'pg';
 import { getGalleryImagePathsMigrationSql } from '../src/db/client-impl.js';
 import { loadLocalEnv } from './lib/loadLocalEnv.js';
 
-neonConfig.webSocketConstructor = ws;
+const { Pool } = pg;
 
 function forceLoadDatabaseEnv(): void {
   loadLocalEnv();

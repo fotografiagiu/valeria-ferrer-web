@@ -1,20 +1,20 @@
 #!/usr/bin/env tsx
 /**
- * Neon migration helper for panel schema only.
+ * Postgres migration helper for panel schema only.
  *
  * Usage:
  *   npm run db:preflight   # connect + safety checks, no DDL
- *   npm run db:migrate     # preflight then apply 0001_init.sql
+ *   npm run db:migrate     # preflight then apply migrations 0001–0004
  *
- * Prefers DATABASE_URL_UNPOOLED, falls back to DATABASE_POSTGRES_URL_NON_POOLING.
- * Never DROPs. Never seeds. Never prints connection strings.
+ * Prefers DATABASE_URL_UNPOOLED, falls back to DATABASE_POSTGRES_URL_NON_POOLING,
+ * then DATABASE_URL.
+ * Never DROPs. Never prints connection strings.
  */
-import { neonConfig, Pool } from '@neondatabase/serverless';
-import ws from 'ws';
+import pg from 'pg';
 import { getMigrationSql, MIGRATION_SQL_PATH } from '../src/db/client-impl.js';
 import { loadLocalEnv } from './lib/loadLocalEnv.js';
 
-neonConfig.webSocketConstructor = ws;
+const { Pool } = pg;
 loadLocalEnv();
 
 const TARGET_TABLES = [
@@ -24,11 +24,13 @@ const TARGET_TABLES = [
   'model_overrides',
   'audit_log',
   'rate_limit_buckets',
+  'web_promotion',
 ] as const;
 
-const UNPOOLED_CANDIDATES = [
+const URL_CANDIDATES = [
   'DATABASE_URL_UNPOOLED',
   'DATABASE_POSTGRES_URL_NON_POOLING',
+  'DATABASE_URL',
 ] as const;
 
 const apply = process.argv.includes('--apply');
@@ -43,7 +45,7 @@ function maskHost(url: string): string {
   }
 }
 
-function assertNeonUrl(url: string, name: string): void {
+function assertPostgresUrl(url: string, name: string): void {
   let parsed: URL;
   try {
     parsed = new URL(url);
@@ -53,28 +55,22 @@ function assertNeonUrl(url: string, name: string): void {
   if (parsed.protocol !== 'postgres:' && parsed.protocol !== 'postgresql:') {
     throw new Error(`${name} must be a postgres(ql) URL`);
   }
-  const host = parsed.hostname.toLowerCase();
-  if (!host.includes('neon.tech') && !host.endsWith('.neon.tech')) {
-    throw new Error(`${name} host does not look like Neon (expected *.neon.tech)`);
-  }
 }
 
-function resolveUnpooled(): { name: string; url: string } {
-  for (const name of UNPOOLED_CANDIDATES) {
+function resolveUrl(): { name: string; url: string } {
+  for (const name of URL_CANDIDATES) {
     const url = process.env[name]?.trim();
     if (url) return { name, url };
   }
-  throw new Error(
-    `No unpooled Neon URL found. Set one of: ${UNPOOLED_CANDIDATES.join(', ')}`
-  );
+  throw new Error(`No Postgres URL found. Set one of: ${URL_CANDIDATES.join(', ')}`);
 }
 
-async function withPool<T>(fn: (pool: Pool) => Promise<T>): Promise<T> {
-  const { name, url } = resolveUnpooled();
-  assertNeonUrl(url, name);
+async function withPool<T>(fn: (pool: pg.Pool) => Promise<T>): Promise<T> {
+  const { name, url } = resolveUrl();
+  assertPostgresUrl(url, name);
   console.log(`Using ${name} host: ${maskHost(url)}`);
 
-  const pool = new Pool({ connectionString: url });
+  const pool = new Pool({ connectionString: url, max: 1 });
   try {
     return await fn(pool);
   } finally {
@@ -82,7 +78,7 @@ async function withPool<T>(fn: (pool: Pool) => Promise<T>): Promise<T> {
   }
 }
 
-async function runPreflight(pool: Pool): Promise<void> {
+async function runPreflight(pool: pg.Pool): Promise<void> {
   const ping = await pool.query<{ ok: number }>('SELECT 1::int AS ok');
   if (ping.rows[0]?.ok !== 1) {
     throw new Error('Connection probe failed');
@@ -110,15 +106,15 @@ async function runPreflight(pool: Pool): Promise<void> {
   );
   console.log(`Public tables present: ${anyPublic.rows[0]?.n ?? '?'}`);
   console.log(`Target panel tables (${TARGET_TABLES.join(', ')}): none — OK to migrate`);
-  console.log(`Migration file: ${MIGRATION_SQL_PATH}`);
+  console.log(`Migration file: ${MIGRATION_SQL_PATH} (+ 0002/0003/0004)`);
 }
 
-async function runApply(pool: Pool): Promise<void> {
+async function runApply(pool: pg.Pool): Promise<void> {
   const sql = getMigrationSql();
   if (!sql.includes('CREATE TABLE') || sql.toLowerCase().includes('drop table')) {
     throw new Error('Migration file failed safety check (expected CREATE-only, no DROP TABLE)');
   }
-  console.log('Applying 0001_init.sql …');
+  console.log('Applying migrations 0001–0004 …');
   await pool.query(sql);
   console.log('Migration applied.');
 

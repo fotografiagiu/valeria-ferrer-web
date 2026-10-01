@@ -2,7 +2,7 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { neon } from '@neondatabase/serverless';
+import { getPool } from '../../src/db/client-impl.js';
 
 export const config = {
   maxDuration: 30,
@@ -36,7 +36,6 @@ async function loadActiveSlugSet(): Promise<Set<string> | null> {
         method: 'GET',
         signal: controller.signal,
         headers: { Accept: 'application/json' },
-        cache: 'no-store',
       });
       if (response.ok) {
         const catalog = (await response.json()) as {
@@ -81,41 +80,37 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return;
   }
 
-  const url = process.env.DATABASE_URL;
-  if (!url) {
+  if (!process.env.DATABASE_URL) {
     res.status(503).json({ error: 'DATABASE_URL missing' });
     return;
   }
 
   try {
-    const sql = neon(url);
-    const meta = await sql`
-      SELECT order_version, updated_at FROM catalog_meta WHERE id = 1 LIMIT 1
-    `;
-    const rows = await sql`
-      SELECT slug, display_order, cover_image_path, gallery_image_paths
-      FROM model_overrides
-      WHERE display_order IS NOT NULL
-      ORDER BY display_order ASC
-    `;
-
-    const hiddenRows = await sql`
-      SELECT slug
-      FROM model_overrides
-      WHERE staff_hidden = true
-      ORDER BY slug ASC
-    `;
+    const pool = getPool();
+    const meta = await pool.query<{ order_version: number; updated_at: Date | string }>(
+      `SELECT order_version, updated_at FROM catalog_meta WHERE id = 1 LIMIT 1`
+    );
+    const rows = await pool.query<{
+      slug: string;
+      display_order: number;
+      cover_image_path: string;
+      gallery_image_paths: string[] | null;
+    }>(
+      `SELECT slug, display_order, cover_image_path, gallery_image_paths
+       FROM model_overrides
+       WHERE display_order IS NOT NULL
+       ORDER BY display_order ASC`
+    );
+    const hiddenRows = await pool.query<{ slug: string }>(
+      `SELECT slug
+       FROM model_overrides
+       WHERE staff_hidden = true
+       ORDER BY slug ASC`
+    );
 
     const active = await loadActiveSlugSet();
 
-    const models = (
-      rows as Array<{
-        slug: string;
-        display_order: number;
-        cover_image_path: string;
-        gallery_image_paths: string[] | null;
-      }>
-    )
+    const models = rows.rows
       .filter((r) => (active ? active.has(r.slug) : true))
       .map((r) => {
         const gallery =
@@ -130,13 +125,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         };
       });
 
-    const hiddenSlugs = (
-      hiddenRows as Array<{ slug: string }>
-    )
+    const hiddenSlugs = hiddenRows.rows
       .map((r) => r.slug)
       .filter((slug) => (active ? active.has(slug) : true));
 
-    const m0 = meta[0] as { order_version?: number; updated_at?: Date | string } | undefined;
+    const m0 = meta.rows[0];
     res.status(200).json({
       orderVersion: Number(m0?.order_version ?? 0),
       updatedAt: m0?.updated_at ? new Date(m0.updated_at).toISOString() : new Date().toISOString(),
