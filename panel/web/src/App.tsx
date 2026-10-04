@@ -1,4 +1,5 @@
 import { lazy, Suspense, useCallback, useEffect, useRef, useState } from 'react';
+import { InstallScreen } from './components/InstallScreen';
 import { LoginScreen } from './components/LoginScreen';
 import { Toast } from './components/Toast';
 import {
@@ -100,6 +101,10 @@ export function App() {
   }, [applyCatalog, showToast]);
 
   useEffect(() => {
+    if (typeof window !== 'undefined' && window.location.pathname.replace(/\/$/, '') === '/instalar') {
+      setBootstrapping(false);
+      return;
+    }
     let cancelled = false;
     setBootstrapping(true);
     setBootError(null);
@@ -144,6 +149,14 @@ export function App() {
     }
     setUser(null);
     setModels([]);
+  }
+
+  const onInstallPage =
+    typeof window !== 'undefined' &&
+    window.location.pathname.replace(/\/$/, '') === '/instalar';
+
+  if (onInstallPage) {
+    return <InstallScreen />;
   }
 
   if (bootstrapping) {

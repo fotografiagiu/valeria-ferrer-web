@@ -238,6 +238,49 @@ img {
   font-size: 0.75rem;
 }
 
+
+.install-card .install-icon {
+  margin: 0 auto 16px;
+  border-radius: 16px;
+  border: 1px solid var(--gold-line);
+}
+
+.install-title {
+  margin: 0 0 10px;
+  text-align: center;
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+.install-hero-btn {
+  margin-bottom: 16px;
+}
+
+.install-steps {
+  margin: 0 0 18px;
+  padding-left: 18px;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  line-height: 1.55;
+}
+
+.install-steps li + li {
+  margin-top: 8px;
+}
+
+.install-login-link {
+  display: block;
+  margin-top: 8px;
+  text-align: center;
+  color: var(--gold);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
 .error-text {
   color: var(--danger);
   font-size: 0.85rem;

@@ -11,6 +11,10 @@ declare global {
   }
 }
 
+type Props = {
+  variant?: 'compact' | 'hero';
+};
+
 function isStandalone(): boolean {
   return (
     window.matchMedia('(display-mode: standalone)').matches ||
@@ -18,12 +22,18 @@ function isStandalone(): boolean {
   );
 }
 
-/** Install prompt for Android and desktop. Renders nothing where unsupported. */
-export function InstallButton() {
+function isAndroidChrome(): boolean {
+  const ua = navigator.userAgent;
+  return /Android/i.test(ua) && /Chrome/i.test(ua) && !/EdgA|OPR|SamsungBrowser|Firefox/i.test(ua);
+}
+
+/** Install prompt for Android and desktop. Always visible on the install page. */
+export function InstallButton({ variant = 'compact' }: Props) {
   const [promptEvent, setPromptEvent] = useState<InstallPromptEvent | null>(
     () => window.__vfInstallPrompt
   );
-  const [installed, setInstalled] = useState(false);
+  const [installed, setInstalled] = useState(() => isStandalone());
+  const [busy, setBusy] = useState(false);
 
   useEffect(() => {
     const onReady = () => setPromptEvent(window.__vfInstallPrompt);
@@ -40,23 +50,44 @@ export function InstallButton() {
     };
   }, []);
 
-  if (isStandalone()) return null;
-  if (installed) {
+  if (isStandalone() || installed) {
     return <p className="install-hint">App instalada. Ábrela desde su icono.</p>;
   }
-  if (!promptEvent) return null;
 
   async function onInstall() {
-    await promptEvent!.prompt();
-    const { outcome } = await promptEvent!.userChoice;
-    if (outcome === 'accepted') setInstalled(true);
-    window.__vfInstallPrompt = null;
-    setPromptEvent(null);
+    if (!promptEvent) return;
+    setBusy(true);
+    try {
+      await promptEvent.prompt();
+      const { outcome } = await promptEvent.userChoice;
+      if (outcome === 'accepted') setInstalled(true);
+      window.__vfInstallPrompt = null;
+      setPromptEvent(null);
+    } finally {
+      setBusy(false);
+    }
   }
 
-  return (
-    <button type="button" className="install-btn" onClick={onInstall}>
-      Instalar la app en este móvil
-    </button>
-  );
+  const className = variant === 'hero' ? 'primary-btn install-hero-btn' : 'install-btn';
+
+  if (promptEvent) {
+    return (
+      <button type="button" className={className} onClick={() => void onInstall()} disabled={busy}>
+        {busy ? 'Instalando…' : 'Instalar en esta tablet'}
+      </button>
+    );
+  }
+
+  if (variant === 'hero' && isAndroidChrome()) {
+    return (
+      <p className="hint-text">
+        Chrome está comprobando la app. Si no aparece el botón, abre el menú (⋮) y pulsa{' '}
+        <strong>Instalar app</strong>.
+      </p>
+    );
+  }
+
+  if (variant === 'compact') return null;
+
+  return null;
 }

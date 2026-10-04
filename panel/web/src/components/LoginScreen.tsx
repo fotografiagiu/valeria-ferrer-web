@@ -74,6 +74,9 @@ export function LoginScreen({ onLoggedIn }: Props) {
         </button>
 
         <InstallButton />
+        <a className="install-login-link" href="/instalar">
+          Instalar en tablet / móvil
+        </a>
       </form>
     </div>
   );
