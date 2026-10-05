@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-10-05T19:11:01.419Z",
-  "catalogVersion": "ff9974d4aac9911d402b3019aed8ece214d81ac2e993bf53835a476a2e30d275",
+  "generatedAt": "2026-10-05T20:09:09.361Z",
+  "catalogVersion": "9b26e3c53e62bddb443ff7a3ff46094a0aef9817ea3b537bf4c2da8fa25b9fba",
   "source": "valeria-ferrer-web",
   "method": "build-app-catalog",
   "models": [
@@ -735,7 +735,8 @@
         "/chicas/paris-valeria-ferrer-model-agency-valencia/gallery/05.jpg",
         "/chicas/paris-valeria-ferrer-model-agency-valencia/gallery/06.jpg",
         "/chicas/paris-valeria-ferrer-model-agency-valencia/gallery/07.jpg",
-        "/chicas/paris-valeria-ferrer-model-agency-valencia/gallery/08.jpg"
+        "/chicas/paris-valeria-ferrer-model-agency-valencia/gallery/08.jpg",
+        "/chicas/paris-valeria-ferrer-model-agency-valencia/gallery/09.jpg"
       ]
     },
     {
