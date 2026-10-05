@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-10-03T21:49:08.196Z",
-  "catalogVersion": "8f603d957c3b2954224de2c3a728daea436c06bd3fb22e6fa8031bf836cba427",
+  "generatedAt": "2026-10-05T19:11:01.419Z",
+  "catalogVersion": "ff9974d4aac9911d402b3019aed8ece214d81ac2e993bf53835a476a2e30d275",
   "source": "valeria-ferrer-web",
   "method": "build-app-catalog",
   "models": [
@@ -724,7 +724,7 @@
     {
       "slug": "paris",
       "name": "Paris",
-      "active": false,
+      "active": true,
       "vip": false,
       "coverImageUrl": "/chicas/paris-valeria-ferrer-model-agency-valencia/portada.jpg",
       "images": [
