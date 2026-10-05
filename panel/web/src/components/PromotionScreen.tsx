@@ -81,6 +81,7 @@ export function PromotionScreen({ onToast, onUnauthorized }: Props) {
   }>(null);
   const [duration, setDuration] = useState<PromotionDurationHours>(DEFAULT_DURATION);
   const [confirmOff, setConfirmOff] = useState(false);
+  const [historyOpen, setHistoryOpen] = useState(false);
 
   const effective: EffectivePromotion | null = state?.effective ?? null;
   const live = useMemo(() => {
@@ -263,21 +264,31 @@ export function PromotionScreen({ onToast, onUnauthorized }: Props) {
         })}
       </div>
 
-      <div className="promo-history">
-        <h3>Historial reciente</h3>
-        {history.length === 0 ? (
-          <p className="muted">Aún no hay activaciones registradas.</p>
-        ) : (
-          <ul className="promo-history-list">
-            {history.map((item) => (
-              <li key={`${item.at}-${item.action}-${item.summary}`}>
-                <span className="promo-history-at">{formatHistoryAt(item.at)}</span>
-                <span className="promo-history-actor">{item.actor || 'Admin'}</span>
-                <span className="promo-history-summary">{item.summary}</span>
-              </li>
-            ))}
-          </ul>
-        )}
+      <div className={`promo-history${historyOpen ? ' is-open' : ''}`}>
+        <button
+          type="button"
+          className="promo-history-toggle"
+          aria-expanded={historyOpen}
+          onClick={() => setHistoryOpen((open) => !open)}
+        >
+          <h3>Historial reciente</h3>
+          <span className="promo-history-chevron" aria-hidden="true" />
+        </button>
+        {historyOpen ? (
+          history.length === 0 ? (
+            <p className="muted">Aún no hay activaciones registradas.</p>
+          ) : (
+            <ul className="promo-history-list">
+              {history.map((item) => (
+                <li key={`${item.at}-${item.action}-${item.summary}`}>
+                  <span className="promo-history-at">{formatHistoryAt(item.at)}</span>
+                  <span className="promo-history-actor">{item.actor || 'Admin'}</span>
+                  <span className="promo-history-summary">{item.summary}</span>
+                </li>
+              ))}
+            </ul>
+          )
+        ) : null}
       </div>
 
       {modal ? (
