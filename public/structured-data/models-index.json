@@ -4,7 +4,7 @@
   "name": "Modelos Valeria Ferrer",
   "description": "Catálogo completo de modelos exclusivas en Valencia",
   "url": "https://www.valeriaferrer.com/models",
-  "numberOfItems": 35,
+  "numberOfItems": 36,
   "itemListElement": [
     {
       "@type": "ListItem",
@@ -354,6 +354,16 @@
         "name": "Erika",
         "url": "https://www.valeriaferrer.com/models/erika",
         "image": "https://www.valeriaferrer.com/chicas/erika-valeria-ferrer-model-agency-valencia/portada.jpg"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 36,
+      "item": {
+        "@type": "Person",
+        "name": "Paris",
+        "url": "https://www.valeriaferrer.com/models/paris",
+        "image": "https://www.valeriaferrer.com/chicas/paris-valeria-ferrer-model-agency-valencia/portada.jpg"
       }
     }
   ]
