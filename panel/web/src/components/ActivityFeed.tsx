@@ -17,6 +17,7 @@ export function ActivityFeed() {
   const [items, setItems] = useState<ActivityItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [open, setOpen] = useState(false);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -43,46 +44,61 @@ export function ActivityFeed() {
   }, [load]);
 
   return (
-    <section className="activity-section" aria-label="Actividad reciente">
+    <section
+      className={`activity-section${open ? ' is-open' : ''}`}
+      aria-label="Actividad reciente"
+    >
       <div className="activity-header">
-        <h2>Actividad reciente</h2>
+        <button
+          type="button"
+          className="activity-toggle"
+          aria-expanded={open}
+          onClick={() => setOpen((value) => !value)}
+        >
+          <h2>Actividad reciente</h2>
+          <span className="promo-history-chevron" aria-hidden="true" />
+        </button>
         <button type="button" className="ghost-btn" onClick={load} disabled={loading}>
           Actualizar
         </button>
       </div>
 
-      {loading && items.length === 0 ? (
-        <p className="activity-empty">Cargando…</p>
-      ) : null}
+      {open ? (
+        <>
+          {loading && items.length === 0 ? (
+            <p className="activity-empty">Cargando…</p>
+          ) : null}
 
-      {error ? <p className="activity-error">{error}</p> : null}
+          {error ? <p className="activity-error">{error}</p> : null}
 
-      {!loading && !error && items.length === 0 ? (
-        <p className="activity-empty">Sin cambios en las últimas 24 h</p>
-      ) : null}
+          {!loading && !error && items.length === 0 ? (
+            <p className="activity-empty">Sin cambios en las últimas 24 h</p>
+          ) : null}
 
-      {items.length > 0 ? (
-        <ul className="activity-list">
-          {items.map((item) => (
-            <li key={item.id} className="activity-item">
-              <div className="activity-when">{formatWhen(item.at)}</div>
-              <div className="activity-body">
-                <span className={`activity-subject${item.automatic ? ' system' : ''}`}>
-                  {item.subject}
-                </span>
-                <span className="activity-sep">·</span>
-                <span className="activity-summary">{item.summary}</span>
-              </div>
-              {item.details && item.details.length > 0 ? (
-                <ul className="activity-details">
-                  {item.details.map((line) => (
-                    <li key={line}>{line}</li>
-                  ))}
-                </ul>
-              ) : null}
-            </li>
-          ))}
-        </ul>
+          {items.length > 0 ? (
+            <ul className="activity-list">
+              {items.map((item) => (
+                <li key={item.id} className="activity-item">
+                  <div className="activity-when">{formatWhen(item.at)}</div>
+                  <div className="activity-body">
+                    <span className={`activity-subject${item.automatic ? ' system' : ''}`}>
+                      {item.subject}
+                    </span>
+                    <span className="activity-sep">·</span>
+                    <span className="activity-summary">{item.summary}</span>
+                  </div>
+                  {item.details && item.details.length > 0 ? (
+                    <ul className="activity-details">
+                      {item.details.map((line) => (
+                        <li key={line}>{line}</li>
+                      ))}
+                    </ul>
+                  ) : null}
+                </li>
+              ))}
+            </ul>
+          ) : null}
+        </>
       ) : null}
     </section>
   );
