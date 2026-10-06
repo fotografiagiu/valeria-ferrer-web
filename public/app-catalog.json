@@ -1,9 +1,33 @@
 {
-  "generatedAt": "2026-10-06T08:22:18.225Z",
-  "catalogVersion": "51ae1d5253fd39a896fa82c3b09e15288d26104922685b8a879f0b269075bb7e",
+  "generatedAt": "2026-10-06T20:46:33.686Z",
+  "catalogVersion": "81adaab009f1b3e2964df5b76e371b32ca94c39c5e3ff57b6d0f7a1454cc1480",
   "source": "valeria-ferrer-web",
   "method": "build-app-catalog",
   "models": [
+    {
+      "slug": "nerea",
+      "name": "Nerea",
+      "active": true,
+      "vip": false,
+      "coverImageUrl": "/chicas/nerea-model-agency-valencia-vf/portada.jpg",
+      "images": [
+        "/chicas/nerea-model-agency-valencia-vf/gallery/01.jpg",
+        "/chicas/nerea-model-agency-valencia-vf/gallery/02.jpg",
+        "/chicas/nerea-model-agency-valencia-vf/gallery/03.jpg",
+        "/chicas/nerea-model-agency-valencia-vf/gallery/04.jpg",
+        "/chicas/nerea-model-agency-valencia-vf/gallery/05.jpg",
+        "/chicas/nerea-model-agency-valencia-vf/gallery/06.jpg",
+        "/chicas/nerea-model-agency-valencia-vf/gallery/07.jpg",
+        "/chicas/nerea-model-agency-valencia-vf/gallery/08.jpg",
+        "/chicas/nerea-model-agency-valencia-vf/gallery/09.jpg",
+        "/chicas/nerea-model-agency-valencia-vf/gallery/10.jpg",
+        "/chicas/nerea-model-agency-valencia-vf/gallery/11.jpg",
+        "/chicas/nerea-model-agency-valencia-vf/gallery/12.jpg",
+        "/chicas/nerea-model-agency-valencia-vf/gallery/13.jpg",
+        "/chicas/nerea-model-agency-valencia-vf/gallery/14.jpg",
+        "/chicas/nerea-model-agency-valencia-vf/gallery/15.jpg"
+      ]
+    },
     {
       "slug": "martina",
       "name": "Martina",
