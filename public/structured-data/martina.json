@@ -1,0 +1,39 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Martina",
+  "description": "Martina es española de 27 años, 1,60 m y 45 kg: delgada, elegante y con esa presencia mediterránea que se nota al entrar. Morena de pelo largo, figura fina y un vestido que deja ver una silueta real, sin filtros. Novedad en Valencia — cercana, sensual y con ganas de verdad. Fotos reales con cuño Valeria Ferrer. Si buscas una escort española joven para un encuentro discreto y fácil de conectar, Martina está lista.",
+  "url": "https://www.valeriaferrer.com/models/martina",
+  "image": [
+    "https://www.valeriaferrer.com/chicas/martina-model-agency-valencia-vf/portada.jpg",
+    "https://www.valeriaferrer.com/chicas/martina-model-agency-valencia-vf/gallery/01.jpg",
+    "https://www.valeriaferrer.com/chicas/martina-model-agency-valencia-vf/gallery/02.jpg",
+    "https://www.valeriaferrer.com/chicas/martina-model-agency-valencia-vf/gallery/03.jpg"
+  ],
+  "nationality": "Española",
+  "jobTitle": "Modelo",
+  "knowsLanguage": [
+    "Español"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "itemOffered": {
+      "@type": "Service",
+      "name": "Acompañamiento Premium",
+      "description": "Servicios exclusivos de acompañamiento con Martina en Valencia"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Valencia"
+    },
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "name": "Contacto Directo",
+      "url": "https://www.valeriaferrer.com/contact"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.valeriaferrer.com/models/martina"
+  }
+}
