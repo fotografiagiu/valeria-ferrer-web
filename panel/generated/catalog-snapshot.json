@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-10-06T20:46:41.205Z",
+  "generatedAt": "2026-10-07T09:20:08.651Z",
   "sourcePath": "data/models.json",
-  "sourceHash": "81adaab009f1b3e2964df5b76e371b32ca94c39c5e3ff57b6d0f7a1454cc1480",
+  "sourceHash": "33eee274b51d01fa6bfd7d9c8aedaa7119c2a40d25a994634290fb6280104dc2",
   "modelCount": 54,
   "activeCount": 27,
   "models": [
@@ -32,11 +32,20 @@
       "slug": "martina",
       "name": "Martina",
       "active": true,
-      "coverImageUrl": "/chicas/martina-model-agency-valencia-vf/portada.jpg",
+      "coverImageUrl": "/chicas/martina-model-agency-valencia-vf/portada-oct2026.jpg",
       "images": [
         "/chicas/martina-model-agency-valencia-vf/gallery/01.jpg",
         "/chicas/martina-model-agency-valencia-vf/gallery/02.jpg",
-        "/chicas/martina-model-agency-valencia-vf/gallery/03.jpg"
+        "/chicas/martina-model-agency-valencia-vf/gallery/03.jpg",
+        "/chicas/martina-model-agency-valencia-vf/gallery/04-oct2026.jpg",
+        "/chicas/martina-model-agency-valencia-vf/gallery/05-oct2026.jpg",
+        "/chicas/martina-model-agency-valencia-vf/gallery/06-oct2026.jpg",
+        "/chicas/martina-model-agency-valencia-vf/gallery/07-oct2026.jpg",
+        "/chicas/martina-model-agency-valencia-vf/gallery/08-oct2026.jpg",
+        "/chicas/martina-model-agency-valencia-vf/gallery/09-oct2026.jpg",
+        "/chicas/martina-model-agency-valencia-vf/gallery/10-oct2026.jpg",
+        "/chicas/martina-model-agency-valencia-vf/gallery/11-oct2026.jpg",
+        "/chicas/martina-model-agency-valencia-vf/gallery/12-oct2026.jpg"
       ]
     },
     {
