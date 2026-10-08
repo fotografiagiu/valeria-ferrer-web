@@ -7,6 +7,7 @@ export {
   getPromotionMigrationSql,
   getStaffHiddenMigrationSql,
   getGalleryImagePathsMigrationSql,
+  getWebPromotionSalidasMigrationSql,
   MIGRATION_SQL_PATH,
   MIGRATION_002_SQL_PATH,
   resetDbSingleton,

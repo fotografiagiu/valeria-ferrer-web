@@ -1,11 +1,11 @@
 -- Web promotion control (singleton). Additive — never DROP.
--- active_promotion: none | copas | duples
+-- active_promotion: none | copas | duples | salidas
 -- Effective live state is computed: type != none AND now < ends_at
 
 CREATE TABLE IF NOT EXISTS web_promotion (
   id                  SMALLINT PRIMARY KEY DEFAULT 1 CHECK (id = 1),
   active_promotion    TEXT NOT NULL DEFAULT 'none'
-                        CHECK (active_promotion IN ('none', 'copas', 'duples')),
+                        CHECK (active_promotion IN ('none', 'copas', 'duples', 'salidas')),
   starts_at           TIMESTAMPTZ,
   ends_at             TIMESTAMPTZ,
   duration_hours      INTEGER,

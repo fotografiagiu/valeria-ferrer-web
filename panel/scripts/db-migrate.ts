@@ -4,7 +4,7 @@
  *
  * Usage:
  *   npm run db:preflight   # connect + safety checks, no DDL
- *   npm run db:migrate     # preflight then apply migrations 0001–0004
+ *   npm run db:migrate     # preflight then apply migrations 0001–0005
  *
  * Prefers DATABASE_URL_UNPOOLED, falls back to DATABASE_POSTGRES_URL_NON_POOLING,
  * then DATABASE_URL.
@@ -114,7 +114,7 @@ async function runApply(pool: pg.Pool): Promise<void> {
   if (!sql.includes('CREATE TABLE') || sql.toLowerCase().includes('drop table')) {
     throw new Error('Migration file failed safety check (expected CREATE-only, no DROP TABLE)');
   }
-  console.log('Applying migrations 0001–0004 …');
+  console.log('Applying migrations 0001–0005 …');
   await pool.query(sql);
   console.log('Migration applied.');
 

@@ -1,4 +1,4 @@
-export type PromoKind = 'copas' | 'duples'
+export type PromoKind = 'copas' | 'duples' | 'salidas'
 
 export type PromoPopupConfig = {
   id: string
@@ -35,6 +35,14 @@ export const PROMO_CREATIVES: Record<
     ctaHref: '/booking',
     bannerText: 'Oferta dúplex · Oferta activa · Ver oferta',
   },
+  salidas: {
+    kind: 'salidas',
+    image: '/promos/promo-salidas-vip.webp',
+    imageWidth: 1024,
+    imageHeight: 682,
+    ctaHref: '/booking',
+    bannerText: 'Salidas VIP · Oferta activa · Ver oferta',
+  },
 }
 
 export type RemotePromotionPayload = {
@@ -61,7 +69,7 @@ export function resolvePromoFromRemote(
 ): PromoPopupConfig | null {
   if (!payload || payload.active !== true) return null
   const kind = payload.activePromotion
-  if (kind !== 'copas' && kind !== 'duples') return null
+  if (kind !== 'copas' && kind !== 'duples' && kind !== 'salidas') return null
   const startsAt = payload.startsAt
   const endsAt = payload.endsAt
   if (!startsAt || !endsAt) return null
@@ -73,14 +81,13 @@ export function resolvePromoFromRemote(
     typeof payload.durationHours === 'number' && payload.durationHours > 0
       ? payload.durationHours
       : null
-  const bannerText =
+  const timedBanner =
     kind === 'copas'
-      ? hours
-        ? `🥂 Copa de invitación · Aprovecha en estas ${hours} ${hours === 1 ? 'hora' : 'horas'} · Ver oferta`
-        : creative.bannerText
-      : hours
+      ? `🥂 Copa de invitación · Aprovecha en estas ${hours} ${hours === 1 ? 'hora' : 'horas'} · Ver oferta`
+      : kind === 'duples'
         ? `Oferta dúplex · Aprovecha en estas ${hours} ${hours === 1 ? 'hora' : 'horas'} · Ver oferta`
-        : creative.bannerText
+        : `Salidas VIP · Aprovecha en estas ${hours} ${hours === 1 ? 'hora' : 'horas'} · Ver oferta`
+  const bannerText = hours ? timedBanner : creative.bannerText
 
   return {
     ...creative,
