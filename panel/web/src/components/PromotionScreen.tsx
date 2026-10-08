@@ -309,8 +309,10 @@ export function PromotionScreen({ onToast, onUnauthorized }: Props) {
             </h3>
             {modal.mode === 'replace' && live && effective?.activePromotion !== 'none' ? (
               <p className="promo-modal-warn">
-                {CREATIVES[effective.activePromotion as ActivatablePromotion]?.title ??
-                  effective.activePromotion}{' '}
+                {(effective?.activePromotion &&
+                  CREATIVES[effective.activePromotion as ActivatablePromotion]?.title) ||
+                  effective?.activePromotion ||
+                  'la promoción'}{' '}
                 está activa hasta{' '}
                 {formatEndsAt(effective?.endsAt ?? null)}. ¿Quieres sustituirla por{' '}
                 {CREATIVES[modal.promotion].title}?
