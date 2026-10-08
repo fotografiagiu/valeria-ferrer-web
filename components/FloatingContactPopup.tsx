@@ -62,7 +62,7 @@ const FloatingContactPopup: React.FC = () => {
 
                 <div className="space-y-3">
                   <a 
-                    href={OFFICIAL_TELEGRAM_URL} 
+                    href={OFFICIAL_TELEGRAM_URL} data-contact-placement="floating" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="flex items-center justify-between w-full bg-[#c2b2a3] text-black py-3 px-4 rounded-xl text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-white transition-all duration-300 group/btn"
@@ -75,7 +75,7 @@ const FloatingContactPopup: React.FC = () => {
                   </a>
 
                   <a 
-                    href={OFFICIAL_PHONE_TEL}
+                    href={OFFICIAL_PHONE_TEL} data-contact-placement="floating"
                     className="flex items-center justify-between w-full bg-white/5 border border-white/10 text-white py-3 px-4 rounded-xl text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-white/10 transition-all duration-300"
                   >
                     <div className="flex items-center">

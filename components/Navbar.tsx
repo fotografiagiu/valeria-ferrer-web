@@ -49,11 +49,11 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolled, openMembers }) => {
     }`}>
       {/* Top Bar */}
       <div className="flex items-center justify-center space-x-4 md:space-x-8 text-[10px] md:text-[11px] font-medium tracking-widest text-[#c2b2a3] border-b border-[#c2b2a3]/10 pb-2 mb-2 px-4 text-center">
-        <a href={OFFICIAL_TELEGRAM_URL} target="_blank" rel="noopener noreferrer" className="flex items-center hover:text-white transition-colors">
+        <a href={OFFICIAL_TELEGRAM_URL} data-contact-placement="navbar" target="_blank" rel="noopener noreferrer" className="flex items-center hover:text-white transition-colors">
           <Send size={12} className="mr-2 hidden md:block" />
           <span className="uppercase">Telegram: {OFFICIAL_TELEGRAM_HANDLE}</span>
         </a>
-        <a href={OFFICIAL_PHONE_TEL} className="flex items-center hover:text-white transition-colors">
+        <a href={OFFICIAL_PHONE_TEL} data-contact-placement="navbar" className="flex items-center hover:text-white transition-colors">
           <Phone size={12} className="mr-2 hidden md:block" />
           <span className="uppercase">Telf: {OFFICIAL_PHONE_LABEL}</span>
         </a>
@@ -144,11 +144,11 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolled, openMembers }) => {
       {isMobileMenuOpen && (
         <div id="mobile-nav-menu" className="lg:hidden absolute top-full left-0 w-full bg-[#0a0a0a] border-t border-white/5 py-10 px-8 flex flex-col space-y-6 items-center uppercase tracking-[0.2em] text-sm animate-in fade-in slide-in-from-top duration-300">
           <div className="flex flex-col items-center space-y-2 mb-4 pb-4 border-b border-white/5 w-full">
-            <a href={OFFICIAL_TELEGRAM_URL} target="_blank" rel="noopener noreferrer" className="flex items-center text-[10px] text-[#c2b2a3]">
+            <a href={OFFICIAL_TELEGRAM_URL} data-contact-placement="navbar" target="_blank" rel="noopener noreferrer" className="flex items-center text-[10px] text-[#c2b2a3]">
               <Send size={12} className="mr-2" />
               <span>Telegram: {OFFICIAL_TELEGRAM_HANDLE}</span>
             </a>
-            <a href={OFFICIAL_PHONE_TEL} className="flex items-center text-[10px] text-[#c2b2a3]">
+            <a href={OFFICIAL_PHONE_TEL} data-contact-placement="navbar" className="flex items-center text-[10px] text-[#c2b2a3]">
               <Phone size={12} className="mr-2" />
               <span>Telf: {OFFICIAL_PHONE_LABEL}</span>
             </a>

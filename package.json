@@ -16,6 +16,7 @@
     "verify:prerender": "node scripts/verify-prerender.mjs",
     "lint": "tsc",
     "test:promo": "node --experimental-strip-types --test lib/promoPopupConfig.test.ts",
+    "test:contact-tracking": "node --experimental-strip-types --test lib/contactTracking.test.ts",
     "preview": "vite preview"
   },
   "dependencies": {

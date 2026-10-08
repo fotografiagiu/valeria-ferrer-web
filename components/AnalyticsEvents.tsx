@@ -68,42 +68,8 @@ const AnalyticsEvents: React.FC<AnalyticsEventsProps> = ({
     }
   }, [modelName, serviceType, districtName, blogArticleId]);
 
-  // Track user interactions
+  // Track user interactions (contact_click is handled globally by ContactClickTracker)
   useEffect(() => {
-    // Track contact clicks
-    const handleContactClick = (event: MouseEvent) => {
-      const target = event.target as HTMLElement;
-      const linkElement = target.closest('a');
-      
-      if (!linkElement) return;
-      
-      const href = linkElement.getAttribute('href') || '';
-      let platform: 'telegram' | 'whatsapp' | 'phone' | null = null;
-      
-      // Detect Telegram links
-      if (href.includes('t.me')) {
-        platform = 'telegram';
-      }
-      // Detect WhatsApp links
-      else if (href.includes('whatsapp') || href.includes('wa.me')) {
-        platform = 'whatsapp';
-      }
-      // Detect phone links
-      else if (href.startsWith('tel:')) {
-        platform = 'phone';
-      }
-      
-      if (platform) {
-        track('contact_click', {
-          type: platform,
-          platform: platform,
-          location: 'model_profile',
-          modelName: modelName || 'unknown',
-          path: window.location.pathname
-        });
-      }
-    };
-
     // Track model card clicks
     const handleModelCardClick = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
@@ -130,12 +96,10 @@ const AnalyticsEvents: React.FC<AnalyticsEventsProps> = ({
       }
     };
 
-    document.addEventListener('click', handleContactClick);
     document.addEventListener('click', handleModelCardClick);
     document.addEventListener('click', handleBlogClick);
 
     return () => {
-      document.removeEventListener('click', handleContactClick);
       document.removeEventListener('click', handleModelCardClick);
       document.removeEventListener('click', handleBlogClick);
     };

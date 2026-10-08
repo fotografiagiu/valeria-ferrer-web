@@ -133,7 +133,7 @@ const Home: React.FC = () => {
 
       <div className="bg-[#111111] py-4 border-b border-white/5 text-center">
         <a
-          href="https://t.me/Valeriaferreeer"
+          href="https://t.me/Valeriaferreeer" data-contact-placement="home_banner"
           target="_blank"
           rel="noopener noreferrer"
           className="text-[10px] tracking-[0.5em] text-[#c2b2a3] hover:text-white transition-colors uppercase font-bold flex items-center justify-center"

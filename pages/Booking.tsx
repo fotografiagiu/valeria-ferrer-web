@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, Calendar, ShieldCheck, Send } from 'lucide-react';
 import PageSEOHead, { SITE_ORIGIN } from '../components/PageSEOHead';
+import { trackContactClick } from '../lib/contactTracking';
 
 const Booking: React.FC = () => {
   useEffect(() => { window.scrollTo(0, 0); }, []);
@@ -32,7 +33,13 @@ const Booking: React.FC = () => {
     
     const encodedMessage = encodeURIComponent(message);
     const telegramUrl = `https://t.me/Valeriaferreeer?text=${encodedMessage}`;
-    
+
+    trackContactClick({
+      model_slug: null,
+      channel: 'telegram',
+      placement: 'booking',
+      page: window.location.pathname || '/booking',
+    });
     window.open(telegramUrl, '_blank');
   };
 
@@ -53,12 +60,12 @@ const Booking: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-          <a href="tel:645872227" className="bg-[#111111] p-8 border border-white/5 text-center hover:border-[#c2b2a3]/30 transition-colors">
+          <a href="tel:645872227" data-contact-placement="booking" className="bg-[#111111] p-8 border border-white/5 text-center hover:border-[#c2b2a3]/30 transition-colors">
             <Phone size={24} className="mx-auto text-[#c2b2a3] mb-4" />
             <p className="text-[10px] tracking-widest uppercase text-gray-500 mb-2">Llamada Directa</p>
             <p className="text-sm font-bold">645 872 227</p>
           </a>
-          <a href="https://t.me/Valeriaferreeer" target="_blank" rel="noopener noreferrer" className="bg-[#111111] p-8 border border-white/5 text-center hover:border-[#c2b2a3]/30 transition-colors">
+          <a href="https://t.me/Valeriaferreeer" target="_blank" rel="noopener noreferrer" data-contact-placement="booking" className="bg-[#111111] p-8 border border-white/5 text-center hover:border-[#c2b2a3]/30 transition-colors">
             <Send size={24} className="mx-auto text-[#c2b2a3] mb-4" />
             <p className="text-[10px] tracking-widest uppercase text-gray-500 mb-2">Telegram</p>
             <p className="text-sm font-bold">@Valeriaferreeer</p>

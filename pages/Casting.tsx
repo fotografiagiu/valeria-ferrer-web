@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Camera, Star, Globe, Heart } from 'lucide-react';
 import PageSEOHead, { SITE_ORIGIN } from '../components/PageSEOHead';
+import { trackContactClick } from '../lib/contactTracking';
 
 const Casting: React.FC = () => {
   useEffect(() => { window.scrollTo(0, 0); }, []);
@@ -37,7 +38,13 @@ const Casting: React.FC = () => {
     // Abrir WhatsApp con el mensaje
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/34687410110?text=${encodedMessage}`;
-    
+
+    trackContactClick({
+      model_slug: null,
+      channel: 'whatsapp',
+      placement: 'casting',
+      page: window.location.pathname || '/casting',
+    });
     window.open(whatsappUrl, '_blank');
   };
 

@@ -11,6 +11,7 @@ import AnalyticsTracker from './components/AnalyticsTracker';
 import PageSEOHead from './components/PageSEOHead';
 import PromoPopup from './components/PromoPopup';
 import { Analytics } from '@vercel/analytics/react';
+import ContactClickTracker from './components/ContactClickTracker';
 
 const About = React.lazy(() => import('./pages/About'));
 const Models = React.lazy(() => import('./pages/Models'));
@@ -198,6 +199,7 @@ const App: React.FC = () => {
             </Suspense>
           )}
           <PromoPopup />
+          <ContactClickTracker />
           <ContentProtection />
           <Analytics />
         </div>
