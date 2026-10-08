@@ -65,11 +65,11 @@ const Footer: React.FC = () => {
           <div className="space-y-6">
             <h4 className="text-xs font-bold tracking-[0.3em] uppercase text-[#c2b2a3]">Contacto</h4>
             <div className="space-y-4 text-xs font-light tracking-widest">
-              <a href="https://t.me/Valeriaferreeer" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3 hover:text-[#c2b2a3] transition-colors">
+              <a href="https://t.me/Valeriaferreeer" data-contact-placement="footer" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3 hover:text-[#c2b2a3] transition-colors">
                 <Send size={16} className="text-[#c2b2a3]" />
                 <span>Telegram: @Valeriaferreeer</span>
               </a>
-              <a href="tel:645872227" className="flex items-center space-x-3 hover:text-[#c2b2a3] transition-colors">
+              <a href="tel:645872227" data-contact-placement="footer" className="flex items-center space-x-3 hover:text-[#c2b2a3] transition-colors">
                 <Phone size={16} className="text-[#c2b2a3]" />
                 <span>+34 645 872 227</span>
               </a>

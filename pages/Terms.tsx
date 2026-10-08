@@ -87,6 +87,7 @@ const Terms: React.FC = () => {
                   href="https://t.me/valeriaferreer"
                   target="_blank"
                   rel="noopener noreferrer"
+                  data-contact-placement="seo_landing"
                   className="text-[#c2b2a3] hover:text-white underline underline-offset-4"
                 >
                   @valeriaferreer
@@ -94,7 +95,7 @@ const Terms: React.FC = () => {
               </li>
               <li>
                 Teléfono:{' '}
-                <a href="tel:+34645872227" className="text-[#c2b2a3] hover:text-white">
+                <a href="tel:+34645872227" data-contact-placement="seo_landing" className="text-[#c2b2a3] hover:text-white">
                   +34 645 872 227
                 </a>
               </li>

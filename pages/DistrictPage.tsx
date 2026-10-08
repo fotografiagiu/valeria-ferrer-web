@@ -476,6 +476,7 @@ const DistrictPage: React.FC = () => {
                 href="https://t.me/Valeriaferreeer"
                 target="_blank"
                 rel="noopener noreferrer"
+                data-contact-placement="seo_landing"
                 className="px-8 py-3 border border-[#c2b2a3] text-[#c2b2a3] font-bold rounded-full hover:bg-[#c2b2a3] hover:text-black transition-all duration-300 flex items-center justify-center"
               >
                 <Phone size={16} className="mr-2" />

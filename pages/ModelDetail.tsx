@@ -243,15 +243,19 @@ const ModelDetail: React.FC = () => {
       </div>
 
       {/* Fixed Contact Bar */}
-      <div className={`fixed bottom-0 left-0 right-0 bg-[#0a0a0a]/95 backdrop-blur-lg border-t border-white/10 z-50 transition-transform duration-300 ${
+      <div
+        data-model-slug={model.slug}
+        className={`fixed bottom-0 left-0 right-0 bg-[#0a0a0a]/95 backdrop-blur-lg border-t border-white/10 z-50 transition-transform duration-300 ${
         showContactBar ? 'translate-y-0' : 'translate-y-full'
-      }`}>
+      }`}
+      >
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-center gap-4">
             <a
               href={`https://t.me/Valeriaferreeer?text=Hola%20${model.name},%20vi%20tu%20perfil%20y%20me%20gustaría%20conocer%20más`}
               target="_blank"
               rel="noopener noreferrer"
+              data-contact-placement="detail_sticky"
               className="flex items-center space-x-2 px-6 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors duration-300"
             >
               <MessageCircle size={20} />
@@ -259,6 +263,7 @@ const ModelDetail: React.FC = () => {
             </a>
             <a
               href={`tel:${phoneNumber}`}
+              data-contact-placement="detail_sticky"
               className="flex items-center space-x-2 px-6 py-3 bg-[#c2b2a3] text-black rounded-full hover:bg-[#d4c4b3] transition-colors duration-300"
             >
               <Phone size={20} />
@@ -1246,7 +1251,9 @@ const ModelDetail: React.FC = () => {
                     Reservar Ahora
                   </Link>
                   <a 
-                    href="tel:645872227" 
+                    href="tel:645872227"
+                    data-contact-placement="detail_sidebar"
+                    data-model-slug={model.slug}
                     className="inline-flex items-center justify-center px-8 py-4 border border-[#c2b2a3]/30 text-[#c2b2a3] uppercase tracking-[0.3em] text-[8px] font-bold hover:bg-[#c2b2a3] hover:text-black transition-all duration-700"
                   >
                     <Phone size={12} className="mr-2" /> 
@@ -2283,7 +2290,9 @@ const ModelDetail: React.FC = () => {
               <h4 className="text-lg font-bold text-white uppercase tracking-widest mb-6">Contacto</h4>
               <div className="space-y-3">
                 <a 
-                  href="tel:645872227" 
+                  href="tel:645872227"
+                  data-contact-placement="detail_sidebar"
+                  data-model-slug={model.slug}
                   className="flex items-center text-[#c2b2a3] hover:text-white transition-colors"
                 >
                   <Phone size={16} className="mr-3" /> 
@@ -2293,6 +2302,8 @@ const ModelDetail: React.FC = () => {
                   href="https://t.me/Valeriaferreeer" 
                   target="_blank"
                   rel="noopener noreferrer"
+                  data-contact-placement="detail_sidebar"
+                  data-model-slug={model.slug}
                   className="flex items-center text-[#c2b2a3] hover:text-white transition-colors"
                 >
                   <Phone size={16} className="mr-3" /> 
