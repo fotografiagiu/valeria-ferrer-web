@@ -29,6 +29,11 @@ const CREATIVES: Record<
     image: '/promos/promo-duplex-precios-oct2026.webp',
     hint: 'Oferta dúplex',
   },
+  salidas: {
+    title: 'SALIDAS VIP',
+    image: '/promos/promo-salidas-vip.webp',
+    hint: 'Oferta salidas VIP',
+  },
 };
 
 type Props = {
@@ -145,9 +150,7 @@ export function PromotionScreen({ onToast, onUnauthorized }: Props) {
       const next = await activatePromotion(modal.promotion, duration);
       setState(next);
       setModal(null);
-      onToast(
-        modal.promotion === 'copas' ? 'Publicidad COPAS activada' : 'Publicidad DUPLEX activada'
-      );
+      onToast(`Publicidad ${CREATIVES[modal.promotion].title} activada`);
     } catch (err) {
       if (err instanceof ApiError && err.status === 401) {
         onUnauthorized?.();
@@ -186,7 +189,7 @@ export function PromotionScreen({ onToast, onUnauthorized }: Props) {
         <div>
           <h2 id="promo-web-title">Publicidad web</h2>
           <p className="promo-section-sub">
-            Control remoto de Copas y Duplex · sin commit ni deploy
+            Control remoto de Copas, Duplex y Salidas VIP · sin commit ni deploy
           </p>
         </div>
         <button type="button" className="ghost-btn" onClick={() => void refresh()} disabled={loading || busy}>
@@ -200,7 +203,7 @@ export function PromotionScreen({ onToast, onUnauthorized }: Props) {
           <span className="promo-status-value muted">Cargando…</span>
         ) : live && activeType && activeType !== 'none' ? (
           <span className="promo-status-value live">
-            ● {activeType === 'copas' ? 'COPAS' : 'DUPLEX'} activa
+            ● {CREATIVES[activeType as ActivatablePromotion]?.title ?? activeType} activa
             <span className="promo-status-meta">
               Finaliza {formatEndsAt(effective?.endsAt ?? null)} · Quedan{' '}
               {formatRemaining(effective?.endsAt ?? null, now)}
@@ -306,7 +309,9 @@ export function PromotionScreen({ onToast, onUnauthorized }: Props) {
             </h3>
             {modal.mode === 'replace' && live && effective?.activePromotion !== 'none' ? (
               <p className="promo-modal-warn">
-                {effective?.activePromotion === 'copas' ? 'COPAS' : 'DUPLEX'} está activa hasta{' '}
+                {CREATIVES[effective.activePromotion as ActivatablePromotion]?.title ??
+                  effective.activePromotion}{' '}
+                está activa hasta{' '}
                 {formatEndsAt(effective?.endsAt ?? null)}. ¿Quieres sustituirla por{' '}
                 {CREATIVES[modal.promotion].title}?
               </p>

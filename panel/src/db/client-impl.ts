@@ -21,6 +21,10 @@ export const MIGRATION_004_SQL_PATH = path.resolve(
   __dirname,
   '../../db/migrations/0004_gallery_image_paths.sql'
 );
+export const MIGRATION_005_SQL_PATH = path.resolve(
+  __dirname,
+  '../../db/migrations/0005_web_promotion_salidas.sql'
+);
 
 export type AppDb = ReturnType<typeof drizzle<typeof schema>>;
 
@@ -62,7 +66,8 @@ export function getMigrationSql(): string {
   const promo = readFileSync(MIGRATION_002_SQL_PATH, 'utf8');
   const staffHidden = readFileSync(MIGRATION_003_SQL_PATH, 'utf8');
   const gallery = readFileSync(MIGRATION_004_SQL_PATH, 'utf8');
-  return `${init}\n\n${promo}\n\n${staffHidden}\n\n${gallery}`;
+  const salidas = readFileSync(MIGRATION_005_SQL_PATH, 'utf8');
+  return `${init}\n\n${promo}\n\n${staffHidden}\n\n${gallery}\n\n${salidas}`;
 }
 
 export function getPromotionMigrationSql(): string {
@@ -75,6 +80,10 @@ export function getStaffHiddenMigrationSql(): string {
 
 export function getGalleryImagePathsMigrationSql(): string {
   return readFileSync(MIGRATION_004_SQL_PATH, 'utf8');
+}
+
+export function getWebPromotionSalidasMigrationSql(): string {
+  return readFileSync(MIGRATION_005_SQL_PATH, 'utf8');
 }
 
 /** Create a Drizzle DB bound to a fresh Pool (scripts / one-off). Caller owns lifecycle. */

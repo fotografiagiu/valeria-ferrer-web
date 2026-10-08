@@ -62,7 +62,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const row = result.rows[0];
 
     const activePromotion =
-      row?.active_promotion === 'copas' || row?.active_promotion === 'duples'
+      row?.active_promotion === 'copas' ||
+      row?.active_promotion === 'duples' ||
+      row?.active_promotion === 'salidas'
         ? row.active_promotion
         : 'none';
     const endsAt = iso(row?.ends_at);
