@@ -94,6 +94,6 @@ test('salidas live → promo config', () => {
   )
   assert.ok(promo)
   assert.equal(promo.kind, 'salidas')
-  assert.equal(promo.image.includes('promo-salidas-vip'), true)
+  assert.equal(promo.image.includes('promo-salidas-exclusivas-oct2026'), true)
   assert.equal(isPromoLive(promo, now), true)
 })
