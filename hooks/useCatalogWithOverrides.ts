@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import {
+  HOME_PIN_ORDER,
   applyCatalogOverrides,
   applyHomePinOrder,
   loadPublicOverrides,
@@ -38,7 +39,16 @@ export function useCatalogWithOverrides<T extends CatalogLike>(
 
   return useMemo(() => {
     if (overrideRows?.length) {
-      return applyCatalogOverrides(staticModels, overrideRows, hiddenSlugs);
+      const applied = applyCatalogOverrides(staticModels, overrideRows, hiddenSlugs);
+      // Fichas nuevas ya en HOME_PIN_ORDER pero aún no en el orden del panel:
+      // sacarlas del final y ponerlas al frente, en orden de pin.
+      const inOverrides = new Set(overrideRows.map((r) => r.slug));
+      const pinLeading = HOME_PIN_ORDER.map((slug) =>
+        applied.find((m) => m.slug === slug && !inOverrides.has(slug))
+      ).filter((m): m is T => Boolean(m));
+      if (!pinLeading.length) return applied;
+      const lead = new Set(pinLeading.map((m) => m.slug));
+      return [...pinLeading, ...applied.filter((m) => !lead.has(m.slug))];
     }
     // Sin overrides del panel: orden de models.json + pins de home.
     // Si ya hay hiddenSlugs (payload parcial), filtrarlos igual.

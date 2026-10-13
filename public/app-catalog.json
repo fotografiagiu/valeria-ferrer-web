@@ -1,9 +1,23 @@
 {
-  "generatedAt": "2026-10-11T21:12:03.504Z",
-  "catalogVersion": "e58f123137330f7f1cda31c4251cccbf8998aba453e94a8d286f95f0e3e03aca",
+  "generatedAt": "2026-10-13T19:08:56.572Z",
+  "catalogVersion": "402705163532735391a97756669d7f3d7a5ad5af86aadbdae2f39c7ec1677586",
   "source": "valeria-ferrer-web",
   "method": "build-app-catalog",
   "models": [
+    {
+      "slug": "irene",
+      "name": "Irene",
+      "active": true,
+      "vip": false,
+      "coverImageUrl": "/chicas/irene-model-agency-valencia-vf/portada.jpg",
+      "images": [
+        "/chicas/irene-model-agency-valencia-vf/gallery/01.jpg",
+        "/chicas/irene-model-agency-valencia-vf/gallery/02.jpg",
+        "/chicas/irene-model-agency-valencia-vf/gallery/03.jpg",
+        "/chicas/irene-model-agency-valencia-vf/gallery/04.jpg",
+        "/chicas/irene-model-agency-valencia-vf/gallery/05.jpg"
+      ]
+    },
     {
       "slug": "karol",
       "name": "Karol",

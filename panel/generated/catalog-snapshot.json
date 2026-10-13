@@ -1,31 +1,56 @@
 {
-  "generatedAt": "2026-10-07T09:26:35.835Z",
+  "generatedAt": "2026-10-13T19:09:12.861Z",
   "sourcePath": "data/models.json",
-  "sourceHash": "4eba53b4d505fe34580c001e4f7f6939b3a065ed043db458e146190a9b4ae48c",
-  "modelCount": 54,
-  "activeCount": 27,
+  "sourceHash": "402705163532735391a97756669d7f3d7a5ad5af86aadbdae2f39c7ec1677586",
+  "modelCount": 56,
+  "activeCount": 29,
   "models": [
+    {
+      "slug": "irene",
+      "name": "Irene",
+      "active": true,
+      "coverImageUrl": "/chicas/irene-model-agency-valencia-vf/portada.jpg",
+      "images": [
+        "/chicas/irene-model-agency-valencia-vf/gallery/01.jpg",
+        "/chicas/irene-model-agency-valencia-vf/gallery/02.jpg",
+        "/chicas/irene-model-agency-valencia-vf/gallery/03.jpg",
+        "/chicas/irene-model-agency-valencia-vf/gallery/04.jpg",
+        "/chicas/irene-model-agency-valencia-vf/gallery/05.jpg"
+      ]
+    },
+    {
+      "slug": "karol",
+      "name": "Karol",
+      "active": true,
+      "coverImageUrl": "/chicas/karol-valeria-ferrer-model-agency-valencia/portada.jpg",
+      "images": [
+        "/chicas/karol-valeria-ferrer-model-agency-valencia/gallery/01.jpg",
+        "/chicas/karol-valeria-ferrer-model-agency-valencia/gallery/02.jpg",
+        "/chicas/karol-valeria-ferrer-model-agency-valencia/gallery/03.jpg",
+        "/chicas/karol-valeria-ferrer-model-agency-valencia/gallery/04.jpg"
+      ]
+    },
     {
       "slug": "nerea",
       "name": "Nerea",
       "active": true,
-      "coverImageUrl": "/chicas/nerea-model-agency-valencia-vf/portada.jpg",
+      "coverImageUrl": "/chicas/nerea-model-agency-valencia-vf/portada-v2-blanco-oct2026.jpg",
       "images": [
-        "/chicas/nerea-model-agency-valencia-vf/gallery/01.jpg",
-        "/chicas/nerea-model-agency-valencia-vf/gallery/02.jpg",
-        "/chicas/nerea-model-agency-valencia-vf/gallery/03.jpg",
-        "/chicas/nerea-model-agency-valencia-vf/gallery/04.jpg",
-        "/chicas/nerea-model-agency-valencia-vf/gallery/05.jpg",
-        "/chicas/nerea-model-agency-valencia-vf/gallery/06.jpg",
-        "/chicas/nerea-model-agency-valencia-vf/gallery/07.jpg",
-        "/chicas/nerea-model-agency-valencia-vf/gallery/08.jpg",
-        "/chicas/nerea-model-agency-valencia-vf/gallery/09.jpg",
-        "/chicas/nerea-model-agency-valencia-vf/gallery/10.jpg",
-        "/chicas/nerea-model-agency-valencia-vf/gallery/11.jpg",
-        "/chicas/nerea-model-agency-valencia-vf/gallery/12.jpg",
-        "/chicas/nerea-model-agency-valencia-vf/gallery/13.jpg",
-        "/chicas/nerea-model-agency-valencia-vf/gallery/14.jpg",
-        "/chicas/nerea-model-agency-valencia-vf/gallery/15.jpg"
+        "/chicas/nerea-model-agency-valencia-vf/gallery/01-v2-blanco-oct2026.jpg",
+        "/chicas/nerea-model-agency-valencia-vf/gallery/02-v2-blanco-oct2026.jpg",
+        "/chicas/nerea-model-agency-valencia-vf/gallery/03-v2-blanco-oct2026.jpg",
+        "/chicas/nerea-model-agency-valencia-vf/gallery/04-v2-blanco-oct2026.jpg",
+        "/chicas/nerea-model-agency-valencia-vf/gallery/05-v2-blanco-oct2026.jpg",
+        "/chicas/nerea-model-agency-valencia-vf/gallery/06-v2-blanco-oct2026.jpg",
+        "/chicas/nerea-model-agency-valencia-vf/gallery/07-v2-blanco-oct2026.jpg",
+        "/chicas/nerea-model-agency-valencia-vf/gallery/08-v2-blanco-oct2026.jpg",
+        "/chicas/nerea-model-agency-valencia-vf/gallery/09-v2-blanco-oct2026.jpg",
+        "/chicas/nerea-model-agency-valencia-vf/gallery/10-v2-blanco-oct2026.jpg",
+        "/chicas/nerea-model-agency-valencia-vf/gallery/11-v2-blanco-oct2026.jpg",
+        "/chicas/nerea-model-agency-valencia-vf/gallery/12-v2-blanco-oct2026.jpg",
+        "/chicas/nerea-model-agency-valencia-vf/gallery/13-v2-blanco-oct2026.jpg",
+        "/chicas/nerea-model-agency-valencia-vf/gallery/14-v2-blanco-oct2026.jpg",
+        "/chicas/nerea-model-agency-valencia-vf/gallery/15-v2-blanco-oct2026.jpg"
       ]
     },
     {
