@@ -33,10 +33,10 @@ function fakeAnchor(attrs: Record<string, string | null>) {
 
 test('detectContactChannel: telegram / phone / whatsapp', () => {
   assert.equal(detectContactChannel('https://t.me/Valeriaferreeer'), 'telegram')
-  assert.equal(detectContactChannel('tel:645872227'), 'phone')
+  assert.equal(detectContactChannel('tel:611076490'), 'phone')
   assert.equal(detectContactChannel('https://wa.me/34687410110'), 'whatsapp')
   assert.equal(
-    detectContactChannel('https://api.whatsapp.com/send?phone=34645872227'),
+    detectContactChannel('https://api.whatsapp.com/send?phone=34611076490'),
     'whatsapp'
   )
 })
@@ -83,7 +83,7 @@ test('Navbar tel → 1 event', () => {
   withMockTrack((calls) => {
     const resolved = resolveContactClickFromAnchor(
       fakeAnchor({
-        href: 'tel:645872227',
+        href: 'tel:611076490',
         'data-contact-placement': 'navbar',
       }),
       '/'
@@ -137,7 +137,7 @@ test('Detail sticky falls back to path slug when attr missing', () => {
   const slug = 'martina-model-agency-valencia-vf'
   const resolved = resolveContactClickFromAnchor(
     fakeAnchor({
-      href: 'tel:645872227',
+      href: 'tel:611076490',
       'data-contact-placement': 'detail_sticky',
     }),
     `/models/${slug}`
@@ -215,7 +215,7 @@ test('Promo popup CTAs use promo_popup placement (no double local track)', () =>
   withMockTrack((calls) => {
     const resolved = resolveContactClickFromAnchor(
       fakeAnchor({
-        href: 'tel:645872227',
+        href: 'tel:611076490',
         'data-contact-placement': 'promo_popup',
       }),
       '/'

@@ -2,6 +2,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Phone, Instagram, Twitter, MapPin, Send } from 'lucide-react';
+import {
+  OFFICIAL_PHONE_LABEL_INTL,
+  OFFICIAL_PHONE_TEL,
+  OFFICIAL_TELEGRAM_HANDLE,
+  OFFICIAL_TELEGRAM_URL,
+  OFFICIAL_WHATSAPP_URL,
+} from '../lib/officialContact';
 
 const Footer: React.FC = () => {
   return (
@@ -65,13 +72,17 @@ const Footer: React.FC = () => {
           <div className="space-y-6">
             <h4 className="text-xs font-bold tracking-[0.3em] uppercase text-[#c2b2a3]">Contacto</h4>
             <div className="space-y-4 text-xs font-light tracking-widest">
-              <a href="https://t.me/Valeriaferreeer" data-contact-placement="footer" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3 hover:text-[#c2b2a3] transition-colors">
+              <a href={OFFICIAL_TELEGRAM_URL} target="_blank" rel="noopener noreferrer" data-contact-placement="footer" className="flex items-center space-x-3 hover:text-[#c2b2a3] transition-colors">
                 <Send size={16} className="text-[#c2b2a3]" />
-                <span>Telegram: @Valeriaferreeer</span>
+                <span>Telegram: {OFFICIAL_TELEGRAM_HANDLE}</span>
               </a>
-              <a href="tel:645872227" data-contact-placement="footer" className="flex items-center space-x-3 hover:text-[#c2b2a3] transition-colors">
+              <a href={OFFICIAL_PHONE_TEL} data-contact-placement="footer" className="flex items-center space-x-3 hover:text-[#c2b2a3] transition-colors">
                 <Phone size={16} className="text-[#c2b2a3]" />
-                <span>+34 645 872 227</span>
+                <span>{OFFICIAL_PHONE_LABEL_INTL}</span>
+              </a>
+              <a href={OFFICIAL_WHATSAPP_URL} target="_blank" rel="noopener noreferrer" data-contact-placement="footer" className="flex items-center space-x-3 hover:text-[#25d366] transition-colors">
+                <Phone size={16} className="text-[#25d366]" />
+                <span>WhatsApp: 611 076 490</span>
               </a>
               <div className="flex items-center space-x-3">
                 <MapPin size={16} className="text-[#c2b2a3]" />

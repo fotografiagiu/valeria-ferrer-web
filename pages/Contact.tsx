@@ -55,8 +55,8 @@ const Contact: React.FC = () => {
                   <div>
                     <h3 className="text-lg font-light text-white uppercase tracking-widest mb-2">Teléfono</h3>
                     <p className="text-gray-400 text-sm leading-relaxed">
-                      <a href="tel:645872227" data-contact-placement="contact_page" className="hover:text-[#c2b2a3] transition-colors">
-                        +34 645 872 227
+                      <a href="tel:+34611076490" className="hover:text-[#c2b2a3] transition-colors">
+                        +34 611 076 490
                       </a>
                       <br />
                       Disponible 24/7 para clientes VIP
@@ -87,7 +87,7 @@ const Contact: React.FC = () => {
                   <div>
                     <h3 className="text-lg font-light text-white uppercase tracking-widest mb-2">Telegram</h3>
                     <p className="text-gray-400 text-sm leading-relaxed">
-                      <a href="https://t.me/Valeriaferreeer" target="_blank" rel="noopener noreferrer" data-contact-placement="contact_page" className="hover:text-[#c2b2a3] transition-colors">
+                      <a href="https://t.me/Valeriaferreeer" target="_blank" rel="noopener noreferrer" className="hover:text-[#c2b2a3] transition-colors">
                         @Valeriaferreeer
                       </a>
                       <br />
@@ -153,7 +153,7 @@ const Contact: React.FC = () => {
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  className="w-full h-645872227 lg:h-full min-h-[400px]"
+                  className="w-full h-auto lg:h-full min-h-[400px]"
                 />
               </div>
             </div>
@@ -195,15 +195,13 @@ const Contact: React.FC = () => {
                 href="https://wa.me/34687410110"
                 target="_blank"
                 rel="noopener noreferrer"
-                data-contact-placement="contact_page"
                 className="inline-flex items-center px-8 py-4 bg-[#c2b2a3] text-black font-bold uppercase tracking-[0.3em] text-xs hover:bg-white transition-all duration-300"
               >
                 <Send size={16} className="mr-3" />
                 WhatsApp
               </a>
               <a
-                href="tel:645872227"
-                data-contact-placement="contact_page"
+                href="tel:+34611076490"
                 className="inline-flex items-center px-8 py-4 border border-[#c2b2a3]/30 text-[#c2b2a3] font-bold uppercase tracking-[0.3em] text-xs hover:bg-[#c2b2a3] hover:text-black transition-all duration-300"
               >
                 <Phone size={16} className="mr-3" />
