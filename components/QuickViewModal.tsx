@@ -3,6 +3,7 @@ import { X, Phone, MessageCircle, Calendar, MapPin, Heart, Star, ChevronLeft, Ch
 import LazyImage from './LazyImage';
 import modelsData from '../data/models.json';
 import { filterActiveModels } from '../lib/modelsCatalog';
+import { officialWhatsAppUrlWithText } from '../lib/officialContact';
 
 interface QuickViewModalProps {
   isOpen: boolean;
@@ -134,7 +135,9 @@ const QuickViewModal: React.FC<QuickViewModalProps> = ({ isOpen, onClose, modelI
             {/* Action Buttons */}
             <div className="space-y-3">
               <a
-                href={`https://api.whatsapp.com/send?phone=+34XXXXXXXXXX&text=Hola%2C+estoy+interesado+en+quedar+con+${encodeURIComponent(model.name)}`}
+                href={officialWhatsAppUrlWithText(
+                  `Hola, estoy interesado en quedar con ${model.name}`,
+                )}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 w-full py-3 bg-[#c2b2a3] text-black font-bold rounded-lg hover:bg-white transition-colors"

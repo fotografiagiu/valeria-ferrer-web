@@ -6,6 +6,7 @@ import ModelsGrid from '../components/ModelsGrid';
 import FAQ from '../components/FAQ';
 import PageSEOHead from '../components/PageSEOHead';
 import HomeNovedadesStrip from '../components/HomeNovedadesStrip';
+import HomeWhatsAppNews from '../components/HomeWhatsAppNews';
 import modelsData from '../data/models.json';
 import { filterActiveModels } from '../lib/modelsCatalog';
 import { useCatalogWithOverrides } from '../hooks/useCatalogWithOverrides';
@@ -86,6 +87,8 @@ const Home: React.FC = () => {
         canonicalUrl={homeSEOData.canonicalUrl}
       />
       <Hero />
+
+      <HomeWhatsAppNews />
 
       <HomeNovedadesStrip exploreLinks={exploreLinks} loadExploreNav={loadExploreNav} />
 

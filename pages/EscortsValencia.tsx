@@ -347,7 +347,6 @@ const EscortsValencia: React.FC = () => {
               href="https://t.me/Valeriaferreeer"
               target="_blank"
               rel="noopener noreferrer"
-              data-contact-placement="seo_landing"
               className="inline-flex items-center gap-2 text-[#c2b2a3] hover:text-white transition-colors uppercase tracking-[0.2em] text-[10px]"
             >
               <MessageCircle size={16} />
@@ -355,12 +354,11 @@ const EscortsValencia: React.FC = () => {
             </a>
             <span className="hidden sm:inline text-gray-600">·</span>
             <a
-              href="tel:+34645872227"
-              data-contact-placement="seo_landing"
+              href="tel:+34611076490"
               className="inline-flex items-center gap-2 text-[#c2b2a3] hover:text-white transition-colors uppercase tracking-[0.2em] text-[10px]"
             >
               <Phone size={16} />
-              +34 645 872 227
+              +34 611 076 490
             </a>
           </div>
         </div>
