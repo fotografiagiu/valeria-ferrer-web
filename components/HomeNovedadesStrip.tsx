@@ -165,7 +165,7 @@ const HomeNovedadesStrip: React.FC<HomeNovedadesStripProps> = ({
                   alt={`${model.name} — nueva incorporación Valeria Ferrer`}
                   className="h-full w-full object-cover object-center"
                   containerClassName="absolute inset-0 h-full w-full overflow-hidden"
-                  sizes="(max-width: 767px) 75vw, 33vw"
+                  sizes="(max-width: 767px) 33vw, 33vw"
                   priority={index === 0}
                 />
                 <span className="vf-new-ribbon" aria-hidden="true">
