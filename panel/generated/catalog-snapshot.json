@@ -1,10 +1,32 @@
 {
-  "generatedAt": "2026-10-15T07:18:29.963Z",
+  "generatedAt": "2026-10-15T07:29:21.332Z",
   "sourcePath": "data/models.json",
-  "sourceHash": "dc27ec799c8e8791b3b836f982f8e39243058baa8d8aa170fd305022d148d511",
-  "modelCount": 58,
-  "activeCount": 31,
+  "sourceHash": "a20b167647965e53784e6f0cb2f85622eff07cb342958790b7be443027fc1607",
+  "modelCount": 59,
+  "activeCount": 32,
   "models": [
+    {
+      "slug": "shantell",
+      "name": "Shantell",
+      "active": true,
+      "coverImageUrl": "/chicas/shantell-model-agency-valencia-vf/portada.jpg",
+      "images": [
+        "/chicas/shantell-model-agency-valencia-vf/gallery/01.jpg",
+        "/chicas/shantell-model-agency-valencia-vf/gallery/02.jpg",
+        "/chicas/shantell-model-agency-valencia-vf/gallery/03.jpg",
+        "/chicas/shantell-model-agency-valencia-vf/gallery/04.jpg",
+        "/chicas/shantell-model-agency-valencia-vf/gallery/05.jpg",
+        "/chicas/shantell-model-agency-valencia-vf/gallery/06.jpg",
+        "/chicas/shantell-model-agency-valencia-vf/gallery/07.jpg",
+        "/chicas/shantell-model-agency-valencia-vf/gallery/08.jpg",
+        "/chicas/shantell-model-agency-valencia-vf/gallery/09.jpg",
+        "/chicas/shantell-model-agency-valencia-vf/gallery/10.jpg",
+        "/chicas/shantell-model-agency-valencia-vf/gallery/11.jpg",
+        "/chicas/shantell-model-agency-valencia-vf/gallery/12.jpg",
+        "/chicas/shantell-model-agency-valencia-vf/gallery/13.jpg",
+        "/chicas/shantell-model-agency-valencia-vf/gallery/14.jpg"
+      ]
+    },
     {
       "slug": "thania",
       "name": "Thania",
