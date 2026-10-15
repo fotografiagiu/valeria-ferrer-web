@@ -1,10 +1,23 @@
 {
-  "generatedAt": "2026-10-15T06:56:54.268Z",
+  "generatedAt": "2026-10-15T07:18:29.963Z",
   "sourcePath": "data/models.json",
-  "sourceHash": "5528bf66e965729d307f18f65c6b05be1c45834c8e7bf53b6ebfca78508e0f8c",
-  "modelCount": 57,
-  "activeCount": 30,
+  "sourceHash": "dc27ec799c8e8791b3b836f982f8e39243058baa8d8aa170fd305022d148d511",
+  "modelCount": 58,
+  "activeCount": 31,
   "models": [
+    {
+      "slug": "thania",
+      "name": "Thania",
+      "active": true,
+      "coverImageUrl": "/chicas/thania-model-agency-valencia-vf/portada.jpg",
+      "images": [
+        "/chicas/thania-model-agency-valencia-vf/gallery/01.jpg",
+        "/chicas/thania-model-agency-valencia-vf/gallery/02.jpg",
+        "/chicas/thania-model-agency-valencia-vf/gallery/03.jpg",
+        "/chicas/thania-model-agency-valencia-vf/gallery/04.jpg",
+        "/chicas/thania-model-agency-valencia-vf/gallery/05.jpg"
+      ]
+    },
     {
       "slug": "pamela",
       "name": "Pamela",
