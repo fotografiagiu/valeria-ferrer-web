@@ -90,7 +90,11 @@ const Home: React.FC = () => {
 
       <HomeWhatsAppNews />
 
-      <HomeNovedadesStrip exploreLinks={exploreLinks} loadExploreNav={loadExploreNav} />
+      <HomeNovedadesStrip
+        models={homeModels}
+        exploreLinks={exploreLinks}
+        loadExploreNav={loadExploreNav}
+      />
 
       {/* Elite Experience Section — sin Framer en cards (mismo aspecto final) */}
       <section className="py-12 md:py-24 bg-[#0a0a0a] border-b border-white/5">
