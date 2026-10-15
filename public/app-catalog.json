@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-10-15T07:29:20.753Z",
-  "catalogVersion": "a20b167647965e53784e6f0cb2f85622eff07cb342958790b7be443027fc1607",
+  "generatedAt": "2026-10-15T07:40:57.444Z",
+  "catalogVersion": "f79fef981846f1a805e64d0d79beeb22e27e0f06ff9215ee230572bff5809901",
   "source": "valeria-ferrer-web",
   "method": "build-app-catalog",
   "models": [
@@ -32,13 +32,13 @@
       "name": "Thania",
       "active": true,
       "vip": false,
-      "coverImageUrl": "/chicas/thania-model-agency-valencia-vf/portada.jpg",
+      "coverImageUrl": "/chicas/thania-model-agency-valencia-vf/portada-oct15.jpg",
       "images": [
-        "/chicas/thania-model-agency-valencia-vf/gallery/01.jpg",
-        "/chicas/thania-model-agency-valencia-vf/gallery/02.jpg",
-        "/chicas/thania-model-agency-valencia-vf/gallery/03.jpg",
-        "/chicas/thania-model-agency-valencia-vf/gallery/04.jpg",
-        "/chicas/thania-model-agency-valencia-vf/gallery/05.jpg"
+        "/chicas/thania-model-agency-valencia-vf/gallery/01-oct15.jpg",
+        "/chicas/thania-model-agency-valencia-vf/gallery/02-oct15.jpg",
+        "/chicas/thania-model-agency-valencia-vf/gallery/03-oct15.jpg",
+        "/chicas/thania-model-agency-valencia-vf/gallery/04-oct15.jpg",
+        "/chicas/thania-model-agency-valencia-vf/gallery/05-oct15.jpg"
       ]
     },
     {
