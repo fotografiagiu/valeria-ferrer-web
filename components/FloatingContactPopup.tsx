@@ -35,7 +35,7 @@ const FloatingContactPopup: React.FC = () => {
   return (
     <>
       {/* Columna flotante: WhatsApp arriba · Atención Exclusiva debajo */}
-      <div className="fixed bottom-24 right-6 z-[55] flex w-[min(300px,calc(100vw-1.75rem))] flex-col items-stretch gap-3">
+      <div className="fixed bottom-6 left-6 z-[55] flex w-[min(280px,calc(100vw-1.75rem))] max-md:bottom-24 max-md:left-auto max-md:right-6 flex-col items-stretch gap-3">
         <a
           href={OFFICIAL_WHATSAPP_URL}
           target="_blank"
