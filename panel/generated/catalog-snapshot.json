@@ -1,10 +1,26 @@
 {
-  "generatedAt": "2026-10-13T19:09:12.861Z",
+  "generatedAt": "2026-10-15T06:46:42.923Z",
   "sourcePath": "data/models.json",
-  "sourceHash": "402705163532735391a97756669d7f3d7a5ad5af86aadbdae2f39c7ec1677586",
-  "modelCount": 56,
-  "activeCount": 29,
+  "sourceHash": "b1826e63abf15e43d49075e95e453594ab6d00861247d5b42085c02987768963",
+  "modelCount": 57,
+  "activeCount": 30,
   "models": [
+    {
+      "slug": "pamela",
+      "name": "Pamela",
+      "active": true,
+      "coverImageUrl": "/chicas/pamela-model-agency-valencia-vf/portada.jpg",
+      "images": [
+        "/chicas/pamela-model-agency-valencia-vf/gallery/01.jpg",
+        "/chicas/pamela-model-agency-valencia-vf/gallery/02.jpg",
+        "/chicas/pamela-model-agency-valencia-vf/gallery/03.jpg",
+        "/chicas/pamela-model-agency-valencia-vf/gallery/04.jpg",
+        "/chicas/pamela-model-agency-valencia-vf/gallery/05.jpg",
+        "/chicas/pamela-model-agency-valencia-vf/gallery/06.jpg",
+        "/chicas/pamela-model-agency-valencia-vf/gallery/07.jpg",
+        "/chicas/pamela-model-agency-valencia-vf/gallery/08.jpg"
+      ]
+    },
     {
       "slug": "irene",
       "name": "Irene",
