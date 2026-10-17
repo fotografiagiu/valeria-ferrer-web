@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-10-15T07:41:00.557Z",
+  "generatedAt": "2026-10-17T15:54:19.108Z",
   "sourcePath": "data/models.json",
-  "sourceHash": "f79fef981846f1a805e64d0d79beeb22e27e0f06ff9215ee230572bff5809901",
+  "sourceHash": "01167e623af49a28f02765df872da01bee75c3539f9644dc21b41e697b1128ee",
   "modelCount": 59,
-  "activeCount": 32,
+  "activeCount": 33,
   "models": [
     {
       "slug": "shantell",
@@ -698,7 +698,7 @@
     {
       "slug": "marta",
       "name": "Marta",
-      "active": false,
+      "active": true,
       "coverImageUrl": "/chicas/marta-valeria-ferrer-model-agency-valencia/portada.jpg",
       "images": [
         "/chicas/marta-valeria-ferrer-model-agency-valencia/gallery/01.jpg",
