@@ -702,6 +702,20 @@
   overflow: visible;
 }
 
+.home-novedades-vf.is-solo .vf-news-grid {
+  grid-template-columns: minmax(0, 520px);
+  justify-content: center;
+}
+
+.home-novedades-vf.is-solo .vf-news-card__media {
+  aspect-ratio: 3 / 4;
+}
+
+.home-novedades-vf.is-solo .vf-news-card__name,
+.home-novedades-vf.is-solo .vf-news-card h3 {
+  font-size: 36px;
+}
+
 
 /* ============================================================
    CARD
@@ -1337,6 +1351,41 @@
 
   .home-novedades-vf .vf-explore-slot {
     margin: 18px 12px 0;
+  }
+
+  .home-novedades-vf.is-solo .vf-news-grid {
+    grid-template-columns: minmax(0, 1fr);
+    width: min(100% - 32px, 420px);
+    margin-inline: auto;
+    padding: 0;
+  }
+
+  .home-novedades-vf.is-solo .vf-news-card__media {
+    aspect-ratio: 3 / 4;
+  }
+
+  .home-novedades-vf.is-solo .vf-news-card__body {
+    padding: 16px 16px 18px;
+  }
+
+  .home-novedades-vf.is-solo .vf-news-card__name,
+  .home-novedades-vf.is-solo .vf-news-card h3 {
+    font-size: 32px;
+  }
+
+  .home-novedades-vf.is-solo .vf-news-card__origin {
+    font-size: 11px;
+  }
+
+  .home-novedades-vf.is-solo .vf-news-card__meta {
+    font-size: 12px;
+    letter-spacing: .04em;
+  }
+
+  .home-novedades-vf.is-solo .vf-news-card__cta {
+    height: 44px;
+    min-height: 44px;
+    font-size: 11px;
   }
 }
 

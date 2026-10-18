@@ -6,7 +6,7 @@ import { getModelCoverThumbnailPath, getModelCoverImage } from '../lib/modelGrid
 const ExploreProfilesNav = React.lazy(() => import('./ExploreProfilesNav'));
 
 /** Home strip promo slot — visual order only; does not alter catalog/SEO. */
-const HOME_NOVEDADES_PROMO_SLUGS = ['daniela', 'shantell', 'thania'] as const;
+const HOME_NOVEDADES_PROMO_SLUGS = ['daniela'] as const;
 
 type NovedadesModel = {
   slug: string;
@@ -58,8 +58,7 @@ const HomeNovedadesStrip: React.FC<HomeNovedadesStripProps> = ({
     const pinned = HOME_NOVEDADES_PROMO_SLUGS.map((slug) => bySlug.get(slug)).filter(
       (m): m is NovedadesModel => Boolean(m),
     );
-    if (pinned.length > 0) return pinned.slice(0, 3);
-    return models.filter((m) => m.isNew).slice(0, 3);
+    return pinned;
   }, [models]);
   const count = novedades.length;
   const trackRef = useRef<HTMLDivElement>(null);
@@ -112,13 +111,13 @@ const HomeNovedadesStrip: React.FC<HomeNovedadesStripProps> = ({
     );
   }
 
-  const countCopy =
-    count === 1
-      ? '1 nueva incorporación · disponible ahora en Valencia'
-      : `${count} nuevas incorporaciones · disponibles ahora en Valencia`;
+  const solo = count === 1;
+  const countCopy = solo
+    ? '1 nueva incorporación · disponible ahora en Valencia'
+    : `${count} nuevas incorporaciones · disponibles ahora en Valencia`;
 
   return (
-    <section className="home-novedades-vf" aria-labelledby="vf-novedades-title">
+    <section className={`home-novedades-vf${solo ? ' is-solo' : ''}`} aria-labelledby="vf-novedades-title">
       {/*
         Editorial plates REQUIRED (clean photo only — never full UI mockup):
         - /public/images/novedades-hero-editorial.webp
@@ -139,12 +138,14 @@ const HomeNovedadesStrip: React.FC<HomeNovedadesStripProps> = ({
               {' '}
               a <span className="gold">perder?</span>
             </h2>
-            <p className="vf-news-subtitle">Conócelas ahora</p>
+            <p className="vf-news-subtitle">{solo ? 'Conócela ahora' : 'Conócelas ahora'}</p>
             <p className="vf-news-description">{countCopy}</p>
           </div>
         </header>
 
-        <div className="vf-news-grid-heading">Nuevas incorporaciones</div>
+        <div className="vf-news-grid-heading">
+          {solo ? 'Nueva incorporación' : 'Nuevas incorporaciones'}
+        </div>
 
         <div
           id="novedades-grid"
@@ -165,7 +166,7 @@ const HomeNovedadesStrip: React.FC<HomeNovedadesStripProps> = ({
                   alt={`${model.name} — nueva incorporación Valeria Ferrer`}
                   className="h-full w-full object-cover object-center"
                   containerClassName="absolute inset-0 h-full w-full overflow-hidden"
-                  sizes="(max-width: 767px) 33vw, 33vw"
+                  sizes={solo ? '(max-width: 767px) 88vw, 520px' : '(max-width: 767px) 33vw, 33vw'}
                   priority={index === 0}
                 />
                 <span className="vf-new-ribbon" aria-hidden="true">
@@ -190,19 +191,21 @@ const HomeNovedadesStrip: React.FC<HomeNovedadesStripProps> = ({
           ))}
         </div>
 
-        <div className="vf-news-dots" aria-label="Navegación de novedades" role="tablist">
-          {novedades.map((model, index) => (
-            <button
-              key={model.slug}
-              type="button"
-              role="tab"
-              aria-selected={activeIndex === index}
-              aria-label={`Ver ${model.name}`}
-              className={`vf-news-dot${activeIndex === index ? ' is-active' : ''}`}
-              onClick={() => scrollToIndex(index)}
-            />
-          ))}
-        </div>
+        {count > 1 ? (
+          <div className="vf-news-dots" aria-label="Navegación de novedades" role="tablist">
+            {novedades.map((model, index) => (
+              <button
+                key={model.slug}
+                type="button"
+                role="tab"
+                aria-selected={activeIndex === index}
+                aria-label={`Ver ${model.name}`}
+                className={`vf-news-dot${activeIndex === index ? ' is-active' : ''}`}
+                onClick={() => scrollToIndex(index)}
+              />
+            ))}
+          </div>
+        ) : null}
 
         <div className="vf-news-main-cta-wrap">
           <Link to="/novedades" className="vf-news-main-cta">
