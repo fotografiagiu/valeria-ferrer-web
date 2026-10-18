@@ -1,9 +1,20 @@
 {
-  "generatedAt": "2026-10-17T15:54:19.108Z",
-  "catalogVersion": "01167e623af49a28f02765df872da01bee75c3539f9644dc21b41e697b1128ee",
+  "generatedAt": "2026-10-18T15:26:19.913Z",
+  "catalogVersion": "797d2d250859908b12fd673b3b4aa4216d03134580625699cb0eee1297e1c591",
   "source": "valeria-ferrer-web",
   "method": "build-app-catalog",
   "models": [
+    {
+      "slug": "daniela",
+      "name": "Daniela",
+      "active": true,
+      "vip": false,
+      "coverImageUrl": "/chicas/daniela-model-agency-valencia-vf/portada.jpg",
+      "images": [
+        "/chicas/daniela-model-agency-valencia-vf/gallery/01.jpg",
+        "/chicas/daniela-model-agency-valencia-vf/gallery/02.jpg"
+      ]
+    },
     {
       "slug": "shantell",
       "name": "Shantell",
