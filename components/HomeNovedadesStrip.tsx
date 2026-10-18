@@ -6,7 +6,7 @@ import { getModelCoverThumbnailPath, getModelCoverImage } from '../lib/modelGrid
 const ExploreProfilesNav = React.lazy(() => import('./ExploreProfilesNav'));
 
 /** Home strip promo slot — visual order only; does not alter catalog/SEO. */
-const HOME_NOVEDADES_PROMO_SLUGS = ['thania', 'shantell', 'pamela'] as const;
+const HOME_NOVEDADES_PROMO_SLUGS = ['daniela', 'shantell', 'thania'] as const;
 
 type NovedadesModel = {
   slug: string;
