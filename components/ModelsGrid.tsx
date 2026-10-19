@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { MODELS } from '../constants';
 import { Crown, Grid3X3, LayoutGrid } from 'lucide-react';
 import LazyImage from './LazyImage';
+import HalloweenCardOverlay from './HalloweenCardOverlay';
 import {
   getGalleryImageThumbnail,
   getModelCoverThumbnailPath,
@@ -168,6 +169,7 @@ const ModelCard: React.FC<{
           )}
 
           <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
+          <HalloweenCardOverlay />
 
           {(model.galleryUpdated ||
             adaptedModel.name === 'Flor' ||
