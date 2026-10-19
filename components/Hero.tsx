@@ -5,6 +5,8 @@ import HalloweenScene from './HalloweenScene';
 import { halloweenIsLive } from './HalloweenCampaign';
 
 const MOBILE_MQ = '(max-width: 767px)';
+/** Imagen creada para la campaña: un salón fotográfico, no un mockup con texto. */
+const HALLOWEEN_ROOM_IMAGE = 'https://d8j0ntlcm91z4.cloudfront.net/user_36DayVJkjOLFx77vIiJcDWRkvYc/hf_20261019_102448_388329a1-c921-4283-9551-2cd376c043a4.png';
 const HERO_BANNER_MOBILE_WEBP = '/images/home-hero-banner-mobile-v4-premium.webp';
 const HERO_BANNER_MOBILE_FALLBACK = '/images/home-hero-banner-mobile-v4-premium.png';
 const DESKTOP_VIDEO_SRC =
@@ -43,6 +45,7 @@ function hideHeroLcpShell(): void {
 
 const Hero = () => {
   const isMobileHero = useIsMobileHero();
+  const halloween = halloweenIsLive();
 
   useEffect(() => {
     const mq = window.matchMedia(MOBILE_MQ);
@@ -56,7 +59,19 @@ const Hero = () => {
       {/* Background Media */}
       <div className="absolute inset-0 z-0 overflow-hidden bg-black">
         {/* Móvil: imagen estática — sin iframe YouTube en el DOM */}
-        {isMobileHero ? (
+        {halloween ? (
+          <img
+            src={HALLOWEEN_ROOM_IMAGE}
+            alt=""
+            aria-hidden="true"
+            decoding="async"
+            fetchPriority="high"
+            loading="eager"
+            width={1024}
+            height={1792}
+            className="vf-halloween-photographic-hero absolute inset-0 h-full w-full object-cover object-center"
+          />
+        ) : isMobileHero ? (
           <picture className="absolute inset-0 h-full w-full">
             <source srcSet={HERO_BANNER_MOBILE_WEBP} type="image/webp" />
             <img
@@ -90,11 +105,11 @@ const Hero = () => {
         />
       </div>
 
-      {halloweenIsLive() && <>
+      {halloween && <>
       <HalloweenScene />
       <a href="#halloween-campaign" className="vf-halloween-hero__ticker" aria-label="Descubrir la campaña especial de Halloween">
-        <span className="vf-halloween-hero__pumpkin" aria-hidden="true">✦</span>
-        <span><strong>ESPECIAL HALLOWEEN</strong><small>Citas exclusivas · Sorpresas próximamente</small></span>
+        <span className="vf-halloween-hero__pumpkin" aria-hidden="true">🎃</span>
+        <span><strong>ESPECIAL HALLOWEEN</strong><small>Citas exclusivas · Momentos inolvidables · Ver oferta</small></span>
         <span aria-hidden="true">›</span>
       </a>
       </>}
