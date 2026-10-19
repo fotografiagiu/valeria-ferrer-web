@@ -794,8 +794,8 @@
    filter:drop-shadow(0 3px 6px rgba(132,32,7,.55));
  }
  .vf-halloween-preview .vf-halloween-hero .text-lg{font-size:clamp(11px,1.1vw,15px);letter-spacing:.14em;line-height:1.6;margin:8px auto 20px!important;}
- .vf-halloween-preview .vf-halloween-hero .flex.flex-col.sm\\:flex-row{width:100%;display:flex;gap:12px!important;justify-content:center;}
- .vf-halloween-preview .vf-halloween-hero .flex.flex-col.sm\\:flex-row>*{margin:0!important;min-width:0;width:49%;}
+ .vf-halloween-preview .vf-halloween-hero .flex.flex-col.sm\:flex-row{width:100%;display:flex;gap:12px!important;justify-content:center;}
+ .vf-halloween-preview .vf-halloween-hero .flex.flex-col.sm\:flex-row>*{margin:0!important;min-width:0;width:49%;}
  .vf-halloween-preview .vf-halloween-hero a[href="/models"],
  .vf-halloween-preview .vf-halloween-hero a[href="/booking"]{white-space:nowrap;padding:13px 8px!important;font-size:clamp(9px,.89vw,12px);}
  .vf-halloween-preview .vf-halloween-values{max-width:780px;margin:28px auto 0;}
