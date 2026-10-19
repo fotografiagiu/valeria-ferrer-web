@@ -71,7 +71,7 @@ const Hero = () => {
               loading="eager"
               width={768}
               height={1376}
-              className="vf-halloween-photographic-hero absolute inset-0 h-full w-full object-cover object-center"
+              className="vf-halloween-photographic-hero vf-halloween-hero__portrait absolute inset-0 h-full w-full object-cover object-center"
             />
           </>
         ) : isMobileHero ? (
@@ -118,12 +118,12 @@ const Hero = () => {
       </>}
 
       {/* Content — móvil: visible al montar; desktop: animación framer-motion */}
-      <div className="relative z-20 text-center max-w-5xl px-6 max-md:mt-[4vh]">
+      <div className="vf-halloween-hero__content relative z-20 text-center max-w-5xl px-6 max-md:mt-[4vh]">
         <motion.div
           initial={isMobileHero ? false : { opacity: 0, y: 50 }}
           animate={isMobileHero ? undefined : { opacity: 1, y: 0 }}
           transition={isMobileHero ? { duration: 0 } : { duration: 1, ease: 'easeOut' }}
-          className="text-center mb-8"
+          className="vf-halloween-hero__brand text-center mb-8"
         >
           {/* Main name with better visual organization */}
           <div className="relative inline-block">
@@ -159,7 +159,7 @@ const Hero = () => {
           initial={isMobileHero ? false : { opacity: 0 }}
           animate={isMobileHero ? undefined : { opacity: 1 }}
           transition={isMobileHero ? { duration: 0 } : { duration: 1, delay: 0.5 }}
-          className="text-lg md:text-xl font-light tracking-[0.3em] uppercase text-gray-200 mb-12 drop-shadow-xl max-md:max-w-[17rem] max-md:mx-auto max-md:leading-relaxed max-md:tracking-[0.22em] max-md:text-base"
+          className="vf-halloween-hero__subtitle text-lg md:text-xl font-light tracking-[0.3em] uppercase text-gray-200 mb-12 drop-shadow-xl max-md:max-w-[17rem] max-md:mx-auto max-md:leading-relaxed max-md:tracking-[0.22em] max-md:text-base"
         >
           Experiencias exclusivas y citas discretas en Valencia
         </motion.p>
@@ -168,7 +168,7 @@ const Hero = () => {
           initial={isMobileHero ? false : { opacity: 0, scale: 0.9 }}
           animate={isMobileHero ? undefined : { opacity: 1, scale: 1 }}
           transition={isMobileHero ? { duration: 0 } : { duration: 0.8, delay: 0.8 }}
-          className="flex flex-col sm:flex-row items-center justify-center space-y-5 sm:space-y-0 sm:space-x-8"
+          className="vf-halloween-hero__actions flex flex-col sm:flex-row items-center justify-center space-y-5 sm:space-y-0 sm:space-x-8"
         >
           {isMobileHero ? (
             <div className="w-full sm:w-auto">
