@@ -4,6 +4,7 @@ import { MODELS } from '../constants';
 import { Crown, Grid3X3, LayoutGrid } from 'lucide-react';
 import LazyImage from './LazyImage';
 import HalloweenCardOverlay, { HalloweenInfoWebs } from './HalloweenCardOverlay';
+import { halloweenIsLive } from './HalloweenCampaign';
 import {
   getGalleryImageThumbnail,
   getModelCoverThumbnailPath,
@@ -168,7 +169,9 @@ const ModelCard: React.FC<{
             />
           )}
 
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
+          <div className={halloweenIsLive()
+            ? "absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent pointer-events-none"
+            : "absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60"} />
           <HalloweenCardOverlay />
 
           {(model.galleryUpdated ||
