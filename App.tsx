@@ -10,6 +10,7 @@ import ContentProtection from './components/ContentProtection';
 import AnalyticsTracker from './components/AnalyticsTracker';
 import PageSEOHead from './components/PageSEOHead';
 import PromoPopup from './components/PromoPopup';
+import HalloweenCampaign from './components/HalloweenCampaign';
 import { Analytics } from '@vercel/analytics/react';
 import ContactClickTracker from './components/ContactClickTracker';
 
@@ -137,6 +138,7 @@ const App: React.FC = () => {
             openMembers={() => setIsMembersModalOpen(true)} 
           />
           
+          <HalloweenCampaign />
           <main>
             <Suspense fallback={routeFallback}>
               <Routes>
