@@ -2,6 +2,7 @@
 import React, { Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Hero from '../components/Hero';
+import HalloweenCampaign from '../components/HalloweenCampaign';
 import ModelsGrid from '../components/ModelsGrid';
 import FAQ from '../components/FAQ';
 import PageSEOHead from '../components/PageSEOHead';
@@ -87,6 +88,7 @@ const Home: React.FC = () => {
         canonicalUrl={homeSEOData.canonicalUrl}
       />
       <Hero />
+      <HalloweenCampaign homeOnly />
 
       <HomeWhatsAppNews />
 
