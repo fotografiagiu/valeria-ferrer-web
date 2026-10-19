@@ -1031,3 +1031,185 @@
   .vf-halloween-preview .vf-halloween-hero__pumpkin{font-size:16px;}
   .vf-halloween-preview .vf-halloween-wordmark__art{width:min(100%, 360px);}
 }
+
+
+/* DESKTOP HERO REFERENCE 2 · 2026-10-19 — composition calibrated from supplied screenshots */
+/* Desktop-only changes: keep the original mobile layout and its crop untouched.
+   The existing 620px / 820px limits made reference-2 look like reference-1. */
+@media (min-width:1200px) {
+  .vf-halloween-preview .vf-halloween-hero {
+    display:flex!important;
+    align-items:center!important;
+    justify-content:flex-start!important;
+    position:relative;
+    min-height:clamp(1080px,92svh,1450px)!important;
+    height:auto!important;
+    padding:190px 5.1vw 105px!important;
+    overflow:hidden;
+  }
+  /* Same Halloween model as on mobile, larger and shifted left to fill the right side. */
+  .vf-halloween-preview .vf-halloween-hero .vf-halloween-hero__portrait {
+    position:absolute!important;
+    top:0!important;
+    right:0!important;
+    left:auto!important;
+    bottom:0!important;
+    height:100%!important;
+    width:85%!important;
+    max-width:none!important;
+    object-fit:cover!important;
+    object-position:center 23%!important;
+    filter:brightness(1.15) saturate(1.12) contrast(1.03)!important;
+    -webkit-mask-image:linear-gradient(to right, transparent 0%, rgba(0,0,0,.64) 17%,#000 38%)!important;
+    mask-image:linear-gradient(to right, transparent 0%, rgba(0,0,0,.64) 17%,#000 38%)!important;
+  }
+  /* Stop the legacy black/40 video overlay from dulling the portrait. */
+  .vf-halloween-preview .vf-halloween-hero > .absolute.inset-0.z-0 > .z-10 {
+    background:transparent!important;
+    opacity:0!important;
+  }
+  .vf-halloween-preview .vf-halloween-hero::before {
+    z-index:12;
+    background:
+      linear-gradient(to right,rgba(9,1,7,.92) 0%,rgba(14,2,9,.79) 21%,rgba(14,2,8,.43) 42%,rgba(11,2,6,.07) 66%,transparent 84%)!important;
+  }
+  /* Reference 2: the whole content is broader and centered vertically. */
+  .vf-halloween-preview .vf-halloween-hero .vf-halloween-hero__content {
+    position:relative;
+    z-index:20;
+    width:min(45vw,900px)!important;
+    max-width:900px!important;
+    flex:none!important;
+    box-sizing:border-box;
+    margin:0!important;
+    padding:0 8px!important;
+    text-align:center;
+  }
+  .vf-halloween-preview .vf-halloween-hero .vf-halloween-hero__brand {
+    margin-bottom:27px!important;
+  }
+  .vf-halloween-preview .vf-halloween-hero h1 {
+    margin-bottom:23px!important;
+  }
+  .vf-halloween-preview .vf-halloween-hero h1 > span:first-child {
+    font-size:clamp(70px,4.9vw,109px)!important;
+    line-height:1.05!important;
+    letter-spacing:-.012em!important;
+    white-space:nowrap;
+  }
+  .vf-halloween-preview .vf-halloween-hero h1 > span:nth-child(2) {
+    margin-top:19px!important;
+    font-size:clamp(17px,1.38vw,25px)!important;
+    letter-spacing:.25em!important;
+  }
+  .vf-halloween-preview .vf-halloween-hero .vf-halloween-hero__brand p {
+    font-size:clamp(13px,.94vw,18px)!important;
+    letter-spacing:.31em!important;
+    margin-top:19px!important;
+    color:#e3ba91!important;
+  }
+  .vf-halloween-preview .vf-halloween-hero .vf-halloween-wordmark {
+    margin:30px auto 20px!important;
+    width:100%!important;
+    justify-content:center;
+    align-items:center;
+  }
+  .vf-halloween-preview .vf-halloween-hero .vf-halloween-wordmark__art {
+    width:min(100%,745px)!important;
+    max-width:745px!important;
+    margin:0 auto!important;
+    filter:drop-shadow(0 8px 15px rgba(95,13,4,.48))!important;
+  }
+  .vf-halloween-preview .vf-halloween-hero .vf-halloween-hero__subtitle {
+    max-width:720px!important;
+    margin:18px auto 30px!important;
+    font-size:clamp(16px,1.1vw,22px)!important;
+    line-height:1.55!important;
+    letter-spacing:.14em!important;
+    text-wrap:balance;
+  }
+  .vf-halloween-preview .vf-halloween-hero .vf-halloween-hero__actions {
+    display:flex!important;
+    flex-direction:row!important;
+    justify-content:center!important;
+    align-items:stretch!important;
+    gap:17px!important;
+    margin:0 auto!important;
+    width:100%;
+  }
+  .vf-halloween-preview .vf-halloween-hero .vf-halloween-hero__actions > * {
+    width:calc(50% - 9px)!important;
+    min-width:0!important;
+    max-width:420px!important;
+    margin:0!important;
+  }
+  .vf-halloween-preview .vf-halloween-hero .vf-halloween-hero__actions a {
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    min-height:68px!important;
+    padding:14px 10px!important;
+    font-size:clamp(12px,.95vw,17px)!important;
+    letter-spacing:.12em!important;
+    white-space:nowrap;
+  }
+  .vf-halloween-preview .vf-halloween-hero .vf-halloween-values {
+    display:flex!important;
+    gap:18px!important;
+    width:100%!important;
+    max-width:840px!important;
+    margin:33px auto 0!important;
+  }
+  .vf-halloween-preview .vf-halloween-hero .vf-halloween-values svg {
+    width:27px!important;height:27px!important;
+  }
+  .vf-halloween-preview .vf-halloween-hero .vf-halloween-values span {
+    max-width:145px!important;
+    font-size:clamp(10px,.76vw,14px)!important;
+    letter-spacing:.09em!important;
+    line-height:1.4!important;
+  }
+  /* The banner also matches reference 2's visual breadth. */
+  .vf-halloween-preview .vf-halloween-hero__ticker {
+    top:111px!important;
+    width:min(76vw,1510px)!important;
+    max-width:1510px!important;
+    min-height:68px!important;
+    gap:19px!important;
+    padding:14px 20px!important;
+    border-radius:6px!important;
+  }
+  .vf-halloween-preview .vf-halloween-hero__line {
+    font-size:clamp(12px,.91vw,18px)!important;
+    letter-spacing:.13em!important;
+  }
+  .vf-halloween-preview .vf-halloween-hero__pumpkin {
+    font-size:27px!important;
+  }
+}
+
+/* Medium desktops: keep content and photograph separate without squeezing buttons. */
+@media (min-width:768px) and (max-width:1199px) {
+  .vf-halloween-preview .vf-halloween-hero {
+    min-height:900px!important;
+    height:auto!important;
+    padding-top:160px!important;
+    padding-bottom:70px!important;
+  }
+  .vf-halloween-preview .vf-halloween-hero .vf-halloween-hero__content {
+    width:48%!important;
+    max-width:none!important;
+  }
+  .vf-halloween-preview .vf-halloween-hero .vf-halloween-hero__portrait {
+    width:84%!important;
+    object-position:center 23%!important;
+  }
+  .vf-halloween-preview .vf-halloween-hero .vf-halloween-hero__actions a {
+    padding:14px 7px!important;
+    font-size:10px!important;
+    letter-spacing:.06em!important;
+  }
+  .vf-halloween-preview .vf-halloween-hero__ticker {
+    width:88%!important;
+  }
+}
