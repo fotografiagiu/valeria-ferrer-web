@@ -10,7 +10,7 @@ import ContentProtection from './components/ContentProtection';
 import AnalyticsTracker from './components/AnalyticsTracker';
 import PageSEOHead from './components/PageSEOHead';
 import PromoPopup from './components/PromoPopup';
-import HalloweenCampaign from './components/HalloweenCampaign';
+import HalloweenCampaign, { halloweenIsLive } from './components/HalloweenCampaign';
 import './styles/halloween-preview.css';
 import { Analytics } from '@vercel/analytics/react';
 import ContactClickTracker from './components/ContactClickTracker';
@@ -133,7 +133,7 @@ const App: React.FC = () => {
   return (
     <AnalyticsTracker>
       <Router>
-        <div className="vf-halloween-preview min-h-screen bg-[#0a0a0a] text-white overflow-x-hidden">
+        <div className={`${halloweenIsLive() ? 'vf-halloween-preview ' : ''}min-h-screen bg-[#0a0a0a] text-white overflow-x-hidden`}>
           <Navbar 
             isScrolled={isScrolled} 
             openMembers={() => setIsMembersModalOpen(true)} 
