@@ -348,7 +348,6 @@
    ──────────────────────────────────────────────── */
 .vf-halloween-preview {
   --vf-room-art: url("https://d8j0ntlcm91z4.cloudfront.net/user_36DayVJkjOLFx77vIiJcDWRkvYc/hf_20261019_102448_388329a1-c921-4283-9551-2cd376c043a4.png");
-  --vf-card-art: url("https://d8j0ntlcm91z4.cloudfront.net/user_36DayVJkjOLFx77vIiJcDWRkvYc/hf_20261019_102547_21bc3352-2304-4534-b4d9-8871a5e54018.png");
 }
 
 /* Full-bleed salon plate; actual HTML headings and CTAs remain readable/SEO friendly */
@@ -401,24 +400,20 @@
 .vf-halloween-preview .vf-halloween-catalog>div:not(.pointer-events-none) {
   position:relative;z-index:1;
 }
-/* Profile photo ornaments made from high-detail pumpkin/candle/spiderweb art. */
+/* Profile photographs are never covered by an opaque image.
+ * HalloweenCardOverlay renders vector drawings with a transparent canvas. */
 .vf-halloween-preview .vf-halloween-decor-layer {
-  display:block;pointer-events:none;
-  /* No aislar: screen debe mezclarse con la foto ORIGINAL inferior. */
+  pointer-events:none;
+  contain:paint;
 }
-.vf-halloween-preview .vf-halloween-decor-image {
-  width:100%;
-  height:100%;
-  object-fit:fill;
-  mix-blend-mode:screen;
-  opacity:.98;
-  filter:contrast(1.3) brightness(1.03) saturate(1.25);
+.vf-halloween-preview .vf-halloween-decor-layer .vf-halloween-ornaments {
+  background:none!important;
+  opacity:1;
 }
-.vf-halloween-preview .vf-halloween-decor-layer::after {
-  content:"";position:absolute;inset:0;pointer-events:none;
-  box-shadow:inset 0 0 0 1px rgba(244,166,100,.2),inset 0 -20px 28px -16px rgba(239,97,37,.38);
+.vf-halloween-preview .vf-halloween-model-photo::after{
+  display:none;
 }
-/* The original face remains untouched: warm ambient lighting only. */
+/* The original portraits remain untouched. */
 .vf-halloween-preview .vf-halloween-model-photo>img:not(.vf-halloween-decor-image){
   filter:sepia(.12) saturate(1.12) contrast(1.03);
 }
@@ -455,14 +450,9 @@
 .vf-halloween-preview .vf-halloween-home-card .vf-halloween-decor-image {
   object-position:center;
 }
-/* Новelties: retained cards, same photographs with our corner art layered in. */
+/* Novedades now use the same transparent vector decorations as /models. */
 .vf-halloween-preview .home-novedades-vf .vf-news-card__media::after {
-  background-image:var(--vf-card-art);
-  background-size:100% 100%;background-repeat:no-repeat;
-  background-position:center center;
-  opacity:.75;
-  mix-blend-mode:screen;
-  filter:contrast(1.35) saturate(1.15);
+  background-image:none!important;
 }
 .vf-halloween-preview .home-novedades-vf .vf-news-card__name {
   font-family:Georgia,"Times New Roman",serif;
@@ -523,4 +513,99 @@
 @media (prefers-reduced-motion:reduce) {
   .vf-halloween-preview .vf-halloween-decor-image,
   .vf-halloween-preview .vf-halloween-hero__ticker {animation:none;transition:none;}
+}
+
+
+/* REFERENCE-FAITHFUL HALLOWEEN CARDS: ivory webs, copper frames, visible real photos */
+.vf-halloween-preview .vf-halloween-card-web{display:none}
+.vf-halloween-preview .vf-halloween-model-photo > img,
+.vf-halloween-preview .vf-halloween-model-photo > picture > img {
+  filter:none!important; opacity:1!important;
+}
+.vf-halloween-preview .vf-halloween-decor-layer {
+  z-index:8;
+  overflow:hidden;
+}
+.vf-halloween-preview .vf-halloween-photo-web {
+  position:absolute;z-index:9;top:0;
+  width:36%;max-width:130px;height:auto;pointer-events:none;
+  opacity:.95;
+  filter:drop-shadow(0 0 3px rgba(30,5,11,.5));
+}
+.vf-halloween-preview .vf-halloween-photo-web--left {left:0}
+.vf-halloween-preview .vf-halloween-photo-web--right {right:0}
+.vf-halloween-preview .vf-halloween-ornaments{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  overflow:visible;
+  mix-blend-mode:normal!important;
+  opacity:1!important;
+  background:transparent!important;
+}
+.vf-halloween-preview .vf-halloween-model-card,
+.vf-halloween-preview .vf-halloween-home-card,
+.vf-halloween-preview .vf-news-card{
+  border:1px solid #b77745!important;
+  outline:1px solid rgba(253,185,121,.16);
+  outline-offset:-4px;
+  border-radius:11px;
+  box-shadow:0 0 0 1px rgba(30,13,8,.85),0 6px 24px rgba(0,0,0,.36);
+}
+.vf-halloween-preview .vf-halloween-model-info,
+.vf-halloween-preview .vf-halloween-home-info,
+.vf-halloween-preview .home-novedades-vf .vf-news-card__body {
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+  border-top:1px solid #a96537;
+  background:linear-gradient(to bottom,#160d10 0%,#090609 65%,#14080e 100%)!important;
+}
+.vf-halloween-preview .vf-halloween-info-webs{
+  display:block;position:absolute;inset:0;z-index:0;pointer-events:none;
+}
+.vf-halloween-preview .vf-halloween-info-web {
+  position:absolute;top:0;width:37%;max-width:100px;height:auto;
+  opacity:.63;filter:drop-shadow(0 0 3px #000);
+}
+.vf-halloween-preview .vf-halloween-info-web--left{left:0}
+.vf-halloween-preview .vf-halloween-info-web--right{right:0}
+.vf-halloween-preview .vf-halloween-model-info> :not(.vf-halloween-info-webs),
+.vf-halloween-preview .vf-halloween-home-info> :not(.vf-halloween-info-webs),
+.vf-halloween-preview .home-novedades-vf .vf-news-card__body> :not(.vf-halloween-info-webs){
+  position:relative;z-index:1;
+}
+.vf-halloween-preview .vf-halloween-model-info h3,
+.vf-halloween-preview .vf-halloween-home-info h3,
+.vf-halloween-preview .home-novedades-vf .vf-news-card__name{
+  color:#fff2df!important;
+  font-family:'Playfair Display', Georgia, serif;
+  font-weight:400;
+  text-shadow:0 2px 12px rgba(0,0,0,.56);
+}
+.vf-halloween-preview .vf-halloween-model-info p,
+.vf-halloween-preview .vf-halloween-home-info p,
+.vf-halloween-preview .home-novedades-vf .vf-news-card__origin,
+.vf-halloween-preview .home-novedades-vf .vf-news-card__meta{
+  color:#efceaf;
+}
+.vf-halloween-preview .vf-halloween-model-card .vf-halloween-model-photo,
+.vf-halloween-preview .vf-halloween-home-card .aspect-\\[2\\/3\\],
+.vf-halloween-preview .home-novedades-vf .vf-news-card__media{
+  border-bottom:1px solid rgba(211,135,76,.48);
+}
+.vf-halloween-preview .vf-halloween-home-card .aspect-\\[2\\/3\\] > div.bg-gradient-to-t{
+  opacity:.18;
+}
+.vf-halloween-preview .home-novedades-vf .vf-news-card__media{
+  position:relative;isolation:isolate;
+}
+.vf-halloween-preview .home-novedades-vf .vf-news-card__media .vf-halloween-decor-layer{
+  z-index:8;
+}
+@media(max-width:767px){
+  .vf-halloween-preview .vf-halloween-photo-web{width:43%}
+  .vf-halloween-preview .vf-halloween-info-web{width:41%;opacity:.64}
+  .vf-halloween-preview .vf-halloween-model-info{min-height:122px}
+  .vf-halloween-preview .vf-halloween-model-info h3{font-size:clamp(17px,4.7vw,22px)}
+  .vf-halloween-preview .vf-halloween-model-info p{font-size:9px;line-height:1.45}
 }
