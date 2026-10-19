@@ -6,6 +6,7 @@ import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { Crown } from 'lucide-react';
 import { halloweenIsLive } from './HalloweenCampaign';
+import HalloweenCardOverlay from './HalloweenCardOverlay';
 
 export type CatalogPreviewModel = {
   slug: string;
@@ -144,6 +145,7 @@ function VipHorizontalCard({ model }: { model: CatalogPreviewModel }) {
           className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-[38%] bg-gradient-to-t from-black/16 to-transparent"
           aria-hidden
         />
+        <HalloweenCardOverlay />
         <div className="absolute right-3 top-3 z-20 md:right-4 md:top-4">
           <div className="vip-gold-badge relative flex items-center space-x-1.5 px-3 py-1.5 md:space-x-2 md:px-4 md:py-2">
             <Crown className="relative z-[1] h-3 w-3 text-[#1a1208] md:h-3.5 md:w-3.5" strokeWidth={1.6} />
@@ -225,6 +227,7 @@ function VerticalModelCard({ model }: { model: CatalogPreviewModel }) {
           className="pointer-events-none absolute inset-x-0 bottom-0 h-[28%] bg-gradient-to-t from-black/35 to-transparent"
           aria-hidden
         />
+        <HalloweenCardOverlay />
         <svg className="vf-halloween-card-web" viewBox="0 0 110 110" aria-hidden="true" fill="none">
           <g stroke="currentColor" strokeWidth="1.1">
             <path d="M110 0 0 110M110 0 42 110M110 0 0 63M110 0 81 110M110 0 0 27M110 0 110 110"/>
