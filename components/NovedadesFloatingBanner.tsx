@@ -17,6 +17,8 @@ import {
   subscribePromotion,
 } from '../lib/webPromotionRemote';
 
+const HALLOWEEN_HANGING_STORAGE_KEY = 'vf-halloween-hanging-camila-daniela-v1';
+
 type NovedadSlide = {
   slug: string;
   name: string;
@@ -27,17 +29,17 @@ type NovedadSlide = {
   href: string;
 };
 
-function persistMinimized(): void {
+function persistMinimized(key: string = CFG.storageKey): void {
   try {
-    localStorage.setItem(CFG.storageKey, String(Date.now()));
+    localStorage.setItem(key, String(Date.now()));
   } catch {
     /* ignore */
   }
 }
 
-function clearMinimized(): void {
+function clearMinimized(key: string = CFG.storageKey): void {
   try {
-    localStorage.removeItem(CFG.storageKey);
+    localStorage.removeItem(key);
   } catch {
     /* ignore */
   }
@@ -98,16 +100,16 @@ const NovedadesFloatingBanner: React.FC = () => {
     /^\/models\/[^/]+\/?$/.test(location.pathname);
 
   const minimize = useCallback(() => {
-    persistMinimized();
+    persistMinimized(halloweenLanding ? HALLOWEEN_HANGING_STORAGE_KEY : CFG.storageKey);
     setIsOpen(false);
     setShowMinimized(true);
-  }, []);
+  }, [halloweenLanding]);
 
   const expand = useCallback(() => {
-    clearMinimized();
+    clearMinimized(halloweenLanding ? HALLOWEEN_HANGING_STORAGE_KEY : CFG.storageKey);
     setShowMinimized(false);
     setIsOpen(true);
-  }, []);
+  }, [halloweenLanding]);
 
   // Mientras la oferta promocional esté activa, no mostrar el banner de novedades.
   useEffect(() => startPromotionWatcher(), []);
@@ -128,7 +130,17 @@ const NovedadesFloatingBanner: React.FC = () => {
       return;
     }
 
-    const dismissed = isNovedadesBannerDismissed(CFG);
+    let dismissed = isNovedadesBannerDismissed(CFG);
+    if (halloweenLanding) {
+      // Own key: a previously minimized Martina/Nerea banner must not suppress
+      // the first Camila/Daniela cobweb preview.
+      try {
+        const timestamp = Number(localStorage.getItem(HALLOWEEN_HANGING_STORAGE_KEY));
+        dismissed = timestamp > 0 && Date.now() - timestamp < CFG.dismissDays * 86400000;
+      } catch {
+        dismissed = false;
+      }
+    }
     const showTimer = window.setTimeout(() => {
       setReady(true);
       if (dismissed) {
