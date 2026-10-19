@@ -61,7 +61,11 @@ function buildSlides(): NovedadSlide[] {
         name: m.name,
         title: m.name,
         text: `Nueva incorporación · ${place}`,
-        imageSrc: getModelCoverThumbnailPath(m.image),
+        // Camila was uploaded with portada.jpg but no cover-thumbnail.jpg yet.
+        // Use the actual existing small asset; Daniela uses the standard generated cover.
+        imageSrc: m.slug === 'camila'
+          ? m.image.replace('/chicas/', '/chicas-thumbnails/')
+          : getModelCoverThumbnailPath(m.image),
         imageAlt: `${m.name}, nueva modelo en Valeria Ferrer Valencia`,
         href: `/models/${m.slug || m.id}`,
       };
