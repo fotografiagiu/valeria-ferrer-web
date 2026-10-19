@@ -1,6 +1,8 @@
 import React, { useCallback, useEffect, useId, useMemo, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Sparkles, X } from 'lucide-react';
+import HalloweenHangingNovedades from './HalloweenHangingNovedades';
+import { halloweenIsLive } from './HalloweenCampaign';
 import { MODELS } from '../constants';
 import {
   NOVEDADES_BANNER as CFG,
@@ -68,6 +70,22 @@ const NovedadesFloatingBanner: React.FC = () => {
   const location = useLocation();
   const titleId = useId();
   const slides = useMemo(() => buildSlides(), []);
+  // Halloween preview: display actual active catalog records; never fabricate photos or links.
+  const halloweenLanding = halloweenIsLive() && location.pathname === '/';
+  const hangingSlides = useMemo(() => (
+    ['camila', 'daniela']
+      .map((slug) => MODELS.find((m) => m.slug === slug && m.isNew))
+      .filter((m): m is (typeof MODELS)[number] => Boolean(m))
+      .map((m) => ({
+        slug: m.slug,
+        name: m.name,
+        imageSrc: getModelCoverThumbnailPath(m.image),
+        imageAlt: `${m.name}, nueva incorporación`,
+        text: m.nationality || 'Valencia',
+        href: `/models/${m.slug}`,
+      }))
+  ), []);
+  const availableSlides = halloweenLanding ? hangingSlides : slides;
   const [ready, setReady] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [showMinimized, setShowMinimized] = useState(false);
@@ -102,8 +120,8 @@ const NovedadesFloatingBanner: React.FC = () => {
 
   // Campaña activa + respeto dismissDays tras cerrar (no molestar en cada visita).
   useEffect(() => {
-    const campaignLive = isNovedadesBannerLive(CFG);
-    if (!campaignLive || hideOnRoute || promoActive || slides.length === 0) {
+    const campaignLive = halloweenLanding || isNovedadesBannerLive(CFG);
+    if (!campaignLive || hideOnRoute || promoActive || availableSlides.length === 0) {
       setReady(false);
       setIsOpen(false);
       setShowMinimized(false);
@@ -122,7 +140,7 @@ const NovedadesFloatingBanner: React.FC = () => {
       }
     }, CFG.delayMs);
 
-    const end = Date.parse(CFG.endsAt);
+    const end = halloweenLanding ? Date.parse('2026-11-02T00:00:00+01:00') : Date.parse(CFG.endsAt);
     const msLeft = end - Date.now();
     const endTimer =
       Number.isFinite(msLeft) && msLeft > 0 && msLeft < 2147483647
@@ -137,7 +155,7 @@ const NovedadesFloatingBanner: React.FC = () => {
       window.clearTimeout(showTimer);
       if (endTimer) window.clearTimeout(endTimer);
     };
-  }, [hideOnRoute, promoActive, slides.length]);
+  }, [hideOnRoute, promoActive, availableSlides.length, halloweenLanding]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -167,7 +185,7 @@ const NovedadesFloatingBanner: React.FC = () => {
     img.src = next.imageSrc;
   }, [index, slides]);
 
-  if (!isNovedadesBannerLive(CFG) || hideOnRoute || promoActive || !ready || slides.length === 0) {
+  if ((!halloweenLanding && !isNovedadesBannerLive(CFG)) || hideOnRoute || promoActive || !ready || availableSlides.length === 0) {
     return null;
   }
 
@@ -175,7 +193,14 @@ const NovedadesFloatingBanner: React.FC = () => {
 
   return (
     <>
-      {isOpen && (
+      {isOpen && halloweenLanding && (
+        <HalloweenHangingNovedades
+          models={hangingSlides}
+          titleId={titleId}
+          onClose={minimize}
+        />
+      )}
+      {isOpen && !halloweenLanding && (
         <aside
           role="dialog"
           aria-modal="false"
