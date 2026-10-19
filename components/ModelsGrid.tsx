@@ -133,7 +133,7 @@ const ModelCard: React.FC<{
     <div
       itemScope
       itemType="https://schema.org/Person"
-      className="group relative overflow-hidden bg-[#1a1a1a] rounded-lg shadow-lg md:hover:shadow-[0_10px_40px_rgba(194,178,163,0.15)] md:transition-shadow md:duration-500"
+      className="vf-halloween-home-card group relative overflow-hidden bg-[#1a1a1a] rounded-lg shadow-lg md:hover:shadow-[0_10px_40px_rgba(194,178,163,0.15)] md:transition-shadow md:duration-500"
       onMouseEnter={() => {
         setIsHovered(true);
         setHoverImageReady(true);
@@ -272,7 +272,7 @@ const ModelsGrid: React.FC<ModelsGridProps> = ({
   };
 
   return (
-    <section className="py-24 bg-[#0a0a0a]">
+    <section className="vf-halloween-home-models py-24 bg-[#0a0a0a]">
       <div className="max-w-[1600px] mx-auto px-0 md:px-6">
         <div className="text-center mb-16 px-4 md:px-0">
           <h2 className="text-3xl md:text-5xl font-light mb-4">
