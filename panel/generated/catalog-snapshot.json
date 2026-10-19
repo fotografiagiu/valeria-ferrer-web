@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-10-19T23:19:24.967Z",
+  "generatedAt": "2026-10-19T23:24:55.012Z",
   "sourcePath": "data/models.json",
-  "sourceHash": "ada83e5d79d56cab371143aeedd873ec5d45809c3a2c76a23724e92e4b8e5183",
+  "sourceHash": "543284bcc6693bd26cebce425b51734bf6ce0bc0131f726331e1b4222d3aeca8",
   "modelCount": 62,
   "activeCount": 35,
   "models": [
@@ -10,7 +10,10 @@
       "name": "Camila",
       "active": true,
       "coverImageUrl": "/chicas/camila-model-agency-valencia-vf/portada.jpg",
-      "images": []
+      "images": [
+        "/chicas/camila-model-agency-valencia-vf/gallery/01.jpg",
+        "/chicas/camila-model-agency-valencia-vf/gallery/02.jpg"
+      ]
     },
     {
       "slug": "sofia2",
