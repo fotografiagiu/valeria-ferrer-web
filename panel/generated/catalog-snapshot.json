@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-10-18T15:29:41.509Z",
+  "generatedAt": "2026-10-19T07:50:33.767Z",
   "sourcePath": "data/models.json",
-  "sourceHash": "797d2d250859908b12fd673b3b4aa4216d03134580625699cb0eee1297e1c591",
+  "sourceHash": "1f4046ebfa878f6670b162a5170246691a1f58c58c893ae5f399e352f3aa64b1",
   "modelCount": 60,
-  "activeCount": 34,
+  "activeCount": 33,
   "models": [
     {
       "slug": "daniela",
@@ -336,6 +336,7 @@
     {
       "slug": "erika",
       "name": "Erika",
+      "active": false,
       "coverImageUrl": "/chicas/erika-valeria-ferrer-model-agency-valencia/portada.jpg",
       "images": [
         "/chicas/erika-valeria-ferrer-model-agency-valencia/gallery/01.jpg",
