@@ -7,6 +7,8 @@ import { halloweenIsLive } from './HalloweenCampaign';
  * no puede dibujar un fondo negro sobre el rostro ni sobre el centro.
  */
 const CARD_FRAME = '/images/halloween-card-frame.png';
+const WEB_LEFT = '/images/halloween-web-left.png';
+const WEB_RIGHT = '/images/halloween-web-right.png';
 
 export const HalloweenWeb: React.FC<{ className?: string; flip?: boolean }> = ({ className = '', flip = false }) => (
   <svg className={className} viewBox="0 0 128 128" aria-hidden="true" fill="none"
@@ -29,8 +31,8 @@ export const HalloweenInfoWebs: React.FC = () => {
   if (!halloweenIsLive()) return null;
   return (
     <span className="vf-halloween-info-webs" aria-hidden="true">
-      <HalloweenWeb className="vf-halloween-info-web vf-halloween-info-web--left" />
-      <HalloweenWeb flip className="vf-halloween-info-web vf-halloween-info-web--right" />
+      <img src={WEB_LEFT} alt="" decoding="async" className="vf-halloween-info-web vf-halloween-info-web--left" />
+      <img src={WEB_RIGHT} alt="" decoding="async" className="vf-halloween-info-web vf-halloween-info-web--right" />
     </span>
   );
 };
