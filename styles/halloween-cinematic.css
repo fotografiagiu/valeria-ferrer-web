@@ -936,10 +936,13 @@
 .vf-halloween-preview .halloween-overlay{
   position:absolute!important;
   inset:0;
+  top:0!important;
+  bottom:auto!important;
   z-index:2!important;
   width:100%!important;
-  height:100%!important;
+  height:108%!important;
   object-fit:fill!important;
+  object-position:center top;
   pointer-events:none!important;
   mix-blend-mode:normal;
   opacity:1!important;
