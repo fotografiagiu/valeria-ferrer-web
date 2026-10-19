@@ -255,8 +255,12 @@ function VerticalModelCard({ model }: { model: CatalogPreviewModel }) {
         <h3 className="serif relative z-[1] text-[1.35rem] font-light uppercase leading-none tracking-[0.12em] text-[#ebe3da] md:text-[1.5rem] lg:text-[1.55rem]">
           {model.name}
         </h3>
-
-        <DiamondDivider className="my-2.5 justify-center md:my-3" />
+        {halloweenIsLive() && model.nationality && (
+          <p className="vf-halloween-origin relative z-[1] mt-2 text-[10px] uppercase tracking-[0.24em] text-[#e6bf93]">
+            {model.nationality}
+          </p>
+        )}
+        {!halloweenIsLive() && <DiamondDivider className="my-2.5 justify-center md:my-3" />}
 
         {(meta || model.height) && (
           <div className="relative z-[1] flex w-full flex-col items-center gap-0.5">
