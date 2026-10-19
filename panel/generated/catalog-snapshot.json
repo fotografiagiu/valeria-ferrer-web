@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-10-19T23:24:55.012Z",
+  "generatedAt": "2026-10-19T23:56:47.570Z",
   "sourcePath": "data/models.json",
-  "sourceHash": "543284bcc6693bd26cebce425b51734bf6ce0bc0131f726331e1b4222d3aeca8",
+  "sourceHash": "32366b479a9f1e13f221c55ed6137265fcec3f0b37e3c216372735a1231b4dc8",
   "modelCount": 62,
   "activeCount": 35,
   "models": [
@@ -9,10 +9,10 @@
       "slug": "camila",
       "name": "Camila",
       "active": true,
-      "coverImageUrl": "/chicas/camila-model-agency-valencia-vf/portada.jpg",
+      "coverImageUrl": "/chicas/camila-model-agency-valencia-vf/portada-v2.jpg",
       "images": [
-        "/chicas/camila-model-agency-valencia-vf/gallery/01.jpg",
-        "/chicas/camila-model-agency-valencia-vf/gallery/02.jpg"
+        "/chicas/camila-model-agency-valencia-vf/gallery/01-v2.jpg",
+        "/chicas/camila-model-agency-valencia-vf/gallery/02-v2.jpg"
       ]
     },
     {
