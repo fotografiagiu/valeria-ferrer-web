@@ -770,3 +770,46 @@
     padding:0 9px;
   }
 }
+
+/* Editorial split hero: matching responsive figure and cream text */
+@media (min-width:768px) {
+ .vf-halloween-preview .vf-halloween-hero {justify-content:flex-start;align-items:center;min-height:700px;height:clamp(700px,82svh,880px)!important;padding:150px 4% 60px;}
+ .vf-halloween-preview .vf-halloween-desktop-room{display:block;background-position:center;background-size:cover;filter:brightness(.8) saturate(1.1);}
+ .vf-halloween-preview .vf-halloween-hero .vf-halloween-photographic-hero {
+  left:auto!important;right:0!important;top:0!important;width:62%!important;height:100%!important;
+  object-fit:cover;object-position:center 30%;filter:brightness(1.05) saturate(1.13);
+  mask-image:linear-gradient(90deg,transparent 0%,black 30%);
+ }
+ .vf-halloween-preview .vf-halloween-hero::before{background:linear-gradient(90deg,rgba(14,1,9,.58),rgba(17,1,10,.37) 47%,transparent 80%);}
+ .vf-halloween-preview .vf-halloween-hero .relative.z-20 {width:53%;max-width:770px;flex-shrink:0;margin:0!important;padding:12px;text-align:center;}
+ .vf-halloween-preview .vf-halloween-hero h1>span:first-child{font-size:clamp(44px,5vw,83px);}
+ .vf-halloween-preview .vf-halloween-hero h1>span:nth-child(2){font-size:clamp(10px,1.2vw,18px);}
+ .vf-halloween-preview .vf-halloween-hero .text-center.mb-8{margin-bottom:12px!important;}
+ .vf-halloween-preview .vf-halloween-wordmark{display:flex;flex-direction:column;align-items:center;margin:7px auto;gap:2px;}
+ .vf-halloween-preview .vf-halloween-wordmark__kicker{font:400 clamp(15px,1.8vw,23px) Georgia,serif;letter-spacing:.22em;color:#ffd196;}
+ .vf-halloween-preview .vf-halloween-wordmark strong{
+   font:600 clamp(43px,5.3vw,84px) Georgia,serif;line-height:1.06;letter-spacing:-.07em;white-space:nowrap;
+   background:linear-gradient(#ffe8b6,#ff9b2f 48%,#eb5419 75%,#9b260d);
+   -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+   filter:drop-shadow(0 3px 6px rgba(132,32,7,.55));
+ }
+ .vf-halloween-preview .vf-halloween-hero .text-lg{font-size:clamp(11px,1.1vw,15px);letter-spacing:.14em;line-height:1.6;margin:8px auto 20px!important;}
+ .vf-halloween-preview .vf-halloween-hero .flex.flex-col.sm\\:flex-row{width:100%;display:flex;gap:12px!important;justify-content:center;}
+ .vf-halloween-preview .vf-halloween-hero .flex.flex-col.sm\\:flex-row>*{margin:0!important;min-width:0;width:49%;}
+ .vf-halloween-preview .vf-halloween-hero a[href="/models"],
+ .vf-halloween-preview .vf-halloween-hero a[href="/booking"]{white-space:nowrap;padding:13px 8px!important;font-size:clamp(9px,.89vw,12px);}
+ .vf-halloween-preview .vf-halloween-values{max-width:780px;margin:28px auto 0;}
+ .vf-halloween-preview .vf-halloween-hero__ticker{top:107px;width:92%;max-width:none;}
+}
+@media (max-width:767px) {
+ .vf-halloween-preview .vf-halloween-desktop-room{display:none;}
+ .vf-halloween-preview .vf-halloween-hero {min-height:max(820px,100svh);padding:175px 8px 16px;}
+ .vf-halloween-preview .vf-halloween-hero .vf-halloween-photographic-hero {
+  width:100%;height:100%;object-fit:cover;object-position:center 29%;filter:saturate(1.1) brightness(1.08);
+ }
+ .vf-halloween-preview .vf-halloween-hero::before{
+  background:linear-gradient(to bottom,transparent 0%,transparent 32%,rgba(12,0,7,.12) 42%,rgba(10,0,6,.73) 69%,rgba(7,0,5,.8));
+ }
+ .vf-halloween-preview .vf-halloween-hero .relative.z-20{margin:0 auto!important;max-width:460px;padding:10px 11px 17px;}
+ .vf-halloween-preview .vf-halloween-hero .vf-halloween-wordmark strong{font-size:clamp(47px,12vw,66px);}
+}
