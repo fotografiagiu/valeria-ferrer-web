@@ -2,7 +2,10 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { getPool } from '../../src/db/client-impl.js';
+import { withPgClient } from '../../src/db/client-impl.js';
+
+const CACHE_MS = 15_000;
+let cached: { at: number; body: Record<string, unknown> } | null = null;
 
 export const config = {
   maxDuration: 30,
@@ -85,28 +88,35 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return;
   }
 
+  if (cached && Date.now() - cached.at < CACHE_MS) {
+    res.status(200).json(cached.body);
+    return;
+  }
+
   try {
-    const pool = getPool();
-    const meta = await pool.query<{ order_version: number; updated_at: Date | string }>(
-      `SELECT order_version, updated_at FROM catalog_meta WHERE id = 1 LIMIT 1`
-    );
-    const rows = await pool.query<{
-      slug: string;
-      display_order: number;
-      cover_image_path: string;
-      gallery_image_paths: string[] | null;
-    }>(
-      `SELECT slug, display_order, cover_image_path, gallery_image_paths
-       FROM model_overrides
-       WHERE display_order IS NOT NULL
-       ORDER BY display_order ASC`
-    );
-    const hiddenRows = await pool.query<{ slug: string }>(
-      `SELECT slug
-       FROM model_overrides
-       WHERE staff_hidden = true
-       ORDER BY slug ASC`
-    );
+    const { meta, rows, hiddenRows } = await withPgClient(async (client) => {
+      const meta = await client.query<{ order_version: number; updated_at: Date | string }>(
+        `SELECT order_version, updated_at FROM catalog_meta WHERE id = 1 LIMIT 1`
+      );
+      const rows = await client.query<{
+        slug: string;
+        display_order: number;
+        cover_image_path: string;
+        gallery_image_paths: string[] | null;
+      }>(
+        `SELECT slug, display_order, cover_image_path, gallery_image_paths
+         FROM model_overrides
+         WHERE display_order IS NOT NULL
+         ORDER BY display_order ASC`
+      );
+      const hiddenRows = await client.query<{ slug: string }>(
+        `SELECT slug
+         FROM model_overrides
+         WHERE staff_hidden = true
+         ORDER BY slug ASC`
+      );
+      return { meta, rows, hiddenRows };
+    });
 
     const active = await loadActiveSlugSet();
 
@@ -130,12 +140,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       .filter((slug) => (active ? active.has(slug) : true));
 
     const m0 = meta.rows[0];
-    res.status(200).json({
+    const body = {
       orderVersion: Number(m0?.order_version ?? 0),
       updatedAt: m0?.updated_at ? new Date(m0.updated_at).toISOString() : new Date().toISOString(),
       models,
       hiddenSlugs,
-    });
+    };
+    cached = { at: Date.now(), body };
+    res.status(200).json(body);
   } catch (err) {
     console.error('public overrides failed', err);
     res.status(503).json({ error: 'overrides unavailable' });

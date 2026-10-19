@@ -134,6 +134,11 @@ export function createApp(options: CreateAppOptions) {
   const { db } = options;
   const app = new Hono<{ Variables: AppVariables }>();
 
+  app.onError((err, c) => {
+    console.error(err);
+    return c.json({ error: 'panel unavailable' }, 503);
+  });
+
   async function getCatalogModels(): Promise<CatalogModelLite[]> {
     const resolved = await resolveCatalogModels({
       injectedModels: options.catalogModels,

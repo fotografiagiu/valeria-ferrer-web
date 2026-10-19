@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { createApp } from '../../src/app.js';
-import { getDb } from '../../src/db/client.js';
+import { getDb, releaseRuntimeDb } from '../../src/db/client.js';
 import { loadEnv } from '../../src/lib/env.js';
 
 /** Never let a stalled request reach the platform gateway timeout. */
@@ -153,5 +153,8 @@ export default async function staffApiHandler(
     } else {
       res.end();
     }
+  } finally {
+    cachedApp = null;
+    await releaseRuntimeDb();
   }
 }
