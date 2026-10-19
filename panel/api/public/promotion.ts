@@ -1,5 +1,8 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { getPool } from '../../src/db/client-impl.js';
+import { withPgClient } from '../../src/db/client-impl.js';
+
+const CACHE_MS = 15_000;
+let cached: { at: number; body: Record<string, unknown> } | null = null;
 
 export const config = {
   maxDuration: 15,
@@ -13,7 +16,7 @@ function applyCors(req: VercelRequest, res: VercelResponse) {
     .filter(Boolean);
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  res.setHeader('Cache-Control', 'no-store, max-age=0');
+  res.setHeader('Cache-Control', 'public, max-age=15, s-maxage=15');
   if (origin && allowed.includes(origin)) {
     res.setHeader('Access-Control-Allow-Origin', origin);
     res.setHeader('Vary', 'Origin');
@@ -44,20 +47,26 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return;
   }
 
+  if (cached && Date.now() - cached.at < CACHE_MS) {
+    res.status(200).json(cached.body);
+    return;
+  }
+
   try {
-    const pool = getPool();
-    const result = await pool.query<{
-      active_promotion: string;
-      starts_at: Date | string | null;
-      ends_at: Date | string | null;
-      duration_hours: number | null;
-      promo_id: string | null;
-      updated_at: Date | string;
-    }>(
-      `SELECT active_promotion, starts_at, ends_at, duration_hours, promo_id, updated_at
-       FROM web_promotion
-       WHERE id = 1
-       LIMIT 1`
+    const result = await withPgClient((client) =>
+      client.query<{
+        active_promotion: string;
+        starts_at: Date | string | null;
+        ends_at: Date | string | null;
+        duration_hours: number | null;
+        promo_id: string | null;
+        updated_at: Date | string;
+      }>(
+        `SELECT active_promotion, starts_at, ends_at, duration_hours, promo_id, updated_at
+         FROM web_promotion
+         WHERE id = 1
+         LIMIT 1`
+      )
     );
     const row = result.rows[0];
 
@@ -72,28 +81,27 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const live =
       activePromotion !== 'none' && Number.isFinite(endsMs) && Date.now() < endsMs;
 
-    if (!live) {
-      res.status(200).json({
-        activePromotion: 'none',
-        active: false,
-        startsAt: null,
-        endsAt: null,
-        durationHours: null,
-        promoId: null,
-        updatedAt: iso(row?.updated_at) ?? new Date().toISOString(),
-      });
-      return;
-    }
-
-    res.status(200).json({
-      activePromotion,
-      active: true,
-      startsAt: iso(row?.starts_at),
-      endsAt,
-      durationHours: typeof row?.duration_hours === 'number' ? row.duration_hours : null,
-      promoId: row?.promo_id ?? null,
-      updatedAt: iso(row?.updated_at) ?? new Date().toISOString(),
-    });
+    const body = !live
+      ? {
+          activePromotion: 'none' as const,
+          active: false,
+          startsAt: null,
+          endsAt: null,
+          durationHours: null,
+          promoId: null,
+          updatedAt: iso(row?.updated_at) ?? new Date().toISOString(),
+        }
+      : {
+          activePromotion,
+          active: true,
+          startsAt: iso(row?.starts_at),
+          endsAt,
+          durationHours: typeof row?.duration_hours === 'number' ? row.duration_hours : null,
+          promoId: row?.promo_id ?? null,
+          updatedAt: iso(row?.updated_at) ?? new Date().toISOString(),
+        };
+    cached = { at: Date.now(), body };
+    res.status(200).json(body);
   } catch (err) {
     console.error('public promotion failed', err);
     res.status(503).json({ error: 'promotion unavailable' });

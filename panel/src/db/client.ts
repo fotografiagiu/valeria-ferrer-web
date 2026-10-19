@@ -3,6 +3,8 @@ export {
   createPool,
   getDb,
   getPool,
+  releaseRuntimeDb,
+  withPgClient,
   getMigrationSql,
   getPromotionMigrationSql,
   getStaffHiddenMigrationSql,

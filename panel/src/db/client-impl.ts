@@ -100,6 +100,34 @@ export function getDb(): AppDb {
   return singleton;
 }
 
+/**
+ * Close the runtime pool before a Vercel isolate freezes.
+ * Session-mode poolers cap concurrent clients (often 15). A frozen isolate
+ * keeps its socket open, so warm functions fill that cap and login starts
+ * failing with EMAXCONNSESSION.
+ */
+export async function releaseRuntimeDb(): Promise<void> {
+  const pool = poolSingleton;
+  poolSingleton = null;
+  singleton = null;
+  if (!pool) return;
+  await pool.end().catch(() => undefined);
+}
+
+/** One connection, always closed before the caller continues. */
+export async function withPgClient<T>(fn: (client: pg.Client) => Promise<T>): Promise<T> {
+  const client = new pg.Client({
+    connectionString: resolveDatabaseUrl(),
+    connectionTimeoutMillis: 4_000,
+  });
+  await client.connect();
+  try {
+    return await fn(client);
+  } finally {
+    await client.end().catch(() => undefined);
+  }
+}
+
 export function setDbForTests(db: AppDb): void {
   singleton = db;
 }
