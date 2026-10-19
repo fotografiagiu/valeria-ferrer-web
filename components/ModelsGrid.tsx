@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { MODELS } from '../constants';
 import { Crown, Grid3X3, LayoutGrid } from 'lucide-react';
 import LazyImage from './LazyImage';
-import HalloweenCardOverlay from './HalloweenCardOverlay';
+import HalloweenCardOverlay, { HalloweenInfoWebs } from './HalloweenCardOverlay';
 import {
   getGalleryImageThumbnail,
   getModelCoverThumbnailPath,
@@ -208,7 +208,8 @@ const ModelCard: React.FC<{
           </div>
         </div>
 
-        <div className="p-4 md:p-6 relative z-10 text-center">
+        <div className="vf-halloween-home-info p-4 md:p-6 relative z-10 text-center">
+          <HalloweenInfoWebs />
           <h3
             className="text-xl md:text-2xl tracking-widest uppercase mb-1 font-light"
             itemProp="name"
