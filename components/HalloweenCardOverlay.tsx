@@ -1,7 +1,7 @@
 import React from 'react';
 import { halloweenIsLive } from './HalloweenCampaign';
 
-const CARD_FRAME = '/images/halloween-card-frame-ref.png';
+const CARD_FRAME = '/images/halloween-card-frame-glow.png';
 const NAME_PLATE = '/images/halloween-nameplate.png';
 
 export const HalloweenWeb: React.FC<{ className?: string; flip?: boolean }> = ({ className = '', flip = false }) => (
