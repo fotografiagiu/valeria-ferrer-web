@@ -2,6 +2,7 @@ import { useEffect, useSyncExternalStore } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import HalloweenScene from './HalloweenScene';
+import { halloweenIsLive } from './HalloweenCampaign';
 
 const MOBILE_MQ = '(max-width: 767px)';
 const HERO_BANNER_MOBILE_WEBP = '/images/home-hero-banner-mobile-v4-premium.webp';
@@ -89,12 +90,14 @@ const Hero = () => {
         />
       </div>
 
+      {halloweenIsLive() && <>
       <HalloweenScene />
       <a href="#halloween-campaign" className="vf-halloween-hero__ticker" aria-label="Descubrir la campaña especial de Halloween">
         <span className="vf-halloween-hero__pumpkin" aria-hidden="true">✦</span>
         <span><strong>ESPECIAL HALLOWEEN</strong><small>Citas exclusivas · Sorpresas próximamente</small></span>
         <span aria-hidden="true">›</span>
       </a>
+      </>}
 
       {/* Content — móvil: visible al montar; desktop: animación framer-motion */}
       <div className="relative z-20 text-center max-w-5xl px-6 max-md:mt-[4vh]">
