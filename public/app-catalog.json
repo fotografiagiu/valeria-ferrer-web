@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-10-18T15:26:19.913Z",
-  "catalogVersion": "797d2d250859908b12fd673b3b4aa4216d03134580625699cb0eee1297e1c591",
+  "generatedAt": "2026-10-19T07:50:33.607Z",
+  "catalogVersion": "1f4046ebfa878f6670b162a5170246691a1f58c58c893ae5f399e352f3aa64b1",
   "source": "valeria-ferrer-web",
   "method": "build-app-catalog",
   "models": [
@@ -443,7 +443,7 @@
     {
       "slug": "erika",
       "name": "Erika",
-      "active": true,
+      "active": false,
       "vip": false,
       "coverImageUrl": "/chicas/erika-valeria-ferrer-model-agency-valencia/portada.jpg",
       "images": [
