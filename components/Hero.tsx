@@ -8,7 +8,7 @@ import { halloweenIsLive } from './HalloweenCampaign';
 const MOBILE_MQ = '(max-width: 767px)';
 /** Imagen creada para la campaña: un salón fotográfico, no un mockup con texto. */
 const HALLOWEEN_ROOM_MOBILE = 'https://d8j0ntlcm91z4.cloudfront.net/user_36DayVJkjOLFx77vIiJcDWRkvYc/hf_20261019_120457_5e2340c9-9216-4e70-a79d-b32b1206bbe3.png';
-const HALLOWEEN_ROOM_DESKTOP = 'https://d8j0ntlcm91z4.cloudfront.net/user_36DayVJkjOLFx77vIiJcDWRkvYc/hf_20261019_120625_4a081b4c-5096-4722-85c5-5b80995c5076.png';
+const HALLOWEEN_ROOM_DESKTOP = 'https://d8j0ntlcm91z4.cloudfront.net/user_36DayVJkjOLFx77vIiJcDWRkvYc/hf_20261019_102448_388329a1-c921-4283-9551-2cd376c043a4.png';
 const HERO_BANNER_MOBILE_WEBP = '/images/home-hero-banner-mobile-v4-premium.webp';
 const HERO_BANNER_MOBILE_FALLBACK = '/images/home-hero-banner-mobile-v4-premium.png';
 const DESKTOP_VIDEO_SRC =
@@ -62,8 +62,14 @@ const Hero = () => {
       <div className="absolute inset-0 z-0 overflow-hidden bg-black">
         {/* Móvil: imagen estática — sin iframe YouTube en el DOM */}
         {halloween ? (
-          <picture className="absolute inset-0 h-full w-full">
-            <source media="(min-width: 768px)" srcSet={HALLOWEEN_ROOM_DESKTOP} />
+          <>
+            {/* El salón de escritorio no contiene otra modelo. La misma imagen de bruja
+                aparece en AMBOS tamaños, evitando cambiar de mujer al redimensionar. */}
+            <div
+              className="vf-halloween-desktop-room absolute inset-0"
+              style={{ backgroundImage: `url("${HALLOWEEN_ROOM_DESKTOP}")` }}
+              aria-hidden="true"
+            />
             <img
               src={HALLOWEEN_ROOM_MOBILE}
               alt=""
@@ -75,7 +81,7 @@ const Hero = () => {
               height={1792}
               className="vf-halloween-photographic-hero absolute inset-0 h-full w-full object-cover object-center"
             />
-          </picture>
+          </>
         ) : isMobileHero ? (
           <picture className="absolute inset-0 h-full w-full">
             <source srcSet={HERO_BANNER_MOBILE_WEBP} type="image/webp" />
