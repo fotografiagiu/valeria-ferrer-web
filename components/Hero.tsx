@@ -120,7 +120,7 @@ const Hero = () => {
       <HalloweenScene />
       <a href="#halloween-campaign" onClick={(event) => { event.preventDefault(); window.dispatchEvent(new Event('vf:halloween-contact')); }} className="vf-halloween-hero__ticker" aria-label="Consultar ofertas Halloween por teléfono o WhatsApp">
         <span className="vf-halloween-hero__pumpkin" aria-hidden="true">🎃</span>
-        <span><strong>ESPECIAL HALLOWEEN</strong><small>Citas exclusivas · Momentos inolvidables · Ver oferta</small></span>
+        <span><strong>ESPECIAL HALLOWEEN</strong><small>Vive una noche diferente · Ver ofertas</small></span>
         <span aria-hidden="true">›</span>
       </a>
       </>}
