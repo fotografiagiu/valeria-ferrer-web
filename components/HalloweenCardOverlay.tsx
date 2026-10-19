@@ -1,11 +1,8 @@
 import React from 'react';
 import { halloweenIsLive } from './HalloweenCampaign';
 
-/** Marco fotográfico con el centro transparente. La placa es ornamento, no una capa opaca. */
-const CARD_FRAME = '/images/halloween-card-frame.png';
-const PLATE_CANDLE = '/images/halloween-plate-candle.png';
-const WEB_LEFT = '/images/halloween-web-left.png';
-const WEB_RIGHT = '/images/halloween-web-right.png';
+const CARD_FRAME = '/images/halloween-card-frame-ref.png';
+const NAME_PLATE = '/images/halloween-nameplate.png';
 
 export const HalloweenWeb: React.FC<{ className?: string; flip?: boolean }> = ({ className = '', flip = false }) => (
   <svg className={className} viewBox="0 0 128 128" aria-hidden="true" fill="none"
@@ -27,12 +24,13 @@ export const HalloweenWeb: React.FC<{ className?: string; flip?: boolean }> = ({
 export const HalloweenInfoWebs: React.FC = () => {
   if (!halloweenIsLive()) return null;
   return (
-    <span className="vf-halloween-info-webs" aria-hidden="true">
-      <img src={WEB_LEFT} alt="" decoding="async" className="vf-halloween-plate__web vf-halloween-plate__web--left" />
-      <img src={WEB_RIGHT} alt="" decoding="async" className="vf-halloween-plate__web vf-halloween-plate__web--right" />
-      <img src={PLATE_CANDLE} alt="" decoding="async" className="vf-halloween-plate__candle vf-halloween-plate__candle--left" />
-      <img src={PLATE_CANDLE} alt="" decoding="async" className="vf-halloween-plate__candle vf-halloween-plate__candle--right" />
-    </span>
+    <img
+      src={NAME_PLATE}
+      alt=""
+      aria-hidden="true"
+      decoding="async"
+      className="vf-halloween-info-plate"
+    />
   );
 };
 
