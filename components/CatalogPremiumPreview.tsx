@@ -5,6 +5,7 @@
 import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { Crown } from 'lucide-react';
+import { halloweenIsLive } from './HalloweenCampaign';
 
 export type CatalogPreviewModel = {
   slug: string;
@@ -312,11 +313,11 @@ const CatalogPremiumPreview: React.FC<Props> = ({ models = [] }) => {
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#c2b2a3]/25 to-transparent" />
 
       <div className="relative mx-auto w-full max-w-[520px] px-3 sm:max-w-[640px] sm:px-4 md:max-w-[760px] lg:max-w-[900px] xl:max-w-[960px]">
-        <Link to="/" className="vf-halloween-catalog-strip" aria-label="Ver la campaña de Halloween de Valeria Ferrer">
+        {halloweenIsLive() && <Link to="/" className="vf-halloween-catalog-strip" aria-label="Ver la campaña de Halloween de Valeria Ferrer">
           <span aria-hidden="true" className="vf-halloween-catalog-strip__star">✦</span>
           <span><strong>ESPECIAL HALLOWEEN</strong><small>Próximamente · citas exclusivas</small></span>
           <span aria-hidden="true" className="vf-halloween-catalog-strip__arrow">›</span>
-        </Link>
+        </Link>}
         {import.meta.env.DEV && (
           <p className="mb-5 text-center text-[8px] uppercase tracking-[0.35em] text-[#c2b2a3]/35">
             Preview · VIP horizontal · colección vertical 4:5
@@ -337,7 +338,7 @@ const CatalogPremiumPreview: React.FC<Props> = ({ models = [] }) => {
             <SectionLabel>Colección</SectionLabel>
             <ul
               id="models-grid-start"
-              className="vf-halloween-models-grid grid grid-cols-2 gap-2.5 sm:gap-5 md:gap-6 lg:gap-7"
+              className={`vf-halloween-models-grid grid ${halloweenIsLive() ? 'grid-cols-2 gap-2.5' : 'grid-cols-1 gap-5'} sm:grid-cols-2 sm:gap-5 md:gap-6 lg:gap-7`}
               aria-label="Listado de modelos"
             >
               {listModels.map((model) => (
