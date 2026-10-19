@@ -869,7 +869,7 @@
   max-width:none!important;
   object-fit:fill;
   pointer-events:none;
-  opacity:1!important;
+  opacity:.55!important;
 }
 .vf-halloween-preview .vf-halloween-model-info,
 .vf-halloween-preview .vf-halloween-home-info,
@@ -883,9 +883,15 @@
   color:#f6d7a2!important;
   text-shadow:0 1px 8px rgba(0,0,0,.72);
 }
+.vf-halloween-preview .vf-halloween-model-info p,
+.vf-halloween-preview .vf-halloween-home-info p,
+.vf-halloween-preview .home-novedades-vf .vf-news-card__origin,
+.vf-halloween-preview .home-novedades-vf .vf-news-card__meta{
+  text-shadow:0 1px 5px rgba(0,0,0,.9);
+}
 .vf-halloween-preview .card-photo > .absolute.bottom-4{
   display:block!important;
-  bottom:20%!important;
+  bottom:18%!important;
   z-index:5!important;
   transform:translateX(-50%) translateY(0)!important;
   opacity:1!important;
