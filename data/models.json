@@ -1,5 +1,63 @@
 [
   {
+    "slug": "camila",
+    "name": "Camila",
+    "age": 23,
+    "height": "1,75 m",
+    "weight": "50 kg",
+    "nationality": "Colombiana",
+    "city": "Valencia",
+    "profileUrl": "/chicas/camila-model-agency-valencia-vf/portada.jpg",
+    "coverImageUrl": "/chicas/camila-model-agency-valencia-vf/portada.jpg",
+    "profileImageUrl": "/chicas/camila-model-agency-valencia-vf/portada.jpg",
+    "description": "Camila es colombiana de 23 años, 1,75 m y 50 kg: alta, preciosa y con un cuerpo que se queda mirando. Cara de revista, melena larga y una figura esbelta que entra por los ojos. Novedad en Valencia — elegante, sensual y con esa presencia que da ganas de llamarla. Fotos reales. Si buscas una escort colombiana alta en Valencia, Camila está para marcar ahora.",
+    "essence": "Colombiana alta, guapa y con un cuerpo esbelto que se nota al momento.",
+    "uniquePoints": [
+      "Colombiana de 23 en Valencia — alta, guapa y novedad",
+      "1,75 m y 50 kg: figura esbelta, imposible de ignorar",
+      "Cara preciosa y cuerpo de revista: dan ganas de escribirle ya"
+    ],
+    "experiencePoints": [
+      "Privado con una colombiana alta, guapa y muy sensual",
+      "Encuentro fácil y con química: atención, deseo y cero frialdad",
+      "Valencia con una novedad latina que se queda en la cabeza"
+    ],
+    "images": [
+      {
+        "url": "/chicas/camila-model-agency-valencia-vf/gallery/01.jpg",
+        "alt": "Camila en Valencia"
+      },
+      {
+        "url": "/chicas/camila-model-agency-valencia-vf/gallery/02.jpg",
+        "alt": "Camila retrato"
+      }
+    ],
+    "services": [
+      "Girlfriend Experience",
+      "Cenas de Negocios",
+      "Eventos Sociales",
+      "Acompañamiento Personal"
+    ],
+    "availability": "24h",
+    "languages": [
+      "Español"
+    ],
+    "tags": [
+      "premium",
+      "colombiana",
+      "latina",
+      "alta",
+      "esbelta",
+      "elegante",
+      "sensual",
+      "novedad"
+    ],
+    "isNew": true,
+    "featured": true,
+    "vip": false,
+    "active": true
+  },
+  {
     "slug": "sofia2",
     "name": "Sofía",
     "age": 28,

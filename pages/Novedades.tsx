@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, ChevronRight, Crown, Sparkles } from 'lucide-react';
 import PageSEOHead from '../components/PageSEOHead';
 import LazyImage from '../components/LazyImage';
+import HalloweenCardOverlay from '../components/HalloweenCardOverlay';
 import { MODELS } from '../constants';
 import { EXPLORE_NAV, ExploreNavKey, getExploreHref } from '../data/exploreNav';
 import { getHubModels } from '../lib/hubs';
@@ -62,16 +63,17 @@ function NovedadesCompactCard({
         ${isRow ? 'snap-start' : 'min-w-0'}
       `}
     >
-      <div className="relative aspect-[4/5] overflow-hidden">
+      <div className="card-photo relative aspect-[4/5] overflow-hidden">
         <LazyImage
           src={imageSrc}
           alt={`${model.name} — nueva incorporación`}
-          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+          className="model h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
           sizes={isRow ? `${NOVEDADES_CARD_WIDTH_PX}px` : '(max-width: 768px) 50vw, 25vw'}
           priority={index < 3}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
-        <span className="absolute top-2 left-2 px-2 py-0.5 bg-[#c2b2a3]/90 text-black text-[8px] uppercase tracking-[0.2em] font-bold rounded-sm">
+        <HalloweenCardOverlay />
+        <span className="absolute top-2 left-2 z-30 px-2 py-0.5 bg-[#c2b2a3]/90 text-black text-[8px] uppercase tracking-[0.2em] font-bold rounded-sm">
           Nueva
         </span>
       </div>
