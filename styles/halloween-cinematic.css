@@ -1297,9 +1297,9 @@
     position:absolute!important;
     inset:0!important;
     z-index:0!important;
-    background-image:url('/images/halloween-hero-desktop-original.webp')!important;
-    background-size:100% auto!important;
-    background-position:center center!important;
+    background-image:url('/images/halloween-hero-desktop-sharp.webp')!important;
+    background-size:auto 100%!important;
+    background-position:right center!important;
     background-repeat:no-repeat!important;
     background-color:#120608!important;
     filter:none!important;
