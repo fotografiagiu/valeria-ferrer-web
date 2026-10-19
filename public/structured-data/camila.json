@@ -1,0 +1,30 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Camila",
+  "description": "Camila es colombiana de 23 años, 1,75 m y 50 kg: alta, preciosa y con un cuerpo que se queda mirando. Cara de revista, melena larga y una figura esbelta que entra por los ojos. Novedad en Valencia — elegante, sensual y con esa presencia que da ganas de llamarla. Fotos reales. Si buscas una escort colombiana alta en Valencia, Camila está para marcar ahora.",
+  "url": "https://www.valeriaferrer.com/models/camila",
+  "image": [
+    "https://www.valeriaferrer.com/chicas/camila-model-agency-valencia-vf/portada.jpg",
+    "https://www.valeriaferrer.com/chicas/camila-model-agency-valencia-vf/gallery/01.jpg",
+    "https://www.valeriaferrer.com/chicas/camila-model-agency-valencia-vf/gallery/02.jpg"
+  ],
+  "nationality": "Colombiana",
+  "jobTitle": "Acompañante de lujo en Valencia",
+  "knowsLanguage": [
+    "Español"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "description": "Servicios exclusivos de acompañamiento con Camila en Valencia",
+    "areaServed": {
+      "@type": "City",
+      "name": "Valencia"
+    },
+    "availability": "https://schema.org/InStock"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.valeriaferrer.com/models/camila/"
+  }
+}

@@ -24,6 +24,14 @@ const HalloweenCampaign: React.FC<{ homeOnly?: boolean }> = ({ homeOnly = false 
   const [contactOpen, setContactOpen] = useState(false);
   const closeRef = useRef<HTMLButtonElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
+  useEffect(() => {
+    // La franja superior de Halloween del hero usa el modal global.
+    // La instancia homeOnly no escucha para evitar modales duplicados.
+    if (homeOnly) return;
+    const onPromoContact = () => setContactOpen(true);
+    window.addEventListener('vf:halloween-contact', onPromoContact);
+    return () => window.removeEventListener('vf:halloween-contact', onPromoContact);
+  }, [homeOnly]);
 
   useEffect(() => {
     if (!contactOpen) return;
@@ -57,7 +65,7 @@ const HalloweenCampaign: React.FC<{ homeOnly?: boolean }> = ({ homeOnly = false 
   return (
     <>
       {isHome && homeOnly && (
-        <section aria-label="Campaña especial de Halloween" className="relative bg-[#090507] px-3 sm:px-6 py-7 md:py-12 border-y border-[#de627e]/25">
+        <section id="halloween-campaign" aria-label="Campaña especial de Halloween" className="relative bg-[#090507] px-3 sm:px-6 py-7 md:py-12 border-y border-[#de627e]/25">
           <div className="relative max-w-7xl mx-auto overflow-hidden rounded-2xl md:rounded-[28px] border border-[#ee6096]/30 shadow-[0_0_44px_rgba(210,35,103,0.18)]">
             <button
               ref={triggerRef}

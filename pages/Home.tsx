@@ -2,7 +2,7 @@
 import React, { Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Hero from '../components/Hero';
-import HalloweenCampaign from '../components/HalloweenCampaign';
+import HalloweenCampaign, { halloweenIsLive } from '../components/HalloweenCampaign';
 import ModelsGrid from '../components/ModelsGrid';
 import FAQ from '../components/FAQ';
 import PageSEOHead from '../components/PageSEOHead';
@@ -80,6 +80,8 @@ const Home: React.FC = () => {
     canonicalUrl: 'https://www.valeriaferrer.com',
   };
 
+  const isHalloweenPreview = halloweenIsLive();
+
   return (
     <div className="overflow-x-hidden">
       <PageSEOHead
@@ -88,7 +90,17 @@ const Home: React.FC = () => {
         canonicalUrl={homeSEOData.canonicalUrl}
       />
       <Hero />
-      <HalloweenCampaign homeOnly />
+      {/* Halloween: catálogo real visible directamente tras la portada, como en la referencia.
+          Mismos datos/links y una única instancia del listado, sin duplicar fichas. */}
+      {isHalloweenPreview && (
+        <ModelsGrid
+          models={homeModels}
+          heading="Nuestras chicas disponibles"
+          subtitle="Modelos exclusivas en Valencia · Citas discretas · Experiencias únicas"
+        />
+      )}
+
+      {!isHalloweenPreview && <HalloweenCampaign homeOnly />}
 
       <HomeWhatsAppNews />
 
@@ -180,11 +192,13 @@ const Home: React.FC = () => {
         </ul>
       </nav>
 
-      <ModelsGrid
-        models={homeModels}
-        heading="Escorts en Valencia"
-        subtitle="Selección Valeria Ferrer · Fotos reales · Reserva discreta"
-      />
+      {!isHalloweenPreview && (
+        <ModelsGrid
+          models={homeModels}
+          heading="Escorts en Valencia"
+          subtitle="Selección Valeria Ferrer · Fotos reales · Reserva discreta"
+        />
+      )}
 
       <div ref={reviewsSentinelRef} className="min-h-[32rem] md:min-h-[28rem]">
         {loadReviews ? (

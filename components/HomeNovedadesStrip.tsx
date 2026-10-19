@@ -1,6 +1,7 @@
 import React, { Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import LazyImage from './LazyImage';
+import HalloweenCardOverlay, { HalloweenInfoWebs } from './HalloweenCardOverlay';
 import { getModelCoverThumbnailPath, getModelCoverImage } from '../lib/modelGridImage';
 
 const ExploreProfilesNav = React.lazy(() => import('./ExploreProfilesNav'));
@@ -160,20 +161,22 @@ const HomeNovedadesStrip: React.FC<HomeNovedadesStripProps> = ({
               role="listitem"
               data-model-name={model.name}
             >
-              <div className="vf-news-card__media">
+              <div className="card-photo vf-news-card__media">
                 <LazyImage
                   src={coverOf(model)}
                   alt={`${model.name} — nueva incorporación Valeria Ferrer`}
-                  className="h-full w-full object-cover object-center"
+                  className="model h-full w-full object-cover object-center"
                   containerClassName="absolute inset-0 h-full w-full overflow-hidden"
                   sizes={solo ? '(max-width: 767px) 88vw, 520px' : '(max-width: 767px) 33vw, 33vw'}
                   priority={index === 0}
                 />
+                <HalloweenCardOverlay />
                 <span className="vf-new-ribbon" aria-hidden="true">
                   ✦ NUEVA
                 </span>
               </div>
               <div className="vf-news-card__body">
+                <HalloweenInfoWebs />
                 <h3 className="vf-news-card__name serif">{model.name}</h3>
                 {model.nationality ? (
                   <p className="vf-news-card__origin">{model.nationality}</p>
