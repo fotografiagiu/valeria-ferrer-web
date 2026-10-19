@@ -339,3 +339,187 @@
   animation:none!important;transition-duration:.01ms!important;
  }
 }
+
+
+/* ────────────────────────────────────────────────
+   HIGH-FIDELITY HALLOWEEN PHOTO PLATES · 19/10
+   Only when the campaign gate gives .vf-halloween-preview.
+   Decoration overlays original pictures, never replacing them.
+   ──────────────────────────────────────────────── */
+.vf-halloween-preview {
+  --vf-room-art: url("https://d8j0ntlcm91z4.cloudfront.net/user_36DayVJkjOLFx77vIiJcDWRkvYc/hf_20261019_102448_388329a1-c921-4283-9551-2cd376c043a4.png");
+  --vf-card-art: url("https://d8j0ntlcm91z4.cloudfront.net/user_36DayVJkjOLFx77vIiJcDWRkvYc/hf_20261019_102547_21bc3352-2304-4534-b4d9-8871a5e54018.png");
+}
+
+/* Full-bleed salon plate; actual HTML headings and CTAs remain readable/SEO friendly */
+.vf-halloween-preview .vf-halloween-hero .vf-halloween-photographic-hero {
+  object-fit: cover;
+  object-position: center 57%;
+  filter: brightness(.67) saturate(1.12) contrast(1.05);
+  transform: scale(1.008);
+}
+.vf-halloween-preview .vf-halloween-hero::before {
+  background:
+    linear-gradient(to bottom, rgba(3,0,5,.28) 0%, rgba(14,1,8,.18) 22%, rgba(11,1,8,.43) 43%, rgba(10,0,7,.49) 64%, rgba(8,1,7,.2) 88%, rgba(6,1,5,.2) 100%),
+    radial-gradient(ellipse 66% 38% at 50% 51%,rgba(11,2,6,.42),transparent 85%);
+}
+.vf-halloween-preview .vf-halloween-scene__art {opacity: .28}
+.vf-halloween-preview .vf-halloween-scene__vignette {
+  background:radial-gradient(ellipse 85% 64% at 50% 53%,transparent 25%,rgba(9,1,6,.36) 100%);
+}
+.vf-halloween-preview .vf-halloween-hero__ticker {
+  border:1px solid #cb7d4b;
+  background:linear-gradient(100deg,rgba(37,8,14,.94),rgba(87,8,38,.88),rgba(26,5,16,.94));
+  box-shadow:inset 0 0 20px rgba(255,52,80,.27),0 0 15px rgba(227,66,104,.18),0 12px 40px rgba(0,0,0,.45);
+}
+.vf-halloween-preview .vf-halloween-hero__pumpkin {
+  filter:drop-shadow(0 0 7px #d85a22);
+  font-size:25px;
+}
+.vf-halloween-preview .vf-halloween-hero h1 {
+  filter:drop-shadow(0 3px 16px rgba(0,0,0,.6));
+}
+.vf-halloween-preview .vf-halloween-hero a[href="/booking"] {
+  box-shadow:0 0 0 1px #b7724c, 0 6px 23px rgba(0,0,0,.35);
+}
+.vf-halloween-preview .vf-halloween-hero a[href="/models"] {
+  border-color:#f0c17c;
+  background:rgba(18,3,10,.85);
+}
+
+/* Premium fabric ambience behind main catalog, while keeping all text and cards intact. */
+.vf-halloween-preview .vf-halloween-catalog::after,
+.vf-halloween-preview .vf-halloween-home-models::after {
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:0;
+  background-image:linear-gradient(to bottom,#090508ee,#160710e3 40%,#080508f5),var(--vf-room-art);
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center top;
+  opacity:.23;
+  filter:saturate(1.15);
+}
+.vf-halloween-preview .vf-halloween-catalog>div:not(.pointer-events-none) {
+  position:relative;z-index:1;
+}
+/* Profile photo ornaments made from high-detail pumpkin/candle/spiderweb art. */
+.vf-halloween-preview .vf-halloween-decor-layer {
+  display:block;pointer-events:none;isolation:isolate;
+}
+.vf-halloween-preview .vf-halloween-decor-image {
+  width:100%;
+  height:100%;
+  object-fit:fill;
+  mix-blend-mode:screen;
+  opacity:.98;
+  filter:contrast(1.3) brightness(1.03) saturate(1.25);
+}
+.vf-halloween-preview .vf-halloween-decor-layer::after {
+  content:"";position:absolute;inset:0;pointer-events:none;
+  box-shadow:inset 0 0 0 1px rgba(244,166,100,.2),inset 0 -20px 28px -16px rgba(239,97,37,.38);
+}
+/* The original face remains untouched: warm ambient lighting only. */
+.vf-halloween-preview .vf-halloween-model-photo>img:not(.vf-halloween-decor-image){
+  filter:sepia(.12) saturate(1.12) contrast(1.03);
+}
+.vf-halloween-preview .vf-halloween-model-card,
+.vf-halloween-preview .vf-halloween-home-card,
+.vf-halloween-preview .vf-halloween-vip-card {
+  border-color:#c7844a!important;
+  box-shadow:0 6px 25px #050004, inset 0 0 0 1px #9e51262b;
+  background:#0c0609;
+}
+.vf-halloween-preview .vf-halloween-model-info,
+.vf-halloween-preview .vf-halloween-home-card .p-4,
+.vf-halloween-preview .vf-halloween-home-card .md\\:p-6{
+  background:linear-gradient(180deg,#10090c,#0a0608 70%,#180d0d);
+  border-top:1px solid #7c3b22;
+}
+.vf-halloween-preview .vf-halloween-model-info::after {
+  content:"";pointer-events:none;position:absolute;inset:0;
+  border-left:1px solid rgba(199,110,64,.16);border-right:1px solid rgba(199,110,64,.16);
+  box-shadow:inset 0 0 24px rgba(116,39,24,.1);
+}
+.vf-halloween-preview .vf-halloween-model-info h3 {
+  font-family:Georgia,"Times New Roman",serif;
+  text-shadow:0 1px 12px #d76a3c4a;
+}
+.vf-halloween-preview .vf-halloween-model-info .vf-halloween-real-vip-badge{
+  font-family:system-ui,sans-serif;
+}
+.vf-halloween-preview .vf-halloween-model-photo .vf-halloween-card-web {
+  z-index:11;
+  color:#e99d65;
+  opacity:.72;
+}
+.vf-halloween-preview .vf-halloween-home-card .vf-halloween-decor-image {
+  object-position:center;
+}
+/* Новelties: retained cards, same photographs with our corner art layered in. */
+.vf-halloween-preview .home-novedades-vf .vf-news-card__media::after {
+  background-image:var(--vf-card-art);
+  background-size:100% 100%;background-repeat:no-repeat;
+  background-position:center center;
+  opacity:.75;
+  mix-blend-mode:screen;
+  filter:contrast(1.35) saturate(1.15);
+}
+.vf-halloween-preview .home-novedades-vf .vf-news-card__name {
+  font-family:Georgia,"Times New Roman",serif;
+}
+.vf-halloween-preview .vf-halloween-catalog-strip {
+  border:1px solid #d2705e;
+  background:linear-gradient(100deg,#36081a,#6a0d30 48%,#2c0815);
+  box-shadow:inset 0 0 17px #ff558133,0 0 20px #b4284533;
+}
+/* Match the reference: two real models side-by-side even on small phones. */
+@media (max-width:767px) {
+  .vf-halloween-preview .vf-halloween-hero {
+    min-height:max(765px,100svh);
+  }
+  .vf-halloween-preview .vf-halloween-hero .vf-halloween-photographic-hero {
+    object-position:center 52%;filter:brightness(.74) saturate(1.08) contrast(1.05);
+  }
+  .vf-halloween-preview .vf-halloween-hero .relative.z-20{
+    margin-top:clamp(150px,17vh,180px);
+    margin-bottom:20px;
+  }
+  .vf-halloween-preview .vf-halloween-hero h1{
+    font-size:clamp(2.8rem,12vw,4.6rem);
+  }
+  .vf-halloween-preview .vf-halloween-hero__ticker {
+    top:calc(95px + env(safe-area-inset-top,0px));
+    width:calc(100% - 18px);
+    padding:8px 9px;
+  }
+  .vf-halloween-preview .vf-halloween-hero__ticker small{
+    font-size:7px;
+  }
+  .vf-halloween-preview .vf-halloween-catalog > div:not(.pointer-events-none) {
+    padding-left:8px;padding-right:8px;
+  }
+  .vf-halloween-preview .vf-halloween-models-grid {
+    gap:10px;
+  }
+  .vf-halloween-preview .vf-halloween-model-photo {
+    aspect-ratio: 4 / 5;
+  }
+  .vf-halloween-preview .vf-halloween-model-info{
+    padding:13px 6px 17px;
+  }
+  .vf-halloween-preview .vf-halloween-model-card .vf-halloween-decor-image{
+    filter:contrast(1.36) brightness(1.08) saturate(1.25);
+  }
+  .vf-halloween-preview .vf-halloween-model-info h3{
+    font-size:clamp(17px,4.7vw,21px);
+  }
+  .vf-halloween-preview .vf-halloween-real-vip-badge {
+    top:5px;right:5px;font-size:8px;
+  }
+  .vf-halloween-preview .vf-halloween-home-card .vf-halloween-decor-image{
+    object-fit:fill;
+  }
+}
+@media (prefers-reduced-motion:reduce) {
+  .vf-halloween-preview .vf-halloween-decor-image,
+  .vf-halloween-preview .vf-halloween-hero__ticker {animation:none;transition:none;}
+}
