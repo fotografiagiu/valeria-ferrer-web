@@ -1,6 +1,7 @@
 import { useEffect, useSyncExternalStore } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { Drama, Gem, ShieldCheck, Heart } from 'lucide-react';
 import HalloweenScene from './HalloweenScene';
 import { halloweenIsLive } from './HalloweenCampaign';
 
@@ -107,7 +108,7 @@ const Hero = () => {
 
       {halloween && <>
       <HalloweenScene />
-      <a href="#halloween-campaign" className="vf-halloween-hero__ticker" aria-label="Descubrir la campaña especial de Halloween">
+      <a href="#halloween-campaign" onClick={(event) => { event.preventDefault(); window.dispatchEvent(new Event('vf:halloween-contact')); }} className="vf-halloween-hero__ticker" aria-label="Consultar ofertas Halloween por teléfono o WhatsApp">
         <span className="vf-halloween-hero__pumpkin" aria-hidden="true">🎃</span>
         <span><strong>ESPECIAL HALLOWEEN</strong><small>Citas exclusivas · Momentos inolvidables · Ver oferta</small></span>
         <span aria-hidden="true">›</span>
@@ -145,6 +146,14 @@ const Hero = () => {
             </p>
           </div>
         </motion.div>
+
+        {halloween && (
+          <div className="vf-halloween-wordmark" aria-label="Especial Halloween">
+            <span className="vf-halloween-wordmark__kicker">ESPECIAL</span>
+            <strong>HALL<span className="vf-halloween-wordmark__pumpkin" aria-label="O">🎃</span>WEEN</strong>
+            <span className="vf-halloween-wordmark__bats" aria-hidden="true">✦</span>
+          </div>
+        )}
 
         <motion.p
           initial={isMobileHero ? false : { opacity: 0 }}
@@ -215,6 +224,14 @@ const Hero = () => {
             </motion.div>
           )}
         </motion.div>
+        {halloween && (
+          <div className="vf-halloween-values" aria-label="Atención personalizada y discreta">
+            <div><Drama aria-hidden="true" size={23} strokeWidth={1.5} /><span>Atmósfera única</span></div>
+            <div><Gem aria-hidden="true" size={23} strokeWidth={1.5} /><span>Ambiente premium</span></div>
+            <div><ShieldCheck aria-hidden="true" size={23} strokeWidth={1.5} /><span>Discreción total</span></div>
+            <div><Heart aria-hidden="true" size={23} strokeWidth={1.5} /><span>Experiencias especiales</span></div>
+          </div>
+        )}
       </div>
     </section>
   );
