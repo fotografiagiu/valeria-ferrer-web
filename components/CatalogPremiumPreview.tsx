@@ -312,6 +312,11 @@ const CatalogPremiumPreview: React.FC<Props> = ({ models = [] }) => {
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#c2b2a3]/25 to-transparent" />
 
       <div className="relative mx-auto w-full max-w-[520px] px-3 sm:max-w-[640px] sm:px-4 md:max-w-[760px] lg:max-w-[900px] xl:max-w-[960px]">
+        <Link to="/" className="vf-halloween-catalog-strip" aria-label="Ver la campaña de Halloween de Valeria Ferrer">
+          <span aria-hidden="true" className="vf-halloween-catalog-strip__star">✦</span>
+          <span><strong>ESPECIAL HALLOWEEN</strong><small>Próximamente · citas exclusivas</small></span>
+          <span aria-hidden="true" className="vf-halloween-catalog-strip__arrow">›</span>
+        </Link>
         {import.meta.env.DEV && (
           <p className="mb-5 text-center text-[8px] uppercase tracking-[0.35em] text-[#c2b2a3]/35">
             Preview · VIP horizontal · colección vertical 4:5
