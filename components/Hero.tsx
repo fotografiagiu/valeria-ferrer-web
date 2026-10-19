@@ -62,9 +62,7 @@ const Hero = () => {
         {/* Móvil: imagen estática — sin iframe YouTube en el DOM */}
         {halloween ? (
           <>
-            {/* Solo escritorio: ampliación ambiental del MISMO archivo fotográfico.
-                La foto principal se muestra completa con object-fit: contain. */}
-            <div className="vf-halloween-hero__desktop-extend" style={{ backgroundImage: `url("${HALLOWEEN_WITCH}")` }} aria-hidden="true" />
+            <div className="vf-halloween-hero__desktop-extend" aria-hidden="true" />
             <img
               src={HALLOWEEN_WITCH}
               alt=""
