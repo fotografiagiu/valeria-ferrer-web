@@ -228,6 +228,11 @@ function VerticalModelCard({ model }: { model: CatalogPreviewModel }) {
           aria-hidden
         />
         <HalloweenCardOverlay />
+        {halloweenIsLive() && model.vip === true && (
+          <span className="vf-halloween-real-vip-badge absolute right-2 top-2 z-20 inline-flex items-center gap-1 rounded-sm bg-gradient-to-r from-[#ecbc83] to-[#c48b51] px-2 py-1 text-[9px] font-bold uppercase tracking-[0.11em] text-[#200c09]">
+            <Crown size={12} aria-hidden="true" /> VIP
+          </span>
+        )}
         <svg className="vf-halloween-card-web" viewBox="0 0 110 110" aria-hidden="true" fill="none">
           <g stroke="currentColor" strokeWidth="1.1">
             <path d="M110 0 0 110M110 0 42 110M110 0 0 63M110 0 81 110M110 0 0 27M110 0 110 110"/>
@@ -293,7 +298,12 @@ function normalizeModels(models: CatalogPreviewModel[]): CatalogPreviewModel[] {
 
 const CatalogPremiumPreview: React.FC<Props> = ({ models = [] }) => {
   const normalized = useMemo(() => normalizeModels(models), [models]);
-  const vipHero = useMemo(() => pickVipHero(normalized), [normalized]);
+  // Durante Halloween: fichas en dos columnas como en la referencia;
+  // no se pierde ninguna modelo ni se altera el atributo VIP.
+  const vipHero = useMemo(
+    () => (halloweenIsLive() ? null : pickVipHero(normalized)),
+    [normalized],
+  );
   const listModels = useMemo(
     () => (vipHero ? normalized.filter((m) => m.slug !== vipHero.slug) : normalized),
     [normalized, vipHero]
