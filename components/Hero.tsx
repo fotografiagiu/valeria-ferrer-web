@@ -1,8 +1,13 @@
 import { useEffect, useSyncExternalStore } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { Drama, Gem, ShieldCheck, Heart } from 'lucide-react';
+import HalloweenScene from './HalloweenScene';
+import { halloweenIsLive } from './HalloweenCampaign';
 
 const MOBILE_MQ = '(max-width: 767px)';
+/** La misma bruja en móvil y escritorio. El texto va en HTML, no dentro de la foto. */
+const HALLOWEEN_WITCH = '/images/halloween-hero-witch.jpg';
 const HERO_BANNER_MOBILE_WEBP = '/images/home-hero-banner-mobile-v4-premium.webp';
 const HERO_BANNER_MOBILE_FALLBACK = '/images/home-hero-banner-mobile-v4-premium.png';
 const DESKTOP_VIDEO_SRC =
@@ -41,6 +46,7 @@ function hideHeroLcpShell(): void {
 
 const Hero = () => {
   const isMobileHero = useIsMobileHero();
+  const halloween = halloweenIsLive();
 
   useEffect(() => {
     const mq = window.matchMedia(MOBILE_MQ);
@@ -50,11 +56,26 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="relative h-screen flex items-center justify-center overflow-hidden bg-black">
+    <section className="vf-halloween-hero relative h-screen flex items-center justify-center overflow-hidden bg-black">
       {/* Background Media */}
       <div className="absolute inset-0 z-0 overflow-hidden bg-black">
         {/* Móvil: imagen estática — sin iframe YouTube en el DOM */}
-        {isMobileHero ? (
+        {halloween ? (
+          <>
+            <div className="vf-halloween-hero__desktop-extend" aria-hidden="true" />
+            <img
+              src={HALLOWEEN_WITCH}
+              alt=""
+              aria-hidden="true"
+              decoding="async"
+              fetchPriority="high"
+              loading="eager"
+              width={768}
+              height={1376}
+              className="vf-halloween-photographic-hero vf-halloween-hero__portrait absolute inset-0 h-full w-full object-cover object-center"
+            />
+          </>
+        ) : isMobileHero ? (
           <picture className="absolute inset-0 h-full w-full">
             <source srcSet={HERO_BANNER_MOBILE_WEBP} type="image/webp" />
             <img
@@ -88,13 +109,22 @@ const Hero = () => {
         />
       </div>
 
+      {halloween && <>
+      <HalloweenScene />
+      <a href="#halloween-campaign" onClick={(event) => { event.preventDefault(); window.dispatchEvent(new Event('vf:halloween-contact')); }} className="vf-halloween-hero__ticker" aria-label="Consultar ofertas Halloween por teléfono o WhatsApp">
+        <span className="vf-halloween-hero__pumpkin" aria-hidden="true">🎃</span>
+        <span className="vf-halloween-hero__line">ESPECIAL HALLOWEEN · VIVE UNA NOCHE DIFERENTE · VER OFERTAS</span>
+        <span aria-hidden="true">›</span>
+      </a>
+      </>}
+
       {/* Content — móvil: visible al montar; desktop: animación framer-motion */}
-      <div className="relative z-20 text-center max-w-5xl px-6 max-md:mt-[4vh]">
+      <div className="vf-halloween-hero__content relative z-20 text-center max-w-5xl px-6 max-md:mt-[4vh]">
         <motion.div
           initial={isMobileHero ? false : { opacity: 0, y: 50 }}
           animate={isMobileHero ? undefined : { opacity: 1, y: 0 }}
           transition={isMobileHero ? { duration: 0 } : { duration: 1, ease: 'easeOut' }}
-          className="text-center mb-8"
+          className="vf-halloween-hero__brand text-center mb-8"
         >
           {/* Main name with better visual organization */}
           <div className="relative inline-block">
@@ -120,11 +150,17 @@ const Hero = () => {
           </div>
         </motion.div>
 
+        {halloween && (
+          <div className="vf-halloween-wordmark" aria-label="Especial Halloween">
+            <img src="/images/halloween-wordmark.png" alt="" className="vf-halloween-wordmark__art" />
+          </div>
+        )}
+
         <motion.p
           initial={isMobileHero ? false : { opacity: 0 }}
           animate={isMobileHero ? undefined : { opacity: 1 }}
           transition={isMobileHero ? { duration: 0 } : { duration: 1, delay: 0.5 }}
-          className="text-lg md:text-xl font-light tracking-[0.3em] uppercase text-gray-200 mb-12 drop-shadow-xl max-md:max-w-[17rem] max-md:mx-auto max-md:leading-relaxed max-md:tracking-[0.22em] max-md:text-base"
+          className="vf-halloween-hero__subtitle text-lg md:text-xl font-light tracking-[0.3em] uppercase text-gray-200 mb-12 drop-shadow-xl max-md:max-w-[17rem] max-md:mx-auto max-md:leading-relaxed max-md:tracking-[0.22em] max-md:text-base"
         >
           Experiencias exclusivas y citas discretas en Valencia
         </motion.p>
@@ -133,7 +169,7 @@ const Hero = () => {
           initial={isMobileHero ? false : { opacity: 0, scale: 0.9 }}
           animate={isMobileHero ? undefined : { opacity: 1, scale: 1 }}
           transition={isMobileHero ? { duration: 0 } : { duration: 0.8, delay: 0.8 }}
-          className="flex flex-col sm:flex-row items-center justify-center space-y-5 sm:space-y-0 sm:space-x-8"
+          className="vf-halloween-hero__actions flex flex-col sm:flex-row items-center justify-center space-y-5 sm:space-y-0 sm:space-x-8"
         >
           {isMobileHero ? (
             <div className="w-full sm:w-auto">
@@ -168,7 +204,7 @@ const Hero = () => {
                 to="/booking"
                 className="block px-12 py-5 luxury-gradient text-black uppercase tracking-[0.3em] text-xs font-bold hover:scale-105 hover:shadow-[0_0_30px_rgba(194,178,163,0.3)] transition-all duration-300 w-full sm:w-auto group relative overflow-hidden"
               >
-                <span className="relative z-10">Reservar Cita Exclusiva</span>
+                <span className="relative z-10">Reserva cita exclusiva</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-[#d4af37] to-[#c2b2a3] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </Link>
             </div>
@@ -183,12 +219,20 @@ const Hero = () => {
                 to="/booking"
                 className="block px-12 py-5 luxury-gradient text-black uppercase tracking-[0.3em] text-xs font-bold hover:scale-105 hover:shadow-[0_0_30px_rgba(194,178,163,0.3)] transition-all duration-300 w-full sm:w-auto group relative overflow-hidden"
               >
-                <span className="relative z-10">Reservar Cita Exclusiva</span>
+                <span className="relative z-10">Reserva cita exclusiva</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-[#d4af37] to-[#c2b2a3] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </Link>
             </motion.div>
           )}
         </motion.div>
+        {halloween && (
+          <div className="vf-halloween-values" aria-label="Atención personalizada y discreta">
+            <div><Drama aria-hidden="true" size={23} strokeWidth={1.5} /><span>Atmósfera única</span></div>
+            <div><Gem aria-hidden="true" size={23} strokeWidth={1.5} /><span>Ambiente premium</span></div>
+            <div><ShieldCheck aria-hidden="true" size={23} strokeWidth={1.5} /><span>Discreción total</span></div>
+            <div><Heart aria-hidden="true" size={23} strokeWidth={1.5} /><span>Experiencias especiales</span></div>
+          </div>
+        )}
       </div>
     </section>
   );

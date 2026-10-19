@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { MODELS } from '../constants';
 import { Crown, Grid3X3, LayoutGrid } from 'lucide-react';
 import LazyImage from './LazyImage';
+import HalloweenCardOverlay, { HalloweenInfoWebs } from './HalloweenCardOverlay';
+import { halloweenIsLive } from './HalloweenCampaign';
 import {
   getGalleryImageThumbnail,
   getModelCoverThumbnailPath,
@@ -133,7 +135,7 @@ const ModelCard: React.FC<{
     <div
       itemScope
       itemType="https://schema.org/Person"
-      className="group relative overflow-hidden bg-[#1a1a1a] rounded-lg shadow-lg md:hover:shadow-[0_10px_40px_rgba(194,178,163,0.15)] md:transition-shadow md:duration-500"
+      className="vf-halloween-home-card group relative overflow-hidden bg-[#1a1a1a] rounded-lg shadow-lg md:hover:shadow-[0_10px_40px_rgba(194,178,163,0.15)] md:transition-shadow md:duration-500"
       onMouseEnter={() => {
         setIsHovered(true);
         setHoverImageReady(true);
@@ -141,13 +143,13 @@ const ModelCard: React.FC<{
       onMouseLeave={() => setIsHovered(false)}
     >
       <Link to={`/models/${adaptedModel.id}`} className="block" itemProp="url">
-        <div className="aspect-[2/3] relative overflow-hidden md:transform-gpu">
+        <div className="card-photo aspect-[2/3] relative overflow-hidden md:transform-gpu">
           <LazyImage
             key={coverSrc}
             src={adaptedModel.image}
             alt={altText}
             title={altText}
-            className={`w-full h-full object-cover md:transition-transform md:duration-700 max-md:scale-100 ${
+            className={`model w-full h-full object-cover md:transition-transform md:duration-700 max-md:scale-100 ${
               isHovered ? 'md:scale-110' : 'md:scale-100'
             }`}
             sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
@@ -167,7 +169,10 @@ const ModelCard: React.FC<{
             />
           )}
 
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
+          <div className={halloweenIsLive()
+            ? "absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent pointer-events-none"
+            : "absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60"} />
+          <HalloweenCardOverlay />
 
           {(model.galleryUpdated ||
             adaptedModel.name === 'Flor' ||
@@ -206,7 +211,8 @@ const ModelCard: React.FC<{
           </div>
         </div>
 
-        <div className="p-4 md:p-6 relative z-10 text-center">
+        <div className="vf-halloween-home-info p-4 md:p-6 relative z-10 text-center">
+          <HalloweenInfoWebs />
           <h3
             className="text-xl md:text-2xl tracking-widest uppercase mb-1 font-light"
             itemProp="name"
@@ -253,6 +259,18 @@ const ModelsGrid: React.FC<ModelsGridProps> = ({
   subtitle = 'Selección Valeria Ferrer · Fotos reales · Reserva discreta',
 }) => {
   const [viewMode, setViewMode] = useState<'normal' | 'double'>('double');
+  const [seasonalFilter, setSeasonalFilter] = useState<'todas' | 'nuevas' | 'espanolas' | 'latinas' | 'vip'>('todas');
+  const seasonal = halloweenIsLive();
+  const filteredSeasonalModels = seasonal ? models.filter((model) => {
+    const nationality = String(model.nationality || '').toLocaleLowerCase('es');
+    switch (seasonalFilter) {
+      case 'nuevas': return Boolean(model.isNew || model.galleryUpdated);
+      case 'espanolas': return nationality.includes('espa');
+      case 'latinas': return ['colomb', 'venezol', 'argentin', 'brasile', 'ecuator', 'peruan', 'dominican', 'cubana', 'mexican', 'chilena', 'uruguay', 'paraguay'].some((value) => nationality.includes(value));
+      case 'vip': return model.vip === true;
+      default: return true;
+    }
+  }) : models;
   const [isMobile, setIsMobile] = useState(
     () => typeof window !== 'undefined' && window.matchMedia(MOBILE_MQ).matches
   );
@@ -272,7 +290,7 @@ const ModelsGrid: React.FC<ModelsGridProps> = ({
   };
 
   return (
-    <section className="py-24 bg-[#0a0a0a]">
+    <section className="vf-halloween-home-models py-24 bg-[#0a0a0a]">
       <div className="max-w-[1600px] mx-auto px-0 md:px-6">
         <div className="text-center mb-16 px-4 md:px-0">
           <h2 className="text-3xl md:text-5xl font-light mb-4">
@@ -295,7 +313,29 @@ const ModelsGrid: React.FC<ModelsGridProps> = ({
 
           <div className="w-20 h-[1px] bg-[#c2b2a3] mx-auto mb-8" />
 
-          <div className="flex flex-col justify-center items-center space-y-4 mb-8 md:hidden">
+          {seasonal && (
+            <div className="vf-halloween-filters" role="group" aria-label="Filtrar chicas disponibles">
+              {([
+                ['todas', 'Todas'],
+                ['nuevas', 'Nuevas'],
+                ['espanolas', 'Españolas'],
+                ['latinas', 'Latinas'],
+                ['vip', 'VIP'],
+              ] as const).map(([key, label]) => (
+                <button
+                  type="button"
+                  key={key}
+                  aria-pressed={seasonalFilter === key}
+                  onClick={() => setSeasonalFilter(key)}
+                  className={seasonalFilter === key ? 'is-active' : ''}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+          )}
+
+          {!seasonal && <div className="flex flex-col justify-center items-center space-y-4 mb-8 md:hidden">
             <div className="flex flex-col items-center space-y-3">
               <span className="text-[12px] text-[#c2b2a3] uppercase tracking-[0.3em] font-bold">
                 VISTA DE FICHAS
@@ -343,7 +383,7 @@ const ModelsGrid: React.FC<ModelsGridProps> = ({
                   : '📱 Visualiza más modelos en formato 2x2'}
               </p>
             </div>
-          </div>
+          </div>}
         </div>
 
         <div
@@ -354,7 +394,7 @@ const ModelsGrid: React.FC<ModelsGridProps> = ({
               : 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4'
           }`}
         >
-          {models.map((model, index) => (
+          {filteredSeasonalModels.map((model, index) => (
             <ModelCard
               key={model.slug || model.id}
               model={model}
@@ -364,6 +404,9 @@ const ModelsGrid: React.FC<ModelsGridProps> = ({
             />
           ))}
         </div>
+        {seasonal && filteredSeasonalModels.length === 0 && (
+          <p className="px-4 py-10 text-center text-sm text-[#e6c5a5]">No hay modelos en esta categoría actualmente.</p>
+        )}
 
         <div className="mt-16 text-center px-4 md:px-0">
           <Link
