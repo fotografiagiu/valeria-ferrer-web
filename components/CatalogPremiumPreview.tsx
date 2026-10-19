@@ -113,7 +113,7 @@ function VipHorizontalCard({ model }: { model: CatalogPreviewModel }) {
       to={`/models/${model.slug}`}
       data-model-name={model.name}
       data-card-layout="vip-horizontal"
-      className="group relative flex min-h-[240px] flex-col overflow-hidden rounded-2xl border border-[rgba(201,172,120,0.28)] bg-[#0a0a0a] transition-[border-color,box-shadow,transform] duration-500 ease-out md:min-h-[300px] md:flex-row md:duration-700 md:ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:-translate-y-0.5 md:hover:border-[rgba(201,172,120,0.42)] md:hover:shadow-[0_22px_56px_-18px_rgba(0,0,0,0.9),0_0_32px_-14px_rgba(194,178,163,0.14)] lg:min-h-[320px]"
+      className="vf-halloween-vip-card group relative flex min-h-[240px] flex-col overflow-hidden rounded-2xl border border-[rgba(201,172,120,0.28)] bg-[#0a0a0a] transition-[border-color,box-shadow,transform] duration-500 ease-out md:min-h-[300px] md:flex-row md:duration-700 md:ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:-translate-y-0.5 md:hover:border-[rgba(201,172,120,0.42)] md:hover:shadow-[0_22px_56px_-18px_rgba(0,0,0,0.9),0_0_32px_-14px_rgba(194,178,163,0.14)] lg:min-h-[320px]"
     >
       <div
         className="pointer-events-none absolute inset-y-6 z-[5] hidden w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-[#c2b2a3]/44 to-transparent md:left-[52%] md:block lg:left-[54%]"
@@ -204,9 +204,9 @@ function VerticalModelCard({ model }: { model: CatalogPreviewModel }) {
       to={`/models/${model.slug}`}
       data-model-name={model.name}
       data-card-layout="vertical"
-      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-[rgba(201,172,120,0.20)] bg-[#0a0a0a] transition-[border-color,box-shadow,transform] duration-500 ease-out md:duration-700 md:ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:-translate-y-0.5 md:hover:border-[rgba(201,172,120,0.35)] md:hover:shadow-[0_18px_44px_-16px_rgba(0,0,0,0.85),0_0_28px_-12px_rgba(194,178,163,0.12)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#c2b2a3]/55"
+      className="vf-halloween-model-card group relative flex h-full flex-col overflow-hidden rounded-2xl border border-[rgba(201,172,120,0.20)] bg-[#0a0a0a] transition-[border-color,box-shadow,transform] duration-500 ease-out md:duration-700 md:ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:-translate-y-0.5 md:hover:border-[rgba(201,172,120,0.35)] md:hover:shadow-[0_18px_44px_-16px_rgba(0,0,0,0.85),0_0_28px_-12px_rgba(194,178,163,0.12)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#c2b2a3]/55"
     >
-      <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#141414]">
+      <div className="vf-halloween-model-photo relative aspect-[4/5] w-full overflow-hidden bg-[#141414]">
         {imageSrc ? (
           <img
             src={imageSrc}
@@ -224,6 +224,12 @@ function VerticalModelCard({ model }: { model: CatalogPreviewModel }) {
           className="pointer-events-none absolute inset-x-0 bottom-0 h-[28%] bg-gradient-to-t from-black/35 to-transparent"
           aria-hidden
         />
+        <svg className="vf-halloween-card-web" viewBox="0 0 110 110" aria-hidden="true" fill="none">
+          <g stroke="currentColor" strokeWidth="1.1">
+            <path d="M110 0 0 110M110 0 42 110M110 0 0 63M110 0 81 110M110 0 0 27M110 0 110 110"/>
+            <path d="M110 28Q70 33 82 73M110 53Q57 45 58 91M110 80Q52 56 34 104"/>
+          </g>
+        </svg>
         {badge && (
           <div className="absolute left-3 top-3 z-10">
             <span className="rounded-sm border border-[#c2b2a3]/25 bg-[#0a0a0a]/72 px-2.5 py-1 text-[8px] font-medium uppercase tracking-[0.28em] text-[#e8ddd2] backdrop-blur-[2px] md:text-[9px]">
@@ -233,7 +239,7 @@ function VerticalModelCard({ model }: { model: CatalogPreviewModel }) {
         )}
       </div>
 
-      <div className="relative flex flex-1 flex-col items-center px-4 pb-5 pt-4 text-center md:px-5 md:pb-6 md:pt-5">
+      <div className="vf-halloween-model-info relative flex flex-1 flex-col items-center px-4 pb-5 pt-4 text-center md:px-5 md:pb-6 md:pt-5">
         <div
           className="pointer-events-none absolute inset-x-0 top-0 h-16 bg-[radial-gradient(ellipse_at_50%_0%,rgba(194,178,163,0.06),transparent_70%)]"
           aria-hidden
@@ -293,7 +299,7 @@ const CatalogPremiumPreview: React.FC<Props> = ({ models = [] }) => {
     <section
       id="catalog-horizontal-preview-root"
       data-catalog-preview="vertical-grid"
-      className="relative overflow-hidden bg-[#020202] py-10 md:py-16 lg:py-[4.5rem]"
+      className="vf-halloween-catalog relative overflow-hidden bg-[#020202] py-10 md:py-16 lg:py-[4.5rem]"
     >
       <div
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_90%_70%_at_50%_28%,rgba(28,24,20,0.55)_0%,#050504_45%,#020202_100%)]"
@@ -326,7 +332,7 @@ const CatalogPremiumPreview: React.FC<Props> = ({ models = [] }) => {
             <SectionLabel>Colección</SectionLabel>
             <ul
               id="models-grid-start"
-              className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-5 md:gap-6 lg:gap-7"
+              className="vf-halloween-models-grid grid grid-cols-2 gap-2.5 sm:gap-5 md:gap-6 lg:gap-7"
               aria-label="Listado de modelos"
             >
               {listModels.map((model) => (
