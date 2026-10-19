@@ -217,6 +217,36 @@
 .vf-halloween-preview .home-novedades-vf .vf-news-card__name {
   color:#f6dfc5;
 }
+/* Cards top promo: also visible after the models route autoscroll. */
+.vf-halloween-preview .vf-halloween-catalog-strip {
+  display:flex;align-items:center;justify-content:center;gap:14px;
+  width:min(100%,660px);min-height:64px;margin:0 auto 29px;
+  padding:11px 18px;
+  border:1px solid rgba(220,115,69,.64);border-radius:6px;
+  color:#f6d7b4;text-align:center;text-decoration:none;
+  background:linear-gradient(108deg,#2e0d1a,#5d1928 50%,#200812);
+  box-shadow:inset 0 0 28px rgba(255,118,46,.08),0 10px 33px rgba(0,0,0,.4);
+  transition:background .25s ease,border-color .25s ease;
+}
+.vf-halloween-preview .vf-halloween-catalog-strip:hover{
+  background:linear-gradient(108deg,#421021,#742437,#36101c);
+  border-color:#d8a06a;
+}
+.vf-halloween-preview .vf-halloween-catalog-strip>span:nth-child(2){
+  display:grid;gap:5px;justify-items:center;
+}
+.vf-halloween-preview .vf-halloween-catalog-strip strong {
+  font-weight:760;font-size:12px;letter-spacing:.28em;color:#f7c691;
+}
+.vf-halloween-preview .vf-halloween-catalog-strip small {
+  text-transform:uppercase;font-size:9px;letter-spacing:.16em;color:#e5bdac;
+}
+.vf-halloween-preview .vf-halloween-catalog-strip__star {
+  font-size:20px;color:#ecaa68;text-shadow:0 0 13px rgba(255,139,76,.7);
+}
+.vf-halloween-preview .vf-halloween-catalog-strip__arrow {
+  font-size:26px;color:#ffc38c;
+}
 /* Two columns on mobile like the reference, VIP feature remains prominent. */
 .vf-halloween-preview .vf-halloween-models-grid > li {min-width:0;}
 .vf-halloween-preview .vf-halloween-models-grid .vf-halloween-model-card h3{
@@ -234,6 +264,12 @@
 }
 /* Details are visual only, not semantic/content changes. */
 @media(max-width:767px){
+  /* Preserve all CTAs on shorter phones instead of clipping the hero. */
+  .vf-halloween-preview .vf-halloween-hero{height:auto;min-height:max(790px,100svh)}
+  .vf-halloween-preview .vf-halloween-catalog-strip{min-height:54px;margin-bottom:21px;padding:9px 12px;gap:8px}
+  .vf-halloween-preview .vf-halloween-catalog-strip strong{font-size:10px;letter-spacing:.2em}
+  .vf-halloween-preview .vf-halloween-catalog-strip small{font-size:8px;letter-spacing:.09em}
+
   .vf-halloween-preview .vf-halloween-hero picture img {object-position:center}
   .vf-halloween-preview .vf-halloween-hero .relative.z-20 {
     margin-top:clamp(138px,21vh,195px);
