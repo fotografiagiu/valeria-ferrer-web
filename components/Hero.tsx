@@ -154,7 +154,7 @@ const Hero = () => {
         {halloween && (
           <div className="vf-halloween-wordmark" aria-label="Especial Halloween">
             <span className="vf-halloween-wordmark__kicker">ESPECIAL</span>
-            <strong>HALL<span className="vf-halloween-wordmark__pumpkin" aria-label="O">🎃</span>WEEN</strong>
+            <strong>HALL<span className="vf-halloween-wordmark__pumpkin" aria-label="O">O</span>WEEN</strong>
             <span className="vf-halloween-wordmark__bats" aria-hidden="true">✦</span>
           </div>
         )}
