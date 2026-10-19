@@ -268,7 +268,8 @@
 .vf-halloween-preview .vf-halloween-decor-layer{
   position:absolute;inset:0;z-index:8;
   overflow:hidden;pointer-events:none;
-  isolation:isolate;
+  /* Screen blend must see the original photo UNDERNEATH this layer. */
+  isolation:auto;
 }
 .vf-halloween-preview .vf-halloween-photo-web{
   position:absolute;
