@@ -259,6 +259,18 @@ const ModelsGrid: React.FC<ModelsGridProps> = ({
   subtitle = 'Selección Valeria Ferrer · Fotos reales · Reserva discreta',
 }) => {
   const [viewMode, setViewMode] = useState<'normal' | 'double'>('double');
+  const [seasonalFilter, setSeasonalFilter] = useState<'todas' | 'nuevas' | 'espanolas' | 'latinas' | 'vip'>('todas');
+  const seasonal = halloweenIsLive();
+  const filteredSeasonalModels = seasonal ? models.filter((model) => {
+    const nationality = String(model.nationality || '').toLocaleLowerCase('es');
+    switch (seasonalFilter) {
+      case 'nuevas': return Boolean(model.isNew || model.galleryUpdated);
+      case 'espanolas': return nationality.includes('espa');
+      case 'latinas': return ['colomb', 'venezol', 'argentin', 'brasile', 'ecuator', 'peruan', 'dominican', 'cubana', 'mexican', 'chilena', 'uruguay', 'paraguay'].some((value) => nationality.includes(value));
+      case 'vip': return model.vip === true;
+      default: return true;
+    }
+  }) : models;
   const [isMobile, setIsMobile] = useState(
     () => typeof window !== 'undefined' && window.matchMedia(MOBILE_MQ).matches
   );
@@ -301,7 +313,29 @@ const ModelsGrid: React.FC<ModelsGridProps> = ({
 
           <div className="w-20 h-[1px] bg-[#c2b2a3] mx-auto mb-8" />
 
-          <div className="flex flex-col justify-center items-center space-y-4 mb-8 md:hidden">
+          {seasonal && (
+            <div className="vf-halloween-filters" role="group" aria-label="Filtrar chicas disponibles">
+              {([
+                ['todas', 'Todas'],
+                ['nuevas', 'Nuevas'],
+                ['espanolas', 'Españolas'],
+                ['latinas', 'Latinas'],
+                ['vip', 'VIP'],
+              ] as const).map(([key, label]) => (
+                <button
+                  type="button"
+                  key={key}
+                  aria-pressed={seasonalFilter === key}
+                  onClick={() => setSeasonalFilter(key)}
+                  className={seasonalFilter === key ? 'is-active' : ''}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+          )}
+
+          {!seasonal && <div className="flex flex-col justify-center items-center space-y-4 mb-8 md:hidden">
             <div className="flex flex-col items-center space-y-3">
               <span className="text-[12px] text-[#c2b2a3] uppercase tracking-[0.3em] font-bold">
                 VISTA DE FICHAS
@@ -349,7 +383,7 @@ const ModelsGrid: React.FC<ModelsGridProps> = ({
                   : '📱 Visualiza más modelos en formato 2x2'}
               </p>
             </div>
-          </div>
+          </div>}
         </div>
 
         <div
@@ -360,7 +394,7 @@ const ModelsGrid: React.FC<ModelsGridProps> = ({
               : 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4'
           }`}
         >
-          {models.map((model, index) => (
+          {filteredSeasonalModels.map((model, index) => (
             <ModelCard
               key={model.slug || model.id}
               model={model}
@@ -370,6 +404,9 @@ const ModelsGrid: React.FC<ModelsGridProps> = ({
             />
           ))}
         </div>
+        {seasonal && filteredSeasonalModels.length === 0 && (
+          <p className="px-4 py-10 text-center text-sm text-[#e6c5a5]">No hay modelos en esta categoría actualmente.</p>
+        )}
 
         <div className="mt-16 text-center px-4 md:px-0">
           <Link
