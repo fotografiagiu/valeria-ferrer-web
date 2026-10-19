@@ -1298,10 +1298,10 @@
     inset:0!important;
     z-index:0!important;
     background-image:url('/images/halloween-hero-desktop-original.webp')!important;
-    background-size:cover!important;
-    background-position:center center!important;
+    background-size:100% auto!important;
+    background-position:left center!important;
     background-repeat:no-repeat!important;
-    background-color:#ecaf6c!important;
+    background-color:#e2a15a!important;
     filter:none!important;
     transform:none!important;
     opacity:1!important;
@@ -1310,6 +1310,6 @@
     display:none!important;
   }
   .vf-halloween-preview .vf-halloween-hero::before {
-    background:linear-gradient(90deg,rgba(28,10,8,.42) 0%,rgba(28,10,8,.16) 22%,transparent 40%)!important;
+    background:linear-gradient(90deg,rgba(22,8,10,.55) 0%,rgba(32,12,10,.28) 18%,rgba(70,32,14,.08) 36%,transparent 52%)!important;
   }
 }
