@@ -100,7 +100,7 @@ const Home: React.FC = () => {
         />
       )}
 
-      <HalloweenCampaign homeOnly />
+      {!isHalloweenPreview && <HalloweenCampaign homeOnly />}
 
       <HomeWhatsAppNews />
 
