@@ -1,6 +1,7 @@
 import { useEffect, useSyncExternalStore } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import HalloweenScene from './HalloweenScene';
 
 const MOBILE_MQ = '(max-width: 767px)';
 const HERO_BANNER_MOBILE_WEBP = '/images/home-hero-banner-mobile-v4-premium.webp';
@@ -50,7 +51,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="relative h-screen flex items-center justify-center overflow-hidden bg-black">
+    <section className="vf-halloween-hero relative h-screen flex items-center justify-center overflow-hidden bg-black">
       {/* Background Media */}
       <div className="absolute inset-0 z-0 overflow-hidden bg-black">
         {/* Móvil: imagen estática — sin iframe YouTube en el DOM */}
@@ -87,6 +88,13 @@ const Hero = () => {
           aria-hidden="true"
         />
       </div>
+
+      <HalloweenScene />
+      <a href="#halloween-campaign" className="vf-halloween-hero__ticker" aria-label="Descubrir la campaña especial de Halloween">
+        <span className="vf-halloween-hero__pumpkin" aria-hidden="true">✦</span>
+        <span><strong>ESPECIAL HALLOWEEN</strong><small>Citas exclusivas · Sorpresas próximamente</small></span>
+        <span aria-hidden="true">›</span>
+      </a>
 
       {/* Content — móvil: visible al montar; desktop: animación framer-motion */}
       <div className="relative z-20 text-center max-w-5xl px-6 max-md:mt-[4vh]">
