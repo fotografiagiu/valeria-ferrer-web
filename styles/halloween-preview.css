@@ -403,7 +403,8 @@
 }
 /* Profile photo ornaments made from high-detail pumpkin/candle/spiderweb art. */
 .vf-halloween-preview .vf-halloween-decor-layer {
-  display:block;pointer-events:none;isolation:isolate;
+  display:block;pointer-events:none;
+  /* No aislar: screen debe mezclarse con la foto ORIGINAL inferior. */
 }
 .vf-halloween-preview .vf-halloween-decor-image {
   width:100%;
