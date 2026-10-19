@@ -1,13 +1,11 @@
 import React from 'react';
 import { halloweenIsLive } from './HalloweenCampaign';
 
-/**
- * Ornamentos en capas sin tocar la foto original de cada modelo.
- * Este fondo ya existente se mezcla en SCREEN y se enmascara al 35 % inferior:
- * no puede dibujar un fondo negro sobre el rostro ni sobre el centro.
- */
+/** Marco fotográfico con el centro transparente. La placa es ornamento, no una capa opaca. */
 const CARD_FRAME = '/images/halloween-card-frame.png';
-const NAME_PLATE = '/images/halloween-nameplate.png';
+const PLATE_CANDLE = '/images/halloween-plate-candle.png';
+const WEB_LEFT = '/images/halloween-web-left.png';
+const WEB_RIGHT = '/images/halloween-web-right.png';
 
 export const HalloweenWeb: React.FC<{ className?: string; flip?: boolean }> = ({ className = '', flip = false }) => (
   <svg className={className} viewBox="0 0 128 128" aria-hidden="true" fill="none"
@@ -29,13 +27,12 @@ export const HalloweenWeb: React.FC<{ className?: string; flip?: boolean }> = ({
 export const HalloweenInfoWebs: React.FC = () => {
   if (!halloweenIsLive()) return null;
   return (
-    <img
-      src={NAME_PLATE}
-      alt=""
-      aria-hidden="true"
-      decoding="async"
-      className="vf-halloween-info-plate"
-    />
+    <span className="vf-halloween-info-webs" aria-hidden="true">
+      <img src={WEB_LEFT} alt="" decoding="async" className="vf-halloween-plate__web vf-halloween-plate__web--left" />
+      <img src={WEB_RIGHT} alt="" decoding="async" className="vf-halloween-plate__web vf-halloween-plate__web--right" />
+      <img src={PLATE_CANDLE} alt="" decoding="async" className="vf-halloween-plate__candle vf-halloween-plate__candle--left" />
+      <img src={PLATE_CANDLE} alt="" decoding="async" className="vf-halloween-plate__candle vf-halloween-plate__candle--right" />
+    </span>
   );
 };
 

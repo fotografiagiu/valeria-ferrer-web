@@ -517,7 +517,10 @@
 }
 @media(min-width:768px) and (max-width:1099px){
   .vf-halloween-preview .vf-halloween-home-models #models-grid-start,
-  .vf-halloween-preview .vf-halloween-models-grid{gap:12px!important;}
+  .vf-halloween-preview .vf-halloween-models-grid{
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    gap:12px!important;
+  }
 }
 @media(prefers-reduced-motion:reduce){
   .vf-halloween-preview .vf-halloween-home-card,
@@ -630,9 +633,10 @@
 }
 
 /* Avoid duplicate dark gradients hiding portraits. */
+.vf-halloween-preview .card-photo .bg-gradient-to-t,
 .vf-halloween-preview .vf-halloween-model-photo .bg-gradient-to-t,
 .vf-halloween-preview .vf-halloween-home-card .bg-gradient-to-t{
-  opacity:.15!important;
+  opacity:.1!important;
 }
 
 /* Small screen: reference places witch high and headline over the lower portrait. */
@@ -860,28 +864,75 @@
   pointer-events:none;
   filter:drop-shadow(0 8px 18px rgba(80,16,0,.45));
 }
-.vf-halloween-preview .vf-halloween-info-plate{
+.vf-halloween-preview .vf-halloween-info-plate{display:none!important;}
+.vf-halloween-preview .vf-halloween-info-webs{
   position:absolute!important;
   inset:0;
-  z-index:0!important;
-  width:100%!important;
-  height:100%!important;
-  max-width:none!important;
-  object-fit:fill;
+  z-index:0;
   pointer-events:none;
-  opacity:.55!important;
 }
+.vf-halloween-preview .vf-halloween-plate__web{
+  position:absolute!important;
+  top:2px;
+  width:24%!important;
+  max-width:70px!important;
+  max-height:52px!important;
+  height:auto!important;
+  object-fit:contain;
+  object-position:left top;
+  opacity:.92!important;
+  pointer-events:none;
+}
+.vf-halloween-preview .vf-halloween-plate__web--left{left:5px!important;right:auto!important;}
+.vf-halloween-preview .vf-halloween-plate__web--right{right:5px!important;left:auto!important;object-position:right top;}
+.vf-halloween-preview .vf-halloween-plate__candle{
+  position:absolute;
+  bottom:1px;
+  width:30%;
+  max-width:64px;
+  height:auto;
+  opacity:.78;
+  pointer-events:none;
+  mix-blend-mode:screen;
+}
+.vf-halloween-preview .vf-halloween-plate__candle--left{left:4px;}
+.vf-halloween-preview .vf-halloween-plate__candle--right{right:4px;transform:scaleX(-1);}
 .vf-halloween-preview .vf-halloween-model-info,
 .vf-halloween-preview .vf-halloween-home-info,
 .vf-halloween-preview .home-novedades-vf .vf-news-card__body{
-  min-height:156px;
-  padding:16px 28px 48px!important;
+  min-height:148px;
+  padding:18px 16px 20px!important;
+  background:
+    radial-gradient(ellipse 42% 48% at 0% 100%, rgba(128,48,18,.34), transparent 70%),
+    radial-gradient(ellipse 42% 48% at 100% 100%, rgba(128,48,18,.34), transparent 70%),
+    linear-gradient(180deg,#181014 0%,#0b0709 48%,#160a10 100%)!important;
+  box-shadow:inset 0 0 0 1px rgba(228,186,112,.95), inset 0 0 0 4px #0c0709, inset 0 0 0 5px rgba(196,146,74,.5)!important;
 }
 .vf-halloween-preview .vf-halloween-model-info h3,
 .vf-halloween-preview .vf-halloween-home-info h3,
 .vf-halloween-preview .home-novedades-vf .vf-news-card__name{
-  color:#f6d7a2!important;
+  color:#f7f1e6!important;
+  font-family:"Playfair Display",Georgia,serif;
+  font-size:clamp(20px,2vw,28px)!important;
+  letter-spacing:.08em!important;
   text-shadow:0 1px 8px rgba(0,0,0,.72);
+}
+.vf-halloween-preview .vf-halloween-home-info > p:nth-of-type(1),
+.vf-halloween-preview .vf-halloween-model-info .vf-halloween-origin,
+.vf-halloween-preview .home-novedades-vf .vf-news-card__origin{
+  color:#e6c48a!important;
+  letter-spacing:.22em!important;
+}
+.vf-halloween-preview .vf-halloween-home-info > p:nth-last-of-type(2)::after,
+.vf-halloween-preview .vf-halloween-model-info > .flex::after,
+.vf-halloween-preview .home-novedades-vf .vf-news-card__meta::before{
+  content:"";
+  display:block;
+  width:min(52%, 132px);
+  height:1px;
+  margin:8px auto 7px;
+  background:linear-gradient(90deg, transparent, #e8c98a 16%, #f8e7c3 50%, #e8c98a 84%, transparent);
+  box-shadow:0 0 6px rgba(232,201,138,.35);
 }
 .vf-halloween-preview .vf-halloween-model-info p,
 .vf-halloween-preview .vf-halloween-home-info p,
