@@ -1,10 +1,22 @@
 {
-  "generatedAt": "2026-10-19T07:50:33.767Z",
+  "generatedAt": "2026-10-19T11:18:14.604Z",
   "sourcePath": "data/models.json",
-  "sourceHash": "1f4046ebfa878f6670b162a5170246691a1f58c58c893ae5f399e352f3aa64b1",
-  "modelCount": 60,
-  "activeCount": 33,
+  "sourceHash": "d040a27649c538663a4c15bf1ec14fdbc9d815618f4fff8e2654dbf553126d76",
+  "modelCount": 61,
+  "activeCount": 34,
   "models": [
+    {
+      "slug": "sofia2",
+      "name": "Sofía",
+      "active": true,
+      "coverImageUrl": "/chicas/sofia2-model-agency-valencia-vf/portada.jpg",
+      "images": [
+        "/chicas/sofia2-model-agency-valencia-vf/gallery/01.jpg",
+        "/chicas/sofia2-model-agency-valencia-vf/gallery/02.jpg",
+        "/chicas/sofia2-model-agency-valencia-vf/gallery/03.jpg",
+        "/chicas/sofia2-model-agency-valencia-vf/gallery/04.jpg"
+      ]
+    },
     {
       "slug": "daniela",
       "name": "Daniela",
