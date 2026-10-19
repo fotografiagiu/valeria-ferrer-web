@@ -1,9 +1,22 @@
 {
-  "generatedAt": "2026-10-19T07:50:33.607Z",
-  "catalogVersion": "1f4046ebfa878f6670b162a5170246691a1f58c58c893ae5f399e352f3aa64b1",
+  "generatedAt": "2026-10-19T11:18:14.443Z",
+  "catalogVersion": "d040a27649c538663a4c15bf1ec14fdbc9d815618f4fff8e2654dbf553126d76",
   "source": "valeria-ferrer-web",
   "method": "build-app-catalog",
   "models": [
+    {
+      "slug": "sofia2",
+      "name": "Sofía",
+      "active": true,
+      "vip": false,
+      "coverImageUrl": "/chicas/sofia2-model-agency-valencia-vf/portada.jpg",
+      "images": [
+        "/chicas/sofia2-model-agency-valencia-vf/gallery/01.jpg",
+        "/chicas/sofia2-model-agency-valencia-vf/gallery/02.jpg",
+        "/chicas/sofia2-model-agency-valencia-vf/gallery/03.jpg",
+        "/chicas/sofia2-model-agency-valencia-vf/gallery/04.jpg"
+      ]
+    },
     {
       "slug": "daniela",
       "name": "Daniela",
