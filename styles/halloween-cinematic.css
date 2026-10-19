@@ -1263,17 +1263,20 @@
   .vf-halloween-preview .vf-halloween-hero .vf-halloween-hero__portrait{
     position:absolute!important;
     left:auto!important;
-    right:0!important;
+    /* right offset positions the full portrait within the Halloween room.
+       Auto width keeps the image box the SAME aspect ratio as the JPG,
+       allowing both its edges to fade naturally into the extended scene. */
+    right:clamp(90px,21vw,425px)!important;
     top:0!important;
-    bottom:0!important;
-    width:77%!important;
+    bottom:auto!important;
+    width:auto!important;
     height:100%!important;
     max-width:none!important;
     object-fit:contain!important;
-    object-position:42% center!important;
+    object-position:center top!important;
     filter:brightness(1.08) saturate(1.1)!important;
-    -webkit-mask-image:linear-gradient(to right,transparent 0%,rgba(0,0,0,.6) 12%,#000 24%,#000 92%,transparent 100%)!important;
-    mask-image:linear-gradient(to right,transparent 0%,rgba(0,0,0,.6) 12%,#000 24%,#000 92%,transparent 100%)!important;
+    -webkit-mask-image:linear-gradient(to right,transparent 0%,#000 16%,#000 87%,transparent 100%)!important;
+    mask-image:linear-gradient(to right,transparent 0%,#000 16%,#000 87%,transparent 100%)!important;
   }
   /* Preserve the contrast on the left without covering the foreground model. */
   .vf-halloween-preview .vf-halloween-hero::before{
