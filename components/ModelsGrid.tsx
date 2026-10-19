@@ -143,13 +143,13 @@ const ModelCard: React.FC<{
       onMouseLeave={() => setIsHovered(false)}
     >
       <Link to={`/models/${adaptedModel.id}`} className="block" itemProp="url">
-        <div className="aspect-[2/3] relative overflow-hidden md:transform-gpu">
+        <div className="card-photo aspect-[2/3] relative overflow-hidden md:transform-gpu">
           <LazyImage
             key={coverSrc}
             src={adaptedModel.image}
             alt={altText}
             title={altText}
-            className={`w-full h-full object-cover md:transition-transform md:duration-700 max-md:scale-100 ${
+            className={`model w-full h-full object-cover md:transition-transform md:duration-700 max-md:scale-100 ${
               isHovered ? 'md:scale-110' : 'md:scale-100'
             }`}
             sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"

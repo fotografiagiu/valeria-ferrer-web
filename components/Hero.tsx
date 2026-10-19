@@ -6,9 +6,8 @@ import HalloweenScene from './HalloweenScene';
 import { halloweenIsLive } from './HalloweenCampaign';
 
 const MOBILE_MQ = '(max-width: 767px)';
-/** Imagen creada para la campaña: un salón fotográfico, no un mockup con texto. */
-const HALLOWEEN_ROOM_MOBILE = 'https://d8j0ntlcm91z4.cloudfront.net/user_36DayVJkjOLFx77vIiJcDWRkvYc/hf_20261019_120457_5e2340c9-9216-4e70-a79d-b32b1206bbe3.png';
-const HALLOWEEN_ROOM_DESKTOP = 'https://d8j0ntlcm91z4.cloudfront.net/user_36DayVJkjOLFx77vIiJcDWRkvYc/hf_20261019_102448_388329a1-c921-4283-9551-2cd376c043a4.png';
+/** La misma bruja en móvil y escritorio. El texto va en HTML, no dentro de la foto. */
+const HALLOWEEN_WITCH = '/images/halloween-hero-witch.jpg';
 const HERO_BANNER_MOBILE_WEBP = '/images/home-hero-banner-mobile-v4-premium.webp';
 const HERO_BANNER_MOBILE_FALLBACK = '/images/home-hero-banner-mobile-v4-premium.png';
 const DESKTOP_VIDEO_SRC =
@@ -63,22 +62,15 @@ const Hero = () => {
         {/* Móvil: imagen estática — sin iframe YouTube en el DOM */}
         {halloween ? (
           <>
-            {/* El salón de escritorio no contiene otra modelo. La misma imagen de bruja
-                aparece en AMBOS tamaños, evitando cambiar de mujer al redimensionar. */}
-            <div
-              className="vf-halloween-desktop-room absolute inset-0"
-              style={{ backgroundImage: `url("${HALLOWEEN_ROOM_DESKTOP}")` }}
-              aria-hidden="true"
-            />
             <img
-              src={HALLOWEEN_ROOM_MOBILE}
+              src={HALLOWEEN_WITCH}
               alt=""
               aria-hidden="true"
               decoding="async"
               fetchPriority="high"
               loading="eager"
-              width={1024}
-              height={1792}
+              width={768}
+              height={1376}
               className="vf-halloween-photographic-hero absolute inset-0 h-full w-full object-cover object-center"
             />
           </>
@@ -120,7 +112,7 @@ const Hero = () => {
       <HalloweenScene />
       <a href="#halloween-campaign" onClick={(event) => { event.preventDefault(); window.dispatchEvent(new Event('vf:halloween-contact')); }} className="vf-halloween-hero__ticker" aria-label="Consultar ofertas Halloween por teléfono o WhatsApp">
         <span className="vf-halloween-hero__pumpkin" aria-hidden="true">🎃</span>
-        <span><strong>ESPECIAL HALLOWEEN</strong><small>Vive una noche diferente · Ver ofertas</small></span>
+        <span className="vf-halloween-hero__line">ESPECIAL HALLOWEEN · VIVE UNA NOCHE DIFERENTE · VER OFERTAS</span>
         <span aria-hidden="true">›</span>
       </a>
       </>}
@@ -213,7 +205,7 @@ const Hero = () => {
                 to="/booking"
                 className="block px-12 py-5 luxury-gradient text-black uppercase tracking-[0.3em] text-xs font-bold hover:scale-105 hover:shadow-[0_0_30px_rgba(194,178,163,0.3)] transition-all duration-300 w-full sm:w-auto group relative overflow-hidden"
               >
-                <span className="relative z-10">Reservar Cita Exclusiva</span>
+                <span className="relative z-10">Reserva cita exclusiva</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-[#d4af37] to-[#c2b2a3] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </Link>
             </div>
@@ -228,7 +220,7 @@ const Hero = () => {
                 to="/booking"
                 className="block px-12 py-5 luxury-gradient text-black uppercase tracking-[0.3em] text-xs font-bold hover:scale-105 hover:shadow-[0_0_30px_rgba(194,178,163,0.3)] transition-all duration-300 w-full sm:w-auto group relative overflow-hidden"
               >
-                <span className="relative z-10">Reservar Cita Exclusiva</span>
+                <span className="relative z-10">Reserva cita exclusiva</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-[#d4af37] to-[#c2b2a3] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </Link>
             </motion.div>

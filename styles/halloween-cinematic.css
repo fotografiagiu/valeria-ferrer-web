@@ -813,3 +813,147 @@
  .vf-halloween-preview .vf-halloween-hero .relative.z-20{margin:0 auto!important;max-width:460px;padding:10px 11px 17px;}
  .vf-halloween-preview .vf-halloween-hero .vf-halloween-wordmark strong{font-size:clamp(47px,12vw,66px);}
 }
+
+/* Reference lock: one witch photograph, HTML type, transparent card frame. */
+.vf-halloween-preview{
+  --vf-hero-photo:url('/images/halloween-hero-witch.jpg');
+}
+.vf-halloween-preview .vf-halloween-scene{display:none!important;}
+.vf-halloween-preview .vf-halloween-desktop-room{display:none!important;}
+.vf-halloween-preview .vf-halloween-hero{
+  background:
+    radial-gradient(ellipse 42% 68% at 16% 78%, rgba(196,78,18,.34), transparent 72%),
+    radial-gradient(ellipse 36% 48% at 82% 18%, rgba(120,28,16,.4), transparent 70%),
+    #12060c;
+}
+.vf-halloween-preview .vf-halloween-hero__ticker > span:nth-child(2){
+  display:block;
+}
+.vf-halloween-preview .vf-halloween-hero__line{
+  display:block;
+  color:#ffe7cf;
+  font-weight:650;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  white-space:nowrap;
+  font-size:clamp(7.5px, 2.05vw, 13px);
+  line-height:1.2;
+}
+.vf-halloween-preview .vf-halloween-hero a[href="/models"]{
+  color:#ffe6c6!important;
+  background:rgba(20,6,8,.42)!important;
+  border:1px solid #f3a85c!important;
+  box-shadow:0 0 16px rgba(255,122,28,.55), inset 0 0 14px rgba(255,150,50,.22)!important;
+}
+.vf-halloween-preview .vf-halloween-hero a[href="/booking"]{
+  color:#2a1208!important;
+  background:linear-gradient(180deg,#ffe0b4,#ff8d2c 58%,#e25a10)!important;
+  border:1px solid #ffc27a!important;
+  box-shadow:0 0 22px rgba(255,110,20,.72)!important;
+}
+.vf-halloween-preview .vf-halloween-wordmark{display:flex!important;}
+
+.vf-halloween-preview .card-photo{
+  position:relative;
+  overflow:hidden;
+}
+.vf-halloween-preview .card-photo img.model{
+  position:relative;
+  z-index:1;
+}
+.vf-halloween-preview .halloween-overlay{
+  position:absolute!important;
+  inset:0;
+  z-index:2!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:fill!important;
+  pointer-events:none!important;
+  mix-blend-mode:normal;
+  opacity:1!important;
+  filter:none!important;
+  background:none!important;
+  -webkit-mask-image:none!important;
+  mask-image:none!important;
+}
+.vf-halloween-preview .vf-halloween-photo-ornament{
+  display:none;
+}
+
+@media (min-width:768px){
+  .vf-halloween-preview .vf-halloween-hero{
+    justify-content:flex-start;
+    align-items:center;
+    min-height:clamp(740px, 86svh, 940px);
+    height:auto!important;
+    padding:128px 4vw 64px 6vw;
+  }
+  .vf-halloween-preview .vf-halloween-hero .vf-halloween-photographic-hero{
+    left:auto!important;
+    right:0!important;
+    top:0!important;
+    width:56%!important;
+    height:100%!important;
+    object-fit:cover;
+    object-position:center 16%;
+    filter:saturate(1.06) brightness(1.02);
+    -webkit-mask-image:linear-gradient(90deg, transparent 0%, #000 24%);
+    mask-image:linear-gradient(90deg, transparent 0%, #000 24%);
+  }
+  .vf-halloween-preview .vf-halloween-hero::before{
+    background:linear-gradient(90deg, rgba(12,2,8,.72) 0%, rgba(12,2,8,.42) 38%, transparent 68%);
+  }
+  .vf-halloween-preview .vf-halloween-hero .relative.z-20{
+    width:min(44%, 620px);
+    max-width:620px;
+    margin:0!important;
+    text-align:center;
+  }
+  .vf-halloween-preview .vf-halloween-hero__ticker{
+    top:104px;
+    width:min(980px, calc(100% - 40px));
+  }
+  .vf-halloween-preview .vf-halloween-hero__line{font-size:12px;letter-spacing:.18em;}
+  .vf-halloween-preview .vf-halloween-values{max-width:560px;margin:26px auto 0;}
+}
+@media (max-width:767px){
+  .vf-halloween-preview .vf-halloween-hero{
+    align-items:flex-end;
+    min-height:100svh;
+    height:auto!important;
+    padding:156px 10px 18px;
+  }
+  .vf-halloween-preview .vf-halloween-hero .vf-halloween-photographic-hero{
+    left:0!important;
+    right:0!important;
+    top:0!important;
+    width:100%!important;
+    height:100%!important;
+    object-fit:cover;
+    object-position:center 14%;
+    filter:saturate(1.08) brightness(1.04);
+    -webkit-mask-image:none;
+    mask-image:none;
+  }
+  .vf-halloween-preview .vf-halloween-hero::before{
+    background:linear-gradient(to bottom, rgba(8,1,4,.08) 0%, rgba(8,1,4,.05) 28%, rgba(8,1,4,.28) 52%, rgba(6,0,3,.62) 78%, rgba(5,0,2,.72));
+  }
+  .vf-halloween-preview .vf-halloween-hero .relative.z-20{
+    width:100%;
+    max-width:430px;
+    margin:0 auto!important;
+    text-align:center;
+  }
+  .vf-halloween-preview .vf-halloween-hero__ticker{
+    top:118px;
+    width:calc(100% - 16px);
+    min-height:44px;
+    padding:8px 10px;
+    gap:6px;
+  }
+  .vf-halloween-preview .vf-halloween-hero__line{
+    font-size:7.4px;
+    letter-spacing:.06em;
+  }
+  .vf-halloween-preview .vf-halloween-hero__pumpkin{font-size:16px;}
+}

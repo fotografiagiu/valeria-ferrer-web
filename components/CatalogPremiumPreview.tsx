@@ -126,7 +126,7 @@ function VipHorizontalCard({ model }: { model: CatalogPreviewModel }) {
       />
 
       {/* Foto */}
-      <div className="relative aspect-[4/5] w-full shrink-0 self-stretch md:aspect-auto md:min-h-[inherit] md:w-[52%] lg:w-[54%]">
+      <div className="card-photo relative aspect-[4/5] w-full shrink-0 self-stretch md:aspect-auto md:min-h-[inherit] md:w-[52%] lg:w-[54%]">
         <div
           className="pointer-events-none absolute inset-y-0 left-0 z-0 w-[65%] bg-[radial-gradient(ellipse_at_38%_50%,rgba(194,178,163,0.055),transparent_68%)]"
           aria-hidden
@@ -139,7 +139,7 @@ function VipHorizontalCard({ model }: { model: CatalogPreviewModel }) {
             height={900}
             loading="eager"
             decoding="async"
-            className={`vip-cover-fade absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-out md:duration-[1.1s] md:group-hover:scale-[1.02] ${objectPos}`}
+            className={`model vip-cover-fade absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-out md:duration-[1.1s] md:group-hover:scale-[1.02] ${objectPos}`}
           />
         ) : (
           <div className="absolute inset-0 bg-[#141414]" aria-hidden />
@@ -212,7 +212,7 @@ function VerticalModelCard({ model }: { model: CatalogPreviewModel }) {
       data-card-layout="vertical"
       className="vf-halloween-model-card group relative flex h-full flex-col overflow-hidden rounded-2xl border border-[rgba(201,172,120,0.20)] bg-[#0a0a0a] transition-[border-color,box-shadow,transform] duration-500 ease-out md:duration-700 md:ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:-translate-y-0.5 md:hover:border-[rgba(201,172,120,0.35)] md:hover:shadow-[0_18px_44px_-16px_rgba(0,0,0,0.85),0_0_28px_-12px_rgba(194,178,163,0.12)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#c2b2a3]/55"
     >
-      <div className="vf-halloween-model-photo relative aspect-[4/5] w-full overflow-hidden bg-[#141414]">
+      <div className="card-photo vf-halloween-model-photo relative aspect-[4/5] w-full overflow-hidden bg-[#141414]">
         {imageSrc ? (
           <img
             src={imageSrc}
@@ -221,7 +221,7 @@ function VerticalModelCard({ model }: { model: CatalogPreviewModel }) {
             height={800}
             loading="lazy"
             decoding="async"
-            className={`absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-out md:duration-[1.05s] md:group-hover:scale-[1.02] ${objectPos}`}
+            className={`model absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-out md:duration-[1.05s] md:group-hover:scale-[1.02] ${objectPos}`}
           />
         ) : (
           <div className="absolute inset-0 bg-[#141414]" aria-hidden />
