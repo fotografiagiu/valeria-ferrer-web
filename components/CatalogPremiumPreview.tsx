@@ -6,7 +6,7 @@ import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { Crown } from 'lucide-react';
 import { halloweenIsLive } from './HalloweenCampaign';
-import HalloweenCardOverlay from './HalloweenCardOverlay';
+import HalloweenCardOverlay, { HalloweenInfoWebs } from './HalloweenCardOverlay';
 
 export type CatalogPreviewModel = {
   slug: string;
@@ -23,8 +23,11 @@ export type CatalogPreviewModel = {
 };
 
 function resolveCoverUrl(coverImageUrl: string): string {
-  if (!coverImageUrl) return '';
-  return coverImageUrl.startsWith('/') ? coverImageUrl : `/${coverImageUrl}`;
+  const src = coverImageUrl?.trim();
+  if (!src) return '';
+  // Cloud overrides may be external HTTPS images: never corrupt their URLs.
+  if (/^(https?:\/\/|data:|blob:)/i.test(src) || src.startsWith('/')) return src;
+  return `/${src}`;
 }
 
 /** Solo modelos con flag real `vip` — sin fallback a featured ni primer item. */
@@ -233,12 +236,6 @@ function VerticalModelCard({ model }: { model: CatalogPreviewModel }) {
             <Crown size={12} aria-hidden="true" /> VIP
           </span>
         )}
-        <svg className="vf-halloween-card-web" viewBox="0 0 110 110" aria-hidden="true" fill="none">
-          <g stroke="currentColor" strokeWidth="1.1">
-            <path d="M110 0 0 110M110 0 42 110M110 0 0 63M110 0 81 110M110 0 0 27M110 0 110 110"/>
-            <path d="M110 28Q70 33 82 73M110 53Q57 45 58 91M110 80Q52 56 34 104"/>
-          </g>
-        </svg>
         {badge && (
           <div className="absolute left-3 top-3 z-10">
             <span className="rounded-sm border border-[#c2b2a3]/25 bg-[#0a0a0a]/72 px-2.5 py-1 text-[8px] font-medium uppercase tracking-[0.28em] text-[#e8ddd2] backdrop-blur-[2px] md:text-[9px]">
@@ -249,6 +246,7 @@ function VerticalModelCard({ model }: { model: CatalogPreviewModel }) {
       </div>
 
       <div className="vf-halloween-model-info relative flex flex-1 flex-col items-center px-4 pb-5 pt-4 text-center md:px-5 md:pb-6 md:pt-5">
+        <HalloweenInfoWebs />
         <div
           className="pointer-events-none absolute inset-x-0 top-0 h-16 bg-[radial-gradient(ellipse_at_50%_0%,rgba(194,178,163,0.06),transparent_70%)]"
           aria-hidden
