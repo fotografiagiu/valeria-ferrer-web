@@ -10,12 +10,13 @@ const DISMISS_KEY = 'vf-halloween-2026-topbar-closed';
 export const HALLOWEEN_CAMPAIGN_ENABLED = true;
 export const halloweenIsLive = (now = Date.now()) => HALLOWEEN_CAMPAIGN_ENABLED && now >= HALLOWEEN_START && now < HALLOWEEN_END;
 
-const HalloweenCampaign: React.FC = () => {
+const HalloweenCampaign: React.FC<{ homeOnly?: boolean }> = ({ homeOnly = false }) => {
   const { pathname } = useLocation();
   const [dismissed, setDismissed] = useState(() => {
     try { return window.sessionStorage.getItem(DISMISS_KEY) === '1'; } catch { return false; }
   });
   if (!halloweenIsLive()) return null;
+  if (homeOnly && pathname !== '/') return null;
   const isHome = pathname === '/';
   const showBar = !isHome && !dismissed && (
     pathname === '/models' || pathname.startsWith('/models/') ||
@@ -28,7 +29,7 @@ const HalloweenCampaign: React.FC = () => {
   };
   return (
     <>
-      {isHome && (
+      {isHome && homeOnly && (
         <section aria-label="Campaña especial de Halloween" className="relative bg-[#090507] px-3 sm:px-6 py-7 md:py-12 border-y border-[#de627e]/25">
           <div className="relative max-w-7xl mx-auto overflow-hidden rounded-2xl md:rounded-[28px] border border-[#ee6096]/30 shadow-[0_0_44px_rgba(210,35,103,0.18)]">
             <img
@@ -53,7 +54,7 @@ const HalloweenCampaign: React.FC = () => {
           </p>
         </section>
       )}
-      {showBar && (
+      {!homeOnly && showBar && (
         <div role="region" aria-label="Promoción de Halloween" className="relative z-10 mx-3 md:mx-auto max-w-7xl mt-28 lg:mt-32 mb-2 flex items-center justify-center gap-3 rounded-xl border border-[#f57d99]/40 bg-gradient-to-r from-[#180810] via-[#3d1026] to-[#180810] px-10 py-3 shadow-[0_8px_28px_rgba(0,0,0,0.24)]">
           <Link to="/" className="text-[#ffe2e9] text-xs sm:text-sm text-center hover:text-white">
             <strong className="text-[#ffc092]">🎃 Especial Halloween</strong> · Muy pronto, promociones exclusivas y una ambientación única <span className="underline underline-offset-4 whitespace-nowrap">Descubrir</span>
