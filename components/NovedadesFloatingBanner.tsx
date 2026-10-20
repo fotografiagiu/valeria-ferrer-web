@@ -85,7 +85,9 @@ const NovedadesFloatingBanner: React.FC = () => {
       .map((m) => ({
         slug: m.slug,
         name: m.name,
-        imageSrc: getModelCoverThumbnailPath(m.image),
+        imageSrc: m.slug === 'camila'
+          ? m.image.replace('/chicas/', '/chicas-thumbnails/')
+          : getModelCoverThumbnailPath(m.image),
         imageAlt: `${m.name}, nueva incorporación`,
         text: m.nationality || 'Valencia',
         href: `/models/${m.slug}`,
