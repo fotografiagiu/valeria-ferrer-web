@@ -27,6 +27,14 @@ type CatalogLike = {
   gallery?: string[];
 };
 
+function knownCoverPaths(model: CatalogLike): Set<string> {
+  return new Set(
+    [model.coverImageUrl, model.image, ...(model.gallery || [])].filter(
+      (path): path is string => Boolean(path)
+    )
+  );
+}
+
 /** Home pin fallback — must stay aligned with panel effectiveOrder until overrides load. */
 export const HOME_PIN_ORDER: readonly string[] = [
   'camila',
@@ -119,11 +127,14 @@ export function applyCatalogOverrides<T extends CatalogLike>(
     if (!model) continue;
     seen.add(resolvedSlug);
     const cover = row.coverImagePath?.trim();
-    // Ignore stale cover paths from the retired sofia slug/folder.
+    const knownCovers = knownCoverPaths(model);
+    // Ignore a panel cover that is no longer in this ficha. That happens when
+    // the photo file is replaced to bust the immutable cache.
     const coverIsStale =
       !!cover &&
       (cover.includes('/sofia-valeria-ferrer-model-agency-valencia/') ||
-        (resolvedSlug === 'sofia1' && row.slug === 'sofia'));
+        (resolvedSlug === 'sofia1' && row.slug === 'sofia') ||
+        (knownCovers.size > 0 && !knownCovers.has(cover)));
     ordered.push(
       cover && !coverIsStale
         ? withGalleryOverride(model, cover, row.galleryImagePaths)
