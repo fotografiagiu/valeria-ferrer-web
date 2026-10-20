@@ -19,14 +19,15 @@ const WHATSAPP_HOME_URL = officialWhatsAppUrlWithText(
 const FloatingContactPopup: React.FC = () => {
   const { pathname } = useLocation();
   const isHome = pathname === '/';
-  const [isOpen, setIsOpen] = useState(false);
+  // Inicio abre Contacto al cargar. Al cerrar, permanece minimizado hasta volver a Inicio.
+  const [isOpen, setIsOpen] = useState(() => isHome);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
 
-  // A navigation never leaves the old contact panel over a model profile.
+  // En las fichas y demás rutas comienza minimizado; al regresar a Inicio vuelve a desplegarse.
   useEffect(() => {
-    setIsOpen(false);
-  }, [pathname]);
+    setIsOpen(isHome);
+  }, [pathname, isHome]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -74,12 +75,12 @@ const FloatingContactPopup: React.FC = () => {
                   setIsOpen(false);
                   triggerRef.current?.focus();
                 }}
-                className="absolute right-3 top-3 z-10 grid h-8 w-8 place-items-center rounded-full text-gray-400 transition-colors hover:bg-white/10 hover:text-white"
+                className="absolute right-2 top-2 z-10 grid h-11 w-11 place-items-center rounded-full border border-white/15 bg-white/5 text-gray-300 shadow-sm transition-all hover:border-[#c2b2a3]/50 hover:bg-white/15 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                 aria-label="Cerrar opciones de contacto"
               >
-                <X size={17} aria-hidden="true" />
+                <X size={21} strokeWidth={1.8} aria-hidden="true" />
               </button>
-              <h4 className="mb-2 pr-8 text-[10px] font-bold uppercase tracking-[0.22em] text-[#c2b2a3]">
+              <h4 className="mb-2 pr-12 text-[10px] font-bold uppercase tracking-[0.22em] text-[#c2b2a3]">
                 Atención Exclusiva
               </h4>
               <p className="mb-3 text-[11px] leading-relaxed text-gray-300">
@@ -161,10 +162,10 @@ const FloatingContactPopup: React.FC = () => {
           rel="noopener noreferrer"
           data-contact-placement="floating_whatsapp"
           aria-label={`Abrir WhatsApp de Valeria Ferrer al ${OFFICIAL_PHONE_LABEL} con mensaje preparado`}
-          className="fixed bottom-5 right-4 z-[55] inline-flex min-h-12 items-center gap-2 rounded-full border border-[#d6ab5e]/65 bg-[#116b3d] px-4 py-3 text-white shadow-[0_5px_24px_rgba(0,0,0,.55),0_0_12px_rgba(25,166,89,.18)] transition-all hover:bg-[#18864d] hover:shadow-[0_6px_28px_rgba(0,0,0,.6),0_0_18px_rgba(25,166,89,.3)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white md:bottom-6 md:right-6"
+          className="vf-whatsapp-glass fixed bottom-5 right-4 z-[55] inline-flex min-h-12 items-center gap-2 overflow-hidden rounded-full px-5 py-3 text-white transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white md:bottom-6 md:right-6"
         >
-          <MessageCircle size={22} fill="none" strokeWidth={2} aria-hidden="true" />
-          <span className="text-[12px] font-semibold tracking-[0.06em]">WhatsApp</span>
+          <span className="vf-whatsapp-glass__icon grid h-7 w-7 shrink-0 place-items-center rounded-full"><MessageCircle size={21} fill="none" strokeWidth={2.15} aria-hidden="true" /></span>
+          <span className="relative z-10 text-[12px] font-semibold tracking-[0.07em]">WhatsApp</span>
         </a>
       )}
     </>
