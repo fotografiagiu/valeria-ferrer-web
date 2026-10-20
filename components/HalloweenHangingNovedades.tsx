@@ -30,15 +30,16 @@ const HalloweenHangingNovedades: React.FC<Props> = ({ models, titleId, onClose }
       aria-labelledby={titleId}
       aria-label="Nuevas incorporaciones de Halloween"
     >
-      <svg className="vf-hanging-news__web" aria-hidden="true" viewBox="0 0 450 114" preserveAspectRatio="none">
-        <g fill="none" stroke="#dca466" strokeWidth="1.1" opacity=".85">
-          <path d="M225 0 225 44M225 0 100 75M225 0 350 75M225 0 23 22M225 0 427 22" />
-          <path d="M162 0Q172 20 189 27M288 0Q278 20 261 27" />
-          <path d="M144 24Q225 95 306 24M87 49Q225 119 363 49M60 63Q225 130 390 63" />
-          <path d="M225 0v65M155 35l-13 67M295 35l13 67M100 75 84 113M350 75l16 38" />
-        </g>
-        <circle cx="225" cy="44" r="3.3" fill="#e9b978" />
-      </svg>
+      <img
+        className="vf-hanging-news__web"
+        src="/images/halloween-hanging-realistic.svg"
+        alt=""
+        aria-hidden="true"
+        width={900}
+        height={480}
+        loading="eager"
+        decoding="async"
+      />
       <div className="vf-hanging-news__body">
         <header className="vf-hanging-news__header">
           <span className="vf-hanging-news__eyebrow">VALERIA FERRER · HALLOWEEN</span>
