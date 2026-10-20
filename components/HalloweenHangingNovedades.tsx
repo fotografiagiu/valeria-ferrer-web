@@ -55,13 +55,10 @@ const HalloweenHangingNovedades: React.FC<Props> = ({ models, titleId, onClose }
               <span className="vf-hanging-news__thread" aria-hidden="true" />
               <Link to={model.href} className="vf-hanging-news__card" onClick={onClose} aria-label={`Ver perfil de ${model.name}`}>
                 <div className="vf-hanging-news__photo">
-                  <img src={model.imageSrc} alt={model.imageAlt} width={190} height={245} loading="eager" decoding="async" />
+                  <img className="vf-hanging-news__portrait" src={model.imageSrc} alt={model.imageAlt} width={190} height={245} loading="eager" decoding="async" />
                   <span className="vf-hanging-news__new">NUEVA</span>
-                  <svg className="vf-hanging-news__corner" aria-hidden="true" viewBox="0 0 62 62">
-                    <g fill="none" stroke="#edaa5c" strokeWidth=".8" opacity=".8">
-                      <path d="M0 0H62M0 0V62M0 0 54 54M0 0 28 62M0 0 62 28M0 19Q19 17 27 27M0 38Q34 34 46 46M19 0Q17 19 27 27M38 0Q34 34 46 46" />
-                    </g>
-                  </svg>
+                  <img className="vf-hanging-news__web-corner vf-hanging-news__web-corner--left" src="/images/halloween-web-left.png" alt="" aria-hidden="true" width={312} height={356} decoding="async" />
+                  <img className="vf-hanging-news__web-corner vf-hanging-news__web-corner--right" src="/images/halloween-web-right.png" alt="" aria-hidden="true" width={312} height={356} decoding="async" />
                 </div>
                 <div className="vf-hanging-news__caption">
                   <strong>{model.name}</strong>

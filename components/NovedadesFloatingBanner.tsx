@@ -61,11 +61,7 @@ function buildSlides(): NovedadSlide[] {
         name: m.name,
         title: m.name,
         text: `Nueva incorporación · ${place}`,
-        // Camila was uploaded with portada.jpg but no cover-thumbnail.jpg yet.
-        // Use the actual existing small asset; Daniela uses the standard generated cover.
-        imageSrc: m.slug === 'camila'
-          ? m.image.replace('/chicas/', '/chicas-thumbnails/')
-          : getModelCoverThumbnailPath(m.image),
+        imageSrc: getModelCoverThumbnailPath(m.image),
         imageAlt: `${m.name}, nueva modelo en Valeria Ferrer Valencia`,
         href: `/models/${m.slug || m.id}`,
       };
@@ -85,9 +81,7 @@ const NovedadesFloatingBanner: React.FC = () => {
       .map((m) => ({
         slug: m.slug,
         name: m.name,
-        imageSrc: m.slug === 'camila'
-          ? m.image.replace('/chicas/', '/chicas-thumbnails/')
-          : getModelCoverThumbnailPath(m.image),
+        imageSrc: getModelCoverThumbnailPath(m.image),
         imageAlt: `${m.name}, nueva incorporación`,
         text: m.nationality || 'Valencia',
         href: `/models/${m.slug}`,
