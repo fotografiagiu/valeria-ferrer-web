@@ -162,10 +162,17 @@ const FloatingContactPopup: React.FC = () => {
           rel="noopener noreferrer"
           data-contact-placement="floating_whatsapp"
           aria-label={`Abrir WhatsApp de Valeria Ferrer al ${OFFICIAL_PHONE_LABEL} con mensaje preparado`}
-          className="vf-whatsapp-glass fixed bottom-5 right-4 z-[55] inline-flex min-h-12 items-center gap-2 overflow-hidden rounded-full px-5 py-3 text-white transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white md:bottom-6 md:right-6"
+          className="vf-whatsapp-glass fixed bottom-5 right-4 z-[55] inline-flex min-h-[58px] items-center gap-3 overflow-hidden rounded-full px-4 py-2.5 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white md:bottom-6 md:right-6 md:min-h-[62px] md:px-5"
         >
-          <span className="vf-whatsapp-glass__icon grid h-7 w-7 shrink-0 place-items-center rounded-full"><MessageCircle size={21} fill="none" strokeWidth={2.15} aria-hidden="true" /></span>
-          <span className="relative z-10 text-[12px] font-semibold tracking-[0.07em]">WhatsApp</span>
+          <span className="vf-whatsapp-glass__icon grid h-9 w-9 shrink-0 place-items-center rounded-full" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="25" height="25" fill="currentColor" aria-hidden="true">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.966-.273-.099-.471-.148-.67.15-.197.297-.767.965-.94 1.164-.173.198-.347.223-.644.075-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.496.099-.198.05-.372-.025-.52-.074-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.372-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.48s1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.71.307 1.263.49 1.695.627.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.005-1.413.248-.694.248-1.289.174-1.413-.075-.124-.273-.198-.57-.347m-5.423 7.403h-.004a9.877 9.877 0 01-5.031-1.378l-.361-.214-3.741.98.998-3.647-.235-.374a9.86 9.86 0 01-1.51-5.26C2.166 6.443 6.601 2.01 12.054 2.01a9.79 9.79 0 016.966 2.886 9.793 9.793 0 012.883 6.972c-.003 5.453-4.438 9.886-9.854 9.886m8.413-18.299A11.805 11.805 0 0012.05 0C5.495 0 .16 5.336.158 11.896a11.87 11.87 0 001.588 5.949L0 24l6.3-1.652a11.91 11.91 0 005.75 1.465h.005c6.557 0 11.892-5.336 11.895-11.897a11.832 11.832 0 00-3.488-8.403Z" />
+            </svg>
+          </span>
+          <span className="vf-whatsapp-glass__copy relative z-10 flex flex-col items-start gap-0.5">
+            <span className="text-[15px] font-bold leading-[1.1] tracking-[0.02em]">WhatsApp</span>
+            <span className="vf-whatsapp-glass__subtitle text-[9px] font-semibold uppercase leading-tight tracking-[0.16em]">Escríbenos</span>
+          </span>
         </a>
       )}
     </>
