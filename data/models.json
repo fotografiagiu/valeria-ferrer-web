@@ -1,5 +1,55 @@
 [
   {
+    "slug": "nicoll",
+    "name": "Nicoll",
+    "age": 30,
+    "height": "1,63 m",
+    "weight": "63 kg",
+    "nationality": "—",
+    "city": "Valencia",
+    "profileUrl": "https://www.valeriaferrer.com/models/nicoll/",
+    "coverImageUrl": "/chicas/nicoll-model-agency-valencia-vf/portada.jpg",
+    "profileImageUrl": "/chicas/nicoll-model-agency-valencia-vf/portada.jpg",
+    "description": "Nicoll tiene 30 años, 1,63 m y 63 kg. Cara marcada, melena oscura y una figura con presencia que se nota al momento. Novedad en Valencia — elegante, sensual y con una mirada que da ganas de escribir. Fotos reales. Si buscas compañía con carácter y química, Nicoll está lista.",
+    "essence": "Con Nicoll la cita tiene pulso: 30 años, 1,63 m y 63 kg, segura y cercana a la vez. Poco teatro, mucha química y una presencia que deja ganas de repetir. Ideal para un privado en Valencia con una novedad que se siente de verdad.",
+    "uniquePoints": [
+      "30 años en Valencia — novedad con carácter y mirada directa",
+      "1,63 m y 63 kg: figura con presencia y elegancia",
+      "Cercana y segura: engancha desde el primer mensaje"
+    ],
+    "experiencePoints": [
+      "Privado con una mujer de 30, segura y con química real",
+      "Encuentro intenso y fácil: atención, deseo y cero frialdad",
+      "Valencia con compañía nueva que conecta rápido"
+    ],
+    "images": [
+      "/chicas/nicoll-model-agency-valencia-vf/gallery/01.jpg",
+      "/chicas/nicoll-model-agency-valencia-vf/gallery/02.jpg"
+    ],
+    "services": [
+      "Girlfriend Experience",
+      "Cenas de Negocios",
+      "Eventos Sociales",
+      "Acompañamiento Personal"
+    ],
+    "availability": "24h",
+    "languages": [
+      "Español"
+    ],
+    "tags": [
+      "nueva",
+      "elegante",
+      "sensual",
+      "novedad",
+      "guapa",
+      "atractiva"
+    ],
+    "isNew": true,
+    "featured": true,
+    "vip": false,
+    "active": true
+  },
+  {
     "slug": "camila",
     "name": "Camila",
     "age": 23,

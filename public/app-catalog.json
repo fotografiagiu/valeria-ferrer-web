@@ -1,9 +1,20 @@
 {
-  "generatedAt": "2026-10-19T23:56:47.131Z",
-  "catalogVersion": "32366b479a9f1e13f221c55ed6137265fcec3f0b37e3c216372735a1231b4dc8",
+  "generatedAt": "2026-10-23T21:02:29.927Z",
+  "catalogVersion": "6df854a8d745c96e5e1b41fc7fd53e14215da290dc7cf8e127fc7fd65b3b63b7",
   "source": "valeria-ferrer-web",
   "method": "build-app-catalog",
   "models": [
+    {
+      "slug": "nicoll",
+      "name": "Nicoll",
+      "active": true,
+      "vip": false,
+      "coverImageUrl": "/chicas/nicoll-model-agency-valencia-vf/portada.jpg",
+      "images": [
+        "/chicas/nicoll-model-agency-valencia-vf/gallery/01.jpg",
+        "/chicas/nicoll-model-agency-valencia-vf/gallery/02.jpg"
+      ]
+    },
     {
       "slug": "camila",
       "name": "Camila",
