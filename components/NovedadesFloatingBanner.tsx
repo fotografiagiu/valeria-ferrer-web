@@ -123,7 +123,7 @@ const NovedadesFloatingBanner: React.FC = () => {
   // Campaña activa + respeto dismissDays tras cerrar (no molestar en cada visita).
   useEffect(() => {
     const campaignLive = halloweenLanding || isNovedadesBannerLive(CFG);
-    if (!campaignLive || hideOnRoute || promoActive || availableSlides.length === 0) {
+    if (!campaignLive || hideOnRoute || (promoActive && !halloweenLanding) || availableSlides.length === 0) {
       setReady(false);
       setIsOpen(false);
       setShowMinimized(false);
@@ -197,7 +197,7 @@ const NovedadesFloatingBanner: React.FC = () => {
     img.src = next.imageSrc;
   }, [index, slides]);
 
-  if ((!halloweenLanding && !isNovedadesBannerLive(CFG)) || hideOnRoute || promoActive || !ready || availableSlides.length === 0) {
+  if ((!halloweenLanding && !isNovedadesBannerLive(CFG)) || hideOnRoute || (promoActive && !halloweenLanding) || !ready || availableSlides.length === 0) {
     return null;
   }
 
