@@ -17,7 +17,7 @@ import {
   subscribePromotion,
 } from '../lib/webPromotionRemote';
 
-const HALLOWEEN_HANGING_STORAGE_KEY = 'vf-halloween-hanging-camila-daniela-v1';
+const HALLOWEEN_HANGING_STORAGE_KEY = 'vf-halloween-hanging-camila-nicoll-v1';
 
 type NovedadSlide = {
   slug: string;
@@ -75,7 +75,7 @@ const NovedadesFloatingBanner: React.FC = () => {
   // Halloween preview: display actual active catalog records; never fabricate photos or links.
   const halloweenLanding = halloweenIsLive() && location.pathname === '/';
   const hangingSlides = useMemo(() => (
-    ['camila', 'daniela']
+    ['camila', 'nicoll']
       .map((slug) => MODELS.find((m) => m.slug === slug && m.isNew))
       .filter((m): m is (typeof MODELS)[number] => Boolean(m))
       .map((m) => ({
@@ -133,7 +133,7 @@ const NovedadesFloatingBanner: React.FC = () => {
     let dismissed = isNovedadesBannerDismissed(CFG);
     if (halloweenLanding) {
       // Own key: a previously minimized Martina/Nerea banner must not suppress
-      // the first Camila/Daniela cobweb preview.
+      // the first Camila/Nicoll cobweb preview.
       try {
         const timestamp = Number(localStorage.getItem(HALLOWEEN_HANGING_STORAGE_KEY));
         dismissed = timestamp > 0 && Date.now() - timestamp < CFG.dismissDays * 86400000;
