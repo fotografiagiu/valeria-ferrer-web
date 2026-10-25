@@ -266,7 +266,7 @@ const ModelsGrid: React.FC<ModelsGridProps> = ({
     switch (seasonalFilter) {
       case 'nuevas': return Boolean(model.isNew || model.galleryUpdated);
       case 'espanolas': return nationality.includes('espa');
-      case 'latinas': return ['colomb', 'venezol', 'argentin', 'brasile', 'ecuator', 'peruan', 'dominican', 'cubana', 'mexican', 'chilena', 'uruguay', 'paraguay'].some((value) => nationality.includes(value));
+      case 'latinas': return ['colomb', 'venezol', 'argentin', 'brasile', 'ecuator', 'peruan', 'dominican', 'cubana', 'mexican', 'chilena', 'uruguay', 'paraguay', 'panam'].some((value) => nationality.includes(value));
       case 'vip': return model.vip === true;
       default: return true;
     }
