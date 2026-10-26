@@ -10,6 +10,7 @@ import {
   isNovedadesBannerLive,
 } from '../lib/novedadesBannerConfig';
 import { getModelCoverThumbnailPath } from '../lib/modelGridImage';
+import { isHalloweenCashPopupOpen, subscribeHalloweenCashPopup } from '../lib/halloweenCashGate';
 import { isPromoLive } from '../lib/promoPopupConfig';
 import {
   getCachedPromotion,
@@ -94,6 +95,7 @@ const NovedadesFloatingBanner: React.FC = () => {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const [promoActive, setPromoActive] = useState(() => isPromoLive(getCachedPromotion()));
+  const [cashPopupOpen, setCashPopupOpen] = useState(() => isHalloweenCashPopupOpen());
 
   const hideOnRoute =
     location.pathname === '/novedades' ||
@@ -120,10 +122,12 @@ const NovedadesFloatingBanner: React.FC = () => {
     });
   }, []);
 
+  useEffect(() => subscribeHalloweenCashPopup(setCashPopupOpen), []);
+
   // Campaña activa + respeto dismissDays tras cerrar (no molestar en cada visita).
   useEffect(() => {
     const campaignLive = halloweenLanding || isNovedadesBannerLive(CFG);
-    if (!campaignLive || hideOnRoute || (promoActive && !halloweenLanding) || availableSlides.length === 0) {
+    if (!campaignLive || hideOnRoute || cashPopupOpen || (promoActive && !halloweenLanding) || availableSlides.length === 0) {
       setReady(false);
       setIsOpen(false);
       setShowMinimized(false);
@@ -167,7 +171,7 @@ const NovedadesFloatingBanner: React.FC = () => {
       window.clearTimeout(showTimer);
       if (endTimer) window.clearTimeout(endTimer);
     };
-  }, [hideOnRoute, promoActive, availableSlides.length, halloweenLanding]);
+  }, [hideOnRoute, promoActive, cashPopupOpen, availableSlides.length, halloweenLanding]);
 
   useEffect(() => {
     if (!isOpen) return;

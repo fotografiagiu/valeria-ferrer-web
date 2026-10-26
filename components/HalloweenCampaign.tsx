@@ -10,9 +10,9 @@ import {
 /** Campaña independiente de las promociones gestionadas desde Administración. */
 const HALLOWEEN_START = Date.parse('2026-10-19T00:00:00+02:00');
 const HALLOWEEN_END = Date.parse('2026-11-02T00:00:00+01:00');
-const BANNER = 'https://d2ol7oe51mr4n9.cloudfront.net/user_36DayVJkjOLFx77vIiJcDWRkvYc/b2d9d8f3-1fb4-49d1-8a86-e5dedc4c71e3.png';
+const BANNER = '/promos/promo-halloween-efectivo-oct2026.webp';
 const DISMISS_KEY = 'vf-halloween-2026-topbar-closed';
-const WHATSAPP_URL = officialWhatsAppUrlWithText('Hola, me gustaría recibir información sobre las próximas promociones de Halloween de Valeria Ferrer.');
+const WHATSAPP_URL = officialWhatsAppUrlWithText('Hola, quiero el descuento de 5€ pagando en efectivo.');
 export const HALLOWEEN_CAMPAIGN_ENABLED = true;
 export const halloweenIsLive = (now = Date.now()) => HALLOWEEN_CAMPAIGN_ENABLED && now >= HALLOWEEN_START && now < HALLOWEEN_END;
 
@@ -76,9 +76,9 @@ const HalloweenCampaign: React.FC<{ homeOnly?: boolean }> = ({ homeOnly = false 
             >
               <img
                 src={BANNER}
-                alt="Valeria Ferrer · Especial Halloween · Muy pronto, promociones exclusivas y chicas ambientadas para la ocasión"
-                width={1672}
-                height={941}
+                alt="Promoción exclusiva. Pagos en efectivo: 5 euros menos en todas las tarifas. 30 min 75 euros, 1 hora 145 euros, 1,5 horas 225 euros. Solo efectivo."
+                width={1024}
+                height={576}
                 loading="lazy"
                 decoding="async"
                 className="block w-full h-auto transition-transform duration-500 group-hover:scale-[1.012]"
@@ -89,7 +89,7 @@ const HalloweenCampaign: React.FC<{ homeOnly?: boolean }> = ({ homeOnly = false 
             </button>
           </div>
           <p className="text-center text-[#d5a7b8] text-[10px] sm:text-xs tracking-[.12em] mt-3.5">
-            HALLOWEEN 2026 · SORPRESAS Y PROMOCIONES PRÓXIMAMENTE
+            HALLOWEEN 2026 · 5 € MENOS PAGANDO EN EFECTIVO
           </p>
         </section>
       )}
@@ -101,7 +101,7 @@ const HalloweenCampaign: React.FC<{ homeOnly?: boolean }> = ({ homeOnly = false 
             onClick={() => setContactOpen(true)}
             className="text-[#ffe2e9] text-xs sm:text-sm text-center hover:text-white"
           >
-            <strong className="text-[#ffc092]">🎃 Especial Halloween</strong> · Muy pronto, promociones exclusivas y una ambientación única <span className="underline underline-offset-4 whitespace-nowrap">Consultar</span>
+            <strong className="text-[#ffc092]">🎃 Especial Halloween</strong> · 5 € menos en todas las tarifas pagando en efectivo <span className="underline underline-offset-4 whitespace-nowrap">Reservar</span>
           </button>
           <button type="button" aria-label="Cerrar aviso de Halloween" onClick={closeBar} className="absolute right-3 top-1/2 -translate-y-1/2 rounded p-1 text-[#ffe2e9]/80 hover:text-white">
             <X size={18} aria-hidden="true" />
@@ -136,7 +136,7 @@ const HalloweenCampaign: React.FC<{ homeOnly?: boolean }> = ({ homeOnly = false 
             <span className="text-[#f3a0be] text-[11px] font-semibold tracking-[0.3em] uppercase">Valeria Ferrer</span>
             <h2 id="halloween-contact-title" className="mt-3 font-serif text-3xl sm:text-4xl leading-tight text-white">Especial Halloween</h2>
             <p id="halloween-contact-description" className="mt-3 mb-7 text-sm text-[#ddc2ce] leading-relaxed">
-              ¿Quieres saber más sobre las próximas promociones? Contacta directamente con nosotros.
+              5 € menos en todas las tarifas, solo pagando en efectivo. Reserva ahora.
             </p>
             <div className="grid gap-3">
               <a

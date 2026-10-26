@@ -10,6 +10,7 @@ import ContentProtection from './components/ContentProtection';
 import AnalyticsTracker from './components/AnalyticsTracker';
 import PageSEOHead from './components/PageSEOHead';
 import PromoPopup from './components/PromoPopup';
+import HalloweenCashPromo from './components/HalloweenCashPromo';
 import HalloweenCampaign, { halloweenIsLive } from './components/HalloweenCampaign';
 import './styles/halloween-cinematic.css';
 import { Analytics } from '@vercel/analytics/react';
@@ -202,6 +203,7 @@ const App: React.FC = () => {
             </Suspense>
           )}
           <PromoPopup />
+          <HalloweenCashPromo />
           <ContactClickTracker />
           <ContentProtection />
           <Analytics />
