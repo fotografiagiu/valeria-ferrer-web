@@ -90,8 +90,8 @@ const Home: React.FC = () => {
         canonicalUrl={homeSEOData.canonicalUrl}
       />
       <Hero />
-      {/* Halloween: catálogo real visible directamente tras la portada, como en la referencia.
-          Mismos datos/links y una única instancia del listado, sin duplicar fichas. */}
+      {/* Halloween: la promo de efectivo ocupa el primer bloque; el catálogo sigue justo debajo. */}
+      {isHalloweenPreview && <HalloweenCampaign homeOnly />}
       {isHalloweenPreview && (
         <ModelsGrid
           models={homeModels}
