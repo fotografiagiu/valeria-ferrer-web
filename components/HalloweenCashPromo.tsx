@@ -139,44 +139,77 @@ const HalloweenCashPromo: React.FC = () => {
                   className="block h-auto w-full max-h-[min(78dvh,640px)] object-contain bg-black"
                 />
               </button>
-              <div className="border-t border-[#e7c27a]/30 bg-[#160d12] px-4 py-3 sm:hidden">
-                <p className="text-center text-[10px] font-semibold uppercase tracking-[0.22em] text-[#e7c27a]">
-                  Solo efectivo · 5 € menos
-                </p>
-                <ul className="mt-2 space-y-1.5">
-                  {RATES.map((rate) => (
-                    <li key={rate.label} className="flex items-baseline justify-between gap-3 text-white">
-                      <span className="text-[13px] tracking-wide text-[#f3e6d4]">{rate.label}</span>
-                      <span className="flex items-baseline gap-2">
-                        <span className="text-[13px] text-[#d7c4b0]/55 line-through">{rate.from}</span>
-                        <span className="text-[#c9a27a]" aria-hidden="true">→</span>
-                        <span className="vf-cash-price text-[1.65rem] font-semibold leading-none">{rate.to}</span>
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-                <p className="mt-2 text-center text-[12px] text-[#f0d7b4]">
-                  El resto de tarifas, también 5 € menos.
-                </p>
+              <div className="vf-cash-rates relative isolate overflow-hidden px-3 pb-3 pt-3.5 sm:hidden">
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0 bg-[radial-gradient(120%_90%_at_50%_0%,rgba(255,120,40,0.28),transparent_55%),radial-gradient(90%_80%_at_12%_100%,rgba(190,40,120,0.35),transparent_50%),radial-gradient(90%_80%_at_88%_100%,rgba(120,30,160,0.32),transparent_50%),linear-gradient(180deg,#2a1020_0%,#14080f_100%)]"
+                />
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-[#ff9ad8]/80 to-transparent"
+                />
+                <div className="relative z-[1]">
+                  <div className="mx-auto flex w-fit items-center gap-2 rounded-full border border-[#ff7eb6]/55 bg-[#2a0f1f]/85 px-3 py-1 shadow-[0_0_18px_rgba(255,90,170,0.35)]">
+                    <span aria-hidden="true" className="text-[11px]">🎃</span>
+                    <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#ffd0e8]">
+                      Solo efectivo · −5 €
+                    </span>
+                    <span aria-hidden="true" className="text-[11px]">🎃</span>
+                  </div>
+                  <ul className="mt-3 grid grid-cols-3 gap-2">
+                    {RATES.map((rate) => (
+                      <li
+                        key={rate.label}
+                        className="rounded-xl border border-[#e7c27a]/35 bg-[#1a0b14]/72 px-1.5 py-2.5 text-center shadow-[inset_0_1px_0_rgba(255,210,160,0.12),0_8px_20px_rgba(0,0,0,0.28)] backdrop-blur-[2px]"
+                      >
+                        <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-[#f3d7a8]">
+                          {rate.label}
+                        </p>
+                        <p className="mt-1 text-[11px] text-[#d7c4b0]/55 line-through">{rate.from}</p>
+                        <p className="vf-cash-price mt-0.5 text-[1.35rem] font-bold leading-none tracking-tight">
+                          {rate.to}
+                        </p>
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="mt-2.5 text-center text-[11px] leading-snug text-[#f0d7b4]/90">
+                    El resto de tarifas, también 5 € menos.
+                  </p>
+                </div>
               </div>
               <button
                 type="button"
                 onClick={() => setContactOpen(true)}
-                className="block w-full bg-[#e7c27a] py-3.5 text-[12px] font-bold uppercase tracking-[0.2em] text-[#1a1008] hover:bg-[#fff1d2] transition-colors"
+                className="block w-full bg-gradient-to-r from-[#f0c478] via-[#e7c27a] to-[#f0c478] py-3.5 text-[12px] font-bold uppercase tracking-[0.2em] text-[#1a1008] hover:from-[#fff1d2] hover:via-[#ffe7b0] hover:to-[#fff1d2] transition-colors"
               >
                 Reservar con 5 € menos
               </button>
             </div>
             <style>{`
-              @keyframes vf-cash-ember {
-                0%, 100% { text-shadow: 0 0 8px rgba(255, 186, 92, 0.28); color: #ffd9a0; }
-                50% { text-shadow: 0 0 14px rgba(255, 196, 110, 0.75), 0 0 2px rgba(255, 236, 200, 0.85); color: #ffe7c2; }
+              @keyframes vf-cash-neon {
+                0%, 100% {
+                  color: #ff9ad8;
+                  text-shadow:
+                    0 0 6px rgba(255, 90, 180, 0.55),
+                    0 0 16px rgba(255, 70, 170, 0.35);
+                }
+                50% {
+                  color: #ffd0ef;
+                  text-shadow:
+                    0 0 8px rgba(255, 140, 210, 0.95),
+                    0 0 22px rgba(255, 70, 180, 0.55),
+                    0 0 2px rgba(255, 230, 250, 0.9);
+                }
               }
-              .vf-cash-price { animation: vf-cash-ember 2.8s ease-in-out infinite; }
+              .vf-cash-price { animation: vf-cash-neon 2.6s ease-in-out infinite; }
               @media (prefers-reduced-motion: reduce) {
-                .vf-cash-price { animation: none; color: #ffd9a0; text-shadow: 0 0 8px rgba(255, 186, 92, 0.4); }
+                .vf-cash-price {
+                  animation: none;
+                  color: #ff9ad8;
+                  text-shadow: 0 0 10px rgba(255, 90, 180, 0.55);
+                }
               }
-            `}            </style>
+            `}</style>
           </div>
           </div>
         </div>
