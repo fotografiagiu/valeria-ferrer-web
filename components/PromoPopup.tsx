@@ -6,6 +6,7 @@ import {
   OFFICIAL_TELEGRAM_HANDLE,
   OFFICIAL_TELEGRAM_URL,
 } from '../lib/officialContact'
+import { halloweenIsLive } from './HalloweenCampaign'
 import { isPromoLive, type PromoPopupConfig } from '../lib/promoPopupConfig'
 import {
   getCachedPromotion,
@@ -25,7 +26,8 @@ const PromoPopup: React.FC = () => {
   useEffect(() => subscribePromotion(setPromo), [])
 
   const syncVisibility = useCallback(() => {
-    if (!isPromoLive(promo)) {
+    // Happy Hour (novedad Halloween) has the screen until 2 Nov.
+    if (halloweenIsLive() || !isPromoLive(promo)) {
       setContactOpen(false)
       setView('hidden')
       return
