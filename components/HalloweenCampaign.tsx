@@ -1,18 +1,20 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { X, ArrowUpRight, Phone, MessageCircle } from 'lucide-react';
+import { X, ArrowUpRight, Phone, MessageCircle, Send } from 'lucide-react';
 import {
   OFFICIAL_PHONE_LABEL,
   OFFICIAL_PHONE_TEL,
+  OFFICIAL_TELEGRAM_HANDLE,
+  OFFICIAL_TELEGRAM_URL,
   officialWhatsAppUrlWithText,
 } from '../lib/officialContact';
 
 /** Campaña independiente de las promociones gestionadas desde Administración. */
 const HALLOWEEN_START = Date.parse('2026-10-19T00:00:00+02:00');
 const HALLOWEEN_END = Date.parse('2026-11-02T00:00:00+01:00');
-const BANNER = '/promos/promo-halloween-efectivo-oct2026.webp';
+const BANNER = '/promos/promo-halloween-happy-hour-oct2026.webp';
 const DISMISS_KEY = 'vf-halloween-2026-topbar-closed';
-const WHATSAPP_URL = officialWhatsAppUrlWithText('Hola, quiero el descuento de 5€ pagando en efectivo.');
+const WHATSAPP_URL = officialWhatsAppUrlWithText('Hola, quiero información sobre el Happy Hour de Halloween.');
 export const HALLOWEEN_CAMPAIGN_ENABLED = true;
 export const halloweenIsLive = (now = Date.now()) => HALLOWEEN_CAMPAIGN_ENABLED && now >= HALLOWEEN_START && now < HALLOWEEN_END;
 
@@ -71,25 +73,25 @@ const HalloweenCampaign: React.FC<{ homeOnly?: boolean }> = ({ homeOnly = false 
               ref={triggerRef}
               type="button"
               onClick={() => setContactOpen(true)}
-              aria-label="Abrir opciones para llamar o escribir por WhatsApp sobre Halloween"
+              aria-label="Abrir opciones para llamar, WhatsApp o Telegram sobre el Happy Hour de Halloween"
               className="relative block w-full text-left cursor-pointer group"
             >
               <img
                 src={BANNER}
-                alt="Promoción exclusiva. Pagos en efectivo: 5 euros menos en todas las tarifas. 30 min 75 euros, 1 hora 145 euros, 1,5 horas 225 euros. Solo efectivo."
+                alt="Valeria Ferrer Valencia. Happy Hour. A partir del jueves 29 de octubre. Llama para informarte."
                 width={1024}
-                height={576}
+                height={682}
                 loading="lazy"
                 decoding="async"
                 className="block w-full h-auto transition-transform duration-500 group-hover:scale-[1.012]"
               />
-              <span aria-hidden="true" className="absolute bottom-[3%] right-[3%] inline-flex items-center gap-1.5 rounded-full bg-[#1a0913]/90 border border-[#f5a9ca]/65 backdrop-blur px-3.5 sm:px-6 py-2 sm:py-3 text-[10px] sm:text-sm font-semibold tracking-wide text-white shadow-[0_0_20px_rgba(255,83,157,0.3)] group-hover:bg-[#7c2346] transition-colors">
-                Llamar o WhatsApp <ArrowUpRight size={16} aria-hidden="true" />
+              <span aria-hidden="true" className="absolute bottom-[3%] right-[3%] inline-flex items-center gap-1.5 rounded-full bg-[#1a0913]/90 border border-[#c084fc]/65 backdrop-blur px-3.5 sm:px-6 py-2 sm:py-3 text-[10px] sm:text-sm font-semibold tracking-wide text-white shadow-[0_0_20px_rgba(192,70,255,0.35)] group-hover:bg-[#4c1d6b] transition-colors">
+                Llamar · WhatsApp · Telegram <ArrowUpRight size={16} aria-hidden="true" />
               </span>
             </button>
           </div>
           <p className="text-center text-[#d5a7b8] text-[10px] sm:text-xs tracking-[.12em] mt-3.5">
-            HALLOWEEN 2026 · 5 € MENOS PAGANDO EN EFECTIVO
+            HALLOWEEN 2026 · HAPPY HOUR · A PARTIR DEL 29 DE OCTUBRE
           </p>
         </section>
       )}
@@ -101,7 +103,7 @@ const HalloweenCampaign: React.FC<{ homeOnly?: boolean }> = ({ homeOnly = false 
             onClick={() => setContactOpen(true)}
             className="text-[#ffe2e9] text-xs sm:text-sm text-center hover:text-white"
           >
-            <strong className="text-[#ffc092]">🎃 Especial Halloween</strong> · 5 € menos en todas las tarifas pagando en efectivo <span className="underline underline-offset-4 whitespace-nowrap">Reservar</span>
+            <strong className="text-[#ffc092]">🎃 Happy Hour Halloween</strong> · A partir del jueves 29 · Llama para informarte <span className="underline underline-offset-4 whitespace-nowrap">Contactar</span>
           </button>
           <button type="button" aria-label="Cerrar aviso de Halloween" onClick={closeBar} className="absolute right-3 top-1/2 -translate-y-1/2 rounded p-1 text-[#ffe2e9]/80 hover:text-white">
             <X size={18} aria-hidden="true" />
@@ -134,9 +136,9 @@ const HalloweenCampaign: React.FC<{ homeOnly?: boolean }> = ({ homeOnly = false 
               <X size={20} aria-hidden="true" />
             </button>
             <span className="text-[#f3a0be] text-[11px] font-semibold tracking-[0.3em] uppercase">Valeria Ferrer</span>
-            <h2 id="halloween-contact-title" className="mt-3 font-serif text-3xl sm:text-4xl leading-tight text-white">Especial Halloween</h2>
+            <h2 id="halloween-contact-title" className="mt-3 font-serif text-3xl sm:text-4xl leading-tight text-white">Happy Hour Halloween</h2>
             <p id="halloween-contact-description" className="mt-3 mb-7 text-sm text-[#ddc2ce] leading-relaxed">
-              5 € menos en todas las tarifas, solo pagando en efectivo. Reserva ahora.
+              A partir del jueves 29 de octubre. Elige cómo quieres informarte.
             </p>
             <div className="grid gap-3">
               <a
@@ -156,6 +158,16 @@ const HalloweenCampaign: React.FC<{ homeOnly?: boolean }> = ({ homeOnly = false 
                 className="flex items-center justify-center gap-3 rounded-xl bg-[#25d366] px-5 py-4 font-bold tracking-wide text-[#07230f] hover:bg-[#41e17b] transition-colors"
               >
                 <MessageCircle size={21} aria-hidden="true" /> Hablar por WhatsApp
+              </a>
+              <a
+                href={OFFICIAL_TELEGRAM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-contact-placement="halloween_banner"
+                onClick={() => setContactOpen(false)}
+                className="flex items-center justify-center gap-3 rounded-xl bg-[#c084fc] px-5 py-4 font-bold tracking-wide text-[#1a0a1f] hover:bg-white transition-colors"
+              >
+                <Send size={20} aria-hidden="true" /> Telegram · {OFFICIAL_TELEGRAM_HANDLE}
               </a>
             </div>
             <p className="mt-5 text-xs text-[#c49aaa]">Atención discreta y personalizada</p>
