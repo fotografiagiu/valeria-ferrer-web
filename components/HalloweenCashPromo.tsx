@@ -9,13 +9,6 @@ import {
   OFFICIAL_TELEGRAM_URL,
   officialWhatsAppUrlWithText,
 } from '../lib/officialContact'
-import { isPromoLive } from '../lib/promoPopupConfig'
-import {
-  getCachedPromotion,
-  startPromotionWatcher,
-  subscribePromotion,
-} from '../lib/webPromotionRemote'
-
 const IMAGE = '/promos/promo-halloween-happy-hour-oct2026.webp'
 const WHATSAPP_URL = officialWhatsAppUrlWithText(
   'Hola, quiero información sobre el Happy Hour de Halloween.'
@@ -25,19 +18,10 @@ type View = 'hidden' | 'popup' | 'banner'
 
 /** Novedad Halloween Happy Hour — popup grande; al pinchar: teléfono, WhatsApp y Telegram. */
 const HalloweenCashPromo: React.FC = () => {
-  const [panelPromo, setPanelPromo] = useState(() => isPromoLive(getCachedPromotion()))
   const [view, setView] = useState<View>('hidden')
   const [contactOpen, setContactOpen] = useState(false)
 
-  useEffect(() => startPromotionWatcher(), [])
-
-  useEffect(() => {
-    return subscribePromotion((promo) => {
-      setPanelPromo(isPromoLive(promo))
-    })
-  }, [])
-
-  const campaignOn = halloweenIsLive() && !panelPromo
+  const campaignOn = halloweenIsLive()
 
   useEffect(() => {
     if (!campaignOn) {
