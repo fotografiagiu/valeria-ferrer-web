@@ -36,8 +36,9 @@ const ModelDetail: React.FC = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const found = MODELS.find(m => m.id === id);
-  const catalogSlice = useCatalogWithOverrides(found ? [found] : []);
-  const overridden = catalogSlice[0] ?? found;
+  // Same public order as home /models (panel display_order + hiddenSlugs).
+  const orderedModels = useCatalogWithOverrides(MODELS);
+  const overridden = orderedModels.find((m) => m.id === id || m.slug === id) ?? found;
   const staffHidden = useIsStaffHiddenSlug(overridden?.slug || id);
   const model = staffHidden ? undefined : overridden;
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
@@ -72,10 +73,13 @@ const ModelDetail: React.FC = () => {
 
   const modalImages = useMemo(() => getAllModalImages(), [model, id]);
 
-  // Find previous and next models
-  const currentIndex = MODELS.findIndex(m => m.id === id);
-  const previousModel = currentIndex > 0 ? MODELS[currentIndex - 1] : null;
-  const nextModel = currentIndex < MODELS.length - 1 ? MODELS[currentIndex + 1] : null;
+  // Anterior / Siguiente deben seguir el orden visible del catálogo, no models.json.
+  const currentIndex = orderedModels.findIndex((m) => m.id === id || m.slug === id);
+  const previousModel = currentIndex > 0 ? orderedModels[currentIndex - 1] : null;
+  const nextModel =
+    currentIndex >= 0 && currentIndex < orderedModels.length - 1
+      ? orderedModels[currentIndex + 1]
+      : null;
 
   const navigateToModel = (modelId: string) => {
     navigate(`/models/${modelId}`);
