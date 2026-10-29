@@ -77,17 +77,17 @@ const HalloweenCashPromo: React.FC = () => {
 
       {view === 'popup' && (
         <div className="fixed inset-0 z-[140] overflow-y-auto overscroll-contain bg-black/90" role="dialog" aria-modal="true" aria-labelledby="halloween-offers-title" onClick={minimize}>
-          <div className="flex min-h-full items-center justify-center px-3 py-6 sm:p-6">
-            <div className="relative z-10 w-full max-w-[1220px] xl:max-w-[1360px]" onClick={(event) => event.stopPropagation()}>
+          <div className="flex min-h-full items-center justify-center px-3 py-5 sm:px-5 sm:py-6">
+            <div className="relative z-10 w-full lg:w-[94vw] lg:max-w-none xl:w-[92vw] 2xl:max-w-[1650px]" onClick={(event) => event.stopPropagation()}>
               <button type="button" onClick={minimize}
                 className="absolute right-0 top-0 z-30 flex h-10 w-10 items-center justify-center rounded-full border border-white/25 bg-black/85 text-white hover:bg-black"
                 aria-label="Cerrar ofertas">
                 <X size={20} aria-hidden="true"/>
               </button>
-              <h2 id="halloween-offers-title" className="pr-10 text-center font-serif text-2xl text-[#f2d69b] sm:text-3xl">
+              <h2 id="halloween-offers-title" className="pr-10 text-center font-serif text-2xl text-[#f2d69b] sm:text-3xl xl:text-4xl">
                 Descubre nuestras dos ofertas
               </h2>
-              <p className="mb-5 mt-2 text-center text-[12px] text-[#e7d2b1]">
+              <p className="mb-5 mt-2 text-center text-[12px] text-[#e7d2b1] xl:text-sm">
                 Happy Hour por horario y tarifa BLACK para chicas con etiqueta BLACK
               </p>
               <DesktopOfferBanners onHappy={() => setContactKind("happy")} onBlack={() => setContactKind("black")} />
