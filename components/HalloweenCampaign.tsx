@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { BLACK_OFFER_IMAGE, BLACK_OFFER_IMAGE_WIDTH, BLACK_OFFER_IMAGE_HEIGHT, BLACK_OFFER_WHATSAPP_TEXT } from '../lib/blackPromoAsset';
 import { useLocation } from 'react-router-dom';
 import { X, ArrowUpRight, Phone, MessageCircle, Send } from 'lucide-react';
 import {
@@ -15,6 +16,7 @@ const HALLOWEEN_END = Date.parse('2026-11-02T00:00:00+01:00');
 const BANNER = '/promos/promo-halloween-happy-hour-oct2026.webp';
 const DISMISS_KEY = 'vf-halloween-2026-topbar-closed';
 const WHATSAPP_URL = officialWhatsAppUrlWithText('Hola, quiero información sobre el Happy Hour de Halloween.');
+const BLACK_WHATSAPP_URL = officialWhatsAppUrlWithText(BLACK_OFFER_WHATSAPP_TEXT);
 export const HALLOWEEN_CAMPAIGN_ENABLED = true;
 export const halloweenIsLive = (now = Date.now()) => HALLOWEEN_CAMPAIGN_ENABLED && now >= HALLOWEEN_START && now < HALLOWEEN_END;
 
@@ -23,14 +25,14 @@ const HalloweenCampaign: React.FC<{ homeOnly?: boolean }> = ({ homeOnly = false 
   const [dismissed, setDismissed] = useState(() => {
     try { return window.sessionStorage.getItem(DISMISS_KEY) === '1'; } catch { return false; }
   });
-  const [contactOpen, setContactOpen] = useState(false);
+  const [contactOpen, setContactOpen] = useState<'happy' | 'black' | null>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
   useEffect(() => {
     // La franja superior de Halloween del hero usa el modal global.
     // La instancia homeOnly no escucha para evitar modales duplicados.
     if (homeOnly) return;
-    const onPromoContact = () => setContactOpen(true);
+    const onPromoContact = () => setContactOpen('happy');
     window.addEventListener('vf:halloween-contact', onPromoContact);
     return () => window.removeEventListener('vf:halloween-contact', onPromoContact);
   }, [homeOnly]);
@@ -41,7 +43,7 @@ const HalloweenCampaign: React.FC<{ homeOnly?: boolean }> = ({ homeOnly = false 
     document.body.style.overflow = 'hidden';
     closeRef.current?.focus();
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setContactOpen(false);
+      if (event.key === 'Escape') setContactOpen(null);
     };
     window.addEventListener('keydown', onKeyDown);
     return () => {
@@ -67,32 +69,45 @@ const HalloweenCampaign: React.FC<{ homeOnly?: boolean }> = ({ homeOnly = false 
   return (
     <>
       {isHome && homeOnly && (
-        <section id="halloween-campaign" aria-label="Campaña especial de Halloween" className="relative bg-[#090507] px-3 sm:px-6 py-7 md:py-12 border-y border-[#de627e]/25">
-          <div className="relative max-w-7xl mx-auto overflow-hidden rounded-2xl md:rounded-[28px] border border-[#ee6096]/30 shadow-[0_0_44px_rgba(210,35,103,0.18)]">
-            <button
-              ref={triggerRef}
-              type="button"
-              onClick={() => setContactOpen(true)}
-              aria-label="Abrir opciones para llamar, WhatsApp o Telegram sobre el Happy Hour de Halloween"
-              className="relative block w-full text-left cursor-pointer group"
-            >
-              <img
-                src={BANNER}
-                alt="Valeria Ferrer Valencia. Happy Hour. A partir del jueves 29 de octubre. Llama para informarte."
-                width={1024}
-                height={682}
-                loading="lazy"
-                decoding="async"
-                className="block w-full h-auto transition-transform duration-500 group-hover:scale-[1.012]"
-              />
-              <span aria-hidden="true" className="absolute bottom-[3%] right-[3%] inline-flex items-center gap-1.5 rounded-full bg-[#1a0913]/90 border border-[#c084fc]/65 backdrop-blur px-3.5 sm:px-6 py-2 sm:py-3 text-[10px] sm:text-sm font-semibold tracking-wide text-white shadow-[0_0_20px_rgba(192,70,255,0.35)] group-hover:bg-[#4c1d6b] transition-colors">
-                Llamar · WhatsApp · Telegram <ArrowUpRight size={16} aria-hidden="true" />
-              </span>
-            </button>
+        <section id="halloween-campaign" aria-label="Promociones Happy Hour y BLACK" className="relative border-y border-[#d7a767]/25 bg-[#090507] px-3 py-8 sm:px-6 md:py-12">
+          <div className="mx-auto max-w-7xl">
+            <div className="mb-6 text-center">
+              <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#d6b57b]">Valeria Ferrer · Promociones</p>
+              <h2 className="mt-2 font-serif text-2xl text-[#f5dfb2] md:text-4xl">Dos ofertas para descubrir</h2>
+            </div>
+            <div className="grid grid-cols-1 items-start gap-5 md:grid-cols-2 md:gap-7">
+              <div className="overflow-hidden rounded-2xl border border-[#c084fc]/40 bg-[#160d19] shadow-[0_14px_50px_rgba(0,0,0,.45)]">
+                <h3 className="p-3 text-center text-[11px] font-bold uppercase tracking-[0.22em] text-[#edd5fd]">🎃 Happy Hour · Oferta por horario</h3>
+                <button
+                  ref={triggerRef}
+                  type="button"
+                  onClick={() => setContactOpen('happy')}
+                  aria-label="Consultar la oferta Happy Hour"
+                  className="block w-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#c084fc]"
+                >
+                  <img src={BANNER} alt="Happy Hour Valeria Ferrer, desde el 29 de octubre. Llama para informarte." width={1024} height={682} loading="lazy" decoding="async" className="block h-auto w-full" />
+                </button>
+                <button type="button" onClick={() => setContactOpen('happy')} className="flex w-full items-center justify-center gap-2 bg-[#54236a] px-4 py-4 text-xs font-bold uppercase tracking-[0.15em] text-white hover:bg-[#723593]">
+                  Consultar Happy Hour <ArrowUpRight size={16} aria-hidden="true" />
+                </button>
+              </div>
+              <div className="overflow-hidden rounded-2xl border border-[#d9b669]/50 bg-[#120e0a] shadow-[0_14px_50px_rgba(0,0,0,.45)]">
+                <h3 className="p-3 text-center text-[11px] font-bold uppercase tracking-[0.22em] text-[#f2d38d]">✦ BLACK · Tarifa especial por modelo</h3>
+                <button
+                  type="button"
+                  onClick={() => setContactOpen('black')}
+                  aria-label="Consultar la tarifa especial de las chicas con etiqueta BLACK"
+                  className="block w-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#d9b669]"
+                >
+                  <img src={BLACK_OFFER_IMAGE} alt="Aprovecha la oferta BLACK. Menciona BLACK al reservar para acceder a la tarifa especial de las chicas con etiqueta BLACK." width={BLACK_OFFER_IMAGE_WIDTH} height={BLACK_OFFER_IMAGE_HEIGHT} loading="lazy" decoding="async" className="block h-auto w-full" />
+                </button>
+                <button type="button" onClick={() => setContactOpen('black')} className="flex w-full items-center justify-center gap-2 bg-gradient-to-r from-[#9b722b] via-[#dfb85e] to-[#9b722b] px-4 py-4 text-xs font-extrabold uppercase tracking-[0.15em] text-[#1c1205] hover:brightness-110">
+                  Consultar tarifa BLACK <ArrowUpRight size={16} aria-hidden="true" />
+                </button>
+                <p className="px-4 pb-3 pt-2 text-center text-[11px] text-[#e4cda1]">Solo chicas con etiqueta BLACK. Menciónalo en tu reserva.</p>
+              </div>
+            </div>
           </div>
-          <p className="text-center text-[#d5a7b8] text-[10px] sm:text-xs tracking-[.12em] mt-3.5">
-            HALLOWEEN 2026 · HAPPY HOUR · A PARTIR DEL 29 DE OCTUBRE
-          </p>
         </section>
       )}
       {!homeOnly && showBar && (
@@ -100,10 +115,10 @@ const HalloweenCampaign: React.FC<{ homeOnly?: boolean }> = ({ homeOnly = false 
           <button
             ref={triggerRef}
             type="button"
-            onClick={() => setContactOpen(true)}
+            onClick={() => setContactOpen('happy')}
             className="text-[#ffe2e9] text-xs sm:text-sm text-center hover:text-white"
           >
-            <strong className="text-[#ffc092]">🎃 Happy Hour Halloween</strong> · A partir del jueves 29 · Llama para informarte <span className="underline underline-offset-4 whitespace-nowrap">Contactar</span>
+            <strong className="text-[#ffc092]">🎃 Happy Hour Halloween</strong> + <strong className="text-[#f4d58d]">Tarifa BLACK</strong> · Consulta ambas ofertas <span className="underline underline-offset-4 whitespace-nowrap">Contactar</span>
           </button>
           <button type="button" aria-label="Cerrar aviso de Halloween" onClick={closeBar} className="absolute right-3 top-1/2 -translate-y-1/2 rounded p-1 text-[#ffe2e9]/80 hover:text-white">
             <X size={18} aria-hidden="true" />
@@ -116,7 +131,7 @@ const HalloweenCampaign: React.FC<{ homeOnly?: boolean }> = ({ homeOnly = false 
             type="button"
             aria-label="Cerrar opciones de contacto"
             tabIndex={-1}
-            onClick={() => setContactOpen(false)}
+            onClick={() => setContactOpen(null)}
             className="absolute inset-0 bg-black/85 backdrop-blur-md cursor-default"
           />
           <div
@@ -129,32 +144,36 @@ const HalloweenCampaign: React.FC<{ homeOnly?: boolean }> = ({ homeOnly = false 
             <button
               type="button"
               ref={closeRef}
-              onClick={() => setContactOpen(false)}
+              onClick={() => setContactOpen(null)}
               aria-label="Cerrar"
               className="absolute right-3 top-3 rounded-full p-2 text-white/65 hover:bg-white/10 hover:text-white"
             >
               <X size={20} aria-hidden="true" />
             </button>
             <span className="text-[#f3a0be] text-[11px] font-semibold tracking-[0.3em] uppercase">Valeria Ferrer</span>
-            <h2 id="halloween-contact-title" className="mt-3 font-serif text-3xl sm:text-4xl leading-tight text-white">Happy Hour Halloween</h2>
+            <h2 id="halloween-contact-title" className="mt-3 font-serif text-3xl sm:text-4xl leading-tight text-white">
+              {contactOpen === 'black' ? 'Tarifa especial BLACK' : 'Happy Hour Halloween'}
+            </h2>
             <p id="halloween-contact-description" className="mt-3 mb-7 text-sm text-[#ddc2ce] leading-relaxed">
-              A partir del jueves 29 de octubre. Elige cómo quieres informarte.
+              {contactOpen === 'black'
+                ? 'Menciona BLACK en tu reserva. Tarifa especial exclusiva de las chicas con etiqueta BLACK.'
+                : 'A partir del jueves 29 de octubre. Elige cómo quieres informarte.'}
             </p>
             <div className="grid gap-3">
               <a
                 href={OFFICIAL_PHONE_TEL}
                 data-contact-placement="halloween_banner"
-                onClick={() => setContactOpen(false)}
+                onClick={() => setContactOpen(null)}
                 className="flex items-center justify-center gap-3 rounded-xl border border-[#eab5ca]/50 bg-[#3a1c29] px-5 py-4 font-semibold tracking-wide text-white hover:bg-[#593046] transition-colors"
               >
                 <Phone size={20} aria-hidden="true" /> Llamar · {OFFICIAL_PHONE_LABEL}
               </a>
               <a
-                href={WHATSAPP_URL}
+                href={contactOpen === 'black' ? BLACK_WHATSAPP_URL : WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 data-contact-placement="halloween_banner"
-                onClick={() => setContactOpen(false)}
+                onClick={() => setContactOpen(null)}
                 className="flex items-center justify-center gap-3 rounded-xl bg-[#25d366] px-5 py-4 font-bold tracking-wide text-[#07230f] hover:bg-[#41e17b] transition-colors"
               >
                 <MessageCircle size={21} aria-hidden="true" /> Hablar por WhatsApp
@@ -164,7 +183,7 @@ const HalloweenCampaign: React.FC<{ homeOnly?: boolean }> = ({ homeOnly = false 
                 target="_blank"
                 rel="noopener noreferrer"
                 data-contact-placement="halloween_banner"
-                onClick={() => setContactOpen(false)}
+                onClick={() => setContactOpen(null)}
                 className="flex items-center justify-center gap-3 rounded-xl bg-[#c084fc] px-5 py-4 font-bold tracking-wide text-[#1a0a1f] hover:bg-white transition-colors"
               >
                 <Send size={20} aria-hidden="true" /> Telegram · {OFFICIAL_TELEGRAM_HANDLE}
