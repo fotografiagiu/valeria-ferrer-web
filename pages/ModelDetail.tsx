@@ -36,8 +36,8 @@ const ModelDetail: React.FC = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const found = MODELS.find(m => m.id === id);
-  // Same public order as home /models (panel display_order + hiddenSlugs).
-  const orderedModels = useCatalogWithOverrides(MODELS);
+  // Same catalog as home/models (panel order); homePinFallback if overrides fail.
+  const orderedModels = useCatalogWithOverrides(MODELS, { homePinFallback: true });
   const overridden = orderedModels.find((m) => m.id === id || m.slug === id) ?? found;
   const staffHidden = useIsStaffHiddenSlug(overridden?.slug || id);
   const model = staffHidden ? undefined : overridden;
