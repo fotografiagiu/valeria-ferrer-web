@@ -3,6 +3,7 @@ import { MessageCircle, Phone, Send, X } from 'lucide-react'
 import { halloweenIsLive } from './HalloweenCampaign'
 import { setHalloweenCashPopupOpen } from '../lib/halloweenCashGate'
 import { BLACK_OFFER_IMAGE, BLACK_OFFER_IMAGE_WIDTH, BLACK_OFFER_IMAGE_HEIGHT, BLACK_OFFER_WHATSAPP_TEXT } from '../lib/blackPromoAsset'
+import DesktopOfferBanners from './DesktopOfferBanners'
 import {
   OFFICIAL_PHONE_LABEL,
   OFFICIAL_PHONE_TEL,
@@ -77,7 +78,7 @@ const HalloweenCashPromo: React.FC = () => {
       {view === 'popup' && (
         <div className="fixed inset-0 z-[140] overflow-y-auto overscroll-contain bg-black/90" role="dialog" aria-modal="true" aria-labelledby="halloween-offers-title" onClick={minimize}>
           <div className="flex min-h-full items-center justify-center px-3 py-6 sm:p-6">
-            <div className="relative z-10 w-full max-w-[1220px]" onClick={(event) => event.stopPropagation()}>
+            <div className="relative z-10 w-full max-w-[1220px] xl:max-w-[1360px]" onClick={(event) => event.stopPropagation()}>
               <button type="button" onClick={minimize}
                 className="absolute right-0 top-0 z-30 flex h-10 w-10 items-center justify-center rounded-full border border-white/25 bg-black/85 text-white hover:bg-black"
                 aria-label="Cerrar ofertas">
@@ -89,7 +90,8 @@ const HalloweenCashPromo: React.FC = () => {
               <p className="mb-5 mt-2 text-center text-[12px] text-[#e7d2b1]">
                 Happy Hour por horario y tarifa BLACK para chicas con etiqueta BLACK
               </p>
-              <div className="grid grid-cols-1 items-start gap-4 md:grid-cols-2 md:gap-6">
+              <DesktopOfferBanners onHappy={() => setContactKind("happy")} onBlack={() => setContactKind("black")} />
+              <div className="grid grid-cols-1 items-start gap-4 md:grid-cols-2 md:gap-6 lg:hidden">
                 <section aria-label="Oferta Happy Hour" className="overflow-hidden rounded-xl border border-[#c084fc]/55 bg-[#110a17] shadow-[0_14px_50px_rgba(0,0,0,.45)]">
                   <h3 className="p-3 text-center text-xs font-bold uppercase tracking-[0.18em] text-[#f0dcfc]">🎃 HAPPY HOUR</h3>
                   <button type="button" onClick={() => setContactKind('happy')} className="block w-full focus-visible:outline-2 focus-visible:outline-[#d5a8fc]" aria-label="Consultar Happy Hour">
@@ -114,7 +116,7 @@ const HalloweenCashPromo: React.FC = () => {
                 </section>
               </div>
               <p className="mt-3 text-center text-xs text-[#d6bf91]">
-                Desliza para ver ambos carteles. Cada oferta se consulta por separado.
+                <span className="lg:hidden">Desliza para ver ambos carteles.</span> Cada oferta se consulta por separado.
               </p>
             </div>
           </div>

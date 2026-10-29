@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { BLACK_OFFER_IMAGE, BLACK_OFFER_IMAGE_WIDTH, BLACK_OFFER_IMAGE_HEIGHT, BLACK_OFFER_WHATSAPP_TEXT } from '../lib/blackPromoAsset';
+import DesktopOfferBanners from './DesktopOfferBanners';
 import { useLocation } from 'react-router-dom';
 import { X, ArrowUpRight, Phone, MessageCircle, Send } from 'lucide-react';
 import {
@@ -75,7 +76,8 @@ const HalloweenCampaign: React.FC<{ homeOnly?: boolean }> = ({ homeOnly = false 
               <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#d6b57b]">Valeria Ferrer · Promociones</p>
               <h2 className="mt-2 font-serif text-2xl text-[#f5dfb2] md:text-4xl">Dos ofertas para descubrir</h2>
             </div>
-            <div className="grid grid-cols-1 items-start gap-5 md:grid-cols-2 md:gap-7">
+            <DesktopOfferBanners onHappy={() => setContactOpen("happy")} onBlack={() => setContactOpen("black")} />
+            <div className="grid grid-cols-1 items-start gap-5 md:grid-cols-2 md:gap-7 lg:hidden">
               <div className="overflow-hidden rounded-2xl border border-[#c084fc]/40 bg-[#160d19] shadow-[0_14px_50px_rgba(0,0,0,.45)]">
                 <h3 className="p-3 text-center text-[11px] font-bold uppercase tracking-[0.22em] text-[#edd5fd]">🎃 Happy Hour · Oferta por horario</h3>
                 <button
