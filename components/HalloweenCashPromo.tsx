@@ -78,7 +78,7 @@ const HalloweenCashPromo: React.FC = () => {
       {view === 'popup' && (
         <div className="fixed inset-0 z-[140] overflow-y-auto overscroll-contain bg-black/90" role="dialog" aria-modal="true" aria-labelledby="halloween-offers-title" onClick={minimize}>
           <div className="flex min-h-full items-center justify-center px-3 py-5 sm:px-5 sm:py-6">
-            <div className="relative z-10 w-full lg:w-[94vw] lg:max-w-none xl:w-[92vw] 2xl:max-w-[1650px]" onClick={(event) => event.stopPropagation()}>
+            <div className="relative z-10 w-full lg:w-[97vw] lg:max-w-none xl:w-[96vw] 2xl:max-w-[1850px]" onClick={(event) => event.stopPropagation()}>
               <button type="button" onClick={minimize}
                 className="absolute right-0 top-0 z-30 flex h-10 w-10 items-center justify-center rounded-full border border-white/25 bg-black/85 text-white hover:bg-black"
                 aria-label="Cerrar ofertas">

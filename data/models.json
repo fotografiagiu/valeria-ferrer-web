@@ -1043,6 +1043,11 @@
     "availability": "24h",
     "languages": [
       "Español"
+    ],
+    "black": true,
+    "vip": false,
+    "tags": [
+      "black"
     ]
   },
   {
