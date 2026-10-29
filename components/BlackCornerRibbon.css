@@ -1,0 +1,75 @@
+/**
+ * Banda diagonal premium. Sólo CSS, sin imágenes ni animaciones costosas.
+ * Anchura contenida dentro de la esquina; no tapa la cara ni la CTA.
+ */
+.vf-black-corner {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 40;
+  width: clamp(102px, 29%, 128px);
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  pointer-events: none;
+  isolation: isolate;
+  filter: drop-shadow(-2px 3px 5px rgba(0, 0, 0, .52));
+}
+.vf-black-corner__fold {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 45%;
+  height: 45%;
+  background: linear-gradient(132deg, #402915 0%, #d1a552 34%, #fae3a1 44%, #5c3c19 55%, #130e0b 75%);
+  clip-path: polygon(0 0, 100% 0, 100% 100%);
+  z-index: 1;
+}
+.vf-black-corner__band {
+  position: absolute;
+  top: 25%;
+  right: -32%;
+  z-index: 2;
+  width: 145%;
+  height: 32%;
+  transform: rotate(45deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  border-top: 2px solid #f5d889;
+  border-bottom: 2px solid #bd8b35;
+  background: linear-gradient(115deg,
+    #060606 0%, #191713 15%, #0b0b0a 29%, #302412 48%,
+    #0b0b0a 63%, #12100e 75%, #050505 100%);
+  box-shadow: 0 3px 8px rgba(0,0,0,.72), inset 0 1px rgba(255,243,184,.23);
+}
+.vf-black-corner__band::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg,
+    transparent 0 69%, rgba(255,220,145,.22) 74%,
+    rgba(255,226,164,.04) 79%, rgba(0,0,0,.45) 85%, transparent 89%);
+}
+.vf-black-corner__band > span {
+  position: relative;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(11px, 1.1vw, 16px);
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: .12em;
+  color: #f7dc9c;
+  text-shadow: 0 1px 1px #000, 0 0 4px rgba(220,173,85,.34);
+}
+.vf-black-corner--profile {
+  width: clamp(122px, 21%, 178px);
+}
+.vf-black-corner--profile .vf-black-corner__band > span {
+  font-size: clamp(14px, 1.5vw, 19px);
+}
+@media (max-width: 639px) {
+  .vf-black-corner { width: min(43%, 120px); }
+  .vf-black-corner__band > span { font-size: 11px; letter-spacing: .09em; }
+  .vf-black-corner--profile { width: min(39%, 146px); }
+  .vf-black-corner--profile .vf-black-corner__band > span { font-size: 14px; }
+}
