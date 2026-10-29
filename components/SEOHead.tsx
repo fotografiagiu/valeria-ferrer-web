@@ -23,7 +23,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({ model }) => {
     if (!model) return;
 
     // Generate SEO data based on model properties and rules
-    const isVIP = !!model.vip || model.slug === 'claudia-vip' || model.slug === 'paula-vip';
+    const isVIP = !!model.vip;
     const modelName = model.name;
     const nationality = model.nationality || 'Española';
     const city = model.city || 'Valencia';

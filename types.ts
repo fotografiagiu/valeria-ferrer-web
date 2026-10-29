@@ -24,6 +24,7 @@ export interface Model {
   gallery?: string[];
   featured?: boolean;
   vip?: boolean;
+  black?: boolean;
   vipRates?: {
     [key: string]: string;
   };

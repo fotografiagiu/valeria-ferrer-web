@@ -21,6 +21,7 @@ export const MODELS: Model[] = catalogModels.map((item) => ({
   isNew: item.isNew || false,
   galleryUpdated: item.galleryUpdated || undefined,
   vip: item.vip || false,
+  black: item.black === true,
   vipRates: item.vipRates || {},
   services: item.services || [],
   availability: item.availability || {},
@@ -121,7 +122,7 @@ export const REVIEWS: Review[] = [
   },
   {
     id: '27',
-    modelName: 'Paula (VIP)',
+    modelName: 'Paula',
     title: 'Otro nivel',
     content:
       'Paula es VIP de verdad, no de postureo. Llega hecha un pincel, hotel de lujo y todo cuadrado. Si quieres algo más premium en Valencia, esta.',

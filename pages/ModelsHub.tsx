@@ -30,6 +30,7 @@ function toGridModel(m: Model) {
     isNew: m.isNew,
     galleryUpdated: m.galleryUpdated,
     vip: m.vip,
+    black: m.black,
   };
 }
 

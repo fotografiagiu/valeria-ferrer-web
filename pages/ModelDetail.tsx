@@ -158,7 +158,7 @@ const ModelDetail: React.FC = () => {
 
   // Generate H1 text based on model properties and VIP rules
   const generateH1Text = () => {
-    const isVIP = !!model.vip || model.slug === 'claudia-vip' || model.slug === 'paula-vip';
+    const isVIP = !!model.vip;
     const modelName = model.name;
     const nationality = model.nationality || 'Española';
     const city = model.city || 'Valencia';
@@ -237,7 +237,7 @@ const ModelDetail: React.FC = () => {
               {/* Subtitle with VIP rule */}
               <div className="flex items-center space-x-2 text-[#c2b2a3] text-sm lg:text-base">
                 {(() => {
-                  const isVIP = !!model.vip || model.slug === 'claudia-vip' || model.slug === 'paula-vip';
+                  const isVIP = !!model.vip;
                   const nationality = model.nationality || 'Española';
                   const city = model.city || 'Valencia';
                   
@@ -387,7 +387,7 @@ const ModelDetail: React.FC = () => {
             </div>
             {/* Badge for exclusivity */}
             <div className="absolute top-6 left-6 px-4 py-2 bg-black/40 backdrop-blur-md border border-[#c2b2a3]/30 text-[9px] tracking-[0.4em] uppercase font-bold text-[#c2b2a3]">
-              {model.galleryUpdated ? 'Actualizada' : model.isNew ? 'Nueva' : 'Elección Élite'}
+              {model.black ? 'BLACK' : model.galleryUpdated ? 'Actualizada' : model.isNew ? 'Nueva' : 'Elección Élite'}
             </div>
             
             {/* Image Counter and Navigation Dots */}
@@ -589,11 +589,11 @@ const ModelDetail: React.FC = () => {
                       </li>
                     </>
                   )}
-                  {model.name === "Paula (VIP)" && (
+                  {model.name === "Paula" && (
                     <>
                       <li className="flex items-start">
                         <span className="text-[#c2b2a3] mr-2">•</span>
-                        <span>Elegancia VIP exclusiva de clase internacional</span>
+                        <span>Elegancia exclusiva de clase internacional</span>
                       </li>
                       <li className="flex items-start">
                         <span className="text-[#c2b2a3] mr-2">•</span>
@@ -884,11 +884,11 @@ const ModelDetail: React.FC = () => {
                       </li>
                     </>
                   )}
-                  {model.name === "Paula (VIP)" && (
+                  {model.name === "Paula" && (
                     <>
                       <li className="flex items-start">
                         <span className="text-[#c2b2a3] mr-2">•</span>
-                        <span>Experiencias VIP exclusivas personalizadas lujosas</span>
+                        <span>Experiencias exclusivas personalizadas</span>
                       </li>
                       <li className="flex items-start">
                         <span className="text-[#c2b2a3] mr-2">•</span>
@@ -1148,7 +1148,7 @@ const ModelDetail: React.FC = () => {
         <div className="lg:hidden py-16 bg-[#080808] border-t border-white/5">
           <div className="max-w-6xl mx-auto px-6">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-light mb-4 tracking-tight">Tarifas <span className="italic luxury-text-gradient">Premium</span></h2>
+              <h2 className="text-3xl md:text-4xl font-light mb-4 tracking-tight">Tarifas <span className="italic luxury-text-gradient">{model.black ? 'BLACK' : 'Premium'}</span></h2>
               <p className="text-gray-500 text-xs font-light leading-relaxed uppercase tracking-widest max-w-2xl mx-auto">
                 Experiencias exclusivas adaptadas a tus necesidades. Todas nuestras tarifas incluyen discreción absoluta y servicio de primera clase.
               </p>
@@ -1211,15 +1211,15 @@ const ModelDetail: React.FC = () => {
                       <div className="p-4 space-y-1">
                         <div className="flex justify-between items-center py-3 border-b border-white/5">
                           <span className="text-xs text-gray-400 tracking-[0.1em]">1 hora</span>
-                          <span className="text-sm font-light luxury-text-gradient">150 €</span>
+                          <span className="text-sm font-light luxury-text-gradient">{model.black ? '130 €' : '150 €'}</span>
                         </div>
                         <div className="flex justify-between items-center py-3 border-b border-white/5">
                           <span className="text-xs text-gray-400 tracking-[0.1em]">45 minutos</span>
-                          <span className="text-sm font-light luxury-text-gradient">120 €</span>
+                          <span className="text-sm font-light luxury-text-gradient">{model.black ? '100 €' : '120 €'}</span>
                         </div>
                         <div className="flex justify-between items-center py-3 border-b border-white/5">
                           <span className="text-xs text-gray-400 tracking-[0.1em]">30 minutos</span>
-                          <span className="text-sm font-light luxury-text-gradient">80 €</span>
+                          <span className="text-sm font-light luxury-text-gradient">{model.black ? '70 €' : '80 €'}</span>
                         </div>
                         <div className="flex justify-between items-center py-3 border-b border-white/5">
                           <span className="text-xs text-gray-400 tracking-[0.1em]">1,5 horas</span>
@@ -1394,7 +1394,7 @@ const ModelDetail: React.FC = () => {
                 
                 {/* Badge for exclusivity */}
                 <div className="absolute top-6 left-6 px-4 py-2 bg-black/40 backdrop-blur-md border border-[#c2b2a3]/30 text-[9px] tracking-[0.4em] uppercase font-bold text-[#c2b2a3]">
-                  {model.galleryUpdated ? 'Actualizada' : model.isNew ? 'Nueva' : 'Elección Élite'}
+                  {model.black ? 'BLACK' : model.galleryUpdated ? 'Actualizada' : model.isNew ? 'Nueva' : 'Elección Élite'}
                 </div>
                 
                 {/* Image Counter and Navigation Dots - Desktop */}
@@ -1566,11 +1566,11 @@ const ModelDetail: React.FC = () => {
                           </li>
                         </>
                       )}
-                      {model.name === "Paula (VIP)" && (
+                      {model.name === "Paula" && (
                         <>
                           <li className="flex items-start">
                             <span className="text-[#c2b2a3] mr-2">•</span>
-                            <span>Elegancia VIP exclusiva de clase internacional</span>
+                            <span>Elegancia exclusiva de clase internacional</span>
                           </li>
                           <li className="flex items-start">
                             <span className="text-[#c2b2a3] mr-2">•</span>
@@ -1861,11 +1861,11 @@ const ModelDetail: React.FC = () => {
                           </li>
                         </>
                       )}
-                      {model.name === "Paula (VIP)" && (
+                      {model.name === "Paula" && (
                         <>
                           <li className="flex items-start">
                             <span className="text-[#c2b2a3] mr-2">•</span>
-                            <span>Experiencias VIP exclusivas personalizadas lujosas</span>
+                            <span>Experiencias exclusivas personalizadas</span>
                           </li>
                           <li className="flex items-start">
                             <span className="text-[#c2b2a3] mr-2">•</span>
@@ -2201,7 +2201,7 @@ const ModelDetail: React.FC = () => {
             
             {/* Prices */}
             <div className="bg-[#111111] border border-white/5 p-4 flex-1">
-              <h4 className="text-lg font-bold text-white uppercase tracking-widest mb-6">Tarifas</h4>
+              <h4 className="text-lg font-bold text-white uppercase tracking-widest mb-6">Tarifas {model.black ? 'BLACK' : ''}</h4>
               <div className="space-y-2">
                 {model.vip ? (
                   // VIP Tariffs
@@ -2248,15 +2248,15 @@ const ModelDetail: React.FC = () => {
                   <>
                     <div className="flex justify-between items-center py-2 border-b border-white/5">
                       <span className="text-sm text-gray-400">1 hora</span>
-                      <span className="text-white font-light">150 €</span>
+                      <span className="text-white font-light">{model.black ? '130 €' : '150 €'}</span>
                     </div>
                     <div className="flex justify-between items-center py-2 border-b border-white/5">
                       <span className="text-sm text-gray-400">45 minutos</span>
-                      <span className="text-white font-light">120 €</span>
+                      <span className="text-white font-light">{model.black ? '100 €' : '120 €'}</span>
                     </div>
                     <div className="flex justify-between items-center py-2 border-b border-white/5">
                       <span className="text-sm text-gray-400">30 minutos</span>
-                      <span className="text-white font-light">80 €</span>
+                      <span className="text-white font-light">{model.black ? '70 €' : '80 €'}</span>
                     </div>
                     <div className="flex justify-between items-center py-2 border-b border-white/5">
                       <span className="text-sm text-gray-400">1,5 horas</span>
