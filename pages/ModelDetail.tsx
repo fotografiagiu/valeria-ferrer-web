@@ -1225,17 +1225,17 @@ const ModelDetail: React.FC = () => {
                         </div>
                         <div className="flex justify-between items-center py-3 border-b border-white/5">
                           <span className="text-xs text-gray-400 tracking-[0.1em]">1,5 horas</span>
-                          <span className="text-sm font-light luxury-text-gradient">230 €</span>
+                          <span className="text-sm font-light luxury-text-gradient">{model.black ? '200 €' : '230 €'}</span>
                         </div>
                         <div className="flex justify-between items-center py-3">
                           <span className="text-xs text-gray-400 tracking-[0.1em]">2 horas</span>
-                          <span className="text-sm font-light luxury-text-gradient">300 €</span>
+                          <span className="text-sm font-light luxury-text-gradient">{model.black ? '260 €' : '300 €'}</span>
                         </div>
                       </div>
                       <div className="p-4 space-y-1">
                         <div className="flex justify-between items-center py-3 border-b border-white/5">
                           <span className="text-xs text-gray-400 tracking-[0.1em]">3 horas</span>
-                          <span className="text-sm font-light luxury-text-gradient">430 €</span>
+                          <span className="text-sm font-light luxury-text-gradient">{model.black ? '370 €' : '430 €'}</span>
                         </div>
                         <div className="flex justify-between items-center py-3 border-b border-white/5">
                           <span className="text-xs text-gray-400 tracking-[0.1em]">Salida</span>
@@ -2263,15 +2263,15 @@ const ModelDetail: React.FC = () => {
                     </div>
                     <div className="flex justify-between items-center py-2 border-b border-white/5">
                       <span className="text-sm text-gray-400">1,5 horas</span>
-                      <span className="text-white font-light">230 €</span>
+                      <span className="text-white font-light">{model.black ? '200 €' : '230 €'}</span>
                     </div>
                     <div className="flex justify-between items-center py-2 border-b border-white/5">
                       <span className="text-sm text-gray-400">2 horas</span>
-                      <span className="text-white font-light">300 €</span>
+                      <span className="text-white font-light">{model.black ? '260 €' : '300 €'}</span>
                     </div>
                     <div className="flex justify-between items-center py-2 border-b border-white/5">
                       <span className="text-sm text-gray-400">3 horas</span>
-                      <span className="text-white font-light">430 €</span>
+                      <span className="text-white font-light">{model.black ? '370 €' : '430 €'}</span>
                     </div>
                     <div className="flex justify-between items-center py-2 border-b border-white/5">
                       <span className="text-sm text-gray-400">Salida</span>
