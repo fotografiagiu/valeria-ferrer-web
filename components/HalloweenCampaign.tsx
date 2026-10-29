@@ -71,7 +71,7 @@ const HalloweenCampaign: React.FC<{ homeOnly?: boolean }> = ({ homeOnly = false 
     <>
       {isHome && homeOnly && (
         <section id="halloween-campaign" aria-label="Promociones Happy Hour y BLACK" className="relative border-y border-[#d7a767]/25 bg-[#090507] px-3 py-8 sm:px-6 md:py-12">
-          <div className="mx-auto max-w-[1650px]">
+          <div className="mx-auto max-w-[1850px]">
             <div className="mb-6 text-center">
               <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#d6b57b]">Valeria Ferrer · Promociones</p>
               <h2 className="mt-2 font-serif text-2xl text-[#f5dfb2] md:text-4xl">Dos ofertas para descubrir</h2>
