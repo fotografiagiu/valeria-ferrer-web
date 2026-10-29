@@ -4,6 +4,7 @@ import { MODELS } from '../constants';
 import { Crown, Grid3X3, LayoutGrid } from 'lucide-react';
 import LazyImage from './LazyImage';
 import HalloweenCardOverlay, { HalloweenInfoWebs } from './HalloweenCardOverlay';
+import BlackCornerRibbon from './BlackCornerRibbon';
 import { halloweenIsLive } from './HalloweenCampaign';
 import {
   getGalleryImageThumbnail,
@@ -190,13 +191,7 @@ const ModelCard: React.FC<{
             </div>
           )}
 
-          {adaptedModel.black === true && (
-            <div className="absolute top-2 right-2 md:top-4 md:right-4 z-30">
-              <span className="inline-flex items-center justify-center rounded-sm border border-amber-300/70 bg-black/95 px-4 py-2 text-[10px] md:text-xs font-extrabold tracking-[0.26em] text-amber-200 shadow-[0_0_15px_rgba(218,165,32,0.35)]">
-                BLACK
-              </span>
-            </div>
-          )}
+          {adaptedModel.black === true && <BlackCornerRibbon />}
           {adaptedModel.vip === true && (
             <div className="absolute top-2 right-2 md:top-4 md:right-4 z-30">
               <div className="vip-gold-badge relative flex items-center space-x-1.5 px-3 py-1.5 md:space-x-2 md:px-5 md:py-2.5">
