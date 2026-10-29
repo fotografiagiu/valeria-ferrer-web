@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { Phone, Send, X } from 'lucide-react'
+import { ArrowRight, Phone, Send, X } from 'lucide-react'
 import {
   OFFICIAL_PHONE_LABEL,
   OFFICIAL_PHONE_TEL,
@@ -179,7 +179,7 @@ const PromoPopup: React.FC = () => {
 
       {view === 'popup' ? (
         <div
-          className="fixed inset-0 z-[120] flex items-center justify-center p-3 sm:p-6"
+          className="fixed inset-0 z-[120] flex items-center justify-center overflow-y-auto p-3 pt-24 sm:p-6 sm:pt-24"
           role="dialog"
           aria-modal="true"
           aria-labelledby="promo-popup-title"
@@ -191,18 +191,28 @@ const PromoPopup: React.FC = () => {
             onClick={minimizePromo}
           />
 
+          <button
+            type="button"
+            onClick={minimizePromo}
+            aria-label="Cerrar oferta y continuar viendo los perfiles"
+            style={{ top: 'max(12px, env(safe-area-inset-top))' }}
+            className="fixed right-3 z-30 inline-flex min-h-[64px] items-center gap-2 rounded-2xl border-[3px] border-white bg-[#f8d88c] px-3 py-2 text-[#1a1209] shadow-[0_8px_34px_rgba(0,0,0,.85)] transition hover:bg-white focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-2 focus-visible:outline-white sm:right-6 sm:px-5"
+          >
+            <ArrowRight size={22} strokeWidth={3} aria-hidden="true" className="shrink-0 motion-safe:animate-pulse" />
+            <span className="text-left text-[13px] font-black uppercase leading-tight tracking-[0.02em]">
+              <span className="block">Cerrar aquí</span>
+              <span className="block text-[10px] sm:text-xs">para ver los perfiles</span>
+            </span>
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#17110d] text-white" aria-hidden="true">
+              <X size={28} strokeWidth={3} />
+            </span>
+          </button>
+
           <div className="relative z-10 w-full max-w-[920px]">
             <h2 id="promo-popup-title" className="sr-only">
               Oferta especial Valeria Ferrer
             </h2>
-            <button
-              type="button"
-              onClick={minimizePromo}
-              className="absolute top-2 right-2 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-black/70 text-white border border-white/20 hover:bg-black hover:text-[#c2b2a3] transition-colors"
-              aria-label="Cerrar"
-            >
-              <X size={20} aria-hidden="true" />
-            </button>
+
 
             <button
               type="button"
@@ -213,7 +223,7 @@ const PromoPopup: React.FC = () => {
               <img
                 src={promo.image}
                 alt="Oferta especial Valeria Ferrer. Reserva ahora."
-                className="block h-auto w-full max-h-[82dvh] object-contain bg-black"
+                className="block h-auto w-full max-h-[68dvh] object-contain bg-black sm:max-h-[76dvh]"
                 width={promo.imageWidth}
                 height={promo.imageHeight}
               />
