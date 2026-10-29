@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { MessageCircle, Phone, Send, X } from 'lucide-react'
+import { ArrowRight, MessageCircle, Phone, Send, X } from 'lucide-react'
 import { halloweenIsLive } from './HalloweenCampaign'
 import { setHalloweenCashPopupOpen } from '../lib/halloweenCashGate'
 import { BLACK_OFFER_IMAGE, BLACK_OFFER_IMAGE_WIDTH, BLACK_OFFER_IMAGE_HEIGHT, BLACK_OFFER_WHATSAPP_TEXT } from '../lib/blackPromoAsset'
@@ -77,13 +77,24 @@ const HalloweenCashPromo: React.FC = () => {
 
       {view === 'popup' && (
         <div className="fixed inset-0 z-[140] overflow-y-auto overscroll-contain bg-black/90" role="dialog" aria-modal="true" aria-labelledby="halloween-offers-title" onClick={minimize}>
-          <div className="flex min-h-full items-center justify-center px-3 py-5 sm:px-5 sm:py-6">
-            <div className="relative z-10 w-full lg:w-[97vw] lg:max-w-none xl:w-[96vw] 2xl:max-w-[1850px]" onClick={(event) => event.stopPropagation()}>
-              <button type="button" onClick={minimize}
-                className="absolute right-0 top-0 z-30 flex h-10 w-10 items-center justify-center rounded-full border border-white/25 bg-black/85 text-white hover:bg-black"
-                aria-label="Cerrar ofertas">
-                <X size={20} aria-hidden="true"/>
+              <button
+                type="button"
+                onClick={minimize}
+                aria-label="Cerrar oferta y continuar viendo los perfiles"
+                style={{ top: 'max(12px, env(safe-area-inset-top))' }}
+                className="fixed right-3 z-50 inline-flex min-h-[64px] items-center gap-2 rounded-2xl border-[3px] border-white bg-[#f8d88c] px-3 py-2 text-[#1a1209] shadow-[0_8px_34px_rgba(0,0,0,.85)] transition hover:bg-white focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-2 focus-visible:outline-white sm:right-6 sm:px-5"
+              >
+                <ArrowRight size={22} strokeWidth={3} aria-hidden="true" className="shrink-0 motion-safe:animate-pulse" />
+                <span className="text-left text-[13px] font-black uppercase leading-tight tracking-[0.02em]">
+                  <span className="block">Cerrar aquí</span>
+                  <span className="block text-[10px] sm:text-xs">para ver los perfiles</span>
+                </span>
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#17110d] text-white" aria-hidden="true">
+                  <X size={28} strokeWidth={3} />
+                </span>
               </button>
+          <div className="flex min-h-full items-center justify-center px-3 pb-5 pt-24 sm:px-5 sm:pb-6 sm:pt-24">
+            <div className="relative z-10 w-full lg:w-[97vw] lg:max-w-none xl:w-[96vw] 2xl:max-w-[1850px]" onClick={(event) => event.stopPropagation()}>
               <h2 id="halloween-offers-title" className="pr-10 text-center font-serif text-2xl text-[#f2d69b] sm:text-3xl xl:text-4xl">
                 Descubre nuestras dos ofertas
               </h2>
