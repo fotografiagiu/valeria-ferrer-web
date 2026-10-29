@@ -73,7 +73,7 @@ const ModelDetail: React.FC = () => {
 
   const modalImages = useMemo(() => getAllModalImages(), [model, id]);
 
-  // Anterior / Siguiente deben seguir el orden visible del catálogo, no models.json.
+  // Anterior / Siguiente: mismo orden público del catálogo (panel), no models.json.
   const currentIndex = orderedModels.findIndex((m) => m.id === id || m.slug === id);
   const previousModel = currentIndex > 0 ? orderedModels[currentIndex - 1] : null;
   const nextModel =
