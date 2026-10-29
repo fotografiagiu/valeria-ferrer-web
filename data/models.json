@@ -1416,6 +1416,7 @@
   {
     "slug": "alicia",
     "name": "Alicia",
+    "black": true,
     "age": 18,
     "height": "1,68 m",
     "weight": "53 kg",
