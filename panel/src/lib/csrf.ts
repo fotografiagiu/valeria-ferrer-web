@@ -67,7 +67,9 @@ export function corsHeadersForPublicOverrides(
 ): Record<string, string> {
   const headers: Record<string, string> = {
     'Access-Control-Allow-Methods': 'GET, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type',
+    // Accept + Cache-Control: browsers may send them on credential-less GETs;
+    // denying them in preflight breaks www catalog order entirely.
+    'Access-Control-Allow-Headers': 'Accept, Content-Type, Cache-Control',
     'Cache-Control': 'public, max-age=30',
   };
   if (requestOrigin && env.publicWebOrigins.includes(requestOrigin)) {
@@ -84,7 +86,7 @@ export function corsHeadersForPublicPromotion(
 ): Record<string, string> {
   const headers: Record<string, string> = {
     'Access-Control-Allow-Methods': 'GET, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Headers': 'Accept, Content-Type, Cache-Control',
     'Cache-Control': 'no-store, max-age=0',
   };
   if (requestOrigin && env.publicWebOrigins.includes(requestOrigin)) {

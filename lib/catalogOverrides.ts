@@ -202,12 +202,13 @@ async function fetchPublicOverridesOnce(): Promise<PublicOverridesPayload | null
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), 4000);
   try {
+    // Do not set cache:'no-store' — browsers add Cache-Control and the panel
+    // CORS Allow-Headers only lists Content-Type, so the preflight fails and
+    // the public site falls back to models.json / home pins forever.
     const res = await fetch(url, {
       method: 'GET',
-      headers: { Accept: 'application/json' },
       signal: controller.signal,
       credentials: 'omit',
-      cache: 'no-store',
     });
     if (!res.ok) return null;
     const data: unknown = await res.json();

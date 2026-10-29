@@ -36,10 +36,10 @@ export async function fetchRemotePromotion(
     const controller = new AbortController()
     const timer = window.setTimeout(() => controller.abort(), 4000)
     try {
+      // Avoid cache:'no-store' — it forces Cache-Control on the request and the
+      // panel CORS Allow-Headers historically rejected that preflight.
       const res = await fetchImpl(resolvePublicPromotionUrl(), {
         method: 'GET',
-        headers: { Accept: 'application/json' },
-        cache: 'no-store',
         signal: controller.signal,
       })
       if (!res.ok) return null

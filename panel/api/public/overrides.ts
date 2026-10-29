@@ -21,7 +21,7 @@ function applyCors(req: VercelRequest, res: VercelResponse) {
     .map((s) => s.trim())
     .filter(Boolean);
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Access-Control-Allow-Headers', 'Accept, Content-Type, Cache-Control');
   res.setHeader('Cache-Control', 'public, max-age=30');
   if (origin && allowed.includes(origin)) {
     res.setHeader('Access-Control-Allow-Origin', origin);
