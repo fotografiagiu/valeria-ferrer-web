@@ -18,7 +18,7 @@ import {
   subscribePromotion,
 } from '../lib/webPromotionRemote';
 
-const HALLOWEEN_HANGING_STORAGE_KEY = 'vf-halloween-hanging-camila-nicoll-v1';
+const HALLOWEEN_HANGING_STORAGE_KEY = 'vf-halloween-hanging-alana-susi-v1';
 
 type NovedadSlide = {
   slug: string;
@@ -76,7 +76,7 @@ const NovedadesFloatingBanner: React.FC = () => {
   // Halloween preview: display actual active catalog records; never fabricate photos or links.
   const halloweenLanding = halloweenIsLive() && location.pathname === '/';
   const hangingSlides = useMemo(() => (
-    ['camila', 'nicoll']
+    ['alana', 'susi']
       .map((slug) => MODELS.find((m) => m.slug === slug && m.isNew))
       .filter((m): m is (typeof MODELS)[number] => Boolean(m))
       .map((m) => ({
