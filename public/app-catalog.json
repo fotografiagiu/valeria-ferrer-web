@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-10-30T20:35:50.411Z",
-  "catalogVersion": "45491ce02289dd14ce2b2c7d702481518526b5f814d4dc003ec80104928b3f16",
+  "generatedAt": "2026-10-30T20:37:20.841Z",
+  "catalogVersion": "d7fccbae9d27e07d07810b53a05b34cab65cdd6e6a7bb165a1bd916e87bb0c2a",
   "source": "valeria-ferrer-web",
   "method": "build-app-catalog",
   "models": [
@@ -13,7 +13,10 @@
       "images": [
         "/chicas/alana-model-agency-valencia-vf/gallery/01.jpg",
         "/chicas/alana-model-agency-valencia-vf/gallery/02.jpg",
-        "/chicas/alana-model-agency-valencia-vf/gallery/03.jpg"
+        "/chicas/alana-model-agency-valencia-vf/gallery/03.jpg",
+        "/chicas/alana-model-agency-valencia-vf/gallery/04.jpg",
+        "/chicas/alana-model-agency-valencia-vf/gallery/05.jpg",
+        "/chicas/alana-model-agency-valencia-vf/gallery/06.jpg"
       ]
     },
     {
