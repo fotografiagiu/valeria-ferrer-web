@@ -1,6 +1,7 @@
 import React, { Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import LazyImage from './LazyImage';
+import NewCornerRibbon from './NewCornerRibbon';
 import HalloweenCardOverlay, { HalloweenInfoWebs } from './HalloweenCardOverlay';
 import { getModelCoverThumbnailPath, getModelCoverImage } from '../lib/modelGridImage';
 
@@ -171,9 +172,7 @@ const HomeNovedadesStrip: React.FC<HomeNovedadesStripProps> = ({
                   priority={index === 0}
                 />
                 <HalloweenCardOverlay />
-                <span className="vf-new-ribbon" aria-hidden="true">
-                  ✦ NUEVA
-                </span>
+                <NewCornerRibbon />
               </div>
               <div className="vf-news-card__body">
                 <HalloweenInfoWebs />
