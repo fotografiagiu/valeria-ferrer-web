@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { Crown } from 'lucide-react';
 import { halloweenIsLive } from './HalloweenCampaign';
 import HalloweenCardOverlay, { HalloweenInfoWebs } from './HalloweenCardOverlay';
+import NewCornerRibbon from './NewCornerRibbon';
 
 export type CatalogPreviewModel = {
   slug: string;
@@ -61,8 +62,8 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 }
 
 function statusBadge(model: CatalogPreviewModel): string | null {
+  if (model.isNew) return null; // La banda rosa sustituye el badge pequeño.
   if (model.galleryUpdated) return 'Actualizada';
-  if (model.isNew) return 'Nueva';
   return null;
 }
 
@@ -149,6 +150,7 @@ function VipHorizontalCard({ model }: { model: CatalogPreviewModel }) {
           aria-hidden
         />
         <HalloweenCardOverlay />
+        {model.isNew === true && <NewCornerRibbon />}
         <div className="absolute right-3 top-3 z-20 md:right-4 md:top-4">
           <div className="vip-gold-badge relative flex items-center space-x-1.5 px-3 py-1.5 md:space-x-2 md:px-4 md:py-2">
             <Crown className="relative z-[1] h-3 w-3 text-[#1a1208] md:h-3.5 md:w-3.5" strokeWidth={1.6} />
@@ -231,6 +233,7 @@ function VerticalModelCard({ model }: { model: CatalogPreviewModel }) {
           aria-hidden
         />
         <HalloweenCardOverlay />
+        {model.isNew === true && <NewCornerRibbon />}
         {halloweenIsLive() && model.vip === true && (
           <span className="vf-halloween-real-vip-badge absolute right-2 top-2 z-20 inline-flex items-center gap-1 rounded-sm bg-gradient-to-r from-[#ecbc83] to-[#c48b51] px-2 py-1 text-[9px] font-bold uppercase tracking-[0.11em] text-[#200c09]">
             <Crown size={12} aria-hidden="true" /> VIP
