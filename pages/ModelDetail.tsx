@@ -13,6 +13,7 @@ import PageSEOHead, { SITE_ORIGIN } from '../components/PageSEOHead';
 import Breadcrumbs from '../components/Breadcrumbs';
 import AnalyticsEvents from '../components/AnalyticsEvents';
 import BlackCornerRibbon from '../components/BlackCornerRibbon';
+import NewCornerRibbon from '../components/NewCornerRibbon';
 import { useIsStaffHiddenSlug, useCatalogWithOverrides } from '../hooks/useCatalogWithOverrides';
 import {
   OFFICIAL_PHONE_LABEL,
@@ -390,10 +391,13 @@ const ModelDetail: React.FC = () => {
                 loading={model.slug === 'lana' ? 'eager' : 'lazy'}
               />
             </div>
-            {/* Badge for exclusivity */}
-            <div className="absolute top-6 left-6 px-4 py-2 bg-black/40 backdrop-blur-md border border-[#c2b2a3]/30 text-[9px] tracking-[0.4em] uppercase font-bold text-[#c2b2a3]">
-              {model.galleryUpdated ? 'Actualizada' : model.isNew ? 'Nueva' : 'Elección Élite'}
-            </div>
+            {/* Nueva incorporación a la izquierda, BLACK a la derecha. */}
+            {model.isNew && <NewCornerRibbon profile />}
+            {!model.isNew && (
+              <div className="absolute top-6 left-6 px-4 py-2 bg-black/40 backdrop-blur-md border border-[#c2b2a3]/30 text-[9px] tracking-[0.4em] uppercase font-bold text-[#c2b2a3]">
+                {model.galleryUpdated ? 'Actualizada' : 'Elección Élite'}
+              </div>
+            )}
             {model.black && <BlackCornerRibbon profile />}
             
             {/* Image Counter and Navigation Dots */}
@@ -1398,11 +1402,14 @@ const ModelDetail: React.FC = () => {
                   }`}
                 />
                 
-                {/* Badge for exclusivity */}
-                <div className="absolute top-6 left-6 px-4 py-2 bg-black/40 backdrop-blur-md border border-[#c2b2a3]/30 text-[9px] tracking-[0.4em] uppercase font-bold text-[#c2b2a3]">
-                  {model.galleryUpdated ? 'Actualizada' : model.isNew ? 'Nueva' : 'Elección Élite'}
-                </div>
-                {model.black && <BlackCornerRibbon profile />}
+                {/* Nueva incorporación a la izquierda, BLACK a la derecha. */}
+                                {model.isNew && <NewCornerRibbon profile />}
+                                {!model.isNew && (
+                                  <div className="absolute top-6 left-6 px-4 py-2 bg-black/40 backdrop-blur-md border border-[#c2b2a3]/30 text-[9px] tracking-[0.4em] uppercase font-bold text-[#c2b2a3]">
+                                    {model.galleryUpdated ? 'Actualizada' : 'Elección Élite'}
+                                  </div>
+                                )}
+                                {model.black && <BlackCornerRibbon profile />}
                 
                 {/* Image Counter and Navigation Dots - Desktop */}
                 <div className="absolute bottom-4 left-0 right-0 flex items-center justify-between px-6">
