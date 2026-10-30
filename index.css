@@ -807,12 +807,27 @@
   background: #090705;
 }
 
-/* LazyImage wrapper must fill media box */
-.home-novedades-vf .vf-news-card__media > div {
+/* El wrapper de LazyImage llena la foto; NUNCA expandir la banda NOVEDAD.
+   Antes, el selector "> div" forzaba 100% de ancho/alto a la banda rosa. */
+.home-novedades-vf .vf-news-card__media > div:not(.vf-new-corner) {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
+}
+
+/* Blindaje ante cambios de estilos globales en el carrusel de novedades. */
+.home-novedades-vf .vf-news-card__media > .vf-new-corner {
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: clamp(88px, 24%, 116px);
+  height: auto;
+  aspect-ratio: 1 / 1;
+}
+@media (max-width: 639px) {
+  .home-novedades-vf .vf-news-card__media > .vf-new-corner {
+    width: min(33%, 98px);
+  }
 }
 
 .home-novedades-vf .vf-news-card__media picture {
