@@ -1,9 +1,21 @@
 {
-  "generatedAt": "2026-10-28T05:14:54.164Z",
-  "catalogVersion": "0cbb59961f6b4a315071f4cb61966c27d7d1a77eeccca84f15fc43c9248bc5eb",
+  "generatedAt": "2026-10-30T20:32:36.911Z",
+  "catalogVersion": "4f5d680049329594fd807961fe9f908525de90f157499214d1f6b3750d64fb56",
   "source": "valeria-ferrer-web",
   "method": "build-app-catalog",
   "models": [
+    {
+      "slug": "alana",
+      "name": "Alana",
+      "active": true,
+      "vip": false,
+      "coverImageUrl": "/chicas/alana-model-agency-valencia-vf/portada.jpg",
+      "images": [
+        "/chicas/alana-model-agency-valencia-vf/gallery/01.jpg",
+        "/chicas/alana-model-agency-valencia-vf/gallery/02.jpg",
+        "/chicas/alana-model-agency-valencia-vf/gallery/03.jpg"
+      ]
+    },
     {
       "slug": "susi",
       "name": "Susi",
@@ -13,8 +25,7 @@
       "images": [
         "/chicas/susi-model-agency-valencia-vf/gallery/01-blanco-oct2026.jpg",
         "/chicas/susi-model-agency-valencia-vf/gallery/02-blanco-oct2026.jpg"
-      ],
-      "profileImageUrl": "/chicas/susi-model-agency-valencia-vf/portada-blanco-oct2026.jpg"
+      ]
     },
     {
       "slug": "nicoll",
@@ -388,9 +399,9 @@
     },
     {
       "slug": "paula-vip",
-      "name": "Paula (VIP)",
+      "name": "Paula",
       "active": true,
-      "vip": true,
+      "vip": false,
       "coverImageUrl": "/chicas/paula-vip-model-agency-valencia/paula-portada-nueva.jpg",
       "images": [
         "/chicas/paula-vip-model-agency-valencia/paula-galeria-nueva-01.jpg",
@@ -407,48 +418,6 @@
         "/chicas/paula-vip-model-agency-valencia/2.jpg",
         "/chicas/paula-vip-model-agency-valencia/3.jpg",
         "/chicas/paula-vip-model-agency-valencia/4.jpg"
-      ],
-      "rateExceptions": [
-        {
-          "serviceTypeId": "30min",
-          "totalCents": 10000
-        },
-        {
-          "serviceTypeId": "45min",
-          "totalCents": 15000
-        },
-        {
-          "serviceTypeId": "60min",
-          "totalCents": 20000
-        },
-        {
-          "serviceTypeId": "90min",
-          "totalCents": 30000
-        },
-        {
-          "serviceTypeId": "120min",
-          "totalCents": 35000
-        },
-        {
-          "serviceTypeId": "180min",
-          "totalCents": 52000
-        },
-        {
-          "serviceTypeId": "salida",
-          "totalCents": 25000
-        },
-        {
-          "serviceTypeId": "noche",
-          "totalCents": 200000
-        },
-        {
-          "serviceTypeId": "dia",
-          "totalCents": 300000
-        },
-        {
-          "serviceTypeId": "dosDias",
-          "totalCents": 400000
-        }
       ]
     },
     {

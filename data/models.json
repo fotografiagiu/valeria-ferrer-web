@@ -1,5 +1,59 @@
 [
   {
+    "slug": "alana",
+    "name": "Alana",
+    "age": 23,
+    "height": "1,58 m",
+    "weight": "55 kg",
+    "nationality": "Cubana",
+    "city": "Valencia",
+    "profileUrl": "https://www.valeriaferrer.com/models/alana/",
+    "coverImageUrl": "/chicas/alana-model-agency-valencia-vf/portada.jpg",
+    "profileImageUrl": "/chicas/alana-model-agency-valencia-vf/portada.jpg",
+    "description": "Alana es cubana y te deja sin aire. A sus 23 años concentra una cara que engancha y un cuerpo de escándalo que pide cita ya: compacta, intensa y con una mirada que te empuja a escribirle ahora. En Valencia entra como novedad. Si buscas a la mujer que te quite el rumbo desde la primera foto, Alana es esa llamada.",
+    "essence": "Con Alana no hay medias tintas. Cubana de fuego corto y mirada larga: te mira, te retiene y convierte un mensaje en ganas de verla hoy. Poquita estatura, muchísimo impacto, y la sensación de que la cita ya empezó.",
+    "uniquePoints": [
+      "Cubana que te engancha desde la primera foto",
+      "Cuerpo de escándalo en 1,58 m: intensa, compacta e imposible de ignorar",
+      "La novedad en Valencia que te empuja a llamarla ahora"
+    ],
+    "experiencePoints": [
+      "Un encuentro que empieza con ganas y se te queda encima",
+      "Atención cercana, juguetona y con hambre de verdad",
+      "La cita que te hace querer escribirle otra vez"
+    ],
+    "images": [
+      "/chicas/alana-model-agency-valencia-vf/gallery/01.jpg",
+      "/chicas/alana-model-agency-valencia-vf/gallery/02.jpg",
+      "/chicas/alana-model-agency-valencia-vf/gallery/03.jpg"
+    ],
+    "services": [
+      "Girlfriend Experience",
+      "Cenas de Negocios",
+      "Eventos Sociales",
+      "Acompañamiento Personal"
+    ],
+    "availability": "24h",
+    "languages": [
+      "Español"
+    ],
+    "tags": [
+      "cubana",
+      "latina",
+      "nueva",
+      "novedad",
+      "apasionada",
+      "sensual",
+      "seductora",
+      "intensa"
+    ],
+    "isNew": true,
+    "featured": true,
+    "vip": false,
+    "active": true,
+    "black": false
+  },
+  {
     "slug": "susi",
     "name": "Susi",
     "age": 23,
