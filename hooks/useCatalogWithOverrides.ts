@@ -27,13 +27,31 @@ export function useCatalogWithOverrides<T extends CatalogLike>(
 
   useEffect(() => {
     let cancelled = false;
-    loadPublicOverrides().then((payload) => {
-      if (cancelled) return;
-      setOverrideRows(payload?.models ?? null);
-      setHiddenSlugs(payload?.hiddenSlugs ?? []);
-    });
+    const update = (refresh = false) => {
+      void loadPublicOverrides(refresh).then((payload) => {
+        if (cancelled || !payload) return;
+        setOverrideRows(payload.models);
+        setHiddenSlugs(payload.hiddenSlugs ?? []);
+      });
+    };
+    update();
+
+    // Una portada editada desde el panel debe actualizarse al volver a la web,
+    // sin obligar al cliente a cerrar la pestaña o vaciar la caché.
+    const onFocus = () => update(true);
+    const onVisible = () => {
+      if (document.visibilityState === 'visible') update(true);
+    };
+    window.addEventListener('focus', onFocus);
+    document.addEventListener('visibilitychange', onVisible);
+    const interval = window.setInterval(() => {
+      if (document.visibilityState === 'visible') update(true);
+    }, 60_000);
     return () => {
       cancelled = true;
+      window.removeEventListener('focus', onFocus);
+      document.removeEventListener('visibilitychange', onVisible);
+      window.clearInterval(interval);
     };
   }, []);
 
