@@ -633,7 +633,6 @@
     "tags": [
       "brasileña",
       "brasilena",
-      "normal",
       "nueva",
       "latina",
       "madura",
@@ -645,12 +644,14 @@
       "apasionada",
       "social",
       "cenas",
-      "eventos"
+      "eventos",
+      "black"
     ],
     "isNew": true,
     "featured": true,
     "vip": false,
-    "active": true
+    "active": true,
+    "black": true
   },
   {
     "slug": "nerea",
