@@ -205,10 +205,9 @@
       "alta",
       "esbelta",
       "elegante",
-      "sensual",
-      "novedad"
+      "sensual"
     ],
-    "isNew": true,
+    "isNew": false,
     "featured": true,
     "vip": false,
     "active": true
@@ -835,7 +834,6 @@
     "tags": [
       "brasileña",
       "normal",
-      "nueva",
       "joven",
       "guapa",
       "atractiva",
@@ -847,7 +845,7 @@
       "cenas",
       "eventos"
     ],
-    "isNew": true,
+    "isNew": false,
     "featured": true,
     "vip": false,
     "active": true
@@ -1203,7 +1201,6 @@
     "tags": [
       "colombiana",
       "normal",
-      "nueva",
       "joven",
       "guapa",
       "atractiva",
@@ -1216,7 +1213,7 @@
       "cenas",
       "eventos"
     ],
-    "isNew": true,
+    "isNew": false,
     "featured": true,
     "vip": false,
     "active": true
@@ -1355,7 +1352,6 @@
     "tags": [
       "venezolana",
       "latina",
-      "nueva",
       "joven",
       "guapa",
       "atractiva",
@@ -1368,7 +1364,7 @@
       "valencia",
       "black"
     ],
-    "isNew": true,
+    "isNew": false,
     "featured": true,
     "vip": false,
     "active": true,
@@ -1545,7 +1541,6 @@
     "tags": [
       "venezolana",
       "latina",
-      "nueva",
       "joven",
       "alta",
       "pecho-90",
@@ -1558,7 +1553,7 @@
       "eventos",
       "valencia"
     ],
-    "isNew": true,
+    "isNew": false,
     "featured": true,
     "vip": false,
     "active": true
@@ -1692,7 +1687,6 @@
     "tags": [
       "uruguaya",
       "normal",
-      "nueva",
       "elegante",
       "sofisticada",
       "seductora",
@@ -1700,7 +1694,7 @@
       "cenas",
       "eventos"
     ],
-    "isNew": true,
+    "isNew": false,
     "featured": true,
     "vip": false
   },
@@ -2232,7 +2226,6 @@
     "tags": [
       "colombiana",
       "latina",
-      "nueva",
       "joven",
       "guapa",
       "atractiva",
@@ -2245,7 +2238,7 @@
       "valencia"
     ],
     "featured": true,
-    "isNew": true,
+    "isNew": false,
     "vip": false,
     "active": false
   },
@@ -3000,7 +2993,6 @@
     "tags": [
       "colombiana",
       "normal",
-      "nueva",
       "apasionada",
       "seductora",
       "divertida",
@@ -3008,7 +3000,7 @@
       "cenas",
       "eventos"
     ],
-    "isNew": true,
+    "isNew": false,
     "featured": true,
     "vip": false,
     "active": false
