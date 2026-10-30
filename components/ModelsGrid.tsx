@@ -5,6 +5,7 @@ import { Crown, Grid3X3, LayoutGrid } from 'lucide-react';
 import LazyImage from './LazyImage';
 import HalloweenCardOverlay, { HalloweenInfoWebs } from './HalloweenCardOverlay';
 import BlackCornerRibbon from './BlackCornerRibbon';
+import NewCornerRibbon from './NewCornerRibbon';
 import { halloweenIsLive } from './HalloweenCampaign';
 import {
   getGalleryImageThumbnail,
@@ -176,20 +177,14 @@ const ModelCard: React.FC<{
             : "absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60"} />
           <HalloweenCardOverlay />
 
-          {(model.galleryUpdated ||
-            adaptedModel.name === 'Flor' ||
-            adaptedModel.name === 'Mónica' ||
-            adaptedModel.name === 'KEY' ||
-            adaptedModel.name === 'Teresa' ||
-            adaptedModel.name === 'Emma' ||
-            adaptedModel.name === 'Lili' ||
-            model.isNew) && (
-            <div className="absolute top-2 left-2 md:top-4 md:left-4 z-30">
-              <span className="px-2.5 py-1 md:px-3 md:py-1 bg-[#c2b2a3] text-black text-[10px] md:text-[9px] tracking-[0.2em] uppercase font-bold rounded-sm shadow-lg">
-                {model.galleryUpdated ? 'Actualizada' : 'Nueva'}
+          {model.galleryUpdated && !model.isNew && (
+            <div className="absolute top-2 left-2 z-30 md:top-4 md:left-4">
+              <span className="rounded-sm bg-[#c2b2a3] px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-black shadow-lg md:px-3 md:py-1 md:text-[9px]">
+                Actualizada
               </span>
             </div>
           )}
+          {model.isNew === true && <NewCornerRibbon />}
 
           {adaptedModel.black === true && <BlackCornerRibbon />}
           {adaptedModel.vip === true && (
