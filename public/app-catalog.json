@@ -9,17 +9,12 @@
       "name": "Susi",
       "active": true,
       "vip": false,
-      "coverImageUrl": "/chicas/susi-model-agency-valencia-vf/portada.jpg",
+      "coverImageUrl": "/chicas/susi-model-agency-valencia-vf/portada-blanco-oct2026.jpg",
       "images": [
-        "/chicas/susi-model-agency-valencia-vf/gallery/01.jpg",
-        "/chicas/susi-model-agency-valencia-vf/gallery/02.jpg",
-        "/chicas/susi-model-agency-valencia-vf/gallery/03.jpg",
-        "/chicas/susi-model-agency-valencia-vf/gallery/04.jpg",
-        "/chicas/susi-model-agency-valencia-vf/gallery/05.jpg",
-        "/chicas/susi-model-agency-valencia-vf/gallery/06.jpg",
-        "/chicas/susi-model-agency-valencia-vf/gallery/07.jpg",
-        "/chicas/susi-model-agency-valencia-vf/gallery/08.jpg"
-      ]
+        "/chicas/susi-model-agency-valencia-vf/gallery/01-blanco-oct2026.jpg",
+        "/chicas/susi-model-agency-valencia-vf/gallery/02-blanco-oct2026.jpg"
+      ],
+      "profileImageUrl": "/chicas/susi-model-agency-valencia-vf/portada-blanco-oct2026.jpg"
     },
     {
       "slug": "nicoll",
