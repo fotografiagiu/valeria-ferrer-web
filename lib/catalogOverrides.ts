@@ -25,15 +25,8 @@ type CatalogLike = {
   image?: string;
   hoverImage?: string;
   gallery?: string[];
+  images?: string[];
 };
-
-function knownCoverPaths(model: CatalogLike): Set<string> {
-  return new Set(
-    [model.coverImageUrl, model.image, ...(model.gallery || [])].filter(
-      (path): path is string => Boolean(path)
-    )
-  );
-}
 
 /** Home pin fallback — must stay aligned with panel effectiveOrder until overrides load. */
 export const HOME_PIN_ORDER: readonly string[] = [
@@ -86,6 +79,11 @@ function withGalleryOverride<T extends CatalogLike>(
 
   const gallery = galleryImagePaths.filter((p) => p && p !== coverImagePath);
   next = { ...next, gallery };
+  // Inicio consume model.images y la ficha individual consume model.gallery.
+  // Mantener ambos sincronizados con el orden seleccionado en el panel.
+  if ('images' in model) {
+    (next as CatalogLike).images = gallery;
+  }
   if ('hoverImage' in next || model.hoverImage !== undefined) {
     (next as CatalogLike).hoverImage = gallery[0] || coverImagePath;
   }
@@ -127,14 +125,16 @@ export function applyCatalogOverrides<T extends CatalogLike>(
     if (!model) continue;
     seen.add(resolvedSlug);
     const cover = row.coverImagePath?.trim();
-    const knownCovers = knownCoverPaths(model);
-    // Ignore a panel cover that is no longer in this ficha. That happens when
-    // the photo file is replaced to bust the immutable cache.
+    // La portada del panel está validada por la allowlist en el servidor.
+    // No compararla con la galería estática: la lista de la web puede quedar
+    // desactualizada al añadir/cambiar fotos, descartando una portada válida.
+    // Solo se rechaza la URL histórica obsoleta de Sofía o rutas no locales.
     const coverIsStale =
       !!cover &&
       (cover.includes('/sofia-valeria-ferrer-model-agency-valencia/') ||
         (resolvedSlug === 'sofia1' && row.slug === 'sofia') ||
-        (knownCovers.size > 0 && !knownCovers.has(cover)));
+        !/^\/(?:chicas|chicas-optimized)\/[^?#]+$/i.test(cover) ||
+        cover.includes('..'));
     ordered.push(
       cover && !coverIsStale
         ? withGalleryOverride(model, cover, row.galleryImagePaths)
@@ -170,6 +170,8 @@ export function resolvePublicOverridesUrl(): string {
 }
 
 let overridesPromise: Promise<PublicOverridesPayload | null> | null = null;
+let overridesFetchedAt = 0;
+const OVERRIDE_REFRESH_MIN_INTERVAL_MS = 25_000;
 
 function isValidOverridesPayload(data: unknown): data is PublicOverridesPayload {
   if (!data || typeof data !== 'object') return false;
@@ -197,15 +199,20 @@ function isValidOverridesPayload(data: unknown): data is PublicOverridesPayload 
   return true;
 }
 
-async function fetchPublicOverridesOnce(): Promise<PublicOverridesPayload | null> {
+async function fetchPublicOverridesOnce(refresh = false): Promise<PublicOverridesPayload | null> {
   const url = resolvePublicOverridesUrl();
+  // La web debe ver cambios de portada incluso sin recargar toda la página.
+  // Una URL distinta impide reutilizar en el navegador el JSON anterior.
+  const requestUrl = refresh
+    ? `${url}${url.includes('?') ? '&' : '?'}_refresh=${Date.now()}`
+    : url;
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), 4000);
   try {
     // Do not set cache:'no-store' — browsers add Cache-Control and the panel
     // CORS Allow-Headers only lists Content-Type, so the preflight fails and
     // the public site falls back to models.json / home pins forever.
-    const res = await fetch(url, {
+    const res = await fetch(requestUrl, {
       method: 'GET',
       signal: controller.signal,
       credentials: 'omit',
@@ -222,9 +229,13 @@ async function fetchPublicOverridesOnce(): Promise<PublicOverridesPayload | null
 }
 
 /** Single shared fetch for the SPA session; failures resolve to null (static fallback). */
-export function loadPublicOverrides(): Promise<PublicOverridesPayload | null> {
-  if (!overridesPromise) {
-    overridesPromise = fetchPublicOverridesOnce();
+export function loadPublicOverrides(refresh = false): Promise<PublicOverridesPayload | null> {
+  if (
+    !overridesPromise ||
+    (refresh && Date.now() - overridesFetchedAt >= OVERRIDE_REFRESH_MIN_INTERVAL_MS)
+  ) {
+    overridesFetchedAt = Date.now();
+    overridesPromise = fetchPublicOverridesOnce(refresh);
   }
   return overridesPromise;
 }
@@ -232,4 +243,5 @@ export function loadPublicOverrides(): Promise<PublicOverridesPayload | null> {
 /** Test helper — do not use in production UI. */
 export function resetPublicOverridesCacheForTests(): void {
   overridesPromise = null;
+  overridesFetchedAt = 0;
 }
