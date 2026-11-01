@@ -80,7 +80,7 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div className="overflow-x-hidden">
+    <div className="vf-noir-home-page overflow-x-hidden">
       <PageSEOHead
         title={homeSEOData.title}
         description={homeSEOData.description}
@@ -97,7 +97,7 @@ const Home: React.FC = () => {
       />
 
       {/* Elite Experience Section — sin Framer en cards (mismo aspecto final) */}
-      <section className="py-12 md:py-24 bg-[#0a0a0a] border-b border-white/5">
+      <section className="vf-home-value-section py-12 md:py-24 bg-[#0a0a0a] border-b border-white/5">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="text-center mb-10 md:mb-20">
             <h2 className="text-2xl md:text-5xl font-light tracking-wider mb-2 md:mb-4">La Experiencia Elite</h2>
@@ -138,7 +138,7 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      <div className="bg-[#111111] py-4 border-b border-white/5 text-center">
+      <div className="vf-home-telegram-strip bg-[#111111] py-4 border-b border-white/5 text-center">
         <a
           href="https://t.me/Valeriaferreeer" data-contact-placement="home_banner"
           target="_blank"
@@ -153,7 +153,7 @@ const Home: React.FC = () => {
       {/* Anclas de intención: lujo y catálogo (genérico consolidado en Home) */}
       <nav
         aria-label="Explorar por intención"
-        className="bg-[#0a0a0a] py-5 px-6 border-b border-white/5 text-center"
+        className="vf-home-intent-nav bg-[#0a0a0a] py-5 px-6 border-b border-white/5 text-center"
       >
         <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[11px] uppercase tracking-[0.22em] text-gray-500">
           <li>
@@ -194,7 +194,7 @@ const Home: React.FC = () => {
 
       <FAQ />
 
-      <section className="py-32 relative flex items-center justify-center text-center">
+      <section className="vf-home-final-cta py-32 relative flex items-center justify-center text-center">
         <div className="absolute inset-0 z-0">
           <img
             src="/og-image.jpg"
