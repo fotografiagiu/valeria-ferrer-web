@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight, ChevronRight, Clock3, Tag, Wallet, Sparkles } from 'lucide-react';
 import { officialWhatsAppUrlWithText } from '../lib/officialContact';
@@ -27,6 +27,15 @@ const PRIORITY_SLUGS = ['laura2', 'susi', 'bea', 'karol', 'camila', 'daniela'];
 
 /** Presentational homepage only. The catalog, model routes and live admin overrides remain authoritative. */
 const NovemberNoirHome: React.FC<NovemberNoirHomeProps> = ({ models }) => {
+  // Clear the static mobile LCP shell once React has mounted the matching hero.
+  useEffect(() => {
+    const shell = document.getElementById('hero-lcp-shell');
+    if (!shell) return;
+    shell.classList.add('is-hidden');
+    const removeTimer = window.setTimeout(() => shell.remove(), 470);
+    return () => window.clearTimeout(removeTimer);
+  }, []);
+
   const featuredModels = useMemo(() => {
     const active = models.filter((model) => model.active !== false);
     const bySlug = new Map(active.map((model) => [model.slug, model]));
