@@ -1,14 +1,10 @@
-import React, { Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { Suspense, useMemo } from 'react';
 import { Link } from 'react-router-dom';
+import { ArrowUpRight, ChevronRight, Sparkles } from 'lucide-react';
 import LazyImage from './LazyImage';
-import NewCornerRibbon from './NewCornerRibbon';
-import HalloweenCardOverlay, { HalloweenInfoWebs } from './HalloweenCardOverlay';
 import { getModelCoverThumbnailPath, getModelCoverImage } from '../lib/modelGridImage';
 
 const ExploreProfilesNav = React.lazy(() => import('./ExploreProfilesNav'));
-
-/** Home strip promo slot — visual order only; does not alter catalog/SEO. */
-const HOME_NOVEDADES_PROMO_SLUGS = ['alana', 'susi'] as const;
 
 type NovedadesModel = {
   slug: string;
@@ -20,6 +16,8 @@ type NovedadesModel = {
   coverImageUrl?: string;
   image?: string;
   isNew?: boolean;
+  galleryUpdated?: boolean;
+  active?: boolean;
   vip?: boolean;
 };
 
@@ -33,207 +31,90 @@ function coverOf(model: NovedadesModel): string {
   return getModelCoverThumbnailPath(getModelCoverImage(model.coverImageUrl || model.image || ''));
 }
 
-function metaLine(model: NovedadesModel): string {
-  const bits: string[] = [];
-  if (model.age) bits.push(`${model.age} años`);
-  if (model.height) bits.push(String(model.height));
-  if (model.nationality) bits.push(model.nationality);
-  return bits.join(' · ');
-}
-
-function descLine(model: NovedadesModel): string {
-  if (model.vip) return 'Acompañante VIP · Experiencia exclusiva';
-  const nat = (model.nationality || '').toLowerCase();
-  if (nat.includes('españ')) return 'Modelo española · Experiencia única';
-  if (nat.includes('colomb')) return 'Acompañante de lujo · Alta gama';
-  if (nat.includes('venez')) return 'Modelo venezolana · Experiencia única';
-  return 'Acompañante de lujo · Experiencia única';
+function originalOf(model: NovedadesModel): string {
+  return getModelCoverImage(model.coverImageUrl || model.image || '');
 }
 
 const HomeNovedadesStrip: React.FC<HomeNovedadesStripProps> = ({
-  models,
-  exploreLinks,
-  loadExploreNav,
+  models, exploreLinks, loadExploreNav,
 }) => {
+  // No historic hardcoded slugs. Respect the same active, staff-hidden and
+  // administration-ordered catalog that drives the full homepage.
   const novedades = useMemo(() => {
-    const bySlug = new Map(models.map((m) => [m.slug, m]));
-    const pinned = HOME_NOVEDADES_PROMO_SLUGS.map((slug) => bySlug.get(slug)).filter(
-      (m): m is NovedadesModel => Boolean(m),
-    );
-    return pinned;
+    const available = models.filter((m) => m.active !== false);
+    const flagged = available.filter((m) => m.isNew === true || m.galleryUpdated === true);
+    return (flagged.length ? flagged : available).slice(0, 2);
   }, [models]);
-  const count = novedades.length;
-  const trackRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  const syncActiveFromScroll = useCallback(() => {
-    const el = trackRef.current;
-    if (!el || !el.children.length) return;
-    const first = el.children[0] as HTMLElement;
-    const gap = parseFloat(getComputedStyle(el).columnGap || getComputedStyle(el).gap) || 12;
-    const cardWidth = first.offsetWidth + gap;
-    if (cardWidth <= 0) return;
-    const idx = Math.round(el.scrollLeft / cardWidth);
-    setActiveIndex(Math.max(0, Math.min(count - 1, idx)));
-  }, [count]);
-
-  useEffect(() => {
-    const el = trackRef.current;
-    if (!el) return;
-    syncActiveFromScroll();
-    el.addEventListener('scroll', syncActiveFromScroll, { passive: true });
-    return () => el.removeEventListener('scroll', syncActiveFromScroll);
-  }, [syncActiveFromScroll, count]);
-
-  const scrollToIndex = (index: number) => {
-    const el = trackRef.current;
-    if (!el || !el.children[index]) return;
-    const card = el.children[index] as HTMLElement;
-    el.scrollTo({ left: card.offsetLeft - 20, behavior: 'smooth' });
-  };
-
-  if (!count) {
-    return (
-      <section className="bg-[#111111] border-y border-white/5 py-8 md:py-10">
-        <div className="max-w-[1600px] mx-auto px-6">
-          <div className="max-w-3xl mx-auto text-center mb-8">
-            <p className="text-gray-400 font-light text-sm md:text-base tracking-wide mb-4">
-              Nuevas incorporaciones y mejoras
-            </p>
-            <Link
-              to="/novedades"
-              className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full border border-[#c2b2a3]/35 bg-[#c2b2a3]/10 text-[#c2b2a3] text-[10px] md:text-xs uppercase tracking-[0.32em] font-medium hover:bg-[#c2b2a3]/18 hover:border-[#c2b2a3]/50 hover:text-white transition-all duration-300"
-            >
-              Ver novedades
-            </Link>
-          </div>
-          <ExploreNavSlot exploreLinks={exploreLinks} loadExploreNav={loadExploreNav} />
-        </div>
-      </section>
-    );
-  }
-
-  const solo = count === 1;
-  const countCopy = solo
-    ? '1 nueva incorporación · disponible ahora en Valencia'
-    : `${count} nuevas incorporaciones · disponibles ahora en Valencia`;
 
   return (
-    <section className={`home-novedades-vf${solo ? ' is-solo' : ''}`} aria-labelledby="vf-novedades-title">
-      {/*
-        Editorial plates REQUIRED (clean photo only — never full UI mockup):
-        - /public/images/novedades-hero-editorial.webp
-        - /public/images/novedades-hero-editorial-mobile.webp
-        Until both exist, hero stays flat/black. Do not invent satin/figure with CSS.
-      */}
-      <div className="vf-news-bleed" aria-hidden="true">
-        <div className="vf-news-hero__visual" />
+    <section className="vf-hanging-news" aria-labelledby="vf-hanging-news-title">
+      <div className="vf-hanging-news__atmosphere" aria-hidden="true" />
+      <div className="vf-hanging-news__rig" aria-hidden="true">
+        <span className="vf-hanging-news__rig-bar" />
+        <span className="vf-hanging-news__rope vf-hanging-news__rope--left" />
+        <span className="vf-hanging-news__rope vf-hanging-news__rope--right" />
       </div>
-
-      <div className="vf-news-inner">
-        <header className="vf-news-hero">
-          <div className="vf-news-copy">
-            <p className="vf-news-badge">Novedades</p>
-            <h2 id="vf-novedades-title" className="vf-news-title">
-              ¿Te la vas
-              <br className="vf-news-title-break" />
-              {' '}
-              a <span className="gold">perder?</span>
-            </h2>
-            <p className="vf-news-subtitle">{solo ? 'Conócela ahora' : 'Conócelas ahora'}</p>
-            <p className="vf-news-description">{countCopy}</p>
-          </div>
-        </header>
-
-        <div className="vf-news-grid-heading">
-          {solo ? 'Nueva incorporación' : 'Nuevas incorporaciones'}
+      <div className="vf-hanging-news__sign">
+        <p>VALERIA FERRER</p>
+        <h2 id="vf-hanging-news-title">Novedades</h2>
+        <span>ÚLTIMAS INCORPORACIONES</span>
+      </div>
+      <div className="vf-hanging-news__inner">
+        <div className="vf-hanging-news__lead">
+          <span className="vf-hanging-news__intro-tag"><Sparkles size={14} aria-hidden="true" /> SELECCIÓN ACTUALIZADA</span>
+          <p>Descubre los perfiles destacados del catálogo actual</p>
         </div>
-
-        <div
-          id="novedades-grid"
-          ref={trackRef}
-          className="vf-news-grid"
-          role="list"
-        >
-          {novedades.map((model, index) => (
-            <article
-              key={model.slug}
-              className="vf-news-card is-new"
-              role="listitem"
-              data-model-name={model.name}
-            >
-              <div className="card-photo vf-news-card__media">
-                <LazyImage
-                  src={coverOf(model)}
-                  alt={`${model.name} — nueva incorporación Valeria Ferrer`}
-                  className="model h-full w-full object-cover object-center"
-                  containerClassName="absolute inset-0 h-full w-full overflow-hidden"
-                  sizes={solo ? '(max-width: 767px) 88vw, 520px' : '(max-width: 767px) 33vw, 33vw'}
-                  priority={index === 0}
-                />
-                <HalloweenCardOverlay />
-                <NewCornerRibbon />
-              </div>
-              <div className="vf-news-card__body">
-                <HalloweenInfoWebs />
-                <h3 className="vf-news-card__name serif">{model.name}</h3>
-                {model.nationality ? (
-                  <p className="vf-news-card__origin">{model.nationality}</p>
-                ) : null}
-                <p className="vf-news-card__meta">
-                  {metaLine(model)}
-                  <br />
-                  {descLine(model)}
-                </p>
-                <Link to={`/models/${model.slug}`} className="vf-news-card__cta">
-                  Ver perfil →
+        <div className="vf-hanging-news__grid">
+          {novedades.map((model, index) => {
+            const original = originalOf(model);
+            return (
+              <article className="vf-hanging-news__card" key={model.slug}>
+                <Link to={'/models/' + model.slug} className="vf-hanging-news__card-link" aria-label={'Ver perfil de ' + model.name}>
+                  <div className="vf-hanging-news__card-photo">
+                    <LazyImage
+                      src={coverOf(model)}
+                      alt={model.name + ' — perfil actual de Valeria Ferrer Valencia'}
+                      className="vf-hanging-news__card-image"
+                      containerClassName="vf-hanging-news__img-container"
+                      sizes="(max-width: 767px) 85vw, 410px"
+                      priority={false}
+                      loading="lazy"
+                    />
+                    <img
+                      className="vf-hanging-news__fallback-original"
+                      src={original}
+                      alt=""
+                      loading="lazy"
+                      aria-hidden="true"
+                      onError={(event) => { event.currentTarget.style.visibility = 'hidden'; }}
+                    />
+                    <div className="vf-hanging-news__image-shade" />
+                    {model.isNew ? <span className="vf-hanging-news__ribbon">NUEVA</span> : model.galleryUpdated ? <span className="vf-hanging-news__ribbon">ACTUALIZADA</span> : null}
+                    <span className="vf-hanging-news__index" aria-hidden="true">0{index + 1}</span>
+                  </div>
+                  <div className="vf-hanging-news__card-info">
+                    <h3>{model.name}</h3>
+                    {model.nationality && <p>{model.nationality}</p>}
+                    <span className="vf-hanging-news__link-label">Descubrir su perfil <ArrowUpRight size={15} aria-hidden="true" /></span>
+                  </div>
                 </Link>
-              </div>
-            </article>
-          ))}
+              </article>
+            );
+          })}
         </div>
-
-        {count > 1 ? (
-          <div className="vf-news-dots" aria-label="Navegación de novedades" role="tablist">
-            {novedades.map((model, index) => (
-              <button
-                key={model.slug}
-                type="button"
-                role="tab"
-                aria-selected={activeIndex === index}
-                aria-label={`Ver ${model.name}`}
-                className={`vf-news-dot${activeIndex === index ? ' is-active' : ''}`}
-                onClick={() => scrollToIndex(index)}
-              />
-            ))}
-          </div>
-        ) : null}
-
-        <div className="vf-news-main-cta-wrap">
-          <Link to="/novedades" className="vf-news-main-cta">
-            Ver todas las novedades →
-          </Link>
-        </div>
-
-        <div className="vf-explore-slot">
-          <ExploreNavSlot exploreLinks={exploreLinks} loadExploreNav={loadExploreNav} />
+        <Link to="/novedades" className="vf-hanging-news__all">
+          Ver todas las novedades <ChevronRight size={19} aria-hidden="true" />
+        </Link>
+        <div className="vf-hanging-news__explore">
+          {loadExploreNav && (
+            <Suspense fallback={null}>
+              <ExploreProfilesNav links={exploreLinks} title="Explorar" variant="embedded" />
+            </Suspense>
+          )}
         </div>
       </div>
     </section>
   );
 };
-
-const ExploreNavSlot: React.FC<{
-  exploreLinks: HomeNovedadesStripProps['exploreLinks'];
-  loadExploreNav: boolean;
-}> = ({ exploreLinks, loadExploreNav }) => (
-  <div className="min-h-[5.5rem] md:min-h-[4.5rem]">
-    {loadExploreNav ? (
-      <Suspense fallback={null}>
-        <ExploreProfilesNav links={exploreLinks} title="Explorar" variant="embedded" />
-      </Suspense>
-    ) : null}
-  </div>
-);
 
 export default HomeNovedadesStrip;
