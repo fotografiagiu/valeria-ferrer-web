@@ -2,7 +2,8 @@
 import React, { Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import NovemberNoirHome from '../components/NovemberNoirHome';
-import ModelsGrid from '../components/ModelsGrid';
+import PremiumProfilesGallery from '../components/PremiumProfilesGallery';
+import HomeEditorial from '../components/HomeEditorial';
 import FAQ from '../components/FAQ';
 import PageSEOHead from '../components/PageSEOHead';
 import HomeNovedadesStrip from '../components/HomeNovedadesStrip';
@@ -89,13 +90,16 @@ const Home: React.FC = () => {
       />
       <NovemberNoirHome models={homeModels} />
 
-      <HomeWhatsAppNews />
-
       <HomeNovedadesStrip
         models={homeModels}
         exploreLinks={exploreLinks}
         loadExploreNav={loadExploreNav}
       />
+
+      <PremiumProfilesGallery models={homeModels} />
+      <HomeEditorial />
+
+      <HomeWhatsAppNews />
 
       {/* Elite Experience Section — sin Framer en cards (mismo aspecto final) */}
       <section className="vf-home-value-section py-12 md:py-24 bg-[#0a0a0a] border-b border-white/5">
@@ -178,14 +182,6 @@ const Home: React.FC = () => {
           </li>
         </ul>
       </nav>
-
-      <ModelsGrid
-        models={homeModels}
-        heading="Escorts en Valencia"
-        subtitle="Selección Valeria Ferrer · Fotos reales · Reserva discreta"
-        deferFirstImages
-        useOriginalCovers
-      />
 
       <div ref={reviewsSentinelRef} className="min-h-[32rem] md:min-h-[28rem]">
         {loadReviews ? (
