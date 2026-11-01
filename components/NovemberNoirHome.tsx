@@ -1,9 +1,10 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowUpRight, ChevronRight, Clock3, Tag, Wallet, Sparkles, ShieldCheck } from 'lucide-react';
+import { ArrowUpRight, ChevronRight, Clock3, Tag, Wallet, ShieldCheck } from 'lucide-react';
 import { officialWhatsAppUrlWithText } from '../lib/officialContact';
 import '../styles/november-noir.css';
 import '../styles/november-noir-v3.css';
+import '../styles/valeria-luxury-v5.css';
 
 type NoirModel = {
   slug: string;
@@ -25,7 +26,7 @@ const CASH_URL = officialWhatsAppUrlWithText('Hola, quiero reservar con la promo
 const BLACK_URL = officialWhatsAppUrlWithText('Hola, quiero consultar las tarifas BLACK y reservar con una chica que tenga la etiqueta BLACK.');
 
 /** Presentational homepage only. The catalog, model routes and live admin overrides remain authoritative. */
-const NovemberNoirHome: React.FC<NovemberNoirHomeProps> = ({ models }) => {
+const NovemberNoirHome: React.FC<NovemberNoirHomeProps> = () => {
   // Clear the static mobile LCP shell once React has mounted the matching hero.
   useEffect(() => {
     const shell = document.getElementById('hero-lcp-shell');
@@ -35,15 +36,10 @@ const NovemberNoirHome: React.FC<NovemberNoirHomeProps> = ({ models }) => {
     return () => window.clearTimeout(removeTimer);
   }, []);
 
-  // The public catalog (including panel overrides and hidden profiles) is authoritative.
-  // Never pin an old profile in the featured cards.
-  const activeModels = useMemo(() => models.filter((model) => model.active !== false), [models]);
-  const featuredModels = activeModels.slice(0, 4);
-  const heroModel = activeModels.find((model) => model.slug === 'laura2')
-    ?? activeModels.find((model) => model.black && model.coverImageUrl)
-    ?? activeModels[0];
-  const heroImage = heroModel?.coverImageUrl || heroModel?.profileImageUrl || heroModel?.image || '/images/home-hero-banner-mobile-v4-premium.webp';
-  const heroMobileImage = heroImage;
+  // Placeholder editorial photography until the final approved Higgsfield hero arrives.
+  // Never use a current model's cover as the campaign hero.
+  const heroImage = '/images/novedades-hero-editorial.webp';
+  const heroMobileImage = '/images/novedades-hero-editorial-mobile.webp';
 
   return (
     <div className="vf-noir" id="valeria-ferrer-home">
@@ -76,6 +72,7 @@ const NovemberNoirHome: React.FC<NovemberNoirHomeProps> = ({ models }) => {
             <p className="vf-premium-hero__brand" aria-label="Valeria Ferrer">
               Valeria Ferrer
             </p>
+            <p className="vf-premium-hero__premium-label">AGENCIA PREMIUM</p>
             <span className="vf-premium-hero__brand-rule" aria-hidden="true" />
             <h1 id="vf-premium-hero-title" className="vf-premium-hero__headline">
               Escorts en Valencia
@@ -153,61 +150,7 @@ const NovemberNoirHome: React.FC<NovemberNoirHomeProps> = ({ models }) => {
         </details>
       </section>
 
-      <section className="vf-noir-featured" aria-labelledby="vf-noir-featured-title">
-        <div className="vf-noir-featured__heading">
-          <div className="vf-noir-featured__heading-line" aria-hidden="true" />
-          <div>
-            <span className="vf-noir-featured__kicker"><Sparkles size={13} aria-hidden="true" /> Selección Valeria Ferrer</span>
-            <h2 id="vf-noir-featured-title">Nuestras chicas</h2>
-            <p>Descubre sus perfiles y elige tu experiencia</p>
-          </div>
-          <div className="vf-noir-featured__heading-line" aria-hidden="true" />
-        </div>
-        <div className="vf-noir-featured__grid">
-          {featuredModels.map((model, index) => {
-            const image = model.coverImageUrl || model.profileImageUrl || model.image || '';
-            return (
-              <article key={model.slug} className="vf-noir-profile">
-                <Link to={'/models/' + model.slug} className="vf-noir-profile__link" aria-label={'Ver perfil de ' + model.name}>
-                  <div className="vf-noir-profile__photo">
-                    <img
-                      src={image}
-                      alt={model.name + ' — perfil de Valeria Ferrer en Valencia'}
-                      loading="lazy"
-                      decoding="async"
-                      width={400}
-                      height={520}
-                    />
-                    {model.black === true && <span className="vf-noir-profile__ribbon">BLACK</span>}
-                    <div className="vf-noir-profile__caption">
-                      <h3>{model.name}</h3>
-                      <span>Ver perfil <ChevronRight size={14} aria-hidden="true" /></span>
-                    </div>
-                  </div>
-                </Link>
-              </article>
-            );
-          })}
-        </div>
-        <div className="vf-noir-featured__footer">
-          <Link to="/models" className="vf-noir-btn vf-noir-btn--outline">
-            Ver todas las chicas <ChevronRight size={17} aria-hidden="true" />
-          </Link>
-        </div>
-      </section>
 
-      <section className="vf-noir-editorial" aria-labelledby="vf-noir-editorial-title">
-        <div className="vf-noir-editorial__index"><span>V / F</span><small>VALENCIA · SELECCIÓN EXCLUSIVA</small></div>
-        <div className="vf-noir-editorial__copy">
-          <p className="vf-noir-editorial__kicker">Conoce Valeria Ferrer</p>
-          <h2 id="vf-noir-editorial-title">Escorts de lujo en <em>Valencia</em></h2>
-          <p>En Valeria Ferrer encontrarás una selección de escorts y acompañantes en Valencia con fotografías reales, perfiles individuales y atención privada. Consulta nuestras chicas disponibles, descubre sus galerías y elige con información clara antes de reservar.</p>
-          <div className="vf-noir-editorial__links">
-            <Link to="/escorts-de-lujo-valencia">Escorts de lujo en Valencia <ArrowUpRight size={16} aria-hidden="true" /></Link>
-            <Link to="/models">Explorar todas las chicas <ArrowUpRight size={16} aria-hidden="true" /></Link>
-          </div>
-        </div>
-      </section>
     </div>
   );
 };
