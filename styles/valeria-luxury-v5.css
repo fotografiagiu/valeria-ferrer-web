@@ -372,3 +372,18 @@
   .vf-luxury-card,.vf-luxury-card__media>img,
   .vf-luxury-card__media,.vf-luxury-card__cta{transition:none!important;}
 }
+
+
+/* Category links live after the SEO editorial, not inside the Novedades stage. */
+.vf-home-explore-links{
+  width:min(1270px,calc(100% - 38px));margin:8px auto 40px;padding:21px 23px 9px;
+  border-top:1px solid rgba(234,184,121,.18);
+  color:#d8bba4;text-align:center;
+}
+.vf-luxury-catalog__footer{text-align:center;margin-top:45px;}
+.vf-luxury-catalog__home{
+  color:#ebc18a;font:600 11px Montserrat,sans-serif;text-transform:uppercase;
+  letter-spacing:.12em;text-decoration:none;border-bottom:1px solid rgba(236,177,114,.52);
+  padding-bottom:8px;
+}
+.vf-luxury-catalog__home:hover{color:#ffe8c5;}
