@@ -1,8 +1,7 @@
 
 import React, { Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Hero from '../components/Hero';
-import HalloweenCampaign, { halloweenIsLive } from '../components/HalloweenCampaign';
+import NovemberNoirHome from '../components/NovemberNoirHome';
 import ModelsGrid from '../components/ModelsGrid';
 import FAQ from '../components/FAQ';
 import PageSEOHead from '../components/PageSEOHead';
@@ -12,16 +11,9 @@ import modelsData from '../data/models.json';
 import { filterActiveModels } from '../lib/modelsCatalog';
 import { useCatalogWithOverrides } from '../hooks/useCatalogWithOverrides';
 import { Diamond, ShieldCheck, Star, Send } from 'lucide-react';
-import { officialWhatsAppUrlWithText } from '../lib/officialContact';
 import { getHomeExploreLinks } from '../lib/homeExploreLinks';
 
 const Reviews = React.lazy(() => import('../components/Reviews'));
-
-const CASH_PROMO_IMAGE = '/promos/promo-halloween-efectivo-oct2026.webp';
-const CASH_PROMO_WHATSAPP = officialWhatsAppUrlWithText(
-  'Hola, quiero reservar con la promoción de 5 € menos pagando en efectivo.'
-);
-
 
 function scheduleBelowFoldWork(onReady: () => void): () => void {
   let cancelled = false;
@@ -87,8 +79,6 @@ const Home: React.FC = () => {
     canonicalUrl: 'https://www.valeriaferrer.com',
   };
 
-  const isHalloweenPreview = halloweenIsLive();
-
   return (
     <div className="overflow-x-hidden">
       <PageSEOHead
@@ -96,39 +86,7 @@ const Home: React.FC = () => {
         description={homeSEOData.description}
         canonicalUrl={homeSEOData.canonicalUrl}
       />
-      <Hero />
-      {/* Cartel original sin textos repetidos: toda la información ya está en el diseño. */}
-      <section id="promocion-efectivo" aria-label="Promoción exclusiva para pagos en efectivo" className="bg-[#0b070b] px-3 py-6 sm:px-6 md:py-10">
-        <a
-          href={CASH_PROMO_WHATSAPP}
-          target="_blank"
-          rel="noopener noreferrer"
-          data-contact-placement="cash_promo_home"
-          aria-label="Consultar por WhatsApp la promoción de 5 euros menos en efectivo"
-          className="mx-auto block w-full max-w-[1250px] overflow-hidden rounded-2xl border border-[#d7b66a]/45 shadow-[0_20px_70px_rgba(0,0,0,.5)] focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-[#e9cc93]"
-        >
-          <img
-            src={CASH_PROMO_IMAGE}
-            alt="Cartel original: promoción exclusiva para pagos en efectivo, 5 euros menos. 30 minutos 75 euros, 1 hora 145 euros y 1 hora y media 225 euros."
-            width={1024}
-            height={576}
-            loading="lazy"
-            decoding="async"
-            className="block h-auto w-full object-contain"
-          />
-        </a>
-      </section>
-      {/* Cartel de efectivo arriba + Happy Hour aquí. BLACK fuera de los banners de momento. */}
-      {isHalloweenPreview && <HalloweenCampaign homeOnly />}
-      {isHalloweenPreview && (
-        <ModelsGrid
-          models={homeModels}
-          heading="Nuestras chicas disponibles"
-          subtitle="Modelos exclusivas en Valencia · Citas discretas · Experiencias únicas"
-        />
-      )}
-
-      {!isHalloweenPreview && <HalloweenCampaign homeOnly />}
+      <NovemberNoirHome models={homeModels} />
 
       <HomeWhatsAppNews />
 
@@ -220,13 +178,11 @@ const Home: React.FC = () => {
         </ul>
       </nav>
 
-      {!isHalloweenPreview && (
-        <ModelsGrid
-          models={homeModels}
-          heading="Escorts en Valencia"
-          subtitle="Selección Valeria Ferrer · Fotos reales · Reserva discreta"
-        />
-      )}
+      <ModelsGrid
+        models={homeModels}
+        heading="Escorts en Valencia"
+        subtitle="Selección Valeria Ferrer · Fotos reales · Reserva discreta"
+      />
 
       <div ref={reviewsSentinelRef} className="min-h-[32rem] md:min-h-[28rem]">
         {loadReviews ? (
