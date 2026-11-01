@@ -11,10 +11,22 @@ import HomeWhatsAppNews from '../components/HomeWhatsAppNews';
 import modelsData from '../data/models.json';
 import { filterActiveModels } from '../lib/modelsCatalog';
 import { useCatalogWithOverrides } from '../hooks/useCatalogWithOverrides';
-import { Diamond, ShieldCheck, Star, Send } from 'lucide-react';
+import { Diamond, ShieldCheck, Star, Send, Phone, MessageCircle } from 'lucide-react';
+import { OFFICIAL_PHONE_TEL, officialWhatsAppUrlWithText } from '../lib/officialContact';
 import { getHomeExploreLinks } from '../lib/homeExploreLinks';
 
 const Reviews = React.lazy(() => import('../components/Reviews'));
+
+const CASH_PROMO_IMAGE = '/promos/promo-halloween-efectivo-oct2026.webp';
+const CASH_PROMO_WHATSAPP = officialWhatsAppUrlWithText(
+  'Hola, quiero reservar con la promoción de 5 € menos pagando en efectivo.'
+);
+const CASH_PROMO_RATES = [
+  { duration: '30 min', usual: '80 €', cash: '75 €' },
+  { duration: '45 min', usual: '120 €', cash: '115 €' },
+  { duration: '1 hora', usual: '150 €', cash: '145 €' },
+  { duration: '1 h 30', usual: '230 €', cash: '225 €' },
+] as const;
 
 function scheduleBelowFoldWork(onReady: () => void): () => void {
   let cancelled = false;
@@ -90,6 +102,63 @@ const Home: React.FC = () => {
         canonicalUrl={homeSEOData.canonicalUrl}
       />
       <Hero />
+      {/* Oferta -5 € efectivo: recuperar cartel original sin sustituir Happy Hour ni BLACK.
+          Esta sección independiente podrá pasar al panel remoto cuando se integre el control. */}
+      <section id="promocion-efectivo" aria-labelledby="cash-promo-heading"
+        className="relative border-y border-[#e5c17d]/35 bg-gradient-to-br from-[#210d19] via-[#110a0f] to-[#0b090a] px-3 py-7 sm:px-6 md:py-11"
+      >
+        <div className="mx-auto grid max-w-[1700px] gap-5 overflow-hidden rounded-2xl border border-[#e5c17d]/45 bg-[#120c0e] shadow-[0_18px_65px_rgba(0,0,0,0.5)] lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-0">
+          <div className="flex items-center justify-center bg-[#1a0b12] lg:border-r lg:border-[#e5c17d]/25">
+            <img
+              src={CASH_PROMO_IMAGE}
+              alt="Cartel original de Valeria Ferrer. Promoción exclusiva para pagos en efectivo: 5 euros menos en todas las tarifas."
+              width={1024}
+              height={576}
+              loading="lazy"
+              decoding="async"
+              className="block h-auto w-full object-contain"
+            />
+          </div>
+          <div className="flex flex-col justify-center px-5 pb-7 pt-1 sm:px-8 lg:px-11 lg:py-10 xl:px-14">
+            <p className="mb-3 text-[11px] font-extrabold uppercase tracking-[0.22em] text-[#f1cf8d]">
+              Promoción exclusiva · Solo efectivo
+            </p>
+            <h2 id="cash-promo-heading" className="font-serif text-3xl leading-tight text-white sm:text-4xl xl:text-5xl">
+              <span className="text-[#f0c87a]">5 € MENOS</span> pagando en efectivo
+            </h2>
+            <p className="mb-5 mt-3 text-sm leading-relaxed text-[#e9d5ce] sm:text-base">
+              Todas las duraciones tienen 5 € de descuento si pagas en efectivo.
+            </p>
+            <div className="grid grid-cols-2 gap-2 sm:gap-3" aria-label="Tarifas con descuento en efectivo">
+              {CASH_PROMO_RATES.map(({ duration, usual, cash }) => (
+                <div key={duration} className="rounded-xl border border-[#ddbb80]/30 bg-[#2a1720] p-3 sm:p-4">
+                  <p className="text-xs font-semibold text-[#f3dfc6] sm:text-sm">{duration}</p>
+                  <p className="mt-1 flex flex-wrap items-baseline gap-2">
+                    <del className="text-sm text-[#d0b5ae]/70">{usual}</del>
+                    <strong className="text-xl font-black text-[#f7d489] sm:text-2xl">{cash}</strong>
+                  </p>
+                </div>
+              ))}
+            </div>
+            <p className="mb-5 mt-3 text-xs text-[#d9bda8]">
+              En el resto de tarifas también se descuentan 5 €. Solo pagos en efectivo.
+            </p>
+            <div className="grid gap-3 sm:grid-cols-2">
+              <a href={CASH_PROMO_WHATSAPP} target="_blank" rel="noopener noreferrer"
+                data-contact-placement="cash_promo_home"
+                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#25d366] px-5 py-3 text-center text-xs font-extrabold uppercase tracking-[0.08em] text-[#092311] transition hover:bg-[#45e37b] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+              >
+                <MessageCircle size={18} aria-hidden="true" /> Reservar con descuento
+              </a>
+              <a href={OFFICIAL_PHONE_TEL} data-contact-placement="cash_promo_home"
+                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-[#f0ca81] px-5 py-3 text-center text-xs font-bold uppercase tracking-[0.08em] text-[#f4d8a0] transition hover:bg-[#f0ca81] hover:text-[#120c0e]"
+              >
+                <Phone size={18} aria-hidden="true" /> Llamar
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
       {/* Halloween: la promo de efectivo ocupa el primer bloque; el catálogo sigue justo debajo. */}
       {isHalloweenPreview && <HalloweenCampaign homeOnly />}
       {isHalloweenPreview && (
