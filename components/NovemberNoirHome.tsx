@@ -69,15 +69,17 @@ const NovemberNoirHome: React.FC<NovemberNoirHomeProps> = ({ models }) => {
         </div>
         <div className="vf-noir-hero__veil" aria-hidden="true" />
         <div className="vf-noir-hero__ambient" aria-hidden="true" />
+        <div className="vf-noir-hero__photo-detail" aria-hidden="true"><span>VALERIA FERRER</span><span>PRIVATE COLLECTION / VALENCIA</span></div>
         <div className="vf-noir-hero__inner">
           <div className="vf-noir-hero__copy">
-            <h1 className="vf-noir-eyebrow">Valeria Ferrer <span aria-hidden="true">·</span> Escorts en Valencia</h1>
+            <p className="vf-noir-eyebrow"><span className="vf-noir-eyebrow__line" aria-hidden="true" /> VALERIA FERRER <span aria-hidden="true">·</span> EDICIÓN NOVIEMBRE 2026</p>
             <p className="vf-noir-title" aria-label="November Noir">
               <span>November</span>
               <em>Noir</em>
             </p>
             <span className="vf-noir-fine-line" aria-hidden="true" />
-            <p className="vf-noir-hero__subtitle">Elegancia, exclusividad y<br /> nuevas experiencias</p>
+            <h1 className="vf-noir-hero__seo-title">Escorts en <strong>Valencia</strong></h1>
+            <p className="vf-noir-hero__subtitle">Elegancia, exclusividad y nuevas experiencias.<br /> Perfiles reales, reserva discreta y atención personalizada.</p>
             <div className="vf-noir-hero__actions">
               <Link to="/models" className="vf-noir-btn vf-noir-btn--gold">
                 Ver perfiles <ChevronRight size={18} aria-hidden="true" />
@@ -180,6 +182,19 @@ const NovemberNoirHome: React.FC<NovemberNoirHomeProps> = ({ models }) => {
           <Link to="/models" className="vf-noir-btn vf-noir-btn--outline">
             Ver todas las chicas <ChevronRight size={17} aria-hidden="true" />
           </Link>
+        </div>
+      </section>
+
+      <section className="vf-noir-editorial" aria-labelledby="vf-noir-editorial-title">
+        <div className="vf-noir-editorial__index"><span>V / F</span><small>VALENCIA · SELECCIÓN EXCLUSIVA</small></div>
+        <div className="vf-noir-editorial__copy">
+          <p className="vf-noir-editorial__kicker">Conoce Valeria Ferrer</p>
+          <h2 id="vf-noir-editorial-title">Escorts de lujo en <em>Valencia</em></h2>
+          <p>En Valeria Ferrer encontrarás una selección de escorts y acompañantes en Valencia con fotografías reales, perfiles individuales y atención privada. Consulta nuestras chicas disponibles, descubre sus galerías y elige con información clara antes de reservar.</p>
+          <div className="vf-noir-editorial__links">
+            <Link to="/escorts-de-lujo-valencia">Escorts de lujo en Valencia <ArrowUpRight size={16} aria-hidden="true" /></Link>
+            <Link to="/models">Explorar todas las chicas <ArrowUpRight size={16} aria-hidden="true" /></Link>
+          </div>
         </div>
       </section>
     </div>
