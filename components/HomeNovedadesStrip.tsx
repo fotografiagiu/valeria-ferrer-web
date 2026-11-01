@@ -1,9 +1,7 @@
-import React, { Suspense, useMemo, useRef } from 'react';
+import React, { useMemo, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, Sparkles } from 'lucide-react';
 import PremiumProfileCard, { type PremiumProfile } from './PremiumProfileCard';
-
-const ExploreProfilesNav = React.lazy(() => import('./ExploreProfilesNav'));
 
 type Props = {
   models: PremiumProfile[];
@@ -11,7 +9,7 @@ type Props = {
   loadExploreNav: boolean;
 };
 
-const HomeNovedadesStrip: React.FC<Props> = ({ models, exploreLinks, loadExploreNav }) => {
+const HomeNovedadesStrip: React.FC<Props> = ({ models }) => {
   const novedades = useMemo(() => models.filter((m) => m.active !== false).slice(0, 4), [models]);
   const trackRef = useRef<HTMLDivElement>(null);
   const advance = (dir: -1 | 1) => {
@@ -53,13 +51,7 @@ const HomeNovedadesStrip: React.FC<Props> = ({ models, exploreLinks, loadExplore
           </button>
         </div>
         <Link to="/models" className="vf-hanging-news__all">Ver todas las chicas <ArrowRight size={18} aria-hidden="true" /></Link>
-        <div className="vf-hanging-news__explore">
-          {loadExploreNav && (
-            <Suspense fallback={null}>
-              <ExploreProfilesNav links={exploreLinks} title="Explorar" variant="embedded" />
-            </Suspense>
-          )}
-        </div>
+
       </div>
     </section>
   );
