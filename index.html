@@ -20,7 +20,7 @@
     <title>Valeria Ferrer | Escorts en Valencia</title>
     
     <!-- Performance: banner LCP del hero móvil (WebP + fallback) -->
-    <link rel="preload" as="image" href="/chicas-thumbnails/laura2-model-agency-valencia-vf/cover-thumbnail.jpg" type="image/jpeg" media="(max-width: 767px)" fetchpriority="high">
+    <link rel="preload" as="image" href="/chicas/laura2-model-agency-valencia-vf/portada-oct2026.jpg" type="image/jpeg" media="(max-width: 767px)" fetchpriority="high">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
@@ -242,31 +242,8 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   </head>
   <body class="scroll-smooth">
-    <div id="hero-lcp-shell" aria-hidden="true">
-      <div class="hero-lcp-frame">
-        <picture>
-          <source srcset="/chicas-thumbnails/laura2-model-agency-valencia-vf/cover-thumbnail.jpg" type="image/jpeg" />
-          <img
-            src="/chicas-thumbnails/laura2-model-agency-valencia-vf/cover-thumbnail.jpg"
-            alt=""
-            decoding="sync"
-            fetchpriority="high"
-            loading="eager"
-            width="576"
-            height="1024"
-          />
-        </picture>
-      </div>
-      <div class="hero-lcp-overlay"></div>
-    </div>
-    <script>
-      (function () {
-        var path = window.location.pathname.replace(/\/+$/, '') || '/';
-        var shell = document.getElementById('hero-lcp-shell');
-        if (!shell) return;
-        if (path !== '/') shell.remove();
-      })();
-    </script>
+    <!-- The homepage hero uses the current cover from live administration.
+         Avoid flashing an obsolete cached thumbnail before React has hydrated. -->
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
       </body>
