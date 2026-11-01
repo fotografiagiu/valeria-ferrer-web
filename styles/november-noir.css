@@ -22,6 +22,7 @@
   position: absolute; inset: 0 0 0 auto; width: 62%; height: 100%;
   overflow: hidden;
 }
+.vf-noir-hero__visual picture {display:block;width:100%;height:100%;}
 .vf-noir-hero__visual img {
   display: block; width: 100%; height: 100%; object-fit: cover;
   object-position: 50% 29%;
@@ -172,6 +173,29 @@
   letter-spacing:-.07em;white-space:nowrap;
 }
 .vf-noir-promo__cash-label {font-size:24px;line-height:.91;}
+
+.vf-noir-promos__terms {max-width:1410px;margin:0 auto;padding:15px 0 0;}
+.vf-noir-promos__terms summary {
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  cursor:pointer;list-style:none;color:#d7b284;
+  font:500 10px Montserrat,sans-serif;letter-spacing:.12em;text-transform:uppercase;
+  padding:11px 14px;
+}
+.vf-noir-promos__terms summary::-webkit-details-marker{display:none;}
+.vf-noir-promos__terms[open] summary svg{transform:rotate(90deg);}
+.vf-noir-promos__terms summary:hover{color:#fff0d7;}
+.vf-noir-promos__conditions{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;
+  padding:14px;border:1px solid rgba(197,140,94,.38);border-radius:13px;
+  background:rgba(17,8,12,.91);
+}
+.vf-noir-promos__conditions>div {padding:5px 11px;border-left:1px solid rgba(217,163,97,.38);}
+.vf-noir-promos__conditions strong{
+  color:#eac18a;font:600 13px "Cormorant Garamond",Georgia,serif;letter-spacing:.14em;
+}
+.vf-noir-promos__conditions p {
+  margin-top:6px;color:#e0cab8;font:400 11px/1.65 Montserrat,sans-serif;
+}
 .vf-noir-featured {max-width:1400px;margin:0 auto;padding:34px 22px 66px;}
 .vf-noir-featured__heading {display:flex;align-items:center;justify-content:center;gap:32px;text-align:center;margin:5px auto 31px;}
 .vf-noir-featured__heading-line {flex:1;max-width:170px;height:1px;background:linear-gradient(90deg,transparent,#d3a36c,transparent);}
@@ -262,6 +286,9 @@
  .vf-noir-featured__grid{gap:11px;}
 }
 @media(max-width:767px){
+ .vf-noir-promos__conditions{grid-template-columns:1fr;gap:8px;padding:12px;}
+ .vf-noir-promos__conditions>div{padding:8px 11px;}
+
  .vf-noir-hero{min-height:710px;align-items:flex-end;}
  .vf-noir-hero__visual{inset:0 0 auto;width:100%;height:79%;}
  .vf-noir-hero__visual img{object-position:50% 23%;filter:saturate(.74) sepia(.09) contrast(1.07) brightness(.77);}
