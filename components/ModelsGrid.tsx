@@ -5,6 +5,8 @@ import { Crown, Grid3X3, LayoutGrid } from 'lucide-react';
 import LazyImage from './LazyImage';
 import HalloweenCardOverlay, { HalloweenInfoWebs } from './HalloweenCardOverlay';
 import BlackCornerRibbon from './BlackCornerRibbon';
+import PremiumProfileCard from './PremiumProfileCard';
+import '../styles/valeria-luxury-v5.css';
 import NewCornerRibbon from './NewCornerRibbon';
 import { halloweenIsLive } from './HalloweenCampaign';
 import {
@@ -399,14 +401,7 @@ const ModelsGrid: React.FC<ModelsGridProps> = ({
           }`}
         >
           {filteredSeasonalModels.map((model, index) => (
-            <ModelCard
-              key={model.slug || model.id}
-              model={model}
-              index={index}
-              isDoubleView={viewMode === 'double'}
-              useCoverThumbnail={useCoverThumbnail}
-              prioritizeCover={!deferFirstImages}
-            />
+            <PremiumProfileCard model={model} key={model.slug || model.id} index={index} />
           ))}
         </div>
         {seasonal && filteredSeasonalModels.length === 0 && (
