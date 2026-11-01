@@ -50,12 +50,10 @@ const NavbarNoir: React.FC<NoirNavbarProps> = ({ isScrolled, openMembers }) => {
             <button type="button" aria-expanded={moreOpen} aria-controls="vf-noir-nav-extras" onClick={() => setMoreOpen((value) => !value)}>
               Más <ChevronDown size={13} aria-hidden="true" />
             </button>
-            {moreOpen && (
-              <div id="vf-noir-nav-extras" className="vf-noir-nav__dropdown">
+            <div id="vf-noir-nav-extras" className="vf-noir-nav__dropdown" data-open={moreOpen}>
                 {additional.map((item) => <Link key={item.href} to={item.href} onClick={close}>{item.label}</Link>)}
                 <button type="button" onClick={() => { close(); openMembers(); }}>Lounge de miembros</button>
               </div>
-            )}
           </div>
         </nav>
 
