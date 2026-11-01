@@ -134,7 +134,7 @@ const App: React.FC = () => {
   return (
     <AnalyticsTracker>
       <Router>
-        <div className={`${halloweenIsLive() ? 'vf-halloween-preview ' : ''}min-h-screen bg-[#0a0a0a] text-white overflow-x-hidden`}>
+        <div className={`${halloweenIsLive() ? 'vf-halloween-preview ' : ''}vf-noir-site min-h-screen bg-[#0a0a0a] text-white overflow-x-hidden`}>
           <Navbar 
             isScrolled={isScrolled} 
             openMembers={() => setIsMembersModalOpen(true)} 
