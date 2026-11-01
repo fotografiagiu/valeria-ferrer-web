@@ -251,6 +251,7 @@ interface ModelsGridProps {
   heading?: string;
   subtitle?: string;
   deferFirstImages?: boolean;
+  useOriginalCovers?: boolean;
 }
 
 const ModelsGrid: React.FC<ModelsGridProps> = ({
@@ -258,6 +259,7 @@ const ModelsGrid: React.FC<ModelsGridProps> = ({
   heading = 'Chicas disponibles',
   subtitle = 'Selección Valeria Ferrer · Fotos reales · Reserva discreta',
   deferFirstImages = false,
+  useOriginalCovers = false,
 }) => {
   const [viewMode, setViewMode] = useState<'normal' | 'double'>('double');
   const [seasonalFilter, setSeasonalFilter] = useState<'todas' | 'nuevas' | 'espanolas' | 'latinas' | 'vip'>('todas');
@@ -284,7 +286,8 @@ const ModelsGrid: React.FC<ModelsGridProps> = ({
     return () => mq.removeEventListener('change', update);
   }, []);
 
-  const useCoverThumbnail = isMobile && viewMode === 'double';
+  // The homepage requires the latest original cover from the panel; thumbnails can lag updates.
+  const useCoverThumbnail = !useOriginalCovers && isMobile && viewMode === 'double';
 
   const handleViewChange = (mode: 'normal' | 'double') => {
     setViewMode(mode);
