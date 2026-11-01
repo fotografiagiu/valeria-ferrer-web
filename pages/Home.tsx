@@ -15,6 +15,7 @@ import { Diamond, ShieldCheck, Star, Send } from 'lucide-react';
 import { getHomeExploreLinks } from '../lib/homeExploreLinks';
 
 const Reviews = React.lazy(() => import('../components/Reviews'));
+const ExploreProfilesNav = React.lazy(() => import('../components/ExploreProfilesNav'));
 
 function scheduleBelowFoldWork(onReady: () => void): () => void {
   let cancelled = false;
@@ -98,6 +99,13 @@ const Home: React.FC = () => {
 
       <PremiumProfilesGallery models={homeModels} />
       <HomeEditorial />
+      <section className="vf-home-explore-links" aria-label="Explorar categorías">
+        {loadExploreNav && (
+          <Suspense fallback={null}>
+            <ExploreProfilesNav links={exploreLinks} title="Explorar perfiles" variant="embedded" />
+          </Suspense>
+        )}
+      </section>
 
       <HomeWhatsAppNews />
 
