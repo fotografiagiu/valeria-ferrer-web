@@ -1,9 +1,10 @@
 import React, { useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowUpRight, ChevronRight, Clock3, Tag, Wallet, Sparkles } from 'lucide-react';
+import { ArrowUpRight, ChevronRight, Clock3, Tag, Wallet, Sparkles, ShieldCheck } from 'lucide-react';
 import { officialWhatsAppUrlWithText } from '../lib/officialContact';
 import { getModelCoverThumbnailPath } from '../lib/modelGridImage';
 import '../styles/november-noir.css';
+import '../styles/november-noir-v3.css';
 
 type NoirModel = {
   slug: string;
@@ -23,7 +24,6 @@ interface NovemberNoirHomeProps {
 const HAPPY_URL = officialWhatsAppUrlWithText('Hola, quiero consultar la promoción Happy Hour y reservar.');
 const CASH_URL = officialWhatsAppUrlWithText('Hola, quiero reservar con la promoción de 5 € menos pagando en efectivo.');
 const BLACK_URL = officialWhatsAppUrlWithText('Hola, quiero consultar las tarifas BLACK y reservar con una chica que tenga la etiqueta BLACK.');
-const PRIORITY_SLUGS = ['laura2', 'susi', 'bea', 'karol', 'camila', 'daniela'];
 
 /** Presentational homepage only. The catalog, model routes and live admin overrides remain authoritative. */
 const NovemberNoirHome: React.FC<NovemberNoirHomeProps> = ({ models }) => {
@@ -36,60 +36,71 @@ const NovemberNoirHome: React.FC<NovemberNoirHomeProps> = ({ models }) => {
     return () => window.clearTimeout(removeTimer);
   }, []);
 
-  const featuredModels = useMemo(() => {
-    const active = models.filter((model) => model.active !== false);
-    const bySlug = new Map(active.map((model) => [model.slug, model]));
-    const selected = PRIORITY_SLUGS.map((slug) => bySlug.get(slug)).filter(
-      (model): model is NoirModel => Boolean(model)
-    );
-    const used = new Set(selected.map((model) => model.slug));
-    return [...selected, ...active.filter((model) => !used.has(model.slug))].slice(0, 4);
-  }, [models]);
-
-  const heroModel = featuredModels[0];
-  const heroImage = heroModel?.coverImageUrl || heroModel?.profileImageUrl || '/images/home-hero-banner-mobile-v4-premium.webp';
+  // The public catalog (including panel overrides and hidden profiles) is authoritative.
+  // Never pin an old profile in the featured cards.
+  const activeModels = useMemo(() => models.filter((model) => model.active !== false), [models]);
+  const featuredModels = activeModels.slice(0, 4);
+  const heroModel = activeModels.find((model) => model.slug === 'laura2')
+    ?? activeModels.find((model) => model.black && model.coverImageUrl)
+    ?? activeModels[0];
+  const heroImage = heroModel?.coverImageUrl || heroModel?.profileImageUrl || heroModel?.image || '/images/home-hero-banner-mobile-v4-premium.webp';
   const heroMobileImage = getModelCoverThumbnailPath(heroImage);
 
   return (
-    <div className="vf-noir" id="november-noir">
-      <section className="vf-noir-hero" aria-label="Valeria Ferrer, November Noir">
-        <div className="vf-noir-hero__visual" aria-hidden="true">
+    <div className="vf-noir" id="valeria-ferrer-home">
+      <section className="vf-noir-hero vf-premium-hero" aria-labelledby="vf-premium-hero-title">
+        <div className="vf-noir-hero__visual vf-premium-hero__photo" aria-hidden="true">
           <picture>
             <source media="(max-width: 767px)" srcSet={heroMobileImage} />
             <img
               src={heroImage}
               alt=""
-              width={760}
-              height={1100}
+              width={900}
+              height={1300}
               loading="eager"
               decoding="async"
               fetchPriority="high"
             />
           </picture>
         </div>
-        <div className="vf-noir-hero__veil" aria-hidden="true" />
-        <div className="vf-noir-hero__ambient" aria-hidden="true" />
-        <div className="vf-noir-hero__photo-detail" aria-hidden="true"><span>VALERIA FERRER</span><span>PRIVATE COLLECTION / VALENCIA</span></div>
-        <div className="vf-noir-hero__inner">
-          <div className="vf-noir-hero__copy">
-            <p className="vf-noir-eyebrow"><span className="vf-noir-eyebrow__line" aria-hidden="true" /> VALERIA FERRER <span aria-hidden="true">·</span> EDICIÓN NOVIEMBRE 2026</p>
-            <p className="vf-noir-title" aria-label="November Noir">
-              <span>November</span>
-              <em>Noir</em>
+        <div className="vf-premium-hero__atmosphere" aria-hidden="true" />
+        <div className="vf-premium-hero__glow" aria-hidden="true" />
+        <div className="vf-premium-hero__frame" aria-hidden="true" />
+        <div className="vf-noir-hero__veil vf-premium-hero__veil" aria-hidden="true" />
+        <div className="vf-premium-hero__side-note" aria-hidden="true">VALERIA FERRER · VALENCIA · EST. 2026</div>
+        <div className="vf-noir-hero__inner vf-premium-hero__inner">
+          <div className="vf-noir-hero__copy vf-premium-hero__copy">
+            <p className="vf-premium-hero__eyebrow">
+              <span className="vf-premium-hero__sparkle" aria-hidden="true">✦</span>
+              Valeria Ferrer · Selección exclusiva
             </p>
-            <span className="vf-noir-fine-line" aria-hidden="true" />
-            <h1 className="vf-noir-hero__seo-title">Escorts en <strong>Valencia</strong></h1>
-            <p className="vf-noir-hero__subtitle">Elegancia, exclusividad y nuevas experiencias.<br /> Perfiles reales, reserva discreta y atención personalizada.</p>
-            <div className="vf-noir-hero__actions">
+            <p className="vf-premium-hero__intro">Una experiencia que se recuerda</p>
+            <h1 id="vf-premium-hero-title" className="vf-premium-hero__headline">
+              <span>Escorts en</span>
+              <em>Valencia</em>
+            </h1>
+            <p className="vf-premium-hero__description">
+              Descubre nuestras chicas disponibles en Valencia.
+              Fotografías reales, perfiles seleccionados y atención privada.
+            </p>
+            <div className="vf-premium-hero__actions">
               <Link to="/models" className="vf-noir-btn vf-noir-btn--gold">
-                Ver perfiles <ChevronRight size={18} aria-hidden="true" />
+                Descubrir perfiles <ArrowUpRight size={18} aria-hidden="true" />
               </Link>
               <Link to="/booking" className="vf-noir-btn vf-noir-btn--outline">
                 Reservar ahora <ChevronRight size={18} aria-hidden="true" />
               </Link>
             </div>
-            <p className="vf-noir-hero__micro">Fotografías reales · Atención privada · Valencia</p>
+            <p className="vf-premium-hero__confidence">
+              <ShieldCheck size={15} strokeWidth={1.3} aria-hidden="true" />
+              Fotos reales <span>·</span> Discreción <span>·</span> Atención personalizada
+            </p>
           </div>
+        </div>
+        <div className="vf-premium-hero__bottom" aria-hidden="true">
+          <span>EXCLUSIVIDAD EN CADA DETALLE</span>
+          <span className="vf-premium-hero__bottom-rule" />
+          <span>01 / VALERIA FERRER</span>
         </div>
       </section>
 
