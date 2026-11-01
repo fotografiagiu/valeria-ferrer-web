@@ -2,7 +2,7 @@ import React, { Suspense, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight, ChevronRight, Sparkles } from 'lucide-react';
 import LazyImage from './LazyImage';
-import { getModelCoverThumbnailPath, getModelCoverImage } from '../lib/modelGridImage';
+import { getModelCoverImage } from '../lib/modelGridImage';
 
 const ExploreProfilesNav = React.lazy(() => import('./ExploreProfilesNav'));
 
@@ -26,10 +26,6 @@ type HomeNovedadesStripProps = {
   exploreLinks: ReturnType<typeof import('../lib/homeExploreLinks').getHomeExploreLinks>;
   loadExploreNav: boolean;
 };
-
-function coverOf(model: NovedadesModel): string {
-  return getModelCoverThumbnailPath(getModelCoverImage(model.coverImageUrl || model.image || ''));
-}
 
 function originalOf(model: NovedadesModel): string {
   return getModelCoverImage(model.coverImageUrl || model.image || '');
@@ -66,27 +62,18 @@ const HomeNovedadesStrip: React.FC<HomeNovedadesStripProps> = ({
         </div>
         <div className="vf-hanging-news__grid">
           {novedades.map((model, index) => {
-            const original = originalOf(model);
             return (
               <article className="vf-hanging-news__card" key={model.slug}>
                 <Link to={'/models/' + model.slug} className="vf-hanging-news__card-link" aria-label={'Ver perfil de ' + model.name}>
                   <div className="vf-hanging-news__card-photo">
                     <LazyImage
-                      src={coverOf(model)}
+                      src={originalOf(model)}
                       alt={model.name + ' — perfil actual de Valeria Ferrer Valencia'}
                       className="vf-hanging-news__card-image"
                       containerClassName="vf-hanging-news__img-container"
                       sizes="(max-width: 767px) 85vw, 410px"
                       priority={false}
                       loading="lazy"
-                    />
-                    <img
-                      className="vf-hanging-news__fallback-original"
-                      src={original}
-                      alt=""
-                      loading="lazy"
-                      aria-hidden="true"
-                      onError={(event) => { event.currentTarget.style.visibility = 'hidden'; }}
                     />
                     <div className="vf-hanging-news__image-shade" />
                     {model.isNew ? <span className="vf-hanging-news__ribbon">NUEVA</span> : model.galleryUpdated ? <span className="vf-hanging-news__ribbon">ACTUALIZADA</span> : null}
