@@ -387,3 +387,20 @@
   padding-bottom:8px;
 }
 .vf-luxury-catalog__home:hover{color:#ffe8c5;}
+
+
+/* Desktop Novedades: show four at once, scroll the rest using real arrow controls. */
+@media(min-width:768px){
+  .vf-hanging-news--open .vf-hanging-news__grid{
+    display:flex;flex-wrap:nowrap;justify-content:flex-start;
+    grid-template-columns:none;
+    overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;
+    scrollbar-width:none;-webkit-overflow-scrolling:touch;
+    padding:9px 6px 23px;
+  }
+  .vf-hanging-news--open .vf-hanging-news__grid::-webkit-scrollbar{display:none;}
+  .vf-hanging-news--open .vf-hanging-news__grid .vf-luxury-card{
+    flex:0 0 calc((100% - 3 * clamp(12px,1.6vw,25px)) / 4);
+    scroll-snap-align:start;
+  }
+}
