@@ -71,16 +71,19 @@ const NovemberNoirHome: React.FC<NovemberNoirHomeProps> = ({ models }) => {
           <div className="vf-noir-hero__copy vf-premium-hero__copy">
             <p className="vf-premium-hero__eyebrow">
               <span className="vf-premium-hero__sparkle" aria-hidden="true">✦</span>
-              Valeria Ferrer · Selección exclusiva
+              UNA SELECCIÓN EXCLUSIVA EN VALENCIA
             </p>
-            <p className="vf-premium-hero__intro">Una experiencia que se recuerda</p>
+            <p className="vf-premium-hero__brand" aria-label="Valeria Ferrer">
+              Valeria Ferrer
+            </p>
+            <span className="vf-premium-hero__brand-rule" aria-hidden="true" />
             <h1 id="vf-premium-hero-title" className="vf-premium-hero__headline">
-              <span>Escorts en</span>
-              <em>Valencia</em>
+              Escorts en Valencia
             </h1>
+            <p className="vf-premium-hero__intro">Elegancia. Discreción. Exclusividad.</p>
             <p className="vf-premium-hero__description">
-              Descubre nuestras chicas disponibles en Valencia.
-              Fotografías reales, perfiles seleccionados y atención privada.
+              Descubre los perfiles actuales de Valeria Ferrer.
+              Fotografías reales, atención personalizada y reserva privada en Valencia.
             </p>
             <div className="vf-premium-hero__actions">
               <Link to="/models" className="vf-noir-btn vf-noir-btn--gold">
