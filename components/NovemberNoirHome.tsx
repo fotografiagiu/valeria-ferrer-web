@@ -48,20 +48,24 @@ const NovemberNoirHome: React.FC<NovemberNoirHomeProps> = ({ models }) => {
 
   const heroModel = featuredModels[0];
   const heroImage = heroModel?.coverImageUrl || heroModel?.profileImageUrl || '/images/home-hero-banner-mobile-v4-premium.webp';
+  const heroMobileImage = getModelCoverThumbnailPath(heroImage);
 
   return (
     <div className="vf-noir" id="november-noir">
       <section className="vf-noir-hero" aria-label="Valeria Ferrer, November Noir">
         <div className="vf-noir-hero__visual" aria-hidden="true">
-          <img
-            src={heroImage}
-            alt=""
-            width={760}
-            height={1100}
-            loading="eager"
-            decoding="async"
-            fetchPriority="high"
-          />
+          <picture>
+            <source media="(max-width: 767px)" srcSet={heroMobileImage} />
+            <img
+              src={heroImage}
+              alt=""
+              width={760}
+              height={1100}
+              loading="eager"
+              decoding="async"
+              fetchPriority="high"
+            />
+          </picture>
         </div>
         <div className="vf-noir-hero__veil" aria-hidden="true" />
         <div className="vf-noir-hero__ambient" aria-hidden="true" />
@@ -115,6 +119,23 @@ const NovemberNoirHome: React.FC<NovemberNoirHomeProps> = ({ models }) => {
             <ArrowUpRight size={19} className="vf-noir-promo__arrow" aria-hidden="true" />
           </a>
         </div>
+        <details className="vf-noir-promos__terms">
+          <summary>Ver condiciones y precios de las promociones <ChevronRight size={15} aria-hidden="true" /></summary>
+          <div className="vf-noir-promos__conditions">
+            <div>
+              <strong>BLACK</strong>
+              <p>Tarifa especial únicamente en los perfiles que llevan la etiqueta BLACK. Menciona BLACK al reservar.</p>
+            </div>
+            <div>
+              <strong>Happy Hour</strong>
+              <p>De 12:00 a 14:00 y de 01:00 a 03:00. 30 min: 70 € · 45 min: 100 € · 1 hora: 130 €. Consulta disponibilidad.</p>
+            </div>
+            <div>
+              <strong>Solo efectivo</strong>
+              <p>5 € menos por servicio si se paga en efectivo. Ejemplos: 30 min 75 € · 1 hora 145 € · 1 hora y media 225 €.</p>
+            </div>
+          </div>
+        </details>
       </section>
 
       <section className="vf-noir-featured" aria-labelledby="vf-noir-featured-title">
