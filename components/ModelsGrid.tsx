@@ -20,7 +20,8 @@ const ModelCard: React.FC<{
   index: number;
   isDoubleView?: boolean;
   useCoverThumbnail?: boolean;
-}> = ({ model, index, isDoubleView = false, useCoverThumbnail = false }) => {
+  prioritizeCover?: boolean;
+}> = ({ model, index, isDoubleView = false, useCoverThumbnail = false, prioritizeCover = true }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [hoverImageReady, setHoverImageReady] = useState(false);
 
@@ -156,7 +157,7 @@ const ModelCard: React.FC<{
               isHovered ? 'md:scale-110' : 'md:scale-100'
             }`}
             sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
-            priority={index < 4} // First 4 images are priority
+            priority={prioritizeCover && index < 4} // Above-the-fold cards only
           />
 
           {hoverImageReady && (
@@ -249,12 +250,14 @@ interface ModelsGridProps {
   models?: any[];
   heading?: string;
   subtitle?: string;
+  deferFirstImages?: boolean;
 }
 
 const ModelsGrid: React.FC<ModelsGridProps> = ({
   models = MODELS,
   heading = 'Chicas disponibles',
   subtitle = 'Selección Valeria Ferrer · Fotos reales · Reserva discreta',
+  deferFirstImages = false,
 }) => {
   const [viewMode, setViewMode] = useState<'normal' | 'double'>('double');
   const [seasonalFilter, setSeasonalFilter] = useState<'todas' | 'nuevas' | 'espanolas' | 'latinas' | 'vip'>('todas');
@@ -399,6 +402,7 @@ const ModelsGrid: React.FC<ModelsGridProps> = ({
               index={index}
               isDoubleView={viewMode === 'double'}
               useCoverThumbnail={useCoverThumbnail}
+              prioritizeCover={!deferFirstImages}
             />
           ))}
         </div>
