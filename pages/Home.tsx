@@ -118,7 +118,7 @@ const Home: React.FC = () => {
           />
         </a>
       </section>
-      {/* Las promociones Happy Hour y BLACK se conservan sin cambios. */}
+      {/* Cartel de efectivo arriba + Happy Hour aquí. BLACK fuera de los banners de momento. */}
       {isHalloweenPreview && <HalloweenCampaign homeOnly />}
       {isHalloweenPreview && (
         <ModelsGrid
