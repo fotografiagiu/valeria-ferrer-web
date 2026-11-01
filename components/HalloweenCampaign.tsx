@@ -16,7 +16,8 @@ const BANNER = '/promos/promo-halloween-happy-hour-oct2026.webp';
 const DISMISS_KEY = 'vf-halloween-2026-topbar-closed';
 const WHATSAPP_URL = officialWhatsAppUrlWithText('Hola, quiero información sobre el Happy Hour de Halloween.');
 const CASH_WHATSAPP_URL = officialWhatsAppUrlWithText('Hola, quiero reservar con la oferta de 5 € menos pagando en efectivo.');
-export const HALLOWEEN_CAMPAIGN_ENABLED = true;
+// The 2026 Halloween campaign ended. Keep content for archival purposes only.
+export const HALLOWEEN_CAMPAIGN_ENABLED = false;
 export const halloweenIsLive = (now = Date.now()) => HALLOWEEN_CAMPAIGN_ENABLED && now >= HALLOWEEN_START && now < HALLOWEEN_END;
 
 const HalloweenCampaign: React.FC<{ homeOnly?: boolean }> = ({ homeOnly = false }) => {
