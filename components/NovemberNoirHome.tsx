@@ -2,7 +2,6 @@ import React, { useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight, ChevronRight, Clock3, Tag, Wallet, Sparkles, ShieldCheck } from 'lucide-react';
 import { officialWhatsAppUrlWithText } from '../lib/officialContact';
-import { getModelCoverThumbnailPath } from '../lib/modelGridImage';
 import '../styles/november-noir.css';
 import '../styles/november-noir-v3.css';
 
@@ -44,7 +43,7 @@ const NovemberNoirHome: React.FC<NovemberNoirHomeProps> = ({ models }) => {
     ?? activeModels.find((model) => model.black && model.coverImageUrl)
     ?? activeModels[0];
   const heroImage = heroModel?.coverImageUrl || heroModel?.profileImageUrl || heroModel?.image || '/images/home-hero-banner-mobile-v4-premium.webp';
-  const heroMobileImage = getModelCoverThumbnailPath(heroImage);
+  const heroMobileImage = heroImage;
 
   return (
     <div className="vf-noir" id="valeria-ferrer-home">
@@ -164,16 +163,14 @@ const NovemberNoirHome: React.FC<NovemberNoirHomeProps> = ({ models }) => {
         <div className="vf-noir-featured__grid">
           {featuredModels.map((model, index) => {
             const image = model.coverImageUrl || model.profileImageUrl || model.image || '';
-            const thumbnail = getModelCoverThumbnailPath(image);
             return (
               <article key={model.slug} className="vf-noir-profile">
                 <Link to={'/models/' + model.slug} className="vf-noir-profile__link" aria-label={'Ver perfil de ' + model.name}>
                   <div className="vf-noir-profile__photo">
                     <img
-                      src={thumbnail}
-                      onError={(event) => { if (event.currentTarget.src !== new URL(image, window.location.origin).href) event.currentTarget.src = image; }}
+                      src={image}
                       alt={model.name + ' — perfil de Valeria Ferrer en Valencia'}
-                      loading={index < 2 ? 'eager' : 'lazy'}
+                      loading="lazy"
                       decoding="async"
                       width={400}
                       height={520}
