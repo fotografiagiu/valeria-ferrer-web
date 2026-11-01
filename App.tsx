@@ -1,6 +1,6 @@
 import React, { Suspense, useEffect, useMemo, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import Navbar from './components/Navbar';
+import NavbarNoir from './components/NavbarNoir';
 import Home from './pages/Home';
 import Legal from './pages/Legal';
 import Privacy from './pages/Privacy';
@@ -135,7 +135,7 @@ const App: React.FC = () => {
     <AnalyticsTracker>
       <Router>
         <div className={`${halloweenIsLive() ? 'vf-halloween-preview ' : ''}vf-noir-site min-h-screen bg-[#0a0a0a] text-white overflow-x-hidden`}>
-          <Navbar 
+          <NavbarNoir 
             isScrolled={isScrolled} 
             openMembers={() => setIsMembersModalOpen(true)} 
           />
