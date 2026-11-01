@@ -182,6 +182,7 @@ const Home: React.FC = () => {
         models={homeModels}
         heading="Escorts en Valencia"
         subtitle="Selección Valeria Ferrer · Fotos reales · Reserva discreta"
+        deferFirstImages
       />
 
       <div ref={reviewsSentinelRef} className="min-h-[32rem] md:min-h-[28rem]">
