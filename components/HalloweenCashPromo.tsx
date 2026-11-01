@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { ArrowRight, MessageCircle, Phone, Send, X } from 'lucide-react'
 import { halloweenIsLive } from './HalloweenCampaign'
 import { setHalloweenCashPopupOpen } from '../lib/halloweenCashGate'
-import { BLACK_OFFER_IMAGE, BLACK_OFFER_IMAGE_WIDTH, BLACK_OFFER_IMAGE_HEIGHT, BLACK_OFFER_WHATSAPP_TEXT } from '../lib/blackPromoAsset'
 import DesktopOfferBanners from './DesktopOfferBanners'
 import {
   OFFICIAL_PHONE_LABEL,
@@ -13,15 +12,14 @@ import {
 } from '../lib/officialContact'
 
 type View = 'hidden' | 'popup' | 'banner'
-type PromoKind = 'happy' | 'black' | 'cash'
+type PromoKind = 'happy' | 'cash'
 
 const HAPPY_IMAGE = '/promos/promo-halloween-happy-hour-oct2026.webp'
 const CASH_IMAGE = '/promos/promo-halloween-efectivo-oct2026.webp'
 const HAPPY_WHATSAPP_URL = officialWhatsAppUrlWithText('Hola, quiero información sobre el Happy Hour de Halloween.')
-const BLACK_WHATSAPP_URL = officialWhatsAppUrlWithText(BLACK_OFFER_WHATSAPP_TEXT)
 const CASH_WHATSAPP_URL = officialWhatsAppUrlWithText('Hola, quiero reservar con la oferta de 5 € menos pagando en efectivo.')
 
-/** Tres promociones independientes en un solo modal, cada una con consulta y CTA específicos. */
+/** Happy Hour + descuento en efectivo en un solo modal. */
 const HalloweenCashPromo: React.FC = () => {
   const [view, setView] = useState<View>('hidden')
   const [contactKind, setContactKind] = useState<PromoKind | null>(null)
@@ -73,7 +71,7 @@ const HalloweenCashPromo: React.FC = () => {
         <button type="button" onClick={reopen}
           className="fixed left-0 right-0 top-[5.75rem] md:top-[7.25rem] z-[52] border-b border-[#d6ad60]/45 bg-[#160d14]/95 px-4 py-2.5 text-center text-[11px] sm:text-xs font-bold tracking-[0.12em] text-[#f9e2b1] backdrop-blur-md hover:bg-[#34201c] hover:text-white transition-colors"
         >
-          🎃 HAPPY HOUR · ✦ BLACK · −5 € EFECTIVO · Ver las 3 ofertas
+          🎃 HAPPY HOUR · −5 € EFECTIVO · Ver las 2 ofertas
         </button>
       )}
 
@@ -98,32 +96,12 @@ const HalloweenCashPromo: React.FC = () => {
           <div className="flex min-h-full items-center justify-center px-3 pb-5 pt-24 sm:px-5 sm:pb-6 sm:pt-24">
             <div className="relative z-10 w-full lg:w-[97vw] lg:max-w-none xl:w-[96vw] 2xl:max-w-[1850px]" onClick={(event) => event.stopPropagation()}>
               <h2 id="halloween-offers-title" className="pr-10 text-center font-serif text-2xl text-[#f2d69b] sm:text-3xl xl:text-4xl">
-                Descubre nuestras tres ofertas
+                Descubre nuestras dos ofertas
               </h2>
               <p className="mb-5 mt-2 text-center text-[12px] text-[#e7d2b1] xl:text-sm">
-                Happy Hour por horario, tarifa BLACK por chica y 5 € menos pagando en efectivo
+                Happy Hour por horario y 5 € menos pagando en efectivo
               </p>
-              <DesktopOfferBanners onHappy={() => setContactKind("happy")} onBlack={() => setContactKind("black")} />
-              {/* Tercera oferta en escritorio: cartel original completo, sin repetir precios. */}
-              <section aria-label="Promoción cinco euros menos solo efectivo"
-                className="mt-6 hidden overflow-hidden rounded-2xl border border-[#e5c47d]/60 bg-[#120a10] shadow-[0_20px_70px_rgba(0,0,0,.5)] lg:block"
-              >
-                <button type="button" onClick={() => setContactKind('cash')}
-                  aria-label="Consultar promoción de cinco euros menos pagando en efectivo"
-                  className="block w-full focus-visible:outline-2 focus-visible:outline-offset-[-3px] focus-visible:outline-[#f4dfaa]"
-                >
-                  <img src={CASH_IMAGE}
-                    alt="Promoción exclusiva: cinco euros menos pagando en efectivo. Cartel original con las tarifas."
-                    width={1024} height={576} decoding="async" loading="lazy"
-                    className="mx-auto block h-auto w-full max-w-[1250px] object-contain"
-                  />
-                </button>
-                <button type="button" onClick={() => setContactKind('cash')}
-                  className="block w-full bg-gradient-to-r from-[#b7873d] via-[#f1d28a] to-[#b7873d] px-6 py-5 text-sm font-extrabold uppercase tracking-[0.12em] text-[#231506] hover:brightness-110"
-                >
-                  Consultar oferta · Solo efectivo
-                </button>
-              </section>
+              <DesktopOfferBanners onHappy={() => setContactKind("happy")} onCash={() => setContactKind("cash")} />
               <div className="grid grid-cols-1 items-start gap-4 md:grid-cols-2 md:gap-6 lg:hidden">
                 <section aria-label="Oferta Happy Hour" className="overflow-hidden rounded-xl border border-[#c084fc]/55 bg-[#110a17] shadow-[0_14px_50px_rgba(0,0,0,.45)]">
                   <h3 className="p-3 text-center text-xs font-bold uppercase tracking-[0.18em] text-[#f0dcfc]">🎃 HAPPY HOUR</h3>
@@ -136,18 +114,7 @@ const HalloweenCashPromo: React.FC = () => {
                     Consultar Happy Hour
                   </button>
                 </section>
-                <section aria-label="Oferta BLACK" className="overflow-hidden rounded-xl border border-[#e2bf6e]/70 bg-[#120d0a] shadow-[0_14px_50px_rgba(0,0,0,.45)]">
-                  <h3 className="p-3 text-center text-xs font-bold uppercase tracking-[0.18em] text-[#f4d998]">✦ TARIFA BLACK</h3>
-                  <button type="button" onClick={() => setContactKind('black')} className="block w-full focus-visible:outline-2 focus-visible:outline-[#e2bf6e]" aria-label="Consultar tarifa BLACK">
-                    <img src={BLACK_OFFER_IMAGE} alt="Oferta BLACK Valeria Ferrer. Menciona BLACK al reservar para la tarifa especial de chicas con etiqueta BLACK." width={BLACK_OFFER_IMAGE_WIDTH} height={BLACK_OFFER_IMAGE_HEIGHT} decoding="async" loading="lazy"
-                      className="block h-auto max-h-[70dvh] w-full object-contain bg-black"/>
-                  </button>
-                  <button type="button" onClick={() => setContactKind('black')}
-                    className="block w-full bg-gradient-to-r from-[#b78531] via-[#efce76] to-[#b78531] px-3 py-4 text-xs font-extrabold uppercase tracking-[0.16em] text-[#1b1207] hover:brightness-110">
-                    Menciona BLACK · Consultar tarifa
-                  </button>
-                </section>
-                <section aria-label="Descuento solo efectivo" className="overflow-hidden rounded-xl border border-[#e5c47d]/70 bg-[#150b10] shadow-[0_14px_50px_rgba(0,0,0,.45)] md:col-span-2">
+                <section aria-label="Descuento solo efectivo" className="overflow-hidden rounded-xl border border-[#e5c47d]/70 bg-[#150b10] shadow-[0_14px_50px_rgba(0,0,0,.45)]">
                   <h3 className="p-3 text-center text-xs font-bold uppercase tracking-[0.18em] text-[#f4d998]">✦ SOLO EFECTIVO · 5 € MENOS</h3>
                   <button type="button" onClick={() => setContactKind('cash')}
                     className="block w-full focus-visible:outline-2 focus-visible:outline-[#f4d998]"
@@ -167,7 +134,7 @@ const HalloweenCashPromo: React.FC = () => {
                 </section>
               </div>
               <p className="mt-3 text-center text-xs text-[#d6bf91]">
-                <span className="lg:hidden">Desliza para ver los tres carteles.</span> Cada oferta se consulta por separado.
+                Cada oferta se consulta por separado.
               </p>
             </div>
           </div>
@@ -180,21 +147,19 @@ const HalloweenCashPromo: React.FC = () => {
           <div className="relative z-10 w-full max-w-sm rounded-2xl border border-[#d6b166]/50 bg-[#141018] p-5 shadow-2xl">
             <button type="button" onClick={() => setContactKind(null)} className="absolute right-3 top-3 p-1 text-gray-400 hover:text-white" aria-label="Cerrar"><X size={18}/></button>
             <h3 id="halloween-offer-contact-title" className="pr-8 text-[12px] font-bold uppercase tracking-[0.18em] text-[#eed098]">
-              {contactKind === 'black' ? 'Tarifa BLACK' : contactKind === 'cash' ? '5 € menos · Solo efectivo' : 'Happy Hour Halloween'}
+              {contactKind === 'cash' ? '5 € menos · Solo efectivo' : 'Happy Hour Halloween'}
             </h3>
             <p className="mb-5 mt-3 text-sm text-gray-300">
-              {contactKind === 'black'
-                ? 'Menciona BLACK en tu reserva. Oferta solo para chicas identificadas con etiqueta BLACK.'
-                : contactKind === 'cash'
-                  ? '5 € menos en las tarifas, exclusivamente si pagas en efectivo. Consulta disponibilidad.'
-                  : 'Consulta condiciones y disponibilidad del Happy Hour.'}
+              {contactKind === 'cash'
+                ? '5 € menos en las tarifas, exclusivamente si pagas en efectivo. Consulta disponibilidad.'
+                : 'Consulta condiciones y disponibilidad del Happy Hour.'}
             </p>
             <div className="space-y-3">
               <a href={OFFICIAL_PHONE_TEL} data-contact-placement="halloween_offers" className="flex w-full items-center justify-between rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-[11px] font-bold uppercase tracking-[0.12em] text-white hover:bg-white/10">
                 <span className="flex items-center"><Phone size={15} className="mr-3 text-[#e7c17b]"/> Llamar ahora</span>
                 <span className="text-xs font-medium tracking-normal text-gray-400">{OFFICIAL_PHONE_LABEL}</span>
               </a>
-              <a href={contactKind === 'black' ? BLACK_WHATSAPP_URL : contactKind === 'cash' ? CASH_WHATSAPP_URL : HAPPY_WHATSAPP_URL} target="_blank" rel="noopener noreferrer" data-contact-placement="halloween_offers" className="flex w-full items-center justify-between rounded-xl bg-[#25d366] px-4 py-3 text-[11px] font-bold uppercase tracking-[0.12em] text-[#07230f] hover:bg-[#41e17b]">
+              <a href={contactKind === 'cash' ? CASH_WHATSAPP_URL : HAPPY_WHATSAPP_URL} target="_blank" rel="noopener noreferrer" data-contact-placement="halloween_offers" className="flex w-full items-center justify-between rounded-xl bg-[#25d366] px-4 py-3 text-[11px] font-bold uppercase tracking-[0.12em] text-[#07230f] hover:bg-[#41e17b]">
                 <span className="flex items-center"><MessageCircle size={15} className="mr-3"/> WhatsApp</span>
                 <span className="text-xs font-medium tracking-normal">{OFFICIAL_PHONE_LABEL}</span>
               </a>

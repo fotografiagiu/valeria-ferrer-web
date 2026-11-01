@@ -1,8 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { BLACK_OFFER_IMAGE, BLACK_OFFER_IMAGE_WIDTH, BLACK_OFFER_IMAGE_HEIGHT, BLACK_OFFER_WHATSAPP_TEXT } from '../lib/blackPromoAsset';
-import DesktopOfferBanners from './DesktopOfferBanners';
 import { useLocation } from 'react-router-dom';
-import { X, ArrowUpRight, Phone, MessageCircle, Send } from 'lucide-react';
+import { X, ArrowUpRight, Phone, MessageCircle, Send, Clock3 } from 'lucide-react';
 import {
   OFFICIAL_PHONE_LABEL,
   OFFICIAL_PHONE_TEL,
@@ -17,7 +15,7 @@ const HALLOWEEN_END = Date.parse('2026-11-02T00:00:00+01:00');
 const BANNER = '/promos/promo-halloween-happy-hour-oct2026.webp';
 const DISMISS_KEY = 'vf-halloween-2026-topbar-closed';
 const WHATSAPP_URL = officialWhatsAppUrlWithText('Hola, quiero información sobre el Happy Hour de Halloween.');
-const BLACK_WHATSAPP_URL = officialWhatsAppUrlWithText(BLACK_OFFER_WHATSAPP_TEXT);
+const CASH_WHATSAPP_URL = officialWhatsAppUrlWithText('Hola, quiero reservar con la oferta de 5 € menos pagando en efectivo.');
 export const HALLOWEEN_CAMPAIGN_ENABLED = true;
 export const halloweenIsLive = (now = Date.now()) => HALLOWEEN_CAMPAIGN_ENABLED && now >= HALLOWEEN_START && now < HALLOWEEN_END;
 
@@ -26,7 +24,7 @@ const HalloweenCampaign: React.FC<{ homeOnly?: boolean }> = ({ homeOnly = false 
   const [dismissed, setDismissed] = useState(() => {
     try { return window.sessionStorage.getItem(DISMISS_KEY) === '1'; } catch { return false; }
   });
-  const [contactOpen, setContactOpen] = useState<'happy' | 'black' | null>(null);
+  const [contactOpen, setContactOpen] = useState<'happy' | 'cash' | null>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
   useEffect(() => {
@@ -70,44 +68,52 @@ const HalloweenCampaign: React.FC<{ homeOnly?: boolean }> = ({ homeOnly = false 
   return (
     <>
       {isHome && homeOnly && (
-        <section id="halloween-campaign" aria-label="Promociones Happy Hour y BLACK" className="relative border-y border-[#d7a767]/25 bg-[#090507] px-3 py-8 sm:px-6 md:py-12">
+        <section id="halloween-campaign" aria-label="Promoción Happy Hour" className="relative border-y border-[#d7a767]/25 bg-[#090507] px-3 py-8 sm:px-6 md:py-12">
           <div className="mx-auto max-w-[1850px]">
             <div className="mb-6 text-center">
-              <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#d6b57b]">Valeria Ferrer · Promociones</p>
-              <h2 className="mt-2 font-serif text-2xl text-[#f5dfb2] md:text-4xl">Dos ofertas para descubrir</h2>
+              <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#d6b57b]">Valeria Ferrer · Promoción</p>
+              <h2 className="mt-2 font-serif text-2xl text-[#f5dfb2] md:text-4xl">Happy Hour</h2>
+              <p className="mt-2 text-sm text-[#dcc9b0]">Dos franjas horarias con tarifas especiales</p>
             </div>
-            <DesktopOfferBanners onHappy={() => setContactOpen("happy")} onBlack={() => setContactOpen("black")} />
-            <div className="grid grid-cols-1 items-start gap-5 md:grid-cols-2 md:gap-7 lg:hidden">
-              <div className="overflow-hidden rounded-2xl border border-[#c084fc]/40 bg-[#160d19] shadow-[0_14px_50px_rgba(0,0,0,.45)]">
-                <h3 className="p-3 text-center text-[11px] font-bold uppercase tracking-[0.22em] text-[#edd5fd]">🎃 Happy Hour · Oferta por horario</h3>
-                <button
-                  ref={triggerRef}
-                  type="button"
-                  onClick={() => setContactOpen('happy')}
-                  aria-label="Consultar la oferta Happy Hour"
-                  className="block w-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#c084fc]"
-                >
-                  <img src={BANNER} alt="Happy Hour Valeria Ferrer, desde el 29 de octubre. Llama para informarte." width={1024} height={682} loading="lazy" decoding="async" className="block h-auto w-full" />
-                </button>
-                <button type="button" onClick={() => setContactOpen('happy')} className="flex w-full items-center justify-center gap-2 bg-[#54236a] px-4 py-4 text-xs font-bold uppercase tracking-[0.15em] text-white hover:bg-[#723593]">
-                  Consultar Happy Hour <ArrowUpRight size={16} aria-hidden="true" />
+            {/* Desktop panoramic Happy Hour */}
+            <div className="hidden lg:grid min-h-[380px] xl:min-h-[410px] 2xl:min-h-[450px] grid-cols-[44%_56%] overflow-hidden rounded-2xl border border-[#a35ad8]/55 bg-[#140b18] shadow-[0_20px_70px_rgba(0,0,0,.52)]">
+              <button type="button" onClick={() => setContactOpen('happy')} className="relative flex min-h-[380px] xl:min-h-[410px] 2xl:min-h-[450px] items-center justify-center overflow-hidden border-r border-[#a35ad8]/35 bg-[#16051a] focus-visible:outline-2 focus-visible:outline-offset-[-3px] focus-visible:outline-[#d9a8fa]" aria-label="Consultar cartel completo Happy Hour">
+                <span aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#4a153e]/35 via-transparent to-[#100713]" />
+                <img
+                  src={BANNER}
+                  alt="Cartel Happy Hour Halloween. Consulta condiciones y disponibilidad."
+                  width={1024}
+                  height={682}
+                  decoding="async"
+                  loading="lazy"
+                  className="relative block h-[362px] w-full object-contain xl:h-[393px] 2xl:h-[432px]"
+                />
+              </button>
+              <div className="flex flex-col justify-center px-9 py-8 xl:px-14 2xl:px-16">
+                <p className="mb-2 flex items-center gap-2 text-[12px] font-bold uppercase tracking-[0.22em] text-[#e7baf6]"><Clock3 size={16} aria-hidden="true" /> Promoción por horario</p>
+                <h3 className="font-serif text-[3.2rem] leading-none tracking-[0.02em] text-white xl:text-[4.1rem] 2xl:text-[4.6rem]">HAPPY <span className="text-[#dba5ee]">HOUR</span></h3>
+                <p className="mt-4 text-[17px] leading-relaxed text-[#e4cfdf] xl:text-[18px]">Dos franjas horarias con tarifas especiales.</p>
+                <p className="mt-3 text-[20px] font-bold tracking-[0.04em] text-[#f9e7fb] xl:text-[23px]">12:00–14:00 <span className="text-[#bd8ac9]">·</span> 01:00–03:00</p>
+                <button type="button" onClick={() => setContactOpen('happy')} className="mt-6 inline-flex w-fit items-center justify-center gap-3 rounded-full border border-[#edc1f8]/50 bg-gradient-to-r from-[#9b3baf] to-[#6b248d] px-10 py-4 text-[14px] xl:py-5 font-bold uppercase tracking-[0.16em] text-white shadow-[0_5px_22px_rgba(183,69,229,.2)] transition hover:brightness-125 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#eed5fa]">
+                  Consulta Happy Hour <ArrowUpRight size={17} aria-hidden="true" />
                 </button>
               </div>
-              <div className="overflow-hidden rounded-2xl border border-[#d9b669]/50 bg-[#120e0a] shadow-[0_14px_50px_rgba(0,0,0,.45)]">
-                <h3 className="p-3 text-center text-[11px] font-bold uppercase tracking-[0.22em] text-[#f2d38d]">✦ BLACK · Tarifa especial por modelo</h3>
-                <button
-                  type="button"
-                  onClick={() => setContactOpen('black')}
-                  aria-label="Consultar la tarifa especial de las chicas con etiqueta BLACK"
-                  className="block w-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#d9b669]"
-                >
-                  <img src={BLACK_OFFER_IMAGE} alt="Aprovecha la oferta BLACK. Menciona BLACK al reservar para acceder a la tarifa especial de las chicas con etiqueta BLACK." width={BLACK_OFFER_IMAGE_WIDTH} height={BLACK_OFFER_IMAGE_HEIGHT} loading="lazy" decoding="async" className="block h-auto w-full" />
-                </button>
-                <button type="button" onClick={() => setContactOpen('black')} className="flex w-full items-center justify-center gap-2 bg-gradient-to-r from-[#9b722b] via-[#dfb85e] to-[#9b722b] px-4 py-4 text-xs font-extrabold uppercase tracking-[0.15em] text-[#1c1205] hover:brightness-110">
-                  Consultar tarifa BLACK <ArrowUpRight size={16} aria-hidden="true" />
-                </button>
-                <p className="px-4 pb-3 pt-2 text-center text-[11px] text-[#e4cda1]">Solo chicas con etiqueta BLACK. Menciónalo en tu reserva.</p>
-              </div>
+            </div>
+            {/* Mobile Happy Hour card */}
+            <div className="overflow-hidden rounded-2xl border border-[#c084fc]/40 bg-[#160d19] shadow-[0_14px_50px_rgba(0,0,0,.45)] lg:hidden">
+              <h3 className="p-3 text-center text-[11px] font-bold uppercase tracking-[0.22em] text-[#edd5fd]">🎃 Happy Hour · Oferta por horario</h3>
+              <button
+                ref={triggerRef}
+                type="button"
+                onClick={() => setContactOpen('happy')}
+                aria-label="Consultar la oferta Happy Hour"
+                className="block w-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#c084fc]"
+              >
+                <img src={BANNER} alt="Happy Hour Valeria Ferrer, desde el 29 de octubre. Llama para informarte." width={1024} height={682} loading="lazy" decoding="async" className="block h-auto w-full" />
+              </button>
+              <button type="button" onClick={() => setContactOpen('happy')} className="flex w-full items-center justify-center gap-2 bg-[#54236a] px-4 py-4 text-xs font-bold uppercase tracking-[0.15em] text-white hover:bg-[#723593]">
+                Consultar Happy Hour <ArrowUpRight size={16} aria-hidden="true" />
+              </button>
             </div>
           </div>
         </section>
@@ -120,7 +126,7 @@ const HalloweenCampaign: React.FC<{ homeOnly?: boolean }> = ({ homeOnly = false 
             onClick={() => setContactOpen('happy')}
             className="text-[#ffe2e9] text-xs sm:text-sm text-center hover:text-white"
           >
-            <strong className="text-[#ffc092]">🎃 Happy Hour Halloween</strong> + <strong className="text-[#f4d58d]">Tarifa BLACK</strong> · Consulta ambas ofertas <span className="underline underline-offset-4 whitespace-nowrap">Contactar</span>
+            <strong className="text-[#ffc092]">🎃 Happy Hour</strong> + <strong className="text-[#f4d58d]">−5 € efectivo</strong> · Consulta las ofertas <span className="underline underline-offset-4 whitespace-nowrap">Contactar</span>
           </button>
           <button type="button" aria-label="Cerrar aviso de Halloween" onClick={closeBar} className="absolute right-3 top-1/2 -translate-y-1/2 rounded p-1 text-[#ffe2e9]/80 hover:text-white">
             <X size={18} aria-hidden="true" />
@@ -154,11 +160,11 @@ const HalloweenCampaign: React.FC<{ homeOnly?: boolean }> = ({ homeOnly = false 
             </button>
             <span className="text-[#f3a0be] text-[11px] font-semibold tracking-[0.3em] uppercase">Valeria Ferrer</span>
             <h2 id="halloween-contact-title" className="mt-3 font-serif text-3xl sm:text-4xl leading-tight text-white">
-              {contactOpen === 'black' ? 'Tarifa especial BLACK' : 'Happy Hour Halloween'}
+              {contactOpen === 'cash' ? '5 € menos · Solo efectivo' : 'Happy Hour Halloween'}
             </h2>
             <p id="halloween-contact-description" className="mt-3 mb-7 text-sm text-[#ddc2ce] leading-relaxed">
-              {contactOpen === 'black'
-                ? 'Menciona BLACK en tu reserva. Tarifa especial exclusiva de las chicas con etiqueta BLACK.'
+              {contactOpen === 'cash'
+                ? '5 € menos en las tarifas, exclusivamente si pagas en efectivo. Consulta disponibilidad.'
                 : 'A partir del jueves 29 de octubre. Elige cómo quieres informarte.'}
             </p>
             <div className="grid gap-3">
@@ -171,7 +177,7 @@ const HalloweenCampaign: React.FC<{ homeOnly?: boolean }> = ({ homeOnly = false 
                 <Phone size={20} aria-hidden="true" /> Llamar · {OFFICIAL_PHONE_LABEL}
               </a>
               <a
-                href={contactOpen === 'black' ? BLACK_WHATSAPP_URL : WHATSAPP_URL}
+                href={contactOpen === 'cash' ? CASH_WHATSAPP_URL : WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 data-contact-placement="halloween_banner"
