@@ -5,6 +5,7 @@
 import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import PremiumProfileCard, { type PremiumProfile } from './PremiumProfileCard';
+import '../styles/valeria-luxury-v5.css';
 
 export type CatalogPreviewModel = PremiumProfile & {
   coverImageUrl: string;
