@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import NavbarNoir from './NavbarNoir';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown, Globe, Lock, Clock, Mail, Send, Phone } from 'lucide-react';
 import { OFFICIAL_PHONE_LABEL, OFFICIAL_PHONE_TEL, OFFICIAL_TELEGRAM_HANDLE, OFFICIAL_TELEGRAM_URL } from '../lib/officialContact';
@@ -42,6 +43,10 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolled, openMembers }) => {
       window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
     }
   };
+
+  if (location.pathname === '/') {
+    return <NavbarNoir isScrolled={isScrolled} openMembers={openMembers} />;
+  }
 
   return (
     <nav className={`fixed w-full z-50 transition-[background-color,padding,backdrop-filter] duration-500 ${location.pathname === '/' ? 'vf-noir-navbar ' : ''}${
