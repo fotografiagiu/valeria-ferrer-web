@@ -47,7 +47,8 @@ function scheduleBelowFoldWork(onReady: () => void): () => void {
 const Home: React.FC = () => {
   const exploreLinks = useMemo(() => getHomeExploreLinks(), []);
   const activeModels = useMemo(() => filterActiveModels(modelsData), []);
-  const homeModels = useCatalogWithOverrides(activeModels, { homePinFallback: true });
+  // Respect active panel ordering. Never prepend historic HOME_PIN_ORDER on this landing page.
+  const homeModels = useCatalogWithOverrides(activeModels);
   const [loadExploreNav, setLoadExploreNav] = useState(false);
   const [loadReviews, setLoadReviews] = useState(false);
   const reviewsSentinelRef = useRef<HTMLDivElement>(null);
@@ -183,6 +184,7 @@ const Home: React.FC = () => {
         heading="Escorts en Valencia"
         subtitle="Selección Valeria Ferrer · Fotos reales · Reserva discreta"
         deferFirstImages
+        useOriginalCovers
       />
 
       <div ref={reviewsSentinelRef} className="min-h-[32rem] md:min-h-[28rem]">
