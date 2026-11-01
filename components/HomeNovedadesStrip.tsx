@@ -10,13 +10,14 @@ type Props = {
 };
 
 const HomeNovedadesStrip: React.FC<Props> = ({ models }) => {
-  const novedades = useMemo(() => models.filter((m) => m.active !== false).slice(0, 4), [models]);
+  const novedades = useMemo(() => models.filter((m) => m.active !== false).slice(0, 8), [models]);
   const trackRef = useRef<HTMLDivElement>(null);
   const advance = (dir: -1 | 1) => {
     const el = trackRef.current;
     if (!el) return;
     const card = el.querySelector('.vf-luxury-card') as HTMLElement | null;
-    el.scrollBy({ left: dir * ((card?.offsetWidth || 250) + 14), behavior: 'smooth' });
+    const gap = Number.parseFloat(window.getComputedStyle(el).columnGap) || 14;
+    el.scrollBy({ left: dir * ((card?.offsetWidth || 250) + gap), behavior: 'smooth' });
   };
 
   return (
