@@ -895,3 +895,34 @@
     letter-spacing:.08em;
   }
 }
+
+/* Reliability: a cached iOS image must never stay invisible while waiting for
+   a React onLoad state update. The browser paints the decoded photo itself. */
+.vf-profile-detail .vf-editorial-intro__photo-open img {
+  opacity:1!important;
+}
+.vf-profile-detail .vf-editorial-intro__image-error {
+  position:absolute;
+  z-index:6;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:12px;
+  padding:20px;
+  color:#f7e1cb;
+  background:rgba(22,6,14,.90);
+  text-align:center;
+  font:500 13px/1.5 Montserrat,sans-serif;
+}
+.vf-profile-detail .vf-editorial-intro__image-error button {
+  border:1px solid rgba(239,192,127,.7);
+  background:rgba(74,24,42,.86);
+  color:#f8e7d4;
+  border-radius:999px;
+  min-height:44px;
+  padding:10px 20px;
+  cursor:pointer;
+  font:600 12px Montserrat,sans-serif;
+}
