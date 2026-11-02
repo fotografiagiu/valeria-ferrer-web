@@ -1,0 +1,433 @@
+/* ==========================================================================
+   VALERIA FERRER / PROFILE DETAIL LUXURY V1
+   Scope: /models/:id only. Pure design, no modifications to catalog, SEO,
+   booking destinations, promotions, data or personal descriptions.
+   ========================================================================== */
+
+.vf-profile-detail {
+  --vf-p-bg: #100b10;
+  --vf-p-panel: #21171d;
+  --vf-p-panel-hover: #2c1d25;
+  --vf-p-border: rgba(218, 169, 118, .25);
+  --vf-p-cream: #f7e9dd;
+  --vf-p-muted: #c7b6af;
+  --vf-p-gold: #e4bb83;
+  --vf-p-gold-deep: #bd8d59;
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse 64% 36% at 90% 8%, rgba(117, 35, 64, .17), transparent 75%),
+    radial-gradient(ellipse 65% 35% at 4% 50%, rgba(91, 19, 46, .13), transparent 80%),
+    linear-gradient(180deg, #160c13 0%, #100b10 34%, #110b11 100%) !important;
+  color: var(--vf-p-cream);
+}
+
+.vf-profile-detail > .h-32 { height: 84px; }
+.vf-profile-detail .vf-profile-titlebar {
+  background: none !important;
+  padding: 4px 0 0;
+}
+.vf-profile-detail .vf-profile-titlebar > div {
+  max-width: 1380px;
+  padding-top: 12px !important;
+  padding-bottom: 22px !important;
+}
+.vf-profile-detail .vf-profile-titlebar h1 {
+  font-family: "Cormorant Garamond", Georgia, serif !important;
+  font-size: clamp(49px, 5vw, 77px) !important;
+  font-weight: 500;
+  line-height: 1;
+  text-transform: none !important;
+  letter-spacing: -.024em !important;
+  background: linear-gradient(120deg, #fff1e0, #e0b98c 85%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.vf-profile-detail .vf-profile-titlebar h1 + div {
+  margin-top: 8px;
+  color: #d8b69c !important;
+  font-size: 12px !important;
+  text-transform: uppercase;
+  letter-spacing: .18em;
+  line-height: 1.5;
+}
+.vf-profile-detail nav[aria-label="Navegación de migas de pan"] {
+  background: transparent !important;
+  border-color: rgba(221, 179, 123, .14) !important;
+  padding: 13px clamp(17px, 4vw, 40px);
+}
+.vf-profile-detail nav[aria-label="Navegación de migas de pan"] ol {
+  max-width: 1380px;
+  font-size: 12px !important;
+  flex-wrap: wrap;
+  gap: 3px 0;
+}
+.vf-profile-detail nav[aria-label="Navegación de migas de pan"] span,
+.vf-profile-detail nav[aria-label="Navegación de migas de pan"] a:hover {
+  color: var(--vf-p-gold) !important;
+}
+
+.vf-profile-detail .vf-profile-desktop {
+  max-width: 1450px !important;
+  padding: 38px clamp(20px, 3vw, 52px) 90px !important;
+}
+.vf-profile-detail .vf-profile-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.85fr) minmax(320px, .95fr);
+  column-gap: clamp(28px, 3.4vw, 58px) !important;
+  align-items: start;
+}
+.vf-profile-detail .vf-profile-main { min-width: 0; }
+.vf-profile-detail .vf-profile-main > :where(div) { min-width: 0; }
+
+/* Prev/next navigation: one elegant slim bar, not another oversized rectangle */
+.vf-profile-detail .vf-profile-desktop .vf-profile-main > div:first-child {
+  margin-bottom: 10px;
+}
+.vf-profile-detail .vf-profile-desktop .vf-profile-main > div:first-child > div,
+.vf-profile-detail .vf-profile-mobile > div:first-child > div {
+  background: rgba(41, 26, 36, .58) !important;
+  border: 1px solid rgba(224, 175, 120, .2) !important;
+  border-radius: 15px !important;
+  box-shadow: 0 10px 35px rgba(0,0,0,.12);
+}
+.vf-profile-detail .vf-profile-desktop .vf-profile-main > div:first-child > div {
+  padding: 18px 23px !important;
+}
+.vf-profile-detail .vf-profile-main > div:first-child button,
+.vf-profile-detail .vf-profile-mobile > div:first-child button {
+  color: #d9bea9;
+}
+.vf-profile-detail .vf-profile-main > div:first-child button:hover,
+.vf-profile-detail .vf-profile-mobile > div:first-child button:hover { color: #fff1dd; }
+
+/* Primary photo is the visual anchor. Use proportional cover, not huge zoom. */
+.vf-profile-detail .vf-profile-desktop-photo {
+  aspect-ratio: 4 / 4.7;
+  max-height: 790px;
+  border: 1px solid rgba(225, 174, 113, .47) !important;
+  border-radius: 23px !important;
+  background: #24171d;
+  box-shadow: 0 24px 65px rgba(0,0,0,.38), 0 0 0 6px rgba(237,179,117,.025);
+}
+.vf-profile-detail .vf-profile-desktop-photo > img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center 17%;
+  filter: brightness(1.0) contrast(1.015) saturate(.97);
+}
+.vf-profile-detail .vf-profile-desktop-photo img:hover {
+  transform: scale(1.025);
+}
+.vf-profile-detail .vf-profile-desktop-photo .absolute.bottom-4,
+.vf-profile-detail .vf-profile-mobile-photo .absolute.bottom-4 {
+  background: rgba(15, 8, 12, .64);
+  backdrop-filter: blur(9px);
+  border: 1px solid rgba(243, 211, 169, .22);
+  border-radius: 999px;
+  padding: 10px 14px;
+  left: 17px;
+  right: 17px;
+  bottom: 16px;
+}
+.vf-profile-detail .vf-profile-desktop-photo [class*="top-6"],
+.vf-profile-detail .vf-profile-mobile-photo + div [class*="top-6"] {
+  border-radius: 9px;
+}
+
+/* More generous biography hierarchy */
+.vf-profile-detail .vf-profile-main h2,
+.vf-profile-detail .vf-profile-main h3,
+.vf-profile-detail .vf-profile-mobile h2,
+.vf-profile-detail .vf-profile-mobile h3 {
+  font-family: "Cormorant Garamond", Georgia, serif !important;
+  font-weight: 500;
+  text-transform: none !important;
+  letter-spacing: .02em !important;
+  color: #f6e6d9;
+}
+.vf-profile-detail .vf-profile-main h2 { font-size: clamp(25px, 2.5vw, 36px) !important; }
+.vf-profile-detail .vf-profile-main h3 { font-size: clamp(21px, 2vw, 31px) !important; }
+.vf-profile-detail .vf-profile-main .text-gray-400,
+.vf-profile-detail .vf-profile-mobile .text-gray-400 {
+  color: #c7b9b3 !important;
+}
+.vf-profile-detail .vf-profile-main p,
+.vf-profile-detail .vf-profile-mobile p {
+  line-height: 1.8;
+}
+.vf-profile-detail .vf-profile-main p.text-justify,
+.vf-profile-detail .vf-profile-mobile p.text-justify {
+  text-align: left !important;
+  font-size: clamp(13px, 1.1vw, 16px);
+  line-height: 1.9 !important;
+  margin-bottom: 15px;
+}
+
+/* All informational panels are soft, breathable luxury cards */
+.vf-profile-detail .vf-profile-sidebar > div,
+.vf-profile-detail .vf-profile-main div.bg-\[\#111111\],
+.vf-profile-detail .vf-profile-mobile div.bg-\[\#111111\],
+.vf-profile-detail .vf-profile-mobile-pricing div.bg-\[\#111111\] {
+  background: linear-gradient(145deg, rgba(43,28,39,.91), rgba(25,19,28,.9)) !important;
+  border: 1px solid var(--vf-p-border) !important;
+  border-radius: 18px !important;
+  box-shadow: 0 13px 36px rgba(0,0,0,.11);
+}
+.vf-profile-detail .vf-profile-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 19px !important;
+  min-width: 0;
+}
+.vf-profile-detail .vf-profile-sidebar > div {
+  padding: 25px 25px 24px !important;
+}
+.vf-profile-detail .vf-profile-sidebar h4 {
+  font-size: 12px !important;
+  font-weight: 650 !important;
+  letter-spacing: .14em !important;
+  text-transform: uppercase;
+  color: var(--vf-p-gold) !important;
+  margin-bottom: 15px !important;
+}
+.vf-profile-detail .vf-profile-sidebar .space-y-3 > div,
+.vf-profile-detail .vf-profile-sidebar .space-y-2 > div {
+  padding-block: 10px !important;
+  border-color: rgba(225,177,121,.13) !important;
+}
+.vf-profile-detail .vf-profile-sidebar .space-y-3 > div > span:first-child,
+.vf-profile-detail .vf-profile-sidebar .space-y-2 > div > span:first-child {
+  color: #c9b7ad !important;
+  letter-spacing: .08em !important;
+  font-size: 11px !important;
+  font-weight: 500;
+}
+.vf-profile-detail .vf-profile-sidebar .space-y-3 > div > span:last-child,
+.vf-profile-detail .vf-profile-sidebar .space-y-2 > div > span:last-child {
+  color: #fff1df !important;
+  font-weight: 600;
+  font-size: 14px;
+  text-align: right;
+}
+.vf-profile-detail .vf-profile-sidebar a { color: #edd1ac !important; }
+.vf-profile-detail .vf-profile-sidebar a:hover { color: #fff0db !important; }
+.vf-profile-detail .vf-profile-sidebar p {
+  color: #cebcb3 !important;
+  font-size: 13px;
+  line-height: 1.8;
+}
+.vf-profile-detail .vf-profile-sidebar > div:nth-child(n+3) h4 {
+  font-size: 11px !important;
+}
+.vf-profile-detail .vf-profile-sidebar > div:nth-child(n+3) {
+  background: rgba(37,25,35,.6) !important;
+}
+
+/* Editorial photo mosaics and recommendations */
+.vf-profile-detail .vf-profile-main img {
+  border-radius: inherit;
+}
+.vf-profile-detail .vf-profile-main a.group.block,
+.vf-profile-detail .vf-profile-mobile a.group.block {
+  overflow: hidden;
+  border: 1px solid rgba(223,172,109,.28) !important;
+  border-radius: 18px !important;
+  background: #251821 !important;
+  transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+.vf-profile-detail .vf-profile-main a.group.block:hover,
+.vf-profile-detail .vf-profile-mobile a.group.block:hover {
+  border-color: rgba(246,207,145,.75) !important;
+  transform: translateY(-4px);
+  box-shadow: 0 17px 40px rgba(0,0,0,.22);
+}
+.vf-profile-detail .vf-profile-main [class*="rounded-xl"],
+.vf-profile-detail .vf-profile-mobile [class*="rounded-xl"] {
+  border-radius: 13px;
+}
+.vf-profile-detail .vf-profile-main [class*="bg-[#111111]"] { overflow-wrap: break-word; }
+
+/* Mobile: one coherent reading path, image first and quick statistics */
+.vf-profile-detail .vf-profile-mobile {
+  padding: 18px 15px 135px !important;
+  max-width: 620px;
+}
+.vf-profile-detail .vf-profile-mobile > div:first-child {
+  margin-bottom: 18px !important;
+}
+.vf-profile-detail .vf-profile-mobile > div:first-child > div {
+  padding: 13px 15px !important;
+}
+.vf-profile-detail .vf-profile-mobile-photo {
+  border: 1px solid rgba(227,171,108,.45) !important;
+  border-radius: 19px;
+  background: #21141c !important;
+  aspect-ratio: 3 / 3.95;
+  box-shadow: 0 18px 45px rgba(0,0,0,.25);
+}
+.vf-profile-detail .vf-profile-mobile-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 18%;
+}
+.vf-profile-detail .vf-profile-stats {gap: 9px !important;margin-top:18px !important;}
+.vf-profile-detail .vf-profile-stats > div {
+  padding: 13px 11px !important;
+  border-radius: 13px !important;
+}
+.vf-profile-detail .vf-profile-stats p:first-child {
+  color: #c8ad97 !important;
+  font-size: 9px !important;
+  letter-spacing: .1em !important;
+}
+.vf-profile-detail .vf-profile-stats p:last-child {
+  color: #f4dfc9 !important;
+  font-size: 21px !important;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+.vf-profile-detail .vf-profile-mobile-heading {
+  padding-bottom: 22px !important;
+  margin-bottom: 27px !important;
+  border-color: rgba(231,181,120,.21) !important;
+}
+.vf-profile-detail .vf-profile-mobile-heading h2 {
+  color: #efcc9f !important;
+  font-size: clamp(38px,10vw,57px) !important;
+  margin-bottom: 7px !important;
+}
+.vf-profile-detail .vf-profile-mobile-heading > div:nth-child(3) {
+  font-size: 10px !important;
+  letter-spacing: .19em !important;
+  margin-bottom: 10px !important;
+}
+.vf-profile-detail .vf-profile-mobile .grid.grid-cols-2 > div {
+  min-width: 0;
+}
+.vf-profile-detail .vf-profile-mobile .space-y-8 {gap: 16px;}
+.vf-profile-detail .vf-profile-mobile .space-y-8 h2 {font-size: 27px !important;}
+.vf-profile-detail .vf-profile-mobile-pricing {
+  padding: 42px 16px 54px !important;
+  background: linear-gradient(180deg, rgba(32,18,29,.3), transparent) !important;
+  border-color: rgba(226,170,109,.18) !important;
+}
+.vf-profile-detail .vf-profile-mobile-pricing h2 {
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-weight:500!important;
+  font-size:34px!important;
+}
+.vf-profile-detail .vf-profile-mobile-pricing .grid.grid-cols-2 {
+  gap: 0;
+}
+.vf-profile-detail .vf-profile-mobile-pricing .p-4 {
+  padding: 13px !important;
+}
+.vf-profile-detail .vf-profile-mobile-pricing .grid.grid-cols-2 >div>div {
+  border-color: rgba(218,164,107,.2) !important;
+}
+
+/* Sticky contact: neutral luxury outline instead of three very tall blocks. */
+.vf-profile-detail .profile-contact-actions {
+  max-width: 1050px;
+  width: calc(100% - 24px);
+  margin: 0 auto 12px;
+  padding: 10px !important;
+  gap: 9px;
+  border: 1px solid rgba(214,166,107,.3);
+  border-radius: 19px;
+  background: rgba(22,12,20,.94);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 15px 50px rgba(0,0,0,.42);
+}
+.vf-profile-detail .profile-contact-btn {
+  min-height: 51px !important;
+  padding: 9px 13px !important;
+  gap: 9px;
+  font-family: Montserrat,sans-serif;
+  font-size: 13px !important;
+  font-weight: 650;
+  border-radius: 12px;
+  box-shadow: none;
+}
+.vf-profile-detail .profile-contact-btn--telegram {
+  background:#29314b;color:#e9efff;
+}
+.vf-profile-detail .profile-contact-btn--phone {
+  background:#ead2b7;color:#261612;
+}
+.vf-profile-detail .profile-contact-btn--whatsapp {
+  background: #166e51;color:#fff;
+}
+.vf-profile-detail .profile-contact-btn__number {
+  font-size: 10px;
+}
+
+/* Booking & ending sections flow naturally, not two unrelated black slabs. */
+.vf-profile-detail > section.py-16,
+.vf-profile-detail > section.py-24 {
+  background: transparent !important;
+  border-color: rgba(228,171,115,.14) !important;
+}
+.vf-profile-detail > section.py-16 a {
+  border-radius: 999px;
+  background:linear-gradient(125deg,#ba8653,#f1d0a1) !important;
+  color:#2d180d;
+  font-size:11px;
+  letter-spacing:.14em;
+  padding:19px 34px;
+}
+.vf-profile-detail > section.py-24 p {
+  color:#c5a993;
+  letter-spacing:.17em;
+  font-size:10px;
+}
+.vf-profile-detail a:focus-visible,
+.vf-profile-detail button:focus-visible {
+  outline: 2px solid #f3d49c;
+  outline-offset: 4px;
+}
+
+@media(min-width:1024px) and (max-width:1200px){
+  .vf-profile-detail .vf-profile-layout {
+    grid-template-columns:minmax(0,1.6fr) minmax(290px,.95fr);
+    gap:26px!important;
+  }
+  .vf-profile-detail .vf-profile-sidebar>div {padding:21px!important;}
+}
+@media(max-width:1023px){
+  .vf-profile-detail .vf-profile-titlebar h1 {font-size:52px!important;}
+  .vf-profile-detail .vf-profile-titlebar > div {padding:9px 18px 18px!important;}
+}
+@media(max-width:700px){
+  .vf-profile-detail > .h-32 {height:73px;}
+  .vf-profile-detail .vf-profile-titlebar h1 {font-size:47px!important;}
+  .vf-profile-detail .vf-profile-titlebar h1+div{
+    font-size:10px!important;
+    letter-spacing:.11em;
+  }
+  .vf-profile-detail .profile-contact-actions {
+    width:calc(100% - 12px);
+    margin:0 auto 7px;
+    gap:6px;
+    padding:6px!important;
+    border-radius:13px;
+  }
+  .vf-profile-detail .profile-contact-btn{
+    min-height:49px!important;
+    padding:9px 5px!important;
+    gap:5px;
+    font-size:11px!important;
+    border-radius:9px;
+  }
+  .vf-profile-detail .profile-contact-btn svg{width:16px;height:16px;}
+  .vf-profile-detail .profile-contact-btn__number{display:none;}
+  .vf-profile-detail .vf-profile-mobile-photo{aspect-ratio:3/4.1;}
+  .vf-profile-detail .vf-profile-mobile-pricing{padding-inline:13px!important;}
+}
+@media(prefers-reduced-motion:reduce){
+  .vf-profile-detail * {scroll-behavior:auto!important;animation:none!important;transition:none!important;}
+}
