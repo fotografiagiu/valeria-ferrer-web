@@ -25,20 +25,14 @@ const WhatsAppGlyph: React.FC<{ size?: number }> = ({ size = 16 }) => (
 const FloatingContactPopup: React.FC = () => {
   const { pathname } = useLocation();
   const isHome = pathname === '/';
-  const [isOpen, setIsOpen] = useState(() => {
-    if (!isHome || typeof window === 'undefined') return false;
-    return window.matchMedia('(min-width: 768px)').matches;
-  });
+  // Cerrado por defecto: abierto tapaba hero + cartel Novedades.
+  const [isOpen, setIsOpen] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    if (!isHome) {
-      setIsOpen(false);
-      return;
-    }
-    setIsOpen(window.matchMedia('(min-width: 768px)').matches);
-  }, [pathname, isHome]);
+    setIsOpen(false);
+  }, [pathname]);
 
   useEffect(() => {
     if (!isOpen) return;

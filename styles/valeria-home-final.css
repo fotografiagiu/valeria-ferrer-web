@@ -23,14 +23,14 @@
   isolation:isolate;
   display:flex;
   align-items:center;
-  min-height:clamp(650px,72vw,770px);
+  min-height:clamp(620px,68vw,720px);
   overflow:hidden;
   background:#180710;
-  border-bottom:1px solid rgba(218,160,97,.16);
+  border-bottom:0;
 }
 .vf-lux-hero__visual {
   position:absolute;
-  z-index:-2;
+  z-index:0;
   inset:0 0 0 auto;
   width:71%;
   height:100%;
@@ -49,17 +49,17 @@
   filter:brightness(.98) saturate(.97) contrast(1.03);
 }
 .vf-lux-hero__shade {
-  position:absolute;z-index:-1;inset:0;
+  position:absolute;z-index:1;inset:0;
   background:
     linear-gradient(90deg,#190811 0%,rgba(25,8,17,.99) 23%,rgba(25,8,17,.83) 40%,rgba(25,8,17,.20) 67%,rgba(25,8,17,.02) 100%),
-    linear-gradient(0deg,#1c0913 0%,rgba(28,9,19,.83) 3%,transparent 25%),
+    linear-gradient(0deg,#12050c 0%,rgba(18,5,12,.88) 8%,rgba(18,5,12,.35) 22%,transparent 42%),
     radial-gradient(ellipse at 5% 45%,rgba(92,18,49,.2),transparent 58%);
   pointer-events:none;
 }
 .vf-lux-hero__content {
-  position:relative;z-index:1;
+  position:relative;z-index:2;
   width:min(100% - 9vw,1440px);margin:0 auto;
-  padding:130px 0 135px;
+  padding:110px 0 150px;
   max-width:1440px;
 }
 .vf-lux-hero__eyebrow {
@@ -128,7 +128,8 @@
   position:relative;
   z-index:3;
   padding:0 clamp(20px,3.5vw,60px) 70px;
-  margin:-101px auto 0;
+  /* Subir el cartel para que cruce de verdad el borde inferior de la hero */
+  margin:-168px auto 0;
   width:100%;
   background:transparent;
   overflow:hidden;
@@ -340,7 +341,7 @@
   .vf-lux-hero__features span{font-size:8px;white-space:normal;flex:1;color:#f0e0d2}
   .vf-lux-hero__features svg{width:17px;height:17px}
   .vf-lux-promos .vf-noir-promos__grid--two{grid-template-columns:1fr}
-  .vf-noir-home-page > .vf-lux-news{margin-top:-83px;padding:0 8px 46px}
+  .vf-noir-home-page > .vf-lux-news{margin-top:-120px;padding:0 8px 46px}
   .vf-lux-news__rail{height:9px;width:min(310px,78%)}
   .vf-lux-news__hanger{width:min(330px,87%)}
   .vf-lux-news__rope{height:49px;width:6px}
