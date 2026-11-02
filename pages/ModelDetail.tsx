@@ -14,7 +14,6 @@ import Breadcrumbs from '../components/Breadcrumbs';
 import AnalyticsEvents from '../components/AnalyticsEvents';
 import EditorialProfileIntro from '../components/EditorialProfileIntro';
 import BlackCornerRibbon from '../components/BlackCornerRibbon';
-import NewCornerRibbon from '../components/NewCornerRibbon';
 import { useIsStaffHiddenSlug, useCatalogWithOverrides } from '../hooks/useCatalogWithOverrides';
 import {
   OFFICIAL_PHONE_LABEL,
@@ -48,8 +47,10 @@ const ModelDetail: React.FC = () => {
   const [showContactBar, setShowContactBar] = useState(true);
   const touchStartRef = useRef<{ x: number; y: number } | null>(null);
 
+  // Deduplicate the cover repeated at the start of the gallery, preserving order.
+  // Must exactly match EditorialProfileIntro's photo indices for modal navigation.
   const filterValidImages = (images: string[]) =>
-    images.filter(
+    Array.from(new Set(images.filter(
       (img) =>
         img &&
         img !== '/' &&
@@ -57,7 +58,7 @@ const ModelDetail: React.FC = () => {
         typeof img === 'string' &&
         img.startsWith('/') &&
         img.length > 1
-    );
+    )));
 
   const getAllModalImages = () =>
     model ? filterValidImages([model.image, ...(model.gallery || [])]) : [];
@@ -442,7 +443,7 @@ const ModelDetail: React.FC = () => {
               />
             </div>
             {/* Nueva incorporación a la izquierda, BLACK a la derecha. */}
-            {model.isNew && <NewCornerRibbon profile />}
+
             {!model.isNew && (
               <div className="absolute top-6 left-6 px-4 py-2 bg-black/40 backdrop-blur-md border border-[#c2b2a3]/30 text-[9px] tracking-[0.4em] uppercase font-bold text-[#c2b2a3]">
                 {model.galleryUpdated ? 'Actualizada' : 'Elección Élite'}
@@ -1463,7 +1464,7 @@ const ModelDetail: React.FC = () => {
                 />
                 
                 {/* Nueva incorporación a la izquierda, BLACK a la derecha. */}
-                                {model.isNew && <NewCornerRibbon profile />}
+
                                 {!model.isNew && (
                                   <div className="absolute top-6 left-6 px-4 py-2 bg-black/40 backdrop-blur-md border border-[#c2b2a3]/30 text-[9px] tracking-[0.4em] uppercase font-bold text-[#c2b2a3]">
                                     {model.galleryUpdated ? 'Actualizada' : 'Elección Élite'}

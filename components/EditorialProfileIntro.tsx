@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { ChevronLeft, ChevronRight, ChevronDown, Image as ImageIcon } from 'lucide-react';
 import type { Model } from '../types';
-import NewCornerRibbon from './NewCornerRibbon';
 import BlackCornerRibbon from './BlackCornerRibbon';
 import VfPhotoFirma from './VfPhotoFirma';
 
@@ -15,16 +14,15 @@ const vipPriceKeys = ['30min', '45min', '1h', '1.5h', '2h', '3h', 'salidaHotel',
 
 /** Uses the same live model as the model detail view, without stale catalogs. */
 const EditorialProfileIntro: React.FC<Props> = ({ model, onOpenGallery }) => {
+  // The cover is usually also gallery[0]. Do not repeat it as a phantom first photo.
   const photos = useMemo(
-    () => [model.image, ...(model.gallery || [])].filter((src): src is string => typeof src === 'string' && src.startsWith('/') && src.length > 1),
+    () => Array.from(new Set([model.image, ...(model.gallery || [])].filter((src): src is string => typeof src === 'string' && src.startsWith('/') && src.length > 1))),
     [model.image, model.gallery]
   );
   const [selected, setSelected] = useState(0);
-  const [loaded, setLoaded] = useState(false);
   const [selectedRateIndex, setSelectedRateIndex] = useState(2);
-  useEffect(() => { setSelected(0); setLoaded(false); setSelectedRateIndex(2); }, [model.id]);
+  useEffect(() => { setSelected(0); setSelectedRateIndex(2); }, [model.id]);
   const setPhoto = useCallback((value: number) => {
-    setLoaded(false);
     setSelected((value + photos.length) % Math.max(photos.length, 1));
   }, [photos.length]);
   const facts = [
@@ -59,7 +57,7 @@ const EditorialProfileIntro: React.FC<Props> = ({ model, onOpenGallery }) => {
                   aria-label={'Ampliar fotografía ' + (selected + 1) + ' de ' + model.name}>
                   <img key={photos[selected]} src={photos[selected]}
                     alt={model.name + ' — fotografía ' + (selected + 1)} loading="eager" decoding="async"
-                    onLoad={() => setLoaded(true)} className={loaded ? 'is-loaded' : ''} />
+                    className="is-loaded" />
                 </button>
                 <VfPhotoFirma className="vf-editorial-intro__firma" photoSrc={photos[selected]} />
                 {photos.length > 1 && (
@@ -78,7 +76,6 @@ const EditorialProfileIntro: React.FC<Props> = ({ model, onOpenGallery }) => {
                 </div>
               </>
             ) : <span className="vf-editorial-intro__missing"><ImageIcon size={30}/> Galería próximamente</span>}
-            {model.isNew && <NewCornerRibbon profile />}
             {model.black && <BlackCornerRibbon profile />}
           </div>
           <div className="vf-editorial-intro__thumbnails" aria-label="Miniaturas de la galería">
