@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight, ChevronRight, Crown } from 'lucide-react';
+import BlackCornerRibbon from './BlackCornerRibbon';
+import VfPhotoFirma from './VfPhotoFirma';
 
 /** One consistent editorial card for the homepage, Novedades and the catalog.
  * Uses the public catalog's current cover URL; does not invent profiles or cache old thumbnails.
@@ -39,8 +41,9 @@ const PremiumProfileCard: React.FC<Props> = ({ model, priority = false, showNew 
               loading={priority ? 'eager' : 'lazy'} decoding="async"
               fetchPriority={priority ? 'high' : 'auto'} width={640} height={900} />
           ) : <div className="vf-luxury-card__placeholder" aria-hidden="true" />}
+          <VfPhotoFirma className="vf-luxury-card__firma" photoSrc={image} />
           <div className="vf-luxury-card__veil" aria-hidden="true" />
-          {model.black === true && <span className="vf-luxury-card__black" aria-label="Etiqueta BLACK"><span>BLACK</span></span>}
+          {model.black === true && <BlackCornerRibbon />}
           {model.vip === true && <span className="vf-luxury-card__vip"><Crown size={12} aria-hidden="true" /> VIP</span>}
           {showNew && (model.isNew === true || !!model.galleryUpdated) &&
             <span className="vf-luxury-card__new">{model.isNew ? 'NUEVA' : 'ACTUALIZADA'}</span>}

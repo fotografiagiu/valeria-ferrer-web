@@ -3,6 +3,7 @@ import { ChevronLeft, ChevronRight, ChevronDown, Image as ImageIcon } from 'luci
 import type { Model } from '../types';
 import NewCornerRibbon from './NewCornerRibbon';
 import BlackCornerRibbon from './BlackCornerRibbon';
+import VfPhotoFirma from './VfPhotoFirma';
 
 interface Props { model: Model; onOpenGallery: (index: number) => void; }
 const standardPrices = {
@@ -60,6 +61,7 @@ const EditorialProfileIntro: React.FC<Props> = ({ model, onOpenGallery }) => {
                     alt={model.name + ' — fotografía ' + (selected + 1)} loading="eager" decoding="async"
                     onLoad={() => setLoaded(true)} className={loaded ? 'is-loaded' : ''} />
                 </button>
+                <VfPhotoFirma className="vf-editorial-intro__firma" photoSrc={photos[selected]} />
                 {photos.length > 1 && (
                   <>
                     <button type="button" className="vf-editorial-intro__arrow vf-editorial-intro__arrow--prev" aria-label="Fotografía anterior" onClick={() => setPhoto(selected - 1)}><ChevronLeft size={21}/></button>
