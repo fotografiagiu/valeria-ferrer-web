@@ -1,0 +1,376 @@
+/*
+  VALERIA FERRER — PREMIUM FINAL
+  Inspirado en REFERENCIA_VISUAL_APROBADA.png.
+  En este fichero se controla exclusivamente la home nueva.
+  Importar después de november-noir.css y valeria-luxury-v5.css.
+  NO importar v6.css / v7.css ni usar un mockup vertical como hero.
+*/
+.vf-noir-home-page {
+  --vf-bg: #160711;
+  --vf-burgundy: #3b0f24;
+  --vf-cream: #f9e7d6;
+  --vf-gold: #e6ba7f;
+  color: var(--vf-cream);
+  background: radial-gradient(ellipse at 52% 28%,rgba(91,20,48,.28),transparent 59%),
+              linear-gradient(180deg,#11060b,#260b19 38%,#13070e 100%) !important;
+  overflow-x:clip;
+}
+
+/* 1. HERO: archivo limpio 1264x954, sin zoom artificial.
+   La foto se coloca EN UN CONTENEDOR a la derecha. object-fit:cover
+   recorta lo mínimo a 1440/1280px. Prohibidos width:195%, left:-93%. */
+.vf-lux-hero {
+  position:relative;
+  isolation:isolate;
+  display:flex;
+  align-items:center;
+  min-height:clamp(650px,72vw,770px);
+  overflow:hidden;
+  background:#180710;
+  border-bottom:1px solid rgba(218,160,97,.16);
+}
+.vf-lux-hero__visual {
+  position:absolute;
+  z-index:-2;
+  inset:0 0 0 auto;
+  width:71%;
+  height:100%;
+  overflow:hidden;
+}
+.vf-lux-hero__visual img {
+  display:block;
+  width:100%; height:100%;
+  object-fit:cover;
+  object-position:50% 50%;
+  transform:none;
+  animation:none;
+  filter:brightness(.98) saturate(.97) contrast(1.03);
+}
+.vf-lux-hero__shade {
+  position:absolute;z-index:-1;inset:0;
+  background:
+    linear-gradient(90deg,#190811 0%,rgba(25,8,17,.99) 23%,rgba(25,8,17,.83) 40%,rgba(25,8,17,.20) 67%,rgba(25,8,17,.02) 100%),
+    linear-gradient(0deg,#1c0913 0%,rgba(28,9,19,.83) 3%,transparent 25%),
+    radial-gradient(ellipse at 5% 45%,rgba(92,18,49,.2),transparent 58%);
+  pointer-events:none;
+}
+.vf-lux-hero__content {
+  position:relative;z-index:1;
+  width:min(100% - 9vw,1440px);margin:0 auto;
+  padding:130px 0 135px;
+  max-width:1440px;
+}
+.vf-lux-hero__eyebrow {
+  display:flex;align-items:center;gap:11px;
+  color:#e7c8a2;
+  font:600 10px/1.3 Montserrat,system-ui,sans-serif;
+  letter-spacing:.29em;
+  margin:0 0 17px;
+}
+.vf-lux-hero__eyebrow svg{color:var(--vf-gold)}
+.vf-lux-hero__title {
+  display:flex;flex-direction:column;
+  max-width:650px;
+  margin:0;
+  font:italic 500 clamp(77px,7vw,126px)/.74 'Cormorant Garamond',Georgia,serif;
+  letter-spacing:-.04em;
+  text-shadow:0 5px 21px rgba(0,0,0,.45);
+}
+.vf-lux-hero__title span{color:#f9ecde;white-space:nowrap}
+.vf-lux-hero__title em{font-style:italic;color:#f0d3a6;margin-top:.13em}
+.vf-lux-hero__tagline {
+  font:italic 500 clamp(22px,2.3vw,32px)/1.2 'Cormorant Garamond',Georgia,serif;
+  color:#e9c994;
+  margin:28px 0 12px;
+}
+.vf-lux-hero__description {
+  max-width:425px;
+  margin:0;
+  color:#e6d4c7;
+  font:400 13px/1.85 Montserrat,system-ui,sans-serif;
+  text-shadow:0 3px 12px rgba(0,0,0,.35);
+}
+.vf-lux-hero__actions {display:flex;gap:13px;flex-wrap:wrap;margin-top:26px}
+.vf-lux-hero__button {
+  display:inline-flex;align-items:center;justify-content:center;gap:13px;
+  min-height:50px;padding:12px 25px;
+  border-radius:999px;text-decoration:none;
+  font:700 11px Montserrat,system-ui,sans-serif;
+  letter-spacing:.065em;text-transform:uppercase;
+  transition:transform .25s ease,box-shadow .25s ease,background .25s ease;
+}
+.vf-lux-hero__button:hover{transform:translateY(-3px)}
+.vf-lux-hero__button--primary{
+  color:#271407;border:1px solid #ecd4ac;
+  background:linear-gradient(110deg,#c99354,#f4d9a3,#d6a061);
+  box-shadow:0 10px 30px rgba(0,0,0,.26);
+}
+.vf-lux-hero__button--outline{
+  color:#f5e6d3;border:1px solid #ddb477;background:rgba(16,6,12,.58);
+}
+.vf-lux-hero__button:focus-visible{outline:3px solid #f4d699;outline-offset:4px}
+.vf-lux-hero__features{
+  display:flex;align-items:flex-start;gap:clamp(17px,2.6vw,43px);
+  margin-top:32px;
+}
+.vf-lux-hero__features span{
+  display:flex;flex-direction:column;align-items:center;gap:7px;
+  font:400 10px/1.35 Montserrat,system-ui,sans-serif;
+  text-align:center;white-space:nowrap;color:#e3d2c2;
+}
+.vf-lux-hero__features svg {color:#edbe7e;stroke-width:1.5}
+
+/* 2. NOVEDADES: cartel colgado cruzando visualmente el límite de la hero.
+   No debe estar en un sidebar ni dentro de un rectángulo enorme. */
+.vf-noir-home-page > .vf-lux-news {
+  position:relative;
+  z-index:3;
+  padding:0 clamp(20px,3.5vw,60px) 70px;
+  margin:-101px auto 0;
+  width:100%;
+  background:transparent;
+  overflow:hidden;
+}
+.vf-lux-news__rail{
+  width:min(485px,70%);height:12px;
+  border-radius:999px;
+  margin:0 auto;
+  background:linear-gradient(180deg,#fff0b5,#d29b54 48%,#805123 100%);
+  box-shadow:0 2px 8px rgba(0,0,0,.6),0 1px 12px rgba(238,176,92,.27);
+}
+.vf-lux-news__hanger {
+  width:min(440px,72%);
+  margin:0 auto;
+  transform-origin:50% 0;
+  animation:vf-lux-sway 7s ease-in-out infinite alternate;
+}
+.vf-lux-news__rope {
+  display:inline-block;
+  position:relative;
+  width:7px;height:74px;
+  background:repeating-linear-gradient(0deg,#a46c34 0 3px,#ffe3a2 3px 7px,#d5a664 7px 10px);
+  box-shadow:2px 1px 4px rgba(0,0,0,.5);
+}
+.vf-lux-news__rope--left{margin-left:17%}
+.vf-lux-news__rope--right{float:right;margin-right:17%}
+.vf-lux-news__plaque {
+  clear:both;
+  padding:17px 12px 20px;
+  border:1px solid #d7a25f;border-radius:16px;
+  text-align:center;
+  background:linear-gradient(152deg,#3c1425,#1a0811 80%);
+  box-shadow:0 16px 45px rgba(0,0,0,.58),inset 0 1px rgba(255,223,167,.13);
+}
+.vf-lux-news__plaque p {
+  margin:0 0 2px;color:#e7bc88;
+  font:600 10px Montserrat,system-ui,sans-serif;letter-spacing:.32em;
+}
+.vf-lux-news__plaque h2 {
+  margin:0;color:#f9e9d7;
+  font:500 clamp(54px,6.1vw,80px)/.98 'Cormorant Garamond',Georgia,serif;
+  text-shadow:0 3px 17px rgba(0,0,0,.3);
+}
+.vf-lux-news__plaque span {
+  display:block;margin-top:7px;color:#d6ae86;
+  font:500 9px Montserrat,system-ui,sans-serif;letter-spacing:.23em;
+}
+@keyframes vf-lux-sway{
+  0% {transform:rotate(-.6deg)}
+  100% {transform:rotate(.6deg)}
+}
+.vf-lux-news__gallery {position:relative;max-width:1380px;margin:35px auto 0;padding:0 47px}
+.vf-lux-news__track {
+  display:grid;
+  grid-auto-flow:column;
+  grid-auto-columns:calc((100% - 3 * 18px) / 4);
+  column-gap:18px;
+  overflow-x:auto;
+  overflow-y:hidden;
+  scroll-snap-type:x mandatory;
+  scrollbar-width:none;
+  overscroll-behavior-inline:contain;
+  padding:10px 3px 23px;
+}
+.vf-lux-news__track::-webkit-scrollbar{display:none}
+.vf-lux-news__track .vf-luxury-card{
+  width:100%;min-width:0;scroll-snap-align:start;
+  animation:vf-lux-card-drift 9s ease-in-out infinite alternate;
+  animation-delay:calc(var(--vf-card-order,0) * -1s);
+}
+.vf-lux-news__track .vf-luxury-card__media{
+  aspect-ratio:3/4.4;
+  border:1px solid rgba(229,177,112,.77);
+  border-radius:14px;
+  box-shadow:0 15px 42px rgba(0,0,0,.47);
+}
+.vf-lux-news__track .vf-luxury-card__media>img{object-position:center 20%;filter:brightness(1) saturate(.97)}
+.vf-lux-news__track .vf-luxury-card__information{padding:0 17px 20px}
+.vf-lux-news__track .vf-luxury-card__information h3{
+  font-size:clamp(30px,3.1vw,45px);margin-bottom:12px;
+}
+.vf-lux-news__track .vf-luxury-card__cta{
+  min-height:35px;font-size:9px;padding:8px 14px;letter-spacing:.095em;
+}
+@keyframes vf-lux-card-drift{
+  0%{transform:translateY(-2px)}100%{transform:translateY(3px)}
+}
+.vf-lux-news__track .vf-luxury-card:hover{animation-play-state:paused;transform:translateY(-5px)}
+.vf-lux-news__arrow{
+  position:absolute;z-index:4;top:45%;
+  width:42px;height:42px;border:1px solid #d8a96f;border-radius:50%;
+  display:flex;justify-content:center;align-items:center;
+  background:rgba(34,11,22,.83);color:#f9e2c5;
+  cursor:pointer;transition:background .2s ease,transform .2s ease;
+}
+.vf-lux-news__arrow:hover{background:#6b2d40;transform:scale(1.07)}
+.vf-lux-news__arrow:disabled{opacity:.3;cursor:default;transform:none}
+.vf-lux-news__arrow--prev{left:0}
+.vf-lux-news__arrow--next{right:0}
+.vf-lux-news__pagination{display:flex;justify-content:center;gap:9px;margin:6px 0 18px}
+.vf-lux-news__pagination span{
+  width:8px;height:8px;border-radius:50%;border:1px solid #c6a07e;
+  background:transparent;
+}
+.vf-lux-news__pagination span.is-active{background:#f1ddc2}
+.vf-lux-news__all {
+  display:flex;align-items:center;justify-content:center;gap:12px;
+  width:max-content;max-width:100%;min-height:49px;
+  margin:0 auto;padding:12px 27px;border:1px solid #d8ac76;
+  border-radius:999px;background:rgba(21,6,15,.44);
+  color:#f8e5cf;text-decoration:none;
+  font:600 11px Montserrat,system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;
+  transition:transform .2s ease,background .2s ease;
+}
+.vf-lux-news__all:hover{transform:translateY(-2px);background:rgba(106,36,62,.45)}
+
+/* 3. Promociones: por debajo de Novedades, no tapan el cartel ni la hero. */
+.vf-noir-home-page > .vf-lux-promos {margin:10px auto 45px;padding:0 clamp(15px,3.5vw,56px);max-width:1540px}
+.vf-lux-promos .vf-noir-promos__grid{grid-template-columns:1.16fr 1fr 1fr;gap:13px}
+.vf-lux-promos .vf-noir-promo{border-radius:12px;box-shadow:0 13px 32px rgba(0,0,0,.27)}
+.vf-lux-promos .vf-noir-promos__terms{margin-top:4px}
+
+/* 4. Categorías compactas y catálogo actual, sin duplicar fichas antiguas. */
+.vf-home-category-pills {
+  max-width:1400px;margin:17px auto 24px;padding:20px 15px;
+  border-top:1px solid rgba(219,171,118,.2);
+  border-bottom:1px solid rgba(219,171,118,.1);
+  text-align:center;
+}
+.vf-home-category-pills__heading{
+  margin:0 0 13px;color:#d6b18b;font:500 10px Montserrat,sans-serif;
+  letter-spacing:.32em;text-transform:uppercase;
+}
+.vf-home-category-pills__links{display:flex;flex-wrap:wrap;justify-content:center;gap:9px}
+.vf-home-category-pills__link {
+  display:inline-flex;align-items:center;min-height:37px;padding:8px 18px;
+  border:1px solid rgba(222,173,115,.54);border-radius:999px;
+  color:#eed8bf;background:rgba(23,7,15,.4);text-decoration:none;
+  font:600 10px Montserrat,sans-serif;letter-spacing:.08em;text-transform:uppercase;
+  transition:transform .2s ease,border-color .2s ease,background .2s ease;
+}
+.vf-home-category-pills__link:hover{transform:translateY(-2px);border-color:#f1ca91;background:rgba(116,34,61,.35)}
+.vf-all-profiles{padding-top:52px;padding-bottom:82px}
+.vf-all-profiles__grid .vf-luxury-card__media {border-color:rgba(229,177,115,.56)}
+.vf-all-profiles__grid .vf-luxury-card__media>img{filter:brightness(1) saturate(.99)}
+.vf-all-profiles__grid .vf-luxury-card__information h3{font-size:clamp(31px,3vw,46px)}
+
+@media(max-width:1070px){
+  .vf-lux-hero{min-height:710px}
+  .vf-lux-hero__visual{width:75%}
+  .vf-lux-hero__content{width:calc(100% - 62px)}
+  .vf-lux-hero__title{font-size:clamp(67px,8vw,91px)}
+  .vf-lux-hero__features{gap:20px}
+  .vf-lux-news__track{grid-auto-columns:calc((100% - 2 * 14px)/3);column-gap:14px}
+  .vf-lux-promos .vf-noir-promos__grid{grid-template-columns:1fr 1fr}
+  .vf-lux-promos .vf-noir-promos__grid--two{grid-template-columns:1fr 1fr}
+  .vf-lux-promos .vf-noir-promo{padding:16px 13px}
+}
+/* Grid 2 columnas cuando Happy Hour está oculto */
+.vf-lux-promos .vf-noir-promos__grid--two{
+  grid-template-columns:1fr 1fr;
+}
+
+@media(max-width:767px){
+  /* Portada móvil: foto limpia arriba, copy en franja inferior (sin tapar la cara) */
+  .vf-lux-hero{
+    min-height:100svh;
+    min-height:100dvh;
+    align-items:flex-end;
+    display:flex;
+  }
+  .vf-lux-hero__visual{
+    inset:0;
+    width:100%;
+    height:100%;
+  }
+  .vf-lux-hero__visual img{
+    object-fit:cover;
+    /* Cara/torso centrados arriba; el copy vive en la franja oscura inferior */
+    object-position:46% 10%;
+  }
+  .vf-lux-hero__shade {
+    background:
+      linear-gradient(180deg,
+        rgba(12,3,8,.12) 0%,
+        rgba(12,3,8,.02) 28%,
+        rgba(18,5,12,.22) 52%,
+        rgba(18,6,12,.78) 70%,
+        #14060d 84%,
+        #12050c 100%);
+  }
+  .vf-lux-hero__content{
+    width:calc(100% - 28px);
+    max-width:440px;
+    margin:0 auto;
+    padding:0 0 calc(108px + env(safe-area-inset-bottom,0px));
+    text-align:center;
+  }
+  .vf-lux-hero__eyebrow{justify-content:center;font-size:8px;letter-spacing:.14em;margin-bottom:10px}
+  .vf-lux-hero__title{align-items:center;font-size:clamp(48px,12.5vw,64px);line-height:.82}
+  .vf-lux-hero__title span{white-space:normal}
+  .vf-lux-hero__tagline{font-size:clamp(17px,4.8vw,22px);margin:14px auto 0}
+  .vf-lux-hero__description{display:none}
+  .vf-lux-hero__actions{justify-content:center;gap:10px;margin-top:18px}
+  .vf-lux-hero__button{min-height:46px;font-size:10px;padding:11px 18px;gap:8px}
+  .vf-lux-hero__features{justify-content:space-between;gap:6px;margin-top:18px;max-width:360px;margin-left:auto;margin-right:auto}
+  .vf-lux-hero__features span{font-size:8px;white-space:normal;flex:1}
+  .vf-lux-hero__features svg{width:18px;height:18px}
+  .vf-lux-promos .vf-noir-promos__grid--two{grid-template-columns:1fr}
+  .vf-noir-home-page > .vf-lux-news{margin-top:-83px;padding:0 8px 46px}
+  .vf-lux-news__rail{height:9px;width:min(310px,78%)}
+  .vf-lux-news__hanger{width:min(330px,87%)}
+  .vf-lux-news__rope{height:49px;width:6px}
+  .vf-lux-news__plaque{padding:12px 9px 16px;border-radius:12px}
+  .vf-lux-news__plaque p{font-size:8px}
+  .vf-lux-news__plaque h2{font-size:clamp(53px,13vw,70px)}
+  .vf-lux-news__plaque span{font-size:8px;letter-spacing:.14em}
+  .vf-lux-news__gallery{margin-top:24px;padding:0 6px}
+  .vf-lux-news__track{display:flex;gap:12px;padding:8px 16px 25px;scroll-padding-inline:16px}
+  .vf-lux-news__track .vf-luxury-card{flex:0 0 min(75vw,315px);width:min(75vw,315px)}
+  .vf-lux-news__track .vf-luxury-card__media{aspect-ratio:3/4.25}
+  .vf-lux-news__track .vf-luxury-card__information h3{font-size:38px}
+  .vf-lux-news__track .vf-luxury-card__information{padding:0 14px 17px}
+  .vf-lux-news__arrow{width:35px;height:35px;top:44%}
+  .vf-lux-news__arrow--prev{left:0}.vf-lux-news__arrow--next{right:0}
+  .vf-lux-promos .vf-noir-promos__grid{grid-template-columns:1fr}
+  .vf-noir-home-page > .vf-lux-promos{margin:6px auto 25px;padding-inline:10px}
+  .vf-home-category-pills{padding:17px 10px;margin:8px auto 12px}
+  .vf-home-category-pills__links{gap:7px}
+  .vf-home-category-pills__link{font-size:9px;padding:8px 12px}
+  .vf-all-profiles{padding:42px 11px 58px}
+  .vf-all-profiles__grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+  .vf-all-profiles__grid .vf-luxury-card__information{padding:0 10px 12px}
+  .vf-all-profiles__grid .vf-luxury-card__information h3{font-size:clamp(25px,7.5vw,36px)}
+  .vf-all-profiles__grid .vf-luxury-card__cta{font-size:8px;padding:7px 10px}
+}
+@media(max-width:365px){
+  .vf-lux-hero__title{font-size:44px}
+  .vf-lux-hero__actions{flex-direction:column;align-items:stretch}
+  .vf-lux-hero__actions a{width:100%}
+  .vf-lux-hero__content{padding-bottom:calc(100px + env(safe-area-inset-bottom,0px))}
+}
+@media(prefers-reduced-motion:reduce){
+  .vf-lux-news__hanger,.vf-lux-news__track .vf-luxury-card{animation:none!important}
+  .vf-lux-hero__button,.vf-luxury-card,.vf-lux-news__arrow{transition:none!important}
+  .vf-lux-news__track{scroll-behavior:auto}
+}

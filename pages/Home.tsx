@@ -1,66 +1,29 @@
 
 import React, { Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Hero from '../components/Hero';
-import HalloweenCampaign, { halloweenIsLive } from '../components/HalloweenCampaign';
-import ModelsGrid from '../components/ModelsGrid';
+import NovemberNoirHome from '../components/NovemberNoirHome';
+import PremiumProfilesGallery from '../components/PremiumProfilesGallery';
+import HomeEditorial from '../components/HomeEditorial';
 import FAQ from '../components/FAQ';
 import PageSEOHead from '../components/PageSEOHead';
 import HomeNovedadesStrip from '../components/HomeNovedadesStrip';
+import HomePromotions from '../components/HomePromotions';
 import HomeWhatsAppNews from '../components/HomeWhatsAppNews';
 import modelsData from '../data/models.json';
 import { filterActiveModels } from '../lib/modelsCatalog';
 import { useCatalogWithOverrides } from '../hooks/useCatalogWithOverrides';
 import { Diamond, ShieldCheck, Star, Send } from 'lucide-react';
-import { officialWhatsAppUrlWithText } from '../lib/officialContact';
 import { getHomeExploreLinks } from '../lib/homeExploreLinks';
 
 const Reviews = React.lazy(() => import('../components/Reviews'));
 
-const CASH_PROMO_IMAGE = '/promos/promo-halloween-efectivo-oct2026.webp';
-const CASH_PROMO_WHATSAPP = officialWhatsAppUrlWithText(
-  'Hola, quiero reservar con la promoción de 5 € menos pagando en efectivo.'
-);
-
-
-function scheduleBelowFoldWork(onReady: () => void): () => void {
-  let cancelled = false;
-  let done = false;
-
-  const run = () => {
-    if (cancelled || done) return;
-    done = true;
-    onReady();
-  };
-
-  const timeoutId = window.setTimeout(run, 2000);
-  const w = window as Window & {
-    requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number;
-    cancelIdleCallback?: (id: number) => void;
-  };
-  const idleId =
-    typeof w.requestIdleCallback === 'function'
-      ? w.requestIdleCallback(run, { timeout: 3500 })
-      : undefined;
-
-  return () => {
-    cancelled = true;
-    window.clearTimeout(timeoutId);
-    if (idleId !== undefined && w.cancelIdleCallback) {
-      w.cancelIdleCallback(idleId);
-    }
-  };
-}
-
 const Home: React.FC = () => {
   const exploreLinks = useMemo(() => getHomeExploreLinks(), []);
   const activeModels = useMemo(() => filterActiveModels(modelsData), []);
-  const homeModels = useCatalogWithOverrides(activeModels, { homePinFallback: true });
-  const [loadExploreNav, setLoadExploreNav] = useState(false);
+  // Respect active panel ordering. Never prepend historic HOME_PIN_ORDER on this landing page.
+  const homeModels = useCatalogWithOverrides(activeModels);
   const [loadReviews, setLoadReviews] = useState(false);
   const reviewsSentinelRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => scheduleBelowFoldWork(() => setLoadExploreNav(true)), []);
 
   useEffect(() => {
     const node = reviewsSentinelRef.current;
@@ -87,59 +50,39 @@ const Home: React.FC = () => {
     canonicalUrl: 'https://www.valeriaferrer.com',
   };
 
-  const isHalloweenPreview = halloweenIsLive();
-
   return (
-    <div className="overflow-x-hidden">
+    <div className="vf-noir-home-page overflow-x-hidden">
       <PageSEOHead
         title={homeSEOData.title}
         description={homeSEOData.description}
         canonicalUrl={homeSEOData.canonicalUrl}
+        noindex
       />
-      <Hero />
-      {/* Cartel original sin textos repetidos: toda la información ya está en el diseño. */}
-      <section id="promocion-efectivo" aria-label="Promoción exclusiva para pagos en efectivo" className="bg-[#0b070b] px-3 py-6 sm:px-6 md:py-10">
-        <a
-          href={CASH_PROMO_WHATSAPP}
-          target="_blank"
-          rel="noopener noreferrer"
-          data-contact-placement="cash_promo_home"
-          aria-label="Consultar por WhatsApp la promoción de 5 euros menos en efectivo"
-          className="mx-auto block w-full max-w-[1250px] overflow-hidden rounded-2xl border border-[#d7b66a]/45 shadow-[0_20px_70px_rgba(0,0,0,.5)] focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-[#e9cc93]"
-        >
-          <img
-            src={CASH_PROMO_IMAGE}
-            alt="Cartel original: promoción exclusiva para pagos en efectivo, 5 euros menos. 30 minutos 75 euros, 1 hora 145 euros y 1 hora y media 225 euros."
-            width={1024}
-            height={576}
-            loading="lazy"
-            decoding="async"
-            className="block h-auto w-full object-contain"
-          />
-        </a>
-      </section>
-      {/* Cartel de efectivo arriba + Happy Hour aquí. BLACK fuera de los banners de momento. */}
-      {isHalloweenPreview && <HalloweenCampaign homeOnly />}
-      {isHalloweenPreview && (
-        <ModelsGrid
-          models={homeModels}
-          heading="Nuestras chicas disponibles"
-          subtitle="Modelos exclusivas en Valencia · Citas discretas · Experiencias únicas"
-        />
-      )}
+      <NovemberNoirHome models={homeModels} />
 
-      {!isHalloweenPreview && <HalloweenCampaign homeOnly />}
+      <HomeNovedadesStrip models={homeModels} />
+
+      <HomePromotions />
+
+      {/* Compact, immediately crawlable links before the full live catalog. */}
+      <nav className="vf-home-category-pills" aria-label="Explorar perfiles por categoría">
+        <p className="vf-home-category-pills__heading">Explorar</p>
+        <div className="vf-home-category-pills__links">
+          {exploreLinks.map((item) => (
+            <Link key={item.key} to={item.href} className="vf-home-category-pills__link">
+              {item.label}
+            </Link>
+          ))}
+        </div>
+      </nav>
+
+      <PremiumProfilesGallery models={homeModels} />
+      <HomeEditorial />
 
       <HomeWhatsAppNews />
 
-      <HomeNovedadesStrip
-        models={homeModels}
-        exploreLinks={exploreLinks}
-        loadExploreNav={loadExploreNav}
-      />
-
       {/* Elite Experience Section — sin Framer en cards (mismo aspecto final) */}
-      <section className="py-12 md:py-24 bg-[#0a0a0a] border-b border-white/5">
+      <section className="vf-home-value-section py-12 md:py-24 bg-[#0a0a0a] border-b border-white/5">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="text-center mb-10 md:mb-20">
             <h2 className="text-2xl md:text-5xl font-light tracking-wider mb-2 md:mb-4">La Experiencia Elite</h2>
@@ -180,7 +123,7 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      <div className="bg-[#111111] py-4 border-b border-white/5 text-center">
+      <div className="vf-home-telegram-strip bg-[#111111] py-4 border-b border-white/5 text-center">
         <a
           href="https://t.me/Valeriaferreeer" data-contact-placement="home_banner"
           target="_blank"
@@ -195,7 +138,7 @@ const Home: React.FC = () => {
       {/* Anclas de intención: lujo y catálogo (genérico consolidado en Home) */}
       <nav
         aria-label="Explorar por intención"
-        className="bg-[#0a0a0a] py-5 px-6 border-b border-white/5 text-center"
+        className="vf-home-intent-nav bg-[#0a0a0a] py-5 px-6 border-b border-white/5 text-center"
       >
         <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[11px] uppercase tracking-[0.22em] text-gray-500">
           <li>
@@ -220,14 +163,6 @@ const Home: React.FC = () => {
         </ul>
       </nav>
 
-      {!isHalloweenPreview && (
-        <ModelsGrid
-          models={homeModels}
-          heading="Escorts en Valencia"
-          subtitle="Selección Valeria Ferrer · Fotos reales · Reserva discreta"
-        />
-      )}
-
       <div ref={reviewsSentinelRef} className="min-h-[32rem] md:min-h-[28rem]">
         {loadReviews ? (
           <Suspense fallback={null}>
@@ -238,7 +173,7 @@ const Home: React.FC = () => {
 
       <FAQ />
 
-      <section className="py-32 relative flex items-center justify-center text-center">
+      <section className="vf-home-final-cta py-32 relative flex items-center justify-center text-center">
         <div className="absolute inset-0 z-0">
           <img
             src="/og-image.jpg"

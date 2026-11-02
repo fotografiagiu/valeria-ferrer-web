@@ -17,6 +17,55 @@ export const SEO_INJECT_ROUTES = [
     canonical: `${SITE_ORIGIN}/escorts-de-lujo-valencia`,
   },
   {
+    path: '/fees',
+    title: 'Tarifas de escorts en Valencia | Valeria Ferrer',
+    description:
+      'Consulta tarifas orientativas de escorts y acompañantes en Valencia desde 80 €. Precios según duración, modelo, disponibilidad y desplazamiento.',
+    canonical: `${SITE_ORIGIN}/fees`,
+  },
+  {
+    path: '/booking',
+    title: 'Reservas | Valeria Ferrer Valencia',
+    description:
+      'Reserva tu experiencia con Valeria Ferrer. Formulario confidencial para solicitar cita con nuestras modelos exclusivas en Valencia.',
+    canonical: `${SITE_ORIGIN}/booking`,
+  },
+  {
+    path: '/contact',
+    title: 'Contacto | Valeria Ferrer Valencia',
+    description:
+      'Contacta con Valeria Ferrer en Valencia. Atención exclusiva y discreta por Telegram, teléfono o email para reservas y consultas.',
+    canonical: `${SITE_ORIGIN}/contact`,
+  },
+  {
+    path: '/about',
+    title: 'Sobre Valeria Ferrer | Agencia de Modelos de Lujo en Valencia',
+    description:
+      'Conoce Valeria Ferrer: agencia de modelos de lujo en Valencia. Perfiles verificados, discreción absoluta y acompañamiento exclusivo de alto standing.',
+    canonical: `${SITE_ORIGIN}/about`,
+  },
+  {
+    path: '/blog',
+    title: 'Blog Valeria Ferrer | Guías y Acompañantes VIP en Valencia',
+    description:
+      'Guías exclusivas sobre escorts y acompañantes VIP en Valencia: zonas, hoteles de lujo, servicios premium y consejos para reservas discretas.',
+    canonical: `${SITE_ORIGIN}/blog`,
+  },
+  {
+    path: '/novedades',
+    title: 'Novedades en Valeria Ferrer | Últimas incorporaciones y mejoras',
+    description:
+      'Descubre las últimas incorporaciones, perfiles VIP, nuevas formas de explorar y una experiencia más visual e intuitiva en Valeria Ferrer Valencia.',
+    canonical: `${SITE_ORIGIN}/novedades`,
+  },
+  {
+    path: '/colombianas',
+    title: 'Colombianas | Valeria Ferrer',
+    description:
+      'Explora perfiles colombianas en Valencia: presencia, carisma y estilo en una selección premium.',
+    canonical: `${SITE_ORIGIN}/colombianas`,
+  },
+  {
     path: '/casting',
     title: 'Casting en Valencia | Valeria Ferrer',
     description:

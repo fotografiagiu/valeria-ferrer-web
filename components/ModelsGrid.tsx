@@ -5,6 +5,8 @@ import { Crown, Grid3X3, LayoutGrid } from 'lucide-react';
 import LazyImage from './LazyImage';
 import HalloweenCardOverlay, { HalloweenInfoWebs } from './HalloweenCardOverlay';
 import BlackCornerRibbon from './BlackCornerRibbon';
+import PremiumProfileCard from './PremiumProfileCard';
+import '../styles/valeria-luxury-v5.css';
 import NewCornerRibbon from './NewCornerRibbon';
 import { halloweenIsLive } from './HalloweenCampaign';
 import {
@@ -20,7 +22,8 @@ const ModelCard: React.FC<{
   index: number;
   isDoubleView?: boolean;
   useCoverThumbnail?: boolean;
-}> = ({ model, index, isDoubleView = false, useCoverThumbnail = false }) => {
+  prioritizeCover?: boolean;
+}> = ({ model, index, isDoubleView = false, useCoverThumbnail = false, prioritizeCover = true }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [hoverImageReady, setHoverImageReady] = useState(false);
 
@@ -156,7 +159,7 @@ const ModelCard: React.FC<{
               isHovered ? 'md:scale-110' : 'md:scale-100'
             }`}
             sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
-            priority={index < 4} // First 4 images are priority
+            priority={prioritizeCover && index < 4} // Above-the-fold cards only
           />
 
           {hoverImageReady && (
@@ -249,12 +252,16 @@ interface ModelsGridProps {
   models?: any[];
   heading?: string;
   subtitle?: string;
+  deferFirstImages?: boolean;
+  useOriginalCovers?: boolean;
 }
 
 const ModelsGrid: React.FC<ModelsGridProps> = ({
   models = MODELS,
   heading = 'Chicas disponibles',
   subtitle = 'Selección Valeria Ferrer · Fotos reales · Reserva discreta',
+  deferFirstImages = false,
+  useOriginalCovers = false,
 }) => {
   const [viewMode, setViewMode] = useState<'normal' | 'double'>('double');
   const [seasonalFilter, setSeasonalFilter] = useState<'todas' | 'nuevas' | 'espanolas' | 'latinas' | 'vip'>('todas');
@@ -281,7 +288,8 @@ const ModelsGrid: React.FC<ModelsGridProps> = ({
     return () => mq.removeEventListener('change', update);
   }, []);
 
-  const useCoverThumbnail = isMobile && viewMode === 'double';
+  // The homepage requires the latest original cover from the panel; thumbnails can lag updates.
+  const useCoverThumbnail = !useOriginalCovers && isMobile && viewMode === 'double';
 
   const handleViewChange = (mode: 'normal' | 'double') => {
     setViewMode(mode);
@@ -393,13 +401,7 @@ const ModelsGrid: React.FC<ModelsGridProps> = ({
           }`}
         >
           {filteredSeasonalModels.map((model, index) => (
-            <ModelCard
-              key={model.slug || model.id}
-              model={model}
-              index={index}
-              isDoubleView={viewMode === 'double'}
-              useCoverThumbnail={useCoverThumbnail}
-            />
+            <PremiumProfileCard model={model} key={model.slug || model.id} index={index} />
           ))}
         </div>
         {seasonal && filteredSeasonalModels.length === 0 && (

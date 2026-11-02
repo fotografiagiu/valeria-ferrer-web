@@ -19,14 +19,21 @@ const WHATSAPP_HOME_URL = officialWhatsAppUrlWithText(
 const FloatingContactPopup: React.FC = () => {
   const { pathname } = useLocation();
   const isHome = pathname === '/';
-  // Inicio abre Contacto al cargar. Al cerrar, permanece minimizado hasta volver a Inicio.
-  const [isOpen, setIsOpen] = useState(() => isHome);
+  // Desktop: abre en Inicio. Móvil: minimizado para no tapar CTAs del hero.
+  const [isOpen, setIsOpen] = useState(() => {
+    if (!isHome || typeof window === 'undefined') return false;
+    return window.matchMedia('(min-width: 768px)').matches;
+  });
   const wrapperRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
 
-  // En las fichas y demás rutas comienza minimizado; al regresar a Inicio vuelve a desplegarse.
+  // En las fichas y demás rutas comienza minimizado; al regresar a Inicio (desktop) se despliega.
   useEffect(() => {
-    setIsOpen(isHome);
+    if (!isHome) {
+      setIsOpen(false);
+      return;
+    }
+    setIsOpen(window.matchMedia('(min-width: 768px)').matches);
   }, [pathname, isHome]);
 
   useEffect(() => {

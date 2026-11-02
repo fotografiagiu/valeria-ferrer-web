@@ -12,6 +12,7 @@ import SEOHead from '../components/SEOHead';
 import PageSEOHead, { SITE_ORIGIN } from '../components/PageSEOHead';
 import Breadcrumbs from '../components/Breadcrumbs';
 import AnalyticsEvents from '../components/AnalyticsEvents';
+import EditorialProfileIntro from '../components/EditorialProfileIntro';
 import BlackCornerRibbon from '../components/BlackCornerRibbon';
 import NewCornerRibbon from '../components/NewCornerRibbon';
 import { useIsStaffHiddenSlug, useCatalogWithOverrides } from '../hooks/useCatalogWithOverrides';
@@ -223,22 +224,23 @@ const ModelDetail: React.FC = () => {
   };
 
   return (
-    <div className="animate-in fade-in duration-1000 bg-[#0a0a0a] selection:bg-[#c2b2a3]/30">
+    <div className="vf-profile-detail animate-in fade-in duration-1000 bg-[#0a0a0a] selection:bg-[#c2b2a3]/30">
       <SEOHead model={seoModel} />
       <AnalyticsEvents modelName={model.name} />
       {/* Header Spacer */}
       <div className="h-32 lg:h-32"></div>
+      <EditorialProfileIntro model={model} onOpenGallery={openGallery} />
 
       {/* Premium Hero Section */}
-      <div className="relative bg-gradient-to-b from-[#111111] to-transparent">
+      <div className="vf-profile-titlebar relative bg-gradient-to-b from-[#111111] to-transparent">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-4 lg:py-6">
           {/* Centered Model Name */}
           <div className="text-center mb-2 lg:mb-2">
             
             <div className="flex flex-col items-center gap-2">
-              <h1 className="text-4xl lg:text-6xl serif luxury-text-gradient uppercase leading-[0.9] tracking-tighter">
+              <h2 className="text-4xl lg:text-6xl serif luxury-text-gradient uppercase leading-[0.9] tracking-tighter">
                 {model.name}
-              </h1>
+              </h2>
               
               {/* Subtitle with VIP rule */}
               <div className="flex items-center space-x-2 text-[#c2b2a3] text-sm lg:text-base">
@@ -308,7 +310,7 @@ const ModelDetail: React.FC = () => {
       <Breadcrumbs modelName={model?.name} />
 
       {/* Mobile Layout - Old Style */}
-      <div className="lg:hidden max-w-7xl mx-auto px-6 pb-32 pt-10">
+      <div className="vf-profile-mobile vf-profile-mobile--editorial lg:hidden max-w-7xl mx-auto px-6 pb-32 pt-10">
         {/* Model Navigation - Modern Minimalist Design */}
         <div className="mb-6">
           <div className="flex items-center justify-between bg-[#111111]/50 backdrop-blur-sm border border-white/5 rounded-2xl p-4">
@@ -360,7 +362,7 @@ const ModelDetail: React.FC = () => {
           <div className="relative group">
             <div className="absolute -inset-1 bg-gradient-to-b from-[#c2b2a3]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
             <div 
-              className="aspect-[3/4.2] overflow-hidden border border-white/5 bg-[#111111] cursor-pointer active:scale-[0.98] transition-transform duration-150"
+              className="vf-profile-mobile-photo aspect-[3/4.2] overflow-hidden border border-white/5 bg-[#111111] cursor-pointer active:scale-[0.98] transition-transform duration-150"
               onClick={() => openGallery(0)}
               onTouchStart={(e) => {
                 const touch = e.touches[0];
@@ -420,7 +422,7 @@ const ModelDetail: React.FC = () => {
           </div>
           
           {/* Quick Stats Overlay (Mobile Only) */}
-          <div className="grid grid-cols-2 gap-3 mt-8">
+          <div className="vf-profile-stats grid grid-cols-2 gap-3 mt-8">
             {[
               { label: 'Edad', val: model.age },
               { label: 'Estatura', val: model.height },
@@ -436,16 +438,16 @@ const ModelDetail: React.FC = () => {
         </div>
         
         {/* Mobile Header */}
-        <div className="border-b border-white/5 pb-12 mb-8">
+        <div className="vf-profile-mobile-heading border-b border-white/5 pb-12 mb-8">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center space-x-3 text-[#c2b2a3]">
               <Star size={14} className="fill-[#c2b2a3]" />
               <span className="text-[10px] tracking-[0.5em] uppercase font-bold">Acompañante Premier</span>
             </div>
           </div>
-          <h1 className="text-6xl md:text-8xl serif luxury-text-gradient uppercase mb-4 leading-[0.9] tracking-tighter">
+          <h2 className="text-6xl md:text-8xl serif luxury-text-gradient uppercase mb-4 leading-[0.9] tracking-tighter">
             {model.name}
-          </h1>
+          </h2>
           <div className="text-lg font-light text-[#c2b2a3] tracking-[0.3em] uppercase mb-6">
             ESCORT EN VALENCIA
           </div>
@@ -1155,7 +1157,7 @@ const ModelDetail: React.FC = () => {
 
         
         {/* Mobile Pricing Table */}
-        <div className="lg:hidden py-16 bg-[#080808] border-t border-white/5">
+        <div className="vf-profile-mobile-pricing lg:hidden py-16 bg-[#080808] border-t border-white/5">
           <div className="max-w-6xl mx-auto px-6">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-light mb-4 tracking-tight">Tarifas <span className="italic luxury-text-gradient">{model.black ? 'BLACK' : 'Premium'}</span></h2>
@@ -1279,7 +1281,7 @@ const ModelDetail: React.FC = () => {
                     Reservar Ahora
                   </Link>
                   <a 
-                    href="{OFFICIAL_PHONE_TEL}"
+                    href={OFFICIAL_PHONE_TEL}
                     data-contact-placement="detail_sidebar"
                     data-model-slug={model.slug}
                     className="inline-flex items-center justify-center px-8 py-4 border border-[#c2b2a3]/30 text-[#c2b2a3] uppercase tracking-[0.3em] text-[8px] font-bold hover:bg-[#c2b2a3] hover:text-black transition-all duration-700"
@@ -1336,11 +1338,11 @@ const ModelDetail: React.FC = () => {
       </div>
 
       {/* Desktop Layout - Anna Claire Style */}
-      <section className="hidden lg:block max-w-7xl mx-auto px-6 pb-32 pt-10">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
+      <section className="vf-profile-desktop vf-profile-desktop--editorial hidden lg:block max-w-7xl mx-auto px-6 pb-32 pt-10">
+        <div className="vf-profile-layout grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
           
           {/* Main Content Area - 2 columns */}
-          <div className="lg:col-span-2 space-y-12">
+          <div className="vf-profile-main lg:col-span-2 space-y-12">
             
             {/* Model Navigation - Modern Minimalist Design */}
             <div className="mb-8">
@@ -1391,7 +1393,7 @@ const ModelDetail: React.FC = () => {
             {/* Main Image */}
             <div className="relative group">
               <div 
-                className="relative overflow-hidden rounded-2xl cursor-pointer" 
+                className="vf-profile-desktop-photo relative overflow-hidden rounded-2xl cursor-pointer" 
                 onClick={() => openGallery(0)}
               >
                 <img 
@@ -1455,12 +1457,12 @@ const ModelDetail: React.FC = () => {
                 ))}
               </div>
               {modelEssence && (
-                <div className="bg-[#111111] border border-white/5 p-4 flex-1">
-                  <h3 className="text-sm text-[#c2b2a3] uppercase tracking-[0.4em] mb-3 font-bold">La Esencia</h3>
-                  <p className="text-gray-400 font-light leading-[1.6]">
-                    {modelEssence}
-                  </p>
-                </div>
+                <details className="vf-profile-essence-fold">
+                  <summary>La esencia de {model.name} <ChevronRight size={16} aria-hidden="true" /></summary>
+                  <div className="vf-profile-essence-fold__content">
+                    <p>{modelEssence}</p>
+                  </div>
+                </details>
               )}
             </div>
 
@@ -2190,7 +2192,7 @@ const ModelDetail: React.FC = () => {
           </div>
           
           {/* Sidebar - 1 column */}
-          <div className="lg:col-span-1 space-y-8">
+          <div className="vf-profile-sidebar lg:col-span-1 space-y-8">
             
             {/* Personal Details */}
             <div className="bg-[#111111] border border-white/5 p-4 flex-1">
@@ -2322,7 +2324,7 @@ const ModelDetail: React.FC = () => {
               <h4 className="text-lg font-bold text-white uppercase tracking-widest mb-6">Contacto</h4>
               <div className="space-y-3">
                 <a 
-                  href="{OFFICIAL_PHONE_TEL}"
+                  href={OFFICIAL_PHONE_TEL}
                   data-contact-placement="detail_sidebar"
                   data-model-slug={model.slug}
                   className="flex items-center text-[#c2b2a3] hover:text-white transition-colors"

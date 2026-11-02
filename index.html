@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Agencia de escorts de lujo en Valencia. Acompañantes exclusivas con fotos reales, reserva discreta y atención privada para eventos, cenas y citas." />
     <!-- Meta keywords eliminadas - Google ignora desde 2009 -->
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content="noindex, follow" />
     <meta name="author" content="Valeria Ferrer - Agencia de Escorts de Lujo" />
     <meta property="og:title" content="Valeria Ferrer | Escorts en Valencia" />
     <meta property="og:description" content="Agencia de escorts de lujo en Valencia. Acompañantes exclusivas con fotos reales, reserva discreta y atención privada para eventos, cenas y citas." />
@@ -20,7 +20,8 @@
     <title>Valeria Ferrer | Escorts en Valencia</title>
     
     <!-- Performance: banner LCP del hero móvil (WebP + fallback) -->
-    <link rel="preload" as="image" href="/images/home-hero-banner-mobile-v4-premium.webp" type="image/webp" media="(max-width: 767px)" fetchpriority="high">
+    <!-- Preload de la hero editorial limpia para mejorar LCP. -->
+    <link rel="preload" as="image" href="/images/valeria-premium-hero.webp" type="image/webp" fetchpriority="high">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
@@ -242,31 +243,8 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   </head>
   <body class="scroll-smooth">
-    <div id="hero-lcp-shell" aria-hidden="true">
-      <div class="hero-lcp-frame">
-        <picture>
-          <source srcset="/images/halloween-hero-witch.jpg" type="image/jpeg" />
-          <img
-            src="/images/halloween-hero-witch.jpg"
-            alt=""
-            decoding="sync"
-            fetchpriority="high"
-            loading="eager"
-            width="576"
-            height="1024"
-          />
-        </picture>
-      </div>
-      <div class="hero-lcp-overlay"></div>
-    </div>
-    <script>
-      (function () {
-        var path = window.location.pathname.replace(/\/+$/, '') || '/';
-        var shell = document.getElementById('hero-lcp-shell');
-        if (!shell) return;
-        if (path !== '/') shell.remove();
-      })();
-    </script>
+    <!-- The homepage hero uses the current cover from live administration.
+         Avoid flashing an obsolete cached thumbnail before React has hydrated. -->
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
       </body>

@@ -1,6 +1,6 @@
 import React, { Suspense, useEffect, useMemo, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import Navbar from './components/Navbar';
+import NavbarNoir from './components/NavbarNoir';
 import Home from './pages/Home';
 import Legal from './pages/Legal';
 import Privacy from './pages/Privacy';
@@ -13,6 +13,8 @@ import PromoPopup from './components/PromoPopup';
 import HalloweenCashPromo from './components/HalloweenCashPromo';
 import HalloweenCampaign, { halloweenIsLive } from './components/HalloweenCampaign';
 import './styles/halloween-cinematic.css';
+import './styles/model-detail-luxury.css';
+import './styles/model-detail-editorial-v2.css';
 import { Analytics } from '@vercel/analytics/react';
 import ContactClickTracker from './components/ContactClickTracker';
 
@@ -134,8 +136,8 @@ const App: React.FC = () => {
   return (
     <AnalyticsTracker>
       <Router>
-        <div className={`${halloweenIsLive() ? 'vf-halloween-preview ' : ''}min-h-screen bg-[#0a0a0a] text-white overflow-x-hidden`}>
-          <Navbar 
+        <div className={`${halloweenIsLive() ? 'vf-halloween-preview ' : ''}vf-noir-site min-h-screen bg-[#0a0a0a] text-white overflow-x-hidden`}>
+          <NavbarNoir 
             isScrolled={isScrolled} 
             openMembers={() => setIsMembersModalOpen(true)} 
           />
