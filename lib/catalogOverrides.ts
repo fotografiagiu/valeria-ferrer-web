@@ -69,6 +69,31 @@ function withCoverOverride<T extends CatalogLike>(model: T, coverImagePath: stri
   return next;
 }
 
+/** Paths allowed for this ficha in the deployed catalog (models.json). */
+function staticAllowedPaths(model: CatalogLike): Set<string> {
+  const paths = [model.coverImageUrl, ...(model.images || []), ...(model.gallery || [])].filter(
+    (p): p is string => typeof p === 'string' && p.length > 0
+  );
+  return new Set(paths);
+}
+
+/**
+ * Panel overrides older than a photo replace still point at deleted JPGs.
+ * Server cover/gallery writes are allowlisted against models.json — mirror that here
+ * so stale Neon rows cannot resurrect old cuños on top of the new CSS firma.
+ */
+function overridePathsAllowed(
+  model: CatalogLike,
+  coverImagePath: string,
+  galleryImagePaths: string[] | null | undefined
+): boolean {
+  const allowed = staticAllowedPaths(model);
+  if (allowed.size === 0) return true;
+  if (!allowed.has(coverImagePath)) return false;
+  if (!galleryImagePaths?.length) return true;
+  return galleryImagePaths.every((p) => allowed.has(p));
+}
+
 function withGalleryOverride<T extends CatalogLike>(
   model: T,
   coverImagePath: string,
@@ -125,16 +150,15 @@ export function applyCatalogOverrides<T extends CatalogLike>(
     if (!model) continue;
     seen.add(resolvedSlug);
     const cover = row.coverImagePath?.trim();
-    // La portada del panel está validada por la allowlist en el servidor.
-    // No compararla con la galería estática: la lista de la web puede quedar
-    // desactualizada al añadir/cambiar fotos, descartando una portada válida.
-    // Solo se rechaza la URL histórica obsoleta de Sofía o rutas no locales.
+    // Reject non-local / legacy Sofia paths, and Neon rows still pointing at
+    // photo paths removed from models.json (e.g. Alana JPG → webp replace).
     const coverIsStale =
       !!cover &&
       (cover.includes('/sofia-valeria-ferrer-model-agency-valencia/') ||
         (resolvedSlug === 'sofia1' && row.slug === 'sofia') ||
         !/^\/(?:chicas|chicas-optimized)\/[^?#]+$/i.test(cover) ||
-        cover.includes('..'));
+        cover.includes('..') ||
+        !overridePathsAllowed(model, cover, row.galleryImagePaths));
     ordered.push(
       cover && !coverIsStale
         ? withGalleryOverride(model, cover, row.galleryImagePaths)
