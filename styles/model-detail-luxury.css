@@ -431,3 +431,17 @@
 @media(prefers-reduced-motion:reduce){
   .vf-profile-detail * {scroll-behavior:auto!important;animation:none!important;transition:none!important;}
 }
+
+
+/* Column spans: original Tailwind lg:col-span-2 must NOT span both new grid
+   tracks, otherwise sidebar ends up thousands of pixels below the gallery. */
+@media(min-width:1024px){
+  .vf-profile-detail .vf-profile-layout > .vf-profile-main {
+    grid-column: 1 / 2 !important;
+    grid-row: 1 !important;
+  }
+  .vf-profile-detail .vf-profile-layout > .vf-profile-sidebar {
+    grid-column: 2 / 3 !important;
+    grid-row: 1 !important;
+  }
+}
