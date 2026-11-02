@@ -16,9 +16,8 @@
   overflow-x:clip;
 }
 
-/* 1. HERO: archivo limpio 1264x954, sin zoom artificial.
-   La foto se coloca EN UN CONTENEDOR a la derecha. object-fit:cover
-   recorta lo mínimo a 1440/1280px. Prohibidos width:195%, left:-93%. */
+/* 1. HERO: desktop landscape 1264x954 a la derecha; móvil usa crop vertical 9:16.
+   Prohibidos width:195%, left:-93% en desktop. */
 .vf-lux-hero {
   position:relative;
   isolation:isolate;
@@ -37,9 +36,12 @@
   height:100%;
   overflow:hidden;
 }
+.vf-lux-hero__visual picture,
 .vf-lux-hero__visual img {
   display:block;
   width:100%; height:100%;
+}
+.vf-lux-hero__visual img {
   object-fit:cover;
   object-position:50% 50%;
   transform:none;
@@ -291,7 +293,7 @@
 }
 
 @media(max-width:767px){
-  /* Portada móvil: foto limpia arriba, copy en franja inferior (sin tapar la cara) */
+  /* Portada móvil: asset vertical 9:16 a pantalla completa; copy ligero abajo */
   .vf-lux-hero{
     min-height:100svh;
     min-height:100dvh;
@@ -305,36 +307,38 @@
   }
   .vf-lux-hero__visual img{
     object-fit:cover;
-    /* Cara/torso centrados arriba; el copy vive en la franja oscura inferior */
-    object-position:46% 10%;
+    object-position:50% 12%;
+    filter:brightness(1.03) saturate(1.06) contrast(1.05);
   }
   .vf-lux-hero__shade {
     background:
       linear-gradient(180deg,
-        rgba(12,3,8,.12) 0%,
-        rgba(12,3,8,.02) 28%,
-        rgba(18,5,12,.22) 52%,
-        rgba(18,6,12,.78) 70%,
-        #14060d 84%,
-        #12050c 100%);
+        rgba(10,2,6,.22) 0%,
+        rgba(10,2,6,.04) 12%,
+        transparent 32%,
+        transparent 55%,
+        rgba(14,4,10,.28) 68%,
+        rgba(14,5,10,.72) 80%,
+        rgba(12,4,9,.92) 90%,
+        #0e0409 100%);
   }
   .vf-lux-hero__content{
-    width:calc(100% - 28px);
+    width:calc(100% - 24px);
     max-width:440px;
     margin:0 auto;
-    padding:0 0 calc(108px + env(safe-area-inset-bottom,0px));
+    padding:0 0 calc(88px + env(safe-area-inset-bottom,0px));
     text-align:center;
   }
-  .vf-lux-hero__eyebrow{justify-content:center;font-size:8px;letter-spacing:.14em;margin-bottom:10px}
-  .vf-lux-hero__title{align-items:center;font-size:clamp(48px,12.5vw,64px);line-height:.82}
+  .vf-lux-hero__eyebrow{justify-content:center;font-size:9px;letter-spacing:.16em;margin-bottom:8px;text-shadow:0 2px 14px rgba(0,0,0,.55)}
+  .vf-lux-hero__title{align-items:center;font-size:clamp(46px,12vw,62px);line-height:.8;text-shadow:0 6px 28px rgba(0,0,0,.55)}
   .vf-lux-hero__title span{white-space:normal}
-  .vf-lux-hero__tagline{font-size:clamp(17px,4.8vw,22px);margin:14px auto 0}
+  .vf-lux-hero__tagline{font-size:clamp(17px,4.6vw,22px);margin:10px auto 0;text-shadow:0 3px 16px rgba(0,0,0,.5)}
   .vf-lux-hero__description{display:none}
-  .vf-lux-hero__actions{justify-content:center;gap:10px;margin-top:18px}
-  .vf-lux-hero__button{min-height:46px;font-size:10px;padding:11px 18px;gap:8px}
-  .vf-lux-hero__features{justify-content:space-between;gap:6px;margin-top:18px;max-width:360px;margin-left:auto;margin-right:auto}
-  .vf-lux-hero__features span{font-size:8px;white-space:normal;flex:1}
-  .vf-lux-hero__features svg{width:18px;height:18px}
+  .vf-lux-hero__actions{justify-content:center;gap:10px;margin-top:14px}
+  .vf-lux-hero__button{min-height:46px;font-size:10px;padding:11px 18px;gap:8px;box-shadow:0 10px 28px rgba(0,0,0,.35)}
+  .vf-lux-hero__features{justify-content:space-between;gap:6px;margin-top:14px;max-width:360px;margin-left:auto;margin-right:auto}
+  .vf-lux-hero__features span{font-size:8px;white-space:normal;flex:1;color:#f0e0d2}
+  .vf-lux-hero__features svg{width:17px;height:17px}
   .vf-lux-promos .vf-noir-promos__grid--two{grid-template-columns:1fr}
   .vf-noir-home-page > .vf-lux-news{margin-top:-83px;padding:0 8px 46px}
   .vf-lux-news__rail{height:9px;width:min(310px,78%)}

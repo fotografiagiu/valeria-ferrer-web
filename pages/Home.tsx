@@ -56,7 +56,6 @@ const Home: React.FC = () => {
         title={homeSEOData.title}
         description={homeSEOData.description}
         canonicalUrl={homeSEOData.canonicalUrl}
-        noindex
       />
       <NovemberNoirHome models={homeModels} />
 
