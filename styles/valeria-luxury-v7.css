@@ -1,0 +1,380 @@
+/* Valeria Ferrer · Art direction V7
+ * Objective: coherent luxury editorial layout, no mockup UI in hero,
+ * dedicated Novedades below hero, two large cards, compact category pills.
+ * Visual only: don't touch routes, SEO metadata, active catalog or reservations.
+ */
+
+/* The source hero image is a tall CONCEPT MOCKUP containing UI below pixel ~580.
+   Strictly crop to its top fashion-photography region. Never stretch the full image
+   into the hero, which duplicates Novedades inside the photo. */
+.vf-noir-home-page .vf-noir .vf-premium-hero {
+  min-height:clamp(660px,76svh,840px);
+  background:#130810!important;
+  overflow:hidden;
+  border-bottom:0;
+}
+.vf-noir-home-page .vf-noir .vf-premium-hero__photo {
+  position:absolute!important;
+  inset:0 0 0 auto!important;
+  width:67%!important;
+  height:100%!important;
+  overflow:hidden!important;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 30%,#000 100%)!important;
+  mask-image:linear-gradient(90deg,transparent 0%,#000 30%,#000 100%)!important;
+}
+.vf-noir-home-page .vf-noir .vf-premium-hero__photo picture{
+  position:absolute;inset:0;display:block;overflow:hidden;
+  width:100%;height:100%;
+}
+.vf-noir-home-page .vf-noir .vf-premium-hero__photo img{
+  position:absolute!important;
+  width:195%!important;
+  min-width:195%!important;
+  height:auto!important;
+  max-width:none!important;
+  left:-93%!important;
+  top:-1px!important;
+  object-fit:unset!important;
+  object-position:initial!important;
+  transform:none!important;
+  animation:none!important;
+  filter:brightness(.98) saturate(.96) contrast(1.06)!important;
+}
+.vf-noir-home-page .vf-noir .vf-premium-hero__photo::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(0deg,#180811,rgba(24,8,17,.87) 2%,transparent 18%)!important;
+}
+.vf-noir-home-page .vf-noir .vf-premium-hero__glow{
+  background:linear-gradient(90deg,#130810 0%,rgba(19,8,16,.99) 19%,rgba(20,8,16,.85) 37%,rgba(20,8,16,.18) 68%,rgba(20,8,16,.03) 100%),
+             linear-gradient(0deg,#180811 0%,transparent 24%)!important;
+}
+.vf-noir-home-page .vf-noir .vf-premium-hero__veil{
+  background:radial-gradient(ellipse 68% 95% at 7% 71%,rgba(95,16,46,.20),transparent 90%)!important;
+}
+.vf-noir-home-page .vf-noir .vf-premium-hero__atmosphere{opacity:.32;}
+.vf-noir-home-page .vf-noir .vf-premium-hero__frame{
+  border-color:rgba(224,177,115,.13);opacity:.6;
+}
+.vf-noir-home-page .vf-noir .vf-premium-hero__inner{
+  padding-top:145px;
+  padding-bottom:125px;
+  max-width:1480px;
+}
+.vf-noir-home-page .vf-premium-hero__copy{max-width:680px;}
+.vf-noir-home-page .vf-premium-hero__brand{
+  font-size:clamp(65px,6.5vw,112px)!important;
+  font-weight:400;
+  line-height:1.04;
+  letter-spacing:-.064em;
+}
+.vf-noir-home-page .vf-premium-hero__premium-label{
+  color:#e6bd89;letter-spacing:.39em;font-size:11px;
+}
+.vf-noir-home-page .vf-premium-hero__headline{
+  color:#f3dfcb!important;
+  font-size:clamp(27px,2.7vw,42px)!important;
+  line-height:1.28!important;
+  letter-spacing:.14em!important;
+  white-space:normal!important;
+}
+.vf-noir-home-page .vf-premium-hero__intro{
+  color:#e8bd93;
+  font-size:clamp(23px,2vw,32px);
+  margin-bottom:18px;
+}
+.vf-noir-home-page .vf-premium-hero__description{
+  max-width:480px;line-height:1.85;
+  color:#ddc3b8;
+}
+.vf-noir-home-page .vf-premium-hero__actions .vf-noir-btn{
+  padding-inline:26px;min-height:51px;
+  font-size:10.5px;letter-spacing:.115em;
+}
+.vf-noir-home-page .vf-premium-hero__confidence{
+  color:#d2b8a9;font-size:10px;letter-spacing:.07em;
+}
+.vf-noir-home-page .vf-premium-hero__bottom{opacity:.65;}
+
+/* A little separation: promotions and Novedades must never overlap. */
+.vf-noir-home-page>.vf-noir{display:block;position:relative;clear:both;}
+.vf-noir-home-page .vf-noir-promos {
+  margin:-25px auto 0;
+  position:relative;z-index:4;
+}
+.vf-noir-home-page .vf-noir-promo{
+  border-color:rgba(212,163,101,.39);
+  box-shadow:0 14px 37px rgba(0,0,0,.34);
+}
+.vf-noir-home-page .vf-noir-promos__terms summary {
+  letter-spacing:.14em;
+  font-size:10px;
+}
+
+/* Dedicated full-width Novedades, not a side panel, floating card or background. */
+.vf-noir-home-page> .vf-hanging-news--two{
+  position:relative!important;inset:auto!important;
+  float:none!important;clear:both!important;
+  display:block!important;visibility:visible!important;
+  width:100%!important;max-width:none!important;
+  height:auto!important;min-height:0!important;
+  margin:0 auto!important;
+  padding:77px max(18px,calc((100vw - 1500px)/2)) 67px!important;
+  transform:none!important;
+  background:radial-gradient(ellipse at 50% 50%,rgba(98,19,49,.22),transparent 75%),
+             linear-gradient(180deg,#120811 0%,#270d1b 55%,#1a0812 100%)!important;
+  border:0!important;
+  isolation:isolate!important;overflow:hidden!important;
+}
+.vf-hanging-news--two::before {
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(ellipse at 50% 2%,rgba(206,116,81,.10),transparent 48%);
+}
+.vf-hanging-news--two .vf-hanging-news__rig {
+  width:min(780px,100%)!important;
+  max-width:none!important;
+  margin:0 auto!important;
+}
+.vf-hanging-news--two .vf-hanging-news__sign{
+  width:min(685px,calc(100% - 24px))!important;
+  max-width:none!important;
+  margin:-4px auto 0!important;
+  padding:17px 19px 25px!important;
+  background:linear-gradient(155deg,#38131f,#190810)!important;
+  box-shadow:0 20px 50px rgba(0,0,0,.42),inset 0 1px rgba(239,198,139,.1);
+  border-color:rgba(225,174,105,.84)!important;
+}
+.vf-hanging-news--two .vf-hanging-news__sign h2{
+  max-width:100%;
+  overflow-wrap:normal;
+  white-space:nowrap!important;
+  font-size:clamp(47px,5.5vw,78px)!important;
+  letter-spacing:-.03em!important;
+}
+.vf-hanging-news--two .vf-hanging-news__inner {
+  display:block!important;
+  position:relative!important;
+  inset:auto!important;
+  width:100%!important;max-width:1200px!important;
+  margin:0 auto!important;
+  transform:none!important;
+}
+.vf-hanging-news--two .vf-hanging-news__lead{
+  padding:33px 20px 32px!important;
+  text-align:center;
+}
+.vf-hanging-news--two .vf-hanging-news__lead p{
+  margin:9px auto 0;
+  font-size:clamp(18px,2vw,25px)!important;
+  line-height:1.35;
+  max-width:670px;
+}
+.vf-hanging-news--two .vf-hanging-news__gallery-wrap{
+  width:min(910px,100%)!important;
+  padding:0 9px!important;
+  margin:0 auto!important;
+  position:relative!important;
+}
+.vf-hanging-news--two .vf-hanging-news__grid{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  width:100%!important;max-width:910px!important;
+  grid-auto-flow:row!important;
+  overflow:visible!important;
+  gap:clamp(22px,3vw,42px)!important;
+  padding:8px 0 18px!important;
+  margin:0 auto!important;
+  scroll-snap-type:none!important;
+}
+.vf-hanging-news--two .vf-luxury-card{
+  width:100%!important;max-width:none!important;
+  min-width:0!important;flex:none!important;
+  animation:vf-card-drift 9s ease-in-out infinite alternate;
+}
+.vf-hanging-news--two .vf-luxury-card__media{
+  aspect-ratio:3/3.85!important;
+  border-radius:15px!important;
+  border-color:rgba(223,171,108,.58)!important;
+  box-shadow:0 22px 50px rgba(0,0,0,.43)!important;
+}
+.vf-hanging-news--two .vf-luxury-card__media>img{
+  object-position:50% 20%!important;
+  filter:brightness(.98) contrast(1.02);
+}
+.vf-hanging-news--two .vf-luxury-card__information{padding:0 24px 28px!important;}
+.vf-hanging-news--two .vf-luxury-card__information h3{
+  font:italic 500 clamp(40px,4.2vw,58px)/.97 "Cormorant Garamond",Georgia,serif!important;
+  margin-bottom:13px!important;
+}
+.vf-hanging-news--two .vf-luxury-card__cta{
+  min-height:36px!important;
+  padding:8px 17px!important;
+  font:600 10px Montserrat,sans-serif!important;
+  letter-spacing:.12em!important;
+}
+.vf-hanging-news--two .vf-hanging-news__all{
+  margin:36px auto 0;
+  font-size:10px!important;
+  min-height:48px;
+}
+
+/* The category links retain the familiar compact Halloween-chip layout,
+   but have thin champagne outlines rather than decorative glow. */
+.vf-noir-home-page>.vf-home-category-pills{
+  width:min(1390px,calc(100% - 38px));
+  max-width:none;margin:12px auto 12px;
+  padding:25px 16px 25px;
+  border-color:rgba(226,172,109,.2);
+}
+.vf-home-category-pills__heading{
+  color:#d9b18b;font-size:10px;letter-spacing:.35em;
+}
+.vf-home-category-pills__links{gap:9px 11px;}
+.vf-home-category-pills__link{
+  min-height:37px;
+  padding:9px 18px;
+  border:1px solid rgba(213,155,94,.51);
+  color:#edd7c1;
+  background:rgba(34,11,23,.36);
+  border-radius:99px;
+  letter-spacing:.08em;
+  font-size:10px;
+}
+.vf-home-category-pills__link:hover{
+  background:rgba(115,48,67,.3);
+  border-color:#ebc48b;
+  box-shadow:0 4px 20px rgba(0,0,0,.21);
+}
+
+/* Catalog: remove the overly bright double strokes; make images dominant. */
+.vf-noir-home-page .vf-all-profiles {
+  padding-top:60px!important;
+  padding-bottom:96px;
+}
+.vf-noir-home-page .vf-all-profiles__header h2{
+  font-size:clamp(41px,4.1vw,63px);
+  letter-spacing:.006em;
+}
+.vf-noir-home-page .vf-all-profiles__grid{
+  gap:clamp(14px,1.55vw,25px);
+}
+.vf-noir-home-page .vf-all-profiles__grid .vf-luxury-card__media{
+  border:1px solid rgba(217,158,92,.5);
+  box-shadow:0 14px 41px rgba(0,0,0,.39);
+}
+.vf-noir-home-page .vf-all-profiles__grid .vf-luxury-card__media::after{
+  inset:7px;border-color:rgba(234,187,126,.08);
+}
+.vf-noir-home-page .vf-all-profiles__grid .vf-luxury-card__information{
+  padding:0 18px 23px;
+}
+.vf-noir-home-page .vf-all-profiles__grid .vf-luxury-card__information h3{
+  margin-bottom:13px;font-size:clamp(34px,3vw,48px);
+}
+.vf-noir-home-page .vf-all-profiles__grid .vf-luxury-card__cta{border-color:rgba(234,189,129,.82);}
+.vf-luxury-card:hover{transform:translateY(-4px);}
+
+/* Design for tablet portrait without squeezing the display copy. */
+@media(max-width:1100px){
+  .vf-noir-home-page .vf-noir .vf-premium-hero__photo{width:72%!important;}
+  .vf-noir-home-page .vf-noir .vf-premium-hero__photo img{
+    width:225%!important;min-width:225%!important;left:-111%!important;
+  }
+  .vf-noir-home-page>.vf-hanging-news--two{padding:65px 20px 65px!important;}
+}
+@media(max-width:767px){
+  .vf-noir-home-page .vf-noir .vf-premium-hero{
+    min-height:max(720px,90svh);
+  }
+  .vf-noir-home-page .vf-noir .vf-premium-hero__photo{
+    inset:0 0 auto!important;width:100%!important;
+    height:72%!important;
+    -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 48%,rgba(0,0,0,.83) 67%,transparent 100%)!important;
+    mask-image:linear-gradient(180deg,#000 0%,#000 48%,rgba(0,0,0,.83) 67%,transparent 100%)!important;
+  }
+  .vf-noir-home-page .vf-noir .vf-premium-hero__photo img{
+    width:325%!important;min-width:325%!important;
+    left:-153%!important;top:0!important;
+    filter:brightness(.98) saturate(.96)!important;
+  }
+  .vf-noir-home-page .vf-noir .vf-premium-hero__glow{
+    background:linear-gradient(180deg,rgba(18,7,13,.03),rgba(19,7,14,.14) 24%,rgba(20,7,15,.76) 51%,#140811 77%,#140811 100%)!important;
+  }
+  .vf-noir-home-page .vf-noir .vf-premium-hero__inner{
+    padding:310px 0 94px;
+  }
+  .vf-noir-home-page .vf-premium-hero__brand{
+    font-size:clamp(40px,10.4vw,65px)!important;
+    white-space:nowrap;
+  }
+  .vf-noir-home-page .vf-premium-hero__headline{
+    font-size:clamp(23px,6vw,31px)!important;
+    letter-spacing:.095em!important;
+  }
+  .vf-noir-home-page .vf-premium-hero__description{
+    max-width:370px;font-size:11px;line-height:1.78;
+  }
+  .vf-noir-home-page .vf-premium-hero__confidence{font-size:8px;}
+  .vf-noir-home-page>.vf-hanging-news--two{
+    padding:52px 15px 48px!important;
+    overflow:hidden!important;
+  }
+  .vf-hanging-news--two .vf-hanging-news__rig{
+    height:102px!important;
+    max-width:calc(100% - 25px)!important;
+  }
+  .vf-hanging-news--two .vf-hanging-news__sign{
+    width:min(100%,485px)!important;
+    padding:15px 15px 20px!important;
+  }
+  .vf-hanging-news--two .vf-hanging-news__sign h2{
+    font-size:clamp(47px,11.7vw,68px)!important;
+  }
+  .vf-hanging-news--two .vf-hanging-news__lead{
+    padding:27px 5px 27px!important;
+  }
+  .vf-hanging-news--two .vf-hanging-news__lead p{
+    font-size:19px!important;
+  }
+  .vf-hanging-news--two .vf-hanging-news__gallery-wrap{padding:0!important;}
+  .vf-hanging-news--two .vf-hanging-news__grid{
+    grid-template-columns:1fr!important;
+    gap:24px!important;
+    max-width:390px!important;
+  }
+  .vf-hanging-news--two .vf-luxury-card{
+    max-width:370px!important;
+    animation:none!important;
+    margin:0 auto!important;
+  }
+  .vf-hanging-news--two .vf-luxury-card__media{
+    aspect-ratio:3/3.9!important;
+  }
+  .vf-hanging-news--two .vf-luxury-card__information{
+    padding:0 18px 22px!important;
+  }
+  .vf-hanging-news--two .vf-luxury-card__information h3{
+    font-size:49px!important;
+  }
+  .vf-noir-home-page>.vf-home-category-pills{
+    width:calc(100% - 20px);
+    padding:20px 7px;
+  }
+  .vf-home-category-pills__links{gap:8px;}
+  .vf-home-category-pills__link{font-size:9px;padding:8px 12px;}
+  .vf-noir-home-page .vf-all-profiles{
+    padding:44px 11px 67px!important;
+  }
+  .vf-noir-home-page .vf-all-profiles__grid{gap:10px;}
+  .vf-noir-home-page .vf-all-profiles__grid .vf-luxury-card__information{
+    padding:0 10px 13px;
+  }
+  .vf-noir-home-page .vf-all-profiles__grid .vf-luxury-card__information h3{
+    font-size:clamp(26px,7.5vw,39px);
+    margin-bottom:9px;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  .vf-hanging-news--two .vf-luxury-card{
+    animation:none!important;
+  }
+}
