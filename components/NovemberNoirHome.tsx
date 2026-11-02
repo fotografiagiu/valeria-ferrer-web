@@ -6,6 +6,7 @@ import '../styles/november-noir.css';
 import '../styles/november-noir-v3.css';
 import '../styles/valeria-luxury-v5.css';
 import '../styles/valeria-luxury-v6.css';
+import '../styles/valeria-luxury-v6.css';
 
 type NoirModel = {
   slug: string;
