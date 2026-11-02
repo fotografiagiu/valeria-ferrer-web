@@ -20,7 +20,8 @@ const EditorialProfileIntro: React.FC<Props> = ({ model, onOpenGallery }) => {
   );
   const [selected, setSelected] = useState(0);
   const [loaded, setLoaded] = useState(false);
-  useEffect(() => { setSelected(0); setLoaded(false); }, [model.id]);
+  const [selectedRateIndex, setSelectedRateIndex] = useState(2);
+  useEffect(() => { setSelected(0); setLoaded(false); setSelectedRateIndex(2); }, [model.id]);
   const setPhoto = useCallback((value: number) => {
     setLoaded(false);
     setSelected((value + photos.length) % Math.max(photos.length, 1));
@@ -117,23 +118,39 @@ const EditorialProfileIntro: React.FC<Props> = ({ model, onOpenGallery }) => {
             {facts.map((fact) => <div key={fact.name}><dt>{fact.name}</dt><dd>{fact.value}</dd></div>)}
           </dl>
         </details>
-        <div className="vf-editorial-intro__mobile-rates" aria-label="Tarifas principales">
+        <div className="vf-editorial-intro__mobile-rates" aria-label="Consulta de tarifas">
           <div className="vf-editorial-intro__mobile-rates-heading">
-            <h2>Tarifas {model.black ? 'BLACK' : ''}</h2>
-            <span>Consulta disponibilidad</span>
+            <div>
+              <span className="vf-editorial-intro__section-eyebrow">Tarifas {model.black ? 'BLACK' : ''}</span>
+              <h2>Elige tu tiempo</h2>
+            </div>
           </div>
-          <dl className="vf-editorial-intro__price-rows">
-            {[0, 2, 3].map((index) => (
-              <div key={rateRows[index].label}>
-                <dt>{rateRows[index].label}</dt>
-                <dd>{rateRows[index].amount}</dd>
-              </div>
+          <div className="vf-editorial-intro__duration-selector" role="group" aria-label="Seleccionar duración">
+            {[
+              { index: 0, label: '30 min' },
+              { index: 2, label: '1 hora' },
+              { index: 3, label: '1 h 30' },
+            ].map(({ index, label }) => (
+              <button
+                key={index}
+                type="button"
+                className={selectedRateIndex === index ? 'is-selected' : ''}
+                aria-pressed={selectedRateIndex === index}
+                onClick={() => setSelectedRateIndex(index)}
+              >
+                {label}
+              </button>
             ))}
-          </dl>
+          </div>
+          <div className="vf-editorial-intro__selected-quote" aria-live="polite" aria-atomic="true">
+            <span>{rateRows[selectedRateIndex].label}</span>
+            <strong>{rateRows[selectedRateIndex].amount}</strong>
+          </div>
+          <p className="vf-editorial-intro__rate-note">Consulta disponibilidad para tu reserva</p>
           <details className="vf-editorial-intro__disclosure vf-editorial-intro__disclosure--rates">
-            <summary>Ver todas las tarifas <ChevronRight size={16} aria-hidden="true" /></summary>
+            <summary>Consultar todas las tarifas <ChevronRight size={17} aria-hidden="true" /></summary>
             <dl className="vf-editorial-intro__disclosure-rows">
-              {rateRows.filter((_, index) => ![0, 2, 3].includes(index)).map((rate) => (
+              {rateRows.map((rate) => (
                 <div key={rate.label}><dt>{rate.label}</dt><dd>{rate.amount}</dd></div>
               ))}
             </dl>
