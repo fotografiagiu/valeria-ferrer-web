@@ -380,3 +380,129 @@
   .vf-lux-hero__button,.vf-luxury-card,.vf-lux-news__arrow{transition:none!important}
   .vf-lux-news__track{scroll-behavior:auto}
 }
+
+/* Wide desktop editorial layout: preserve mobile and tablet breakpoints. */
+@media (min-width: 1280px) {
+  .vf-noir-home-page .vf-lux-hero__content {
+    width: calc(100% - 7vw);
+    max-width: 1840px;
+  }
+  .vf-noir-home-page .vf-lux-promos {
+    max-width: 1840px;
+    width: calc(100% - 5vw);
+    padding-inline: clamp(16px, 2vw, 40px);
+  }
+  .vf-noir-home-page .vf-home-category-pills {
+    max-width: 1760px;
+    width: calc(100% - 7vw);
+  }
+  .vf-noir-home-page .vf-all-profiles {
+    max-width: 1840px;
+    width: calc(100% - 5vw);
+    padding-inline: clamp(16px, 2vw, 40px);
+  }
+  .vf-noir-home-page .vf-all-profiles__grid {
+    gap: clamp(16px, 1.4vw, 28px);
+  }
+}
+
+/* Desktop hero — show the original photograph in full. No aggressive cover crop. */
+@media (min-width: 768px) {
+  .vf-noir-home-page .vf-lux-hero {
+    background: #180710;
+  }
+  .vf-noir-home-page .vf-lux-hero__visual {
+    inset: 0 0 0 auto;
+    width: 72%;
+    height: 100%;
+    background: #180710;
+  }
+  .vf-noir-home-page .vf-lux-hero__visual picture {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .vf-noir-home-page .vf-lux-hero__visual img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: right center;
+    transform: none;
+  }
+  .vf-noir-home-page .vf-lux-hero__shade {
+    background:
+      linear-gradient(90deg,#190811 0%,rgba(25,8,17,.99) 24%,rgba(25,8,17,.84) 39%,rgba(25,8,17,.14) 67%,rgba(25,8,17,0) 100%),
+      linear-gradient(0deg,#12050c 0%,rgba(18,5,12,.68) 10%,rgba(18,5,12,.10) 25%,transparent 45%);
+  }
+}
+
+/* Polished editorial hero: soft photographic edge, no visible rectangle.
+   Keep full portrait within the right composition and preserve mobile. */
+@media (min-width:768px) {
+  .vf-noir-home-page .vf-lux-hero__visual {
+    inset:0 0 0 auto;
+    width:78%;
+    height:100%;
+    background:transparent;
+    overflow:hidden;
+    -webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.13) 12%,rgba(0,0,0,.65) 27%,#000 42%);
+    mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.13) 12%,rgba(0,0,0,.65) 27%,#000 42%);
+  }
+  .vf-noir-home-page .vf-lux-hero__visual picture {
+    width:100%;
+    height:100%;
+    display:block;
+  }
+  .vf-noir-home-page .vf-lux-hero__visual img {
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    object-position:right center;
+    transform:none;
+  }
+  .vf-noir-home-page .vf-lux-hero__shade {
+    background:
+      linear-gradient(90deg,#190811 0%,rgba(25,8,17,.98) 18%,rgba(25,8,17,.74) 35%,rgba(25,8,17,.24) 55%,rgba(25,8,17,0) 82%),
+      linear-gradient(0deg,#12050c 0%,rgba(18,5,12,.70) 8%,rgba(18,5,12,.16) 24%,transparent 48%);
+  }
+}
+
+/* FINAL DESKTOP HERO: continuous backdrop plus feathered full photograph.
+   No hard rectangular edge; subject retains face and body. */
+@media (min-width:768px) {
+  .vf-noir-home-page .vf-lux-hero {
+    background: #190811;
+  }
+  .vf-noir-home-page .vf-lux-hero__visual {
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background:
+      linear-gradient(90deg,rgba(25,8,17,.97) 0%,rgba(25,8,17,.75) 43%,rgba(25,8,17,.25) 78%),
+      url('/images/valeria-premium-hero.webp') center 37% / cover no-repeat;
+    -webkit-mask-image:none;
+    mask-image:none;
+  }
+  .vf-noir-home-page .vf-lux-hero__visual picture {
+    position:absolute;
+    inset:0 0 0 auto;
+    display:block;
+    height:100%;
+    width:76%;
+    -webkit-mask-image:linear-gradient(90deg,transparent 0%,transparent 28%,rgba(0,0,0,.10) 40%,rgba(0,0,0,.62) 60%,#000 82%);
+    mask-image:linear-gradient(90deg,transparent 0%,transparent 28%,rgba(0,0,0,.10) 40%,rgba(0,0,0,.62) 60%,#000 82%);
+  }
+  .vf-noir-home-page .vf-lux-hero__visual picture img {
+    width:100%;height:100%;display:block;
+    object-fit:contain;object-position:right center;
+    transform:none;
+  }
+  .vf-noir-home-page .vf-lux-hero__shade {
+    background:
+      linear-gradient(90deg,#190811 0%,rgba(25,8,17,.99) 15%,rgba(25,8,17,.89) 31%,rgba(25,8,17,.50) 48%,rgba(25,8,17,.08) 81%,transparent 100%),
+      linear-gradient(0deg,#12050c 0%,rgba(18,5,12,.68) 9%,transparent 38%);
+  }
+}

@@ -751,3 +751,21 @@
     right:25px;
   }
 }
+
+/* Larger desktop profiles without altering the approved mobile composition. */
+@media (min-width:1280px) {
+  .vf-profile-detail .vf-editorial-intro {
+    max-width:1840px;
+    width:calc(100% - 5vw);
+  }
+  .vf-profile-detail .vf-profile-desktop--editorial {
+    max-width:1800px!important;
+    width:calc(100% - 5vw);
+    margin-left:auto;
+    margin-right:auto;
+  }
+  .vf-profile-detail .vf-editorial-intro__photo-frame,
+  .vf-profile-detail .vf-editorial-intro__thumbnails {
+    height:clamp(390px,30vw,565px);
+  }
+}
