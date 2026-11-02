@@ -13,6 +13,7 @@ import PromoPopup from './components/PromoPopup';
 import HalloweenCashPromo from './components/HalloweenCashPromo';
 import HalloweenCampaign, { halloweenIsLive } from './components/HalloweenCampaign';
 import './styles/halloween-cinematic.css';
+import './styles/model-detail-luxury.css';
 import { Analytics } from '@vercel/analytics/react';
 import ContactClickTracker from './components/ContactClickTracker';
 
