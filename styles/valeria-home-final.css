@@ -281,29 +281,60 @@
   .vf-lux-hero__title{font-size:clamp(67px,8vw,91px)}
   .vf-lux-hero__features{gap:20px}
   .vf-lux-news__track{grid-auto-columns:calc((100% - 2 * 14px)/3);column-gap:14px}
-  .vf-lux-promos .vf-noir-promos__grid{grid-template-columns:1fr 1fr 1fr}
+  .vf-lux-promos .vf-noir-promos__grid{grid-template-columns:1fr 1fr}
+  .vf-lux-promos .vf-noir-promos__grid--two{grid-template-columns:1fr 1fr}
   .vf-lux-promos .vf-noir-promo{padding:16px 13px}
 }
+/* Grid 2 columnas cuando Happy Hour está oculto */
+.vf-lux-promos .vf-noir-promos__grid--two{
+  grid-template-columns:1fr 1fr;
+}
+
 @media(max-width:767px){
-  .vf-lux-hero{min-height:810px;align-items:flex-end}
-  .vf-lux-hero__visual{inset:0 0 auto;width:100%;height:72%}
-  .vf-lux-hero__visual img{object-fit:cover;object-position:40% 30%}
+  /* Portada móvil: foto limpia arriba, copy en franja inferior (sin tapar la cara) */
+  .vf-lux-hero{
+    min-height:100svh;
+    min-height:100dvh;
+    align-items:flex-end;
+    display:flex;
+  }
+  .vf-lux-hero__visual{
+    inset:0;
+    width:100%;
+    height:100%;
+  }
+  .vf-lux-hero__visual img{
+    object-fit:cover;
+    object-position:58% 12%;
+  }
   .vf-lux-hero__shade {
-    background:linear-gradient(180deg,rgba(20,5,13,.07) 0%,rgba(20,5,13,.19) 30%,rgba(24,7,17,.84) 60%,#180710 86%,#180710 100%);
+    background:
+      linear-gradient(180deg,
+        rgba(12,3,8,.18) 0%,
+        rgba(12,3,8,.05) 22%,
+        rgba(18,5,12,.35) 48%,
+        rgba(18,6,12,.88) 68%,
+        #14060d 82%,
+        #12050c 100%);
   }
   .vf-lux-hero__content{
-    width:calc(100% - 36px);max-width:480px;
-    padding:320px 0 155px;text-align:center;
+    width:calc(100% - 28px);
+    max-width:440px;
+    margin:0 auto;
+    padding:0 0 calc(118px + env(safe-area-inset-bottom,0px));
+    text-align:center;
   }
-  .vf-lux-hero__eyebrow{justify-content:center;font-size:8px;letter-spacing:.13em;margin-bottom:17px}
-  .vf-lux-hero__title{align-items:center;font-size:clamp(66px,15vw,96px);line-height:.76}
-  .vf-lux-hero__tagline{font-size:clamp(20px,6.3vw,26px);margin:23px auto 9px}
-  .vf-lux-hero__description{max-width:380px;margin:0 auto;font-size:11px;line-height:1.8}
-  .vf-lux-hero__actions{justify-content:center;gap:9px;margin-top:20px}
-  .vf-lux-hero__button{min-height:47px;font-size:9px;padding:10px 16px;gap:7px}
-  .vf-lux-hero__features{justify-content:space-between;gap:7px;margin-top:26px}
+  .vf-lux-hero__eyebrow{justify-content:center;font-size:8px;letter-spacing:.14em;margin-bottom:10px}
+  .vf-lux-hero__title{align-items:center;font-size:clamp(48px,12.5vw,64px);line-height:.82}
+  .vf-lux-hero__title span{white-space:normal}
+  .vf-lux-hero__tagline{font-size:clamp(17px,4.8vw,22px);margin:14px auto 0}
+  .vf-lux-hero__description{display:none}
+  .vf-lux-hero__actions{justify-content:center;gap:10px;margin-top:18px}
+  .vf-lux-hero__button{min-height:46px;font-size:10px;padding:11px 18px;gap:8px}
+  .vf-lux-hero__features{justify-content:space-between;gap:6px;margin-top:18px;max-width:360px;margin-left:auto;margin-right:auto}
   .vf-lux-hero__features span{font-size:8px;white-space:normal;flex:1}
-  .vf-lux-hero__features svg{width:20px;height:20px}
+  .vf-lux-hero__features svg{width:18px;height:18px}
+  .vf-lux-promos .vf-noir-promos__grid--two{grid-template-columns:1fr}
   .vf-noir-home-page > .vf-lux-news{margin-top:-83px;padding:0 8px 46px}
   .vf-lux-news__rail{height:9px;width:min(310px,78%)}
   .vf-lux-news__hanger{width:min(330px,87%)}
@@ -332,10 +363,10 @@
   .vf-all-profiles__grid .vf-luxury-card__cta{font-size:8px;padding:7px 10px}
 }
 @media(max-width:365px){
-  .vf-lux-hero__title{font-size:58px}
+  .vf-lux-hero__title{font-size:44px}
   .vf-lux-hero__actions{flex-direction:column;align-items:stretch}
   .vf-lux-hero__actions a{width:100%}
-  .vf-lux-hero{min-height:860px}
+  .vf-lux-hero__content{padding-bottom:calc(100px + env(safe-area-inset-bottom,0px))}
 }
 @media(prefers-reduced-motion:reduce){
   .vf-lux-news__hanger,.vf-lux-news__track .vf-luxury-card{animation:none!important}
