@@ -242,7 +242,7 @@ const ModelDetail: React.FC = () => {
                 {model.name}
               </h2>
               
-              {/* Subtitle with VIP rule */
+              {/* Subtitle with VIP rule */}
               <div className="flex items-center space-x-2 text-[#c2b2a3] text-sm lg:text-base">
                 {(() => {
                   const isVIP = !!model.vip;
