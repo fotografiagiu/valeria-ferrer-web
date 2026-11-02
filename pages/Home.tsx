@@ -15,47 +15,14 @@ import { Diamond, ShieldCheck, Star, Send } from 'lucide-react';
 import { getHomeExploreLinks } from '../lib/homeExploreLinks';
 
 const Reviews = React.lazy(() => import('../components/Reviews'));
-const ExploreProfilesNav = React.lazy(() => import('../components/ExploreProfilesNav'));
-
-function scheduleBelowFoldWork(onReady: () => void): () => void {
-  let cancelled = false;
-  let done = false;
-
-  const run = () => {
-    if (cancelled || done) return;
-    done = true;
-    onReady();
-  };
-
-  const timeoutId = window.setTimeout(run, 2000);
-  const w = window as Window & {
-    requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number;
-    cancelIdleCallback?: (id: number) => void;
-  };
-  const idleId =
-    typeof w.requestIdleCallback === 'function'
-      ? w.requestIdleCallback(run, { timeout: 3500 })
-      : undefined;
-
-  return () => {
-    cancelled = true;
-    window.clearTimeout(timeoutId);
-    if (idleId !== undefined && w.cancelIdleCallback) {
-      w.cancelIdleCallback(idleId);
-    }
-  };
-}
 
 const Home: React.FC = () => {
   const exploreLinks = useMemo(() => getHomeExploreLinks(), []);
   const activeModels = useMemo(() => filterActiveModels(modelsData), []);
   // Respect active panel ordering. Never prepend historic HOME_PIN_ORDER on this landing page.
   const homeModels = useCatalogWithOverrides(activeModels);
-  const [loadExploreNav, setLoadExploreNav] = useState(false);
   const [loadReviews, setLoadReviews] = useState(false);
   const reviewsSentinelRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => scheduleBelowFoldWork(() => setLoadExploreNav(true)), []);
 
   useEffect(() => {
     const node = reviewsSentinelRef.current;
@@ -91,21 +58,22 @@ const Home: React.FC = () => {
       />
       <NovemberNoirHome models={homeModels} />
 
-      <HomeNovedadesStrip
-        models={homeModels}
-        exploreLinks={exploreLinks}
-        loadExploreNav={loadExploreNav}
-      />
+      <HomeNovedadesStrip models={homeModels} />
+
+      {/* Compact, immediately crawlable links before the full live catalog. */}
+      <nav className="vf-home-category-pills" aria-label="Explorar perfiles por categoría">
+        <p className="vf-home-category-pills__heading">Explorar</p>
+        <div className="vf-home-category-pills__links">
+          {exploreLinks.map((item) => (
+            <Link key={item.key} to={item.href} className="vf-home-category-pills__link">
+              {item.label}
+            </Link>
+          ))}
+        </div>
+      </nav>
 
       <PremiumProfilesGallery models={homeModels} />
       <HomeEditorial />
-      <section className="vf-home-explore-links" aria-label="Explorar categorías">
-        {loadExploreNav && (
-          <Suspense fallback={null}>
-            <ExploreProfilesNav links={exploreLinks} title="Explorar perfiles" variant="embedded" />
-          </Suspense>
-        )}
-      </section>
 
       <HomeWhatsAppNews />
 
