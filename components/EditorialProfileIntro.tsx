@@ -104,6 +104,42 @@ const EditorialProfileIntro: React.FC<Props> = ({ model, onOpenGallery }) => {
           </div>
         </div>
       </div>
+      {/* Mobile: show only the essential facts and popular prices, with access to all information. */}
+      <div className="vf-editorial-intro__mobile-summary">
+        <div className="vf-editorial-intro__quick-facts" aria-label="Datos principales">
+          <span>{model.age} años</span>
+          <span>{model.height}</span>
+          <span>{model.nationality || 'Española'}</span>
+        </div>
+        <details className="vf-editorial-intro__disclosure">
+          <summary>Información personal <ChevronRight size={16} aria-hidden="true" /></summary>
+          <dl className="vf-editorial-intro__disclosure-rows">
+            {facts.map((fact) => <div key={fact.name}><dt>{fact.name}</dt><dd>{fact.value}</dd></div>)}
+          </dl>
+        </details>
+        <div className="vf-editorial-intro__mobile-rates" aria-label="Tarifas principales">
+          <div className="vf-editorial-intro__mobile-rates-heading">
+            <h2>Tarifas {model.black ? 'BLACK' : ''}</h2>
+            <span>Consulta disponibilidad</span>
+          </div>
+          <dl className="vf-editorial-intro__price-rows">
+            {[0, 2, 3].map((index) => (
+              <div key={rateRows[index].label}>
+                <dt>{rateRows[index].label}</dt>
+                <dd>{rateRows[index].amount}</dd>
+              </div>
+            ))}
+          </dl>
+          <details className="vf-editorial-intro__disclosure vf-editorial-intro__disclosure--rates">
+            <summary>Ver todas las tarifas <ChevronRight size={16} aria-hidden="true" /></summary>
+            <dl className="vf-editorial-intro__disclosure-rows">
+              {rateRows.filter((_, index) => ![0, 2, 3].includes(index)).map((rate) => (
+                <div key={rate.label}><dt>{rate.label}</dt><dd>{rate.amount}</dd></div>
+              ))}
+            </dl>
+          </details>
+        </div>
+      </div>
       <div className="vf-editorial-intro__signature">
         <h1 id="vf-editorial-profile-name">{model.name}</h1>
         <span className="vf-editorial-intro__signature-rule" aria-hidden="true" />

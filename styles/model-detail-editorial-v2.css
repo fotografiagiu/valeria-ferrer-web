@@ -495,3 +495,105 @@
   .vf-profile-detail .vf-editorial-intro__rates dd {font-size:19px;}
   .vf-profile-detail .vf-editorial-intro__rates dt {font-size:10px;}
 }
+
+
+/* PROFILE V3 — SIMPLE MOBILE READING
+   Replaces 7+9 boxed tiles with essential facts and a short price list.
+   All original information remains available via native accessible disclosures. */
+.vf-editorial-intro__mobile-summary { display:none; }
+@media (max-width:700px) {
+  .vf-profile-detail .vf-editorial-intro__specs { display:none !important; }
+  .vf-profile-detail .vf-editorial-intro__mobile-summary {
+    display:block;
+    grid-area:specs;
+    padding:0 2px 18px;
+    min-width:0;
+  }
+  .vf-profile-detail .vf-editorial-intro__quick-facts {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:5px;
+    padding:15px 0;
+    border-top:1px solid rgba(221,171,117,.34);
+    border-bottom:1px solid rgba(221,171,117,.2);
+    color:#ecd2bf;
+    font:500 clamp(11px,3.1vw,13px)/1.6 Montserrat,sans-serif;
+    letter-spacing:.02em;
+  }
+  .vf-profile-detail .vf-editorial-intro__quick-facts span {
+    flex:1;min-width:0;text-align:center;
+  }
+  .vf-profile-detail .vf-editorial-intro__quick-facts span+span {
+    border-left:1px solid rgba(224,172,110,.35);
+  }
+  .vf-profile-detail .vf-editorial-intro__disclosure {
+    padding:0;
+    margin:0;
+    border-bottom:1px solid rgba(218,172,117,.2);
+  }
+  .vf-profile-detail .vf-editorial-intro__disclosure summary {
+    display:flex;align-items:center;justify-content:space-between;
+    gap:15px;min-height:48px;
+    cursor:pointer;list-style:none;
+    color:#edc89a;
+    font:600 11px/1.5 Montserrat,sans-serif;
+    letter-spacing:.07em;
+  }
+  .vf-profile-detail .vf-editorial-intro__disclosure summary::-webkit-details-marker {display:none;}
+  .vf-profile-detail .vf-editorial-intro__disclosure summary svg{
+    color:#dcb081;transition:transform .2s ease;flex-shrink:0;
+  }
+  .vf-profile-detail .vf-editorial-intro__disclosure[open] summary svg{transform:rotate(90deg);}
+  .vf-profile-detail .vf-editorial-intro__disclosure-rows {margin:0;padding:0 0 10px;}
+  .vf-profile-detail .vf-editorial-intro__disclosure-rows > div {
+    display:flex;align-items:center;justify-content:space-between;gap:18px;
+    padding:11px 2px;
+    border-top:1px solid rgba(220,178,130,.1);
+  }
+  .vf-profile-detail .vf-editorial-intro__disclosure-rows dt {
+    font:400 12px/1.5 Montserrat,sans-serif;color:#cbb7ad;
+  }
+  .vf-profile-detail .vf-editorial-intro__disclosure-rows dd {
+    margin:0;
+    font:500 12px/1.5 Montserrat,sans-serif;color:#f5e1cf;
+    text-align:right;
+  }
+  .vf-profile-detail .vf-editorial-intro__mobile-rates{
+    margin:31px 0 0;
+    padding:0;
+  }
+  .vf-profile-detail .vf-editorial-intro__mobile-rates-heading{
+    display:flex;align-items:baseline;justify-content:space-between;gap:9px;
+    margin-bottom:9px;
+  }
+  .vf-profile-detail .vf-editorial-intro__mobile-rates-heading h2{
+    margin:0;color:#f4ddc4;
+    font:500 34px/1.1 "Cormorant Garamond",Georgia,serif;
+    letter-spacing:-.025em;
+  }
+  .vf-profile-detail .vf-editorial-intro__mobile-rates-heading > span{
+    font:400 10px/1.4 Montserrat,sans-serif;
+    color:#be9f8f;white-space:nowrap;
+  }
+  .vf-profile-detail .vf-editorial-intro__price-rows{padding:0;margin:0;}
+  .vf-profile-detail .vf-editorial-intro__price-rows > div{
+    min-height:52px;display:flex;align-items:center;justify-content:space-between;
+    padding:9px 2px;
+    border-bottom:1px solid rgba(221,174,119,.2);
+  }
+  .vf-profile-detail .vf-editorial-intro__price-rows dt{
+    color:#e1c7ba;
+    font:400 14px/1.5 Montserrat,sans-serif;
+  }
+  .vf-profile-detail .vf-editorial-intro__price-rows dd{
+    margin:0;color:#fbe9d2;
+    font:500 25px/1.15 "Cormorant Garamond",Georgia,serif;
+    white-space:nowrap;
+  }
+  .vf-profile-detail .vf-editorial-intro__disclosure--rates{border-bottom:0;}
+  .vf-profile-detail .vf-editorial-intro__disclosure--rates summary{min-height:50px;}
+  .vf-profile-detail .vf-editorial-intro__mobile-summary summary:focus-visible{
+    outline:2px solid #edc18c;outline-offset:3px;border-radius:3px;
+  }
+}
