@@ -235,6 +235,48 @@ const ModelDetail: React.FC = () => {
       <AnalyticsEvents modelName={model.name} />
       {/* Header Spacer */}
       <div className="h-32 lg:h-32"></div>
+
+      {/* Mobile navigation: always visible above the editorial gallery.
+          The old navigation inside .vf-profile-mobile is hidden by the editorial CSS. */}
+      <nav className="vf-mobile-profile-nav lg:hidden" aria-label="Navegar por las fichas">
+        <div className="vf-mobile-profile-nav__return">
+          <Link to="/models" className="vf-mobile-profile-nav__back">
+            <ArrowLeft size={19} aria-hidden="true" />
+            <span>Volver a chicas</span>
+          </Link>
+          <Link to="/" className="vf-mobile-profile-nav__home">Inicio</Link>
+        </div>
+        <div className="vf-mobile-profile-nav__pager">
+          <button
+            type="button"
+            className="vf-mobile-profile-nav__direction"
+            onClick={() => previousModel && navigateToModel(previousModel.id)}
+            disabled={!previousModel}
+            aria-label={previousModel ? `Ficha anterior: ${previousModel.name}` : 'No hay ficha anterior'}
+          >
+            <ChevronLeft size={21} aria-hidden="true" />
+            <span className="vf-mobile-profile-nav__copy">
+              <span className="vf-mobile-profile-nav__eyebrow">Anterior</span>
+              <strong>{previousModel?.name || 'Primera ficha'}</strong>
+            </span>
+          </button>
+          <span className="vf-mobile-profile-nav__divider" aria-hidden="true" />
+          <button
+            type="button"
+            className="vf-mobile-profile-nav__direction vf-mobile-profile-nav__direction--next"
+            onClick={() => nextModel && navigateToModel(nextModel.id)}
+            disabled={!nextModel}
+            aria-label={nextModel ? `Siguiente ficha: ${nextModel.name}` : 'No hay siguiente ficha'}
+          >
+            <span className="vf-mobile-profile-nav__copy">
+              <span className="vf-mobile-profile-nav__eyebrow">Siguiente ficha</span>
+              <strong>{nextModel?.name || 'Última ficha'}</strong>
+            </span>
+            <ChevronRight size={21} aria-hidden="true" />
+          </button>
+        </div>
+      </nav>
+
       <EditorialProfileIntro model={model} onOpenGallery={openGallery} />
 
       {/* Premium Hero Section */}
