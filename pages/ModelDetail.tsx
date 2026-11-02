@@ -1457,12 +1457,12 @@ const ModelDetail: React.FC = () => {
                 ))}
               </div>
               {modelEssence && (
-                <div className="bg-[#111111] border border-white/5 p-4 flex-1">
-                  <h3 className="text-sm text-[#c2b2a3] uppercase tracking-[0.4em] mb-3 font-bold">La Esencia</h3>
-                  <p className="text-gray-400 font-light leading-[1.6]">
-                    {modelEssence}
-                  </p>
-                </div>
+                <details className="vf-profile-essence-fold">
+                  <summary>La esencia de {model.name} <ChevronRight size={16} aria-hidden="true" /></summary>
+                  <div className="vf-profile-essence-fold__content">
+                    <p>{modelEssence}</p>
+                  </div>
+                </details>
               )}
             </div>
 
