@@ -1,27 +1,22 @@
-import React, { useMemo, useRef } from 'react';
+import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRight, Sparkles } from 'lucide-react';
 import PremiumProfileCard, { type PremiumProfile } from './PremiumProfileCard';
 
 type Props = {
   models: PremiumProfile[];
-  exploreLinks: ReturnType<typeof import('../lib/homeExploreLinks').getHomeExploreLinks>;
-  loadExploreNav: boolean;
 };
 
+/** Two substantial cards, sourced exclusively from the current public catalog. */
 const HomeNovedadesStrip: React.FC<Props> = ({ models }) => {
-  const novedades = useMemo(() => models.filter((m) => m.active !== false).slice(0, 8), [models]);
-  const trackRef = useRef<HTMLDivElement>(null);
-  const advance = (dir: -1 | 1) => {
-    const el = trackRef.current;
-    if (!el) return;
-    const card = el.querySelector('.vf-luxury-card') as HTMLElement | null;
-    const gap = Number.parseFloat(window.getComputedStyle(el).columnGap) || 14;
-    el.scrollBy({ left: dir * ((card?.offsetWidth || 250) + gap), behavior: 'smooth' });
-  };
+  const novedades = useMemo(() => {
+    const active = models.filter((model) => model.active !== false);
+    const latest = active.filter((model) => model.isNew || model.galleryUpdated);
+    return (latest.length ? latest : active).slice(0, 2);
+  }, [models]);
 
   return (
-    <section className="vf-hanging-news vf-hanging-news--open" aria-labelledby="vf-hanging-news-title">
+    <section className="vf-hanging-news vf-hanging-news--open vf-hanging-news--two" aria-labelledby="vf-hanging-news-title">
       <div className="vf-hanging-news__atmosphere" aria-hidden="true" />
       <div className="vf-hanging-news__rig" aria-hidden="true">
         <span className="vf-hanging-news__rig-bar" />
@@ -35,24 +30,21 @@ const HomeNovedadesStrip: React.FC<Props> = ({ models }) => {
       </div>
       <div className="vf-hanging-news__inner">
         <div className="vf-hanging-news__lead">
-          <span className="vf-hanging-news__intro-tag"><Sparkles size={14} aria-hidden="true" /> SELECCIÓN ACTUALIZADA</span>
-          <p>Descubre los perfiles destacados del catálogo actual</p>
+          <span className="vf-hanging-news__intro-tag">
+            <Sparkles size={14} aria-hidden="true" /> SELECCIÓN ACTUALIZADA
+          </span>
+          <p>Descubre las últimas incorporaciones de Valeria Ferrer</p>
         </div>
         <div className="vf-hanging-news__gallery-wrap">
-          <button type="button" aria-label="Ver novedades anteriores" className="vf-hanging-news__arrow vf-hanging-news__arrow--prev" onClick={() => advance(-1)}>
-            <ArrowLeft size={19} aria-hidden="true" />
-          </button>
-          <div className="vf-hanging-news__grid" ref={trackRef}>
+          <div className="vf-hanging-news__grid">
             {novedades.map((model, index) => (
               <PremiumProfileCard key={model.slug} model={model} index={index} showNew />
             ))}
           </div>
-          <button type="button" aria-label="Ver más novedades" className="vf-hanging-news__arrow vf-hanging-news__arrow--next" onClick={() => advance(1)}>
-            <ArrowRight size={19} aria-hidden="true" />
-          </button>
         </div>
-        <Link to="/models" className="vf-hanging-news__all">Ver todas las chicas <ArrowRight size={18} aria-hidden="true" /></Link>
-
+        <Link to="/novedades" className="vf-hanging-news__all">
+          Ver todas las novedades <ArrowRight size={18} aria-hidden="true" />
+        </Link>
       </div>
     </section>
   );
