@@ -706,3 +706,23 @@
 @media(prefers-reduced-motion:reduce){
  .vf-noir-nav *, .vf-noir-home-page *{animation:none!important;transition:none!important;}
 }
+
+/* Mobile scroll performance: avoid repainting a large blurred fixed header
+   and continuously animated cards while the compositor scrolls. */
+@media (max-width: 767px) {
+  .vf-noir-nav,
+  .vf-noir-nav--scrolled {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+    background: rgba(12, 5, 10, .97) !important;
+  }
+  .vf-noir-home-page .vf-lux-news__hanger,
+  .vf-noir-home-page .vf-lux-news__track .vf-luxury-card,
+  .vf-noir-home-page .vf-lux-news__track *,
+  .vf-noir-home-page .vf-halloween-home-models .vf-luxury-card {
+    animation: none !important;
+  }
+  .vf-noir-home-page .vf-lux-news__track {
+    scroll-behavior: auto !important;
+  }
+}
