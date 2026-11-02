@@ -895,3 +895,24 @@
     letter-spacing:.08em;
   }
 }
+
+/* Mobile performance: backdrop-filter on multiple large translucent layers
+   triggers expensive per-frame repaints in Safari during touch scrolling. */
+@media (max-width: 767px) {
+  .vf-profile-detail .vf-editorial-intro__photo-bottom,
+  .vf-profile-detail .profile-contact-actions,
+  .vf-profile-detail .vf-mobile-profile-nav__pager,
+  .vf-profile-detail .vf-editorial-intro__disclosure,
+  .vf-profile-detail .vf-editorial-intro__mobile-rates,
+  .vf-profile-detail .vf-editorial-intro__mobile-summary {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+  .vf-profile-detail .vf-editorial-intro__photo-open img {
+    transition: none !important;
+  }
+  .vf-profile-detail .vf-editorial-intro__photo-frame,
+  .vf-profile-detail .vf-editorial-intro__photo-open {
+    transform: none !important;
+  }
+}
