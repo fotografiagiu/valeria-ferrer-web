@@ -1,0 +1,54 @@
+/**
+ * Cuño blanco Valeria Ferrer — capa CSS sobre la foto (no quemado).
+ * El PNG ya trae ~68% de opacidad en el alpha; no reducir más en CSS.
+ */
+.vf-photo-firma {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  top: 50%;
+  width: 85%;
+  max-width: 100%;
+  height: auto;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  user-select: none;
+  opacity: 1;
+  object-fit: contain;
+}
+
+/* Cards: nombre/CTA (z-index 3) quedan por encima */
+.vf-luxury-card__media > .vf-photo-firma,
+.vf-luxury-card__firma {
+  width: 84%;
+  max-width: none;
+  top: 46%;
+}
+
+.vf-editorial-intro__firma {
+  width: 82%;
+  max-width: none;
+  top: 48%;
+  z-index: 2;
+}
+
+.vf-gallery-modal__firma {
+  width: 78%;
+  max-width: min(720px, 90%);
+  top: 50%;
+  z-index: 2;
+}
+
+@media (max-width: 767px) {
+  .vf-luxury-card__media > .vf-photo-firma,
+  .vf-luxury-card__firma {
+    width: 88%;
+    top: 45%;
+  }
+  .vf-editorial-intro__firma {
+    width: 86%;
+  }
+  .vf-gallery-modal__firma {
+    width: 86%;
+  }
+}

@@ -145,7 +145,7 @@
   content:"";position:absolute;z-index:5;pointer-events:none;
   inset:8px;border:1px solid rgba(246,205,142,.13);border-radius:9px;
 }
-.vf-luxury-card__media>img{
+.vf-luxury-card__media>img:not(.vf-photo-firma):not(.vf-luxury-card__firma){
   display:block;width:100%;height:100%;
   object-fit:cover;object-position:center 20%;
   filter:brightness(.98) saturate(.97) contrast(1.01);
@@ -183,16 +183,20 @@
   color:#f4d7a8;transition:opacity .25s ease,transform .25s ease;
   transform:translate(-4px,4px);
 }
+/* Legacy fallback — cards use BlackCornerRibbon (lateral horizontal label). */
 .vf-luxury-card__black{
-  position:absolute;right:-36px;top:21px;z-index:6;
-  width:150px;padding:9px 0;transform:rotate(40deg);
-  text-align:center;border-block:1px solid #e1b26f;
-  background:linear-gradient(180deg,#302019,#0c0a0b 80%);
-  box-shadow:0 6px 19px rgba(0,0,0,.48);pointer-events:none;
+  position:absolute;right:0;top:18px;z-index:6;
+  width:auto;padding:7px 14px 7px 16px;transform:none;
+  text-align:center;border:none;
+  border-left:1px solid rgba(232,197,122,.95);
+  border-top:1px solid rgba(232,197,122,.55);
+  border-bottom:1px solid rgba(232,197,122,.55);
+  border-radius:2px 0 0 2px;background:linear-gradient(90deg,#14110f,#0a0908);
+  box-shadow:-4px 4px 14px rgba(0,0,0,.45);pointer-events:none;
 }
 .vf-luxury-card__black span{
-  color:#eec98f;font:600 12px "Cormorant Garamond",Georgia,serif;
-  letter-spacing:.22em;
+  color:#e8c57a;font:600 10px "Cormorant Garamond",Georgia,serif;
+  letter-spacing:.28em;line-height:1;text-transform:uppercase;
 }
 .vf-luxury-card__new{
   position:absolute;top:17px;left:17px;z-index:4;
@@ -214,7 +218,7 @@
 .vf-luxury-card:hover .vf-luxury-card__media{
   border-color:#f8d5a2;box-shadow:0 23px 54px rgba(0,0,0,.62),0 0 25px rgba(225,148,86,.18);
 }
-.vf-luxury-card:hover .vf-luxury-card__media>img{
+.vf-luxury-card:hover .vf-luxury-card__media>img:not(.vf-photo-firma):not(.vf-luxury-card__firma){
   transform:scale(1.045);filter:brightness(1.05) saturate(1.02);
 }
 .vf-luxury-card:hover .vf-luxury-card__cta{background:linear-gradient(115deg,#d4a467,#f5d6a0);color:#231008;}
@@ -345,8 +349,8 @@
   .vf-luxury-card__information{padding:0 11px 13px;}
   .vf-luxury-card__information h3{font-size:32px;margin-bottom:9px;}
   .vf-luxury-card__cta{font-size:8px;letter-spacing:.09em;min-height:31px;padding:6px 12px;gap:5px;}
-  .vf-luxury-card__black{width:123px;right:-32px;top:17px;padding:6px 0;}
-  .vf-luxury-card__black span{font-size:10px;}
+  .vf-luxury-card__black{right:0;top:12px;padding:6px 11px 6px 13px;}
+  .vf-luxury-card__black span{font-size:9px;letter-spacing:.22em;}
   .vf-luxury-card__new{top:9px;left:9px;padding:7px 10px;font-size:8px;}
   .vf-luxury-card__vip{top:9px;left:9px;font-size:8px;}
   .vf-hanging-news__all{margin-top:12px;min-height:46px;font-size:9px!important;padding:10px 20px;}

@@ -30,3 +30,7 @@ dist-ssr
 .env*
 !.env.production
 !.env.example
+
+# Local firma blanca working files
+public/chicas/_backup-pre-firma-blanca/
+qa-screenshots/

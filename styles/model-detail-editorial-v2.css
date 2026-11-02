@@ -53,6 +53,8 @@
 }
 .vf-editorial-intro__photo-open img.is-loaded{opacity:1;}
 .vf-editorial-intro__photo-open:hover img{transform:scale(1.018);}
+.vf-editorial-intro__photo-frame > .vf-editorial-intro__firma,
+.vf-editorial-intro__photo-frame > .vf-photo-firma{pointer-events:none;}
 .vf-editorial-intro__photo-frame::after{
   content:"";pointer-events:none;position:absolute;inset:50% 0 0;
   background:linear-gradient(0deg,rgba(10,4,8,.47),transparent 70%);z-index:1;

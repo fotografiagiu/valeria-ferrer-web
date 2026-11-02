@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import LazyImage from './LazyImage';
 import { getGalleryImageThumbnail } from '../lib/modelGridImage';
+import VfPhotoFirma from './VfPhotoFirma';
 
 interface GalleryModalProps {
   images: string[];
@@ -366,6 +367,7 @@ const GalleryModal: React.FC<GalleryModalProps> = ({
                 sizes={isMobileLandscape ? '100vw' : '90vw'}
                 onImageLoad={(event) => handleMainImageLoad(currentIndex, event.currentTarget)}
               />
+              <VfPhotoFirma className="vf-gallery-modal__firma" photoSrc={currentSrc} />
 
               {validImages.length > 1 && (
                 <motion.div

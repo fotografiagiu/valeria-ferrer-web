@@ -15,6 +15,7 @@ import HalloweenCampaign, { halloweenIsLive } from './components/HalloweenCampai
 import './styles/halloween-cinematic.css';
 import './styles/model-detail-luxury.css';
 import './styles/model-detail-editorial-v2.css';
+import './styles/vf-photo-firma.css';
 import { Analytics } from '@vercel/analytics/react';
 import ContactClickTracker from './components/ContactClickTracker';
 
