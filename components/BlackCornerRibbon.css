@@ -6,10 +6,12 @@
  */
 .vf-black-corner {
   position: absolute;
-  top: 24px;
+  top: 17px;
   right: 7px;
   z-index: 40;
-  width: auto;
+  /* Scale to the actual card, not to the device viewport. */
+  width: 34%;
+  max-width: 145px;
   height: auto;
   pointer-events: none;
   overflow: visible;
@@ -22,13 +24,14 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 145px;
+  width: 100%;
   min-width: 0;
-  height: 54px;
-  padding: 0 15px;
+  height: auto;
+  aspect-ratio: 145 / 54;
+  padding: 0 4px;
   isolation: isolate;
   border: 1px solid rgba(249, 214, 151, .82);
-  border-radius: 19px;
+  border-radius: clamp(9px, 1.15vw, 18px);
   background:
     radial-gradient(ellipse 74% 42% at 85% 0%, rgba(255, 217, 154, .18), transparent 82%),
     radial-gradient(ellipse 78% 35% at 70% 100%, rgba(218, 135, 64, .19), transparent 90%),
@@ -50,7 +53,7 @@
   z-index: 0;
   pointer-events: none;
   inset: 3px;
-  border-radius: 15px;
+  border-radius: inherit;
   border: 1px solid rgba(248, 202, 145, .21);
   background: linear-gradient(172deg, rgba(255, 229, 195, .17) 0%, transparent 29%, transparent 72%, rgba(237, 164, 94, .11) 100%);
 }
@@ -79,7 +82,7 @@
   text-transform: uppercase;
   text-align: center;
   font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
-  font-size: 19px;
+  font-size: clamp(11px, 1.35vw, 19px);
   font-weight: 600;
   line-height: 1;
   letter-spacing: .20em;
@@ -89,34 +92,29 @@
 }
 
 .vf-black-corner--profile {
-  top: 22px;
+  top: 18px;
   right: 10px;
 }
 .vf-black-corner--profile .vf-black-corner__band {
-  width: 145px;
-  height: 54px;
+  width: 100%;
+  height: auto;
 }
 
 @media (max-width: 900px) {
-  .vf-black-corner { top: 13px; right: 7px; }
-  .vf-black-corner__band {
-    width: 111px;
-    height: 44px;
-    padding: 0 9px;
-    border-radius: 15px;
-  }
-  .vf-black-corner__band::before { border-radius: 11px; }
-  .vf-black-corner__band > span { font-size: 15px; letter-spacing: .16em; padding-left: .16em; }
-  .vf-black-corner--profile { top: 14px; right: 8px; }
-  .vf-black-corner--profile .vf-black-corner__band { width: 111px; height: 44px; }
+  .vf-black-corner { top: 11px; right: 7px; max-width: 111px; }
+  .vf-black-corner__band { border-radius: 11px; }
+  .vf-black-corner__band::before { inset: 2px; }
+  .vf-black-corner__band > span { font-size: clamp(10px, 1.65vw, 14px); letter-spacing: .15em; padding-left: .15em; }
+  .vf-black-corner--profile { top: 14px; right: 8px; max-width: 145px; }
 }
+/* On a 2-column phone grid, the desktop-sized fixed label covered half the
+   portrait. The same visual is now approximately one third of the image. */
 @media (max-width: 410px) {
-  .vf-black-corner { top: 10px; right: 6px; }
-  .vf-black-corner__band { width: 94px; height: 37px; border-radius: 13px; }
-  .vf-black-corner__band::before { border-radius: 10px; }
-  .vf-black-corner__band > span { font-size: 13px; letter-spacing: .15em; padding-left: .15em; }
-  .vf-black-corner--profile { top: 11px; right: 7px; }
-  .vf-black-corner--profile .vf-black-corner__band { width: 94px; height: 37px; }
+  .vf-black-corner { top: 9px; right: 5px; max-width: 78px; }
+  .vf-black-corner__band { border-radius: 9px; }
+  .vf-black-corner__band > span { font-size: 10px; letter-spacing: .13em; padding-left: .13em; }
+  .vf-black-corner__band::after { height: 2px; opacity: .65; filter: blur(1.5px); }
+  .vf-black-corner--profile { top: 11px; right: 7px; max-width: 135px; }
 }
 @media (prefers-reduced-transparency: reduce) {
   .vf-black-corner__band { background: linear-gradient(155deg, #292019, #0d0c0d 62%, #2c1c17); }
