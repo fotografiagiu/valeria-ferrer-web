@@ -380,3 +380,28 @@
   .vf-lux-hero__button,.vf-luxury-card,.vf-lux-news__arrow{transition:none!important}
   .vf-lux-news__track{scroll-behavior:auto}
 }
+
+/* Wide desktop editorial layout: preserve mobile and tablet breakpoints. */
+@media (min-width: 1280px) {
+  .vf-noir-home-page .vf-lux-hero__content {
+    width: calc(100% - 7vw);
+    max-width: 1840px;
+  }
+  .vf-noir-home-page .vf-lux-promos {
+    max-width: 1840px;
+    width: calc(100% - 5vw);
+    padding-inline: clamp(16px, 2vw, 40px);
+  }
+  .vf-noir-home-page .vf-home-category-pills {
+    max-width: 1760px;
+    width: calc(100% - 7vw);
+  }
+  .vf-noir-home-page .vf-all-profiles {
+    max-width: 1840px;
+    width: calc(100% - 5vw);
+    padding-inline: clamp(16px, 2vw, 40px);
+  }
+  .vf-noir-home-page .vf-all-profiles__grid {
+    gap: clamp(16px, 1.4vw, 28px);
+  }
+}
