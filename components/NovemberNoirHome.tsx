@@ -5,6 +5,7 @@ import { officialWhatsAppUrlWithText } from '../lib/officialContact';
 import '../styles/november-noir.css';
 import '../styles/november-noir-v3.css';
 import '../styles/valeria-luxury-v5.css';
+import '../styles/valeria-luxury-v6.css';
 
 type NoirModel = {
   slug: string;
@@ -36,10 +37,11 @@ const NovemberNoirHome: React.FC<NovemberNoirHomeProps> = () => {
     return () => window.clearTimeout(removeTimer);
   }, []);
 
-  // Placeholder editorial photography until the final approved Higgsfield hero arrives.
-  // Never use a current model's cover as the campaign hero.
-  const heroImage = '/images/novedades-hero-editorial.webp';
-  const heroMobileImage = '/images/novedades-hero-editorial-mobile.webp';
+  // Preview: exact reference screenshot chosen by the client, optically cropped
+  // with CSS to isolate the editorial portrait. Replace with approved standalone
+  // optimized hero before publishing to production.
+  const heroImage = 'https://d2ol7oe51mr4n9.cloudfront.net/user_36DayVJkjOLFx77vIiJcDWRkvYc/69ff45b8-cb1a-429f-9457-2ae7e2dfd185.png';
+  const heroMobileImage = heroImage;
 
   return (
     <div className="vf-noir" id="valeria-ferrer-home">
@@ -50,8 +52,8 @@ const NovemberNoirHome: React.FC<NovemberNoirHomeProps> = () => {
             <img
               src={heroImage}
               alt=""
-              width={900}
-              height={1300}
+              width={1178}
+              height={1335}
               loading="eager"
               decoding="async"
               fetchPriority="high"
