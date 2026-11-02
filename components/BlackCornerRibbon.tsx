@@ -2,8 +2,7 @@ import React from 'react'
 import './BlackCornerRibbon.css'
 
 /**
- * Etiqueta BLACK lateral horizontal — negro con acento dorado.
- * Decorativa: no bloquea clics.
+ * Thin diagonal BLACK corner ribbon (Laura reference). Decorative only.
  */
 export default function BlackCornerRibbon({ profile = false }: { profile?: boolean }) {
   return (
