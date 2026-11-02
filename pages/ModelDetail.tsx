@@ -12,6 +12,7 @@ import SEOHead from '../components/SEOHead';
 import PageSEOHead, { SITE_ORIGIN } from '../components/PageSEOHead';
 import Breadcrumbs from '../components/Breadcrumbs';
 import AnalyticsEvents from '../components/AnalyticsEvents';
+import EditorialProfileIntro from '../components/EditorialProfileIntro';
 import BlackCornerRibbon from '../components/BlackCornerRibbon';
 import NewCornerRibbon from '../components/NewCornerRibbon';
 import { useIsStaffHiddenSlug, useCatalogWithOverrides } from '../hooks/useCatalogWithOverrides';
@@ -228,6 +229,7 @@ const ModelDetail: React.FC = () => {
       <AnalyticsEvents modelName={model.name} />
       {/* Header Spacer */}
       <div className="h-32 lg:h-32"></div>
+      <EditorialProfileIntro model={model} onOpenGallery={openGallery} />
 
       {/* Premium Hero Section */}
       <div className="vf-profile-titlebar relative bg-gradient-to-b from-[#111111] to-transparent">
@@ -236,11 +238,11 @@ const ModelDetail: React.FC = () => {
           <div className="text-center mb-2 lg:mb-2">
             
             <div className="flex flex-col items-center gap-2">
-              <h1 className="text-4xl lg:text-6xl serif luxury-text-gradient uppercase leading-[0.9] tracking-tighter">
+              <h2 className="text-4xl lg:text-6xl serif luxury-text-gradient uppercase leading-[0.9] tracking-tighter">
                 {model.name}
-              </h1>
+              </h2>
               
-              {/* Subtitle with VIP rule */}
+              {/* Subtitle with VIP rule */
               <div className="flex items-center space-x-2 text-[#c2b2a3] text-sm lg:text-base">
                 {(() => {
                   const isVIP = !!model.vip;
@@ -308,7 +310,7 @@ const ModelDetail: React.FC = () => {
       <Breadcrumbs modelName={model?.name} />
 
       {/* Mobile Layout - Old Style */}
-      <div className="vf-profile-mobile lg:hidden max-w-7xl mx-auto px-6 pb-32 pt-10">
+      <div className="vf-profile-mobile vf-profile-mobile--editorial lg:hidden max-w-7xl mx-auto px-6 pb-32 pt-10">
         {/* Model Navigation - Modern Minimalist Design */}
         <div className="mb-6">
           <div className="flex items-center justify-between bg-[#111111]/50 backdrop-blur-sm border border-white/5 rounded-2xl p-4">
@@ -1336,7 +1338,7 @@ const ModelDetail: React.FC = () => {
       </div>
 
       {/* Desktop Layout - Anna Claire Style */}
-      <section className="vf-profile-desktop hidden lg:block max-w-7xl mx-auto px-6 pb-32 pt-10">
+      <section className="vf-profile-desktop vf-profile-desktop--editorial hidden lg:block max-w-7xl mx-auto px-6 pb-32 pt-10">
         <div className="vf-profile-layout grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
           
           {/* Main Content Area - 2 columns */}
