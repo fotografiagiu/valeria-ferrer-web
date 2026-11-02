@@ -497,103 +497,136 @@
 }
 
 
-/* PROFILE V3 — SIMPLE MOBILE READING
-   Replaces 7+9 boxed tiles with essential facts and a short price list.
-   All original information remains available via native accessible disclosures. */
-.vf-editorial-intro__mobile-summary { display:none; }
-@media (max-width:700px) {
-  .vf-profile-detail .vf-editorial-intro__specs { display:none !important; }
-  .vf-profile-detail .vf-editorial-intro__mobile-summary {
-    display:block;
-    grid-area:specs;
-    padding:0 2px 18px;
-    min-width:0;
+/* PROFILE V4 · Minimalist luxury information and interactive rates.
+   One selector, one price, no grids of boxes. All details remain available. */
+.vf-editorial-intro__mobile-summary{display:none;}
+@media(max-width:700px){
+  .vf-profile-detail .vf-editorial-intro__specs{display:none!important;}
+  .vf-profile-detail .vf-editorial-intro__mobile-summary{
+    display:block;grid-area:specs;min-width:0;
+    padding:0 3px 26px;
   }
-  .vf-profile-detail .vf-editorial-intro__quick-facts {
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:5px;
-    padding:15px 0;
-    border-top:1px solid rgba(221,171,117,.34);
-    border-bottom:1px solid rgba(221,171,117,.2);
-    color:#ecd2bf;
-    font:500 clamp(11px,3.1vw,13px)/1.6 Montserrat,sans-serif;
-    letter-spacing:.02em;
-  }
-  .vf-profile-detail .vf-editorial-intro__quick-facts span {
-    flex:1;min-width:0;text-align:center;
-  }
-  .vf-profile-detail .vf-editorial-intro__quick-facts span+span {
-    border-left:1px solid rgba(224,172,110,.35);
-  }
-  .vf-profile-detail .vf-editorial-intro__disclosure {
-    padding:0;
-    margin:0;
-    border-bottom:1px solid rgba(218,172,117,.2);
-  }
-  .vf-profile-detail .vf-editorial-intro__disclosure summary {
+  .vf-profile-detail .vf-editorial-intro__quick-facts{
     display:flex;align-items:center;justify-content:space-between;
-    gap:15px;min-height:48px;
-    cursor:pointer;list-style:none;
-    color:#edc89a;
-    font:600 11px/1.5 Montserrat,sans-serif;
-    letter-spacing:.07em;
+    gap:0;padding:17px 0 16px;
+    border-top:1px solid rgba(224,170,113,.34);
+    border-bottom:1px solid rgba(224,170,113,.22);
   }
-  .vf-profile-detail .vf-editorial-intro__disclosure summary::-webkit-details-marker {display:none;}
+  .vf-profile-detail .vf-editorial-intro__quick-facts span{
+    color:#ead8cb;
+    font:500 clamp(11px,3vw,13px)/1.5 Montserrat,sans-serif;
+    text-align:center;flex:1;min-width:0;
+  }
+  .vf-profile-detail .vf-editorial-intro__quick-facts span+span{
+    border-left:1px solid rgba(235,188,136,.25);
+  }
+  .vf-profile-detail .vf-editorial-intro__disclosure{
+    margin:0;padding:0;
+    border-bottom:1px solid rgba(226,168,110,.20);
+  }
+  .vf-profile-detail .vf-editorial-intro__disclosure summary{
+    min-height:46px;display:flex;align-items:center;justify-content:space-between;
+    gap:14px;cursor:pointer;list-style:none;
+    color:#e7bf91;font:500 12px/1.5 Montserrat,sans-serif;
+    letter-spacing:.025em;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .vf-profile-detail .vf-editorial-intro__disclosure summary::-webkit-details-marker{display:none;}
   .vf-profile-detail .vf-editorial-intro__disclosure summary svg{
-    color:#dcb081;transition:transform .2s ease;flex-shrink:0;
+    flex-shrink:0;transition:transform .2s ease;color:#d9aa78;
   }
-  .vf-profile-detail .vf-editorial-intro__disclosure[open] summary svg{transform:rotate(90deg);}
-  .vf-profile-detail .vf-editorial-intro__disclosure-rows {margin:0;padding:0 0 10px;}
-  .vf-profile-detail .vf-editorial-intro__disclosure-rows > div {
-    display:flex;align-items:center;justify-content:space-between;gap:18px;
-    padding:11px 2px;
-    border-top:1px solid rgba(220,178,130,.1);
+  .vf-profile-detail .vf-editorial-intro__disclosure[open] summary svg{
+    transform:rotate(90deg);
   }
-  .vf-profile-detail .vf-editorial-intro__disclosure-rows dt {
-    font:400 12px/1.5 Montserrat,sans-serif;color:#cbb7ad;
+  .vf-profile-detail .vf-editorial-intro__disclosure-rows{
+    margin:0;padding:0 0 12px;
   }
-  .vf-profile-detail .vf-editorial-intro__disclosure-rows dd {
-    margin:0;
-    font:500 12px/1.5 Montserrat,sans-serif;color:#f5e1cf;
-    text-align:right;
+  .vf-profile-detail .vf-editorial-intro__disclosure-rows>div{
+    display:flex;justify-content:space-between;align-items:center;gap:20px;
+    min-height:37px;padding:8px 1px;
+    border-top:1px solid rgba(229,179,126,.1);
+  }
+  .vf-profile-detail .vf-editorial-intro__disclosure-rows dt{
+    color:#cbb3a8;font:400 12px/1.5 Montserrat,sans-serif;
+  }
+  .vf-profile-detail .vf-editorial-intro__disclosure-rows dd{
+    color:#f6e4d4;text-align:right;margin:0;
+    font:500 12px/1.5 Montserrat,sans-serif;
   }
   .vf-profile-detail .vf-editorial-intro__mobile-rates{
-    margin:31px 0 0;
-    padding:0;
+    margin:28px 0 0;padding:0;
+    border:0;background:transparent;box-shadow:none;
   }
   .vf-profile-detail .vf-editorial-intro__mobile-rates-heading{
-    display:flex;align-items:baseline;justify-content:space-between;gap:9px;
-    margin-bottom:9px;
+    display:block;margin:0 0 19px;
+  }
+  .vf-profile-detail .vf-editorial-intro__section-eyebrow{
+    display:block;margin-bottom:6px;
+    color:#cba06e;
+    font:600 9px/1.6 Montserrat,sans-serif;
+    text-transform:uppercase;letter-spacing:.27em;
   }
   .vf-profile-detail .vf-editorial-intro__mobile-rates-heading h2{
-    margin:0;color:#f4ddc4;
-    font:500 34px/1.1 "Cormorant Garamond",Georgia,serif;
-    letter-spacing:-.025em;
+    margin:0;color:#f6e5d6;
+    font:500 clamp(32px,9vw,43px)/1.07 "Cormorant Garamond",Georgia,serif;
+    letter-spacing:-.01em;
   }
-  .vf-profile-detail .vf-editorial-intro__mobile-rates-heading > span{
-    font:400 10px/1.4 Montserrat,sans-serif;
-    color:#be9f8f;white-space:nowrap;
+  .vf-profile-detail .vf-editorial-intro__duration-selector{
+    display:flex;align-items:stretch;gap:3px;padding:4px;
+    border:1px solid rgba(223,167,106,.30);
+    background:rgba(13,5,10,.24);
+    border-radius:999px;
   }
-  .vf-profile-detail .vf-editorial-intro__price-rows{padding:0;margin:0;}
-  .vf-profile-detail .vf-editorial-intro__price-rows > div{
-    min-height:52px;display:flex;align-items:center;justify-content:space-between;
-    padding:9px 2px;
-    border-bottom:1px solid rgba(221,174,119,.2);
+  .vf-profile-detail .vf-editorial-intro__duration-selector button{
+    flex:1;min-width:0;min-height:42px;
+    color:#d5bbb0;background:transparent;border:0;
+    border-radius:999px;
+    cursor:pointer;
+    font:600 clamp(10px,3vw,12px)/1.3 Montserrat,sans-serif;
+    letter-spacing:.01em;
+    transition:background .18s ease,color .18s ease,box-shadow .18s ease;
   }
-  .vf-profile-detail .vf-editorial-intro__price-rows dt{
-    color:#e1c7ba;
-    font:400 14px/1.5 Montserrat,sans-serif;
+  .vf-profile-detail .vf-editorial-intro__duration-selector button.is-selected{
+    background:linear-gradient(120deg,#fae2bb,#d3a473);
+    color:#291419;
+    box-shadow:0 3px 13px rgba(0,0,0,.2);
   }
-  .vf-profile-detail .vf-editorial-intro__price-rows dd{
-    margin:0;color:#fbe9d2;
-    font:500 25px/1.15 "Cormorant Garamond",Georgia,serif;
+  .vf-profile-detail .vf-editorial-intro__duration-selector button:focus-visible,
+  .vf-profile-detail .vf-editorial-intro__disclosure summary:focus-visible{
+    outline:2px solid #f7d59d;outline-offset:3px;
+  }
+  .vf-profile-detail .vf-editorial-intro__selected-quote{
+    display:flex;align-items:baseline;justify-content:space-between;
+    gap:12px;
+    min-height:91px;padding:18px 2px 10px;
+    border-bottom:1px solid rgba(232,184,121,.31);
+  }
+  .vf-profile-detail .vf-editorial-intro__selected-quote span{
+    font:400 14px/1.4 Montserrat,sans-serif;color:#ddc3b4;
+  }
+  .vf-profile-detail .vf-editorial-intro__selected-quote strong{
+    font:500 clamp(52px,13vw,69px)/1 "Cormorant Garamond",Georgia,serif;
+    letter-spacing:-.04em;color:#ffe7c7;
     white-space:nowrap;
+    font-variant-numeric:lining-nums;
   }
-  .vf-profile-detail .vf-editorial-intro__disclosure--rates{border-bottom:0;}
-  .vf-profile-detail .vf-editorial-intro__disclosure--rates summary{min-height:50px;}
-  .vf-profile-detail .vf-editorial-intro__mobile-summary summary:focus-visible{
-    outline:2px solid #edc18c;outline-offset:3px;border-radius:3px;
+  .vf-profile-detail .vf-editorial-intro__rate-note{
+    margin:12px 1px 5px;
+    color:#b7a098;
+    font:400 10px/1.6 Montserrat,sans-serif;
+    letter-spacing:.01em;
   }
+  .vf-profile-detail .vf-editorial-intro__disclosure--rates{
+    margin-top:7px;
+  }
+  .vf-profile-detail .vf-editorial-intro__disclosure--rates summary{
+    font-size:12px;min-height:49px;
+  }
+  @media(prefers-reduced-motion:reduce){
+    .vf-profile-detail .vf-editorial-intro__duration-selector button,
+    .vf-profile-detail .vf-editorial-intro__disclosure summary svg{transition:none;}
+  }
+}
+@media(max-width:360px){
+  .vf-profile-detail .vf-editorial-intro__selected-quote strong{font-size:49px;}
 }
