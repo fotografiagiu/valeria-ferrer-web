@@ -298,3 +298,35 @@
 @media(prefers-reduced-motion:reduce){
   .vf-editorial-intro *{animation:none!important;transition:none!important;}
 }
+
+
+/* Secondary biography remains readable without pushing the gallery far below. */
+.vf-profile-detail .vf-profile-essence-fold{
+  margin-top:16px;
+  border-top:1px solid rgba(225,171,114,.24);
+}
+.vf-profile-detail .vf-profile-essence-fold summary{
+  list-style:none;display:flex;justify-content:space-between;align-items:center;
+  padding:12px 0;cursor:pointer;color:#ddaf7f;
+  font:600 10px/1.4 Montserrat,sans-serif;letter-spacing:.19em;text-transform:uppercase;
+}
+.vf-profile-detail .vf-profile-essence-fold summary::-webkit-details-marker{display:none;}
+.vf-profile-detail .vf-profile-essence-fold summary:hover{color:#fae0bb;}
+.vf-profile-detail .vf-profile-essence-fold[open] summary svg{transform:rotate(90deg);}
+.vf-profile-detail .vf-profile-essence-fold__content{
+  color:#d2bbb2;padding:8px 0 15px;
+  font:400 13px/1.82 Montserrat,sans-serif;
+}
+.vf-profile-detail .vf-profile-essence-fold__content p{margin:0;}
+/* Make the top photo and info resemble the horizontal editorial reference, not a tall portrait. */
+@media(min-width:1181px){
+  .vf-profile-detail .vf-editorial-intro__photo-frame,
+  .vf-profile-detail .vf-editorial-intro__thumbnails{height:clamp(338px,26vw,410px);}
+  .vf-profile-detail .vf-editorial-intro__specs dl > div{
+    min-height:35px;padding:7px 0;
+  }
+  .vf-profile-detail .vf-editorial-intro__signature{padding-top:12px;}
+  .vf-profile-detail .vf-profile-desktop--editorial{
+    padding-top:0!important;
+  }
+}
