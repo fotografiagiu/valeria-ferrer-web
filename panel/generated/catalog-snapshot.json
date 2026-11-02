@@ -1,10 +1,26 @@
 {
-  "generatedAt": "2026-10-19T23:56:47.570Z",
+  "generatedAt": "2026-11-02T22:19:50.755Z",
   "sourcePath": "data/models.json",
-  "sourceHash": "32366b479a9f1e13f221c55ed6137265fcec3f0b37e3c216372735a1231b4dc8",
-  "modelCount": 62,
-  "activeCount": 35,
+  "sourceHash": "d8fba26e394cb0bad4b839e9e833deaeeb4b678a0950eeaffc55f1f6d22acbc1",
+  "modelCount": 64,
+  "activeCount": 37,
   "models": [
+    {
+      "slug": "susi",
+      "name": "Susi",
+      "active": true,
+      "coverImageUrl": "/chicas/susi-model-agency-valencia-vf/gallery/susi-nueva-01.webp",
+      "images": [
+        "/chicas/susi-model-agency-valencia-vf/gallery/susi-nueva-01.webp",
+        "/chicas/susi-model-agency-valencia-vf/gallery/susi-nueva-02.webp",
+        "/chicas/susi-model-agency-valencia-vf/gallery/susi-nueva-03.webp",
+        "/chicas/susi-model-agency-valencia-vf/gallery/susi-nueva-04.webp",
+        "/chicas/susi-model-agency-valencia-vf/gallery/susi-nueva-05.webp",
+        "/chicas/susi-model-agency-valencia-vf/gallery/susi-nueva-06.webp",
+        "/chicas/susi-model-agency-valencia-vf/gallery/susi-nueva-07.webp",
+        "/chicas/susi-model-agency-valencia-vf/gallery/susi-nueva-08.webp"
+      ]
+    },
     {
       "slug": "camila",
       "name": "Camila",
