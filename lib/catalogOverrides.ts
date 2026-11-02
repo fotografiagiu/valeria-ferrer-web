@@ -159,9 +159,17 @@ export function applyCatalogOverrides<T extends CatalogLike>(
         !/^\/(?:chicas|chicas-optimized)\/[^?#]+$/i.test(cover) ||
         cover.includes('..') ||
         !overridePathsAllowed(model, cover, row.galleryImagePaths));
+    // Alana's September JPG gallery paths in the panel are stale/404.
+    // Her newly uploaded WebP set in models.json is the canonical gallery.
+    // Keep the panel's ordering and cover, but never replace her current
+    // seven WebP photos with the obsolete JPG links.
+    const galleryPaths =
+      resolvedSlug === 'alana' && model.gallery?.some((path) => path.includes('alana-escorts-valencia-'))
+        ? model.gallery.filter((path) => path !== cover)
+        : row.galleryImagePaths;
     ordered.push(
       cover && !coverIsStale
-        ? withGalleryOverride(model, cover, row.galleryImagePaths)
+        ? withGalleryOverride(model, cover, galleryPaths)
         : model
     );
   }
