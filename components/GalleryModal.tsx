@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import LazyImage from './LazyImage';
@@ -226,7 +227,9 @@ const GalleryModal: React.FC<GalleryModalProps> = ({
 
   const currentSrc = validImages[currentIndex];
 
-  return (
+  // A portal keeps the full-screen gallery above the sticky site header and
+  // outside the profile's isolation/transform stacking context on iOS Safari.
+  return createPortal(
     <AnimatePresence mode="wait">
       {isOpen && (
         <motion.div
@@ -237,8 +240,8 @@ const GalleryModal: React.FC<GalleryModalProps> = ({
           exit="exit"
           className={
             isMobileLandscape
-              ? 'fixed inset-0 z-50 flex flex-col bg-black lg:flex lg:items-center lg:justify-center lg:bg-black/85 lg:backdrop-blur-md'
-              : 'fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md'
+              ? 'vf-gallery-modal fixed inset-0 z-[9999] flex flex-col bg-black lg:flex lg:items-center lg:justify-center lg:bg-black/85 lg:backdrop-blur-md'
+              : 'vf-gallery-modal fixed inset-0 z-[9999] flex items-center justify-center bg-black/85 backdrop-blur-md'
           }
         >
           <motion.button
@@ -247,10 +250,11 @@ const GalleryModal: React.FC<GalleryModalProps> = ({
             animate="visible"
             exit="exit"
             onClick={onClose}
-            className="absolute top-4 right-4 z-10 w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-white/80 hover:text-white hover:bg-white/20 transition-all duration-300 group"
-            aria-label="Cerrar galería"
+            className="vf-gallery-modal__close group"
+            aria-label="Cerrar fotografía ampliada"
+            type="button"
           >
-            <X size={24} className="transition-transform group-hover:rotate-90 duration-300" />
+            <span>Cerrar</span><X size={22} strokeWidth={2.6} className="transition-transform group-hover:rotate-90 duration-300" />
           </motion.button>
 
           {validImages.length > 1 && (
@@ -423,7 +427,8 @@ const GalleryModal: React.FC<GalleryModalProps> = ({
           />
         </motion.div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 };
 

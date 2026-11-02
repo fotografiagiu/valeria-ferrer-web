@@ -630,3 +630,124 @@
 @media(max-width:360px){
   .vf-profile-detail .vf-editorial-intro__selected-quote strong{font-size:49px;}
 }
+
+
+/* V5 — Glass signposting. Both actions remain native <details> controls. */
+@media (max-width:700px) {
+  .vf-profile-detail .vf-editorial-intro__mobile-summary > .vf-editorial-intro__disclosure,
+  .vf-profile-detail .vf-editorial-intro__disclosure--rates {
+    position:relative;
+    margin:14px 0 0;
+    border:1px solid rgba(236,185,124,.53);
+    border-radius:15px;
+    overflow:hidden;
+    background:linear-gradient(120deg,rgba(117,55,77,.40),rgba(72,34,53,.26) 54%,rgba(209,146,104,.16));
+    box-shadow:inset 0 1px 0 rgba(255,228,197,.13),0 10px 30px rgba(12,3,9,.18);
+    -webkit-backdrop-filter:blur(15px) saturate(130%);
+    backdrop-filter:blur(15px) saturate(130%);
+  }
+  .vf-profile-detail .vf-editorial-intro__disclosure--rates{
+    margin-top:16px;
+    background:linear-gradient(120deg,rgba(90,38,58,.53),rgba(132,68,73,.31) 68%,rgba(218,158,107,.2));
+    border-color:rgba(242,195,135,.67);
+  }
+  .vf-profile-detail .vf-editorial-intro__mobile-summary > .vf-editorial-intro__disclosure > summary,
+  .vf-profile-detail .vf-editorial-intro__disclosure--rates > summary {
+    min-height:65px;
+    width:100%;
+    padding:10px 12px 10px 17px;
+    color:#f8dfbe;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    font:600 13px/1.35 Montserrat,sans-serif;
+    letter-spacing:.015em;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .vf-profile-detail .vf-editorial-intro__mobile-summary > .vf-editorial-intro__disclosure > summary span,
+  .vf-profile-detail .vf-editorial-intro__disclosure--rates > summary span {
+    display:block;
+    min-width:0;
+  }
+  .vf-profile-detail .vf-editorial-intro__mobile-summary summary small{
+    display:block;
+    margin-top:4px;
+    font:400 10px/1.45 Montserrat,sans-serif;
+    color:#d8b9aa;
+    letter-spacing:0;
+  }
+  .vf-profile-detail .vf-editorial-intro__mobile-summary > .vf-editorial-intro__disclosure > summary svg,
+  .vf-profile-detail .vf-editorial-intro__disclosure--rates > summary svg {
+    flex:0 0 auto;
+    width:37px;height:37px;
+    padding:8px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#f5d4aa,#c18e5b);
+    color:#321822;
+    border:1px solid rgba(255,241,215,.4);
+    box-shadow:0 4px 13px rgba(0,0,0,.24);
+    transition:transform .22s ease;
+  }
+  .vf-profile-detail .vf-editorial-intro__mobile-summary > .vf-editorial-intro__disclosure[open] > summary svg,
+  .vf-profile-detail .vf-editorial-intro__disclosure--rates[open] > summary svg {
+    transform:rotate(180deg);
+  }
+  .vf-profile-detail .vf-editorial-intro__mobile-summary .vf-editorial-intro__disclosure-rows{
+    padding:0 17px 12px;
+  }
+  .vf-profile-detail .vf-editorial-intro__mobile-summary .vf-editorial-intro__disclosure-rows > div{
+    padding:11px 0;
+  }
+  .vf-profile-detail .vf-editorial-intro__mobile-summary > .vf-editorial-intro__disclosure:focus-within,
+  .vf-profile-detail .vf-editorial-intro__disclosure--rates:focus-within {
+    border-color:#f5d29e;
+  }
+}
+
+/* Floating gallery lives in a document.body portal to avoid nested stacking contexts. */
+.vf-gallery-modal{
+  z-index:100000!important;
+  overscroll-behavior:contain;
+}
+.vf-gallery-modal__close {
+  position:fixed;
+  z-index:100001;
+  top:max(14px,calc(env(safe-area-inset-top,0px) + 14px));
+  right:max(12px,calc(env(safe-area-inset-right,0px) + 12px));
+  display:inline-flex;
+  gap:9px;
+  align-items:center;
+  justify-content:center;
+  min-height:49px;
+  min-width:108px;
+  border:1px solid rgba(246,218,181,.78);
+  border-radius:100px;
+  padding:10px 15px;
+  color:#fff3e3;
+  font:600 12px/1.2 Montserrat,sans-serif;
+  letter-spacing:.045em;
+  cursor:pointer;
+  background:rgba(43,16,30,.88);
+  box-shadow:0 8px 31px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,239,207,.16);
+  -webkit-backdrop-filter:blur(18px);
+  backdrop-filter:blur(18px);
+  -webkit-tap-highlight-color:transparent;
+}
+.vf-gallery-modal__close svg{
+  flex-shrink:0;
+  color:#f7cf9c;
+}
+.vf-gallery-modal__close:hover,
+.vf-gallery-modal__close:focus-visible {
+  background:rgba(99,33,58,.97);
+  color:#fff;
+  outline:2px solid rgba(255,223,179,.65);
+  outline-offset:2px;
+}
+@media(min-width:1024px){
+  .vf-gallery-modal__close{
+    top:25px;
+    right:25px;
+  }
+}

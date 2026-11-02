@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { ChevronLeft, ChevronRight, Image as ImageIcon } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ChevronDown, Image as ImageIcon } from 'lucide-react';
 import type { Model } from '../types';
 import NewCornerRibbon from './NewCornerRibbon';
 import BlackCornerRibbon from './BlackCornerRibbon';
@@ -113,7 +113,7 @@ const EditorialProfileIntro: React.FC<Props> = ({ model, onOpenGallery }) => {
           <span>{model.nationality || 'Española'}</span>
         </div>
         <details className="vf-editorial-intro__disclosure">
-          <summary>Información personal <ChevronRight size={16} aria-hidden="true" /></summary>
+          <summary><span>Información personal <small>Toca para ver todos los datos</small></span><ChevronDown size={21} strokeWidth={2.4} aria-hidden="true" /></summary>
           <dl className="vf-editorial-intro__disclosure-rows">
             {facts.map((fact) => <div key={fact.name}><dt>{fact.name}</dt><dd>{fact.value}</dd></div>)}
           </dl>
@@ -128,8 +128,8 @@ const EditorialProfileIntro: React.FC<Props> = ({ model, onOpenGallery }) => {
           <div className="vf-editorial-intro__duration-selector" role="group" aria-label="Seleccionar duración">
             {[
               { index: 0, label: '30 min' },
+              { index: 1, label: '45 min' },
               { index: 2, label: '1 hora' },
-              { index: 3, label: '1 h 30' },
             ].map(({ index, label }) => (
               <button
                 key={index}
@@ -148,7 +148,7 @@ const EditorialProfileIntro: React.FC<Props> = ({ model, onOpenGallery }) => {
           </div>
           <p className="vf-editorial-intro__rate-note">Consulta disponibilidad para tu reserva</p>
           <details className="vf-editorial-intro__disclosure vf-editorial-intro__disclosure--rates">
-            <summary>Consultar todas las tarifas <ChevronRight size={17} aria-hidden="true" /></summary>
+            <summary><span>Consultar todas las tarifas <small>Más duraciones y servicios</small></span><ChevronDown size={21} strokeWidth={2.4} aria-hidden="true" /></summary>
             <dl className="vf-editorial-intro__disclosure-rows">
               {rateRows.map((rate) => (
                 <div key={rate.label}><dt>{rate.label}</dt><dd>{rate.amount}</dd></div>
