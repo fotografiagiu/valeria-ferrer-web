@@ -305,23 +305,24 @@
   }
   .vf-lux-hero__visual img{
     object-fit:cover;
-    object-position:58% 12%;
+    /* Cara/torso centrados arriba; el copy vive en la franja oscura inferior */
+    object-position:46% 10%;
   }
   .vf-lux-hero__shade {
     background:
       linear-gradient(180deg,
-        rgba(12,3,8,.18) 0%,
-        rgba(12,3,8,.05) 22%,
-        rgba(18,5,12,.35) 48%,
-        rgba(18,6,12,.88) 68%,
-        #14060d 82%,
+        rgba(12,3,8,.12) 0%,
+        rgba(12,3,8,.02) 28%,
+        rgba(18,5,12,.22) 52%,
+        rgba(18,6,12,.78) 70%,
+        #14060d 84%,
         #12050c 100%);
   }
   .vf-lux-hero__content{
     width:calc(100% - 28px);
     max-width:440px;
     margin:0 auto;
-    padding:0 0 calc(118px + env(safe-area-inset-bottom,0px));
+    padding:0 0 calc(108px + env(safe-area-inset-bottom,0px));
     text-align:center;
   }
   .vf-lux-hero__eyebrow{justify-content:center;font-size:8px;letter-spacing:.14em;margin-bottom:10px}
