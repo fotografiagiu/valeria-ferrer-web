@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import { ArrowRight, Phone, Send, X } from 'lucide-react'
 import {
   OFFICIAL_PHONE_LABEL,
@@ -17,6 +18,10 @@ import {
 type PromoView = 'hidden' | 'popup' | 'banner'
 
 const PromoPopup: React.FC = () => {
+  const { pathname } = useLocation()
+  // Keep profile photographs unobstructed by the pink promotional banner/popup.
+  // Promotion remains available elsewhere on the site.
+  const hideOnProfile = /^\/models\/[^/]+\/?$/.test(pathname)
   const [promo, setPromo] = useState<PromoPopupConfig | null>(() => getCachedPromotion())
   const [view, setView] = useState<PromoView>('hidden')
   const [contactOpen, setContactOpen] = useState(false)
@@ -27,7 +32,7 @@ const PromoPopup: React.FC = () => {
 
   const syncVisibility = useCallback(() => {
     // Happy Hour (novedad Halloween) has the screen until 2 Nov.
-    if (halloweenIsLive() || !isPromoLive(promo)) {
+    if (hideOnProfile || halloweenIsLive() || !isPromoLive(promo)) {
       setContactOpen(false)
       setView('hidden')
       return
@@ -35,7 +40,7 @@ const PromoPopup: React.FC = () => {
     // Always reopen the large popup on a fresh page load / new promo id.
     // Minimize only lives in memory until the next navigation/reload.
     setView((current) => (current === 'banner' ? 'banner' : 'popup'))
-  }, [promo])
+  }, [promo, hideOnProfile])
 
   const minimizePromo = useCallback(() => {
     setContactOpen(false)
@@ -125,7 +130,7 @@ const PromoPopup: React.FC = () => {
     }
   }, [closeContact, contactOpen, minimizePromo, view])
 
-  if (!promo || view === 'hidden') return null
+  if (hideOnProfile || !promo || view === 'hidden') return null
 
   return (
     <>
