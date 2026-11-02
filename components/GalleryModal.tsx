@@ -3,7 +3,6 @@ import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import LazyImage from './LazyImage';
-import { getGalleryImageThumbnail } from '../lib/modelGridImage';
 import VfPhotoFirma from './VfPhotoFirma';
 
 interface GalleryModalProps {
@@ -408,12 +407,18 @@ const GalleryModal: React.FC<GalleryModalProps> = ({
                           : 'opacity-60 hover:opacity-80 hover:scale-105'
                       }`}
                     >
-                      <LazyImage
-                        src={getGalleryImageThumbnail(image)}
+                      {/* Original image, not an assumed /chicas-thumbnails/ variant.
+                          The mapped thumbnails are missing for some new WebP galleries,
+                          and LazyImage leaves invisible placeholders after image failures. */}
+                      <img
+                        src={image}
                         alt={`${modelName} - Miniatura ${index + 1}`}
-                        className="w-full h-full object-cover"
-                        sizes="64px"
-                        priority={index === currentIndex}
+                        className="block w-full h-full object-cover"
+                        width={64}
+                        height={64}
+                        loading={index < 4 ? 'eager' : 'lazy'}
+                        decoding="async"
+                        draggable={false}
                       />
                     </button>
                   );
