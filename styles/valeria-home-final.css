@@ -405,3 +405,15 @@
     gap: clamp(16px, 1.4vw, 28px);
   }
 }
+
+/* Desktop hero: prioritize the model's face instead of center-cropping it. */
+@media (min-width: 1071px) {
+  .vf-noir-home-page .vf-lux-hero__visual img {
+    object-position: 50% 0%;
+  }
+}
+@media (min-width: 768px) and (max-width: 1070px) {
+  .vf-noir-home-page .vf-lux-hero__visual img {
+    object-position: 50% 0%;
+  }
+}
