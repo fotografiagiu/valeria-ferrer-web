@@ -20,7 +20,8 @@
     <title>Valeria Ferrer | Escorts en Valencia</title>
     
     <!-- Performance: banner LCP del hero móvil (WebP + fallback) -->
-    <link rel="preload" as="image" href="/images/novedades-hero-editorial-mobile.webp" type="image/webp" media="(max-width: 767px)" fetchpriority="high">
+    <!-- Avoid preloading the replaced editorial image. The V6 hero loads with fetchpriority=high. -->
+    <link rel="preconnect" href="https://d2ol7oe51mr4n9.cloudfront.net" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
