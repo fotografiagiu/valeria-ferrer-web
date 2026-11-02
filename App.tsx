@@ -14,6 +14,7 @@ import HalloweenCashPromo from './components/HalloweenCashPromo';
 import HalloweenCampaign, { halloweenIsLive } from './components/HalloweenCampaign';
 import './styles/halloween-cinematic.css';
 import './styles/model-detail-luxury.css';
+import './styles/model-detail-editorial-v2.css';
 import { Analytics } from '@vercel/analytics/react';
 import ContactClickTracker from './components/ContactClickTracker';
 
