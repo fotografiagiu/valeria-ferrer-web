@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ChevronLeft, ChevronRight, ChevronDown, Image as ImageIcon } from 'lucide-react';
 import type { Model } from '../types';
 import NewCornerRibbon from './NewCornerRibbon';
@@ -20,11 +20,36 @@ const EditorialProfileIntro: React.FC<Props> = ({ model, onOpenGallery }) => {
     [model.image, model.gallery]
   );
   const [selected, setSelected] = useState(0);
-  const [loaded, setLoaded] = useState(false);
+  const [loadedSrc, setLoadedSrc] = useState<string | null>(null);
+  const [retrySrc, setRetrySrc] = useState<string | null>(null);
+  const [failedSrc, setFailedSrc] = useState<string | null>(null);
+  const mainImageRef = useRef<HTMLImageElement>(null);
   const [selectedRateIndex, setSelectedRateIndex] = useState(2);
-  useEffect(() => { setSelected(0); setLoaded(false); setSelectedRateIndex(2); }, [model.id]);
+  const selectedSrc = photos[selected] || '';
+  const imageSrc = retrySrc === selectedSrc
+    ? selectedSrc + (selectedSrc.includes('?') ? '&' : '?') + 'vf_photo_retry=1'
+    : selectedSrc;
+  const loaded = loadedSrc === selectedSrc && !!selectedSrc;
+
+  useEffect(() => {
+    setSelected(0);
+    setLoadedSrc(null);
+    setRetrySrc(null);
+    setFailedSrc(null);
+    setSelectedRateIndex(2);
+  }, [model.id]);
+
+  // iOS Safari may return an image from cache before React's load handler runs.
+  // Reconcile with the native image state; never hide a valid image indefinitely.
+  useEffect(() => {
+    const image = mainImageRef.current;
+    if (selectedSrc && image?.complete && image.naturalWidth > 0) {
+      setLoadedSrc(selectedSrc);
+      setFailedSrc(null);
+    }
+  }, [selectedSrc, imageSrc]);
+
   const setPhoto = useCallback((value: number) => {
-    setLoaded(false);
     setSelected((value + photos.length) % Math.max(photos.length, 1));
   }, [photos.length]);
   const facts = [
@@ -57,11 +82,27 @@ const EditorialProfileIntro: React.FC<Props> = ({ model, onOpenGallery }) => {
                 <button type="button" className="vf-editorial-intro__photo-open"
                   onClick={() => onOpenGallery(selected)}
                   aria-label={'Ampliar fotografía ' + (selected + 1) + ' de ' + model.name}>
-                  <img key={photos[selected]} src={photos[selected]}
+                  <img key={imageSrc} ref={mainImageRef} src={imageSrc}
                     alt={model.name + ' — fotografía ' + (selected + 1)} loading="eager" decoding="async"
-                    onLoad={() => setLoaded(true)} className={loaded ? 'is-loaded' : ''} />
+                    onLoad={() => { setLoadedSrc(selectedSrc); setFailedSrc(null); }}
+                    onError={() => {
+                      // A single cache-busting retry is enough for transient image/CDN failures.
+                      if (retrySrc !== selectedSrc) setRetrySrc(selectedSrc);
+                      else setFailedSrc(selectedSrc);
+                    }}
+                    className={loaded ? 'is-loaded' : ''} />
                 </button>
-                <VfPhotoFirma className="vf-editorial-intro__firma" photoSrc={photos[selected]} />
+                {loaded && <VfPhotoFirma className="vf-editorial-intro__firma" photoSrc={selectedSrc} />}
+                {failedSrc === selectedSrc && (
+                  <div className="vf-editorial-intro__image-error" role="status">
+                    <span>No se ha podido cargar la fotografía</span>
+                    <button type="button" onClick={() => {
+                      setFailedSrc(null);
+                      setRetrySrc(null);
+                      setLoadedSrc(null);
+                    }}>Reintentar foto</button>
+                  </div>
+                )}
                 {photos.length > 1 && (
                   <>
                     <button type="button" className="vf-editorial-intro__arrow vf-editorial-intro__arrow--prev" aria-label="Fotografía anterior" onClick={() => setPhoto(selected - 1)}><ChevronLeft size={21}/></button>
