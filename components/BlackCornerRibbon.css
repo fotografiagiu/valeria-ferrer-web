@@ -1,95 +1,96 @@
 /**
- * BLACK — etiqueta lateral horizontal (editorial).
- * Sale del borde derecho; proporción media, ni gruesa ni filiforme.
+ * BLACK corner ribbon — Laura reference:
+ * thin 45° diagonal strip, gold edges, small gold serif, clipped to top-right.
  */
 .vf-black-corner {
   position: absolute;
-  top: 18px;
+  top: 0;
   right: 0;
   z-index: 40;
-  width: auto;
-  height: auto;
-  aspect-ratio: auto;
-  overflow: visible;
+  width: clamp(76px, 26%, 92px);
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
   pointer-events: none;
   isolation: isolate;
-  filter: none;
 }
 .vf-black-corner__fold {
   display: none;
 }
 .vf-black-corner__band {
-  position: relative;
-  top: auto;
-  right: auto;
-  width: auto;
-  height: auto;
-  min-height: 0;
-  max-height: none;
-  transform: none;
-  display: inline-flex;
+  position: absolute;
+  top: 27%;
+  right: -44%;
+  z-index: 2;
+  width: 158%;
+  height: 13%;
+  min-height: 13px;
+  max-height: 17px;
+  transform: rotate(45deg);
+  display: flex;
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  padding: 8px 16px 8px 18px;
-  border: none;
-  border-left: 1px solid rgba(232, 197, 122, 0.95);
-  border-top: 1px solid rgba(232, 197, 122, 0.55);
-  border-bottom: 1px solid rgba(232, 197, 122, 0.55);
-  border-radius: 2px 0 0 2px;
-  background: linear-gradient(90deg, #14110f 0%, #0a0908 100%);
-  box-shadow: -4px 4px 14px rgba(0, 0, 0, 0.45);
+  padding: 0;
+  border-top: 1px solid #e8c57a;
+  border-bottom: 1px solid #c49a45;
+  border-left: none;
+  border-right: none;
+  border-radius: 0;
+  background: #0c0a09;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
 }
 .vf-black-corner__band::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 16%;
-  bottom: 16%;
-  width: 2px;
-  background: linear-gradient(180deg, #c49a45, #f0d89a, #c49a45);
+  content: none;
 }
 .vf-black-corner__band > span {
   position: relative;
   font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
-  font-size: 11px;
+  font-size: 8px;
   line-height: 1;
   font-weight: 600;
-  letter-spacing: 0.3em;
+  letter-spacing: 0.26em;
   color: #e8c57a;
   text-transform: uppercase;
   text-shadow: none;
-  padding-left: 2px;
+  padding: 0;
 }
 .vf-black-corner--profile {
-  top: 24px;
-  width: auto;
+  width: clamp(90px, 17%, 118px);
 }
 .vf-black-corner--profile .vf-black-corner__band {
-  padding: 9px 20px 9px 22px;
+  height: 12%;
+  min-height: 14px;
+  max-height: 18px;
 }
 .vf-black-corner--profile .vf-black-corner__band > span {
-  font-size: 12px;
-  letter-spacing: 0.32em;
+  font-size: 9px;
+  letter-spacing: 0.28em;
 }
 @media (max-width: 639px) {
   .vf-black-corner {
-    top: 12px;
+    width: min(28%, 72px);
   }
   .vf-black-corner__band {
-    padding: 6px 11px 6px 13px;
+    top: 26%;
+    right: -48%;
+    width: 160%;
+    height: 12%;
+    min-height: 10px;
+    max-height: 13px;
   }
   .vf-black-corner__band > span {
-    font-size: 9px;
-    letter-spacing: 0.22em;
+    font-size: 6.5px;
+    letter-spacing: 0.2em;
   }
   .vf-black-corner--profile {
-    top: 14px;
+    width: min(28%, 88px);
   }
   .vf-black-corner--profile .vf-black-corner__band {
-    padding: 7px 14px 7px 16px;
+    height: 11%;
+    min-height: 11px;
+    max-height: 14px;
   }
   .vf-black-corner--profile .vf-black-corner__band > span {
-    font-size: 10px;
+    font-size: 7.5px;
   }
 }
