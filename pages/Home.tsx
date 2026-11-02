@@ -7,6 +7,7 @@ import HomeEditorial from '../components/HomeEditorial';
 import FAQ from '../components/FAQ';
 import PageSEOHead from '../components/PageSEOHead';
 import HomeNovedadesStrip from '../components/HomeNovedadesStrip';
+import HomePromotions from '../components/HomePromotions';
 import HomeWhatsAppNews from '../components/HomeWhatsAppNews';
 import modelsData from '../data/models.json';
 import { filterActiveModels } from '../lib/modelsCatalog';
@@ -55,10 +56,13 @@ const Home: React.FC = () => {
         title={homeSEOData.title}
         description={homeSEOData.description}
         canonicalUrl={homeSEOData.canonicalUrl}
+        noindex
       />
       <NovemberNoirHome models={homeModels} />
 
       <HomeNovedadesStrip models={homeModels} />
+
+      <HomePromotions />
 
       {/* Compact, immediately crawlable links before the full live catalog. */}
       <nav className="vf-home-category-pills" aria-label="Explorar perfiles por categoría">
