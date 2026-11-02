@@ -436,3 +436,34 @@
       linear-gradient(0deg,#12050c 0%,rgba(18,5,12,.68) 10%,rgba(18,5,12,.10) 25%,transparent 45%);
   }
 }
+
+/* Polished editorial hero: soft photographic edge, no visible rectangle.
+   Keep full portrait within the right composition and preserve mobile. */
+@media (min-width:768px) {
+  .vf-noir-home-page .vf-lux-hero__visual {
+    inset:0 0 0 auto;
+    width:78%;
+    height:100%;
+    background:transparent;
+    overflow:hidden;
+    -webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.13) 12%,rgba(0,0,0,.65) 27%,#000 42%);
+    mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.13) 12%,rgba(0,0,0,.65) 27%,#000 42%);
+  }
+  .vf-noir-home-page .vf-lux-hero__visual picture {
+    width:100%;
+    height:100%;
+    display:block;
+  }
+  .vf-noir-home-page .vf-lux-hero__visual img {
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    object-position:right center;
+    transform:none;
+  }
+  .vf-noir-home-page .vf-lux-hero__shade {
+    background:
+      linear-gradient(90deg,#190811 0%,rgba(25,8,17,.98) 18%,rgba(25,8,17,.74) 35%,rgba(25,8,17,.24) 55%,rgba(25,8,17,0) 82%),
+      linear-gradient(0deg,#12050c 0%,rgba(18,5,12,.70) 8%,rgba(18,5,12,.16) 24%,transparent 48%);
+  }
+}
