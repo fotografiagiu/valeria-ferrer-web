@@ -406,14 +406,33 @@
   }
 }
 
-/* Desktop hero: prioritize the model's face instead of center-cropping it. */
-@media (min-width: 1071px) {
-  .vf-noir-home-page .vf-lux-hero__visual img {
-    object-position: 50% 0%;
+/* Desktop hero — show the original photograph in full. No aggressive cover crop. */
+@media (min-width: 768px) {
+  .vf-noir-home-page .vf-lux-hero {
+    background: #180710;
   }
-}
-@media (min-width: 768px) and (max-width: 1070px) {
+  .vf-noir-home-page .vf-lux-hero__visual {
+    inset: 0 0 0 auto;
+    width: 72%;
+    height: 100%;
+    background: #180710;
+  }
+  .vf-noir-home-page .vf-lux-hero__visual picture {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
   .vf-noir-home-page .vf-lux-hero__visual img {
-    object-position: 50% 0%;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: right center;
+    transform: none;
+  }
+  .vf-noir-home-page .vf-lux-hero__shade {
+    background:
+      linear-gradient(90deg,#190811 0%,rgba(25,8,17,.99) 24%,rgba(25,8,17,.84) 39%,rgba(25,8,17,.14) 67%,rgba(25,8,17,0) 100%),
+      linear-gradient(0deg,#12050c 0%,rgba(18,5,12,.68) 10%,rgba(18,5,12,.10) 25%,transparent 45%);
   }
 }
