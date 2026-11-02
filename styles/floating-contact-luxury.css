@@ -1,0 +1,228 @@
+/* Panel flotante de contacto — alineado al lenguaje luxury de la home */
+.vf-lux-contact__panel {
+  position: relative;
+  width: min(19.5rem, calc(100vw - 4.5rem));
+  overflow: hidden;
+  border-radius: 18px;
+  padding: 18px 16px 14px;
+  color: #f6e8d8;
+  border: 1px solid rgba(230, 186, 127, 0.34);
+  background:
+    radial-gradient(ellipse at 18% 0%, rgba(120, 36, 62, 0.35), transparent 55%),
+    linear-gradient(165deg, rgba(28, 10, 18, 0.97), rgba(14, 5, 10, 0.98) 55%, rgba(18, 7, 13, 0.98));
+  box-shadow:
+    0 22px 55px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(246, 214, 168, 0.12);
+  backdrop-filter: blur(14px);
+}
+
+.vf-lux-contact__panel::before {
+  content: "";
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(240, 204, 150, 0.7), transparent);
+  pointer-events: none;
+}
+
+.vf-lux-contact__close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  color: #e8d4bf;
+  border: 1px solid rgba(230, 186, 127, 0.28);
+  background: rgba(255, 255, 255, 0.04);
+  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.vf-lux-contact__close:hover {
+  color: #fff8ef;
+  border-color: rgba(240, 210, 160, 0.55);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.vf-lux-contact__close:focus-visible {
+  outline: 2px solid #f4d699;
+  outline-offset: 2px;
+}
+
+.vf-lux-contact__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 40px 8px 0;
+  color: #e7c8a2;
+  font: 600 9px/1.3 Montserrat, system-ui, sans-serif;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.vf-lux-contact__eyebrow svg {
+  color: #e6ba7f;
+}
+
+.vf-lux-contact__lead {
+  margin: 0 0 14px;
+  max-width: 15rem;
+  color: #e6d4c7;
+  font: 400 12px/1.55 'Cormorant Garamond', Georgia, serif;
+}
+
+.vf-lux-contact__channels {
+  display: grid;
+  gap: 8px;
+}
+
+.vf-lux-contact__channel {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 52px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  text-decoration: none;
+  border: 1px solid rgba(230, 186, 127, 0.22);
+  background: rgba(255, 255, 255, 0.035);
+  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.vf-lux-contact__channel:hover {
+  transform: translateY(-1px);
+  border-color: rgba(240, 210, 160, 0.5);
+  background: rgba(255, 255, 255, 0.07);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
+}
+
+.vf-lux-contact__channel:focus-visible {
+  outline: 2px solid #f4d699;
+  outline-offset: 2px;
+}
+
+.vf-lux-contact__channel-icon {
+  display: grid;
+  place-items: center;
+  flex: 0 0 34px;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  color: #1a0c08;
+  background: linear-gradient(135deg, #c99354, #f4d9a3 52%, #d6a061);
+  box-shadow: 0 6px 16px rgba(176, 103, 50, 0.28);
+}
+
+.vf-lux-contact__channel-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.vf-lux-contact__channel-copy strong {
+  color: #f8ecde;
+  font: 700 10px/1.2 Montserrat, system-ui, sans-serif;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.vf-lux-contact__channel-copy em {
+  color: #e8d5c0;
+  font: 500 12px/1.25 Montserrat, system-ui, sans-serif;
+  font-style: normal;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+}
+
+.vf-lux-contact__channel--whatsapp .vf-lux-contact__channel-icon {
+  color: #f4fff8;
+  background: linear-gradient(145deg, #1fa855, #2fd46c 55%, #14964a);
+  box-shadow: 0 6px 16px rgba(22, 140, 70, 0.28);
+}
+
+.vf-lux-contact__channel--whatsapp {
+  border-color: rgba(74, 190, 120, 0.28);
+  background:
+    linear-gradient(105deg, rgba(28, 110, 68, 0.18), transparent 55%),
+    rgba(255, 255, 255, 0.035);
+}
+
+.vf-lux-contact__channel--whatsapp:hover {
+  border-color: rgba(110, 220, 150, 0.45);
+}
+
+.vf-lux-contact__channel--telegram .vf-lux-contact__channel-icon {
+  color: #1a0c08;
+}
+
+.vf-lux-contact__booking {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  margin-top: 12px;
+  padding-top: 11px;
+  border-top: 1px solid rgba(230, 186, 127, 0.16);
+  color: #e7c8a2;
+  text-decoration: none;
+  font: 600 9px/1 Montserrat, system-ui, sans-serif;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transition: color 0.2s ease;
+}
+
+.vf-lux-contact__booking:hover {
+  color: #fff4e4;
+}
+
+.vf-lux-contact__tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid rgba(230, 186, 127, 0.4);
+  border-right: 0;
+  border-radius: 14px 0 0 14px;
+  padding: 12px 9px;
+  color: #1a0c08;
+  background: linear-gradient(180deg, #f0d5a5, #c99354 48%, #d6a061);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+  transition: filter 0.2s ease, transform 0.2s ease;
+}
+
+.vf-lux-contact__tab:hover {
+  filter: brightness(1.06);
+}
+
+.vf-lux-contact__tab:focus-visible {
+  outline: 2px solid #f4d699;
+  outline-offset: 2px;
+}
+
+.vf-lux-contact__tab span {
+  writing-mode: vertical-rl;
+  padding-block: 2px;
+  font: 700 9px/1 Montserrat, system-ui, sans-serif;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vf-lux-contact__channel,
+  .vf-lux-contact__tab,
+  .vf-lux-contact__close {
+    transition: none;
+  }
+
+  .vf-lux-contact__channel:hover,
+  .vf-lux-contact__tab:hover {
+    transform: none;
+  }
+}

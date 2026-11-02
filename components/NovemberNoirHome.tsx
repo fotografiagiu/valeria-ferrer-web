@@ -6,8 +6,8 @@ import '../styles/valeria-luxury-v5.css';
 import '../styles/valeria-home-final.css';
 
 /**
- * Portada limpia. SIN hacer zoom artificial ni recortar capturas de maquetas.
- * La imagen estática proviene de public/images/valeria-premium-hero.webp.
+ * Portada limpia. Desktop: valeria-premium-hero.webp (landscape).
+ * Móvil: valeria-premium-hero-mobile.webp (vertical 9:16 impactante).
  * `models` se mantiene por compatibilidad con pages/Home.tsx.
  */
 interface HomeHeroProps { models?: ReadonlyArray<{ slug: string }> }
@@ -25,15 +25,27 @@ const NovemberNoirHome: React.FC<HomeHeroProps> = () => {
   <div className="vf-noir vf-lux-home-intro" id="valeria-ferrer-home">
     <section className="vf-lux-hero" aria-labelledby="vf-lux-hero-title">
       <div className="vf-lux-hero__visual" aria-hidden="true">
-        <img
-          src="/images/valeria-premium-hero.webp"
-          alt=""
-          width={1264}
-          height={954}
-          loading="eager"
-          decoding="async"
-          fetchPriority="high"
-        />
+        <picture>
+          <source
+            media="(max-width: 767px)"
+            srcSet="/images/valeria-premium-hero-mobile.webp"
+            type="image/webp"
+          />
+          <source
+            media="(max-width: 767px)"
+            srcSet="/images/valeria-premium-hero-mobile.png"
+            type="image/png"
+          />
+          <img
+            src="/images/valeria-premium-hero.webp"
+            alt=""
+            width={1264}
+            height={954}
+            loading="eager"
+            decoding="async"
+            fetchPriority="high"
+          />
+        </picture>
       </div>
       <div className="vf-lux-hero__shade" aria-hidden="true" />
       <div className="vf-lux-hero__content">

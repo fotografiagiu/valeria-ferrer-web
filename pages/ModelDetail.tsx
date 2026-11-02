@@ -118,12 +118,15 @@ const ModelDetail: React.FC = () => {
 
   
   const getRelatedModels = () => {
-    const current = MODELS.find((m) => m.id === id);
+    const current =
+      orderedModels.find((m) => m.id === id || m.slug === id) ||
+      MODELS.find((m) => m.id === id || m.slug === id);
     if (!current) return [];
 
     // Stable rotation (daily) to avoid a "fixed block" feeling.
     const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD (UTC)
-    const recs = getRecommendedModels(current as any, MODELS as any, {
+    const pool = orderedModels.length ? orderedModels : MODELS;
+    const recs = getRecommendedModels(current as any, pool as any, {
       seedKey: `${current.slug}:${today}`,
       mobile: false,
     });
@@ -146,18 +149,21 @@ const ModelDetail: React.FC = () => {
       );
     }
 
-    if (recs.length) return recs.map((r) => r.model);
+    const picked = recs.map((r) => r.model);
+    if (picked.length >= 3) return picked.slice(0, 3);
 
-    // Fallback: stable shuffle (no random per render)
+    // Completar hasta 3 con un shuffle estable del catálogo.
     const seed = current.slug.split('').reduce((acc, ch) => acc + ch.charCodeAt(0), 0);
-    return MODELS.filter((m) => m.id !== id)
+    const seen = new Set(picked.map((m) => m.slug));
+    const fillers = pool
+      .filter((m) => m.slug !== current.slug && !seen.has(m.slug))
       .slice()
       .sort((a, b) => {
         const ha = (a.slug.charCodeAt(0) + seed) % 97;
         const hb = (b.slug.charCodeAt(0) + seed) % 97;
         return ha - hb;
-      })
-      .slice(0, 3);
+      });
+    return [...picked, ...fillers].slice(0, 3);
   };
 
   const exploreProfileLinks = model ? getExploreProfileLinks() : [];
@@ -1296,16 +1302,26 @@ const ModelDetail: React.FC = () => {
         </div>
 
         {/* Mobile Related Models */}
-        <div className="lg:hidden space-y-8 mt-16">
-          <div className="text-center">
-            <h3 className="text-2xl serif text-white uppercase tracking-widest mb-4">También te puede gustar</h3>
-            <p className="text-gray-400 text-sm font-light max-w-xs mx-auto">
+        <div className="vf-profile-related lg:hidden">
+          <div className="vf-profile-divider vf-profile-divider--section" aria-hidden="true">
+            <span className="vf-profile-divider__line" />
+            <span className="vf-profile-divider__gem" />
+            <span className="vf-profile-divider__line" />
+          </div>
+          <div className="vf-profile-related__intro">
+            <p className="vf-profile-related__eyebrow">Selección relacionada</p>
+            <h3>También te puede gustar</h3>
+            <p className="vf-profile-related__lead">
               Descubre otras modelos que podrían complementar tu experiencia perfecta
             </p>
           </div>
-          
+          <div className="vf-profile-divider vf-profile-divider--soft" aria-hidden="true">
+            <span className="vf-profile-divider__line" />
+            <span className="vf-profile-divider__dot" />
+            <span className="vf-profile-divider__line" />
+          </div>
           <div className="space-y-4">
-            {getRelatedModels().slice(0, 3).map((relatedModel, idx) => (
+            {getRelatedModels().slice(0, 3).map((relatedModel) => (
               <Link
                 key={relatedModel.id}
                 to={`/models/${relatedModel.id}`}
@@ -2152,16 +2168,26 @@ const ModelDetail: React.FC = () => {
             </div>
 
             {/* Related Models Section */}
-            <div className="space-y-8 mt-16">
-              <div className="text-center">
-                <h3 className="text-2xl serif text-white uppercase tracking-widest mb-4">También te puede gustar</h3>
-                <p className="text-gray-400 text-lg font-light max-w-2xl mx-auto">
+            <div className="vf-profile-related">
+              <div className="vf-profile-divider vf-profile-divider--section" aria-hidden="true">
+                <span className="vf-profile-divider__line" />
+                <span className="vf-profile-divider__gem" />
+                <span className="vf-profile-divider__line" />
+              </div>
+              <div className="vf-profile-related__intro">
+                <p className="vf-profile-related__eyebrow">Selección relacionada</p>
+                <h3>También te puede gustar</h3>
+                <p className="vf-profile-related__lead">
                   Descubre otras modelos que podrían complementar tu experiencia perfecta
                 </p>
               </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {getRelatedModels().map((relatedModel, idx) => (
+              <div className="vf-profile-divider vf-profile-divider--soft" aria-hidden="true">
+                <span className="vf-profile-divider__line" />
+                <span className="vf-profile-divider__dot" />
+                <span className="vf-profile-divider__line" />
+              </div>
+              <div className="vf-profile-related__grid">
+                {getRelatedModels().map((relatedModel) => (
                   <Link
                     key={relatedModel.id}
                     to={`/models/${relatedModel.id}`}
