@@ -31,8 +31,8 @@ const CREATIVES: Record<
   },
   salidas: {
     title: 'SALIDAS VIP',
-    image: '/promos/promo-salidas-exclusivas-oct2026.webp',
-    hint: 'Salidas exclusivas',
+    image: '/promos/promo-salidas-premium-nov2026.webp',
+    hint: 'Promoción salidas',
   },
 };
 
