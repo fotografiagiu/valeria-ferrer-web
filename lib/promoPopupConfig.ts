@@ -86,7 +86,7 @@ export function resolvePromoFromRemote(
       ? `🥂 Copa de invitación · Aprovecha en estas ${hours} ${hours === 1 ? 'hora' : 'horas'} · Ver oferta`
       : kind === 'duples'
         ? `Oferta dúplex · Aprovecha en estas ${hours} ${hours === 1 ? 'hora' : 'horas'} · Ver oferta`
-        : `Salidas exclusivas · Aprovecha en estas ${hours} ${hours === 1 ? 'hora' : 'horas'} · Ver oferta`
+        : `PROMOCIÓN SALIDAS · 1 h 180 € · Disponible durante ${hours} ${hours === 1 ? 'hora' : 'horas'}`
   const bannerText = hours ? timedBanner : creative.bannerText
 
   return {
