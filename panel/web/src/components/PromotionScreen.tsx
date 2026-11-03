@@ -30,9 +30,9 @@ const CREATIVES: Record<
     hint: 'Oferta dúplex',
   },
   salidas: {
-    title: 'SALIDAS VIP',
-    image: '/promos/promo-salidas-exclusivas-oct2026.webp',
-    hint: 'Salidas exclusivas',
+    title: 'SALIDAS · 1 H / 180 €',
+    image: '/promos/valeria-ferrer-promo-salidas-180.webp',
+    hint: 'Salida premium de una hora · 180 €',
   },
 };
 
