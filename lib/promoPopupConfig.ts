@@ -37,11 +37,11 @@ export const PROMO_CREATIVES: Record<
   },
   salidas: {
     kind: 'salidas',
-    image: '/promos/promo-salidas-exclusivas-oct2026.webp',
-    imageWidth: 1024,
-    imageHeight: 682,
+    image: '/promos/valeria-ferrer-promo-salidas-180.webp',
+    imageWidth: 1916,
+    imageHeight: 821,
     ctaHref: '/booking',
-    bannerText: 'Salidas exclusivas · Oferta activa · Ver oferta',
+    bannerText: 'PROMOCIÓN SALIDAS · 1 hora 180 € · Consultar disponibilidad',
   },
 }
 
