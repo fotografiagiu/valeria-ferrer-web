@@ -37,11 +37,11 @@ export const PROMO_CREATIVES: Record<
   },
   salidas: {
     kind: 'salidas',
-    image: '/promos/promo-salidas-exclusivas-oct2026.webp',
+    image: '/promos/promo-salidas-premium-nov2026.webp',
     imageWidth: 1024,
-    imageHeight: 682,
+    imageHeight: 438,
     ctaHref: '/booking',
-    bannerText: 'Salidas exclusivas · Oferta activa · Ver oferta',
+    bannerText: 'Promoción salidas · Oferta activa · Ver oferta',
   },
 }
 
@@ -86,7 +86,7 @@ export function resolvePromoFromRemote(
       ? `🥂 Copa de invitación · Aprovecha en estas ${hours} ${hours === 1 ? 'hora' : 'horas'} · Ver oferta`
       : kind === 'duples'
         ? `Oferta dúplex · Aprovecha en estas ${hours} ${hours === 1 ? 'hora' : 'horas'} · Ver oferta`
-        : `Salidas exclusivas · Aprovecha en estas ${hours} ${hours === 1 ? 'hora' : 'horas'} · Ver oferta`
+        : `Promoción salidas · Aprovecha en estas ${hours} ${hours === 1 ? 'hora' : 'horas'} · Ver oferta`
   const bannerText = hours ? timedBanner : creative.bannerText
 
   return {

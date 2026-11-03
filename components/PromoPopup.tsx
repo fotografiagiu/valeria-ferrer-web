@@ -1,12 +1,17 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
-import { ArrowRight, Phone, Send, X } from 'lucide-react'
+import { ArrowRight, MessageCircle, Phone, Send, X } from 'lucide-react'
 import {
   OFFICIAL_PHONE_LABEL,
   OFFICIAL_PHONE_TEL,
   OFFICIAL_TELEGRAM_HANDLE,
   OFFICIAL_TELEGRAM_URL,
+  officialWhatsAppUrlWithText,
 } from '../lib/officialContact'
+
+const PROMO_WHATSAPP_URL = officialWhatsAppUrlWithText(
+  'Hola, quiero información sobre la promoción de salidas.',
+)
 import { halloweenIsLive } from './HalloweenCampaign'
 import { isPromoLive, type PromoPopupConfig } from '../lib/promoPopupConfig'
 import {
@@ -218,22 +223,24 @@ const PromoPopup: React.FC = () => {
               Oferta especial Valeria Ferrer
             </h2>
 
-
-            <button
-              type="button"
-              onClick={openContact}
-              className="block w-full overflow-hidden rounded-lg shadow-[0_20px_80px_rgba(0,0,0,0.55)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#c2b2a3]"
-              aria-label="Reserva ahora"
-            >
+            <div className="overflow-hidden rounded-lg shadow-[0_20px_80px_rgba(0,0,0,0.55)]">
               <img
                 src={promo.image}
-                alt="Oferta especial Valeria Ferrer. Reserva ahora."
+                alt="Promoción salidas Valeria Ferrer. 1 hora 180 euros."
                 className="block h-auto w-full max-h-[68dvh] object-contain bg-black sm:max-h-[76dvh]"
                 width={promo.imageWidth}
                 height={promo.imageHeight}
+                decoding="async"
+                fetchPriority="high"
               />
-              <span className="sr-only">Reserva ahora</span>
-            </button>
+              <button
+                type="button"
+                onClick={openContact}
+                className="block w-full bg-gradient-to-r from-[#b7873d] via-[#f1d28a] to-[#b7873d] px-3 py-4 text-xs font-extrabold uppercase tracking-[0.16em] text-[#231506] transition hover:brightness-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f1d28a]"
+              >
+                Contactar
+              </button>
+            </div>
           </div>
         </div>
       ) : null}
@@ -277,6 +284,19 @@ const PromoPopup: React.FC = () => {
                   Llamar ahora
                 </span>
                 <span className="text-[10px] font-medium tracking-normal text-gray-400">{OFFICIAL_PHONE_LABEL}</span>
+              </a>
+              <a
+                href={PROMO_WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-contact-placement="promo_popup"
+                className="flex items-center justify-between w-full bg-[#25d366] text-[#07230f] py-3 px-4 rounded-xl text-[11px] font-bold uppercase tracking-[0.18em] hover:bg-[#41e17b] transition-colors"
+              >
+                <span className="flex items-center">
+                  <MessageCircle size={15} className="mr-3" />
+                  WhatsApp
+                </span>
+                <span className="text-[10px] font-medium tracking-normal">{OFFICIAL_PHONE_LABEL}</span>
               </a>
               <a
                 href={OFFICIAL_TELEGRAM_URL}
