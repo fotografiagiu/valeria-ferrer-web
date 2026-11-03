@@ -37,7 +37,7 @@ export const PROMO_CREATIVES: Record<
   },
   salidas: {
     kind: 'salidas',
-    image: '/promos/valeria-ferrer-promo-salidas-180.webp',
+    image: 'https://d2ol7oe51mr4n9.cloudfront.net/user_36DayVJkjOLFx77vIiJcDWRkvYc/6c162555-23e3-4257-b202-6969e648fa6e.png',
     imageWidth: 1916,
     imageHeight: 821,
     ctaHref: '/booking',
