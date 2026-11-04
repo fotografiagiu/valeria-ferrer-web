@@ -8,7 +8,7 @@ import {
   MODEL_SEO_ROUTES,
   routeToDistRelativePath,
 } from './seo-routes.mjs';
-import { STATIC_BODY_BY_PATH } from './seo-static-body.mjs';
+import { STATIC_BODY_BY_PATH, STATIC_HOME_BODY } from './seo-static-body.mjs';
 
 const DIST_DIR = path.join(process.cwd(), 'dist');
 const TEMPLATE_PATH = path.join(DIST_DIR, 'index.html');
@@ -91,6 +91,13 @@ function main() {
     written.push(relativePath);
     console.log(`✅ ${route.path} → dist/${relativePath}`);
   }
+
+  // Home keeps its own head. Add an HTML fallback only after child-route pages
+  // have been built from the clean home template.
+  const homepage = template.replace(/<div id="root">\s*<\/div>/i, `<div id="root">${STATIC_HOME_BODY}</div>`);
+  if (homepage === template) throw new Error('Cannot inject homepage initial HTML: root anchor missing');
+  fs.writeFileSync(TEMPLATE_PATH, homepage);
+  written.push('index.html');
 
   const staticBodyRoutes = SEO_INJECT_ROUTES.filter((r) => STATIC_BODY_BY_PATH[r.path]).map(
     (r) => r.path
