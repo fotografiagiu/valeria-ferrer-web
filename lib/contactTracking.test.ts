@@ -113,6 +113,31 @@ test('Floating Telegram → 1 event', () => {
   })
 })
 
+
+test('Floating WhatsApp CTA → contact_click registrado (no se pierde la conversión)', () => {
+  withMockTrack((calls) => {
+    const resolved = resolveContactClickFromAnchor(
+      fakeAnchor({
+        href: 'https://wa.me/34611076490?text=Hola',
+        'data-contact-placement': 'floating_whatsapp',
+      }),
+      '/'
+    )
+    assert.ok(resolved)
+    trackContactClick(resolved)
+    assert.equal(calls.length, 1)
+    assert.deepEqual(calls[0], {
+      event: CONTACT_EVENT,
+      data: {
+        model_slug: null,
+        channel: 'whatsapp',
+        placement: 'floating_whatsapp',
+        page: '/',
+      },
+    })
+  })
+})
+
 test('Detail sticky → includes model_slug', () => {
   withMockTrack((calls) => {
     const slug = 'carolina2-model-agency-valencia-vf'
