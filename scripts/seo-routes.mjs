@@ -147,7 +147,7 @@ export function seoRouteForActiveModel(model) {
       : typeof age === 'number' && !Number.isNaN(age)
         ? `${model.name}, ${category.toLowerCase()} ${nationality} de ${age} años en ${city}. Perfil exclusivo, atención discreta y reserva privada para momentos especiales.`
         : model.description?.trim()
-          ? model.description.trim().replace(/\\s+/g, ' ').slice(0, 160)
+          ? model.description.trim().replace(/\s+/g, ' ').slice(0, 160)
           : `${model.name}, ${category.toLowerCase()} ${nationality} en ${city}. Perfil exclusivo, atención discreta y reserva privada para momentos especiales.`);
   return {
     path: `/models/${model.slug}`,
