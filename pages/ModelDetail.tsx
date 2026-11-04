@@ -323,7 +323,8 @@ const ModelDetail: React.FC = () => {
             href={`https://t.me/Valeriaferreeer?text=Hola%20${encodeURIComponent(model.name)},%20vi%20tu%20perfil%20y%20me%20gustaría%20conocer%20más`}
             target="_blank"
             rel="noopener noreferrer"
-            data-contact-placement="model_sticky"
+            data-contact-placement="detail_sticky"
+            data-model-slug={model.slug}
             className="profile-contact-btn profile-contact-btn--telegram"
           >
             <MessageCircle size={20} />
@@ -331,7 +332,8 @@ const ModelDetail: React.FC = () => {
           </a>
           <a
             href={OFFICIAL_PHONE_TEL}
-            data-contact-placement="model_sticky"
+            data-contact-placement="detail_sticky"
+            data-model-slug={model.slug}
             className="profile-contact-btn profile-contact-btn--phone"
           >
             <Phone size={20} />
@@ -343,7 +345,8 @@ const ModelDetail: React.FC = () => {
             )}
             target="_blank"
             rel="noopener noreferrer"
-            data-contact-placement="model_sticky"
+            data-contact-placement="detail_sticky"
+            data-model-slug={model.slug}
             className="profile-contact-btn profile-contact-btn--whatsapp"
           >
             <WhatsAppGlyph size={20} />
