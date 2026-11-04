@@ -158,8 +158,11 @@ if (fs.existsSync(escortsPath)) {
 
 console.log('\n=== SEO Injection Verification ===\n');
 for (const check of checks) {
-  console.log(`${check.ok ? '✅' : '❌'} ${check.message}`);
+  // Keep build logs concise. Important errors must never be buried behind
+  // hundreds of successful route checks or Vercel's log pagination cap.
+  if (!check.ok) console.error('❌ ' + check.message);
 }
+console.log(`Verified ${checks.length - errors.length}/${checks.length} SEO assertions across ${SEO_INJECT_ROUTES.length + MODEL_SEO_ROUTES.length} routes.`);
 
 if (errors.length) {
   console.log(`\n❌ Verification failed with ${errors.length} issue(s)`);
