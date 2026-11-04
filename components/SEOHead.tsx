@@ -43,21 +43,19 @@ const SEOHead: React.FC<SEOHeadProps> = ({ model }) => {
       title = `${modelName} | ${category} ${nationality} en ${city} | Valeria Ferrer`;
     }
 
-    // Generate unique meta description
-    let description = customSeoDescription || '';
-    if (!description && isVIP) {
-      description = `${modelName}, acompañante VIP exclusiva de ${age} años en ${city}. Experiencias de lujo, sofisticación refinada y atención discreta. Reserva VIP privada.`;
-    } else if (!description) {
-      const category = nationality === 'Colombiana' ? 'escort' : 
-                      nationality === 'Española' ? 'acompañante' : 'acompañante';
-      if (typeof age === 'number' && !Number.isNaN(age)) {
-        description = `${modelName}, ${category} ${nationality} de ${age} años en ${city}. Perfil exclusivo, atención discreta y reserva privada para momentos especiales.`;
-      } else if (model.description?.trim()) {
-        description = model.description.trim().replace(/\s+/g, ' ').slice(0, 160);
-      } else {
-        description = `${modelName}, ${category} ${nationality} en ${city}. Perfil exclusivo, atención discreta y reserva privada para momentos especiales.`;
-      }
-    }
+    // Reuse each profile's actual editorial text, rather than publishing the
+    // same generic snippet on dozens of different model pages.
+    const editorial = (model.description || '').replace(/\s+/g, ' ').trim();
+    const prefix = `${model.name} en ${city}. `;
+    const available = Math.max(0, 157 - prefix.length);
+    const excerpt = editorial.length > available
+      ? editorial.slice(0, available).replace(/\s+\S*$/, '') + '…'
+      : editorial;
+    const category = nationality === 'Colombiana' ? 'Escort' : 'Acompañante';
+    const description = customSeoDescription ||
+      (editorial
+        ? prefix + excerpt
+        : `${modelName}, ${category.toLowerCase()} ${nationality} en ${city}. Consulta su perfil y disponibilidad en Valeria Ferrer.`);
 
     // Update document title
     document.title = title;
