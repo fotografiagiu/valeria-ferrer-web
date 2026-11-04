@@ -42,9 +42,10 @@ const PromoPopup: React.FC = () => {
       setView('hidden')
       return
     }
-    // Always reopen the large popup on a fresh page load / new promo id.
-    // Minimize only lives in memory until the next navigation/reload.
-    setView((current) => (current === 'banner' ? 'banner' : 'popup'))
+    // A small persistent banner keeps the page and models visible on entry.
+    // Opening the full promotion is now an explicit click, not a blocking
+    // interstitial. Once opened, keep it open until the visitor closes it.
+    setView((current) => (current === 'popup' ? 'popup' : 'banner'))
   }, [promo, hideOnProfile])
 
   const minimizePromo = useCallback(() => {
