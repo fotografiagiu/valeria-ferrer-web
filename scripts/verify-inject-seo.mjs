@@ -45,6 +45,21 @@ function extractMetaProperty(html, property) {
   return match ? match[1] : '';
 }
 
+// Never fall back to a shared boilerplate description for multiple profiles.
+const modelDescriptions = MODEL_SEO_ROUTES.map(route => route.description);
+if (new Set(modelDescriptions).size !== modelDescriptions.length) {
+  fail('profiles: duplicate descriptions found');
+} else {
+  pass('profiles: all descriptions are distinct');
+}
+for (const route of MODEL_SEO_ROUTES) {
+  if (route.description.length < 45 || route.description.length > 165) {
+    fail(route.path + ': description outside 45–165 characters');
+  } else {
+    pass(route.path + ': unique editorial snippet length OK');
+  }
+}
+
 for (const route of [...SEO_INJECT_ROUTES, ...MODEL_SEO_ROUTES]) {
   const relativePath = routeToDistRelativePath(route.path);
   const filePath = path.join(DIST_DIR, relativePath);
