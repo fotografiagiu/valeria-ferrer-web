@@ -9,6 +9,7 @@ export type ContactPlacement =
   | 'detail_sticky'
   | 'detail_sidebar'
   | 'floating'
+  | 'floating_whatsapp'
   | 'navbar'
   | 'footer'
   | 'home_banner'
@@ -31,6 +32,7 @@ const PLACEMENTS = new Set<string>([
   'detail_sticky',
   'detail_sidebar',
   'floating',
+  'floating_whatsapp',
   'navbar',
   'footer',
   'home_banner',
