@@ -158,6 +158,38 @@ test('Detail sticky → includes model_slug', () => {
   })
 })
 
+test('Mobile sticky uses real placement and slug: phone, Telegram and WhatsApp all tracked', () => {
+  const slug='lili-valencia'
+  for (const [href,channel] of [
+    ['tel:+34611076490','phone'],
+    ['https://t.me/Valeriaferreeer','telegram'],
+    ['https://wa.me/34611076490?text=Hola','whatsapp'],
+  ] as const) {
+    const resolved=resolveContactClickFromAnchor(fakeAnchor({
+      href,
+      'data-contact-placement':'detail_sticky',
+      'data-model-slug':slug,
+    }),'/models/'+slug)
+    assert.ok(resolved)
+    assert.equal(resolved.model_slug,slug)
+    assert.equal(resolved.channel,channel)
+    assert.equal(resolved.placement,'detail_sticky')
+  }
+})
+
+test('QuickView WhatsApp tracks right model without full profile navigation', () => {
+  const slug='lana-model'
+  const resolved=resolveContactClickFromAnchor(fakeAnchor({
+    href:'https://wa.me/34611076490?text=Hola',
+    'data-contact-placement':'quick_view',
+    'data-model-slug':slug,
+  }),'/models')
+  assert.ok(resolved)
+  assert.equal(resolved.model_slug,slug)
+  assert.equal(resolved.placement,'quick_view')
+  assert.equal(resolved.channel,'whatsapp')
+})
+
 test('Detail sticky falls back to path slug when attr missing', () => {
   const slug = 'martina-model-agency-valencia-vf'
   const resolved = resolveContactClickFromAnchor(
