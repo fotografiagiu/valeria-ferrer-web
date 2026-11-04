@@ -135,11 +135,19 @@ if (!fs.existsSync(homePath)) {
     pass('home: description OK');
   }
 
-  if (/<h1\b/i.test(homeHtml)) {
-    pass('home: static H1 present');
+  const homeH1Count = (homeHtml.match(/<h1\\b/gi) || []).length;
+  if (homeH1Count !== 1 || !/<h1\\b[^>]*>Escorts en Valencia<\\/h1>/i.test(homeHtml)) {
+    fail('home: exactly one visible static H1 "Escorts en Valencia" required');
   } else {
-    // A client-only home still needs JS rendering; do not fail an existing contract here.
-    pass('home: H1 rendered by React (not in source HTML)');
+    pass('home: one crawlable H1');
+  }
+  if (!homeHtml.includes('data-seo-initial-shell="home"') ||
+      !homeHtml.includes('href="/models"') ||
+      !homeHtml.includes('href="/booking"') ||
+      !homeHtml.includes('href="/colombianas"')) {
+    fail('home: useful initial content and real internal links missing');
+  } else {
+    pass('home: crawlable internal links to catalog, booking and categories');
   }
 
   if (/<main class="static-seo-escorts-valencia"/i.test(homeHtml)) {
