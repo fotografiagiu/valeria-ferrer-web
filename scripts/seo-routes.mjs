@@ -141,14 +141,16 @@ export function seoRouteForActiveModel(model) {
       ? `${model.name} VIP | Acompañante VIP en ${city} | Valeria Ferrer`
       : `${model.name} | ${category} ${nationality} en ${city} | Valeria Ferrer`);
   const age = model.age;
+  const editorial = (model.description || '').replace(/\s+/g, ' ').trim();
+  const prefix = `${model.name} en ${city}. `;
+  const available = Math.max(0, 157 - prefix.length);
+  const excerpt = editorial.length > available
+    ? editorial.slice(0, available).replace(/\s+\S*$/, '') + '…'
+    : editorial;
   const description = model.seoDescription?.trim() ||
-    (isVIP
-      ? `${model.name}, acompañante VIP exclusiva de ${age} años en ${city}. Experiencias de lujo, sofisticación refinada y atención discreta. Reserva VIP privada.`
-      : typeof age === 'number' && !Number.isNaN(age)
-        ? `${model.name}, ${category.toLowerCase()} ${nationality} de ${age} años en ${city}. Perfil exclusivo, atención discreta y reserva privada para momentos especiales.`
-        : model.description?.trim()
-          ? model.description.trim().replace(/\s+/g, ' ').slice(0, 160)
-          : `${model.name}, ${category.toLowerCase()} ${nationality} en ${city}. Perfil exclusivo, atención discreta y reserva privada para momentos especiales.`);
+    (editorial
+      ? prefix + excerpt
+      : `${model.name}, ${category.toLowerCase()} ${nationality} en ${city}. Consulta su perfil y disponibilidad en Valeria Ferrer.`);
   return {
     path: `/models/${model.slug}`,
     title,
