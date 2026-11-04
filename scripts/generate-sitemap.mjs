@@ -13,11 +13,8 @@ import {
   filterExistingImages,
   readJson,
   toAbsoluteUrl,
-  todayIsoDate,
   writeSeoOutputFile,
 } from './lib/seo-assets.mjs';
-
-const lastmod = todayIsoDate();
 
 const STATIC_PAGES = [
   { path: '/', priority: '1.0', changefreq: 'daily' },
@@ -62,7 +59,7 @@ function readPreviousImageLocs() {
   return urls;
 }
 
-function buildUrlEntry({ loc, priority, changefreq, images = [] }) {
+function buildUrlEntry({ loc, images = [] }) {
   const imageBlocks = images
     .map(
       (image) => `    <image:image>
@@ -74,9 +71,7 @@ function buildUrlEntry({ loc, priority, changefreq, images = [] }) {
 
   return `  <url>
     <loc>${escapeXml(loc)}</loc>
-    <lastmod>${lastmod}</lastmod>
-    <changefreq>${changefreq}</changefreq>
-    <priority>${priority}</priority>${images.length ? `\n${imageBlocks}` : ''}
+${images.length ? `\n${imageBlocks}` : ''}
   </url>`;
 }
 
