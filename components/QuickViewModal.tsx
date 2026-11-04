@@ -140,6 +140,8 @@ const QuickViewModal: React.FC<QuickViewModalProps> = ({ isOpen, onClose, modelI
                 )}
                 target="_blank"
                 rel="noopener noreferrer"
+                data-contact-placement="quick_view"
+                data-model-slug={model.slug}
                 className="flex items-center justify-center gap-2 w-full py-3 bg-[#c2b2a3] text-black font-bold rounded-lg hover:bg-white transition-colors"
               >
                 <MessageCircle size={18} />
