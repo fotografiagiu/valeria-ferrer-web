@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-11-04T11:38:50.086Z",
-  "catalogVersion": "7e821b86469d9ba2e5bdfc8aeebb2495b26191b0e85fd97ec25043130dd1dcfd",
+  "generatedAt": "2026-11-04T18:43:30.848Z",
+  "catalogVersion": "e6f624233c69011fa3e23c9cf775dceb4a01990956bbc3de370ea44acd033185",
   "source": "valeria-ferrer-web",
   "method": "build-app-catalog",
   "models": [
@@ -58,7 +58,14 @@
         "/chicas/susi-model-agency-valencia-vf/gallery/susi-nueva-05.webp",
         "/chicas/susi-model-agency-valencia-vf/gallery/susi-nueva-06.webp",
         "/chicas/susi-model-agency-valencia-vf/gallery/susi-nueva-07.webp",
-        "/chicas/susi-model-agency-valencia-vf/gallery/susi-nueva-08.webp"
+        "/chicas/susi-model-agency-valencia-vf/gallery/susi-nueva-08.webp",
+        "/chicas/susi-model-agency-valencia-vf/gallery/susi-nueva-09.webp",
+        "/chicas/susi-model-agency-valencia-vf/gallery/susi-nueva-10.webp",
+        "/chicas/susi-model-agency-valencia-vf/gallery/susi-nueva-11.webp",
+        "/chicas/susi-model-agency-valencia-vf/gallery/susi-nueva-12.webp",
+        "/chicas/susi-model-agency-valencia-vf/gallery/susi-nueva-13.webp",
+        "/chicas/susi-model-agency-valencia-vf/gallery/susi-nueva-14.webp",
+        "/chicas/susi-model-agency-valencia-vf/gallery/susi-nueva-15.webp"
       ]
     },
     {
