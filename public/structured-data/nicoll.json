@@ -3,28 +3,36 @@
   "@type": "Person",
   "name": "Nicoll",
   "description": "Nicoll es colombiana y te conquista antes de verla. Desde el primer mensaje toma el mando: se acerca, provoca y deja el deseo a medio arder para que no te quede otra que escribirle. En Valencia entra con una pasión que no se explica, se siente. Si buscas a la mujer que te haga llamarla esta noche y volver mañana, Nicoll es esa llamada.",
-  "nationality": "Colombiana",
   "url": "https://www.valeriaferrer.com/models/nicoll",
   "image": [
     "https://www.valeriaferrer.com/chicas/nicoll-model-agency-valencia-vf/portada.jpg",
     "https://www.valeriaferrer.com/chicas/nicoll-model-agency-valencia-vf/gallery/01.jpg",
     "https://www.valeriaferrer.com/chicas/nicoll-model-agency-valencia-vf/gallery/02.jpg"
   ],
-  "jobTitle": "Acompañante de lujo en Valencia",
+  "nationality": "Colombiana",
+  "jobTitle": "Modelo",
   "knowsLanguage": [
     "Español"
   ],
   "offers": {
     "@type": "Offer",
-    "description": "Servicios exclusivos de acompañamiento con Nicoll en Valencia",
+    "itemOffered": {
+      "@type": "Service",
+      "name": "Acompañamiento Premium",
+      "description": "Servicios exclusivos de acompañamiento con Nicoll en Valencia"
+    },
     "areaServed": {
       "@type": "City",
       "name": "Valencia"
     },
-    "availability": "https://schema.org/InStock"
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "name": "Contacto Directo",
+      "url": "https://www.valeriaferrer.com/contact"
+    }
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://www.valeriaferrer.com/models/nicoll/"
+    "@id": "https://www.valeriaferrer.com/models/nicoll"
   }
 }

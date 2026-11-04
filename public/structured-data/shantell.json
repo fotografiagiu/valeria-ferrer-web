@@ -22,21 +22,29 @@
     "https://www.valeriaferrer.com/chicas/shantell-model-agency-valencia-vf/gallery/14.jpg"
   ],
   "nationality": "Venezolana",
-  "jobTitle": "Acompañante de lujo en Valencia",
+  "jobTitle": "Modelo",
   "knowsLanguage": [
     "Español"
   ],
   "offers": {
     "@type": "Offer",
-    "description": "Servicios exclusivos de acompañamiento con Shantell en Valencia",
+    "itemOffered": {
+      "@type": "Service",
+      "name": "Acompañamiento Premium",
+      "description": "Servicios exclusivos de acompañamiento con Shantell en Valencia"
+    },
     "areaServed": {
       "@type": "City",
       "name": "Valencia"
     },
-    "availability": "https://schema.org/InStock"
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "name": "Contacto Directo",
+      "url": "https://www.valeriaferrer.com/contact"
+    }
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://www.valeriaferrer.com/models/shantell/"
+    "@id": "https://www.valeriaferrer.com/models/shantell"
   }
 }

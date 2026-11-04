@@ -5,29 +5,37 @@
   "description": "Thania no pide permiso para quedarse en la cabeza: colombiana de 24 años, 1,70 m y 57 kg, alta, estilizada y con una presencia que se nota al instante. Mirada intensa, cuerpo de pasarela y esa chispa latina que convierte una mira rápida en ganas de escribir. Novedad en Valencia: cercana, segura y con una sensualidad que no se queda a medias. Si buscas una escort colombiana alta en Valencia para un privado con química, estilo y deseo de verdad — Thania es la que te empuja a reservar.",
   "url": "https://www.valeriaferrer.com/models/thania",
   "image": [
-    "https://www.valeriaferrer.com/chicas/thania-model-agency-valencia-vf/portada.jpg",
-    "https://www.valeriaferrer.com/chicas/thania-model-agency-valencia-vf/gallery/01.jpg",
-    "https://www.valeriaferrer.com/chicas/thania-model-agency-valencia-vf/gallery/02.jpg",
-    "https://www.valeriaferrer.com/chicas/thania-model-agency-valencia-vf/gallery/03.jpg",
-    "https://www.valeriaferrer.com/chicas/thania-model-agency-valencia-vf/gallery/04.jpg",
-    "https://www.valeriaferrer.com/chicas/thania-model-agency-valencia-vf/gallery/05.jpg"
+    "https://www.valeriaferrer.com/chicas/thania-model-agency-valencia-vf/portada-oct15.jpg",
+    "https://www.valeriaferrer.com/chicas/thania-model-agency-valencia-vf/gallery/01-oct15.jpg",
+    "https://www.valeriaferrer.com/chicas/thania-model-agency-valencia-vf/gallery/02-oct15.jpg",
+    "https://www.valeriaferrer.com/chicas/thania-model-agency-valencia-vf/gallery/03-oct15.jpg",
+    "https://www.valeriaferrer.com/chicas/thania-model-agency-valencia-vf/gallery/04-oct15.jpg",
+    "https://www.valeriaferrer.com/chicas/thania-model-agency-valencia-vf/gallery/05-oct15.jpg"
   ],
   "nationality": "Colombiana",
-  "jobTitle": "Acompañante de lujo en Valencia",
+  "jobTitle": "Modelo",
   "knowsLanguage": [
     "Español"
   ],
   "offers": {
     "@type": "Offer",
-    "description": "Servicios exclusivos de acompañamiento con Thania en Valencia",
+    "itemOffered": {
+      "@type": "Service",
+      "name": "Acompañamiento Premium",
+      "description": "Servicios exclusivos de acompañamiento con Thania en Valencia"
+    },
     "areaServed": {
       "@type": "City",
       "name": "Valencia"
     },
-    "availability": "https://schema.org/InStock"
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "name": "Contacto Directo",
+      "url": "https://www.valeriaferrer.com/contact"
+    }
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://www.valeriaferrer.com/models/thania/"
+    "@id": "https://www.valeriaferrer.com/models/thania"
   }
 }
