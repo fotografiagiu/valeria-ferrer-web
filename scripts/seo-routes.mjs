@@ -1,4 +1,4 @@
-import { SITE_ORIGIN } from './lib/seo-assets.mjs';
+import { SITE_ORIGIN, MODELS_PATH, readJson } from './lib/seo-assets.mjs';
 
 /** Rutas con inyección SEO estática en build (v1). Alineado con runtime PageSEOHead. */
 export const SEO_INJECT_ROUTES = [
@@ -122,3 +122,41 @@ export function routeToDistRelativePath(routePath) {
   const trimmed = routePath.replace(/^\/+|\/+$/g, '');
   return `${trimmed}/index.html`;
 }
+
+/**
+ * Profile pages are included in the sitemap but React's SEOHead runs only
+ * after JavaScript. Render the same per-model metadata into initial HTML.
+ * No body markup is injected, so React remains the only UI owner.
+ */
+export function seoRouteForActiveModel(model) {
+  if (!model?.slug || !/^[a-z0-9_-]+$/i.test(model.slug)) {
+    throw new Error('Invalid model slug for SEO route: ' + String(model?.slug));
+  }
+  const city = model.city || 'Valencia';
+  const nationality = model.nationality || 'Española';
+  const isVIP = Boolean(model.vip);
+  const category = nationality === 'Colombiana' ? 'Escort' : 'Acompañante';
+  const title = model.seoTitle?.trim() ||
+    (isVIP
+      ? `${model.name} VIP | Acompañante VIP en ${city} | Valeria Ferrer`
+      : `${model.name} | ${category} ${nationality} en ${city} | Valeria Ferrer`);
+  const age = model.age;
+  const description = model.seoDescription?.trim() ||
+    (isVIP
+      ? `${model.name}, acompañante VIP exclusiva de ${age} años en ${city}. Experiencias de lujo, sofisticación refinada y atención discreta. Reserva VIP privada.`
+      : typeof age === 'number' && !Number.isNaN(age)
+        ? `${model.name}, ${category.toLowerCase()} ${nationality} de ${age} años en ${city}. Perfil exclusivo, atención discreta y reserva privada para momentos especiales.`
+        : model.description?.trim()
+          ? model.description.trim().replace(/\s+/g, ' ').slice(0, 160)
+          : `${model.name}, ${category.toLowerCase()} ${nationality} en ${city}. Perfil exclusivo, atención discreta y reserva privada para momentos especiales.`);
+  return {
+    path: `/models/${model.slug}`,
+    title,
+    description,
+    canonical: `${SITE_ORIGIN}/models/${model.slug}`,
+  };
+}
+
+export const MODEL_SEO_ROUTES = readJson(MODELS_PATH)
+  .filter((model) => model.active !== false)
+  .map(seoRouteForActiveModel);

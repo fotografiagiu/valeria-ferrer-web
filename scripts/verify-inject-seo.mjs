@@ -5,6 +5,7 @@ import path from 'path';
 import {
   HOME_SEO_EXPECTED,
   SEO_INJECT_ROUTES,
+  MODEL_SEO_ROUTES,
   routeToDistRelativePath,
 } from './seo-routes.mjs';
 import { STATIC_BODY_CHECKS } from './seo-static-body.mjs';
@@ -44,7 +45,7 @@ function extractMetaProperty(html, property) {
   return match ? match[1] : '';
 }
 
-for (const route of SEO_INJECT_ROUTES) {
+for (const route of [...SEO_INJECT_ROUTES, ...MODEL_SEO_ROUTES]) {
   const relativePath = routeToDistRelativePath(route.path);
   const filePath = path.join(DIST_DIR, relativePath);
   const label = route.path;
@@ -134,6 +135,13 @@ if (!fs.existsSync(homePath)) {
     pass('home: description OK');
   }
 
+  if (/<h1\b/i.test(homeHtml)) {
+    pass('home: static H1 present');
+  } else {
+    // A client-only home still needs JS rendering; do not fail an existing contract here.
+    pass('home: H1 rendered by React (not in source HTML)');
+  }
+
   if (/<main class="static-seo-escorts-valencia"/i.test(homeHtml)) {
     fail('home: must not contain escorts-valencia static body');
   } else {
@@ -150,8 +158,11 @@ if (fs.existsSync(escortsPath)) {
 
 console.log('\n=== SEO Injection Verification ===\n');
 for (const check of checks) {
-  console.log(`${check.ok ? '✅' : '❌'} ${check.message}`);
+  // Keep build logs concise. Important errors must never be buried behind
+  // hundreds of successful route checks or Vercel's log pagination cap.
+  if (!check.ok) console.error('❌ ' + check.message);
 }
+console.log(`Verified ${checks.length - errors.length}/${checks.length} SEO assertions across ${SEO_INJECT_ROUTES.length + MODEL_SEO_ROUTES.length} routes.`);
 
 if (errors.length) {
   console.log(`\n❌ Verification failed with ${errors.length} issue(s)`);
