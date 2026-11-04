@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { toAbsoluteMediaUrl } from './PageSEOHead';
 
 interface SEOHeadProps {
   model?: {
@@ -88,13 +89,10 @@ const SEOHead: React.FC<SEOHeadProps> = ({ model }) => {
       "description": customSeoDescription || model.description || (typeof age === 'number' && !Number.isNaN(age)
         ? `Modelo ${model.nationality || 'Española'} de ${age} años disponible en ${model.city || 'Valencia'}`
         : `Modelo ${model.nationality || 'Española'} disponible en ${model.city || 'Valencia'}`),
-      "image": model.image,
+      "image": toAbsoluteMediaUrl(model.image),
       "url": modelProfileUrl,
       "jobTitle": isVIP ? "Modelo de Compañía VIP" : "Modelo",
       "nationality": model.nationality || "Española",
-      ...(typeof age === 'number' && !Number.isNaN(age)
-        ? { birthDate: new Date(new Date().getFullYear() - age, 0, 1).toISOString().split('T')[0] }
-        : {}),
       "gender": "Female",
       "address": {
         "@type": "PostalAddress",
@@ -102,7 +100,6 @@ const SEOHead: React.FC<SEOHeadProps> = ({ model }) => {
         "addressRegion": "Valencia",
         "addressCountry": "ES"
       },
-      "knowsLanguage": ["Spanish", "English"],
       "offers": {
         "@type": "Offer",
         "description": "Servicios de acompañamiento exclusivos y discreción absoluta",
@@ -164,10 +161,10 @@ const SEOHead: React.FC<SEOHeadProps> = ({ model }) => {
     if (!ogImage) {
       const image = document.createElement('meta') as HTMLMetaElement;
       image.setAttribute('property', 'og:image');
-      image.setAttribute('content', model.image);
+      image.setAttribute('content', toAbsoluteMediaUrl(model.image));
       document.head.appendChild(image);
     } else {
-      ogImage.setAttribute('content', model.image);
+      ogImage.setAttribute('content', toAbsoluteMediaUrl(model.image));
     }
 
     // Add Twitter Card meta tags
@@ -195,10 +192,10 @@ const SEOHead: React.FC<SEOHeadProps> = ({ model }) => {
     if (!twitterImage) {
       const image = document.createElement('meta') as HTMLMetaElement;
       image.name = 'twitter:image';
-      image.setAttribute('content', model.image);
+      image.setAttribute('content', toAbsoluteMediaUrl(model.image));
       document.head.appendChild(image);
     } else {
-      twitterImage.setAttribute('content', model.image);
+      twitterImage.setAttribute('content', toAbsoluteMediaUrl(model.image));
     }
 
     // Add canonical URL - use actual slug
