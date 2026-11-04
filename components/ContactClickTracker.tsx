@@ -16,7 +16,11 @@ const ContactClickTracker: React.FC = () => {
     })
 
     const onClick = (event: MouseEvent) => {
-      handleDocumentContactClick(event)
+      // HashRouter: pathname is '/' on model pages; the real route lives in #/.
+      const hashRoute = window.location.hash.startsWith('#/')
+        ? window.location.hash.slice(1).split('?')[0]
+        : window.location.pathname
+      handleDocumentContactClick(event, hashRoute)
     }
 
     document.addEventListener('click', onClick, true)

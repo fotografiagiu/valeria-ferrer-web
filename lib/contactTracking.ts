@@ -7,6 +7,7 @@ export type ContactChannel = 'telegram' | 'phone' | 'whatsapp'
 
 export type ContactPlacement =
   | 'detail_sticky'
+  | 'quick_view'
   | 'detail_sidebar'
   | 'floating'
   | 'floating_whatsapp'
@@ -30,6 +31,7 @@ export const CONTACT_EVENT = 'contact_click' as const
 
 const PLACEMENTS = new Set<string>([
   'detail_sticky',
+  'quick_view',
   'detail_sidebar',
   'floating',
   'floating_whatsapp',
