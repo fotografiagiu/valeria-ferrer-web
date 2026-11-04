@@ -5,6 +5,7 @@ import path from 'path';
 import {
   DEFAULT_OG_IMAGE,
   SEO_INJECT_ROUTES,
+  MODEL_SEO_ROUTES,
   routeToDistRelativePath,
 } from './seo-routes.mjs';
 import { STATIC_BODY_BY_PATH } from './seo-static-body.mjs';
@@ -81,7 +82,7 @@ function main() {
   const template = fs.readFileSync(TEMPLATE_PATH, 'utf8');
   const written = [];
 
-  for (const route of SEO_INJECT_ROUTES) {
+  for (const route of [...SEO_INJECT_ROUTES, ...MODEL_SEO_ROUTES]) {
     const html = injectSeo(template, route);
     const relativePath = routeToDistRelativePath(route.path);
     const outputPath = path.join(DIST_DIR, relativePath);
@@ -98,7 +99,7 @@ function main() {
     console.log(`📄 Static body: ${staticBodyRoutes.join(', ')}`);
   }
 
-  console.log(`\n🎯 SEO injection complete: ${written.length} routes (home unchanged)`);
+  console.log(`\n🎯 SEO injection complete: ${written.length} routes, including ${MODEL_SEO_ROUTES.length} active profile pages (home unchanged)`);
 }
 
 main();
