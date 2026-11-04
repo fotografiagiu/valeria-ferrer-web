@@ -136,7 +136,7 @@ if (!fs.existsSync(homePath)) {
   }
 
   const homeH1Count = (homeHtml.match(/<h1\b/gi) || []).length;
-  if (homeH1Count !== 1 || !/<h1\b[^>]*>Escorts en Valencia<\\/h1>/i.test(homeHtml)) {
+  if (homeH1Count !== 1 || !/<h1\b[^>]*>Escorts en Valencia<\/h1>/i.test(homeHtml)) {
     fail('home: exactly one visible static H1 "Escorts en Valencia" required');
   } else {
     pass('home: one crawlable H1');
