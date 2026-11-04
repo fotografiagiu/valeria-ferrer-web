@@ -5,30 +5,38 @@
   "description": "Pequeña en estatura. Imposible de ignorar. Hay mujeres que llaman la atención al entrar en una habitación. Y después está Alana, que consigue que sea difícil apartar la mirada. Cubana, de 23 años y 1,58 m de altura, Alana combina un rostro cautivador con una figura de escándalo y una presencia que no pasa desapercibida. Su belleza tiene ese contraste que resulta tan atractivo: facciones delicadas, una mirada intensa y una expresión que mezcla dulzura, seguridad y un punto de misterio. Recién llegada a las novedades de Valeria Ferrer en Valencia, Alana tiene algo que las fotografías apenas consiguen explicar. No necesita grandes gestos para despertar curiosidad. Su manera de mirar, su silueta y ese aire de confianza natural hacen que quieras descubrir mucho más de ella. Si buscas una mujer diferente, con belleza, carácter y un atractivo que deja huella, Alana merece toda tu atención.",
   "url": "https://www.valeriaferrer.com/models/alana",
   "image": [
-    "https://www.valeriaferrer.com/chicas/alana-model-agency-valencia-vf/portada.jpg",
-    "https://www.valeriaferrer.com/chicas/alana-model-agency-valencia-vf/gallery/01.jpg",
-    "https://www.valeriaferrer.com/chicas/alana-model-agency-valencia-vf/gallery/02.jpg",
-    "https://www.valeriaferrer.com/chicas/alana-model-agency-valencia-vf/gallery/03.jpg",
-    "https://www.valeriaferrer.com/chicas/alana-model-agency-valencia-vf/gallery/04.jpg",
-    "https://www.valeriaferrer.com/chicas/alana-model-agency-valencia-vf/gallery/05.jpg",
-    "https://www.valeriaferrer.com/chicas/alana-model-agency-valencia-vf/gallery/06.jpg"
+    "https://www.valeriaferrer.com/chicas/alana-model-agency-valencia-vf/gallery/alana-escorts-valencia-01.webp",
+    "https://www.valeriaferrer.com/chicas/alana-model-agency-valencia-vf/gallery/alana-escorts-valencia-02.webp",
+    "https://www.valeriaferrer.com/chicas/alana-model-agency-valencia-vf/gallery/alana-escorts-valencia-03.webp",
+    "https://www.valeriaferrer.com/chicas/alana-model-agency-valencia-vf/gallery/alana-escorts-valencia-04.webp",
+    "https://www.valeriaferrer.com/chicas/alana-model-agency-valencia-vf/gallery/alana-escorts-valencia-05.webp",
+    "https://www.valeriaferrer.com/chicas/alana-model-agency-valencia-vf/gallery/alana-escorts-valencia-06.webp",
+    "https://www.valeriaferrer.com/chicas/alana-model-agency-valencia-vf/gallery/alana-escorts-valencia-07.webp"
   ],
   "nationality": "Cubana",
-  "jobTitle": "Acompañante de lujo en Valencia",
+  "jobTitle": "Modelo",
   "knowsLanguage": [
     "Español"
   ],
   "offers": {
     "@type": "Offer",
-    "description": "Servicios exclusivos de acompañamiento con Alana en Valencia",
+    "itemOffered": {
+      "@type": "Service",
+      "name": "Acompañamiento Premium",
+      "description": "Servicios exclusivos de acompañamiento con Alana en Valencia"
+    },
     "areaServed": {
       "@type": "City",
       "name": "Valencia"
     },
-    "availability": "https://schema.org/InStock"
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "name": "Contacto Directo",
+      "url": "https://www.valeriaferrer.com/contact"
+    }
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://www.valeriaferrer.com/models/alana/"
+    "@id": "https://www.valeriaferrer.com/models/alana"
   }
 }

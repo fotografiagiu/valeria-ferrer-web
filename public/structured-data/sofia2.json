@@ -12,21 +12,29 @@
     "https://www.valeriaferrer.com/chicas/sofia2-model-agency-valencia-vf/gallery/04.jpg"
   ],
   "nationality": "Colombiana",
-  "jobTitle": "Acompañante de lujo en Valencia",
+  "jobTitle": "Modelo",
   "knowsLanguage": [
     "Español"
   ],
   "offers": {
     "@type": "Offer",
-    "description": "Servicios exclusivos de acompañamiento con Sofía en Valencia",
+    "itemOffered": {
+      "@type": "Service",
+      "name": "Acompañamiento Premium",
+      "description": "Servicios exclusivos de acompañamiento con Sofía en Valencia"
+    },
     "areaServed": {
       "@type": "City",
       "name": "Valencia"
     },
-    "availability": "https://schema.org/InStock"
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "name": "Contacto Directo",
+      "url": "https://www.valeriaferrer.com/contact"
+    }
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://www.valeriaferrer.com/models/sofia2/"
+    "@id": "https://www.valeriaferrer.com/models/sofia2"
   }
 }

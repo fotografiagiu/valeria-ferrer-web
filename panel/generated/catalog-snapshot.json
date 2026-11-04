@@ -1,10 +1,32 @@
 {
-  "generatedAt": "2026-11-03T09:17:21.083Z",
+  "generatedAt": "2026-11-04T11:38:50.224Z",
   "sourcePath": "data/models.json",
-  "sourceHash": "d8fba26e394cb0bad4b839e9e833deaeeb4b678a0950eeaffc55f1f6d22acbc1",
-  "modelCount": 64,
-  "activeCount": 37,
+  "sourceHash": "7e821b86469d9ba2e5bdfc8aeebb2495b26191b0e85fd97ec25043130dd1dcfd",
+  "modelCount": 65,
+  "activeCount": 38,
   "models": [
+    {
+      "slug": "lili2",
+      "name": "Lili",
+      "active": true,
+      "coverImageUrl": "/chicas/lili2-model-agency-valencia-vf/portada.jpg",
+      "images": [
+        "/chicas/lili2-model-agency-valencia-vf/gallery/01.jpg",
+        "/chicas/lili2-model-agency-valencia-vf/gallery/02.jpg",
+        "/chicas/lili2-model-agency-valencia-vf/gallery/03.jpg",
+        "/chicas/lili2-model-agency-valencia-vf/gallery/04.jpg"
+      ]
+    },
+    {
+      "slug": "lili",
+      "name": "Lili",
+      "active": false,
+      "coverImageUrl": "/chicas/lili-valeria-ferrer-model-agency-valencia/portada.jpg",
+      "images": [
+        "/chicas/lili-valeria-ferrer-model-agency-valencia/1.jpg",
+        "/chicas/lili-valeria-ferrer-model-agency-valencia/2.jpg"
+      ]
+    },
     {
       "slug": "alana",
       "name": "Alana",
@@ -34,6 +56,16 @@
         "/chicas/susi-model-agency-valencia-vf/gallery/susi-nueva-06.webp",
         "/chicas/susi-model-agency-valencia-vf/gallery/susi-nueva-07.webp",
         "/chicas/susi-model-agency-valencia-vf/gallery/susi-nueva-08.webp"
+      ]
+    },
+    {
+      "slug": "nicoll",
+      "name": "Nicoll",
+      "active": true,
+      "coverImageUrl": "/chicas/nicoll-model-agency-valencia-vf/portada.jpg",
+      "images": [
+        "/chicas/nicoll-model-agency-valencia-vf/gallery/01.jpg",
+        "/chicas/nicoll-model-agency-valencia-vf/gallery/02.jpg"
       ]
     },
     {
@@ -334,7 +366,7 @@
     },
     {
       "slug": "paula-vip",
-      "name": "Paula (VIP)",
+      "name": "Paula",
       "coverImageUrl": "/chicas/paula-vip-model-agency-valencia/paula-portada-nueva.jpg",
       "images": [
         "/chicas/paula-vip-model-agency-valencia/paula-galeria-nueva-01.jpg",
@@ -568,20 +600,15 @@
     {
       "slug": "monica",
       "name": "Mónica",
-      "coverImageUrl": "/chicas/monica-valeria-ferrer-model-agency-valencia/portada.jpg",
+      "coverImageUrl": "/chicas/monica-valeria-ferrer-model-agency-valencia/portada-oct2026.jpg",
       "images": [
-        "/chicas/monica-valeria-ferrer-model-agency-valencia/gallery/01.jpg",
-        "/chicas/monica-valeria-ferrer-model-agency-valencia/gallery/02.jpg",
-        "/chicas/monica-valeria-ferrer-model-agency-valencia/gallery/03.jpg",
-        "/chicas/monica-valeria-ferrer-model-agency-valencia/gallery/04.jpg",
-        "/chicas/monica-valeria-ferrer-model-agency-valencia/gallery/05.jpg",
-        "/chicas/monica-valeria-ferrer-model-agency-valencia/gallery/06.jpg",
-        "/chicas/monica-valeria-ferrer-model-agency-valencia/gallery/07.jpg",
-        "/chicas/monica-valeria-ferrer-model-agency-valencia/gallery/08.jpg",
-        "/chicas/monica-valeria-ferrer-model-agency-valencia/gallery/09.jpg",
-        "/chicas/monica-valeria-ferrer-model-agency-valencia/gallery/10.jpg",
-        "/chicas/monica-valeria-ferrer-model-agency-valencia/gallery/11.jpg",
-        "/chicas/monica-valeria-ferrer-model-agency-valencia/gallery/12.jpg"
+        "/chicas/monica-valeria-ferrer-model-agency-valencia/gallery/01-oct2026.jpg",
+        "/chicas/monica-valeria-ferrer-model-agency-valencia/gallery/02-oct2026.jpg",
+        "/chicas/monica-valeria-ferrer-model-agency-valencia/gallery/03-oct2026.jpg",
+        "/chicas/monica-valeria-ferrer-model-agency-valencia/gallery/04-oct2026.jpg",
+        "/chicas/monica-valeria-ferrer-model-agency-valencia/gallery/05-oct2026.jpg",
+        "/chicas/monica-valeria-ferrer-model-agency-valencia/gallery/06-oct2026.jpg",
+        "/chicas/monica-valeria-ferrer-model-agency-valencia/gallery/07-oct2026.jpg"
       ]
     },
     {
@@ -598,23 +625,6 @@
         "/chicas/mia-model-agency-valencia-vf/6.jpg",
         "/chicas/mia-model-agency-valencia-vf/7.jpg",
         "/chicas/mia-model-agency-valencia-vf/8.jpg"
-      ]
-    },
-    {
-      "slug": "yaiza",
-      "name": "Yaiza",
-      "coverImageUrl": "/chicas/yaiza-valeria-ferrer-model-agency-valencia/portada.jpg",
-      "images": [
-        "/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/01.jpg",
-        "/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/02.jpg",
-        "/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/03.jpg",
-        "/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/04.jpg",
-        "/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/05.jpg",
-        "/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/06.jpg",
-        "/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/07.jpg",
-        "/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/08.jpg",
-        "/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/09.jpg",
-        "/chicas/yaiza-valeria-ferrer-model-agency-valencia/gallery/10.jpg"
       ]
     },
     {
@@ -980,16 +990,6 @@
         "/chicas/flor-valeria-ferrer-model-agency-valencia/gallery/16.jpg",
         "/chicas/flor-valeria-ferrer-model-agency-valencia/gallery/17.jpg",
         "/chicas/flor-valeria-ferrer-model-agency-valencia/gallery/18.jpg"
-      ]
-    },
-    {
-      "slug": "lili",
-      "name": "Lili",
-      "active": false,
-      "coverImageUrl": "/chicas/lili-valeria-ferrer-model-agency-valencia/portada.jpg",
-      "images": [
-        "/chicas/lili-valeria-ferrer-model-agency-valencia/1.jpg",
-        "/chicas/lili-valeria-ferrer-model-agency-valencia/2.jpg"
       ]
     },
     {

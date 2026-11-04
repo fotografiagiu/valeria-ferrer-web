@@ -10,21 +10,29 @@
     "https://www.valeriaferrer.com/chicas/daniela-model-agency-valencia-vf/gallery/02.jpg"
   ],
   "nationality": "Colombiana",
-  "jobTitle": "Acompañante de lujo en Valencia",
+  "jobTitle": "Modelo",
   "knowsLanguage": [
     "Español"
   ],
   "offers": {
     "@type": "Offer",
-    "description": "Servicios exclusivos de acompañamiento con Daniela en Valencia",
+    "itemOffered": {
+      "@type": "Service",
+      "name": "Acompañamiento Premium",
+      "description": "Servicios exclusivos de acompañamiento con Daniela en Valencia"
+    },
     "areaServed": {
       "@type": "City",
       "name": "Valencia"
     },
-    "availability": "https://schema.org/InStock"
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "name": "Contacto Directo",
+      "url": "https://www.valeriaferrer.com/contact"
+    }
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://www.valeriaferrer.com/models/daniela/"
+    "@id": "https://www.valeriaferrer.com/models/daniela"
   }
 }

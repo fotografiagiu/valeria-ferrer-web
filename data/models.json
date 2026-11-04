@@ -1,5 +1,111 @@
 [
   {
+    "slug": "lili2",
+    "name": "Lili",
+    "age": 20,
+    "height": "1,59 m",
+    "weight": "45 kg",
+    "nationality": "Venezolana",
+    "city": "Valencia",
+    "profileUrl": "https://www.valeriaferrer.com/models/lili2/",
+    "coverImageUrl": "/chicas/lili2-model-agency-valencia-vf/portada.jpg",
+    "profileImageUrl": "/chicas/lili2-model-agency-valencia-vf/portada.jpg",
+    "description": "Hay miradas que despiertan curiosidad desde el primer instante, y Lili tiene una de ellas. Esta preciosa venezolana de 20 años combina una figura delicada y esbelta con una belleza natural, una sonrisa cautivadora y ese inconfundible encanto latino que resulta difícil de ignorar. Con sus 1,59 m de altura, 45 kg y una silueta de proporciones armoniosas, Lili destaca por su feminidad, su estilo y una presencia que transmite frescura y personalidad. Recién llegada a Valeria Ferrer, es una de esas novedades que merece la pena descubrir. Sus fotografías muestran su belleza, pero conocer su personalidad es lo que puede convertir la curiosidad en interés. ¿Te gustaría conocer a Lili? Contacta con nosotros y consulta su disponibilidad.",
+    "essence": "Lili — encanto venezolano en Valencia: mirada que engancha, figura delicada (1,59 m / 45 kg) y belleza natural con ese magnetismo latino difícil de ignorar. Recién llegada a Valeria Ferrer; fotos reales y una presencia fresca que convierte la curiosidad en ganas de quedar. Consulta disponibilidad y reserva tu encuentro.",
+    "uniquePoints": [
+      "Venezolana de 20 en Valencia — novedad con belleza natural y encanto latino",
+      "1,59 m y 45 kg: figura delicada, esbelta y de proporciones armoniosas",
+      "Sonrisa cautivadora y presencia fresca que convierte la curiosidad en cita"
+    ],
+    "experiencePoints": [
+      "Privado con una venezolana joven, natural y de trato cercano en Valencia",
+      "Encuentro con feminidad, estilo y esa chispa latina que se siente de verdad",
+      "Novedad Valeria Ferrer: descubre su personalidad más allá de las fotos"
+    ],
+    "images": [
+      "/chicas/lili2-model-agency-valencia-vf/gallery/01.jpg",
+      "/chicas/lili2-model-agency-valencia-vf/gallery/02.jpg",
+      "/chicas/lili2-model-agency-valencia-vf/gallery/03.jpg",
+      "/chicas/lili2-model-agency-valencia-vf/gallery/04.jpg"
+    ],
+    "services": [
+      "Girlfriend Experience",
+      "Cenas de Negocios",
+      "Eventos Sociales",
+      "Acompañamiento Personal"
+    ],
+    "availability": "24h",
+    "languages": [
+      "Español"
+    ],
+    "tags": [
+      "venezolana",
+      "latina",
+      "nueva",
+      "joven",
+      "valencia",
+      "natural",
+      "discreta"
+    ],
+    "isNew": true,
+    "featured": true,
+    "vip": false,
+    "active": true
+  },
+  {
+    "slug": "lili",
+    "name": "Lili",
+    "age": 21,
+    "height": "1,58 m",
+    "weight": "53 kg",
+    "nationality": "Colombiana",
+    "city": "Valencia",
+    "profileUrl": "https://www.valeriaferrer.com/models/lili/",
+    "coverImageUrl": "/chicas/lili-valeria-ferrer-model-agency-valencia/portada.jpg",
+    "profileImageUrl": "/chicas/lili-valeria-ferrer-model-agency-valencia/portada.jpg",
+    "description": "Lili es una colombiana de 21 años que irrumpe en Valencia con una energía fresca, una sonrisa magnética y una feminidad natural difícil de olvidar. Con 1,58 m y 53 kg, su figura compacta y armoniosa transmite cercanía, sensualidad y ese carisma latino que llena la habitación sin esfuerzo. Joven, espontánea y con una actitud cálida, combina dulzura y picardía en la misma mirada. Ideal para quien busca compañía vibrante, buena conversación y una experiencia auténtica donde la química nace desde el primer instante.",
+    "essence": "El encanto de Lili está en su naturalidad: no necesita artificios para seducir. Tiene esa mezcla de juventud colombiana, calidez genuina y una presencia íntima que hace que cada encuentro se sienta cercano, divertido y muy personal. Sabe crear ambiente, adaptarse a tu ritmo y convertir un plan sencillo en una noche memorable. Perfecta para quien valora la frescura, la complicidad y una compañía que se siente real desde el primer brindis.",
+    "uniquePoints": [
+      "Energía juvenil y carisma colombiano con una sonrisa que conecta al instante",
+      "Figura armoniosa y presencia cercana, ideal para encuentros íntimos y relajados",
+      "Actitud cálida, espontánea y auténtica — química natural sin filtros"
+    ],
+    "experiencePoints": [
+      "Cenas relajadas, copas en terraza y planes con buena vibra en Valencia",
+      "Encuentros privados discretos con ambiente cercano y personal",
+      "Compañía para salidas sociales donde la frescura y el encanto marcan la diferencia"
+    ],
+    "images": [
+      "/chicas/lili-valeria-ferrer-model-agency-valencia/1.jpg",
+      "/chicas/lili-valeria-ferrer-model-agency-valencia/2.jpg"
+    ],
+    "services": [
+      "Girlfriend Experience",
+      "Cenas de Negocios",
+      "Eventos Sociales",
+      "Acompañamiento Personal"
+    ],
+    "availability": "24h",
+    "languages": [
+      "Español",
+      "Inglés"
+    ],
+    "tags": [
+      "colombiana",
+      "normal",
+      "nueva",
+      "joven",
+      "cercana",
+      "discreta",
+      "cenas",
+      "eventos"
+    ],
+    "isNew": true,
+    "featured": true,
+    "vip": false,
+    "active": false
+  },
+  {
     "slug": "alana",
     "name": "Alana",
     "age": 23,
@@ -3334,59 +3440,6 @@
       "cercana",
       "discreta",
       "serena",
-      "cenas",
-      "eventos"
-    ],
-    "isNew": true,
-    "featured": true,
-    "vip": false,
-    "active": false
-  },
-  {
-    "slug": "lili",
-    "name": "Lili",
-    "age": 21,
-    "height": "1,58 m",
-    "weight": "53 kg",
-    "nationality": "Colombiana",
-    "city": "Valencia",
-    "profileUrl": "https://www.valeriaferrer.com/models/lili/",
-    "coverImageUrl": "/chicas/lili-valeria-ferrer-model-agency-valencia/portada.jpg",
-    "profileImageUrl": "/chicas/lili-valeria-ferrer-model-agency-valencia/portada.jpg",
-    "description": "Lili es una colombiana de 21 años que irrumpe en Valencia con una energía fresca, una sonrisa magnética y una feminidad natural difícil de olvidar. Con 1,58 m y 53 kg, su figura compacta y armoniosa transmite cercanía, sensualidad y ese carisma latino que llena la habitación sin esfuerzo. Joven, espontánea y con una actitud cálida, combina dulzura y picardía en la misma mirada. Ideal para quien busca compañía vibrante, buena conversación y una experiencia auténtica donde la química nace desde el primer instante.",
-    "essence": "El encanto de Lili está en su naturalidad: no necesita artificios para seducir. Tiene esa mezcla de juventud colombiana, calidez genuina y una presencia íntima que hace que cada encuentro se sienta cercano, divertido y muy personal. Sabe crear ambiente, adaptarse a tu ritmo y convertir un plan sencillo en una noche memorable. Perfecta para quien valora la frescura, la complicidad y una compañía que se siente real desde el primer brindis.",
-    "uniquePoints": [
-      "Energía juvenil y carisma colombiano con una sonrisa que conecta al instante",
-      "Figura armoniosa y presencia cercana, ideal para encuentros íntimos y relajados",
-      "Actitud cálida, espontánea y auténtica — química natural sin filtros"
-    ],
-    "experiencePoints": [
-      "Cenas relajadas, copas en terraza y planes con buena vibra en Valencia",
-      "Encuentros privados discretos con ambiente cercano y personal",
-      "Compañía para salidas sociales donde la frescura y el encanto marcan la diferencia"
-    ],
-    "images": [
-      "/chicas/lili-valeria-ferrer-model-agency-valencia/1.jpg",
-      "/chicas/lili-valeria-ferrer-model-agency-valencia/2.jpg"
-    ],
-    "services": [
-      "Girlfriend Experience",
-      "Cenas de Negocios",
-      "Eventos Sociales",
-      "Acompañamiento Personal"
-    ],
-    "availability": "24h",
-    "languages": [
-      "Español",
-      "Inglés"
-    ],
-    "tags": [
-      "colombiana",
-      "normal",
-      "nueva",
-      "joven",
-      "cercana",
-      "discreta",
       "cenas",
       "eventos"
     ],

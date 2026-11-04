@@ -1,0 +1,40 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Lili",
+  "description": "Hay miradas que despiertan curiosidad desde el primer instante, y Lili tiene una de ellas. Esta preciosa venezolana de 20 años combina una figura delicada y esbelta con una belleza natural, una sonrisa cautivadora y ese inconfundible encanto latino que resulta difícil de ignorar. Con sus 1,59 m de altura, 45 kg y una silueta de proporciones armoniosas, Lili destaca por su feminidad, su estilo y una presencia que transmite frescura y personalidad. Recién llegada a Valeria Ferrer, es una de esas novedades que merece la pena descubrir. Sus fotografías muestran su belleza, pero conocer su personalidad es lo que puede convertir la curiosidad en interés. ¿Te gustaría conocer a Lili? Contacta con nosotros y consulta su disponibilidad.",
+  "url": "https://www.valeriaferrer.com/models/lili2",
+  "image": [
+    "https://www.valeriaferrer.com/chicas/lili2-model-agency-valencia-vf/portada.jpg",
+    "https://www.valeriaferrer.com/chicas/lili2-model-agency-valencia-vf/gallery/01.jpg",
+    "https://www.valeriaferrer.com/chicas/lili2-model-agency-valencia-vf/gallery/02.jpg",
+    "https://www.valeriaferrer.com/chicas/lili2-model-agency-valencia-vf/gallery/03.jpg",
+    "https://www.valeriaferrer.com/chicas/lili2-model-agency-valencia-vf/gallery/04.jpg"
+  ],
+  "nationality": "Venezolana",
+  "jobTitle": "Modelo",
+  "knowsLanguage": [
+    "Español"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "itemOffered": {
+      "@type": "Service",
+      "name": "Acompañamiento Premium",
+      "description": "Servicios exclusivos de acompañamiento con Lili en Valencia"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Valencia"
+    },
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "name": "Contacto Directo",
+      "url": "https://www.valeriaferrer.com/contact"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.valeriaferrer.com/models/lili2"
+  }
+}
