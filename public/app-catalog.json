@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-11-04T18:43:30.848Z",
-  "catalogVersion": "e6f624233c69011fa3e23c9cf775dceb4a01990956bbc3de370ea44acd033185",
+  "generatedAt": "2026-11-05T18:14:27.892Z",
+  "catalogVersion": "80caa4326a325eaa7d1e3469ac97717c49a2fa082fda89a9da200223c75ce55e",
   "source": "valeria-ferrer-web",
   "method": "build-app-catalog",
   "models": [
@@ -14,7 +14,14 @@
         "/chicas/lili2-model-agency-valencia-vf/gallery/01.jpg",
         "/chicas/lili2-model-agency-valencia-vf/gallery/02.jpg",
         "/chicas/lili2-model-agency-valencia-vf/gallery/03.jpg",
-        "/chicas/lili2-model-agency-valencia-vf/gallery/04.jpg"
+        "/chicas/lili2-model-agency-valencia-vf/gallery/04.jpg",
+        "/chicas/lili2-model-agency-valencia-vf/gallery/05.jpg",
+        "/chicas/lili2-model-agency-valencia-vf/gallery/06.jpg",
+        "/chicas/lili2-model-agency-valencia-vf/gallery/07.jpg",
+        "/chicas/lili2-model-agency-valencia-vf/gallery/08.jpg",
+        "/chicas/lili2-model-agency-valencia-vf/gallery/09.jpg",
+        "/chicas/lili2-model-agency-valencia-vf/gallery/10.jpg",
+        "/chicas/lili2-model-agency-valencia-vf/gallery/11.jpg"
       ]
     },
     {
