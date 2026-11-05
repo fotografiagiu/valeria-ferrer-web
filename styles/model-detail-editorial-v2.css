@@ -916,3 +916,25 @@
     transform: none !important;
   }
 }
+
+
+/* Profile facts & rates: desktop readability adjustment only.
+   Preserve two vertical columns, existing visual language and all content. */
+@media (min-width: 1024px) {
+  .vf-profile-detail .vf-editorial-intro__specs h2 {
+    font-size: clamp(23px, 1.9vw, 29px);
+    line-height: 1.15;
+  }
+  .vf-profile-detail .vf-editorial-intro__specs dt {
+    font-size: clamp(11px, .96vw, 13px);
+    line-height: 1.35;
+  }
+  .vf-profile-detail .vf-editorial-intro__specs dd {
+    font-size: clamp(13px, 1.08vw, 15px);
+    line-height: 1.35;
+  }
+  .vf-profile-detail .vf-editorial-intro__specs dl > div {
+    min-height: 42px;
+    padding-block: 10px;
+  }
+}
