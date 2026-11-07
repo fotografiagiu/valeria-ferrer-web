@@ -1,10 +1,21 @@
 {
-  "generatedAt": "2026-11-05T18:14:40.783Z",
+  "generatedAt": "2026-11-07T22:37:34.494Z",
   "sourcePath": "data/models.json",
-  "sourceHash": "80caa4326a325eaa7d1e3469ac97717c49a2fa082fda89a9da200223c75ce55e",
-  "modelCount": 65,
-  "activeCount": 38,
+  "sourceHash": "22b414afbe85d4cb942f0481e7cbeb278a83214ff412a7b524be4dbfa8bf6b66",
+  "modelCount": 66,
+  "activeCount": 39,
   "models": [
+    {
+      "slug": "yuliana",
+      "name": "Yuliana",
+      "active": true,
+      "coverImageUrl": "/chicas/yuliana-model-agency-valencia-vf/portada.jpg",
+      "images": [
+        "/chicas/yuliana-model-agency-valencia-vf/gallery/01.jpg",
+        "/chicas/yuliana-model-agency-valencia-vf/gallery/02.jpg",
+        "/chicas/yuliana-model-agency-valencia-vf/gallery/03.jpg"
+      ]
+    },
     {
       "slug": "lili2",
       "name": "Lili",
