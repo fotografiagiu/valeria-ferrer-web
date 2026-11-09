@@ -1406,3 +1406,157 @@ img {
   .panel-desktop-shell .gallery-preview-hero {max-height:350px;}
   .panel-desktop-shell .activity-section {margin-top:0;padding-top:0;border-top:0;max-width:1050px;}
 }
+
+
+/* Desktop 2.0 — larger controls, better use of wide screens, editorial cards. */
+@media (min-width: 1100px) {
+  .panel-desktop-shell { --gold: #d9b875; --gold-line: rgba(217,184,117,.24); }
+  .desktop-workspace { grid-template-columns: 284px minmax(0,1fr); }
+  .panel-desktop-shell .app-header {
+    min-height: 84px;
+    padding: 18px clamp(28px,3vw,55px) 18px 324px;
+    background: rgba(18,18,23,.98);
+  }
+  .panel-desktop-shell .app-header h1 { font-size: 1.08rem; }
+  .panel-desktop-shell .app-header .sub { font-size: .82rem; margin-top: 5px; }
+  .panel-desktop-shell .header-actions .ghost-btn {
+    padding: 13px 20px; border-radius: 12px; font-size: .83rem; font-weight: 600;
+  }
+  .desktop-sidebar {
+    height: calc(100dvh - 84px); padding: 34px 18px 25px;
+    border-right-color: rgba(217,184,117,.10);
+    background: linear-gradient(180deg,#151419,#101014);
+  }
+  .desktop-sidebar-brand { padding: 8px 10px 26px; gap: 14px; }
+  .desktop-sidebar-monogram {
+    height: 55px; width: 55px; font-size: 1.6rem;
+    border-radius: 15px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.09), 0 8px 26px rgba(0,0,0,.26);
+  }
+  .desktop-sidebar-brand strong {font-size:1.24rem}
+  .desktop-sidebar-brand small {font-size:.82rem}
+  .desktop-sidebar-label {font-size:.73rem}
+  .desktop-sidebar-nav { gap: 9px; }
+  .desktop-sidebar-nav button {min-height: 60px;border-radius:14px;padding:15px 17px;font-size:.99rem;}
+  .desktop-sidebar-nav button.is-current {
+    background: linear-gradient(100deg,rgba(217,184,117,.18),rgba(217,184,117,.06));
+    box-shadow:inset 3px 0 0 #d9b875;
+  }
+  .desktop-nav-icon { font-size: 1.38rem; }
+  .desktop-nav-count {font-size:.8rem;padding:5px 9px}
+  .desktop-sidebar-bottom {font-size:.8rem}
+  .panel-desktop-shell .main {
+    width:100%; max-width:none; min-width:0;
+    padding: 38px clamp(26px,2.6vw,56px) 125px;
+  }
+  .desktop-page-heading {
+    position:relative; overflow:hidden; border:1px solid rgba(217,184,117,.17);
+    border-radius:22px; padding:31px 35px; margin-bottom:24px;
+    background:
+      radial-gradient(ellipse at 87% 10%,rgba(217,184,117,.16),transparent 49%),
+      linear-gradient(115deg,#242127,#19191f 70%,#17171c);
+    box-shadow:0 18px 50px rgba(0,0,0,.18);
+  }
+  .desktop-page-heading::after {
+    content:"VF"; position:absolute; right:16%; top:-60px;
+    font-family:var(--font-serif);font-size:240px;letter-spacing:-.08em;
+    color:rgba(217,184,117,.035);pointer-events:none;
+  }
+  .desktop-page-eyebrow {font-size:.77rem}
+  .desktop-page-heading h2 {
+    font-size:clamp(2.2rem,2.7vw,3.05rem);
+    margin:11px 0 10px;
+    color:#f6f0e4;
+  }
+  .desktop-page-heading p { font-size:1.01rem; color:#bdb8b9; max-width:640px; line-height:1.5; }
+  .desktop-page-metric {
+    z-index:1;min-width:170px;padding:20px 27px;
+    border-color:rgba(217,184,117,.23);border-radius:15px;
+    background:rgba(12,12,15,.48);backdrop-filter:blur(12px);
+  }
+  .desktop-page-metric span {font-size:.83rem}
+  .desktop-page-metric strong {font-size:2.65rem}
+  .desktop-catalog-toolbar {
+    padding:21px 24px;margin-bottom:17px;
+    border-radius:16px;
+    background:#1a1a20;
+    border-color:rgba(255,255,255,.085);
+  }
+  .desktop-catalog-toolbar-title { display:flex !important;flex-direction:row !important;align-items:center;gap:16px;}
+  .desktop-catalog-toolbar-title > div {display:flex;flex-direction:column;gap:6px}
+  .desktop-catalog-toolbar-title strong {font-size:1.10rem;color:#f5f1e9}
+  .desktop-catalog-toolbar-title span {font-size:.85rem}
+  .desktop-catalog-toolbar-icon {
+    display:grid;place-items:center;height:45px;width:45px;
+    font-size:1.45rem;border-radius:12px;
+    background:rgba(217,184,117,.11);color:#d9b875;
+  }
+  .desktop-toolbar-count {display:inline-block;margin-left:8px;color:#d9b875;font-size:.89rem !important}
+  .desktop-catalog-search {flex-basis:310px}
+  .desktop-catalog-search input {
+    min-height:50px;padding:12px 18px;
+    border-radius:12px;font-size:.93rem;
+  }
+  .panel-desktop-shell .model-list {
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:15px;
+  }
+  .panel-desktop-shell .model-card {
+    position:relative;
+    grid-template-columns:45px 105px minmax(0,1fr) auto;
+    gap:17px;
+    min-height:150px;
+    padding:15px 19px;
+    background:linear-gradient(120deg,#222127,#19191f);
+    border:1px solid rgba(255,255,255,.095);
+    border-radius:17px;
+    box-shadow:0 11px 26px rgba(0,0,0,.16);
+  }
+  .panel-desktop-shell .model-card::before {
+    content:""; position:absolute; left:17px;top:0;right:17px;height:1px;
+    background:linear-gradient(90deg,transparent,rgba(217,184,117,.13),transparent);
+  }
+  .panel-desktop-shell .model-card:hover {
+    transform:translateY(-1px);
+    background:linear-gradient(110deg,#29272e,#1d1c23);
+    border-color:rgba(217,184,117,.44);
+    box-shadow:0 18px 40px rgba(0,0,0,.29);
+  }
+  .panel-desktop-shell .model-card.dragging {z-index:20;transform:none;}
+  .panel-desktop-shell .cover-thumb {
+    width:105px;height:120px;border-radius:11px;
+    border-color:rgba(217,184,117,.30);
+  }
+  .panel-desktop-shell .order-num {font-size:1.55rem}
+  .panel-desktop-shell .model-meta .name {font-size:1.25rem;margin-bottom:10px}
+  .panel-desktop-shell .model-meta .slug {font-size:.83rem;line-height:1.3;color:#a9a4ae}
+  .panel-desktop-shell .model-card-actions {gap:4px}
+  .panel-desktop-shell .trash-btn,
+  .panel-desktop-shell .drag-handle {
+    width:41px;height:50px;border-radius:10px;
+    background:rgba(255,255,255,.025);
+    border:1px solid rgba(255,255,255,.06);
+  }
+  .panel-desktop-shell .trash-btn:hover {background:rgba(210,95,103,.16)}
+  .panel-desktop-shell .drag-handle:hover {background:rgba(217,184,117,.12);color:#e0c187}
+  .panel-desktop-shell .save-bar {
+    left:284px; padding:15px clamp(26px,2.6vw,56px) 18px;
+  }
+  .panel-desktop-shell .save-bar .inner {max-width:none;width:100%}
+  .panel-desktop-shell .save-bar .primary-btn {
+    min-width:230px;padding:15px 25px;border-radius:12px;font-size:.85rem;
+  }
+  .panel-desktop-shell .promo-section {max-width:none}
+  .panel-desktop-shell .activity-section {max-width:none}
+  .panel-desktop-shell .modal-sheet {width:min(1120px,calc(100vw - 360px));}
+}
+@media (min-width:1100px) and (max-width:1450px) {
+  .panel-desktop-shell .model-list {grid-template-columns:1fr}
+}
+@media (min-width:1100px) and (max-width:1250px) {
+  .desktop-workspace {grid-template-columns:248px minmax(0,1fr)}
+  .panel-desktop-shell .app-header {padding-left:280px}
+  .panel-desktop-shell .save-bar {left:248px}
+  .desktop-page-heading {padding:24px}
+}
