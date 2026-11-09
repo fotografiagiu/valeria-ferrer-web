@@ -1,10 +1,21 @@
 {
-  "generatedAt": "2026-11-09T19:06:18.485953Z",
+  "generatedAt": "2026-11-09T19:36:40.472508Z",
   "sourcePath": "data/models.json",
-  "sourceHash": "c0d918b51f016ff4d7829fcad8554cd4d9843402ed7e23b63a7b687b44e842a5",
-  "modelCount": 68,
-  "activeCount": 40,
+  "sourceHash": "55148cb0466e3b1962a2e4b9eb02c0fd1d8e68c450e372d0e54dfdf723c4ada3",
+  "modelCount": 69,
+  "activeCount": 41,
   "models": [
+    {
+      "slug": "cloe",
+      "name": "Cloe",
+      "active": true,
+      "coverImageUrl": "/chicas/cloe-model-agency-valencia-vf/portada.jpg",
+      "images": [
+        "/chicas/cloe-model-agency-valencia-vf/gallery/01.jpg",
+        "/chicas/cloe-model-agency-valencia-vf/gallery/02.jpg",
+        "/chicas/cloe-model-agency-valencia-vf/gallery/03.jpg"
+      ]
+    },
     {
       "slug": "kailin",
       "name": "Kailin",
