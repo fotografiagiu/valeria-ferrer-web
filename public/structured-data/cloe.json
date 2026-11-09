@@ -1,0 +1,27 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Cloe",
+  "description": "Cloe tiene ese encanto que combina una belleza delicada con una personalidad visualmente atrevida y seductora. Venezolana de 21 años, con 1,60 m de estatura y 45 kg, destaca por su figura esbelta, sus facciones femeninas y una mirada que transmite sensualidad y misterio. Su larga melena oscura, sus labios carnosos y sus tatuajes le aportan un estilo muy personal. Una mezcla de dulzura y picardía que la hace diferente, con una imagen juvenil, fresca y llena de atractivo. Esta joven venezolana se incorpora a Valeria Ferrer como una de nuestras novedades en Valencia, destacando por su belleza natural y ese aire provocador que no pasa desapercibido. Si buscas una escort venezolana en Valencia, joven, esbelta y con un encanto especial, Cloe es una de esas bellezas que merece la pena descubrir.",
+  "url": "https://www.valeriaferrer.com/models/cloe",
+  "image": [
+    "https://www.valeriaferrer.com/chicas/cloe-model-agency-valencia-vf/portada.jpg",
+    "https://www.valeriaferrer.com/chicas/cloe-model-agency-valencia-vf/gallery/01.jpg",
+    "https://www.valeriaferrer.com/chicas/cloe-model-agency-valencia-vf/gallery/02.jpg",
+    "https://www.valeriaferrer.com/chicas/cloe-model-agency-valencia-vf/gallery/03.jpg"
+  ],
+  "nationality": "Venezolana",
+  "jobTitle": "Modelo de acompañamiento",
+  "knowsLanguage": [
+    "Español"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "availability": "https://schema.org/InStock",
+    "url": "https://www.valeriaferrer.com/models/cloe"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.valeriaferrer.com/models/cloe"
+  }
+}
