@@ -63,14 +63,17 @@ function SortableCard({
   index,
   onOpenCover,
   onRequestRemove,
+  disableDrag = false,
 }: {
   model: StaffCatalogModel;
   index: number;
   onOpenCover: (model: StaffCatalogModel) => void;
   onRequestRemove: (model: StaffCatalogModel) => void;
+  disableDrag?: boolean;
 }) {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
     id: model.slug,
+    disabled: disableDrag,
   });
 
   const style = {
@@ -142,6 +145,8 @@ export function CatalogScreen({
   const [selected, setSelected] = useState<StaffCatalogModel | null>(null);
   const [pendingRemove, setPendingRemove] = useState<StaffCatalogModel | null>(null);
   const [removing, setRemoving] = useState(false);
+  const [search, setSearch] = useState('');
+  const visibleModels = useMemo(() => models.filter((model) => `${model.name} ${model.slug}`.toLocaleLowerCase('es').includes(search.trim().toLocaleLowerCase('es'))), [models, search]);
 
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 6 } }),
@@ -161,7 +166,7 @@ export function CatalogScreen({
 
   function onDragEnd(event: DragEndEvent) {
     const { active, over } = event;
-    if (!over || active.id === over.id) return;
+    if (search.trim() || !over || active.id === over.id) return;
     const oldIndex = models.findIndex((m) => m.slug === active.id);
     const newIndex = models.findIndex((m) => m.slug === over.id);
     if (oldIndex < 0 || newIndex < 0) return;
@@ -264,14 +269,23 @@ export function CatalogScreen({
         </div>
       ) : null}
 
+      <div className="desktop-catalog-toolbar">
+        <div><strong>{models.length} fichas</strong><span>Orden de aparición en la web</span></div>
+        <label className="desktop-catalog-search">
+          <span className="sr-only">Buscar ficha por nombre</span>
+          <input type="search" placeholder="Buscar modelo…" value={search} onChange={(event) => setSearch(event.target.value)} aria-label="Buscar ficha por nombre" />
+        </label>
+      </div>
+      {search.trim() ? <p className="desktop-search-hint">{visibleModels.length} resultado(s). Limpia la búsqueda para volver a ordenar las fichas.</p> : null}
       <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={onDragEnd}>
         <SortableContext items={models.map((m) => m.slug)} strategy={verticalListSortingStrategy}>
           <div className="model-list">
-            {models.map((model, index) => (
+            {visibleModels.map((model) => (
               <SortableCard
                 key={model.slug}
                 model={model}
-                index={index}
+                index={models.findIndex((entry) => entry.slug === model.slug)}
+                disableDrag={Boolean(search.trim())}
                 onOpenCover={setSelected}
                 onRequestRemove={setPendingRemove}
               />
