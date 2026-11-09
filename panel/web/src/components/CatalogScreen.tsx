@@ -12,6 +12,7 @@ import {
   arrayMove,
   useSortable,
   verticalListSortingStrategy,
+  rectSortingStrategy,
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { useMemo, useState } from 'react';
@@ -99,7 +100,7 @@ function SortableCard({
       />
       <div className="model-meta">
         <p className="name">{model.name}</p>
-        <p className="slug">tocar · fotos</p>
+        <p className="slug">Editar fotos y portada</p>
       </div>
       <div className="model-card-actions">
         <button
@@ -270,7 +271,7 @@ export function CatalogScreen({
       ) : null}
 
       <div className="desktop-catalog-toolbar">
-        <div><strong>{models.length} fichas</strong><span>Orden de aparición en la web</span></div>
+        <div className="desktop-catalog-toolbar-title"><span className="desktop-catalog-toolbar-icon" aria-hidden="true">▦</span><div><strong>Catálogo de modelos <span className="desktop-toolbar-count">{models.length}</span></strong><span>Gestiona tus portadas y el orden de publicación</span></div></div>
         <label className="desktop-catalog-search">
           <span className="sr-only">Buscar ficha por nombre</span>
           <input type="search" placeholder="Buscar modelo…" value={search} onChange={(event) => setSearch(event.target.value)} aria-label="Buscar ficha por nombre" />
@@ -278,7 +279,7 @@ export function CatalogScreen({
       </div>
       {search.trim() ? <p className="desktop-search-hint">{visibleModels.length} resultado(s). Limpia la búsqueda para volver a ordenar las fichas.</p> : null}
       <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={onDragEnd}>
-        <SortableContext items={models.map((m) => m.slug)} strategy={verticalListSortingStrategy}>
+        <SortableContext items={models.map((m) => m.slug)} strategy={typeof window !== 'undefined' && window.matchMedia('(min-width: 1200px)').matches ? rectSortingStrategy : verticalListSortingStrategy}>
           <div className="model-list">
             {visibleModels.map((model) => (
               <SortableCard
