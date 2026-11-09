@@ -1166,6 +1166,7 @@
   },
   {
     "slug": "lia",
+    "active": false,
     "name": "Lía (VIP)",
     "age": 20,
     "height": "1,69 m",
