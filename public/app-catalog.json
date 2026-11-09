@@ -1,9 +1,20 @@
 {
-  "generatedAt": "2026-11-09T18:43:34.819Z",
-  "catalogVersion": "af901bd2cad83fe8a1df07a90e9691c412c53421bd446f12a8e95cddbafb46a1",
+  "generatedAt": "2026-11-09T19:06:18.581Z",
+  "catalogVersion": "c0d918b51f016ff4d7829fcad8554cd4d9843402ed7e23b63a7b687b44e842a5",
   "source": "valeria-ferrer-web",
   "method": "build-app-catalog",
   "models": [
+    {
+      "slug": "kailin",
+      "name": "Kailin",
+      "active": true,
+      "vip": false,
+      "coverImageUrl": "/chicas/kailin-model-agency-valencia-vf/portada.jpg",
+      "images": [
+        "/chicas/kailin-model-agency-valencia-vf/gallery/01.jpg",
+        "/chicas/kailin-model-agency-valencia-vf/gallery/02.jpg"
+      ]
+    },
     {
       "slug": "corina",
       "name": "Corina",
