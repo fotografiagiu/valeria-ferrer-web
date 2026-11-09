@@ -23,9 +23,11 @@ const PromotionScreen = lazy(() =>
 );
 
 type ToastState = { message: string; tone: 'success' | 'error' } | null;
+type DesktopTab = 'catalog' | 'promos' | 'activity';
 
 export function App() {
   const [bootstrapping, setBootstrapping] = useState(true);
+  const [desktopTab, setDesktopTab] = useState<DesktopTab>('catalog');
   const [bootError, setBootError] = useState<string | null>(null);
   const [bootRetry, setBootRetry] = useState(0);
   const [user, setUser] = useState<StaffUser | null>(null);
@@ -190,7 +192,7 @@ export function App() {
   }
 
   return (
-    <div className="app-shell">
+    <div className="app-shell panel-desktop-shell">
       <Toast message={toast?.message ?? null} tone={toast?.tone} />
       <header className="app-header">
         <div>
@@ -212,8 +214,31 @@ export function App() {
         </div>
       </header>
 
-      <main className="main">
-        <Suspense fallback={<div className="loading-center">Cargando publicidad…</div>}>
+      <div className="desktop-workspace">
+        <aside className="desktop-sidebar" aria-label="Secciones del panel">
+          <div className="desktop-sidebar-brand">
+            <span className="desktop-sidebar-monogram">VF</span>
+            <span><strong>Valeria Ferrer</strong><small>Panel de gestión</small></span>
+          </div>
+          <div className="desktop-sidebar-label">ESPACIO DE TRABAJO</div>
+          <nav className="desktop-sidebar-nav" aria-label="Navegación de escritorio">
+            <button className={desktopTab === 'catalog' ? 'is-current' : ''} type="button" aria-current={desktopTab === 'catalog' ? 'page' : undefined} onClick={() => setDesktopTab('catalog')}><span className="desktop-nav-icon">▦</span> Fichas y portadas <span className="desktop-nav-count">{models.length}</span></button>
+            <button className={desktopTab === 'promos' ? 'is-current' : ''} type="button" aria-current={desktopTab === 'promos' ? 'page' : undefined} onClick={() => setDesktopTab('promos')}><span className="desktop-nav-icon">✦</span> Promociones</button>
+            <button className={desktopTab === 'activity' ? 'is-current' : ''} type="button" aria-current={desktopTab === 'activity' ? 'page' : undefined} onClick={() => setDesktopTab('activity')}><span className="desktop-nav-icon">◷</span> Historial</button>
+          </nav>
+          <div className="desktop-sidebar-bottom"><span className="desktop-sidebar-indicator" /> Gestión web · Sesión activa</div>
+        </aside>
+        <main className="main">
+          <div className="desktop-page-heading">
+            <div>
+              <div className="desktop-page-eyebrow">GESTIÓN WEB / VALERIA FERRER</div>
+              <h2>{desktopTab === 'catalog' ? 'Fichas y portadas' : desktopTab === 'promos' ? 'Promociones' : 'Historial de actividad'}</h2>
+              <p>{desktopTab === 'catalog' ? 'Organiza las fichas, selecciona portadas y controla su orden de aparición.' : desktopTab === 'promos' ? 'Activa o desactiva las campañas de la página web.' : 'Revisa los últimos cambios de la plataforma.'}</p>
+            </div>
+            <div className="desktop-page-metric"><span>Fichas en catálogo</span><strong>{models.length}</strong></div>
+          </div>
+          <section className="desktop-view" data-desktop-active={desktopTab === 'promos'}>
+            <Suspense fallback={<div className="loading-center">Cargando publicidad…</div>}>
           <PromotionScreen
             onToast={showToast}
             onUnauthorized={() => {
@@ -221,8 +246,9 @@ export function App() {
               setModels([]);
             }}
           />
-        </Suspense>
-
+            </Suspense>
+          </section>
+          <section className="desktop-view desktop-view-catalog" data-desktop-active={desktopTab === 'catalog'}>
         {(loadingCatalog || ensuring) && models.length === 0 ? (
           <div className="loading-center">
             {ensuring ? 'Incorporando fichas nuevas…' : 'Cargando fichas…'}
@@ -266,10 +292,12 @@ export function App() {
           <div className="loading-center">No hay fichas activas</div>
         ) : null}
 
-        <Suspense fallback={null}>
-          <ActivityFeed />
-        </Suspense>
-      </main>
+          </section>
+          <section className="desktop-view" data-desktop-active={desktopTab === 'activity'}>
+            <Suspense fallback={null}><ActivityFeed /></Suspense>
+          </section>
+        </main>
+      </div>
     </div>
   );
 }
