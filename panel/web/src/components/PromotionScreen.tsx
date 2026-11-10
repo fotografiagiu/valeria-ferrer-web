@@ -36,7 +36,7 @@ const CREATIVES: Record<
   },
   cash5: {
     title: '−5 € EFECTIVO',
-    image: '/promos/promo-halloween-efectivo-oct2026.webp',
+    image: '/promos/promo-efectivo-premium-nov2026.webp',
     hint: '5 € de descuento exclusivamente al pagar en efectivo',
   },
 };

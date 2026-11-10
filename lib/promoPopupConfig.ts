@@ -45,9 +45,9 @@ export const PROMO_CREATIVES: Record<
   },
   cash5: {
     kind: 'cash5',
-    image: '/promos/promo-halloween-efectivo-oct2026.webp',
-    imageWidth: 1024,
-    imageHeight: 576,
+    image: '/promos/promo-efectivo-premium-nov2026.webp',
+    imageWidth: 1050,
+    imageHeight: 591,
     ctaHref: '/booking',
     bannerText: '−5 € solo pagando en efectivo · Oferta activa · Ver condiciones',
   },
