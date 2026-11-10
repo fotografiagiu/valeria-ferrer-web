@@ -34,6 +34,11 @@ const CREATIVES: Record<
     image: '/promos/promo-salidas-premium-nov2026.webp',
     hint: 'Promoción salidas',
   },
+  cash5: {
+    title: '−5 € EFECTIVO',
+    image: '/promos/promo-halloween-efectivo-oct2026.webp',
+    hint: '5 € de descuento exclusivamente al pagar en efectivo',
+  },
 };
 
 type Props = {
@@ -189,7 +194,7 @@ export function PromotionScreen({ onToast, onUnauthorized }: Props) {
         <div>
           <h2 id="promo-web-title">Publicidad web</h2>
           <p className="promo-section-sub">
-            Control remoto de Copas, Duplex y Salidas VIP · sin commit ni deploy
+            Control remoto de Copas, Dúplex, Salidas VIP y −5 € efectivo · sin commit ni deploy
           </p>
         </div>
         <button type="button" className="ghost-btn" onClick={() => void refresh()} disabled={loading || busy}>
@@ -350,7 +355,7 @@ export function PromotionScreen({ onToast, onUnauthorized }: Props) {
         <div className="promo-modal-backdrop" role="presentation">
           <div className="promo-modal" role="dialog" aria-modal="true" aria-labelledby="promo-off-title">
             <h3 id="promo-off-title">Desactivar publicidad</h3>
-            <p className="muted">La web dejará de mostrar Copas/Duplex y Novedades volverá a su comportamiento normal.</p>
+            <p className="muted">La web ocultará la promoción temporal seleccionada y Novedades volverá a su comportamiento normal.</p>
             <div className="promo-modal-actions">
               <button type="button" className="ghost-btn" disabled={busy} onClick={() => setConfirmOff(false)}>
                 Cancelar

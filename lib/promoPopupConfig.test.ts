@@ -99,3 +99,21 @@ test('salidas live → promo config', () => {
   assert.equal(promo.imageHeight, 438)
   assert.equal(isPromoLive(promo, now), true)
 })
+
+test('cash5 active: public creative is resolved; inactive and expired do not show', () => {
+  const data = {
+    active: true,
+    activePromotion: 'cash5',
+    startsAt: '2026-09-23T11:00:00.000Z',
+    endsAt: '2026-09-23T14:00:00.000Z',
+    durationHours: 3,
+    promoId: 'cash5-one',
+  }
+  const promo = resolvePromoFromRemote(data, now)
+  assert.ok(promo)
+  assert.equal(promo.kind, 'cash5')
+  assert.match(promo.image, /efectivo/)
+  assert.equal(isPromoLive(promo, now), true)
+  assert.equal(resolvePromoFromRemote({ ...data, active: false }, now), null)
+  assert.equal(resolvePromoFromRemote(data, Date.parse('2026-09-23T14:00:00.000Z')), null)
+})

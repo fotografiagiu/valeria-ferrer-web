@@ -50,7 +50,7 @@ export const promotionBodySchema = z.discriminatedUnion('action', [
   z
     .object({
       action: z.literal('activate'),
-      promotion: z.enum(['copas', 'duples', 'salidas']),
+      promotion: z.enum(['copas', 'duples', 'salidas', 'cash5']),
       durationHours: z.union([z.literal(1), z.literal(3), z.literal(4)]),
     })
     .strict(),

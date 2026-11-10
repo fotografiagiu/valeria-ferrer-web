@@ -179,6 +179,23 @@ describe('promotion API', () => {
     expect(pub.activePromotion).toBe('duples')
   })
 
+
+  it('activates cash5 and exposes it publicly; replaced promotion is no longer active', async () => {
+    const res = await app.request('http://localhost/api/staff/promotion', {
+      method: 'PUT',
+      headers: { 'content-type': 'application/json', cookie },
+      body: JSON.stringify({ action: 'activate', promotion: 'cash5', durationHours: 3 }),
+    })
+    expect(res.status).toBe(200)
+    const body = await json(res)
+    expect(body.effective.activePromotion).toBe('cash5')
+    expect(body.effective.active).toBe(true)
+    expect(body.history[0].summary).toContain('−5 € EFECTIVO')
+    const pub = await json(await app.request('http://localhost/api/public/promotion'))
+    expect(pub.activePromotion).toBe('cash5')
+    expect(pub.active).toBe(true)
+  })
+
   it('manual deactivate clears public state', async () => {
     const res = await app.request('http://localhost/api/staff/promotion', {
       method: 'PUT',
