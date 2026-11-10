@@ -1,4 +1,4 @@
-import { desc, eq, inArray } from 'drizzle-orm';
+import { desc, eq, inArray, sql } from 'drizzle-orm';
 import type { AppDb } from '../db/client.js';
 import { auditLog, staffUsers, webPromotion } from '../db/schema.js';
 import { appendAudit } from './audit.js';
@@ -243,6 +243,37 @@ export async function listPromotionHistory(
   });
 }
 
+/**
+ * The panel's database predates cash5. Upgrade the allowlist only on the first
+ * authenticated cash5 activation; PostgreSQL DDL is idempotent and does not
+ * alter any live promotion or audit records.
+ * The dedicated 0006 migration should also be run by normal DB deployments.
+ */
+async function ensureCash5Allowed(db: AppDb): Promise<void> {
+  await db.execute(sql.raw(`DO $upgrade$
+DECLARE cname text;
+BEGIN
+ IF NOT EXISTS (
+   SELECT 1 FROM pg_constraint
+   WHERE conrelid = 'public.web_promotion'::regclass AND contype = 'c'
+     AND pg_get_constraintdef(oid) ILIKE '%active_promotion%'
+     AND pg_get_constraintdef(oid) ILIKE '%cash5%'
+ ) THEN
+   FOR cname IN
+     SELECT conname FROM pg_constraint
+     WHERE conrelid = 'public.web_promotion'::regclass AND contype = 'c'
+       AND pg_get_constraintdef(oid) ILIKE '%active_promotion%'
+       AND pg_get_constraintdef(oid) NOT ILIKE '%id = 1%'
+   LOOP
+     EXECUTE format('ALTER TABLE public.web_promotion DROP CONSTRAINT %I', cname);
+   END LOOP;
+   ALTER TABLE public.web_promotion
+     ADD CONSTRAINT web_promotion_active_promotion_check
+     CHECK (active_promotion IN ('none','copas','duples','salidas','cash5'));
+ END IF;
+END $upgrade$;`))
+}
+
 export async function activatePromotion(params: {
   db: AppDb;
   promotion: ActivatablePromotion;
@@ -252,6 +283,7 @@ export async function activatePromotion(params: {
   userAgent?: string | null;
   now?: Date;
 }): Promise<{ stored: StoredPromotion; effective: EffectivePromotion }> {
+  if (params.promotion === 'cash5') await ensureCash5Allowed(params.db);
   const now = params.now ?? new Date();
   const ends = new Date(now.getTime() + params.durationHours * 60 * 60 * 1000);
   const promoId = buildPromoId(params.promotion, now);
