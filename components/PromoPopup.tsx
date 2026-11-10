@@ -9,9 +9,6 @@ import {
   officialWhatsAppUrlWithText,
 } from '../lib/officialContact'
 
-const PROMO_WHATSAPP_URL = officialWhatsAppUrlWithText(
-  'Hola, quiero información sobre la promoción de salidas.',
-)
 import { halloweenIsLive } from './HalloweenCampaign'
 import { isPromoLive, type PromoPopupConfig } from '../lib/promoPopupConfig'
 import {
@@ -28,6 +25,12 @@ const PromoPopup: React.FC = () => {
   // Promotion remains available elsewhere on the site.
   const hideOnProfile = /^\/models\/[^/]+\/?$/.test(pathname)
   const [promo, setPromo] = useState<PromoPopupConfig | null>(() => getCachedPromotion())
+  const promoWhatsAppUrl = officialWhatsAppUrlWithText(
+    promo?.kind === 'cash5' ? 'Hola, quiero reservar con la promoción de 5 € menos pagando en efectivo.'
+      : promo?.kind === 'copas' ? 'Hola, quiero información sobre la copa de invitación.'
+      : promo?.kind === 'duples' ? 'Hola, quiero información sobre la oferta Dúplex.'
+      : 'Hola, quiero información sobre la promoción de salidas.'
+  )
   const [view, setView] = useState<PromoView>('hidden')
   const [contactOpen, setContactOpen] = useState(false)
 
@@ -227,7 +230,7 @@ const PromoPopup: React.FC = () => {
             <div className="overflow-hidden rounded-lg shadow-[0_20px_80px_rgba(0,0,0,0.55)]">
               <img
                 src={promo.image}
-                alt="Promoción salidas Valeria Ferrer. 1 hora 180 euros."
+                alt={promo.kind === 'cash5' ? "Promoción 5 euros menos únicamente al pagar en efectivo" : promo.kind === 'salidas' ? "Promoción salidas Valeria Ferrer. 1 hora 180 euros." : promo.kind === 'copas' ? "Copa de invitación Valeria Ferrer" : "Promoción Dúplex Valeria Ferrer"}
                 className="block h-auto w-full max-h-[68dvh] object-contain bg-black sm:max-h-[76dvh]"
                 width={promo.imageWidth}
                 height={promo.imageHeight}
@@ -287,7 +290,7 @@ const PromoPopup: React.FC = () => {
                 <span className="text-[10px] font-medium tracking-normal text-gray-400">{OFFICIAL_PHONE_LABEL}</span>
               </a>
               <a
-                href={PROMO_WHATSAPP_URL}
+                href={promoWhatsAppUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 data-contact-placement="promo_popup"
