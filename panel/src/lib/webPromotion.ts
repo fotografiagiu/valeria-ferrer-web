@@ -3,7 +3,7 @@ import type { AppDb } from '../db/client.js';
 import { auditLog, staffUsers, webPromotion } from '../db/schema.js';
 import { appendAudit } from './audit.js';
 
-export const PROMOTION_TYPES = ['none', 'copas', 'duples', 'salidas'] as const;
+export const PROMOTION_TYPES = ['none', 'copas', 'duples', 'salidas', 'cash5'] as const;
 export type PromotionType = (typeof PROMOTION_TYPES)[number];
 export type ActivatablePromotion = Exclude<PromotionType, 'none'>;
 
@@ -49,7 +49,7 @@ function iso(value: Date | string | null | undefined): string | null {
 }
 
 export function isActivatablePromotion(value: string): value is ActivatablePromotion {
-  return value === 'copas' || value === 'duples' || value === 'salidas';
+  return value === 'copas' || value === 'duples' || value === 'salidas' || value === 'cash5';
 }
 
 export function isPromotionDurationHours(value: number): value is PromotionDurationHours {
@@ -150,7 +150,7 @@ function historySummary(params: {
   endsAt: string | null;
 }): string {
   const label = (p: PromotionType | null) =>
-    p === 'copas' ? 'COPAS' : p === 'duples' ? 'DUPLEX' : p === 'salidas' ? 'SALIDAS VIP' : 'ninguna';
+    p === 'copas' ? 'COPAS' : p === 'duples' ? 'DUPLEX' : p === 'salidas' ? 'SALIDAS VIP' : p === 'cash5' ? '−5 € EFECTIVO' : 'ninguna';
   const ends =
     params.endsAt != null
       ? new Date(params.endsAt).toLocaleString('es-ES', {
