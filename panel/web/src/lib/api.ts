@@ -170,7 +170,7 @@ export function removeCatalogModel(slug: string, version: number) {
   });
 }
 
-export type PromotionType = 'none' | 'copas' | 'duples' | 'salidas' | 'cash5' | 'cash5';
+export type PromotionType = 'none' | 'copas' | 'duples' | 'salidas' | 'cash5';
 export type ActivatablePromotion = 'copas' | 'duples' | 'salidas' | 'cash5';
 export type PromotionDurationHours = 1 | 3 | 4;
 
