@@ -25,7 +25,12 @@ const HomePromotions: React.FC = () => {
         <ArrowUpRight size={19} className="vf-noir-promo__arrow" aria-hidden="true" />
       </a>
       {active?.kind === 'cash5' ? <a href={CASH_URL} target="_blank" rel="noopener noreferrer"
-        data-contact-placement="cash_noir_home" className="vf-noir-promo vf-noir-promo--cash">
+        data-contact-placement="cash_noir_home" className="vf-noir-promo vf-noir-promo--cash"
+        style={{
+          backgroundImage: "linear-gradient(90deg, rgba(34,8,25,.93), rgba(34,8,25,.82) 54%, rgba(34,8,25,.35)), url('/promos/promo-efectivo-premium-nov2026.webp')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center 42%',
+        }}>
         <span className="vf-noir-promo__icon" aria-hidden="true"><Wallet size={27} /></span>
         <span className="vf-noir-promo__body"><strong><span className="vf-noir-promo__discount">−5 €</span>
           <span className="vf-noir-promo__cash-label">solo en<br /> efectivo</span></strong>
