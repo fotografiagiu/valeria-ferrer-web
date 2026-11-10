@@ -1,4 +1,4 @@
-export type PromoKind = 'copas' | 'duples' | 'salidas'
+export type PromoKind = 'copas' | 'duples' | 'salidas' | 'cash5'
 
 export type PromoPopupConfig = {
   id: string
@@ -43,6 +43,14 @@ export const PROMO_CREATIVES: Record<
     ctaHref: '/booking',
     bannerText: 'Promoción salidas · Oferta activa · Ver oferta',
   },
+  cash5: {
+    kind: 'cash5',
+    image: '/promos/promo-halloween-efectivo-oct2026.webp',
+    imageWidth: 1024,
+    imageHeight: 576,
+    ctaHref: '/booking',
+    bannerText: '−5 € solo pagando en efectivo · Oferta activa · Ver condiciones',
+  },
 }
 
 export type RemotePromotionPayload = {
@@ -69,7 +77,7 @@ export function resolvePromoFromRemote(
 ): PromoPopupConfig | null {
   if (!payload || payload.active !== true) return null
   const kind = payload.activePromotion
-  if (kind !== 'copas' && kind !== 'duples' && kind !== 'salidas') return null
+  if (kind !== 'copas' && kind !== 'duples' && kind !== 'salidas' && kind !== 'cash5') return null
   const startsAt = payload.startsAt
   const endsAt = payload.endsAt
   if (!startsAt || !endsAt) return null
@@ -86,7 +94,9 @@ export function resolvePromoFromRemote(
       ? `🥂 Copa de invitación · Aprovecha en estas ${hours} ${hours === 1 ? 'hora' : 'horas'} · Ver oferta`
       : kind === 'duples'
         ? `Oferta dúplex · Aprovecha en estas ${hours} ${hours === 1 ? 'hora' : 'horas'} · Ver oferta`
-        : `Promoción salidas · Aprovecha en estas ${hours} ${hours === 1 ? 'hora' : 'horas'} · Ver oferta`
+        : kind === 'salidas'
+          ? `Promoción salidas · Aprovecha en estas ${hours} ${hours === 1 ? 'hora' : 'horas'} · Ver oferta`
+          : `−5 € solo en efectivo · Oferta válida ${hours} ${hours === 1 ? 'hora' : 'horas'} · Ver condiciones`
   const bannerText = hours ? timedBanner : creative.bannerText
 
   return {
