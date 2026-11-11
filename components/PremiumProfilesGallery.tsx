@@ -11,7 +11,7 @@ const PremiumProfilesGallery: React.FC<Props> = ({ models }) => {
     <section className="vf-all-profiles" id="models-grid-start" aria-labelledby="vf-all-profiles-heading">
       <header className="vf-all-profiles__header">
         <p className="vf-all-profiles__overline"><Sparkles size={15} aria-hidden="true" /> COLECCIÓN VALERIA FERRER</p>
-        <h2 id="vf-all-profiles-heading">Chicas disponibles <em>en Valencia</em></h2>
+        <h2 id="vf-all-profiles-heading">Escorts en <em>Valencia</em></h2>
         <p>Descubre todos nuestros perfiles actuales. Fotografías reales y atención privada.</p>
         <span className="vf-all-profiles__rule" aria-hidden="true" />
       </header>
