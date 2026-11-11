@@ -26,6 +26,11 @@ export const MIGRATION_005_SQL_PATH = path.resolve(
   '../../db/migrations/0005_web_promotion_salidas.sql'
 );
 
+export const MIGRATION_007_SQL_PATH = path.resolve(
+  __dirname,
+  '../../db/migrations/0007_web_promotion_dual_slot.sql'
+);
+
 export type AppDb = ReturnType<typeof drizzle<typeof schema>>;
 
 let poolSingleton: pg.Pool | null = null;
@@ -67,7 +72,8 @@ export function getMigrationSql(): string {
   const staffHidden = readFileSync(MIGRATION_003_SQL_PATH, 'utf8');
   const gallery = readFileSync(MIGRATION_004_SQL_PATH, 'utf8');
   const salidas = readFileSync(MIGRATION_005_SQL_PATH, 'utf8');
-  return `${init}\n\n${promo}\n\n${staffHidden}\n\n${gallery}\n\n${salidas}`;
+  const dual = readFileSync(MIGRATION_007_SQL_PATH, 'utf8');
+  return `${init}\n\n${promo}\n\n${staffHidden}\n\n${gallery}\n\n${salidas}\n\n${dual}`;
 }
 
 export function getPromotionMigrationSql(): string {

@@ -174,7 +174,16 @@ export type PromotionType = 'none' | 'copas' | 'duples' | 'salidas' | 'cash5';
 export type ActivatablePromotion = 'copas' | 'duples' | 'salidas' | 'cash5';
 export type PromotionDurationHours = 1 | 3 | 4;
 
+export type PromotionSlot = {
+  activePromotion: ActivatablePromotion;
+  startsAt: string;
+  endsAt: string;
+  durationHours: number;
+  promoId: string;
+};
+
 export type EffectivePromotion = {
+  promotions: PromotionSlot[];
   activePromotion: PromotionType;
   active: boolean;
   startsAt: string | null;
@@ -190,6 +199,7 @@ export type StoredPromotion = {
   endsAt: string | null;
   durationHours: number | null;
   promoId: string | null;
+  secondaryPromotion?: PromotionSlot | null;
   updatedAt: string;
   updatedBy: string | null;
 };
@@ -225,10 +235,10 @@ export function activatePromotion(
   });
 }
 
-export function deactivatePromotion() {
+export function deactivatePromotion(promotion?: ActivatablePromotion) {
   return request<StaffPromotionResponse & { ok: true }>('/api/staff/promotion', {
     method: 'PUT',
-    body: JSON.stringify({ action: 'deactivate' }),
+    body: JSON.stringify({ action: 'deactivate', ...(promotion ? { promotion } : {}) }),
   });
 }
 

@@ -54,6 +54,8 @@ export const PROMO_CREATIVES: Record<
 }
 
 export type RemotePromotionPayload = {
+  /** New API: up to two independently expiring remote promotions. */
+  promotions?: RemotePromotionPayload[] | null
   activePromotion?: string | null
   active?: boolean
   startsAt?: string | null
@@ -107,4 +109,21 @@ export function resolvePromoFromRemote(
     enabled: true,
     bannerText,
   }
+}
+
+/** New clients consume up to two live promotions; legacy server responses still work. */
+export function resolvePromosFromRemote(
+  payload: RemotePromotionPayload | null | undefined,
+  now = Date.now(),
+): PromoPopupConfig[] {
+  if (!payload || payload.active !== true) return []
+  const source = Array.isArray(payload.promotions)
+    ? payload.promotions : [payload]
+  const seen = new Set<PromoKind>()
+  return source.flatMap(p => {
+    const promo = resolvePromoFromRemote({ ...p, active: true }, now)
+    if (!promo || !isPromoLive(promo, now) || seen.has(promo.kind)) return []
+    seen.add(promo.kind)
+    return [promo]
+  }).slice(0, 2)
 }
