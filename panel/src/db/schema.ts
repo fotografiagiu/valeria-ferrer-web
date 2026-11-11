@@ -85,6 +85,14 @@ export const webPromotion = pgTable('web_promotion', {
   endsAt: timestamp('ends_at', { withTimezone: true }),
   durationHours: integer('duration_hours'),
   promoId: text('promo_id'),
+  /** Independently expiring second campaign; primary legacy columns remain intact. */
+  secondaryPromotion: jsonb('secondary_promotion').$type<{
+    activePromotion: 'copas' | 'duples' | 'salidas' | 'cash5';
+    startsAt: string;
+    endsAt: string;
+    durationHours: number;
+    promoId: string;
+  } | null>(),
   updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
   updatedBy: uuid('updated_by').references(() => staffUsers.id),
 });
