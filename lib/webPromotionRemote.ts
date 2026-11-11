@@ -1,5 +1,5 @@
 import {
-  resolvePromoFromRemote,
+  resolvePromosFromRemote,
   type PromoPopupConfig,
   type RemotePromotionPayload,
 } from './promoPopupConfig'
@@ -29,9 +29,9 @@ function isValidPayload(data: unknown): data is RemotePromotionPayload {
 }
 
 /** Fail-safe: network/API errors → no promo (Novedades can show). */
-export async function fetchRemotePromotion(
+export async function fetchRemotePromotions(
   fetchImpl: typeof fetch = fetch
-): Promise<PromoPopupConfig | null> {
+): Promise<PromoPopupConfig[]> {
   try {
     const controller = new AbortController()
     const timer = window.setTimeout(() => controller.abort(), 4000)
@@ -42,23 +42,43 @@ export async function fetchRemotePromotion(
         method: 'GET',
         signal: controller.signal,
       })
-      if (!res.ok) return null
+      if (!res.ok) return []
       const raw: unknown = await res.json()
-      if (!isValidPayload(raw)) return null
-      return resolvePromoFromRemote(raw)
+      if (!isValidPayload(raw)) return []
+      return resolvePromosFromRemote(raw)
     } finally {
       window.clearTimeout(timer)
     }
   } catch {
-    return null
+    return []
   }
+}
+
+/** Legacy single-campaign consumer receives the first live one. */
+export async function fetchRemotePromotion(fetchImpl: typeof fetch = fetch) {
+  const all = await fetchRemotePromotions(fetchImpl)
+  return all[0] ?? null
 }
 
 export type PromotionListener = (promo: PromoPopupConfig | null) => void
 
+export type PromotionsListener = (promos: PromoPopupConfig[]) => void
+
 let cached: PromoPopupConfig | null = null
+let cachedPromotions: PromoPopupConfig[] = []
 let inFlight: Promise<PromoPopupConfig | null> | null = null
 const listeners = new Set<PromotionListener>()
+const promotionsListeners = new Set<PromotionsListener>()
+
+export function getCachedPromotions(): PromoPopupConfig[] {
+  return cachedPromotions
+}
+
+export function subscribePromotions(listener: PromotionsListener): () => void {
+  promotionsListeners.add(listener)
+  listener(cachedPromotions)
+  return () => { promotionsListeners.delete(listener) }
+}
 
 export function getCachedPromotion(): PromoPopupConfig | null {
   return cached
@@ -72,17 +92,19 @@ export function subscribePromotion(listener: PromotionListener): () => void {
   }
 }
 
-function emit(next: PromoPopupConfig | null) {
-  cached = next
-  for (const listener of listeners) listener(next)
+function emit(next: PromoPopupConfig[]) {
+  cachedPromotions = next
+  cached = next[0] ?? null
+  for (const listener of listeners) listener(cached)
+  for (const listener of promotionsListeners) listener(cachedPromotions)
 }
 
 export async function refreshRemotePromotion(force = false): Promise<PromoPopupConfig | null> {
   if (inFlight && !force) return inFlight
-  inFlight = fetchRemotePromotion()
-    .then((promo) => {
-      emit(promo)
-      return promo
+  inFlight = fetchRemotePromotions()
+    .then((promos) => {
+      emit(promos)
+      return promos[0] ?? null
     })
     .finally(() => {
       inFlight = null
@@ -114,22 +136,20 @@ function ensureWatcherRunning(): void {
   }, POLL_MS)
 
   let expiryTimer = 0
-  const armExpiry = (promo: PromoPopupConfig | null) => {
+  const armExpiry = (promos: PromoPopupConfig[]) => {
     if (expiryTimer) window.clearTimeout(expiryTimer)
     expiryTimer = 0
-    if (!promo?.endsAt) return
-    const ms = Date.parse(promo.endsAt) - Date.now()
-    if (!Number.isFinite(ms) || ms <= 0) {
-      emit(null)
-      return
-    }
+    const nextExpiry = promos.map(p => Date.parse(p.endsAt))
+      .filter(ms => Number.isFinite(ms) && ms > Date.now())
+      .sort((a, b) => a - b)[0]
+    if (!nextExpiry) return
     expiryTimer = window.setTimeout(() => {
-      emit(null)
+      emit(cachedPromotions.filter(p => Date.parse(p.endsAt) > Date.now()))
       void refreshRemotePromotion(true)
-    }, Math.min(ms + 200, 2_147_000_000))
+    }, Math.min(nextExpiry - Date.now() + 200, 2_147_000_000))
   }
-  armExpiry(cached)
-  const unsub = subscribePromotion(armExpiry)
+  armExpiry(cachedPromotions)
+  const unsub = subscribePromotions(armExpiry)
 
   stopWatcher = () => {
     document.removeEventListener('visibilitychange', onVisible)
