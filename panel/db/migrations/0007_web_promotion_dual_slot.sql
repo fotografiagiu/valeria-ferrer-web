@@ -3,6 +3,10 @@
 ALTER TABLE public.web_promotion
   ADD COLUMN IF NOT EXISTS secondary_promotion JSONB;
 
+-- Optimistic revision protects against two staff sessions overwriting each other.
+ALTER TABLE public.web_promotion
+  ADD COLUMN IF NOT EXISTS revision INTEGER NOT NULL DEFAULT 1;
+
 -- Only well-shaped campaign documents are valid. Null means no second slot.
 -- The backend enforces max two live and disallows duplicate active types.
 DO $migration$
