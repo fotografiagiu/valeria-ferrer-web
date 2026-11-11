@@ -12,9 +12,9 @@ import {
 import { halloweenIsLive } from './HalloweenCampaign'
 import { isPromoLive, type PromoPopupConfig } from '../lib/promoPopupConfig'
 import {
-  getCachedPromotion,
+  getCachedPromotions,
   startPromotionWatcher,
-  subscribePromotion,
+  subscribePromotions,
 } from '../lib/webPromotionRemote'
 
 type PromoView = 'hidden' | 'popup' | 'banner'
@@ -24,7 +24,10 @@ const PromoPopup: React.FC = () => {
   // Keep profile photographs unobstructed by the pink promotional banner/popup.
   // Promotion remains available elsewhere on the site.
   const hideOnProfile = /^\/models\/[^/]+\/?$/.test(pathname)
-  const [promo, setPromo] = useState<PromoPopupConfig | null>(() => getCachedPromotion())
+  const [promos, setPromos] = useState<PromoPopupConfig[]>(() => getCachedPromotions())
+  const [selectedPromoId, setSelectedPromoId] = useState<string | null>(null)
+  const livePromos = promos.filter((item) => isPromoLive(item))
+  const promo = livePromos.find(item => item.id === selectedPromoId) ?? livePromos[0] ?? null
   const promoWhatsAppUrl = officialWhatsAppUrlWithText(
     promo?.kind === 'cash5' ? 'Hola, quiero reservar con la promoción de 5 € menos pagando en efectivo.'
       : promo?.kind === 'copas' ? 'Hola, quiero información sobre la copa de invitación.'
@@ -36,7 +39,7 @@ const PromoPopup: React.FC = () => {
 
   useEffect(() => startPromotionWatcher(), [])
 
-  useEffect(() => subscribePromotion(setPromo), [])
+  useEffect(() => subscribePromotions(setPromos), [])
 
   const syncVisibility = useCallback(() => {
     // Happy Hour (novedad Halloween) has the screen until 2 Nov.
@@ -60,14 +63,17 @@ const PromoPopup: React.FC = () => {
     setView('banner')
   }, [promo])
 
-  const reopenPopup = useCallback(() => {
-    if (!isPromoLive(promo)) {
+  const reopenPopup = useCallback((id?: string) => {
+    const chosen = livePromos.find(item => item.id === id) ?? promo
+    if (!isPromoLive(chosen)) {
       setContactOpen(false)
       setView('hidden')
       return
     }
+    setSelectedPromoId(chosen!.id)
+    setContactOpen(false)
     setView('popup')
-  }, [promo])
+  }, [promo, livePromos])
 
   const openContact = useCallback(() => {
     if (!isPromoLive(promo) || view !== 'popup') return
@@ -82,7 +88,7 @@ const PromoPopup: React.FC = () => {
   useEffect(() => {
     setContactOpen(false)
     setView('hidden')
-  }, [promo?.id])
+  }, [livePromos.map(item => item.id).join('|')])
 
   useEffect(() => {
     syncVisibility()
@@ -144,12 +150,18 @@ const PromoPopup: React.FC = () => {
   return (
     <>
       {view === 'banner' ? (
-        <button
-          type="button"
-          onClick={reopenPopup}
-          className="promo-mini-banner fixed left-0 right-0 top-[5.75rem] md:top-[7.25rem] z-[52] flex items-center justify-center gap-2 overflow-hidden border-b border-[#d946ef]/40 bg-[#1a0618]/92 px-3 py-2.5 text-center text-[11px] sm:text-xs tracking-[0.14em] text-[#f5d0fe] backdrop-blur-md hover:bg-[#2a0a24] hover:text-white transition-colors"
-        >
-          <span className="relative z-[1]">{promo.bannerText}</span>
+        <div className="promo-mini-banner fixed left-0 right-0 top-[5.75rem] md:top-[7.25rem] z-[52] flex items-center justify-center gap-1 sm:gap-3 overflow-hidden border-b border-[#d946ef]/40 bg-[#1a0618]/95 px-2 py-2 text-center text-[10px] sm:text-xs tracking-[0.08em] text-[#f5d0fe] backdrop-blur-md">
+          {livePromos.map(item => (
+            <button
+              key={item.id}
+              type="button"
+              onClick={() => reopenPopup(item.id)}
+              className="relative z-[1] flex-1 sm:flex-none min-w-0 max-w-[580px] rounded-lg border border-[#f1d28a]/20 px-3 py-1.5 text-[#f5d0fe] hover:border-[#f1d28a]/60 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#f1d28a]"
+              aria-label={`Ver promoción ${item.kind}`}
+            >
+              <span className="block truncate">{item.bannerText}</span>
+            </button>
+          ))}
           <style>{`
             @keyframes promo-banner-shimmer {
               0% { transform: translateX(-120%); opacity: 0; }
@@ -188,7 +200,7 @@ const PromoPopup: React.FC = () => {
               }
             }
           `}</style>
-        </button>
+        </div>
       ) : null}
 
       {view === 'popup' ? (
@@ -223,6 +235,18 @@ const PromoPopup: React.FC = () => {
           </button>
 
           <div className="relative z-10 w-full max-w-[920px]">
+            {livePromos.length > 1 ? (
+              <div className="mb-3 flex flex-wrap justify-center gap-2" role="tablist" aria-label="Promociones activas">
+                {livePromos.map(item => (
+                  <button key={item.id} type="button" role="tab"
+                    aria-selected={promo.id === item.id}
+                    onClick={() => { setSelectedPromoId(item.id); setContactOpen(false) }}
+                    className={`rounded-full px-4 py-2 text-xs font-bold tracking-wide transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#f1d28a] ${promo.id === item.id ? 'bg-[#f1d28a] text-[#211408]' : 'border border-[#f1d28a]/40 bg-black/80 text-white hover:bg-white/10'}`}>
+                    {item.kind === 'cash5' ? '−5 € efectivo' : item.kind === 'salidas' ? 'Salidas' : item.kind === 'duples' ? 'Dúplex' : 'Copas'}
+                  </button>
+                ))}
+              </div>
+            ) : null}
             <h2 id="promo-popup-title" className="sr-only">
               Oferta especial Valeria Ferrer
             </h2>
