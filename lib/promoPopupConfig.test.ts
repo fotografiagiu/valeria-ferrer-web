@@ -3,6 +3,7 @@ import test from 'node:test'
 import {
   isPromoLive,
   resolvePromoFromRemote,
+  resolvePromosFromRemote,
   type PromoPopupConfig,
 } from './promoPopupConfig.ts'
 
@@ -116,4 +117,52 @@ test('cash5 active: public creative is resolved; inactive and expired do not sho
   assert.equal(isPromoLive(promo, now), true)
   assert.equal(resolvePromoFromRemote({ ...data, active: false }, now), null)
   assert.equal(resolvePromoFromRemote(data, Date.parse('2026-09-23T14:00:00.000Z')), null)
+})
+
+test('two active remote campaigns are both visible and independently timed', () => {
+  const promotions = resolvePromosFromRemote({
+    active: true,
+    activePromotion: 'duples',
+    promotions: [
+      { activePromotion: 'duples', startsAt: '2026-09-23T11:00:00.000Z',
+        endsAt: '2026-09-23T14:00:00.000Z', promoId: 'duples-one', durationHours: 3 },
+      { activePromotion: 'cash5', startsAt: '2026-09-23T11:00:00.000Z',
+        endsAt: '2026-09-23T13:00:00.000Z', promoId: 'cash5-two', durationHours: 1 },
+    ],
+  }, now)
+  assert.deepEqual(promotions.map(p => p.kind), ['duples', 'cash5'])
+  assert.equal(promotions.length, 2)
+  const afterSecondEnds = Date.parse('2026-09-23T13:15:00.000Z')
+  assert.deepEqual(resolvePromosFromRemote({
+    active: true,
+    promotions: [
+      { activePromotion: 'duples', startsAt: '2026-09-23T11:00:00.000Z',
+        endsAt: '2026-09-23T14:00:00.000Z' },
+      { activePromotion: 'cash5', startsAt: '2026-09-23T11:00:00.000Z',
+        endsAt: '2026-09-23T13:00:00.000Z' },
+    ],
+  }, afterSecondEnds).map(p => p.kind), ['duples'])
+})
+
+test('a duplicate kind and a third remote slot never render more than two', () => {
+  const valid = { startsAt: '2026-09-23T11:00:00.000Z', endsAt: '2026-09-23T14:00:00.000Z' }
+  const promoted = resolvePromosFromRemote({
+    active: true,
+    promotions: [
+      { activePromotion: 'duples', ...valid },
+      { activePromotion: 'duples', ...valid },
+      { activePromotion: 'cash5', ...valid },
+      { activePromotion: 'salidas', ...valid },
+    ],
+  }, now)
+  assert.deepEqual(promoted.map(p => p.kind), ['duples', 'cash5'])
+})
+
+test('legacy single campaign response stays compatible', () => {
+  const promotions = resolvePromosFromRemote({
+    active: true, activePromotion: 'salidas',
+    startsAt: '2026-09-23T11:00:00.000Z',
+    endsAt: '2026-09-23T14:00:00.000Z', durationHours: 3,
+  }, now)
+  assert.deepEqual(promotions.map(p => p.kind), ['salidas'])
 })
