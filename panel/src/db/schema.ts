@@ -18,6 +18,7 @@ export const staffUsers = pgTable('staff_users', {
   displayName: text('display_name').notNull(),
   isActive: boolean('is_active').notNull().default(true),
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  revision: integer('revision').notNull().default(1),
   updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
 });
 
