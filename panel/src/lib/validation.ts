@@ -57,6 +57,7 @@ export const promotionBodySchema = z.discriminatedUnion('action', [
   z
     .object({
       action: z.literal('deactivate'),
+      promotion: z.enum(['copas', 'duples', 'salidas', 'cash5']).optional(),
     })
     .strict(),
 ]);
