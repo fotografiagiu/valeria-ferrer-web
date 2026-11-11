@@ -52,6 +52,8 @@ import {
   deactivatePromotion,
   getPublicPromotion,
   getStaffPromotionState,
+  PromotionConcurrentUpdateError,
+  PromotionSlotsFullError,
 } from './lib/webPromotion.js';
 import { listRecentActivity } from './lib/activityFeed.js';
 import { readSnapshot } from './lib/catalogSnapshot.js';
@@ -608,6 +610,7 @@ export function createApp(options: CreateAppOptions) {
       if (parsed.data.action === 'deactivate') {
         const result = await deactivatePromotion({
           db,
+          promotion: parsed.data.promotion,
           staffUserId: staff.id,
           ip: meta.ip,
           userAgent: meta.userAgent,
@@ -627,6 +630,10 @@ export function createApp(options: CreateAppOptions) {
       const history = (await getStaffPromotionState(db)).history;
       return c.json({ ok: true, ...result, history });
     } catch (err) {
+      if (err instanceof PromotionSlotsFullError ||
+          err instanceof PromotionConcurrentUpdateError) {
+        return c.json({ error: err.message }, 409);
+      }
       console.error(err);
       return c.json({ error: 'internal error' }, 500);
     }
