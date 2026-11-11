@@ -27,17 +27,6 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
   const [error, setError] = useState(false);
   const imgRef = useRef<HTMLImageElement>(null);
 
-  // Generate WebP and fallback sources
-  const generateWebPSrc = (originalSrc: string) => {
-    // Convert .jpg/.png to .webp while maintaining path
-    if (originalSrc.match(/\.(jpg|jpeg|png)$/i)) {
-      return originalSrc.replace(/\.(jpg|jpeg|png)$/i, '.webp');
-    }
-    return originalSrc;
-  };
-
-  const webpSrc = generateWebPSrc(src);
-
   useEffect(() => {
     // Preload critical images
     if (priority && src) {
@@ -74,12 +63,8 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
 
   return (
     <picture className={className}>
-      {/* WebP source for modern browsers */}
-      <source
-        srcSet={webpSrc}
-        type="image/webp"
-      />
-      {/* Fallback for older browsers */}
+      {/* Serve the actual asset URL. Do not guess a .webp sibling that may 404:
+          a broken <source> can prevent the original JPG/PNG from appearing. */}
       <img
         ref={imgRef}
         src={src}
