@@ -50,6 +50,25 @@ describe('toEffectivePromotion', () => {
     expect(eff.promoId).toBe('copas-x')
   })
 
+  it('first slot may expire while second remains live', () => {
+    const now = Date.parse('2026-09-23T04:00:00.000Z')
+    const eff = toEffectivePromotion(stored({
+      activePromotion: 'copas',
+      startsAt: '2026-09-23T00:00:00.000Z',
+      endsAt: '2026-09-23T03:00:00.000Z',
+      secondaryPromotion: {
+        activePromotion: 'cash5',
+        startsAt: '2026-09-23T01:00:00.000Z',
+        endsAt: '2026-09-23T05:00:00.000Z',
+        durationHours: 4,
+        promoId: 'cash5-second',
+      },
+    }), now)
+    expect(eff.active).toBe(true)
+    expect(eff.activePromotion).toBe('cash5')
+    expect(eff.promotions).toHaveLength(1)
+  })
+
   it('expired → inactive even if row still says copas', () => {
     const now = Date.parse('2026-09-23T04:00:00.000Z')
     const eff = toEffectivePromotion(
@@ -163,52 +182,74 @@ describe('promotion API', () => {
     expect(body.activePromotion).toBe('copas')
   })
 
-  it('replaces copas with duples in one write', async () => {
+  it('adds duples while leaving copas active, with independent expiry', async () => {
     const res = await app.request('http://localhost/api/staff/promotion', {
-      method: 'PUT',
-      headers: { 'content-type': 'application/json', cookie },
+      method: 'PUT', headers: { 'content-type': 'application/json', cookie },
       body: JSON.stringify({ action: 'activate', promotion: 'duples', durationHours: 1 }),
     })
     expect(res.status).toBe(200)
     const body = await json(res)
-    expect(body.effective.activePromotion).toBe('duples')
-    expect(body.effective.durationHours).toBe(1)
-    expect(body.history[0].action).toBe('promotion.replace')
-
+    expect(body.effective.promotions.map((p: any) => p.activePromotion))
+      .toEqual(['copas', 'duples'])
+    expect(body.effective.promotions[0].durationHours).toBe(3)
+    expect(body.effective.promotions[1].durationHours).toBe(1)
+    expect(body.history[0].action).toBe('promotion.activate')
     const pub = await json(await app.request('http://localhost/api/public/promotion'))
-    expect(pub.activePromotion).toBe('duples')
+    expect(pub.promotions.map((p: any) => p.activePromotion)).toEqual(['copas', 'duples'])
   })
 
-
-  it('activates cash5 and exposes it publicly; replaced promotion is no longer active', async () => {
+  it('rejects a third publication without replacing the two active ones', async () => {
     const res = await app.request('http://localhost/api/staff/promotion', {
-      method: 'PUT',
-      headers: { 'content-type': 'application/json', cookie },
+      method: 'PUT', headers: { 'content-type': 'application/json', cookie },
+      body: JSON.stringify({ action: 'activate', promotion: 'cash5', durationHours: 3 }),
+    })
+    expect(res.status).toBe(409)
+    const pub = await json(await app.request('http://localhost/api/public/promotion'))
+    expect(pub.promotions).toHaveLength(2)
+    expect(pub.promotions.map((p: any) => p.activePromotion)).toEqual(['copas', 'duples'])
+  })
+
+  it('deactivates only copas, leaving the existing duples intact', async () => {
+    const res = await app.request('http://localhost/api/staff/promotion', {
+      method: 'PUT', headers: { 'content-type': 'application/json', cookie },
+      body: JSON.stringify({ action: 'deactivate', promotion: 'copas' }),
+    })
+    expect(res.status).toBe(200)
+    const body = await json(res)
+    expect(body.effective.promotions.map((p: any) => p.activePromotion)).toEqual(['duples'])
+    expect(body.history[0].action).toBe('promotion.deactivate')
+  })
+
+  it('activates cash5 as second slot without changing duples, then renews it', async () => {
+    const res = await app.request('http://localhost/api/staff/promotion', {
+      method: 'PUT', headers: { 'content-type': 'application/json', cookie },
       body: JSON.stringify({ action: 'activate', promotion: 'cash5', durationHours: 3 }),
     })
     expect(res.status).toBe(200)
     const body = await json(res)
-    expect(body.effective.activePromotion).toBe('cash5')
-    expect(body.effective.active).toBe(true)
-    expect(body.history[0].summary).toContain('−5 € EFECTIVO')
-    const pub = await json(await app.request('http://localhost/api/public/promotion'))
-    expect(pub.activePromotion).toBe('cash5')
-    expect(pub.active).toBe(true)
+    expect(body.effective.promotions.map((p: any) => p.activePromotion)).toEqual(['cash5', 'duples'])
+    const renew = await app.request('http://localhost/api/staff/promotion', {
+      method: 'PUT', headers: { 'content-type': 'application/json', cookie },
+      body: JSON.stringify({ action: 'activate', promotion: 'cash5', durationHours: 4 }),
+    })
+    const renewed = await json(renew)
+    expect(renewed.effective.promotions).toHaveLength(2)
+    expect(renewed.effective.promotions[0].durationHours).toBe(4)
+    expect(renewed.effective.promotions[1].activePromotion).toBe('duples')
   })
 
-  it('manual deactivate clears public state', async () => {
+  it('manual legacy deactivate with no type still clears both slots', async () => {
     const res = await app.request('http://localhost/api/staff/promotion', {
-      method: 'PUT',
-      headers: { 'content-type': 'application/json', cookie },
+      method: 'PUT', headers: { 'content-type': 'application/json', cookie },
       body: JSON.stringify({ action: 'deactivate' }),
     })
     expect(res.status).toBe(200)
     const body = await json(res)
-    expect(body.effective.active).toBe(false)
+    expect(body.effective.promotions).toHaveLength(0)
     expect(body.effective.activePromotion).toBe('none')
-
     const pub = await json(await app.request('http://localhost/api/public/promotion'))
     expect(pub.active).toBe(false)
+    expect(pub.promotions).toEqual([])
   })
 
   it('service helpers activate/deactivate with audit', async () => {
