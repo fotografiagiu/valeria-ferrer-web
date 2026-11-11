@@ -85,19 +85,18 @@ export function PromotionScreen({ onToast, onUnauthorized }: Props) {
   const [busy, setBusy] = useState(false);
   const [state, setState] = useState<StaffPromotionResponse | null>(null);
   const [now, setNow] = useState(() => Date.now());
-  const [modal, setModal] = useState<null | {
-    mode: 'activate' | 'replace';
-    promotion: ActivatablePromotion;
-  }>(null);
+  const [modal, setModal] = useState<null | { promotion: ActivatablePromotion }>(null);
   const [duration, setDuration] = useState<PromotionDurationHours>(DEFAULT_DURATION);
-  const [confirmOff, setConfirmOff] = useState(false);
+  const [confirmOff, setConfirmOff] = useState<ActivatablePromotion | null>(null);
   const [historyOpen, setHistoryOpen] = useState(false);
 
   const effective: EffectivePromotion | null = state?.effective ?? null;
-  const live = useMemo(() => {
-    if (!effective?.active || !effective.endsAt) return false;
-    return Date.now() < Date.parse(effective.endsAt);
-  }, [effective, now]);
+  const activePromotions = useMemo(
+    () => (effective?.promotions ?? []).filter(item =>
+      item.endsAt && now < Date.parse(item.endsAt)),
+    [effective, now],
+  );
+  const live = activePromotions.length > 0;
 
   async function refresh() {
     setLoading(true);
@@ -125,27 +124,21 @@ export function PromotionScreen({ onToast, onUnauthorized }: Props) {
   }, []);
 
   useEffect(() => {
-    if (!live || !effective?.endsAt) return;
-    const ms = Date.parse(effective.endsAt) - Date.now();
-    if (!Number.isFinite(ms) || ms <= 0) {
-      void refresh();
-      return;
-    }
-    const timer = window.setTimeout(() => {
-      void refresh();
-    }, Math.min(ms + 250, 2_147_000_000));
+    if (!activePromotions.length) return;
+    const ms = Math.min(...activePromotions.map(p => Date.parse(p.endsAt) - Date.now()));
+    if (!Number.isFinite(ms) || ms <= 0) { void refresh(); return; }
+    const timer = window.setTimeout(() => void refresh(), Math.min(ms + 250, 2_147_000_000));
     return () => window.clearTimeout(timer);
-  }, [live, effective?.endsAt]);
+  }, [activePromotions.map(p => p.promoId).join('|')]);
 
   function openActivate(promotion: ActivatablePromotion) {
-    const activeType = live ? effective?.activePromotion : 'none';
-    const replacing =
-      live && activeType !== 'none' && activeType !== promotion;
+    const isRenewal = activePromotions.some(p => p.activePromotion === promotion);
+    if (!isRenewal && activePromotions.length >= 2) {
+      onToast('Ya hay dos publicidades activas. Desactiva una antes de añadir otra.', 'error');
+      return;
+    }
     setDuration(DEFAULT_DURATION);
-    setModal({
-      mode: replacing ? 'replace' : 'activate',
-      promotion,
-    });
+    setModal({ promotion });
   }
 
   async function confirmActivate() {
@@ -170,9 +163,10 @@ export function PromotionScreen({ onToast, onUnauthorized }: Props) {
   async function confirmDeactivate() {
     setBusy(true);
     try {
-      const next = await deactivatePromotion();
+      if (!confirmOff) return;
+      const next = await deactivatePromotion(confirmOff);
       setState(next);
-      setConfirmOff(false);
+      setConfirmOff(null);
       onToast('Publicidad desactivada');
     } catch (err) {
       if (err instanceof ApiError && err.status === 401) {
@@ -185,7 +179,6 @@ export function PromotionScreen({ onToast, onUnauthorized }: Props) {
     }
   }
 
-  const activeType = live ? effective?.activePromotion : 'none';
   const history: PromotionHistoryItem[] = state?.history ?? [];
 
   return (
@@ -203,39 +196,32 @@ export function PromotionScreen({ onToast, onUnauthorized }: Props) {
       </div>
 
       <div className="promo-status-bar">
-        <span className="promo-status-label">Estado actual</span>
-        {loading && !state ? (
-          <span className="promo-status-value muted">Cargando…</span>
-        ) : live && activeType && activeType !== 'none' ? (
-          <span className="promo-status-value live">
-            ● {CREATIVES[activeType as ActivatablePromotion]?.title ?? activeType} activa
-            <span className="promo-status-meta">
-              Finaliza {formatEndsAt(effective?.endsAt ?? null)} · Quedan{' '}
-              {formatRemaining(effective?.endsAt ?? null, now)}
-            </span>
-          </span>
-        ) : (
-          <span className="promo-status-value muted">Desactivada</span>
-        )}
+        <span className="promo-status-label">Publicidades activas · {activePromotions.length}/2</span>
+        {loading && !state ? <span className="promo-status-value muted">Cargando…</span>
+        : live ? (
+          <div style={{ display: 'grid', gap: 7 }}>
+            {activePromotions.map(item => (
+              <span className="promo-status-value live" key={item.promoId}>
+                ● {CREATIVES[item.activePromotion]?.title ?? item.activePromotion}
+                <span className="promo-status-meta">
+                  Finaliza {formatEndsAt(item.endsAt)} · Quedan {formatRemaining(item.endsAt, now)}
+                </span>
+              </span>
+            ))}
+          </div>
+        ) : <span className="promo-status-value muted">Desactivadas</span>}
       </div>
-
-      {live ? (
-        <div className="promo-actions-row">
-          <button
-            type="button"
-            className="danger-btn"
-            disabled={busy}
-            onClick={() => setConfirmOff(true)}
-          >
-            Desactivar ahora
-          </button>
-        </div>
-      ) : null}
+      <p className="muted" style={{ fontSize: 12, margin: '10px 0 14px' }}>
+        Selecciona hasta dos publicidades. Cada una tiene su propio contador;
+        puedes renovar o desactivar una sin afectar a la otra.
+      </p>
 
       <div className="promo-cards">
         {(Object.keys(CREATIVES) as ActivatablePromotion[]).map((key) => {
           const creative = CREATIVES[key];
-          const isActive = live && activeType === key;
+          const activeSlot = activePromotions.find(p => p.activePromotion === key);
+          const isActive = Boolean(activeSlot);
+          const isFull = !isActive && activePromotions.length >= 2;
           return (
             <article
               key={key}
@@ -255,17 +241,23 @@ export function PromotionScreen({ onToast, onUnauthorized }: Props) {
                 <p className="muted">{creative.hint}</p>
                 {isActive ? (
                   <p className="promo-card-countdown">
-                    Quedan {formatRemaining(effective?.endsAt ?? null, now)}
+                    Quedan {formatRemaining(activeSlot?.endsAt ?? null, now)}
                   </p>
                 ) : null}
                 <button
                   type="button"
                   className="primary-btn promo-card-cta"
-                  disabled={busy}
+                  disabled={busy || isFull}
                   onClick={() => openActivate(key)}
                 >
-                  {isActive ? 'Renovar' : 'Activar'}
+                  {isActive ? 'Renovar' : isFull ? 'Máximo 2 activas' : 'Activar'}
                 </button>
+                {isActive ? (
+                  <button type="button" className="danger-btn" style={{ marginTop: 7, width: '100%' }}
+                    disabled={busy} onClick={() => setConfirmOff(key)}>
+                    Desactivar esta publicidad
+                  </button>
+                ) : null}
               </div>
             </article>
           );
@@ -308,21 +300,10 @@ export function PromotionScreen({ onToast, onUnauthorized }: Props) {
             aria-labelledby="promo-modal-title"
           >
             <h3 id="promo-modal-title">
-              {modal.mode === 'replace'
-                ? `Sustituir por ${CREATIVES[modal.promotion].title}`
+              {activePromotions.some(p => p.activePromotion === modal.promotion)
+                ? `Renovar publicidad ${CREATIVES[modal.promotion].title}`
                 : `Activar publicidad ${CREATIVES[modal.promotion].title}`}
             </h3>
-            {modal.mode === 'replace' && live && effective?.activePromotion !== 'none' ? (
-              <p className="promo-modal-warn">
-                {(effective?.activePromotion &&
-                  CREATIVES[effective.activePromotion as ActivatablePromotion]?.title) ||
-                  effective?.activePromotion ||
-                  'la promoción'}{' '}
-                está activa hasta{' '}
-                {formatEndsAt(effective?.endsAt ?? null)}. ¿Quieres sustituirla por{' '}
-                {CREATIVES[modal.promotion].title}?
-              </p>
-            ) : null}
             <p className="muted">
               Mientras esta publicidad esté activa, el popup de Novedades quedará oculto.
             </p>
@@ -354,10 +335,10 @@ export function PromotionScreen({ onToast, onUnauthorized }: Props) {
       {confirmOff ? (
         <div className="promo-modal-backdrop" role="presentation">
           <div className="promo-modal" role="dialog" aria-modal="true" aria-labelledby="promo-off-title">
-            <h3 id="promo-off-title">Desactivar publicidad</h3>
-            <p className="muted">La web ocultará la promoción temporal seleccionada y Novedades volverá a su comportamiento normal.</p>
+            <h3 id="promo-off-title">Desactivar {CREATIVES[confirmOff].title}</h3>
+            <p className="muted">Solo se desactivará esta publicidad. La otra seguirá visible hasta vencer.</p>
             <div className="promo-modal-actions">
-              <button type="button" className="ghost-btn" disabled={busy} onClick={() => setConfirmOff(false)}>
+              <button type="button" className="ghost-btn" disabled={busy} onClick={() => setConfirmOff(null)}>
                 Cancelar
               </button>
               <button type="button" className="danger-btn" disabled={busy} onClick={() => void confirmDeactivate()}>
