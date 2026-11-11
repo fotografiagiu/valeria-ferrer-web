@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getCachedPromotion, startPromotionWatcher, subscribePromotion } from '../lib/webPromotionRemote';
+import { getCachedPromotions, startPromotionWatcher, subscribePromotions } from '../lib/webPromotionRemote';
 import { isPromoLive, type PromoPopupConfig } from '../lib/promoPopupConfig';
 import { ArrowUpRight, ChevronRight, Tag, Wallet } from 'lucide-react';
 import { officialWhatsAppUrlWithText } from '../lib/officialContact';
@@ -9,13 +9,15 @@ const CASH_URL = officialWhatsAppUrlWithText('Hola, quiero reservar con la promo
 
 /** BLACK editorial card stays visible. The second card tracks the actual panel promotion. */
 const HomePromotions: React.FC = () => {
-  const [promo, setPromo] = useState<PromoPopupConfig | null>(() => getCachedPromotion());
+  const [promos, setPromos] = useState<PromoPopupConfig[]>(() => getCachedPromotions());
   useEffect(() => startPromotionWatcher(), []);
-  useEffect(() => subscribePromotion(setPromo), []);
-  const active = isPromoLive(promo) ? promo : null;
+  useEffect(() => subscribePromotions(setPromos), []);
+  const activePromos = promos.filter(p => isPromoLive(p));
+  const active = activePromos[0] ?? null;
   return (
   <section className="vf-noir-promos vf-lux-promos" aria-label="Promociones disponibles">
-    <div className="vf-noir-promos__grid vf-noir-promos__grid--two">
+    <div className="vf-noir-promos__grid vf-noir-promos__grid--two"
+      style={activePromos.length > 1 ? { gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 270px), 1fr))' } : undefined}>
       <a href={BLACK_URL} target="_blank" rel="noopener noreferrer"
         data-contact-placement="black_noir_home" className="vf-noir-promo vf-noir-promo--black">
         <span className="vf-noir-promo__icon" aria-hidden="true"><Tag size={26} /></span>
@@ -59,6 +61,35 @@ const HomePromotions: React.FC = () => {
           <ArrowUpRight size={19} className="vf-noir-promo__arrow" aria-hidden="true"/>
         </a>
       ) : null}
+      {activePromos.slice(1).map((item) => (
+        <a key={item.id}
+          href={officialWhatsAppUrlWithText(
+            item.kind === 'cash5'
+              ? 'Hola, quiero reservar con la promoción de 5 € menos pagando en efectivo.'
+              : item.kind === 'copas'
+              ? 'Hola, quiero consultar la promoción de copa de invitación.'
+              : item.kind === 'duples'
+              ? 'Hola, quiero consultar la promoción Dúplex.'
+              : 'Hola, quiero consultar la promoción de salidas.'
+          )}
+          target="_blank" rel="noopener noreferrer"
+          className="vf-noir-promo vf-noir-promo--active-remote"
+          data-contact-placement={`promo_${item.kind}_home`}
+          style={{
+            backgroundImage: 'linear-gradient(90deg, rgba(24,7,20,.84), rgba(24,7,20,.42)), url(' + item.image + ')',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}>
+          <span className="vf-noir-promo__icon" aria-hidden="true"><Tag size={26} /></span>
+          <span className="vf-noir-promo__body">
+            <strong>{item.kind === 'cash5' ? '−5 € solo efectivo'
+              : item.kind === 'copas' ? 'Copa de invitación'
+              : item.kind === 'duples' ? 'Oferta Dúplex' : 'Promoción Salidas VIP'}</strong>
+            <small>Oferta activa · Consultar condiciones y reservar</small>
+          </span>
+          <ArrowUpRight size={19} className="vf-noir-promo__arrow" aria-hidden="true" />
+        </a>
+      ))}
     </div>
     <details className="vf-noir-promos__terms">
       <summary>Ver condiciones y precios de las promociones <ChevronRight size={15} aria-hidden="true" /></summary>
@@ -66,6 +97,14 @@ const HomePromotions: React.FC = () => {
         <div><strong>BLACK</strong><p>Tarifa especial únicamente para perfiles con etiqueta BLACK. Menciona BLACK al reservar.</p></div>
         {active?.kind === 'cash5' ? <div><strong>Solo efectivo</strong><p>5 € menos por servicio al pagar en efectivo. Ejemplos: 30 min 75 € · 1 hora 145 € · 1 hora y media 225 €. Solo durante la promoción activa.</p></div> : null}
         {active && active.kind !== 'cash5' ? <div><strong>Promoción temporal activa</strong><p>{active.kind === 'copas' ? 'Copa de invitación' : active.kind === 'duples' ? 'Dúplex especial' : 'Oferta de salidas'} · Consulta las condiciones al reservar.</p></div> : null}
+        {activePromos.slice(1).map((item) => (
+          <div key={item.id}><strong>{item.kind === 'cash5' ? 'Solo efectivo' : 'Promoción temporal activa'}</strong>
+            <p>{item.kind === 'cash5'
+              ? '5 € menos por servicio al pagar en efectivo. Oferta temporal.'
+              : item.kind === 'copas' ? 'Copa de invitación'
+              : item.kind === 'duples' ? 'Dúplex especial' : 'Oferta de salidas'} · Consulta las condiciones al reservar.</p>
+          </div>
+        ))}
       </div>
     </details>
   </section>
