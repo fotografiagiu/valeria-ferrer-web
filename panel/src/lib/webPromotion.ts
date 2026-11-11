@@ -25,6 +25,7 @@ export type StoredPromotion = {
   durationHours: number | null;
   promoId: string | null;
   secondaryPromotion?: StoredPromoSlot | null;
+  revision?: number;
   updatedAt: string;
   updatedBy: string | null;
 };
@@ -135,6 +136,7 @@ export async function readStoredPromotion(db: AppDb): Promise<StoredPromotion> {
       durationHours: null,
       promoId: null,
       secondaryPromotion: null,
+      revision: 1,
       updatedAt: new Date().toISOString(),
       updatedBy: null,
     };
@@ -146,6 +148,7 @@ export async function readStoredPromotion(db: AppDb): Promise<StoredPromotion> {
     durationHours: row.durationHours,
     promoId: row.promoId,
     secondaryPromotion: row.secondaryPromotion ?? null,
+    revision: row.revision,
     updatedAt: iso(row.updatedAt) ?? new Date().toISOString(),
     updatedBy: row.updatedBy,
   };
@@ -298,6 +301,7 @@ BEGIN
 END $upgrade$;`))
 }
 
+/** Add or renew a campaign. Never replace a different live campaign automatically. */
 export async function activatePromotion(params: {
   db: AppDb;
   promotion: ActivatablePromotion;
@@ -310,70 +314,91 @@ export async function activatePromotion(params: {
   if (params.promotion === 'cash5') await ensureCash5Allowed(params.db);
   const now = params.now ?? new Date();
   const ends = new Date(now.getTime() + params.durationHours * 60 * 60 * 1000);
-  const promoId = buildPromoId(params.promotion, now);
-
-  const before = await readStoredPromotion(params.db);
-  const beforeEffective = toEffectivePromotion(before, now.getTime());
-
-  await params.db
-    .update(webPromotion)
-    .set({
-      activePromotion: params.promotion,
-      startsAt: now,
-      endsAt: ends,
-      durationHours: params.durationHours,
-      promoId,
-      updatedAt: now,
-      updatedBy: params.staffUserId,
-    })
-    .where(eq(webPromotion.id, 1));
-
-  const after: StoredPromotion = {
+  const nextSlot: StoredPromoSlot = {
     activePromotion: params.promotion,
     startsAt: now.toISOString(),
     endsAt: ends.toISOString(),
     durationHours: params.durationHours,
-    promoId,
+    promoId: buildPromoId(params.promotion, now),
+  };
+  const before = await readStoredPromotion(params.db);
+  const effective = toEffectivePromotion(before, now.getTime());
+  const current = effective.promotions;
+  const isPrimaryLive = current.some(p => p.activePromotion === before.activePromotion &&
+    p.promoId === before.promoId);
+  const isSecondaryLive = current.some(p => p.promoId === before.secondaryPromotion?.promoId);
+  const isRenewPrimary = isPrimaryLive && before.activePromotion === params.promotion;
+  const isRenewSecond = isSecondaryLive &&
+    before.secondaryPromotion?.activePromotion === params.promotion;
+  if (!isRenewPrimary && !isRenewSecond && current.length >= 2) {
+    throw new PromotionSlotsFullError();
+  }
+  const usePrimary = isRenewPrimary || (!isRenewSecond && !isPrimaryLive);
+  const primary = usePrimary ? nextSlot : (
+    before.activePromotion !== 'none' && before.startsAt && before.endsAt &&
+    before.durationHours && before.promoId
+      ? {
+          activePromotion: before.activePromotion,
+          startsAt: before.startsAt,
+          endsAt: before.endsAt,
+          durationHours: before.durationHours,
+          promoId: before.promoId,
+        } satisfies StoredPromoSlot
+      : null
+  );
+  const secondary = usePrimary ? before.secondaryPromotion ?? null : nextSlot;
+  const [updated] = await params.db.update(webPromotion).set({
+    activePromotion: primary?.activePromotion ?? 'none',
+    startsAt: primary ? new Date(primary.startsAt) : null,
+    endsAt: primary ? new Date(primary.endsAt) : null,
+    durationHours: primary?.durationHours ?? null,
+    promoId: primary?.promoId ?? null,
+    secondaryPromotion: secondary,
+    revision: sql`${webPromotion.revision} + 1`,
+    updatedAt: now,
+    updatedBy: params.staffUserId,
+  }).where(and(eq(webPromotion.id, 1),
+    eq(webPromotion.revision, before.revision ?? 1))).returning({ revision: webPromotion.revision });
+  if (!updated) throw new PromotionConcurrentUpdateError();
+  const after: StoredPromotion = {
+    activePromotion: primary?.activePromotion ?? 'none',
+    startsAt: primary?.startsAt ?? null,
+    endsAt: primary?.endsAt ?? null,
+    durationHours: primary?.durationHours ?? null,
+    promoId: primary?.promoId ?? null,
+    secondaryPromotion: secondary,
+    revision: updated.revision,
     updatedAt: now.toISOString(),
     updatedBy: params.staffUserId,
   };
-
-  const replacing =
-    beforeEffective.active && beforeEffective.activePromotion !== params.promotion;
-
+  const previous = current.find(p => p.activePromotion === params.promotion);
   await appendAudit(params.db, {
     staffUserId: params.staffUserId,
-    action: replacing ? 'promotion.replace' : 'promotion.activate',
+    action: previous ? 'promotion.replace' : 'promotion.activate',
     before: {
-      activePromotion: beforeEffective.active
-        ? beforeEffective.activePromotion
-        : before.activePromotion === 'none'
-          ? 'none'
-          : before.activePromotion,
-      startsAt: before.startsAt,
-      endsAt: before.endsAt,
-      durationHours: before.durationHours,
-      promoId: before.promoId,
+      activePromotion: previous?.activePromotion ?? 'none',
+      startsAt: previous?.startsAt ?? null,
+      endsAt: previous?.endsAt ?? null,
+      durationHours: previous?.durationHours ?? null,
+      promoId: previous?.promoId ?? null,
     },
     after: {
-      activePromotion: after.activePromotion,
-      startsAt: after.startsAt,
-      endsAt: after.endsAt,
-      durationHours: after.durationHours,
-      promoId: after.promoId,
+      activePromotion: params.promotion,
+      startsAt: nextSlot.startsAt,
+      endsAt: nextSlot.endsAt,
+      durationHours: nextSlot.durationHours,
+      promoId: nextSlot.promoId,
     },
     ip: params.ip,
     userAgent: params.userAgent,
   });
-
-  return {
-    stored: after,
-    effective: toEffectivePromotion(after, now.getTime()),
-  };
+  return { stored: after, effective: toEffectivePromotion(after, now.getTime()) };
 }
 
+/** Turn off one selected campaign or all (legacy action with no promotion). */
 export async function deactivatePromotion(params: {
   db: AppDb;
+  promotion?: ActivatablePromotion;
   staffUserId: string;
   ip?: string | null;
   userAgent?: string | null;
@@ -381,56 +406,61 @@ export async function deactivatePromotion(params: {
 }): Promise<{ stored: StoredPromotion; effective: EffectivePromotion }> {
   const now = params.now ?? new Date();
   const before = await readStoredPromotion(params.db);
-  const beforeEffective = toEffectivePromotion(before, now.getTime());
-
-  await params.db
-    .update(webPromotion)
-    .set({
-      activePromotion: 'none',
-      startsAt: null,
-      endsAt: null,
-      durationHours: null,
-      promoId: null,
-      updatedAt: now,
-      updatedBy: params.staffUserId,
-    })
-    .where(eq(webPromotion.id, 1));
-
+  const current = toEffectivePromotion(before, now.getTime()).promotions;
+  const removed = params.promotion
+    ? current.find(p => p.activePromotion === params.promotion)
+    : current[0];
+  const keepPrimary = params.promotion != null &&
+    before.activePromotion !== params.promotion;
+  const keepSecondary = params.promotion != null &&
+    before.secondaryPromotion?.activePromotion !== params.promotion;
+  const primary = keepPrimary && before.activePromotion !== 'none' &&
+    before.startsAt && before.endsAt && before.durationHours && before.promoId
+      ? {
+          activePromotion: before.activePromotion, startsAt: before.startsAt,
+          endsAt: before.endsAt, durationHours: before.durationHours,
+          promoId: before.promoId,
+        } satisfies StoredPromoSlot
+      : null;
+  const secondary = keepSecondary ? before.secondaryPromotion ?? null : null;
+  const [updated] = await params.db.update(webPromotion).set({
+    activePromotion: primary?.activePromotion ?? 'none',
+    startsAt: primary ? new Date(primary.startsAt) : null,
+    endsAt: primary ? new Date(primary.endsAt) : null,
+    durationHours: primary?.durationHours ?? null,
+    promoId: primary?.promoId ?? null,
+    secondaryPromotion: secondary,
+    revision: sql`${webPromotion.revision} + 1`,
+    updatedAt: now,
+    updatedBy: params.staffUserId,
+  }).where(and(eq(webPromotion.id, 1),
+    eq(webPromotion.revision, before.revision ?? 1))).returning({ revision: webPromotion.revision });
+  if (!updated) throw new PromotionConcurrentUpdateError();
   const after: StoredPromotion = {
-    activePromotion: 'none',
-    startsAt: null,
-    endsAt: null,
-    durationHours: null,
-    promoId: null,
+    activePromotion: primary?.activePromotion ?? 'none',
+    startsAt: primary?.startsAt ?? null,
+    endsAt: primary?.endsAt ?? null,
+    durationHours: primary?.durationHours ?? null,
+    promoId: primary?.promoId ?? null,
+    secondaryPromotion: secondary,
+    revision: updated.revision,
     updatedAt: now.toISOString(),
     updatedBy: params.staffUserId,
   };
-
   await appendAudit(params.db, {
     staffUserId: params.staffUserId,
     action: 'promotion.deactivate',
     before: {
-      activePromotion: beforeEffective.active
-        ? beforeEffective.activePromotion
-        : before.activePromotion,
-      startsAt: before.startsAt,
-      endsAt: before.endsAt,
-      durationHours: before.durationHours,
-      promoId: before.promoId,
+      activePromotion: removed?.activePromotion ?? 'none',
+      startsAt: removed?.startsAt ?? null,
+      endsAt: removed?.endsAt ?? null,
+      durationHours: removed?.durationHours ?? null,
+      promoId: removed?.promoId ?? null,
     },
-    after: {
-      activePromotion: 'none',
-      startsAt: null,
-      endsAt: null,
-      durationHours: null,
-      promoId: null,
-    },
+    after: { activePromotion: 'none', startsAt: null, endsAt: null,
+      durationHours: null, promoId: null },
     ip: params.ip,
     userAgent: params.userAgent,
   });
-
-  return {
-    stored: after,
-    effective: toEffectivePromotion(after, now.getTime()),
-  };
+  return { stored: after, effective: toEffectivePromotion(after, now.getTime()) };
 }
