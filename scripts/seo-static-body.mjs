@@ -51,7 +51,7 @@ export const STATIC_HOME_BODY = [
   '<nav aria-label="Categorías de perfiles" style="' + navStyle + '">',
   ...categories.map(([path,name])=>link(path,name)),
   '</nav>',
-  '<section><h2>Perfiles disponibles</h2><p>' + modelLinks + '</p></section>',
+  '<section><h2>Escorts en Valencia</h2><p>' + modelLinks + '</p></section>',
   '</main></div>',
 ].join('');
 
