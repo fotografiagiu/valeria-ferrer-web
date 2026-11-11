@@ -1,4 +1,4 @@
-import { desc, eq, inArray, sql } from 'drizzle-orm';
+import { and, desc, eq, inArray, sql } from 'drizzle-orm';
 import type { AppDb } from '../db/client.js';
 import { auditLog, staffUsers, webPromotion } from '../db/schema.js';
 import { appendAudit } from './audit.js';
@@ -10,17 +10,28 @@ export type ActivatablePromotion = Exclude<PromotionType, 'none'>;
 export const PROMOTION_DURATIONS = [1, 3, 4] as const;
 export type PromotionDurationHours = (typeof PROMOTION_DURATIONS)[number];
 
+export type StoredPromoSlot = {
+  activePromotion: ActivatablePromotion;
+  startsAt: string;
+  endsAt: string;
+  durationHours: number;
+  promoId: string;
+};
+
 export type StoredPromotion = {
   activePromotion: PromotionType;
   startsAt: string | null;
   endsAt: string | null;
   durationHours: number | null;
   promoId: string | null;
+  secondaryPromotion?: StoredPromoSlot | null;
   updatedAt: string;
   updatedBy: string | null;
 };
 
 export type EffectivePromotion = {
+  /** Both live slots; legacy fields reflect the first live slot. */
+  promotions: StoredPromoSlot[];
   activePromotion: PromotionType;
   active: boolean;
   startsAt: string | null;
@@ -56,38 +67,49 @@ export function isPromotionDurationHours(value: number): value is PromotionDurat
   return (PROMOTION_DURATIONS as readonly number[]).includes(value);
 }
 
-/** Effective public state — expired rows read as inactive without writing. */
-export function toEffectivePromotion(
-  stored: StoredPromotion,
-  now = Date.now()
-): EffectivePromotion {
-  const endsMs = stored.endsAt ? Date.parse(stored.endsAt) : NaN;
-  const live =
-    stored.activePromotion !== 'none' &&
-    Number.isFinite(endsMs) &&
-    now < endsMs;
-
-  if (!live) {
-    return {
-      activePromotion: 'none',
-      active: false,
-      startsAt: null,
-      endsAt: null,
-      durationHours: null,
-      promoId: null,
-      updatedAt: stored.updatedAt,
-    };
-  }
-
+/** Effective public state: two independent expiry windows; never mutates DB. */
+export function toEffectivePromotion(stored: StoredPromotion, now = Date.now()): EffectivePromotion {
+  const primary: StoredPromoSlot | null =
+    stored.activePromotion !== 'none' && stored.startsAt && stored.endsAt &&
+    stored.durationHours && stored.promoId
+      ? { activePromotion: stored.activePromotion, startsAt: stored.startsAt,
+          endsAt: stored.endsAt, durationHours: stored.durationHours, promoId: stored.promoId }
+      : null;
+  const isLive = (p: StoredPromoSlot | null): p is StoredPromoSlot => {
+    if (!p || !isActivatablePromotion(p.activePromotion)) return false;
+    const begins = Date.parse(p.startsAt), expires = Date.parse(p.endsAt);
+    return Number.isFinite(begins) && Number.isFinite(expires) &&
+      begins <= now && expires > now && expires > begins;
+  };
+  const promotions = [primary, stored.secondaryPromotion ?? null]
+    .filter(isLive)
+    .filter((p, index, all) => all.findIndex(x => x.activePromotion === p.activePromotion) === index)
+    .slice(0, 2);
+  const first = promotions[0];
   return {
-    activePromotion: stored.activePromotion,
-    active: true,
-    startsAt: stored.startsAt,
-    endsAt: stored.endsAt,
-    durationHours: stored.durationHours,
-    promoId: stored.promoId,
+    promotions,
+    activePromotion: first?.activePromotion ?? 'none',
+    active: Boolean(first),
+    startsAt: first?.startsAt ?? null,
+    endsAt: first?.endsAt ?? null,
+    durationHours: first?.durationHours ?? null,
+    promoId: first?.promoId ?? null,
     updatedAt: stored.updatedAt,
   };
+}
+
+export class PromotionSlotsFullError extends Error {
+  constructor() {
+    super('Ya hay dos publicidades activas. Desactiva una antes de activar otra.');
+    this.name = 'PromotionSlotsFullError';
+  }
+}
+
+export class PromotionConcurrentUpdateError extends Error {
+  constructor() {
+    super('Otro usuario ha actualizado la publicidad. Recarga e inténtalo de nuevo.');
+    this.name = 'PromotionConcurrentUpdateError';
+  }
 }
 
 export function buildPromoId(promotion: ActivatablePromotion, startsAt: Date): string {
@@ -112,6 +134,7 @@ export async function readStoredPromotion(db: AppDb): Promise<StoredPromotion> {
       endsAt: null,
       durationHours: null,
       promoId: null,
+      secondaryPromotion: null,
       updatedAt: new Date().toISOString(),
       updatedBy: null,
     };
@@ -122,6 +145,7 @@ export async function readStoredPromotion(db: AppDb): Promise<StoredPromotion> {
     endsAt: iso(row.endsAt),
     durationHours: row.durationHours,
     promoId: row.promoId,
+    secondaryPromotion: row.secondaryPromotion ?? null,
     updatedAt: iso(row.updatedAt) ?? new Date().toISOString(),
     updatedBy: row.updatedBy,
   };
