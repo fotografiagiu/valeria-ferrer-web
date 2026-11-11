@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && node scripts/generate-app-catalog.mjs",
+    "build": "npm run test:promo && npm run lint && vite build && node scripts/generate-app-catalog.mjs",
     "build:seo": "node scripts/generate-sitemap.mjs && node scripts/generate-model-structured-data.mjs && node scripts/generate-app-catalog.mjs",
     "build:app-catalog": "node scripts/generate-app-catalog.mjs",
     "build:inject-seo": "node scripts/inject-seo-html.mjs",
