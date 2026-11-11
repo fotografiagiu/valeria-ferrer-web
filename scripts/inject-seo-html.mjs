@@ -58,7 +58,13 @@ function injectStaticBody(html, routePath) {
 
 function injectSeo(html, route) {
   const canonical = route.canonical;
-  let out = html;
+  // La plantilla comparte los preloads de la portada con cada ficha y sección.
+  // En rutas distintas de Home estos 2 archivos compiten con la imagen LCP
+  // real de esa página, desperdiciando ancho de banda especialmente en móvil.
+  let out = html.replace(
+    /^\s*<link\s+rel="preload"\s+as="image"[^>]*valeria-premium-hero[^>]*>\s*$/gim,
+    ''
+  );
   out = replaceTitle(out, route.title);
   out = replaceMetaName(out, 'description', route.description);
   out = replaceCanonical(out, canonical);
