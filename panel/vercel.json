@@ -1,7 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
-  "buildCommand": "npm run catalog:snapshot && npm run catalog:check && npm run typecheck && npm run build:web && rm -rf public && mkdir -p public && cp -R web/dist/. public/",
+  "buildCommand": "npx vitest run tests/promotion.test.ts && npm run catalog:snapshot && npm run catalog:check && npm run typecheck && npm run build:web && rm -rf public && mkdir -p public && cp -R web/dist/. public/",
   "outputDirectory": "public",
   "installCommand": "npm install",
   "functions": {
