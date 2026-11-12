@@ -17,9 +17,9 @@
 <path d="M175 166 Q256 176 339 166" fill="none" stroke="url(#gold)" stroke-width="7" stroke-linecap="round"/>
 <circle cx="153" cy="110" r="6" fill="#f8d9a1"/><circle cx="220" cy="94" r="6" fill="#ffe7b4"/><circle cx="287" cy="85" r="6" fill="#ffe7b4"/><circle cx="359" cy="108" r="6" fill="#f8d9a1"/>
 <!-- Compact serif monogram, high contrast at app-icon size -->
-<text x="256" y="341" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-weight="500" font-size="210" letter-spacing="-18" fill="url(#gold)">VF</text>
+<path d="M105 211 H177 V221 H157 L219 345 L258 221 H241 V211 H294 V221 H281 L228 363 H207 L133 221 H105 Z" fill="url(#gold)"/>
+<path d="M255 208 H407 V250 H394 L389 225 H307 V274 H377 V291 H307 V347 H328 V359 H254 V347 H274 V221 H255 Z" fill="url(#gold)"/>
 <path d="M149 313 Q254 204 403 275" fill="none" stroke="url(#gold)" stroke-width="7" stroke-linecap="round" opacity=".94"/>
 <path d="M114 366 H398" stroke="url(#gold)" stroke-width="1" opacity=".6"/>
-<text x="256" y="410" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="28" letter-spacing="3.5" fill="#f1d4a5">VALERIA FERRER</text>
-<text x="256" y="443" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="13" letter-spacing="9" fill="#dab98d">PANEL</text>
+<path d="M168 435 V409 H182 Q198 409 198 417 Q198 425 182 425 H168 M206 435 L220 409 L234 435 M212 426 H228 M247 435 V409 L267 435 V409 M278 409 H302 M278 409 V435 H302 M278 422 H298 M313 409 V435 H339" fill="none" stroke="url(#gold)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" opacity=".93"/>
 </svg>
