@@ -1,32 +1,38 @@
 {
-  "name": "Valeria Ferrer · Gestión de fichas",
-  "short_name": "VF Gestión",
-  "description": "Orden y portadas del catálogo Valeria Ferrer para encargadas",
+  "name": "Valeria Ferrer · Panel",
+  "short_name": "VF Panel",
+  "description": "Panel de gestión web de Valeria Ferrer: publicidades, catálogo y fotografías",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#0e0e10",
-  "theme_color": "#0e0e10",
+  "background_color": "#0d131e",
+  "theme_color": "#101827",
   "lang": "es",
   "icons": [
     {
-      "src": "/icons/icon-192.png",
+      "src": "/icons/icon-192-v3.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/icons/icon-512.png",
+      "src": "/icons/icon-512-v3.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/icons/icon-512.png",
+      "src": "/icons/icon-maskable-v3.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
+    },
+    {
+      "src": "/icons/vf-panel-v2.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
     }
   ]
 }

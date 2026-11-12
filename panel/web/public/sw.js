@@ -3,14 +3,16 @@
  * but never caches /api/ responses: session state and catalog order must
  * always come from the server.
  */
-const CACHE = 'vf-panel-shell-v4';
+const CACHE = 'vf-panel-shell-v5';
 const SHELL = [
   '/',
   '/manifest.webmanifest',
-  '/favicon.png',
-  '/icons/icon-192.png',
-  '/icons/icon-512.png',
-  '/icons/apple-touch-icon.png',
+  '/icons/icon-64-v3.png',
+  '/icons/icon-192-v3.png',
+  '/icons/icon-512-v3.png',
+  '/icons/icon-180-v3.png',
+  '/icons/icon-maskable-v3.png',
+  '/icons/vf-panel-v2.svg',
 ];
 
 self.addEventListener('install', (event) => {

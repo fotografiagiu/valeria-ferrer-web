@@ -8,23 +8,30 @@ function isIos(): boolean {
   return /iPhone|iPad|iPod/i.test(navigator.userAgent);
 }
 
+function isMac(): boolean {
+  return /Macintosh|Mac OS X/i.test(navigator.userAgent);
+}
+
 export function InstallScreen() {
   const android = isAndroid();
   const ios = isIos();
+  const desktop = !android && !ios;
+  const mac = isMac();
 
   return (
     <div className="login-page">
       <div className="login-card install-card">
         <div className="brand-mark">
-          <img className="install-icon" src="/icons/icon-192.png" alt="" width={72} height={72} />
+          <img className="install-icon" src="/icons/icon-192-v3.png" alt="" width={72} height={72} />
           <div className="vf">Valeria Ferrer</div>
-          <div className="label">Gestión de fichas</div>
+          <div className="label">Panel de control</div>
         </div>
 
-        <h1 className="install-title">Instalar el panel</h1>
+        <h1 className="install-title">{desktop ? 'Instalar en el ordenador' : 'Instalar el panel'}</h1>
         <p className="hint-text">
-          Pasa este enlace a la tablet Android. Al abrirlo en Chrome se puede instalar como app
-          (icono en el escritorio). No es la web pública.
+          Instala <strong>VF Panel</strong> como aplicación. Tendrás un icono propio
+          para abrir Publicidad, Catálogo y Fotografías sin entrar en Vercel.
+          La gestión seguirá solicitando las credenciales de la aplicación.
         </p>
 
         <InstallButton variant="hero" />
@@ -51,10 +58,17 @@ export function InstallScreen() {
           </ol>
         ) : null}
 
-        {!android && !ios ? (
-          <p className="hint-text">
-            En la tablet Android, abre este mismo enlace con Chrome para instalar la app.
-          </p>
+        {desktop ? (
+          <ol className="install-steps">
+            <li>Abre esta página en <strong>Google Chrome</strong> o <strong>Microsoft Edge</strong>.</li>
+            <li>Pulsa <strong>Instalar en este ordenador</strong> cuando aparezca el botón de arriba.</li>
+            <li>
+              Si no aparece, utiliza el icono de instalación de la barra de direcciones
+              o la opción <strong>Instalar aplicación</strong> del menú del navegador.
+            </li>
+            {mac ? <li>En Safari también puedes utilizar <strong>Archivo → Añadir al Dock</strong>.</li> : null}
+            <li>Abre <strong>VF Panel</strong> desde el escritorio, Dock o menú de aplicaciones.</li>
+          </ol>
         ) : null}
 
         <a className="install-login-link" href="/">
