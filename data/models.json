@@ -2254,13 +2254,14 @@
       "Encuentros privados discretos, cercanos y con atención al detalle"
     ],
     "images": [
-      "/chicas/monica-valeria-ferrer-model-agency-valencia/gallery/01-oct2026.jpg",
-      "/chicas/monica-valeria-ferrer-model-agency-valencia/gallery/02-oct2026.jpg",
-      "/chicas/monica-valeria-ferrer-model-agency-valencia/gallery/03-oct2026.jpg",
-      "/chicas/monica-valeria-ferrer-model-agency-valencia/gallery/04-oct2026.jpg",
-      "/chicas/monica-valeria-ferrer-model-agency-valencia/gallery/05-oct2026.jpg",
-      "/chicas/monica-valeria-ferrer-model-agency-valencia/gallery/06-oct2026.jpg",
-      "/chicas/monica-valeria-ferrer-model-agency-valencia/gallery/07-oct2026.jpg"
+      "/chicas/monica-valeria-ferrer-model-agency-valencia/gallery/lenceria-01.jpg",
+      "/chicas/monica-valeria-ferrer-model-agency-valencia/gallery/lenceria-02.jpg",
+      "/chicas/monica-valeria-ferrer-model-agency-valencia/gallery/lenceria-03.jpg",
+      "/chicas/monica-valeria-ferrer-model-agency-valencia/gallery/lenceria-04.jpg",
+      "/chicas/monica-valeria-ferrer-model-agency-valencia/gallery/lenceria-05.jpg",
+      "/chicas/monica-valeria-ferrer-model-agency-valencia/gallery/lenceria-06.jpg",
+      "/chicas/monica-valeria-ferrer-model-agency-valencia/gallery/lenceria-07.jpg",
+      "/chicas/monica-valeria-ferrer-model-agency-valencia/gallery/lenceria-08.jpg"
     ],
     "services": [
       "Girlfriend Experience",
@@ -2287,7 +2288,8 @@
     ],
     "isNew": true,
     "featured": true,
-    "vip": false
+    "vip": false,
+    "active": true
   },
   {
     "slug": "mia",
