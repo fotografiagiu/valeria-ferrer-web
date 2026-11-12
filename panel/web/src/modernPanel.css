@@ -562,8 +562,7 @@ a {color:inherit}
 }
 
 
-/* Single-set photo ordering. One image + one numeric position control.
-   Supersedes the obsolete duplicated preview / draggable gallery layout. */
+/* Single-set photo ordering: draggable photos without a second preview gallery. */
 .gallery-sheet--simple {
   width:min(940px,100%);
   max-height:min(94dvh,980px);
@@ -659,26 +658,49 @@ a {color:inherit}
 }
 .gallery-simple-card.is-cover .gallery-simple-caption strong {color:#f0d5a9}
 .gallery-simple-caption span {font-size:10px;color:#aebccd}
-.gallery-simple-controls select {
-  flex:0 0 auto;
-  width:70px;
-  min-height:40px;
-  padding:8px 10px;
+.gallery-simple-drag-handle {
+  display:block;
+  width:100%;
+  padding:0;
+  border:0;
+  border-radius:0;
+  color:inherit;
+  cursor:grab;
+  touch-action:none;
+  user-select:none;
+  -webkit-user-select:none;
+}
+.gallery-simple-drag-handle:active {cursor:grabbing}
+.gallery-simple-drag-handle:focus-visible {
+  outline:3px solid #f0d4aa;
+  outline-offset:-3px;
+}
+.gallery-simple-drag-handle:disabled {cursor:wait}
+.gallery-simple-drag-handle img {
+  pointer-events:none;
+  user-select:none;
+  -webkit-user-drag:none;
+}
+.gallery-simple-cover-label {pointer-events:none}
+.gallery-simple-card.is-dragging {
+  border-color:var(--gold);
+  background:#27374a;
+  box-shadow:0 14px 40px rgba(0,0,0,.40);
+  opacity:.93;
+  position:relative;
+}
+.gallery-simple-grip {
+  display:grid;
+  place-items:center;
+  flex:0 0 36px;
+  width:36px;
+  height:36px;
+  border:1px solid rgba(229,200,157,.22);
   border-radius:9px;
-  background:#253448;
-  border:1px solid rgba(229,200,157,.40);
-  color:#fff0d7;
-  font-size:14px;
-  font-weight:750;
-  text-align:center;
-  color-scheme:dark;
-  cursor:pointer;
+  color:#ebd0a6;
+  background:#263346;
+  pointer-events:none;
 }
-.gallery-simple-controls select:focus-visible {
-  outline:2px solid #f0d4aa;
-  outline-offset:2px;
-}
-.gallery-simple-controls select:disabled {opacity:.5;cursor:wait}
 .gallery-simple-changed {
   margin:18px 0 0;
   color:#f0d0a4;
@@ -701,11 +723,11 @@ a {color:inherit}
   .gallery-sheet--simple .modal-header {padding:15px 15px}
   .gallery-simple-help {font-size:12px;padding:12px}
   .gallery-simple-controls {padding:9px;gap:4px}
-  .gallery-simple-controls select {width:58px;min-height:40px;padding:7px}
+  .gallery-simple-grip {width:31px;height:31px;flex-basis:31px}
 }
 @media (max-width:365px) {
   .gallery-simple-grid {gap:8px}
   .gallery-simple-controls {padding:7px}
   .gallery-simple-caption strong {font-size:11px}
-  .gallery-simple-controls select {width:52px}
+  .gallery-simple-grip {width:27px;height:30px;flex-basis:27px}
 }
