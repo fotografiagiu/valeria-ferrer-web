@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-11-12T12:19:30.677Z",
-  "catalogVersion": "fb72d2aea47dc8dbc2079a4e45c6405972e14f7e0b89298653c3f72f8eee7d14",
+  "generatedAt": "2026-11-12T12:23:44.098Z",
+  "catalogVersion": "8c304e9997ef47c9e22a7f72eacab9d7df79b6d44e55250f5a35537483619f43",
   "source": "valeria-ferrer-web",
   "method": "build-app-catalog",
   "models": [
@@ -36,7 +36,8 @@
       "images": [
         "/chicas/corina-model-agency-valencia-vf/gallery/01.jpg",
         "/chicas/corina-model-agency-valencia-vf/gallery/02.jpg",
-        "/chicas/corina-model-agency-valencia-vf/gallery/03.jpg"
+        "/chicas/corina-model-agency-valencia-vf/gallery/03.jpg",
+        "/chicas/corina-model-agency-valencia-vf/gallery/04.jpg"
       ]
     },
     {
