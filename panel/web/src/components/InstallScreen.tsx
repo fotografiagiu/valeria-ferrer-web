@@ -16,9 +16,9 @@ export function InstallScreen() {
     <div className="login-page">
       <div className="login-card install-card">
         <div className="brand-mark">
-          <img className="install-icon" src="/icons/icon-192.png" alt="" width={72} height={72} />
+          <img className="install-icon" src="/icons/icon-192-v3.png" alt="" width={72} height={72} />
           <div className="vf">Valeria Ferrer</div>
-          <div className="label">Gestión de fichas</div>
+          <div className="label">Panel de control</div>
         </div>
 
         <h1 className="install-title">Instalar el panel</h1>
