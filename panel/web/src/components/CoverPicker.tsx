@@ -113,10 +113,6 @@ function SortablePhoto({
  * One image per tile, never a duplicate preview gallery.
  * The first item in the sortable list becomes the cover on save.
  */
- Changing its position moves it within the list
- * (the other photos shift automatically); position 1 becomes the cover.
- * There is deliberately NO separate preview and NO second photo gallery.
- */
 export function CoverPicker({
   model,
   onClose,
