@@ -1,4 +1,21 @@
-import { arrayMove } from '@dnd-kit/sortable';
+import {
+  DndContext,
+  KeyboardSensor,
+  PointerSensor,
+  TouchSensor,
+  closestCenter,
+  useSensor,
+  useSensors,
+  type DragEndEvent,
+} from '@dnd-kit/core';
+import {
+  SortableContext,
+  arrayMove,
+  rectSortingStrategy,
+  sortableKeyboardCoordinates,
+  useSortable,
+} from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
 import { useEffect, useMemo, useState } from 'react';
 import { ApiError, putGallery, type StaffCatalogModel } from '../lib/api';
 import { buildOrderedImagePaths, publicThumbUrl } from '../lib/assets';
@@ -18,7 +35,85 @@ type Props = {
 };
 
 /**
- * One image per tile. Changing its position moves it within the list
+ * Exactly one sortable tile per image. The photo itself is the drag handle,
+ * on touchscreen (press then move), pointer devices, and keyboard.
+ */
+function SortablePhoto({
+  path,
+  index,
+  modelName,
+  busy,
+}: {
+  path: string;
+  index: number;
+  modelName: string;
+  busy: boolean;
+}) {
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    setActivatorNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({ id: path, disabled: busy });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    zIndex: isDragging ? 10 : undefined,
+  };
+
+  return (
+    <article
+      ref={setNodeRef}
+      style={style}
+      className={`gallery-simple-card${index === 0 ? ' is-cover' : ''}${isDragging ? ' is-dragging' : ''}`}
+    >
+      <button
+        ref={setActivatorNodeRef}
+        type="button"
+        className="gallery-simple-photo gallery-simple-drag-handle"
+        aria-label={`Arrastrar foto ${index + 1} de ${modelName} para cambiar su posición`}
+        disabled={busy}
+        {...attributes}
+        {...listeners}
+      >
+        <img
+          src={publicThumbUrl(path)}
+          alt=""
+          loading="lazy"
+          decoding="async"
+          draggable={false}
+        />
+        {index === 0 ? <span className="gallery-simple-cover-label">PORTADA</span> : null}
+      </button>
+      <div className="gallery-simple-controls">
+        <div className="gallery-simple-caption">
+          <strong>{index === 0 ? 'Portada' : `Foto ${index + 1}`}</strong>
+          <span>Posición {index + 1}</span>
+        </div>
+        <span className="gallery-simple-grip" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <circle cx="9" cy="5" r="1.5" fill="currentColor" />
+            <circle cx="15" cy="5" r="1.5" fill="currentColor" />
+            <circle cx="9" cy="12" r="1.5" fill="currentColor" />
+            <circle cx="15" cy="12" r="1.5" fill="currentColor" />
+            <circle cx="9" cy="19" r="1.5" fill="currentColor" />
+            <circle cx="15" cy="19" r="1.5" fill="currentColor" />
+          </svg>
+        </span>
+      </div>
+    </article>
+  );
+}
+
+/**
+ * One image per tile, never a duplicate preview gallery.
+ * The first item in the sortable list becomes the cover on save.
+ */
+ Changing its position moves it within the list
  * (the other photos shift automatically); position 1 becomes the cover.
  * There is deliberately NO separate preview and NO second photo gallery.
  */
@@ -45,15 +140,18 @@ export function CoverPicker({
 
   const dirty = paths.join('\0') !== savedPaths.join('\0');
 
-  function movePhoto(path: string, targetIndex: number) {
-    if (busy) return;
-    setPaths((prev) => {
-      const from = prev.indexOf(path);
-      if (from < 0 || targetIndex < 0 || targetIndex >= prev.length || from === targetIndex) {
-        return prev;
-      }
-      return arrayMove(prev, from, targetIndex);
-    });
+  const sensors = useSensors(
+    useSensor(PointerSensor, { activationConstraint: { distance: 6 } }),
+    useSensor(TouchSensor, { activationConstraint: { delay: 150, tolerance: 8 } }),
+    useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
+  );
+
+  function onDragEnd(event: DragEndEvent) {
+    if (busy || !event.over || event.active.id === event.over.id) return;
+    const from = paths.indexOf(String(event.active.id));
+    const to = paths.indexOf(String(event.over.id));
+    if (from < 0 || to < 0) return;
+    setPaths((previous) => arrayMove(previous, from, to));
   }
 
   async function saveOrder() {
@@ -91,7 +189,7 @@ export function CoverPicker({
           <div>
             <h2>{model.name}</h2>
             <p className="hint-text" style={{ margin: '6px 0 0' }}>
-              {paths.length} {paths.length === 1 ? 'fotografía' : 'fotografías'} · Elige la posición de cada foto
+              {paths.length} {paths.length === 1 ? 'fotografía' : 'fotografías'} · Arrastra las fotos para cambiar su orden
             </p>
           </div>
           <button type="button" className="ghost-btn" onClick={onClose} disabled={busy}>
@@ -101,42 +199,23 @@ export function CoverPicker({
 
         <div className="modal-body gallery-editor-body gallery-editor-body--simple">
           <p className="gallery-simple-help">
-            <strong>La posición 1 es la portada.</strong> Cambia un número para mover la foto; las demás se ordenarán solas.
+            <strong>La posición 1 es la portada.</strong> Mantén pulsada una foto y arrástrala a su lugar. Las demás se ordenarán automáticamente.
           </p>
-          <div className="gallery-simple-grid" aria-label="Fotos disponibles, ordenadas por posición">
-            {paths.map((path, index) => (
-              <article key={path} className={`gallery-simple-card${index === 0 ? ' is-cover' : ''}`}>
-                <div className="gallery-simple-photo">
-                  <img
-                    src={publicThumbUrl(path)}
-                    alt={`Fotografía en posición ${index + 1} de ${model.name}`}
-                    loading="lazy"
-                    decoding="async"
-                    draggable={false}
+          <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={onDragEnd}>
+            <SortableContext items={paths} strategy={rectSortingStrategy}>
+              <div className="gallery-simple-grid" aria-label="Fotos disponibles, arrastrar para reordenar">
+                {paths.map((path, index) => (
+                  <SortablePhoto
+                    key={path}
+                    path={path}
+                    index={index}
+                    modelName={model.name}
+                    busy={busy}
                   />
-                  {index === 0 ? <span className="gallery-simple-cover-label">PORTADA</span> : null}
-                </div>
-                <div className="gallery-simple-controls">
-                  <div className="gallery-simple-caption">
-                    <strong>{index === 0 ? 'Portada' : `Foto ${index + 1}`}</strong>
-                    <span>Posición</span>
-                  </div>
-                  <select
-                    aria-label={`Posición de ${index === 0 ? 'la portada' : `foto ${index + 1}`} de ${model.name}`}
-                    value={index + 1}
-                    onChange={(event) => movePhoto(path, Number(event.target.value) - 1)}
-                    disabled={busy}
-                  >
-                    {paths.map((_, position) => (
-                      <option key={position} value={position + 1}>
-                        {position + 1}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </article>
-            ))}
-          </div>
+                ))}
+              </div>
+            </SortableContext>
+          </DndContext>
           {dirty ? (
             <p className="gallery-simple-changed" role="status">Orden modificado · Guarda los cambios para publicarlos en la web.</p>
           ) : null}
