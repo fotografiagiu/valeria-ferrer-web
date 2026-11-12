@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-11-12T12:23:44.098Z",
-  "catalogVersion": "8c304e9997ef47c9e22a7f72eacab9d7df79b6d44e55250f5a35537483619f43",
+  "generatedAt": "2026-11-12T12:30:41.378Z",
+  "catalogVersion": "8afbe2757634025f100811b9eb5444abbcf1b42b57435c10c30836fb9e46d0d1",
   "source": "valeria-ferrer-web",
   "method": "build-app-catalog",
   "models": [
@@ -757,13 +757,14 @@
       "vip": false,
       "coverImageUrl": "/chicas/monica-valeria-ferrer-model-agency-valencia/portada-oct2026.jpg",
       "images": [
-        "/chicas/monica-valeria-ferrer-model-agency-valencia/gallery/01-oct2026.jpg",
-        "/chicas/monica-valeria-ferrer-model-agency-valencia/gallery/02-oct2026.jpg",
-        "/chicas/monica-valeria-ferrer-model-agency-valencia/gallery/03-oct2026.jpg",
-        "/chicas/monica-valeria-ferrer-model-agency-valencia/gallery/04-oct2026.jpg",
-        "/chicas/monica-valeria-ferrer-model-agency-valencia/gallery/05-oct2026.jpg",
-        "/chicas/monica-valeria-ferrer-model-agency-valencia/gallery/06-oct2026.jpg",
-        "/chicas/monica-valeria-ferrer-model-agency-valencia/gallery/07-oct2026.jpg"
+        "/chicas/monica-valeria-ferrer-model-agency-valencia/gallery/lenceria-01.jpg",
+        "/chicas/monica-valeria-ferrer-model-agency-valencia/gallery/lenceria-02.jpg",
+        "/chicas/monica-valeria-ferrer-model-agency-valencia/gallery/lenceria-03.jpg",
+        "/chicas/monica-valeria-ferrer-model-agency-valencia/gallery/lenceria-04.jpg",
+        "/chicas/monica-valeria-ferrer-model-agency-valencia/gallery/lenceria-05.jpg",
+        "/chicas/monica-valeria-ferrer-model-agency-valencia/gallery/lenceria-06.jpg",
+        "/chicas/monica-valeria-ferrer-model-agency-valencia/gallery/lenceria-07.jpg",
+        "/chicas/monica-valeria-ferrer-model-agency-valencia/gallery/lenceria-08.jpg"
       ]
     },
     {
