@@ -1,0 +1,40 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Zoe",
+  "description": "Hay mujeres que llaman la atención y otras que consiguen que no puedas apartar la mirada. ZOE pertenece a las segundas. Su mirada intensa, sus labios definidos y su melena castaña con reflejos enmarcan un rostro lleno de atractivo y personalidad. Su figura y su manera de posar transmiten una combinación irresistible de sensualidad, elegancia y actitud. Con un estilo moderno, provocador y sofisticado, ZOE sabe destacar tanto con un conjunto atrevido como con un vestido elegante. Cada fotografía refleja una belleza con carácter propio y un magnetismo muy especial. Descubre a ZOE en Valeria Ferrer, una de las nuevas protagonistas de nuestro exclusivo catálogo de escorts en Valencia. Explora su galería de fotografías y déjate sorprender por su estilo y atractivo.",
+  "url": "https://www.valeriaferrer.com/models/zoe1",
+  "image": [
+    "https://www.valeriaferrer.com/chicas/zoe1-model-agency-valencia-vf/portada.jpg",
+    "https://www.valeriaferrer.com/chicas/zoe1-model-agency-valencia-vf/gallery/01.jpg",
+    "https://www.valeriaferrer.com/chicas/zoe1-model-agency-valencia-vf/gallery/02.jpg",
+    "https://www.valeriaferrer.com/chicas/zoe1-model-agency-valencia-vf/gallery/03.jpg",
+    "https://www.valeriaferrer.com/chicas/zoe1-model-agency-valencia-vf/gallery/04.jpg"
+  ],
+  "nationality": "Española",
+  "jobTitle": "Modelo",
+  "knowsLanguage": [
+    "Español"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "itemOffered": {
+      "@type": "Service",
+      "name": "Acompañamiento Premium",
+      "description": "Servicios exclusivos de acompañamiento con Zoe en Valencia"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Valencia"
+    },
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "name": "Contacto Directo",
+      "url": "https://www.valeriaferrer.com/contact"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.valeriaferrer.com/models/zoe1"
+  }
+}
