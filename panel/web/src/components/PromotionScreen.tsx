@@ -182,7 +182,7 @@ export function PromotionScreen({ onToast, onUnauthorized }: Props) {
   const history: PromotionHistoryItem[] = state?.history ?? [];
 
   return (
-    <section className="promo-section" aria-labelledby="promo-web-title">
+    <section id="publicidad" className="promo-section" aria-labelledby="promo-web-title">
       <div className="promo-section-head">
         <div>
           <h2 id="promo-web-title">Publicidad web</h2>
