@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { ArrowRight, MessageCircle, Phone, Send, X } from 'lucide-react'
 import {
@@ -36,6 +36,10 @@ const PromoPopup: React.FC = () => {
   )
   const [view, setView] = useState<PromoView>('hidden')
   const [contactOpen, setContactOpen] = useState(false)
+  const campaignKey = livePromos.map((item) => item.id).join('|')
+  // Respect the visitor's X until the active campaign changes, including
+  // refreshes of the remote promotion and navigation between pages.
+  const minimizedCampaigns = useRef(new Set<string>())
 
   useEffect(() => startPromotionWatcher(), [])
 
@@ -48,11 +52,10 @@ const PromoPopup: React.FC = () => {
       setView('hidden')
       return
     }
-    // A small persistent banner keeps the page and models visible on entry.
-    // Opening the full promotion is now an explicit click, not a blocking
-    // interstitial. Once opened, keep it open until the visitor closes it.
-    setView((current) => (current === 'popup' ? 'popup' : 'banner'))
-  }, [promo, hideOnProfile])
+    // Show the full promotion by default. Only the visitor's X minimizes it
+    // to the small banner; polling and tab visibility must not reopen it.
+    setView(minimizedCampaigns.current.has(campaignKey) ? 'banner' : 'popup')
+  }, [promo, hideOnProfile, campaignKey])
 
   const minimizePromo = useCallback(() => {
     setContactOpen(false)
@@ -60,8 +63,9 @@ const PromoPopup: React.FC = () => {
       setView('hidden')
       return
     }
+    minimizedCampaigns.current.add(campaignKey)
     setView('banner')
-  }, [promo])
+  }, [promo, campaignKey])
 
   const reopenPopup = useCallback((id?: string) => {
     const chosen = livePromos.find(item => item.id === id) ?? promo
@@ -71,9 +75,10 @@ const PromoPopup: React.FC = () => {
       return
     }
     setSelectedPromoId(chosen!.id)
+    minimizedCampaigns.current.delete(campaignKey)
     setContactOpen(false)
     setView('popup')
-  }, [promo, livePromos])
+  }, [promo, livePromos, campaignKey])
 
   const openContact = useCallback(() => {
     if (!isPromoLive(promo) || view !== 'popup') return
@@ -84,11 +89,11 @@ const PromoPopup: React.FC = () => {
     setContactOpen(false)
   }, [])
 
-  // Reset minimize state when the remote promo identity changes (Copas ↔ Duples).
+  // A different promotion (Copas ↔ Dúplex, etc.) may open by default.
   useEffect(() => {
     setContactOpen(false)
     setView('hidden')
-  }, [livePromos.map(item => item.id).join('|')])
+  }, [campaignKey])
 
   useEffect(() => {
     syncVisibility()
