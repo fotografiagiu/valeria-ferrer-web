@@ -560,3 +560,152 @@ a {color:inherit}
   .model-card,.promo-card,.primary-btn,.panel-nav a {transition:none}
   .promo-card:hover {transform:none}
 }
+
+
+/* Single-set photo ordering. One image + one numeric position control.
+   Supersedes the obsolete duplicated preview / draggable gallery layout. */
+.gallery-sheet--simple {
+  width:min(940px,100%);
+  max-height:min(94dvh,980px);
+}
+.gallery-sheet--simple .gallery-editor-body--simple {
+  display:block;
+  padding:20px 22px 24px;
+  overflow-y:auto;
+  overscroll-behavior:contain;
+}
+.gallery-sheet--simple:has(> .gallery-save-bar) .gallery-editor-body--simple {
+  padding-bottom:calc(98px + var(--safe-bottom));
+}
+.gallery-simple-help {
+  margin:0 0 18px;
+  padding:13px 16px;
+  border:1px solid rgba(229,200,157,.20);
+  border-left:3px solid #dfbf92;
+  border-radius:11px;
+  background:#111b28;
+  color:#b8c6d6;
+  font-size:13px;
+  line-height:1.5;
+}
+.gallery-simple-help strong {color:#efd7b0}
+.gallery-simple-grid {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:15px;
+  align-items:start;
+}
+.gallery-simple-card {
+  min-width:0;
+  border:1px solid rgba(180,198,221,.20);
+  border-radius:13px;
+  overflow:hidden;
+  background:#111b28;
+  box-shadow:none;
+}
+.gallery-simple-card.is-cover {
+  border-color:rgba(229,200,157,.70);
+  box-shadow:0 0 0 1px rgba(229,200,157,.15);
+}
+.gallery-simple-photo {
+  aspect-ratio:3/4;
+  position:relative;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+  background:#090f19;
+}
+.gallery-simple-photo img {
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  object-position:center;
+  display:block;
+}
+.gallery-simple-cover-label {
+  position:absolute;
+  top:11px;
+  left:11px;
+  display:inline-flex;
+  align-items:center;
+  padding:6px 10px;
+  border:1px solid rgba(229,200,157,.52);
+  border-radius:7px;
+  background:rgba(10,17,26,.89);
+  color:#f6dfb7;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.07em;
+}
+.gallery-simple-controls {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  min-width:0;
+  padding:11px 12px;
+  border-top:1px solid var(--border);
+}
+.gallery-simple-caption {
+  display:flex;
+  flex-direction:column;
+  gap:3px;
+  min-width:0;
+}
+.gallery-simple-caption strong {
+  font-size:12px;
+  font-weight:750;
+  color:#eef3f8;
+}
+.gallery-simple-card.is-cover .gallery-simple-caption strong {color:#f0d5a9}
+.gallery-simple-caption span {font-size:10px;color:#aebccd}
+.gallery-simple-controls select {
+  flex:0 0 auto;
+  width:70px;
+  min-height:40px;
+  padding:8px 10px;
+  border-radius:9px;
+  background:#253448;
+  border:1px solid rgba(229,200,157,.40);
+  color:#fff0d7;
+  font-size:14px;
+  font-weight:750;
+  text-align:center;
+  color-scheme:dark;
+  cursor:pointer;
+}
+.gallery-simple-controls select:focus-visible {
+  outline:2px solid #f0d4aa;
+  outline-offset:2px;
+}
+.gallery-simple-controls select:disabled {opacity:.5;cursor:wait}
+.gallery-simple-changed {
+  margin:18px 0 0;
+  color:#f0d0a4;
+  font-size:12px;
+  font-weight:650;
+  line-height:1.5;
+}
+.gallery-sheet--simple .gallery-save-bar {
+  background:linear-gradient(180deg,rgba(16,25,37,.92),#111b29);
+  border-top:1px solid var(--border);
+  padding:13px 18px calc(13px + var(--safe-bottom));
+}
+.gallery-sheet--simple .gallery-save-bar .primary-btn {
+  min-width:0;
+  min-height:46px;
+}
+@media (max-width:740px) {
+  .gallery-simple-grid {grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+  .gallery-sheet--simple .gallery-editor-body--simple {padding:15px 14px 20px}
+  .gallery-sheet--simple .modal-header {padding:15px 15px}
+  .gallery-simple-help {font-size:12px;padding:12px}
+  .gallery-simple-controls {padding:9px;gap:4px}
+  .gallery-simple-controls select {width:58px;min-height:40px;padding:7px}
+}
+@media (max-width:365px) {
+  .gallery-simple-grid {gap:8px}
+  .gallery-simple-controls {padding:7px}
+  .gallery-simple-caption strong {font-size:11px}
+  .gallery-simple-controls select {width:52px}
+}
