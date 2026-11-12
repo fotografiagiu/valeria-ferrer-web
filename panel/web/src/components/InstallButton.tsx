@@ -27,6 +27,15 @@ function isAndroidChrome(): boolean {
   return /Android/i.test(ua) && /Chrome/i.test(ua) && !/EdgA|OPR|SamsungBrowser|Firefox/i.test(ua);
 }
 
+function isDesktop(): boolean {
+  return !/Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+}
+
+function isSafariMac(): boolean {
+  const ua = navigator.userAgent;
+  return /Macintosh|Mac OS X/i.test(ua) && /Safari/i.test(ua) && !/Chrome|Chromium|Edg|OPR/i.test(ua);
+}
+
 /** Install prompt for Android and desktop. Always visible on the install page. */
 export function InstallButton({ variant = 'compact' }: Props) {
   const [promptEvent, setPromptEvent] = useState<InstallPromptEvent | null>(
@@ -73,21 +82,40 @@ export function InstallButton({ variant = 'compact' }: Props) {
   if (promptEvent) {
     return (
       <button type="button" className={className} onClick={() => void onInstall()} disabled={busy}>
-        {busy ? 'Instalando…' : 'Instalar en esta tablet'}
+        {busy ? 'Instalando…' : isDesktop() ? 'Instalar en este ordenador' : 'Instalar en este dispositivo'}
       </button>
     );
   }
 
-  if (variant === 'hero' && isAndroidChrome()) {
+  if (variant === 'compact') return null;
+
+  if (isSafariMac()) {
     return (
-      <p className="hint-text">
-        Chrome está comprobando la app. Si no aparece el botón, abre el menú (⋮) y pulsa{' '}
-        <strong>Instalar app</strong>.
+      <p className="install-fallback" role="status">
+        Safari en Mac: abre el menú <strong>Archivo</strong> y elige <strong>Añadir al Dock</strong>.
+        La aplicación aparecerá en el Dock y en Launchpad.
       </p>
     );
   }
 
-  if (variant === 'compact') return null;
+  if (isDesktop()) {
+    return (
+      <p className="install-fallback" role="status">
+        Para instalar en el ordenador, abre este enlace en <strong>Chrome o Edge</strong>.
+        Si el navegador no ofrece el botón, pulsa el icono <strong>Instalar</strong> de la barra
+        de direcciones o busca <strong>Instalar aplicación</strong> en el menú del navegador.
+      </p>
+    );
+  }
+
+  if (isAndroidChrome()) {
+    return (
+      <p className="install-fallback" role="status">
+        Chrome está comprobando la app. Si no aparece el botón, abre el menú (⋮) y pulsa
+        <strong> Instalar aplicación</strong>.
+      </p>
+    );
+  }
 
   return null;
 }
