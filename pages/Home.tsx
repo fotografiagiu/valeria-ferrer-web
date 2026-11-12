@@ -51,7 +51,7 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div className="vf-noir-home-page overflow-x-hidden">
+    <div className="vf-noir-home-page overflow-x-clip">
       <PageSEOHead
         title={homeSEOData.title}
         description={homeSEOData.description}
