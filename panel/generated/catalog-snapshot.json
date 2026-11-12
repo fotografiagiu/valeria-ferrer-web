@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-11-09T19:36:40.472508Z",
+  "generatedAt": "2026-11-12T12:19:30.535736Z",
   "sourcePath": "data/models.json",
-  "sourceHash": "55148cb0466e3b1962a2e4b9eb02c0fd1d8e68c450e372d0e54dfdf723c4ada3",
+  "sourceHash": "fb72d2aea47dc8dbc2079a4e45c6405972e14f7e0b89298653c3f72f8eee7d14",
   "modelCount": 69,
   "activeCount": 41,
   "models": [
@@ -34,10 +34,7 @@
       "images": [
         "/chicas/corina-model-agency-valencia-vf/gallery/01.jpg",
         "/chicas/corina-model-agency-valencia-vf/gallery/02.jpg",
-        "/chicas/corina-model-agency-valencia-vf/gallery/03.jpg",
-        "/chicas/corina-model-agency-valencia-vf/gallery/04.jpg",
-        "/chicas/corina-model-agency-valencia-vf/gallery/05.jpg",
-        "/chicas/corina-model-agency-valencia-vf/gallery/06.jpg"
+        "/chicas/corina-model-agency-valencia-vf/gallery/03.jpg"
       ]
     },
     {
