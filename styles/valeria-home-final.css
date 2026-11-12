@@ -297,8 +297,8 @@
 @media(max-width:767px){
   /* Portada móvil: asset vertical 9:16 a pantalla completa; copy ligero abajo */
   .vf-lux-hero{
+    /* Stable on iOS: 100dvh resizes as Safari shows/hides its bars while swiping. */
     min-height:100svh;
-    min-height:100dvh;
     align-items:flex-end;
     display:flex;
   }
@@ -351,7 +351,7 @@
   .vf-lux-news__plaque h2{font-size:clamp(53px,13vw,70px)}
   .vf-lux-news__plaque span{font-size:8px;letter-spacing:.14em}
   .vf-lux-news__gallery{margin-top:24px;padding:0 6px}
-  .vf-lux-news__track{display:flex;gap:12px;padding:8px 16px 25px;scroll-padding-inline:16px}
+  .vf-lux-news__track{display:flex;gap:12px;padding:8px 16px 25px;scroll-padding-inline:16px;scroll-snap-type:x proximity}
   .vf-lux-news__track .vf-luxury-card{flex:0 0 min(75vw,315px);width:min(75vw,315px)}
   .vf-lux-news__track .vf-luxury-card__media{aspect-ratio:3/4.25}
   .vf-lux-news__track .vf-luxury-card__information h3{font-size:38px}
