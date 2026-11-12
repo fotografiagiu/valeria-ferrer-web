@@ -1521,3 +1521,23 @@
   .vf-whatsapp-glass {animation:none;transition:none;}
   .vf-whatsapp-glass:hover {transform:none;}
 }
+
+/* iOS / Android touch scroll: preserve native momentum and avoid costly
+   backdrop recompositing on sticky/fixed overlays at every scroll frame.
+   Desktop styling and pinch-to-zoom are intentionally unchanged. */
+@media (max-width: 767px) and (pointer: coarse) {
+  html, body { scroll-behavior: auto !important; }
+  .vf-noir-site .vf-whatsapp-glass {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+    animation: none !important;
+    transform: none;
+  }
+  .vf-noir-site .vf-whatsapp-glass:hover { transform: none; }
+  .vf-noir-site .promo-mini-banner,
+  .vf-noir-site .vf-lux-contact__panel,
+  .vf-noir-site aside[aria-roledescription="carrusel"] > div {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+}
