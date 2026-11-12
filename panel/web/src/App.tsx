@@ -193,10 +193,16 @@ export function App() {
     <div className="app-shell">
       <Toast message={toast?.message ?? null} tone={toast?.tone} />
       <header className="app-header">
-        <div>
-          <h1>Valeria Ferrer · Gestión de fichas</h1>
-          <div className="sub">{user.displayName}</div>
+        <div className="app-header__identity">
+          <span className="app-header__eyebrow">Panel privado · Gestión web</span>
+          <h1>Valeria Ferrer</h1>
+          <div className="sub">Panel de control <span aria-hidden="true">·</span> {user.displayName}</div>
         </div>
+        <nav className="panel-nav" aria-label="Secciones del panel">
+          <a href="#publicidad">Publicidad</a>
+          <a href="#catalogo">Orden y fichas</a>
+          <a href="#actividad">Actividad</a>
+        </nav>
         <div className="header-actions">
           <button
             type="button"
@@ -213,6 +219,14 @@ export function App() {
       </header>
 
       <main className="main">
+        <div className="panel-intro">
+          <div>
+            <span className="panel-intro__eyebrow">CENTRO DE GESTIÓN</span>
+            <h2>Tu web, bajo control.</h2>
+            <p>Publicidades, posición de las chicas y portadas desde un único lugar.</p>
+          </div>
+          <div className="panel-intro__count"><strong>{models.length}</strong><span>Fichas en el catálogo</span></div>
+        </div>
         <Suspense fallback={<div className="loading-center">Cargando publicidad…</div>}>
           <PromotionScreen
             onToast={showToast}
@@ -223,6 +237,15 @@ export function App() {
           />
         </Suspense>
 
+        <section className="catalog-workspace" id="catalogo" aria-labelledby="catalog-workspace-title">
+          <div className="catalog-workspace__heading">
+            <div>
+              <span className="section-eyebrow">CATÁLOGO / POSICIONAMIENTO</span>
+              <h2 id="catalog-workspace-title">Orden y fotografías</h2>
+              <p>Arrastra cada ficha por el icono de líneas. Pulsa sobre una foto para cambiar portada y galería.</p>
+            </div>
+            <span className="catalog-workspace__counter">{models.length} perfiles</span>
+          </div>
         {(loadingCatalog || ensuring) && models.length === 0 ? (
           <div className="loading-center">
             {ensuring ? 'Incorporando fichas nuevas…' : 'Cargando fichas…'}
@@ -266,9 +289,12 @@ export function App() {
           <div className="loading-center">No hay fichas activas</div>
         ) : null}
 
-        <Suspense fallback={null}>
-          <ActivityFeed />
-        </Suspense>
+        </section>
+        <section id="actividad" className="activity-workspace" aria-label="Actividad reciente">
+          <Suspense fallback={null}>
+            <ActivityFeed />
+          </Suspense>
+        </section>
       </main>
     </div>
   );
