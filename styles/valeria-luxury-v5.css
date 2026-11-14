@@ -261,7 +261,7 @@
   background:linear-gradient(90deg,transparent,#e2b27c,transparent);
 }
 .vf-all-profiles__grid{
-  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(11px,1.65vw,25px);
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(11px,1.65vw,25px);
 }
 .vf-all-profiles__bottom{text-align:center;margin-top:37px;}
 .vf-all-profiles__bottom p{color:#cdb5aa;font:400 12px Montserrat,sans-serif;}
