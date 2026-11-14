@@ -161,6 +161,13 @@
 .vf-luxury-card[data-profile-slug="monica"] .vf-luxury-card__media>img:not(.vf-photo-firma):not(.vf-luxury-card__firma){
   object-position:48% 30%;
 }
+.vf-luxury-card[data-profile-slug="camila"] .vf-luxury-card__media>img:not(.vf-photo-firma):not(.vf-luxury-card__firma){
+  object-position:50% 28%;
+}
+.vf-luxury-card[data-profile-slug="silvia"] .vf-luxury-card__media>img:not(.vf-photo-firma):not(.vf-luxury-card__firma){
+  object-position:50% 30%;
+}
+
 .vf-luxury-card__placeholder{
   position:absolute;inset:0;background:radial-gradient(ellipse at 50% 30%,#5e2d3d,#1f1017 78%);
 }
