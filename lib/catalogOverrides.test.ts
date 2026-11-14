@@ -59,7 +59,7 @@ test('ignora portada histórica obsoleta y nunca utiliza rutas ajenas a imágene
   assert.equal(invalid[0]?.image, model[0]?.image)
 })
 
-test('si la portada del panel tiene cuño horneado, usa la portada limpia del catálogo', () => {
+test('la portada que guarda el panel tiene prioridad aunque tenga un cuño incrustado', () => {
   // luna nueva-09 is in firma-skip-stamped.json (baked); portada-nov2026 is clean.
   const stampedGallery = '/chicas/luna-model-agency-valencia-vf/gallery/nueva-09.jpg'
   const cleanCover = '/chicas/luna-model-agency-valencia-vf/portada-nov2026.jpg'
@@ -80,9 +80,26 @@ test('si la portada del panel tiene cuño horneado, usa la portada limpia del ca
     coverImagePath: stampedGallery,
     galleryImagePaths: gallery,
   }])
-  assert.equal(result[0]?.coverImageUrl, cleanCover)
-  assert.equal(result[0]?.image, cleanCover)
-  assert.deepEqual(result[0]?.images, gallery)
+  assert.equal(result[0]?.coverImageUrl, stampedGallery)
+  assert.equal(result[0]?.image, stampedGallery)
+  assert.deepEqual(result[0]?.images, [gallery[0], cleanCover])
+})
+
+
+test('la portada nueva se publica aunque alguna foto antigua de la galería ya no exista', () => {
+  const cover = '/chicas/zoe/portada.jpg'
+  const photo1 = '/chicas/zoe/gallery/01.jpg'
+  const photo2 = '/chicas/zoe/gallery/02.jpg'
+  const model = [{ slug: 'zoe', coverImageUrl: cover, image: cover, images: [photo1, photo2] }]
+  const result = applyCatalogOverrides(model, [{
+    slug: 'zoe',
+    displayOrder: 1,
+    coverImagePath: photo2,
+    galleryImagePaths: ['/chicas/zoe/gallery/deleted.jpg', photo1, cover],
+  }])
+  assert.equal(result[0]?.coverImageUrl, photo2)
+  assert.equal(result[0]?.image, photo2)
+  assert.deepEqual(result[0]?.images, [photo1, cover])
 })
 
 test('oculta slugs retirados sin afectar a las portadas de modelos visibles', () => {
