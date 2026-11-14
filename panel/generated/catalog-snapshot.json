@@ -77,7 +77,8 @@
         "/chicas/cloe-model-agency-valencia-vf/gallery/01.jpg",
         "/chicas/cloe-model-agency-valencia-vf/gallery/02.jpg",
         "/chicas/cloe-model-agency-valencia-vf/gallery/03.jpg"
-      ]
+      ],
+      "coverImagePath": "/chicas/cloe-model-agency-valencia-vf/portada.jpg"
     },
     {
       "slug": "kailin",
@@ -87,7 +88,8 @@
       "images": [
         "/chicas/kailin-model-agency-valencia-vf/gallery/01.jpg",
         "/chicas/kailin-model-agency-valencia-vf/gallery/02.jpg"
-      ]
+      ],
+      "coverImagePath": "/chicas/kailin-model-agency-valencia-vf/portada.jpg"
     },
     {
       "slug": "corina",
@@ -99,7 +101,8 @@
         "/chicas/corina-model-agency-valencia-vf/gallery/02.jpg",
         "/chicas/corina-model-agency-valencia-vf/gallery/03.jpg",
         "/chicas/corina-model-agency-valencia-vf/gallery/04.jpg"
-      ]
+      ],
+      "coverImagePath": "/chicas/corina-model-agency-valencia-vf/portada.jpg"
     },
     {
       "slug": "yuliana",
@@ -110,7 +113,8 @@
         "/chicas/yuliana-model-agency-valencia-vf/gallery/01.jpg",
         "/chicas/yuliana-model-agency-valencia-vf/gallery/02.jpg",
         "/chicas/yuliana-model-agency-valencia-vf/gallery/03.jpg"
-      ]
+      ],
+      "coverImagePath": "/chicas/yuliana-model-agency-valencia-vf/portada.jpg"
     },
     {
       "slug": "lili2",
@@ -129,7 +133,8 @@
         "/chicas/lili2-model-agency-valencia-vf/gallery/09.jpg",
         "/chicas/lili2-model-agency-valencia-vf/gallery/10.jpg",
         "/chicas/lili2-model-agency-valencia-vf/gallery/11.jpg"
-      ]
+      ],
+      "coverImagePath": "/chicas/lili2-model-agency-valencia-vf/portada.jpg"
     },
     {
       "slug": "lili",
@@ -160,7 +165,7 @@
       "slug": "susi",
       "name": "Susi",
       "active": true,
-      "coverImageUrl": "/chicas/susi-model-agency-valencia-vf/gallery/susi-nueva-13.webp",
+      "coverImageUrl": "/chicas/susi-model-agency-valencia-vf/portada.jpg",
       "images": [
         "/chicas/susi-model-agency-valencia-vf/gallery/susi-ext-01.webp",
         "/chicas/susi-model-agency-valencia-vf/gallery/susi-ext-02.webp",
@@ -178,7 +183,7 @@
         "/chicas/susi-model-agency-valencia-vf/gallery/susi-nueva-14.webp",
         "/chicas/susi-model-agency-valencia-vf/gallery/susi-nueva-15.webp"
       ],
-      "coverImagePath": "/chicas/susi-model-agency-valencia-vf/gallery/susi-nueva-13.webp",
+      "coverImagePath": "/chicas/susi-model-agency-valencia-vf/portada.jpg",
       "galleryImagePaths": [
         "/chicas/susi-model-agency-valencia-vf/gallery/susi-ext-01.webp",
         "/chicas/susi-model-agency-valencia-vf/gallery/susi-ext-02.webp",
@@ -259,7 +264,8 @@
         "/chicas/shantell-model-agency-valencia-vf/gallery/12.jpg",
         "/chicas/shantell-model-agency-valencia-vf/gallery/13.jpg",
         "/chicas/shantell-model-agency-valencia-vf/gallery/14.jpg"
-      ]
+      ],
+      "coverImagePath": "/chicas/shantell-model-agency-valencia-vf/portada.jpg"
     },
     {
       "slug": "thania",

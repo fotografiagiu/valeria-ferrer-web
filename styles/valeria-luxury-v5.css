@@ -151,6 +151,16 @@
   filter:brightness(.98) saturate(.97) contrast(1.01);
   transition:transform 1.05s cubic-bezier(.22,1,.36,1),filter .8s ease;
 }
+/* Per-cover framing tweaks — crop only via object-position, no layout changes */
+.vf-luxury-card[data-profile-slug="zoe1"] .vf-luxury-card__media>img:not(.vf-photo-firma):not(.vf-luxury-card__firma){
+  object-position:52% 28%;
+}
+.vf-luxury-card[data-profile-slug="luna"] .vf-luxury-card__media>img:not(.vf-photo-firma):not(.vf-luxury-card__firma){
+  object-position:50% 22%;
+}
+.vf-luxury-card[data-profile-slug="monica"] .vf-luxury-card__media>img:not(.vf-photo-firma):not(.vf-luxury-card__firma){
+  object-position:48% 30%;
+}
 .vf-luxury-card__placeholder{
   position:absolute;inset:0;background:radial-gradient(ellipse at 50% 30%,#5e2d3d,#1f1017 78%);
 }
