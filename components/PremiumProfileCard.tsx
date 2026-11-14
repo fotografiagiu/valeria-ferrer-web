@@ -1,4 +1,5 @@
 import React from 'react';
+import '../styles/vf-editorial-card-crops.css';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight, ChevronRight, Crown } from 'lucide-react';
 import BlackCornerRibbon from './BlackCornerRibbon';
