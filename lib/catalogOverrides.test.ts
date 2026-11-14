@@ -11,24 +11,24 @@ test('portada elegida en panel se refleja en inicio y galería, incluso si la ve
     slug: 'susi',
     coverImageUrl: primary,
     image: primary,
-    images: [gallery1],
-    gallery: [gallery1],
+    images: [gallery1, gallery2],
+    gallery: [gallery1, gallery2],
     hoverImage: gallery1,
   }]
   const result = applyCatalogOverrides(original, [{
     slug: 'susi',
     displayOrder: 1,
     coverImagePath: gallery2,
-    galleryImagePaths: [primary, gallery1],
+    galleryImagePaths: [gallery1, primary],
   }])
   assert.equal(result[0]?.coverImageUrl, gallery2)
   assert.equal(result[0]?.image, gallery2)
-  assert.equal(result[0]?.hoverImage, primary)
-  assert.deepEqual(result[0]?.images, [primary, gallery1])
-  assert.deepEqual(result[0]?.gallery, [primary, gallery1])
+  assert.equal(result[0]?.hoverImage, gallery1)
+  assert.deepEqual(result[0]?.images, [gallery1, primary])
+  assert.deepEqual(result[0]?.gallery, [gallery1, primary])
   // No alterar los datos de origen para la siguiente actualización.
   assert.equal(original[0]?.image, primary)
-  assert.deepEqual(original[0]?.images, [gallery1])
+  assert.deepEqual(original[0]?.images, [gallery1, gallery2])
 })
 
 test('sustituir portada no altera el orden de perfiles del panel ni las otras fichas', () => {
@@ -57,6 +57,32 @@ test('ignora portada histórica obsoleta y nunca utiliza rutas ajenas a imágene
     coverImagePath: 'https://external.example/foto.jpg',
   }])
   assert.equal(invalid[0]?.image, model[0]?.image)
+})
+
+test('si la portada del panel tiene cuño horneado, usa la portada limpia del catálogo', () => {
+  // luna nueva-09 is in firma-skip-stamped.json (baked); portada-nov2026 is clean.
+  const stampedGallery = '/chicas/luna-model-agency-valencia-vf/gallery/nueva-09.jpg'
+  const cleanCover = '/chicas/luna-model-agency-valencia-vf/portada-nov2026.jpg'
+  const gallery = [
+    '/chicas/luna-model-agency-valencia-vf/gallery/nueva-01.jpg',
+    stampedGallery,
+  ]
+  const original = [{
+    slug: 'luna',
+    coverImageUrl: cleanCover,
+    image: cleanCover,
+    images: gallery,
+    gallery,
+  }]
+  const result = applyCatalogOverrides(original, [{
+    slug: 'luna',
+    displayOrder: 1,
+    coverImagePath: stampedGallery,
+    galleryImagePaths: gallery,
+  }])
+  assert.equal(result[0]?.coverImageUrl, cleanCover)
+  assert.equal(result[0]?.image, cleanCover)
+  assert.deepEqual(result[0]?.images, gallery)
 })
 
 test('oculta slugs retirados sin afectar a las portadas de modelos visibles', () => {

@@ -3,6 +3,8 @@
  * Web has no DATABASE_URL — read-only fetch + static fallback.
  */
 
+import { shouldShowFirma } from './firmaSkip';
+
 export type PublicOverrideRow = {
   slug: string;
   displayOrder: number;
@@ -158,17 +160,26 @@ export function applyCatalogOverrides<T extends CatalogLike>(
         !/^\/(?:chicas|chicas-optimized)\/[^?#]+$/i.test(cover) ||
         cover.includes('..') ||
         !overridePathsAllowed(model, cover, row.galleryImagePaths));
+    // Prefer the static clean cover when the panel cover still has a baked cuño
+    // (gallery interiors keep their stamps; catalog cards must stay clean).
+    const staticCover = model.coverImageUrl?.trim();
+    const preferStaticCleanCover =
+      !!cover &&
+      !!staticCover &&
+      !shouldShowFirma(cover) &&
+      shouldShowFirma(staticCover);
+    const effectiveCover = preferStaticCleanCover ? staticCover : cover;
     // Alana's September JPG gallery paths in the panel are stale/404.
     // Her newly uploaded WebP set in models.json is the canonical gallery.
     // Keep the panel's ordering and cover, but never replace her current
     // seven WebP photos with the obsolete JPG links.
     const galleryPaths =
       resolvedSlug === 'alana' && model.gallery?.some((path) => path.includes('alana-escorts-valencia-'))
-        ? model.gallery.filter((path) => path !== cover)
+        ? model.gallery.filter((path) => path !== effectiveCover)
         : row.galleryImagePaths;
     ordered.push(
-      cover && !coverIsStale
-        ? withGalleryOverride(model, cover, galleryPaths)
+      effectiveCover && !coverIsStale
+        ? withGalleryOverride(model, effectiveCover, galleryPaths)
         : model
     );
   }
