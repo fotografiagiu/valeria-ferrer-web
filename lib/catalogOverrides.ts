@@ -3,8 +3,6 @@
  * Web has no DATABASE_URL — read-only fetch + static fallback.
  */
 
-import { shouldShowFirma } from './firmaSkip';
-
 export type PublicOverrideRow = {
   slug: string;
   displayOrder: number;
@@ -24,6 +22,7 @@ export type PublicOverridesPayload = {
 type CatalogLike = {
   slug: string;
   coverImageUrl?: string;
+  profileImageUrl?: string;
   image?: string;
   hoverImage?: string;
   gallery?: string[];
@@ -72,27 +71,46 @@ function withCoverOverride<T extends CatalogLike>(model: T, coverImagePath: stri
 
 /** Paths allowed for this ficha in the deployed catalog (models.json). */
 function staticAllowedPaths(model: CatalogLike): Set<string> {
-  const paths = [model.coverImageUrl, ...(model.images || []), ...(model.gallery || [])].filter(
+  const paths = [model.coverImageUrl, model.profileImageUrl, model.image, ...(model.images || []), ...(model.gallery || [])].filter(
     (p): p is string => typeof p === 'string' && p.length > 0
   );
   return new Set(paths);
 }
 
 /**
- * Panel overrides older than a photo replace still point at deleted JPGs.
- * Server cover/gallery writes are allowlisted against models.json — mirror that here
- * so stale Neon rows cannot resurrect old cuños on top of the new CSS firma.
+ * Validate the chosen cover independently of the rest of the gallery.
+ * An obsolete gallery image must never silently cancel a newer, valid
+ * portada selected and successfully saved in the private panel.
  */
-function overridePathsAllowed(
+function overrideCoverAllowed(model: CatalogLike, coverImagePath: string): boolean {
+  const allowed = staticAllowedPaths(model);
+  return allowed.size === 0 || allowed.has(coverImagePath);
+}
+
+/** Discard stale gallery paths while preserving the user's valid drag order.
+ * Append any newly added catalogue images rather than losing them.
+ */
+function sanitizeGalleryPaths(
   model: CatalogLike,
   coverImagePath: string,
-  galleryImagePaths: string[] | null | undefined
-): boolean {
+  paths: string[] | null | undefined
+): string[] | null {
+  if (!paths?.length) return null;
   const allowed = staticAllowedPaths(model);
-  if (allowed.size === 0) return true;
-  if (!allowed.has(coverImagePath)) return false;
-  if (!galleryImagePaths?.length) return true;
-  return galleryImagePaths.every((p) => allowed.has(p));
+  const seen = new Set<string>([coverImagePath]);
+  const result: string[] = [];
+  const add = (path: string | undefined) => {
+    if (!path || seen.has(path) || !/^\/(?:chicas|chicas-optimized)\/[^?#]+$/i.test(path)) return;
+    if (allowed.size > 0 && !allowed.has(path)) return;
+    seen.add(path);
+    result.push(path);
+  };
+  paths.forEach(add);
+  // Preserve all images of the currently deployed ficha after an old photo was deleted.
+  if (allowed.size > 0) {
+    [...(model.images || []), ...(model.gallery || []), model.coverImageUrl, model.profileImageUrl].forEach(add);
+  }
+  return result;
 }
 
 function withGalleryOverride<T extends CatalogLike>(
@@ -159,16 +177,10 @@ export function applyCatalogOverrides<T extends CatalogLike>(
         (resolvedSlug === 'sofia1' && row.slug === 'sofia') ||
         !/^\/(?:chicas|chicas-optimized)\/[^?#]+$/i.test(cover) ||
         cover.includes('..') ||
-        !overridePathsAllowed(model, cover, row.galleryImagePaths));
-    // Prefer the static clean cover when the panel cover still has a baked cuño
-    // (gallery interiors keep their stamps; catalog cards must stay clean).
-    const staticCover = model.coverImageUrl?.trim();
-    const preferStaticCleanCover =
-      !!cover &&
-      !!staticCover &&
-      !shouldShowFirma(cover) &&
-      shouldShowFirma(staticCover);
-    const effectiveCover = preferStaticCleanCover ? staticCover : cover;
+        !overrideCoverAllowed(model, cover));
+    // The panel selection is authoritative. The decision to show or remove
+    // a watermark belongs to the cover asset, never to the public UI.
+    const effectiveCover = cover;
     // Alana's September JPG gallery paths in the panel are stale/404.
     // Her newly uploaded WebP set in models.json is the canonical gallery.
     // Keep the panel's ordering and cover, but never replace her current
@@ -176,7 +188,7 @@ export function applyCatalogOverrides<T extends CatalogLike>(
     const galleryPaths =
       resolvedSlug === 'alana' && model.gallery?.some((path) => path.includes('alana-escorts-valencia-'))
         ? model.gallery.filter((path) => path !== effectiveCover)
-        : row.galleryImagePaths;
+        : sanitizeGalleryPaths(model, effectiveCover, row.galleryImagePaths);
     ordered.push(
       effectiveCover && !coverIsStale
         ? withGalleryOverride(model, effectiveCover, galleryPaths)
