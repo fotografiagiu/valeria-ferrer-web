@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-11-12T23:12:29.750Z",
-  "catalogVersion": "2a8196621e199061b37ee0b729f3844c3a3720e839e62385555a7db100c6e8a5",
+  "generatedAt": "2026-11-14T00:04:09.612Z",
+  "catalogVersion": "d2b3f4500374c1392e7060a986ef59ca6bd3937f916aa05035f315fa2f1ef8a0",
   "source": "valeria-ferrer-web",
   "method": "build-app-catalog",
   "models": [
@@ -433,20 +433,23 @@
       "name": "Luna",
       "active": true,
       "vip": false,
-      "coverImageUrl": "/chicas/luna-model-agency-valencia-vf/portada-frente-lavanda-ago2026.jpg",
+      "coverImageUrl": "/chicas/luna-model-agency-valencia-vf/portada-nov2026.jpg",
       "images": [
-        "/chicas/luna-model-agency-valencia-vf/gallery/01.jpg",
-        "/chicas/luna-model-agency-valencia-vf/gallery/02.jpg",
-        "/chicas/luna-model-agency-valencia-vf/gallery/03.jpg",
-        "/chicas/luna-model-agency-valencia-vf/gallery/04.jpg",
-        "/chicas/luna-model-agency-valencia-vf/gallery/05.jpg",
-        "/chicas/luna-model-agency-valencia-vf/gallery/06.jpg",
-        "/chicas/luna-model-agency-valencia-vf/gallery/07.jpg",
-        "/chicas/luna-model-agency-valencia-vf/gallery/08.jpg",
-        "/chicas/luna-model-agency-valencia-vf/gallery/09.jpg",
-        "/chicas/luna-model-agency-valencia-vf/gallery/10.jpg",
-        "/chicas/luna-model-agency-valencia-vf/gallery/11.jpg",
-        "/chicas/luna-model-agency-valencia-vf/gallery/12.jpg"
+        "/chicas/luna-model-agency-valencia-vf/gallery/nueva-01.jpg",
+        "/chicas/luna-model-agency-valencia-vf/gallery/nueva-02.jpg",
+        "/chicas/luna-model-agency-valencia-vf/gallery/nueva-03.jpg",
+        "/chicas/luna-model-agency-valencia-vf/gallery/nueva-04.jpg",
+        "/chicas/luna-model-agency-valencia-vf/gallery/nueva-05.jpg",
+        "/chicas/luna-model-agency-valencia-vf/gallery/nueva-06.jpg",
+        "/chicas/luna-model-agency-valencia-vf/gallery/nueva-07.jpg",
+        "/chicas/luna-model-agency-valencia-vf/gallery/nueva-08.jpg",
+        "/chicas/luna-model-agency-valencia-vf/gallery/nueva-09.jpg",
+        "/chicas/luna-model-agency-valencia-vf/gallery/nueva-10.jpg",
+        "/chicas/luna-model-agency-valencia-vf/gallery/nueva-11.jpg",
+        "/chicas/luna-model-agency-valencia-vf/gallery/nueva-12.jpg",
+        "/chicas/luna-model-agency-valencia-vf/gallery/nueva-13.jpg",
+        "/chicas/luna-model-agency-valencia-vf/gallery/nueva-14.jpg",
+        "/chicas/luna-model-agency-valencia-vf/gallery/nueva-15.jpg"
       ]
     },
     {
