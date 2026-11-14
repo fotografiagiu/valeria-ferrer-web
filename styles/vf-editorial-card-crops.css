@@ -23,10 +23,6 @@
     transform: scale(1.11);
   }
 }
-/* Preserve existing buttons, badges, privacy masking and the original photo watermark. */
-.vf-luxury-card .vf-luxury-card__media > :not(img) { position: relative; }
-.vf-luxury-card .vf-luxury-card__media > .vf-luxury-card__veil,
-.vf-luxury-card .vf-luxury-card__media > .vf-luxury-card__firma { position: absolute; }
 @media (min-width: 1100px) {
   .vf-all-profiles__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
