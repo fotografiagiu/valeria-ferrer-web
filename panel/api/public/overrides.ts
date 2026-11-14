@@ -4,7 +4,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { withPgClient } from '../../src/db/client-impl.js';
 
-const CACHE_MS = 15_000;
+const CACHE_MS = 5_000;
 let cached: { at: number; body: Record<string, unknown> } | null = null;
 
 export const config = {
@@ -16,16 +16,23 @@ const DEFAULT_WEB_CATALOG_URL = 'https://www.valeriaferrer.com/app-catalog.json'
 
 function applyCors(req: VercelRequest, res: VercelResponse) {
   const origin = String(req.headers.origin || '');
-  const allowed = (process.env.PUBLIC_WEB_ORIGINS || '')
-    .split(',')
-    .map((s) => s.trim())
-    .filter(Boolean);
+  // This is a public, read-only catalog feed. Always allow the two
+  // canonical website origins even if a panel environment variable is stale.
+  const allowed = new Set([
+    'https://www.valeriaferrer.com',
+    'https://valeriaferrer.com',
+    ...(process.env.PUBLIC_WEB_ORIGINS || '')
+      .split(',')
+      .map((s) => s.trim())
+      .filter(Boolean),
+  ]);
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Accept, Content-Type, Cache-Control');
-  res.setHeader('Cache-Control', 'public, max-age=30');
-  if (origin && allowed.includes(origin)) {
+  // Limit propagation delay after saving a cover from the staff panel.
+  res.setHeader('Cache-Control', 'public, max-age=5, s-maxage=5');
+  res.setHeader('Vary', 'Origin');
+  if (origin && allowed.has(origin)) {
     res.setHeader('Access-Control-Allow-Origin', origin);
-    res.setHeader('Vary', 'Origin');
   }
 }
 
