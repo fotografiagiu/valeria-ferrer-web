@@ -34,3 +34,7 @@ dist-ssr
 # Local firma blanca working files
 public/chicas/_backup-pre-firma-blanca/
 qa-screenshots/
+
+# Restauración local de originales sin cuño (nunca enviar fotos maestras temporales al repositorio)
+originales-limpios/
+.photo-restoration-backups/
