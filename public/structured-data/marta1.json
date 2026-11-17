@@ -1,0 +1,41 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Marta",
+  "description": "Marta es pura sensualidad. Una española de curvas irresistibles, belleza natural y un atractivo que no pasa desapercibido. Su figura femenina, su larga melena oscura y ese aire atrevido que la caracteriza hacen de ella una mujer capaz de despertar las fantasías más intensas. Dulce, provocadora y con un magnetismo especial, Marta tiene todos los ingredientes para convertirse en una de tus favoritas. Si buscas una escort española en Valencia que combine belleza, sensualidad y un encanto irresistible, descubre a Marta en Valeria Ferrer. Consulta su disponibilidad y déjate conquistar por su atractivo.",
+  "url": "https://www.valeriaferrer.com/models/marta1",
+  "image": [
+    "https://www.valeriaferrer.com/chicas/marta1-model-agency-valencia-vf/portada.jpg",
+    "https://www.valeriaferrer.com/chicas/marta1-model-agency-valencia-vf/gallery/01.jpg",
+    "https://www.valeriaferrer.com/chicas/marta1-model-agency-valencia-vf/gallery/02.jpg",
+    "https://www.valeriaferrer.com/chicas/marta1-model-agency-valencia-vf/gallery/03.jpg",
+    "https://www.valeriaferrer.com/chicas/marta1-model-agency-valencia-vf/gallery/04.jpg",
+    "https://www.valeriaferrer.com/chicas/marta1-model-agency-valencia-vf/gallery/05.jpg"
+  ],
+  "nationality": "Española",
+  "jobTitle": "Modelo",
+  "knowsLanguage": [
+    "Español"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "itemOffered": {
+      "@type": "Service",
+      "name": "Acompañamiento Premium",
+      "description": "Servicios exclusivos de acompañamiento con Marta en Valencia"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Valencia"
+    },
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "name": "Contacto Directo",
+      "url": "https://www.valeriaferrer.com/contact"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.valeriaferrer.com/models/marta1"
+  }
+}

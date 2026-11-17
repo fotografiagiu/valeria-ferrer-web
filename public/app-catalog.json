@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-17T12:16:10.184Z",
+  "generatedAt": "2026-11-17T13:44:45.009Z",
   "catalogVersion": "3268e2bf6fe946303e0dcad5a7d559a35bbddf3e62a01bf79e6a16cbfb12dbd4",
   "source": "valeria-ferrer-web",
   "method": "build-app-catalog",
@@ -54,6 +54,20 @@
         "/chicas/zoe1-model-agency-valencia-vf/gallery/nov17-06.jpg",
         "/chicas/zoe1-model-agency-valencia-vf/gallery/nov17-07.jpg",
         "/chicas/zoe1-model-agency-valencia-vf/gallery/nov17-08.jpg"
+      ]
+    },
+    {
+      "slug": "marta1",
+      "name": "Marta",
+      "active": true,
+      "vip": false,
+      "coverImageUrl": "/chicas/marta1-model-agency-valencia-vf/portada.jpg",
+      "images": [
+        "/chicas/marta1-model-agency-valencia-vf/gallery/01.jpg",
+        "/chicas/marta1-model-agency-valencia-vf/gallery/02.jpg",
+        "/chicas/marta1-model-agency-valencia-vf/gallery/03.jpg",
+        "/chicas/marta1-model-agency-valencia-vf/gallery/04.jpg",
+        "/chicas/marta1-model-agency-valencia-vf/gallery/05.jpg"
       ]
     },
     {
