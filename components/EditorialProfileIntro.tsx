@@ -59,7 +59,8 @@ const EditorialProfileIntro: React.FC<Props> = ({ model, onOpenGallery }) => {
                     alt={model.name + ' — fotografía ' + (selected + 1)} loading="eager" decoding="async"
                     className="is-loaded" />
                 </button>
-                <VfPhotoFirma className="vf-editorial-intro__firma" photoSrc={photos[selected]} />
+                {/* La portada del perfil queda limpia. El cuño se muestra solo al navegar por la galería. */}
+                {selected > 0 ? <VfPhotoFirma className="vf-editorial-intro__firma" photoSrc={photos[selected]} /> : null}
                 {photos.length > 1 && (
                   <>
                     <button type="button" className="vf-editorial-intro__arrow vf-editorial-intro__arrow--prev" aria-label="Fotografía anterior" onClick={() => setPhoto(selected - 1)}><ChevronLeft size={21}/></button>

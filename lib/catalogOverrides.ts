@@ -178,8 +178,8 @@ export function applyCatalogOverrides<T extends CatalogLike>(
         !/^\/(?:chicas|chicas-optimized)\/[^?#]+$/i.test(cover) ||
         cover.includes('..') ||
         !overrideCoverAllowed(model, cover));
-    // The panel selection is authoritative. The decision to show or remove
-    // a watermark belongs to the cover asset, never to the public UI.
+    // El panel decide la foto principal, pero el cuño visual solo se representa
+    // en galería: nunca se debe grabar en una nueva portada.
     const effectiveCover = cover;
     // Alana's September JPG gallery paths in the panel are stale/404.
     // Her newly uploaded WebP set in models.json is the canonical gallery.

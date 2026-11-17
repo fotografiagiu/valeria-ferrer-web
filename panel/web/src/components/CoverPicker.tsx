@@ -18,7 +18,8 @@ import {
 import { CSS } from '@dnd-kit/utilities';
 import { useEffect, useMemo, useState } from 'react';
 import { ApiError, putGallery, type StaffCatalogModel } from '../lib/api';
-import { buildOrderedImagePaths, publicThumbUrl } from '../lib/assets';
+import { buildOrderedImagePaths, publicAssetUrl, publicThumbUrl } from '../lib/assets';
+import { isPhotoKnownStamped, shouldPreviewGalleryWatermark, canUsePhotoAsCover } from '../lib/photoBranding';
 
 type Props = {
   model: StaffCatalogModel;
@@ -59,6 +60,8 @@ function SortablePhoto({
     isDragging,
   } = useSortable({ id: path, disabled: busy });
 
+  const stamped = isPhotoKnownStamped(path);
+  const displayGalleryLogo = shouldPreviewGalleryWatermark(path, index);
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
@@ -87,12 +90,22 @@ function SortablePhoto({
           decoding="async"
           draggable={false}
         />
+        {displayGalleryLogo ? (
+          <img
+            className="gallery-simple-preview-firma"
+            src={publicAssetUrl('/images/firma-valeria-ferrer-white.png')}
+            alt=""
+            aria-hidden="true"
+            draggable={false}
+          />
+        ) : null}
         {index === 0 ? <span className="gallery-simple-cover-label">PORTADA</span> : null}
+        {stamped ? <span className="gallery-simple-stamped-label">LOGO INCRUSTADO</span> : null}
       </button>
       <div className="gallery-simple-controls">
         <div className="gallery-simple-caption">
           <strong>{index === 0 ? 'Portada' : `Foto ${index + 1}`}</strong>
-          <span>Posición {index + 1}</span>
+          <span>{stamped ? 'Logo grabado en el archivo' : index === 0 ? 'Sin cuño añadido' : 'Cuño solo en galería'}</span>
         </div>
         <span className="gallery-simple-grip" aria-hidden="true">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
@@ -135,6 +148,7 @@ export function CoverPicker({
   }, [model]);
 
   const dirty = paths.join('\0') !== savedPaths.join('\0');
+  const coverIsUnsafe = paths.length > 0 && !canUsePhotoAsCover(paths[0], savedPaths[0]);
 
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 6 } }),
@@ -152,6 +166,10 @@ export function CoverPicker({
 
   async function saveOrder() {
     if (!dirty || busy) return;
+    if (coverIsUnsafe) {
+      onToast('Esa fotografía ya tiene un logo incrustado. Para portada, sube su original sin logo.', 'error');
+      return;
+    }
     setBusy(true);
     try {
       const result = await putGallery(model.slug, paths, coverVersion);
@@ -195,7 +213,7 @@ export function CoverPicker({
 
         <div className="modal-body gallery-editor-body gallery-editor-body--simple">
           <p className="gallery-simple-help">
-            <strong>La posición 1 es la portada.</strong> Mantén pulsada una foto y arrástrala a su lugar. Las demás se ordenarán automáticamente.
+            <strong>La posición 1 será la portada limpia.</strong> Las demás fotos muestran el cuño blanco solo en la galería de la web. Arrastra para reordenar. Los logos ya incrustados en una foto requieren subir su original sin logo.
           </p>
           <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={onDragEnd}>
             <SortableContext items={paths} strategy={rectSortingStrategy}>
@@ -212,7 +230,9 @@ export function CoverPicker({
               </div>
             </SortableContext>
           </DndContext>
-          {dirty ? (
+          {coverIsUnsafe ? (
+            <p className="gallery-simple-cover-warning" role="alert">No se puede usar esta foto como nueva portada: lleva el logo grabado en el archivo. Sustitúyela por la original sin logo antes de ponerla en primera posición.</p>
+          ) : dirty ? (
             <p className="gallery-simple-changed" role="status">Orden modificado · Guarda los cambios para publicarlos en la web.</p>
           ) : null}
         </div>
@@ -227,7 +247,7 @@ export function CoverPicker({
             >
               Deshacer
             </button>
-            <button type="button" className="primary-btn" onClick={saveOrder} disabled={busy}>
+            <button type="button" className="primary-btn" onClick={saveOrder} disabled={busy || coverIsUnsafe}>
               {busy ? 'Guardando…' : 'Guardar orden'}
             </button>
           </div>

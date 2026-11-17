@@ -731,3 +731,43 @@ a {color:inherit}
   .gallery-simple-caption strong {font-size:11px}
   .gallery-simple-grip {width:27px;height:30px;flex-basis:27px}
 }
+
+/* El cuño es una capa de presentación, no parte del archivo maestro. */
+.gallery-simple-photo .gallery-simple-preview-firma {
+  position:absolute;
+  z-index:1;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  width:82%;
+  height:auto;
+  object-fit:contain;
+  pointer-events:none;
+  opacity:1;
+}
+.gallery-simple-stamped-label {
+  position:absolute;
+  z-index:2;
+  bottom:10px;
+  left:10px;
+  padding:5px 7px;
+  border-radius:6px;
+  color:#fff2de;
+  background:rgba(104,38,25,.93);
+  border:1px solid rgba(255,169,128,.5);
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:.03em;
+  pointer-events:none;
+}
+.gallery-simple-cover-warning {
+  margin:14px 0 0;
+  padding:12px 14px;
+  border:1px solid rgba(245,159,135,.55);
+  border-radius:9px;
+  background:rgba(115,43,34,.22);
+  color:#ffe1d3;
+  line-height:1.45;
+  font-size:12px;
+  font-weight:650;
+}
