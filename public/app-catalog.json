@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-11-17T10:46:29.862Z",
-  "catalogVersion": "b0afa90e68375af9264189211dcb645ccbbf917fb02c462a5aa697f6afb41cad",
+  "generatedAt": "2026-11-17T12:09:08.226Z",
+  "catalogVersion": "b8a51e7e1f811ef59322be53d0b03b7d3b395d2141120653804f752d0ccf26d6",
   "source": "valeria-ferrer-web",
   "method": "build-app-catalog",
   "models": [
@@ -49,7 +49,11 @@
         "/chicas/zoe1-model-agency-valencia-vf/gallery/01.jpg",
         "/chicas/zoe1-model-agency-valencia-vf/gallery/02.jpg",
         "/chicas/zoe1-model-agency-valencia-vf/gallery/03.jpg",
-        "/chicas/zoe1-model-agency-valencia-vf/gallery/04.jpg"
+        "/chicas/zoe1-model-agency-valencia-vf/gallery/04.jpg",
+        "/chicas/zoe1-model-agency-valencia-vf/gallery/05.jpg",
+        "/chicas/zoe1-model-agency-valencia-vf/gallery/06.jpg",
+        "/chicas/zoe1-model-agency-valencia-vf/gallery/07.jpg",
+        "/chicas/zoe1-model-agency-valencia-vf/gallery/08.jpg"
       ]
     },
     {
