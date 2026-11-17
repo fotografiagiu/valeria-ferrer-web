@@ -17,7 +17,9 @@ import crypto from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
-const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const ROOT = process.env.VF_PHOTO_RESTORE_ROOT
+  ? path.resolve(process.env.VF_PHOTO_RESTORE_ROOT)
+  : path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const SOURCE_ROOT = path.join(ROOT, 'originales-limpios');
 const INVENTORY_PATH = path.join(ROOT, 'data/firma-skip-stamped.json');
 const args = new Set(process.argv.slice(2));
