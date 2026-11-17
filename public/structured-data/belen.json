@@ -1,0 +1,44 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Belén",
+  "description": "Hay mujeres que llaman la atención y otras que consiguen que no puedas dejar de mirarlas. Belén pertenece a ese segundo grupo. Su melena rubia, sus ojos cautivadores y su sonrisa dulce dibujan una belleza irresistible, donde la elegancia y la sensualidad se encuentran en perfecta armonía. Su figura estilizada y sus curvas femeninas completan una imagen que desprende atractivo en cada detalle. Belén tiene ese encanto especial que combina una apariencia delicada con una presencia atrevida y magnética. Una belleza que invita a descubrir mucho más allá de una primera impresión. Si buscas una escort en Valencia con una imagen espectacular y un atractivo que no pasa desapercibido, Belén es uno de esos perfiles que merece la pena descubrir. Descubre a Belén en Valeria Ferrer, consulta su disponibilidad y contacta con nosotros para recibir atención personalizada y discreta.",
+  "url": "https://www.valeriaferrer.com/models/belen",
+  "image": [
+    "https://www.valeriaferrer.com/chicas/belen-model-agency-valencia-vf/portada.jpg",
+    "https://www.valeriaferrer.com/chicas/belen-model-agency-valencia-vf/gallery/01.jpg",
+    "https://www.valeriaferrer.com/chicas/belen-model-agency-valencia-vf/gallery/02.jpg",
+    "https://www.valeriaferrer.com/chicas/belen-model-agency-valencia-vf/gallery/03.jpg",
+    "https://www.valeriaferrer.com/chicas/belen-model-agency-valencia-vf/gallery/04.jpg",
+    "https://www.valeriaferrer.com/chicas/belen-model-agency-valencia-vf/gallery/05.jpg",
+    "https://www.valeriaferrer.com/chicas/belen-model-agency-valencia-vf/gallery/06.jpg",
+    "https://www.valeriaferrer.com/chicas/belen-model-agency-valencia-vf/gallery/07.jpg",
+    "https://www.valeriaferrer.com/chicas/belen-model-agency-valencia-vf/gallery/08.jpg"
+  ],
+  "nationality": "Española",
+  "jobTitle": "Modelo",
+  "knowsLanguage": [
+    "Español"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "itemOffered": {
+      "@type": "Service",
+      "name": "Acompañamiento Premium",
+      "description": "Servicios exclusivos de acompañamiento con Belén en Valencia"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Valencia"
+    },
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "name": "Contacto Directo",
+      "url": "https://www.valeriaferrer.com/contact"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.valeriaferrer.com/models/belen"
+  }
+}
