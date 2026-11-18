@@ -720,11 +720,6 @@ export async function removeModelFromCatalog(params: {
     const metaRows = await tx.select().from(catalogMeta).where(eq(catalogMeta.id, 1)).limit(1);
     const meta = metaRows[0];
     if (!meta) throw new BadRequestError('catalog_meta missing');
-    if (meta.orderVersion !== params.version) {
-      throw new ConflictError(
-        `order version conflict: expected ${meta.orderVersion}, got ${params.version}`
-      );
-    }
 
     const rows = await tx
       .select()
@@ -735,11 +730,18 @@ export async function removeModelFromCatalog(params: {
     if (!row) {
       throw new BadRequestError(`override missing for ${slug}; run npm run catalog:sync`);
     }
+    // Idempotent retries: if the server committed the removal but the client
+    // lost the response, a second click must not produce a misleading failure.
     if (row.displayOrder == null && row.staffHidden) {
-      throw new BadRequestError(`${slug} ya está eliminada del catálogo`);
+      return { orderVersion: meta.orderVersion };
     }
     if (row.displayOrder == null) {
       throw new BadRequestError(`${slug} no está activa en el catálogo del panel`);
+    }
+    if (meta.orderVersion !== params.version) {
+      throw new ConflictError(
+        `order version conflict: expected ${meta.orderVersion}, got ${params.version}`
+      );
     }
 
     const before = {
