@@ -637,21 +637,28 @@
       "slug": "bea",
       "name": "Bea",
       "active": true,
-      "coverImageUrl": "/chicas/bea-model-agency-valencia-vf/portada-v2-oct2026.jpg",
+      "coverImageUrl": "/chicas/bea-model-agency-valencia-vf/portada-nov19.jpg",
       "images": [
-        "/chicas/bea-model-agency-valencia-vf/gallery/01-v2.jpg",
-        "/chicas/bea-model-agency-valencia-vf/gallery/02-v2.jpg",
-        "/chicas/bea-model-agency-valencia-vf/gallery/03-v2.jpg",
-        "/chicas/bea-model-agency-valencia-vf/gallery/04-v2.jpg",
-        "/chicas/bea-model-agency-valencia-vf/gallery/05-v2.jpg",
-        "/chicas/bea-model-agency-valencia-vf/gallery/06-v2.jpg",
-        "/chicas/bea-model-agency-valencia-vf/gallery/07-v2.jpg",
-        "/chicas/bea-model-agency-valencia-vf/gallery/08-v2.jpg",
-        "/chicas/bea-model-agency-valencia-vf/gallery/09-v2.jpg",
-        "/chicas/bea-model-agency-valencia-vf/gallery/10-v2.jpg",
-        "/chicas/bea-model-agency-valencia-vf/gallery/11-v2.jpg",
-        "/chicas/bea-model-agency-valencia-vf/gallery/12-v2.jpg"
-      ]
+        "/chicas/bea-model-agency-valencia-vf/gallery/nov19-01.jpg",
+        "/chicas/bea-model-agency-valencia-vf/gallery/nov19-02.jpg",
+        "/chicas/bea-model-agency-valencia-vf/gallery/nov19-03.jpg",
+        "/chicas/bea-model-agency-valencia-vf/gallery/nov19-04.jpg",
+        "/chicas/bea-model-agency-valencia-vf/gallery/nov19-05.jpg",
+        "/chicas/bea-model-agency-valencia-vf/gallery/nov19-06.jpg",
+        "/chicas/bea-model-agency-valencia-vf/gallery/nov19-07.jpg"
+      ],
+      "profileImageUrl": "/chicas/bea-model-agency-valencia-vf/portada-nov19.jpg",
+      "coverImagePath": "/chicas/bea-model-agency-valencia-vf/portada-nov19.jpg",
+      "galleryImagePaths": [
+        "/chicas/bea-model-agency-valencia-vf/gallery/nov19-01.jpg",
+        "/chicas/bea-model-agency-valencia-vf/gallery/nov19-02.jpg",
+        "/chicas/bea-model-agency-valencia-vf/gallery/nov19-03.jpg",
+        "/chicas/bea-model-agency-valencia-vf/gallery/nov19-04.jpg",
+        "/chicas/bea-model-agency-valencia-vf/gallery/nov19-05.jpg",
+        "/chicas/bea-model-agency-valencia-vf/gallery/nov19-06.jpg",
+        "/chicas/bea-model-agency-valencia-vf/gallery/nov19-07.jpg"
+      ],
+      "isNew": true
     },
     {
       "slug": "erika",
