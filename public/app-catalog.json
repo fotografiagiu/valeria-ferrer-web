@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-17T13:44:45.009Z",
+  "generatedAt": "2026-11-18T23:12:44.648Z",
   "catalogVersion": "3268e2bf6fe946303e0dcad5a7d559a35bbddf3e62a01bf79e6a16cbfb12dbd4",
   "source": "valeria-ferrer-web",
   "method": "build-app-catalog",
@@ -605,20 +605,15 @@
       "name": "Bea",
       "active": true,
       "vip": false,
-      "coverImageUrl": "/chicas/bea-model-agency-valencia-vf/portada-v2-oct2026.jpg",
+      "coverImageUrl": "/chicas/bea-model-agency-valencia-vf/portada-nov19.jpg",
       "images": [
-        "/chicas/bea-model-agency-valencia-vf/gallery/01-v2.jpg",
-        "/chicas/bea-model-agency-valencia-vf/gallery/02-v2.jpg",
-        "/chicas/bea-model-agency-valencia-vf/gallery/03-v2.jpg",
-        "/chicas/bea-model-agency-valencia-vf/gallery/04-v2.jpg",
-        "/chicas/bea-model-agency-valencia-vf/gallery/05-v2.jpg",
-        "/chicas/bea-model-agency-valencia-vf/gallery/06-v2.jpg",
-        "/chicas/bea-model-agency-valencia-vf/gallery/07-v2.jpg",
-        "/chicas/bea-model-agency-valencia-vf/gallery/08-v2.jpg",
-        "/chicas/bea-model-agency-valencia-vf/gallery/09-v2.jpg",
-        "/chicas/bea-model-agency-valencia-vf/gallery/10-v2.jpg",
-        "/chicas/bea-model-agency-valencia-vf/gallery/11-v2.jpg",
-        "/chicas/bea-model-agency-valencia-vf/gallery/12-v2.jpg"
+        "/chicas/bea-model-agency-valencia-vf/gallery/nov19-01.jpg",
+        "/chicas/bea-model-agency-valencia-vf/gallery/nov19-02.jpg",
+        "/chicas/bea-model-agency-valencia-vf/gallery/nov19-03.jpg",
+        "/chicas/bea-model-agency-valencia-vf/gallery/nov19-04.jpg",
+        "/chicas/bea-model-agency-valencia-vf/gallery/nov19-05.jpg",
+        "/chicas/bea-model-agency-valencia-vf/gallery/nov19-06.jpg",
+        "/chicas/bea-model-agency-valencia-vf/gallery/nov19-07.jpg"
       ]
     },
     {
