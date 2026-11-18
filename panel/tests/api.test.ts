@@ -468,6 +468,19 @@ describe('staff remove model', () => {
     const pub = await json(await app.request('http://localhost/api/public/overrides'));
     expect(pub.models.find((m: { slug: string }) => m.slug === target.slug)).toBeUndefined();
     expect(pub.hiddenSlugs).toContain(target.slug);
+
+    // Network retry after a successful commit must be idempotent, not a 400/409.
+    const retry = await app.request('http://localhost/api/staff/catalog/remove', {
+      method: 'POST',
+      headers: {
+        cookie,
+        'content-type': 'application/json',
+        origin: 'http://localhost:8787',
+      },
+      body: JSON.stringify({ slug: target.slug, version: catalog.orderVersion }),
+    });
+    expect(retry.status).toBe(200);
+    expect((await json(retry)).orderVersion).toBe(body.orderVersion);
   });
 
   it('allows reorder after staff remove (orderable set excludes staffHidden)', async () => {

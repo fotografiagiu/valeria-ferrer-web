@@ -142,6 +142,7 @@ export function CatalogScreen({
   const [selected, setSelected] = useState<StaffCatalogModel | null>(null);
   const [pendingRemove, setPendingRemove] = useState<StaffCatalogModel | null>(null);
   const [removing, setRemoving] = useState(false);
+  const [removeError, setRemoveError] = useState<string | null>(null);
 
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 6 } }),
@@ -220,9 +221,13 @@ export function CatalogScreen({
   async function confirmRemove() {
     if (!pendingRemove || removing || orderSaveLocked) return;
     if (dirty) {
-      onToast('Guarda o descarta el orden antes de eliminar.', 'error');
+      const message = 'Guarda o descarta el orden pendiente antes de eliminar este perfil.';
+      setRemoveError(message);
+      onToast(message, 'error');
       return;
     }
+
+    setRemoveError(null);
 
     setRemoving(true);
     try {
@@ -232,8 +237,11 @@ export function CatalogScreen({
       setSavedOrder(next.map((m) => m.slug));
       onOrderVersion(result.orderVersion);
       setPendingRemove(null);
+      setRemoveError(null);
       if (selected?.slug === pendingRemove.slug) setSelected(null);
       onToast(`✓ ${pendingRemove.name} eliminada del catálogo`, 'success');
+      // Reload the authoritative server list: never leave the screen on stale data.
+      onReload();
     } catch (err) {
       if (err instanceof ApiError && err.status === 401) {
         onToast(err.message, 'error');
@@ -241,11 +249,15 @@ export function CatalogScreen({
       } else if (err instanceof ApiError && err.status === 409) {
         setConflict(true);
         setPendingRemove(null);
-        onToast('Los datos cambiaron. Recarga el catálogo.', 'error');
-      } else if (err instanceof ApiError) {
-        onToast(err.message, 'error');
+        onToast('El catálogo cambió en otro dispositivo. Se actualizará la lista.', 'error');
+        onReload();
       } else {
-        onToast('No se pudo eliminar el perfil', 'error');
+        const message = err instanceof ApiError
+          ? `No se ha eliminado el perfil: ${err.message}${err.status > 0 ? ` (HTTP ${err.status})` : ''}`
+          : 'No se pudo eliminar el perfil. Comprueba la conexión y vuelve a intentarlo.';
+        // Keep the actual failure visible inside this dialog until dismissed or retried.
+        setRemoveError(message);
+        onToast(message, 'error');
       }
     } finally {
       setRemoving(false);
@@ -273,7 +285,10 @@ export function CatalogScreen({
                 model={model}
                 index={index}
                 onOpenCover={setSelected}
-                onRequestRemove={setPendingRemove}
+                onRequestRemove={(model) => {
+                  setRemoveError(null);
+                  setPendingRemove(model);
+                }}
               />
             ))}
           </div>
@@ -321,6 +336,14 @@ export function CatalogScreen({
               Se quitará <strong>{pendingRemove.name}</strong> del panel y dejará de mostrarse en la
               página web.
             </p>
+            {orderSaveLocked ? (
+              <p role="status" className="promo-modal-warn">La sincronización del catálogo está en curso. Prueba de nuevo cuando termine.</p>
+            ) : null}
+            {removeError ? (
+              <p role="alert" style={{ color: '#ffb2b2', padding: '8px 0', fontSize: '0.92rem' }}>
+                {removeError}
+              </p>
+            ) : null}
             <div className="promo-modal-actions">
               <button
                 type="button"
