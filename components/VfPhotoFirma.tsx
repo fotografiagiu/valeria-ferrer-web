@@ -9,9 +9,11 @@ type Props = {
   className?: string;
   /** Current photo URL — firma hidden if this image still has the old baked stamp. */
   photoSrc?: string | null;
+  /** La galería ampliada debe mostrar la firma desde el primer fotograma. */
+  priority?: boolean;
 };
 
-const VfPhotoFirma: React.FC<Props> = ({ className = '', photoSrc }) => {
+const VfPhotoFirma: React.FC<Props> = ({ className = '', photoSrc, priority = false }) => {
   if (!shouldShowFirma(photoSrc)) return null;
   return (
     <img
@@ -19,7 +21,8 @@ const VfPhotoFirma: React.FC<Props> = ({ className = '', photoSrc }) => {
       src={VF_FIRMA_WHITE_SRC}
       alt=""
       aria-hidden="true"
-      loading="lazy"
+      loading={priority ? 'eager' : 'lazy'}
+      fetchPriority={priority ? 'high' : 'auto'}
       decoding="async"
       width={1024}
       height={369}
