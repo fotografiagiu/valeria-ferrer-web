@@ -248,34 +248,39 @@ const ModelDetail: React.FC = () => {
           </Link>
           <Link to="/" className="vf-mobile-profile-nav__home">Inicio</Link>
         </div>
-        <div className="vf-mobile-profile-nav__pager">
-          <button
-            type="button"
-            className="vf-mobile-profile-nav__direction"
-            onClick={() => previousModel && navigateToModel(previousModel.id)}
-            disabled={!previousModel}
-            aria-label={previousModel ? `Ficha anterior: ${previousModel.name}` : 'No hay ficha anterior'}
-          >
-            <ChevronLeft size={21} aria-hidden="true" />
-            <span className="vf-mobile-profile-nav__copy">
-              <span className="vf-mobile-profile-nav__eyebrow">Anterior</span>
-              <strong>{previousModel?.name || 'Primera ficha'}</strong>
-            </span>
-          </button>
-          <span className="vf-mobile-profile-nav__divider" aria-hidden="true" />
-          <button
-            type="button"
-            className="vf-mobile-profile-nav__direction vf-mobile-profile-nav__direction--next"
-            onClick={() => nextModel && navigateToModel(nextModel.id)}
-            disabled={!nextModel}
-            aria-label={nextModel ? `Siguiente ficha: ${nextModel.name}` : 'No hay siguiente ficha'}
-          >
-            <span className="vf-mobile-profile-nav__copy">
-              <span className="vf-mobile-profile-nav__eyebrow">Siguiente ficha</span>
-              <strong>{nextModel?.name || 'Última ficha'}</strong>
-            </span>
-            <ChevronRight size={21} aria-hidden="true" />
-          </button>
+        <div className="vf-mobile-profile-nav__photo-pager">
+          {previousModel ? (
+            <Link
+              to={`/models/${previousModel.id}`}
+              className="vf-profile-neighbor-card vf-profile-neighbor-card--previous"
+              aria-label={`Ver ficha anterior: ${previousModel.name}`}
+            >
+              <img className="vf-profile-neighbor-card__photo" src={previousModel.image} alt="" loading="lazy" decoding="async" draggable={false} />
+              <span className="vf-profile-neighbor-card__body">
+                <small>Anterior chica</small>
+                <strong>{previousModel.name}</strong>
+              </span>
+              <ChevronLeft className="vf-profile-neighbor-card__arrow" size={19} aria-hidden="true" />
+            </Link>
+          ) : (
+            <span className="vf-profile-neighbor-card vf-profile-neighbor-card--empty">Primera ficha</span>
+          )}
+          {nextModel ? (
+            <Link
+              to={`/models/${nextModel.id}`}
+              className="vf-profile-neighbor-card vf-profile-neighbor-card--next"
+              aria-label={`Ver siguiente chica: ${nextModel.name}`}
+            >
+              <span className="vf-profile-neighbor-card__body">
+                <small>Siguiente chica</small>
+                <strong>{nextModel.name}</strong>
+              </span>
+              <ChevronRight className="vf-profile-neighbor-card__arrow" size={19} aria-hidden="true" />
+              <img className="vf-profile-neighbor-card__photo" src={nextModel.image} alt="" loading="lazy" decoding="async" draggable={false} />
+            </Link>
+          ) : (
+            <span className="vf-profile-neighbor-card vf-profile-neighbor-card--empty">Última ficha</span>
+          )}
         </div>
       </nav>
 
@@ -287,14 +292,15 @@ const ModelDetail: React.FC = () => {
         {previousModel ? (
           <Link
             to={`/models/${previousModel.id}`}
-            className="vf-desktop-profile-nav__link"
+            className="vf-profile-neighbor-card vf-profile-neighbor-card--previous"
             aria-label={`Ver ficha anterior: ${previousModel.name}`}
           >
-            <ChevronLeft size={19} aria-hidden="true" />
-            <span className="vf-desktop-profile-nav__copy">
+            <img className="vf-profile-neighbor-card__photo" src={previousModel.image} alt="" loading="lazy" decoding="async" draggable={false} />
+            <span className="vf-profile-neighbor-card__body">
               <small>Anterior chica</small>
               <strong>{previousModel.name}</strong>
             </span>
+            <ChevronLeft className="vf-profile-neighbor-card__arrow" size={22} aria-hidden="true" />
           </Link>
         ) : (
           <span className="vf-desktop-profile-nav__edge" aria-hidden="true" />
@@ -307,14 +313,15 @@ const ModelDetail: React.FC = () => {
         {nextModel ? (
           <Link
             to={`/models/${nextModel.id}`}
-            className="vf-desktop-profile-nav__link vf-desktop-profile-nav__link--next"
+            className="vf-profile-neighbor-card vf-profile-neighbor-card--next"
             aria-label={`Ver siguiente chica: ${nextModel.name}`}
           >
-            <span className="vf-desktop-profile-nav__copy">
+            <span className="vf-profile-neighbor-card__body">
               <small>Siguiente chica</small>
               <strong>{nextModel.name}</strong>
             </span>
-            <ChevronRight size={19} aria-hidden="true" />
+            <ChevronRight className="vf-profile-neighbor-card__arrow" size={22} aria-hidden="true" />
+            <img className="vf-profile-neighbor-card__photo" src={nextModel.image} alt="" loading="lazy" decoding="async" draggable={false} />
           </Link>
         ) : (
           <span className="vf-desktop-profile-nav__edge" aria-hidden="true" />
