@@ -5,6 +5,7 @@ import modelsJson from '../data/models.json';
 import { getRecommendedModels } from '../lib/recommendations';
 import { getExploreProfileLinks } from '../lib/exploreProfiles';
 import ExploreProfilesNav from '../components/ExploreProfilesNav';
+import VfPhotoFirma from '../components/VfPhotoFirma';
 import { ArrowLeft, Check, Calendar, Phone, MapPin, Ruler, User, Star, Sparkles, ChevronLeft, ChevronRight, MessageCircle, Shield, Crown, Clock, Heart } from 'lucide-react';
 import LazyImage from '../components/LazyImage';
 import { getGalleryImageThumbnail } from '../lib/modelGridImage';
@@ -279,6 +280,46 @@ const ModelDetail: React.FC = () => {
       </nav>
 
       <EditorialProfileIntro model={model} onOpenGallery={openGallery} />
+
+      {/* Navegación recuperada para escritorio: el diseño editorial oculta la barra
+          legacy dentro de .vf-profile-main. Enlaces reales, sin alterar móvil ni SEO. */}
+      <nav className="vf-desktop-profile-nav" aria-label="Navegación entre fichas">
+        {previousModel ? (
+          <Link
+            to={`/models/${previousModel.id}`}
+            className="vf-desktop-profile-nav__link"
+            aria-label={`Ver ficha anterior: ${previousModel.name}`}
+          >
+            <ChevronLeft size={19} aria-hidden="true" />
+            <span className="vf-desktop-profile-nav__copy">
+              <small>Anterior chica</small>
+              <strong>{previousModel.name}</strong>
+            </span>
+          </Link>
+        ) : (
+          <span className="vf-desktop-profile-nav__edge" aria-hidden="true" />
+        )}
+
+        <Link to="/models" className="vf-desktop-profile-nav__catalog">
+          Ver todas las chicas
+        </Link>
+
+        {nextModel ? (
+          <Link
+            to={`/models/${nextModel.id}`}
+            className="vf-desktop-profile-nav__link vf-desktop-profile-nav__link--next"
+            aria-label={`Ver siguiente chica: ${nextModel.name}`}
+          >
+            <span className="vf-desktop-profile-nav__copy">
+              <small>Siguiente chica</small>
+              <strong>{nextModel.name}</strong>
+            </span>
+            <ChevronRight size={19} aria-hidden="true" />
+          </Link>
+        ) : (
+          <span className="vf-desktop-profile-nav__edge" aria-hidden="true" />
+        )}
+      </nav>
 
       {/* Premium Hero Section */}
       <div className="vf-profile-titlebar relative bg-gradient-to-b from-[#111111] to-transparent">
@@ -2151,6 +2192,10 @@ const ModelDetail: React.FC = () => {
                       className="w-full h-full object-cover transition-all duration-[2s] group-hover:scale-105"
                       draggable={false}
                     />
+                    <VfPhotoFirma
+                      className="vf-profile-gallery__firma"
+                      photoSrc={(model.gallery || [])[0]}
+                    />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700">
                       <div className="absolute bottom-6 left-6 right-6">
                         <p className="text-white text-sm font-light mb-2">Portada editorial</p>
@@ -2174,6 +2219,7 @@ const ModelDetail: React.FC = () => {
                         className="w-full h-full object-cover transition-all duration-[1.5s] group-hover:scale-110"
                         draggable={false}
                       />
+                      <VfPhotoFirma className="vf-profile-gallery__firma" photoSrc={img} />
                       <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
                         <div className="text-white text-xs font-light">Ver imagen</div>
                       </div>
