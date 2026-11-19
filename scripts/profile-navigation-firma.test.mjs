@@ -33,3 +33,22 @@ test('metadata and canonical elements remain unchanged by profile navigation', (
   assert.match(detail, /<SEOHead model=\{seoModel\}/);
   assert.match(detail, /<EditorialProfileIntro model=\{model\} onOpenGallery=\{openGallery\}/);
 });
+
+
+test('approved photo-preview cards use the correct adjacent model cover on desktop and mobile', () => {
+  assert.match(detail, /className="vf-mobile-profile-nav__photo-pager"/);
+  assert.match(detail, /className="vf-profile-neighbor-card vf-profile-neighbor-card--previous"/);
+  assert.match(detail, /className="vf-profile-neighbor-card vf-profile-neighbor-card--next"/);
+  assert.equal((detail.match(/src=\{previousModel\.image\}/g) || []).length, 2);
+  assert.equal((detail.match(/src=\{nextModel\.image\}/g) || []).length, 2);
+  assert.equal((detail.match(/className="vf-profile-neighbor-card__photo"/g) || []).length, 4);
+  assert.match(style, /\.vf-profile-detail \.vf-profile-neighbor-card__photo\s*\{/);
+  assert.match(style, /\.vf-profile-detail \.vf-profile-neighbor-card::before\s*\{/);
+  assert.match(style, /@media \(max-width: 1023px\)[\s\S]*?\.vf-mobile-profile-nav__photo-pager\s*\{/);
+});
+
+test('navigation photo elements are decorative and destination links remain accessible', () => {
+  assert.equal((detail.match(/className="vf-profile-neighbor-card__photo"[^>]+alt=""/g) || []).length, 4);
+  assert.equal((detail.match(/aria-label=\{\`Ver ficha anterior: \$\{previousModel\.name\}\`\}/g) || []).length, 2);
+  assert.equal((detail.match(/aria-label=\{\`Ver siguiente chica: \$\{nextModel\.name\}\`\}/g) || []).length, 2);
+});
