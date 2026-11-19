@@ -366,7 +366,7 @@ const GalleryModal: React.FC<GalleryModalProps> = ({
                 sizes={isMobileLandscape ? '100vw' : '90vw'}
                 onImageLoad={(event) => handleMainImageLoad(currentIndex, event.currentTarget)}
               />
-              <VfPhotoFirma className="vf-gallery-modal__firma" photoSrc={currentSrc} />
+              <VfPhotoFirma className="vf-gallery-modal__firma" photoSrc={currentSrc} priority />
 
               {validImages.length > 1 && (
                 <motion.div
