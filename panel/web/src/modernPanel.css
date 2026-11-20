@@ -23,6 +23,14 @@
 }
 
 html { scroll-behavior:smooth; }
+/* During catalogue reorder, native scrolling must follow dnd-kit's updates
+   immediately. Smooth scrolling queues animations and makes upward dragging
+   feel delayed in browsers and installed PWA alike. Normal nav stays smooth. */
+html.vf-catalog-dragging,
+html.vf-catalog-dragging body {
+  scroll-behavior: auto !important;
+}
+
 body {
   color:var(--text);
   background:
@@ -358,6 +366,7 @@ a {color:inherit}
 .model-card.dragging {
   background:#2a3547;
   border-color:#dfc397;
+  will-change: transform;
   box-shadow:0 18px 40px rgba(0,0,0,.3);
 }
 .order-num {
