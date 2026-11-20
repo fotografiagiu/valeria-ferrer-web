@@ -14,10 +14,24 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { ApiError, putOrder, removeCatalogModel, type StaffCatalogModel } from '../lib/api';
 import { formatOrderNumber, publicThumbUrl } from '../lib/assets';
 import { CoverPicker } from './CoverPicker';
+
+/**
+ * dnd-kit scrolls repeatedly while a handle is held near the viewport edge.
+ * A larger vertical activation zone and higher acceleration make long moves
+ * (e.g. from position 23 to position 1) practical on mobile and desktop.
+ * Horizontal scrolling remains nearly inactive for this vertical list.
+ */
+const CATALOG_AUTO_SCROLL = {
+  thresholds: { x: 0.05, y: 0.3 },
+  acceleration: 18,
+  interval: 5,
+};
+
+const CATALOG_DRAG_CLASS = 'vf-catalog-dragging';
 
 type Props = {
   initialModels: StaffCatalogModel[];
@@ -149,6 +163,20 @@ export function CatalogScreen({
     useSensor(TouchSensor, { activationConstraint: { delay: 120, tolerance: 8 } })
   );
 
+  // HTML's regular smooth scrolling must not delay dnd-kit's repeated scrollBy
+  // calls during a drag. Restore it on drop, cancel and component unmount.
+  useEffect(() => {
+    return () => document.documentElement.classList.remove(CATALOG_DRAG_CLASS);
+  }, []);
+
+  function onDragStart() {
+    document.documentElement.classList.add(CATALOG_DRAG_CLASS);
+  }
+
+  function onDragCancel() {
+    document.documentElement.classList.remove(CATALOG_DRAG_CLASS);
+  }
+
   const dirty = useMemo(() => {
     const current = models.map((m) => m.slug);
     if (current.length !== savedOrder.length) return true;
@@ -161,6 +189,7 @@ export function CatalogScreen({
   }
 
   function onDragEnd(event: DragEndEvent) {
+    document.documentElement.classList.remove(CATALOG_DRAG_CLASS);
     const { active, over } = event;
     if (!over || active.id === over.id) return;
     const oldIndex = models.findIndex((m) => m.slug === active.id);
@@ -276,7 +305,14 @@ export function CatalogScreen({
         </div>
       ) : null}
 
-      <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={onDragEnd}>
+      <DndContext
+        sensors={sensors}
+        collisionDetection={closestCenter}
+        autoScroll={CATALOG_AUTO_SCROLL}
+        onDragStart={onDragStart}
+        onDragCancel={onDragCancel}
+        onDragEnd={onDragEnd}
+      >
         <SortableContext items={models.map((m) => m.slug)} strategy={verticalListSortingStrategy}>
           <div className="model-list">
             {models.map((model, index) => (
