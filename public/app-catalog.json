@@ -1,9 +1,20 @@
 {
-  "generatedAt": "2026-11-19T08:34:02.059Z",
-  "catalogVersion": "3268e2bf6fe946303e0dcad5a7d559a35bbddf3e62a01bf79e6a16cbfb12dbd4",
+  "generatedAt": "2026-11-20T19:00:46.735Z",
+  "catalogVersion": "c89c9054e6b0459499545924cdf2eaba7c3ed0acff566b1dcf6fef20741d6c24",
   "source": "valeria-ferrer-web",
   "method": "build-app-catalog",
   "models": [
+    {
+      "slug": "selena",
+      "name": "Selena",
+      "active": true,
+      "vip": false,
+      "coverImageUrl": "/chicas/selena-model-agency-valencia-vf/portada.jpg",
+      "images": [
+        "/chicas/selena-model-agency-valencia-vf/gallery/01.jpg",
+        "/chicas/selena-model-agency-valencia-vf/gallery/02.jpg"
+      ]
+    },
     {
       "slug": "cataleya",
       "name": "Cataleya",

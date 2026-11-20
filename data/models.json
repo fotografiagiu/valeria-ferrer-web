@@ -1,5 +1,58 @@
 [
   {
+    "slug": "selena",
+    "name": "Selena",
+    "age": 25,
+    "height": "1,65 m",
+    "weight": "53 kg",
+    "nationality": "Venezolana",
+    "city": "Valencia",
+    "profileUrl": "https://www.valeriaferrer.com/models/selena/",
+    "coverImageUrl": "/chicas/selena-model-agency-valencia-vf/portada.jpg",
+    "profileImageUrl": "/chicas/selena-model-agency-valencia-vf/portada.jpg",
+    "description": "Una mirada profunda, unos labios irresistibles y una larga melena negra que realza su belleza. Esta espectacular morena destaca por su feminidad, sus curvas y una presencia magnética que resulta difícil de ignorar. Su estilo combina elegancia, sensualidad y un toque atrevido que despierta la curiosidad desde el primer instante. Cada gesto transmite seguridad y un encanto natural que la convierte en una mujer especialmente atractiva. Si buscas una escort en Valencia con una imagen sofisticada, una belleza seductora y una personalidad visual única, descubre a Selena en Valeria Ferrer. Una modelo que no necesita exageraciones para captar todas las miradas.",
+    "essence": "Selena · belleza cautivadora y sensualidad en Valencia. Venezolana de 25 años, 1,65 m y 53 kg: mirada profunda, melena negra y una presencia magnética.",
+    "uniquePoints": [
+      "Venezolana de 25 en Valencia — mirada profunda, labios irresistibles y larga melena negra",
+      "1,65 m y 53 kg: feminidad, curvas y una presencia magnética difícil de ignorar",
+      "Elegancia, sensualidad y un toque atrevido: novedad Valeria Ferrer con encanto natural"
+    ],
+    "experiencePoints": [
+      "Privado con una venezolana sofisticada, seductora y con mucha presencia en Valencia",
+      "Encuentro con sensualidad, seguridad y ese magnetismo que captura la mirada",
+      "Novedad Valeria Ferrer: descubre a Selena y consulta su disponibilidad"
+    ],
+    "images": [
+      "/chicas/selena-model-agency-valencia-vf/gallery/01.jpg",
+      "/chicas/selena-model-agency-valencia-vf/gallery/02.jpg"
+    ],
+    "services": [
+      "Girlfriend Experience",
+      "Cenas de Negocios",
+      "Eventos Sociales",
+      "Acompañamiento Personal"
+    ],
+    "availability": "24h",
+    "languages": [
+      "Español"
+    ],
+    "tags": [
+      "nueva",
+      "selena",
+      "venezolana",
+      "latina",
+      "morena",
+      "elegante",
+      "seductora",
+      "valencia",
+      "sensual"
+    ],
+    "isNew": true,
+    "featured": true,
+    "vip": false,
+    "active": true
+  },
+  {
     "slug": "cataleya",
     "name": "Cataleya",
     "age": 24,
