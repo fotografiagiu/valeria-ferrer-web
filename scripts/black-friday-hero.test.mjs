@@ -21,7 +21,7 @@ test('desktop uses trial image, but mobile keeps its original picture source', (
   assert.match(hero, /<Link to="\/booking"/);
 });
 
-test('Black Friday overlay does not crop the woman's face or hide the promo at medium desktop widths', () => {
+test("Black Friday overlay preserves the woman and promotion on medium desktop widths", () => {
   assert.match(css, /\.vf-noir-home-page \.vf-lux-hero--black-friday \.vf-lux-hero__visual picture img\s*\{[\s\S]*?object-fit: contain/);
   assert.match(css, /\.vf-noir-home-page \.vf-lux-hero--black-friday \.vf-lux-hero__shade\s*\{[\s\S]*?linear-gradient\(90deg/);
   assert.match(css, /@media \(min-width: 1024px\)/);
