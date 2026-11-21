@@ -23,9 +23,12 @@ const NovemberNoirHome: React.FC<HomeHeroProps> = () => {
 
   return (
   <div className="vf-noir vf-lux-home-intro" id="valeria-ferrer-home">
-    <section className="vf-lux-hero" aria-labelledby="vf-lux-hero-title">
+    <section className="vf-lux-hero vf-lux-hero--black-friday" aria-labelledby="vf-lux-hero-title">
       <div className="vf-lux-hero__visual" aria-hidden="true">
         <picture>
+          {/* Campaña de escritorio: fotografía en resolución original + creatividad Black Friday
+              del boceto aprobado, sin barra de navegación ni texto HTML incrustado. */}
+
           <source
             media="(max-width: 767px)"
             srcSet="/images/valeria-premium-hero-mobile.webp"
@@ -37,10 +40,10 @@ const NovemberNoirHome: React.FC<HomeHeroProps> = () => {
             type="image/png"
           />
           <img
-            src="/images/valeria-premium-hero.webp"
+            src="https://d2ol7oe51mr4n9.cloudfront.net/user_36DayVJkjOLFx77vIiJcDWRkvYc/d9204eed-98ae-4157-9294-468a172bd333.png"
             alt=""
-            width={1264}
-            height={954}
+            width={1916}
+            height={821}
             loading="eager"
             decoding="async"
             fetchPriority="high"
