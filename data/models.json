@@ -1,5 +1,64 @@
 [
   {
+    "slug": "lisa",
+    "name": "Lisa",
+    "age": 19,
+    "height": "1,55 m",
+    "weight": "45 kg",
+    "nationality": "Paraguaya",
+    "city": "Valencia",
+    "profileUrl": "https://www.valeriaferrer.com/models/lisa/",
+    "coverImageUrl": "/chicas/lisa-model-agency-valencia-vf/portada.jpg",
+    "profileImageUrl": "/chicas/lisa-model-agency-valencia-vf/portada.jpg",
+    "description": "Lisa es una preciosa joven de 19 años que destaca por su espectacular belleza, su larga melena rubia y una mirada tan dulce como cautivadora. Su rostro delicado, sus labios carnosos y su figura de curvas irresistibles crean una combinación de dulzura y sensualidad que despierta la curiosidad desde el primer instante. Femenina, atractiva y con ese encanto especial que resulta difícil de describir, Lisa posee una belleza que no pasa desapercibida. Si buscas una compañía especial en Valencia, descubre a Lisa en Valeria Ferrer y déjate conquistar por su irresistible atractivo.",
+    "essence": "Lisa, 19 años · una belleza difícil de olvidar. Paraguaya en Valencia, 1,55 m y 45 kg: melena rubia, mirada dulce y curvas irresistibles.",
+    "uniquePoints": [
+      "Paraguaya de 19 en Valencia — melena rubia larga y una mirada dulce y cautivadora",
+      "1,55 m y 45 kg, pecho natural 85: dulzura y sensualidad en una figura de curvas irresistibles",
+      "Belleza delicada y atractivo especial: novedad Valeria Ferrer difícil de olvidar"
+    ],
+    "experiencePoints": [
+      "Privado con una joven paraguaya rubia, dulce y espectacularmente atractiva en Valencia",
+      "Encuentro con feminidad, encanto y esa belleza que no pasa desapercibida",
+      "Novedad Valeria Ferrer: descubre a Lisa y consulta su disponibilidad"
+    ],
+    "images": [
+      "/chicas/lisa-model-agency-valencia-vf/gallery/01.jpg",
+      "/chicas/lisa-model-agency-valencia-vf/gallery/02.jpg",
+      "/chicas/lisa-model-agency-valencia-vf/gallery/03.jpg",
+      "/chicas/lisa-model-agency-valencia-vf/gallery/04.jpg",
+      "/chicas/lisa-model-agency-valencia-vf/gallery/05.jpg",
+      "/chicas/lisa-model-agency-valencia-vf/gallery/06.jpg",
+      "/chicas/lisa-model-agency-valencia-vf/gallery/07.jpg",
+      "/chicas/lisa-model-agency-valencia-vf/gallery/08.jpg"
+    ],
+    "services": [
+      "Girlfriend Experience",
+      "Cenas de Negocios",
+      "Eventos Sociales",
+      "Acompañamiento Personal"
+    ],
+    "availability": "24h",
+    "languages": [
+      "Español"
+    ],
+    "tags": [
+      "nueva",
+      "lisa",
+      "paraguaya",
+      "rubia",
+      "joven",
+      "valencia",
+      "dulce",
+      "sensual",
+      "femenina"
+    ],
+    "isNew": true,
+    "featured": true,
+    "vip": false,
+    "active": true
+  },
+  {
     "slug": "selena",
     "name": "Selena",
     "age": 25,
