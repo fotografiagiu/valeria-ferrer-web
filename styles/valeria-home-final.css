@@ -697,3 +697,62 @@
 @media (min-width: 1800px) {
   .vf-noir-home-page .vf-lux-hero--black-friday .vf-lux-hero__visual picture { width: 92%; }
 }
+
+
+/* Encuadre definitivo: el archivo HD se dibuja a su proporción nativa.
+   Una única máscara sobre la imagen real elimina la raya sin recortar
+   el rostro ni agrandar la promoción. */
+@media (min-width: 1024px) {
+  .vf-noir-home-page .vf-lux-hero--black-friday .vf-lux-hero__visual {
+    overflow: hidden;
+    background: #190811;
+  }
+  .vf-noir-home-page .vf-lux-hero--black-friday .vf-lux-hero__visual::after {
+    content: none;
+    display: none;
+  }
+  .vf-noir-home-page .vf-lux-hero--black-friday .vf-lux-hero__visual picture {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+  .vf-noir-home-page .vf-lux-hero--black-friday .vf-lux-hero__visual picture img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: auto;
+    display: block;
+    width: auto;
+    max-width: none;
+    height: 100%;
+    aspect-ratio: 1916 / 821;
+    object-fit: contain;
+    object-position: right center;
+    transform: none;
+    filter: none;
+    -webkit-mask-image: linear-gradient(90deg,
+      transparent 0%,
+      rgba(0,0,0,.08) 5%,
+      rgba(0,0,0,.32) 12%,
+      rgba(0,0,0,.75) 21%,
+      #000 32%);
+    mask-image: linear-gradient(90deg,
+      transparent 0%,
+      rgba(0,0,0,.08) 5%,
+      rgba(0,0,0,.32) 12%,
+      rgba(0,0,0,.75) 21%,
+      #000 32%);
+  }
+  .vf-noir-home-page .vf-lux-hero--black-friday .vf-lux-hero__shade {
+    background: linear-gradient(90deg,
+      #190811 0%,
+      rgba(25,8,17,.96) 18%,
+      rgba(25,8,17,.54) 33%,
+      rgba(25,8,17,.12) 48%,
+      transparent 65%);
+  }
+}
