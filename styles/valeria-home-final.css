@@ -129,8 +129,9 @@
   position:relative;
   z-index:3;
   padding:0 clamp(20px,3.5vw,60px) 70px;
-  /* Cuelga sobre el final de la foto; features quedan ~12–20px por encima del rail */
-  margin:-156px auto 0;
+  /* Cruza solo el borde inferior de la foto; evita que el rail flote
+     a media altura de la modelo en ventanas panorámicas o de poca altura. */
+  margin:-76px auto 0;
   width:100%;
   background:transparent;
   overflow:visible;
@@ -483,9 +484,9 @@
     width:100%;
     height:100%;
     overflow:hidden;
-    background:
-      linear-gradient(90deg,rgba(25,8,17,.97) 0%,rgba(25,8,17,.75) 43%,rgba(25,8,17,.25) 78%),
-      url('/images/valeria-premium-hero.webp') center 37% / cover no-repeat;
+    /* Una sola fotografía. El background anterior repetía la misma imagen
+       con cover y otro encuadre, creando cortes/duplicados con el <picture>. */
+    background:#190811;
     -webkit-mask-image:none;
     mask-image:none;
   }
@@ -495,8 +496,10 @@
     display:block;
     height:100%;
     width:76%;
-    -webkit-mask-image:linear-gradient(90deg,transparent 0%,transparent 28%,rgba(0,0,0,.10) 40%,rgba(0,0,0,.62) 60%,#000 82%);
-    mask-image:linear-gradient(90deg,transparent 0%,transparent 28%,rgba(0,0,0,.10) 40%,rgba(0,0,0,.62) 60%,#000 82%);
+    /* Al conservar object-fit:contain, la foto completa queda a la derecha.
+       Máscara suave solo en la unión izquierda; no debe borrar el rostro/cuerpo. */
+    -webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.38) 18%,rgba(0,0,0,.76) 35%,#000 48%);
+    mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.38) 18%,rgba(0,0,0,.76) 35%,#000 48%);
   }
   .vf-noir-home-page .vf-lux-hero__visual picture img {
     width:100%;height:100%;display:block;
@@ -506,6 +509,6 @@
   .vf-noir-home-page .vf-lux-hero__shade {
     background:
       linear-gradient(90deg,#190811 0%,rgba(25,8,17,.99) 15%,rgba(25,8,17,.89) 31%,rgba(25,8,17,.50) 48%,rgba(25,8,17,.08) 81%,transparent 100%),
-      linear-gradient(0deg,#12050c 0%,rgba(18,5,12,.68) 9%,transparent 38%);
+      linear-gradient(0deg,rgba(18,5,12,.42) 0%,rgba(18,5,12,.20) 9%,transparent 29%);
   }
 }
