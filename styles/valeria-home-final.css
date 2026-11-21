@@ -613,3 +613,42 @@
       rgba(25,8,17,0) 100%);
   }
 }
+
+
+/* BLACK FRIDAY — feather directly on the rendered image pixels.
+   object-fit:contain leaves an inner blank margin; masking only <picture>
+   made the actual photograph start with a hard vertical edge. */
+@media (min-width: 1024px) {
+  .vf-noir-home-page .vf-lux-hero--black-friday .vf-lux-hero__visual::after {
+    content: none;
+    display: none;
+  }
+  .vf-noir-home-page .vf-lux-hero--black-friday .vf-lux-hero__visual picture {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+  .vf-noir-home-page .vf-lux-hero--black-friday .vf-lux-hero__visual picture img {
+    -webkit-mask-image: linear-gradient(90deg,
+      transparent 0%,
+      transparent 13%,
+      rgba(0,0,0,.12) 21%,
+      rgba(0,0,0,.42) 32%,
+      rgba(0,0,0,.77) 43%,
+      #000 56%);
+    mask-image: linear-gradient(90deg,
+      transparent 0%,
+      transparent 13%,
+      rgba(0,0,0,.12) 21%,
+      rgba(0,0,0,.42) 32%,
+      rgba(0,0,0,.77) 43%,
+      #000 56%);
+  }
+  .vf-noir-home-page .vf-lux-hero--black-friday .vf-lux-hero__shade {
+    background: linear-gradient(90deg,
+      #190811 0%,
+      rgba(25,8,17,.99) 22%,
+      rgba(25,8,17,.78) 34%,
+      rgba(25,8,17,.40) 44%,
+      rgba(25,8,17,0) 60%);
+  }
+}
