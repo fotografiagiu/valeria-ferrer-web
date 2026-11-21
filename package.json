@@ -10,7 +10,7 @@
     "build:app-catalog": "node scripts/generate-app-catalog.mjs",
     "build:inject-seo": "node scripts/inject-seo-html.mjs",
     "build:prerender": "node scripts/prerender.mjs",
-    "build:production": "npm run test:photos && npm run test:profile-ui && npm run test:home-hero && npm run build && npm run build:seo && npm run build:inject-seo && npm run verify:inject-seo && npm run verify:sitemap && npm run audit:redirects",
+    "build:production": "npm run test:photos && npm run test:profile-ui && npm run test:home-hero && npm run test:black-friday && npm run build && npm run build:seo && npm run build:inject-seo && npm run verify:inject-seo && npm run verify:sitemap && npm run audit:redirects",
     "verify:seo-assets": "node scripts/verify-seo-assets.mjs",
     "verify:sitemap": "node scripts/verify-sitemap.mjs",
     "audit:redirects": "node scripts/audit-redirects.mjs",
@@ -24,7 +24,10 @@
     "photos:restore": "node scripts/restore-clean-model-photos.mjs --apply --verified-originals",
     "test:photos": "node --test scripts/restore-clean-model-photos.test.mjs",
     "test:profile-ui": "node --test scripts/profile-navigation-firma.test.mjs",
-    "test:home-hero": "node --test scripts/home-hero-composition.test.mjs"
+    "test:home-hero": "node --test scripts/home-hero-composition.test.mjs",
+    "prebuild": "node scripts/build-black-friday-hero.mjs",
+    "predev": "node scripts/build-black-friday-hero.mjs",
+    "test:black-friday": "node scripts/build-black-friday-hero.mjs && node --test scripts/black-friday-hero.test.mjs"
   },
   "dependencies": {
     "@google/genai": "^1.46.0",
