@@ -756,3 +756,118 @@
       transparent 65%);
   }
 }
+
+
+/* Black Friday móvil de prueba — no altera escritorio ni SEO. */
+.vf-lux-hero__mobile-black { display:none; }
+@media (max-width:767px) {
+  .vf-noir-home-page .vf-lux-hero--black-friday {
+    min-height:max(900px,100svh);
+    display:flex;
+    align-items:flex-end;
+    background:#190811;
+    overflow:hidden;
+  }
+  .vf-noir-home-page .vf-lux-hero--black-friday .vf-lux-hero__visual {
+    position:absolute;
+    inset:0 0 auto;
+    width:100%;
+    height:58%;
+    overflow:hidden;
+    background:#190811;
+  }
+  .vf-noir-home-page .vf-lux-hero--black-friday .vf-lux-hero__visual picture {
+    position:absolute;
+    inset:0;
+    display:block;
+    height:100%;
+    width:100%;
+    -webkit-mask-image:none;
+    mask-image:none;
+  }
+  .vf-noir-home-page .vf-lux-hero--black-friday .vf-lux-hero__visual picture img {
+    position:static;
+    display:block;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center 12%;
+    -webkit-mask-image:none;
+    mask-image:none;
+  }
+  .vf-noir-home-page .vf-lux-hero--black-friday .vf-lux-hero__shade {
+    z-index:1;
+    background:linear-gradient(180deg,
+      rgba(17,4,10,.09) 0%, rgba(17,4,10,.05) 23%,
+      rgba(25,8,17,.22) 36%, rgba(25,8,17,.85) 51%,
+      #190811 66%, #190811 100%);
+  }
+  .vf-noir-home-page .vf-lux-hero__mobile-black {
+    display:block;
+    position:absolute;
+    z-index:2;
+    top:46%;
+    left:4%;
+    width:92%;
+    height:clamp(152px,44vw,198px);
+    overflow:hidden;
+    border:1px solid rgba(223,169,101,.26);
+    border-radius:13px;
+    box-shadow:0 16px 40px rgba(0,0,0,.45),0 0 25px rgba(255,30,100,.10);
+    background:#100409;
+  }
+  .vf-noir-home-page .vf-lux-hero__mobile-black img {
+    position:absolute;
+    width:200%;
+    height:auto;
+    max-width:none;
+    left:-100%;
+    top:50%;
+    transform:translateY(-50%);
+    filter:none;
+  }
+  .vf-noir-home-page .vf-lux-hero--black-friday .vf-lux-hero__content {
+    position:relative;
+    z-index:3;
+    width:calc(100% - 28px);
+    max-width:440px;
+    margin:0 auto;
+    padding:0 0 72px;
+    text-align:center;
+  }
+  .vf-noir-home-page .vf-lux-hero--black-friday .vf-lux-hero__title {
+    font-size:clamp(45px,11vw,59px);
+    line-height:.84;
+    align-items:center;
+  }
+  .vf-noir-home-page .vf-lux-hero--black-friday .vf-lux-hero__eyebrow {
+    justify-content:center;
+    margin-bottom:12px;
+  }
+  .vf-noir-home-page .vf-lux-hero--black-friday .vf-lux-hero__tagline {
+    margin-top:12px;
+  }
+  .vf-noir-home-page .vf-lux-hero--black-friday .vf-lux-hero__actions {
+    flex-wrap:nowrap;
+    gap:8px;
+    margin-top:18px;
+  }
+  .vf-noir-home-page .vf-lux-hero--black-friday .vf-lux-hero__button {
+    flex:1 1 0;
+    min-width:0;
+    padding:12px 8px;
+    font-size:9px;
+    gap:5px;
+  }
+  .vf-noir-home-page .vf-lux-hero--black-friday .vf-lux-hero__features {
+    margin-top:20px;
+  }
+  .vf-noir-home-page > .vf-lux-news {
+    margin:12px auto 0;
+  }
+}
+@media(max-width:365px) {
+  .vf-noir-home-page .vf-lux-hero--black-friday { min-height:920px; }
+  .vf-noir-home-page .vf-lux-hero__mobile-black { top:45%; }
+  .vf-noir-home-page .vf-lux-hero--black-friday .vf-lux-hero__content { padding-bottom:82px; }
+}
