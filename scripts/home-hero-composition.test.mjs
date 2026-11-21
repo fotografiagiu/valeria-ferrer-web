@@ -12,7 +12,9 @@ test('home retains the single canonical hero image and SEO content', () => {
   assert.match(home, /<NovemberNoirHome models=\{homeModels\}/);
   assert.match(home, /<HomeNovedadesStrip models=\{homeModels\}/);
   assert.match(hero, /<h1 id="vf-lux-hero-title"/);
-  assert.match(hero, /src="\/images\/valeria-premium-hero.webp"/);
+  assert.match(hero, /src="https:\/\/d2ol7oe51mr4n9\.cloudfront\.net\/[^"]+\.png"/);
+  assert.match(hero, /vf-lux-hero--black-friday/);
+  assert.match(css, /\.vf-noir-home-page \.vf-lux-hero--black-friday \.vf-lux-hero__shade/);
   const finalDesktop = css.slice(css.lastIndexOf('/* FINAL DESKTOP HERO:'));
   assert.ok(finalDesktop.length > 200);
   assert.doesNotMatch(finalDesktop, /url\(['"]\/images\/valeria-premium-hero.webp/);
