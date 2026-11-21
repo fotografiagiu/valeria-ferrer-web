@@ -51,6 +51,10 @@ const NovemberNoirHome: React.FC<HomeHeroProps> = () => {
         </picture>
       </div>
       <div className="vf-lux-hero__shade" aria-hidden="true" />
+      <div className="vf-lux-hero__mobile-black" aria-label="Próximamente Black Friday, descuentos exclusivos por tiempo limitado">
+        <img src="https://d2ol7oe51mr4n9.cloudfront.net/user_36DayVJkjOLFx77vIiJcDWRkvYc/d9204eed-98ae-4157-9294-468a172bd333.png"
+          width={1916} height={821} alt="" loading="eager" decoding="async" />
+      </div>
       <div className="vf-lux-hero__content">
         <p className="vf-lux-hero__eyebrow"><Gem size={14} aria-hidden="true" /> AGENCIA PREMIUM EN VALENCIA</p>
         <h1 id="vf-lux-hero-title" className="vf-lux-hero__title">
