@@ -23,9 +23,16 @@ const NovemberNoirHome: React.FC<HomeHeroProps> = () => {
 
   return (
   <div className="vf-noir vf-lux-home-intro" id="valeria-ferrer-home">
-    <section className="vf-lux-hero" aria-labelledby="vf-lux-hero-title">
+    <section className="vf-lux-hero vf-lux-hero--black-friday" aria-labelledby="vf-lux-hero-title">
       <div className="vf-lux-hero__visual" aria-hidden="true">
         <picture>
+          {/* Campaña de escritorio: foto central + creatividad Black Friday original
+              del boceto aprobado, sin barra de navegación ni texto HTML incrustado. */}
+          <source
+            media="(min-width: 1024px)"
+            srcSet="/images/black-friday-hero-trial.avif"
+            type="image/avif"
+          />
           <source
             media="(max-width: 767px)"
             srcSet="/images/valeria-premium-hero-mobile.webp"
