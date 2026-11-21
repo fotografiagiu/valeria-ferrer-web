@@ -590,3 +590,26 @@
     margin: 14px auto 0;
   }
 }
+
+/* Transición real sobre la unión visible del bitmap (no solo sobre su <picture>).
+   La imagen usa object-fit:contain y su borde físico cae más a la derecha que
+   el inicio del contenedor: por eso la máscara anterior no ocultaba la línea. */
+@media (min-width: 1024px) {
+  .vf-noir-home-page .vf-lux-hero--black-friday .vf-lux-hero__visual::after {
+    content: "";
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    bottom: 0;
+    left: 26%;
+    width: 36%;
+    pointer-events: none;
+    background: linear-gradient(90deg,
+      #190811 0%,
+      #190811 22%,
+      rgba(25,8,17,.98) 33%,
+      rgba(25,8,17,.82) 49%,
+      rgba(25,8,17,.43) 73%,
+      rgba(25,8,17,0) 100%);
+  }
+}
