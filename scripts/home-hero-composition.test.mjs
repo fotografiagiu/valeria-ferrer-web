@@ -28,19 +28,19 @@ test('Novedades hangs at the hero edge instead of over model body', () => {
   assert.match(news, /className="vf-lux-news__hanger"/);
 });
 
-test('mobile Black Friday uses the approved HD banner, clean layout and a sign below the hero', () => {
+test('mobile Black Friday follows approved layout: one model, visible original promo and readable H1', () => {
   assert.doesNotMatch(hero, /srcSet="\/images\/valeria-premium-hero-mobile.webp"/);
   assert.match(hero, /src="https:\/\/d2ol7oe51mr4n9\.cloudfront\.net\/[^"]+\.png"/);
-  const mobile = css.slice(css.lastIndexOf('/* BLACK FRIDAY MÓVIL — portada inmersiva restaurada.'));
+  const mobile = css.slice(css.lastIndexOf('/* BLACK FRIDAY MÓVIL — composición aprobada de la derecha.'));
   assert.match(mobile, /@media \(max-width: 767px\)/);
-  assert.match(mobile, /min-height: max\(920px, 112svh\)/);
-  assert.match(mobile, /height: clamp\(340px, 51svh, 475px\)/);
-  assert.match(mobile, /background-size: 200% auto/);
-  assert.match(mobile, /background-position: right 46%/);
-  assert.match(mobile, /object-fit: cover/);
+  assert.match(mobile, /min-height: max\(750px, 100svh\)/);
+  assert.match(mobile, /height: clamp\(430px, 64svh, 565px\)/);
+  assert.match(mobile, /object-position: left center/);
+  assert.match(mobile, /background-size: auto 100%/);
+  assert.match(mobile, /width: 62%/);
+  assert.match(mobile, /flex-direction: row/);
   assert.match(hero, /vf-lux-hero__mobile-promo/);
-  assert.match(mobile, /flex-direction: column;/);
-  assert.match(mobile, /\.vf-noir-home-page > \.vf-lux-news \{margin: 4px auto 0;/);
+  assert.match(mobile, /\.vf-noir-home-page > \.vf-lux-news \{\s*margin: 12px auto 0;/);
 });
 
 test('desktop image feathers into the solid burgundy background without bottom hard cut', () => {
