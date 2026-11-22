@@ -758,144 +758,170 @@
 }
 
 
-/* BLACK FRIDAY MÓVIL 2026 — composición editorial propia, sin la foto Noir.
-   La creatividad original HD se ve completa; contenido y ventajas debajo,
-   sin montarse en la cara de la modelo ni tapar la promoción. Desktop intacto. */
+/* BLACK FRIDAY MÓVIL — portada inmersiva restaurada.
+   Una fotografía a sangre con protagonista visible + segunda ventana a la
+   derecha del MISMO arte original mostrando la promoción en tamaño legible.
+   H1 / CTAs sobre el degradado; Novedades debajo, sin invadir el hero. */
 @media (max-width: 767px) {
   .vf-noir-home-page .vf-lux-hero--black-friday {
+    position: relative;
     display: flex;
     flex-direction: column;
+    justify-content: flex-end;
     align-items: stretch;
-    justify-content: flex-start;
-    min-height: 0;
+    min-height: max(790px, 100svh);
     height: auto;
     overflow: hidden;
-    background:
-      radial-gradient(ellipse at 50% 35%, rgba(96,19,49,.28), transparent 70%),
-      #190811;
+    isolation: isolate;
+    background: #190811;
   }
   .vf-noir-home-page .vf-lux-hero--black-friday .vf-lux-hero__visual {
-    position: relative;
-    inset: auto;
+    position: absolute;
+    inset: 0;
+    display: block;
     z-index: 0;
-    flex: 0 0 auto;
     width: 100%;
-    height: auto;
-    aspect-ratio: 1916 / 821;
+    height: 100%;
+    aspect-ratio: auto;
     overflow: hidden;
     background: #190811;
     -webkit-mask-image: none;
     mask-image: none;
   }
-  .vf-noir-home-page .vf-lux-hero--black-friday .vf-lux-hero__visual picture,
-  .vf-noir-home-page .vf-lux-hero--black-friday .vf-lux-hero__visual picture img {
+  .vf-noir-home-page .vf-lux-hero--black-friday .vf-lux-hero__visual picture {
+    position: absolute;
+    inset: 0;
     display: block;
-    position: static;
     width: 100%;
     height: 100%;
-    max-width: none;
-    object-fit: contain;
-    object-position: center center;
-    transform: none;
-    filter: none;
+    overflow: hidden;
     -webkit-mask-image: none;
     mask-image: none;
   }
+  .vf-noir-home-page .vf-lux-hero--black-friday .vf-lux-hero__visual picture img {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    aspect-ratio: auto;
+    object-fit: cover;
+    /* El personaje está en la izquierda del original panorámico.
+       Encuadre izquierdo-centro: el rostro permanece protagonista. */
+    object-position: 28% 50%;
+    transform: none;
+    filter: brightness(.88) saturate(1.04);
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+  /* Promo independiente del crop de la modelo: se usa exactamente la misma
+     imagen de Black Friday, sin duplicar tarjetas ni insertar otra campaña. */
+  .vf-noir-home-page .vf-lux-hero--black-friday .vf-lux-hero__mobile-promo {
+    position: absolute;
+    z-index: 2;
+    top: clamp(155px, 23svh, 205px);
+    right: 0;
+    width: min(92%, 405px);
+    height: 210px;
+    pointer-events: none;
+    background-image: url('https://d2ol7oe51mr4n9.cloudfront.net/user_36DayVJkjOLFx77vIiJcDWRkvYc/d9204eed-98ae-4157-9294-468a172bd333.png');
+    background-repeat: no-repeat;
+    background-size: auto 210px;
+    background-position: right center;
+    -webkit-mask-image: linear-gradient(90deg,transparent 0%,rgba(0,0,0,.65) 19%,#000 42%);
+    mask-image: linear-gradient(90deg,transparent 0%,rgba(0,0,0,.65) 19%,#000 42%);
+    filter: drop-shadow(0 8px 24px rgba(0,0,0,.2));
+  }
   .vf-noir-home-page .vf-lux-hero--black-friday .vf-lux-hero__shade {
     z-index: 1;
-    background: linear-gradient(180deg,
-      transparent 0%, transparent 26%,
-      rgba(25,8,17,.08) 33%, #190811 43%,
-      #190811 100%);
+    background:
+      linear-gradient(180deg,
+        rgba(19,4,12,.40) 0%,
+        rgba(19,4,12,.14) 18%,
+        rgba(19,4,12,.03) 29%,
+        rgba(19,4,12,.30) 43%,
+        rgba(19,4,12,.83) 55%,
+        rgba(25,8,17,.97) 76%,
+        #190811 100%),
+      linear-gradient(90deg,rgba(25,8,17,.33),transparent 75%);
     pointer-events: none;
   }
   .vf-noir-home-page .vf-lux-hero--black-friday .vf-lux-hero__content {
-    z-index: 2;
     position: relative;
+    z-index: 3;
     flex: 0 0 auto;
-    width: min(100% - 32px, 440px);
-    max-width: 440px;
+    width: calc(100% - 32px);
+    max-width: 430px;
     margin: 0 auto;
-    padding: 20px 0 33px;
+    padding: 0 0 42px;
     text-align: center;
   }
   .vf-noir-home-page .vf-lux-hero--black-friday .vf-lux-hero__eyebrow {
     justify-content: center;
-    margin: 0 auto 12px;
+    margin: 0 auto 10px;
     font-size: 9px;
-    letter-spacing: .15em;
-    color: #ebc69a;
+    letter-spacing: .16em;
     opacity: 1;
   }
   .vf-noir-home-page .vf-lux-hero--black-friday .vf-lux-hero__title {
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 100%;
     margin: 0;
-    font-size: clamp(45px, 12vw, 62px);
-    line-height: .84;
+    max-width: 100%;
+    font-size: clamp(51px, 12vw, 66px);
+    line-height: .83;
     letter-spacing: -.035em;
-    text-shadow: 0 4px 20px rgba(0,0,0,.36);
+    text-shadow: 0 3px 20px rgba(0,0,0,.72);
   }
-  .vf-noir-home-page .vf-lux-hero--black-friday .vf-lux-hero__title span {
-    white-space: nowrap;
-  }
+  .vf-noir-home-page .vf-lux-hero--black-friday .vf-lux-hero__title span {white-space: nowrap}
   .vf-noir-home-page .vf-lux-hero--black-friday .vf-lux-hero__tagline {
-    margin: 17px auto 0;
-    font-size: clamp(20px, 5vw, 25px);
+    font-size: clamp(19px, 5.15vw, 24px);
     line-height: 1.2;
+    margin: 17px auto 0;
+    text-shadow: 0 2px 14px rgba(0,0,0,.8);
   }
-  .vf-noir-home-page .vf-lux-hero--black-friday .vf-lux-hero__description {
-    display: none;
-  }
+  .vf-noir-home-page .vf-lux-hero--black-friday .vf-lux-hero__description {display:none}
   .vf-noir-home-page .vf-lux-hero--black-friday .vf-lux-hero__actions {
-    display: grid;
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
     gap: 10px;
-    width: min(100%, 360px);
-    margin: 22px auto 0;
+    width: min(100%, 370px);
+    margin: 24px auto 0;
   }
   .vf-noir-home-page .vf-lux-hero--black-friday .vf-lux-hero__button {
     width: 100%;
-    min-height: 48px;
-    padding: 11px 15px;
+    min-height: 50px;
+    padding: 12px 16px;
     font-size: 11px;
-    letter-spacing: .065em;
-    gap: 10px;
+    gap: 9px;
   }
   .vf-noir-home-page .vf-lux-hero--black-friday .vf-lux-hero__features {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 14px 10px;
-    width: min(100%, 345px);
-    max-width: 345px;
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: 14px 8px;
+    width: min(100%, 338px);
+    max-width: 338px;
     margin: 23px auto 0;
   }
   .vf-noir-home-page .vf-lux-hero--black-friday .vf-lux-hero__features span {
     font-size: 10px;
-    line-height: 1.25;
+    line-height: 1.3;
     white-space: normal;
     gap: 5px;
   }
-  .vf-noir-home-page .vf-lux-hero--black-friday .vf-lux-hero__features svg {
-    width: 18px;
-    height: 18px;
-  }
-  .vf-noir-home-page > .vf-lux-news {
-    margin: 8px auto 0;
-    padding-top: 0;
-  }
-  .vf-noir-home-page .vf-lux-news__hanger {
-    margin-top: -1px;
-  }
+  .vf-noir-home-page .vf-lux-hero--black-friday .vf-lux-hero__features svg {width:18px;height:18px}
+  .vf-noir-home-page > .vf-lux-news {margin: 4px auto 0;padding-top:0}
+  .vf-noir-home-page .vf-lux-news__hanger {margin-top:-1px}
 }
 @media (max-width: 365px) {
-  .vf-noir-home-page .vf-lux-hero--black-friday .vf-lux-hero__title {
-    font-size: clamp(41px, 12vw, 47px);
-  }
-  .vf-noir-home-page .vf-lux-hero--black-friday .vf-lux-hero__content {
-    width: calc(100% - 24px);
-    padding-bottom: 28px;
-  }
+  .vf-noir-home-page .vf-lux-hero--black-friday {min-height: 810px}
+  .vf-noir-home-page .vf-lux-hero--black-friday .vf-lux-hero__title {font-size:clamp(45px,12vw,52px)}
+  .vf-noir-home-page .vf-lux-hero--black-friday .vf-lux-hero__content {width:calc(100% - 24px);padding-bottom:32px}
+  .vf-noir-home-page .vf-lux-hero--black-friday .vf-lux-hero__mobile-promo {top:150px;height:185px;background-size:auto 185px}
+}
+@media (min-width: 768px) {
+  .vf-noir-home-page .vf-lux-hero--black-friday .vf-lux-hero__mobile-promo {display:none}
 }
