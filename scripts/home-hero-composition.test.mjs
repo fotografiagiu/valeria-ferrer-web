@@ -12,7 +12,7 @@ test('home retains the single canonical hero image and SEO content', () => {
   assert.match(home, /<NovemberNoirHome models=\{homeModels\}/);
   assert.match(home, /<HomeNovedadesStrip models=\{homeModels\}/);
   assert.match(hero, /<h1 id="vf-lux-hero-title"/);
-  assert.match(hero, /src="https:\/\/d2ol7oe51mr4n9\.cloudfront\.net\/[^"]+\.png"/);
+  assert.match(hero, /d2ol7oe51mr4n9\.cloudfront\.net\/[^'"\s]+\.png/);
   assert.match(hero, /vf-lux-hero--black-friday/);
   assert.match(css, /\.vf-noir-home-page \.vf-lux-hero--black-friday \.vf-lux-hero__shade/);
   const finalDesktop = css.slice(css.lastIndexOf('/* FINAL DESKTOP HERO:'));
@@ -28,19 +28,18 @@ test('Novedades hangs at the hero edge instead of over model body', () => {
   assert.match(news, /className="vf-lux-news__hanger"/);
 });
 
-test('mobile Black Friday follows approved layout: one model, visible original promo and readable H1', () => {
+test('mobile Black Friday uses composed vertical asset without dual-crop promo', () => {
   assert.doesNotMatch(hero, /srcSet="\/images\/valeria-premium-hero-mobile.webp"/);
-  assert.match(hero, /src="https:\/\/d2ol7oe51mr4n9\.cloudfront\.net\/[^"]+\.png"/);
-  const mobile = css.slice(css.lastIndexOf('/* BLACK FRIDAY MÓVIL — composición aprobada de la derecha.'));
+  assert.match(hero, /srcSet="\/images\/black-friday-hero-mobile\.webp"/);
+  assert.match(hero, /srcSet="\/images\/black-friday-hero-mobile\.jpg"/);
+  assert.match(hero, /d2ol7oe51mr4n9\.cloudfront\.net\/[^'"\s]+\.png/);
+  assert.doesNotMatch(hero, /vf-lux-hero__mobile-promo/);
+  const mobile = css.slice(css.lastIndexOf('/* BLACK FRIDAY MÓVIL — recurso vertical compuesto'));
   assert.match(mobile, /@media \(max-width: 767px\)/);
-  assert.match(mobile, /min-height: max\(750px, 100svh\)/);
-  assert.match(mobile, /height: clamp\(430px, 64svh, 565px\)/);
-  assert.match(mobile, /object-position: left center/);
-  assert.match(mobile, /background-size: auto 100%/);
-  assert.match(mobile, /width: 62%/);
+  assert.match(mobile, /object-position: center top/);
   assert.match(mobile, /flex-direction: row/);
-  assert.match(hero, /vf-lux-hero__mobile-promo/);
-  assert.match(mobile, /\.vf-noir-home-page > \.vf-lux-news \{\s*margin: 12px auto 0;/);
+  assert.match(mobile, /display: none !important;/);
+  assert.match(mobile, /\.vf-noir-home-page > \.vf-lux-news \{\s*margin: 10px auto 0;/);
 });
 
 test('desktop image feathers into the solid burgundy background without bottom hard cut', () => {
