@@ -31,11 +31,13 @@ test('Novedades hangs at the hero edge instead of over model body', () => {
 test('mobile Black Friday uses the approved HD banner, clean layout and a sign below the hero', () => {
   assert.doesNotMatch(hero, /srcSet="\/images\/valeria-premium-hero-mobile.webp"/);
   assert.match(hero, /src="https:\/\/d2ol7oe51mr4n9\.cloudfront\.net\/[^"]+\.png"/);
-  const mobile = css.slice(css.lastIndexOf('/* BLACK FRIDAY MÓVIL 2026'));
+  const mobile = css.slice(css.lastIndexOf('/* BLACK FRIDAY MÓVIL — portada inmersiva restaurada.'));
   assert.match(mobile, /@media \(max-width: 767px\)/);
-  assert.match(mobile, /aspect-ratio: 1916 \/ 821/);
-  assert.match(mobile, /grid-template-columns: 1fr;/);
-  assert.match(mobile, /\.vf-noir-home-page > \.vf-lux-news \{\s*margin: 8px auto 0;/);
+  assert.match(mobile, /min-height: max\(790px, 100svh\)/);
+  assert.match(mobile, /object-fit: cover/);
+  assert.match(hero, /vf-lux-hero__mobile-promo/);
+  assert.match(mobile, /flex-direction: column;/);
+  assert.match(mobile, /\.vf-noir-home-page > \.vf-lux-news \{margin: 4px auto 0;/);
 });
 
 test('desktop image feathers into the solid burgundy background without bottom hard cut', () => {
