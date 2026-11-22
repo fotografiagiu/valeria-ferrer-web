@@ -6,8 +6,8 @@ import '../styles/valeria-luxury-v5.css';
 import '../styles/valeria-home-final.css';
 
 /**
- * Portada limpia. Desktop: valeria-premium-hero.webp (landscape).
- * Móvil: valeria-premium-hero-mobile.webp (vertical 9:16 impactante).
+ * Portada Black Friday HD: un único banner original tanto en desktop como en móvil.
+ * Móvil adapta su composición sin volver a la fotografía November Noir antigua.
  * `models` se mantiene por compatibilidad con pages/Home.tsx.
  */
 interface HomeHeroProps { models?: ReadonlyArray<{ slug: string }> }
@@ -26,19 +26,8 @@ const NovemberNoirHome: React.FC<HomeHeroProps> = () => {
     <section className="vf-lux-hero vf-lux-hero--black-friday" aria-labelledby="vf-lux-hero-title">
       <div className="vf-lux-hero__visual" aria-hidden="true">
         <picture>
-          {/* Campaña de escritorio: fotografía en resolución original + creatividad Black Friday
-              del boceto aprobado, sin barra de navegación ni texto HTML incrustado. */}
-
-          <source
-            media="(max-width: 767px)"
-            srcSet="/images/valeria-premium-hero-mobile.webp"
-            type="image/webp"
-          />
-          <source
-            media="(max-width: 767px)"
-            srcSet="/images/valeria-premium-hero-mobile.png"
-            type="image/png"
-          />
+          {/* Una sola creatividad Black Friday HD, con la misma modelo en ambos formatos.
+              En móvil se muestra completa arriba del texto; no se recorta el logotipo. */}
           <img
             src="https://d2ol7oe51mr4n9.cloudfront.net/user_36DayVJkjOLFx77vIiJcDWRkvYc/d9204eed-98ae-4157-9294-468a172bd333.png"
             alt=""
