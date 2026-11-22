@@ -40,6 +40,7 @@ const NovemberNoirHome: React.FC<HomeHeroProps> = () => {
         </picture>
       </div>
       <div className="vf-lux-hero__shade" aria-hidden="true" />
+      <div className="vf-lux-hero__mobile-promo" aria-hidden="true" />
       <div className="vf-lux-hero__content">
         <p className="vf-lux-hero__eyebrow"><Gem size={14} aria-hidden="true" /> AGENCIA PREMIUM EN VALENCIA</p>
         <h1 id="vf-lux-hero-title" className="vf-lux-hero__title">
