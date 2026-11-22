@@ -33,7 +33,10 @@ test('mobile Black Friday uses the approved HD banner, clean layout and a sign b
   assert.match(hero, /src="https:\/\/d2ol7oe51mr4n9\.cloudfront\.net\/[^"]+\.png"/);
   const mobile = css.slice(css.lastIndexOf('/* BLACK FRIDAY MÓVIL — portada inmersiva restaurada.'));
   assert.match(mobile, /@media \(max-width: 767px\)/);
-  assert.match(mobile, /min-height: max\(790px, 100svh\)/);
+  assert.match(mobile, /min-height: max\(920px, 112svh\)/);
+  assert.match(mobile, /height: clamp\(340px, 51svh, 475px\)/);
+  assert.match(mobile, /background-size: 200% auto/);
+  assert.match(mobile, /background-position: right 46%/);
   assert.match(mobile, /object-fit: cover/);
   assert.match(hero, /vf-lux-hero__mobile-promo/);
   assert.match(mobile, /flex-direction: column;/);
