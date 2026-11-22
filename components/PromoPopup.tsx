@@ -52,10 +52,19 @@ const PromoPopup: React.FC = () => {
       setView('hidden')
       return
     }
-    // Show the full promotion by default. Only the visitor's X minimizes it
-    // to the small banner; polling and tab visibility must not reopen it.
-    setView(minimizedCampaigns.current.has(campaignKey) ? 'banner' : 'popup')
-  }, [promo, hideOnProfile, campaignKey])
+    // Móvil + portada Black Friday: no abrir el modal encima de la composición
+    // aprobada. Queda en banner (o oculto vía CSS en el hero) hasta que el
+    // visitante lo reabra. Desktop y resto de rutas mantienen el popup.
+    const mobileHome =
+      typeof window !== 'undefined' &&
+      window.matchMedia('(max-width: 767px)').matches &&
+      (pathname === '/' || pathname === '')
+    if (mobileHome || minimizedCampaigns.current.has(campaignKey)) {
+      setView('banner')
+      return
+    }
+    setView('popup')
+  }, [promo, hideOnProfile, campaignKey, pathname])
 
   const minimizePromo = useCallback(() => {
     setContactOpen(false)

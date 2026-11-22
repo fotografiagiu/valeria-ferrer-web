@@ -6,11 +6,15 @@ import '../styles/valeria-luxury-v5.css';
 import '../styles/valeria-home-final.css';
 
 /**
- * Portada Black Friday HD: un único banner original tanto en desktop como en móvil.
- * Móvil adapta su composición sin volver a la fotografía November Noir antigua.
+ * Portada Black Friday HD.
+ * Desktop: banner horizontal original en CDN.
+ * Móvil: recurso vertical compuesto (modelo izq. + promo der.), sin dual-crop CSS.
  * `models` se mantiene por compatibilidad con pages/Home.tsx.
  */
 interface HomeHeroProps { models?: ReadonlyArray<{ slug: string }> }
+
+const BF_DESKTOP_SRC =
+  'https://d2ol7oe51mr4n9.cloudfront.net/user_36DayVJkjOLFx77vIiJcDWRkvYc/d9204eed-98ae-4157-9294-468a172bd333.png';
 
 const NovemberNoirHome: React.FC<HomeHeroProps> = () => {
   useEffect(() => {
@@ -21,15 +25,47 @@ const NovemberNoirHome: React.FC<HomeHeroProps> = () => {
     return () => window.clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    const hero = document.querySelector('.vf-lux-hero--black-friday');
+    if (!(hero instanceof HTMLElement)) return;
+
+    const mq = window.matchMedia('(max-width: 767px)');
+    const syncPastHero = () => {
+      if (!mq.matches) {
+        document.body.classList.remove('vf-past-mobile-hero');
+        return;
+      }
+      const past = window.scrollY > hero.offsetHeight * 0.72;
+      document.body.classList.toggle('vf-past-mobile-hero', past);
+    };
+
+    syncPastHero();
+    window.addEventListener('scroll', syncPastHero, { passive: true });
+    mq.addEventListener('change', syncPastHero);
+    return () => {
+      window.removeEventListener('scroll', syncPastHero);
+      mq.removeEventListener('change', syncPastHero);
+      document.body.classList.remove('vf-past-mobile-hero');
+    };
+  }, []);
+
   return (
   <div className="vf-noir vf-lux-home-intro" id="valeria-ferrer-home">
     <section className="vf-lux-hero vf-lux-hero--black-friday" aria-labelledby="vf-lux-hero-title">
       <div className="vf-lux-hero__visual" aria-hidden="true">
         <picture>
-          {/* Una sola creatividad Black Friday HD, con la misma modelo en ambos formatos.
-              En móvil se muestra completa arriba del texto; no se recorta el logotipo. */}
+          <source
+            media="(max-width: 767px)"
+            type="image/webp"
+            srcSet="/images/black-friday-hero-mobile.webp"
+          />
+          <source
+            media="(max-width: 767px)"
+            type="image/jpeg"
+            srcSet="/images/black-friday-hero-mobile.jpg"
+          />
           <img
-            src="https://d2ol7oe51mr4n9.cloudfront.net/user_36DayVJkjOLFx77vIiJcDWRkvYc/d9204eed-98ae-4157-9294-468a172bd333.png"
+            src={BF_DESKTOP_SRC}
             alt=""
             width={1916}
             height={821}
@@ -40,7 +76,6 @@ const NovemberNoirHome: React.FC<HomeHeroProps> = () => {
         </picture>
       </div>
       <div className="vf-lux-hero__shade" aria-hidden="true" />
-      <div className="vf-lux-hero__mobile-promo" aria-hidden="true" />
       <div className="vf-lux-hero__content">
         <p className="vf-lux-hero__eyebrow"><Gem size={14} aria-hidden="true" /> AGENCIA PREMIUM EN VALENCIA</p>
         <h1 id="vf-lux-hero-title" className="vf-lux-hero__title">
