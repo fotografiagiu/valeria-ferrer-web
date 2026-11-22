@@ -819,8 +819,8 @@
     top: clamp(32px, 6svh, 70px);
     right: 0;
     left: auto;
-    width: 69%;
-    height: clamp(235px, 32svh, 285px);
+    width: 62%;
+    height: clamp(215px, 28svh, 255px);
     pointer-events: none;
     background-color: transparent;
     background-image: url('https://d2ol7oe51mr4n9.cloudfront.net/user_36DayVJkjOLFx77vIiJcDWRkvYc/d9204eed-98ae-4157-9294-468a172bd333.png');
@@ -934,7 +934,7 @@
   .vf-noir-home-page .vf-lux-hero--black-friday {min-height: 730px}
   .vf-noir-home-page .vf-lux-hero--black-friday .vf-lux-hero__title {font-size: clamp(30px, 8.9vw, 34px)}
   .vf-noir-home-page .vf-lux-hero--black-friday .vf-lux-hero__content {width:calc(100% - 22px);padding-bottom:30px}
-  .vf-noir-home-page .vf-lux-hero--black-friday .vf-lux-hero__mobile-promo {width:70%;height:230px}
+  .vf-noir-home-page .vf-lux-hero--black-friday .vf-lux-hero__mobile-promo {width:62%;height:215px}
 }
 @media (min-width: 768px) {
   .vf-noir-home-page .vf-lux-hero--black-friday .vf-lux-hero__mobile-promo {display:none}
