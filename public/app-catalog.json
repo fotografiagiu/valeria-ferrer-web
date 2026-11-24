@@ -1,9 +1,32 @@
 {
-  "generatedAt": "2026-11-21T11:03:15.351Z",
-  "catalogVersion": "e856d12d0c1905bafb59562479a4293437b4f0d82abe7754684f054665b4f053",
+  "generatedAt": "2026-11-24T13:19:36.386Z",
+  "catalogVersion": "c9540224e90cdc8cdefa2886569032ca6dc123c13de1d00c697e91af0fcd423d",
   "source": "valeria-ferrer-web",
   "method": "build-app-catalog",
   "models": [
+    {
+      "slug": "megan",
+      "name": "Megan",
+      "active": true,
+      "vip": false,
+      "coverImageUrl": "/chicas/megan-model-agency-valencia-vf/portada.jpg",
+      "images": [
+        "/chicas/megan-model-agency-valencia-vf/gallery/01.jpg",
+        "/chicas/megan-model-agency-valencia-vf/gallery/02.jpg",
+        "/chicas/megan-model-agency-valencia-vf/gallery/03.jpg",
+        "/chicas/megan-model-agency-valencia-vf/gallery/04.jpg",
+        "/chicas/megan-model-agency-valencia-vf/gallery/05.jpg",
+        "/chicas/megan-model-agency-valencia-vf/gallery/06.jpg",
+        "/chicas/megan-model-agency-valencia-vf/gallery/07.jpg",
+        "/chicas/megan-model-agency-valencia-vf/gallery/08.jpg",
+        "/chicas/megan-model-agency-valencia-vf/gallery/09.jpg",
+        "/chicas/megan-model-agency-valencia-vf/gallery/10.jpg",
+        "/chicas/megan-model-agency-valencia-vf/gallery/11.jpg",
+        "/chicas/megan-model-agency-valencia-vf/gallery/12.jpg",
+        "/chicas/megan-model-agency-valencia-vf/gallery/13.jpg",
+        "/chicas/megan-model-agency-valencia-vf/gallery/14.jpg"
+      ]
+    },
     {
       "slug": "lisa",
       "name": "Lisa",

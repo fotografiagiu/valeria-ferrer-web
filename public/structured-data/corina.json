@@ -12,14 +12,26 @@
     "https://www.valeriaferrer.com/chicas/corina-model-agency-valencia-vf/gallery/04.jpg"
   ],
   "nationality": "Venezolana",
-  "jobTitle": "Modelo de acompañamiento",
+  "jobTitle": "Modelo",
   "knowsLanguage": [
     "Español"
   ],
   "offers": {
     "@type": "Offer",
-    "availability": "https://schema.org/InStock",
-    "url": "https://www.valeriaferrer.com/models/corina"
+    "itemOffered": {
+      "@type": "Service",
+      "name": "Acompañamiento Premium",
+      "description": "Servicios exclusivos de acompañamiento con Corina en Valencia"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Valencia"
+    },
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "name": "Contacto Directo",
+      "url": "https://www.valeriaferrer.com/contact"
+    }
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
