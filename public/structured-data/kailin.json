@@ -10,14 +10,26 @@
     "https://www.valeriaferrer.com/chicas/kailin-model-agency-valencia-vf/gallery/02.jpg"
   ],
   "nationality": "Venezolana",
-  "jobTitle": "Modelo de acompañamiento",
+  "jobTitle": "Modelo",
   "knowsLanguage": [
     "Español"
   ],
   "offers": {
     "@type": "Offer",
-    "availability": "https://schema.org/InStock",
-    "url": "https://www.valeriaferrer.com/models/kailin"
+    "itemOffered": {
+      "@type": "Service",
+      "name": "Acompañamiento Premium",
+      "description": "Servicios exclusivos de acompañamiento con Kailin en Valencia"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Valencia"
+    },
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "name": "Contacto Directo",
+      "url": "https://www.valeriaferrer.com/contact"
+    }
   },
   "mainEntityOfPage": {
     "@type": "WebPage",

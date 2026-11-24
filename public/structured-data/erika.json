@@ -1,0 +1,44 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Erika",
+  "description": "Erika es una española elegante que irradia sofisticación y estilo mediterráneo. Su figura armoniosa y presencia refinada la hacen ideal para acompañamiento de lujo en Valencia y cenas íntimas. Cada encuentro con ella está lleno de distinción y elegancia natural. Su estilo único transforma momentos especiales en experiencias refinadas con clase internacional.",
+  "url": "https://www.valeriaferrer.com/models/erika",
+  "image": [
+    "https://www.valeriaferrer.com/chicas/erika-valeria-ferrer-model-agency-valencia/portada.jpg",
+    "https://www.valeriaferrer.com/chicas/erika-valeria-ferrer-model-agency-valencia/gallery/01.jpg",
+    "https://www.valeriaferrer.com/chicas/erika-valeria-ferrer-model-agency-valencia/gallery/02.jpg",
+    "https://www.valeriaferrer.com/chicas/erika-valeria-ferrer-model-agency-valencia/gallery/03.jpg",
+    "https://www.valeriaferrer.com/chicas/erika-valeria-ferrer-model-agency-valencia/gallery/04.jpg",
+    "https://www.valeriaferrer.com/chicas/erika-valeria-ferrer-model-agency-valencia/gallery/05.jpg",
+    "https://www.valeriaferrer.com/chicas/erika-valeria-ferrer-model-agency-valencia/gallery/06.jpg",
+    "https://www.valeriaferrer.com/chicas/erika-valeria-ferrer-model-agency-valencia/gallery/07.jpg",
+    "https://www.valeriaferrer.com/chicas/erika-valeria-ferrer-model-agency-valencia/gallery/08.jpg"
+  ],
+  "nationality": "Española",
+  "jobTitle": "Modelo",
+  "knowsLanguage": [
+    "Español"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "itemOffered": {
+      "@type": "Service",
+      "name": "Acompañamiento Premium",
+      "description": "Servicios exclusivos de acompañamiento con Erika en Valencia"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Valencia"
+    },
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "name": "Contacto Directo",
+      "url": "https://www.valeriaferrer.com/contact"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.valeriaferrer.com/models/erika"
+  }
+}
