@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-11-24T14:57:42.955Z",
-  "catalogVersion": "4f3997988ed68330285fe43476879927a07a9b0f589c5461d92e66ef65b58ce0",
+  "generatedAt": "2026-11-25T12:13:23.617Z",
+  "catalogVersion": "e487614a4ee13e64cb8332b66652385bb436fb8764d7bb1bb61cbef72e4188eb",
   "source": "valeria-ferrer-web",
   "method": "build-app-catalog",
   "models": [
@@ -66,10 +66,16 @@
       "name": "Selena",
       "active": true,
       "vip": false,
-      "coverImageUrl": "/chicas/selena-model-agency-valencia-vf/portada.jpg",
+      "coverImageUrl": "/chicas/selena-model-agency-valencia-vf/portada-nov25.jpg",
       "images": [
-        "/chicas/selena-model-agency-valencia-vf/gallery/01.jpg",
-        "/chicas/selena-model-agency-valencia-vf/gallery/02.jpg"
+        "/chicas/selena-model-agency-valencia-vf/gallery/nov25-01.jpg",
+        "/chicas/selena-model-agency-valencia-vf/gallery/nov25-02.jpg",
+        "/chicas/selena-model-agency-valencia-vf/gallery/nov25-03.jpg",
+        "/chicas/selena-model-agency-valencia-vf/gallery/nov25-04.jpg",
+        "/chicas/selena-model-agency-valencia-vf/gallery/nov25-05.jpg",
+        "/chicas/selena-model-agency-valencia-vf/gallery/nov25-06.jpg",
+        "/chicas/selena-model-agency-valencia-vf/gallery/nov25-07.jpg",
+        "/chicas/selena-model-agency-valencia-vf/gallery/nov25-08.jpg"
       ]
     },
     {
