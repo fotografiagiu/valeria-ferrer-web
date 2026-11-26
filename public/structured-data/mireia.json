@@ -1,0 +1,38 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Mireia",
+  "description": "Rubia española, curvas de infarto y pura tentación. Su carta de presentación es un físico que habla por sí solo: una larguísima melena rubia que cae sobre su espalda, una cintura definida y unas curvas espectaculares que cobran protagonismo desde cualquier perspectiva. Esta nueva belleza española combina una figura voluptuosa con una imagen femenina, atrevida y llena de sensualidad. Rubia, española y con un cuerpo que parece hecho para las portadas: una de esas novedades que merece la pena descubrir con detenimiento. Andaluza de 25 años en Valencia, 1,72 m y 70 kg. Descubre a Mireia en Valeria Ferrer.",
+  "url": "https://www.valeriaferrer.com/models/mireia",
+  "image": [
+    "https://www.valeriaferrer.com/chicas/mireia-model-agency-valencia-vf/portada.jpg",
+    "https://www.valeriaferrer.com/chicas/mireia-model-agency-valencia-vf/gallery/01.jpg",
+    "https://www.valeriaferrer.com/chicas/mireia-model-agency-valencia-vf/gallery/02.jpg"
+  ],
+  "nationality": "Andaluza",
+  "jobTitle": "Modelo",
+  "knowsLanguage": [
+    "Español"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "itemOffered": {
+      "@type": "Service",
+      "name": "Acompañamiento Premium",
+      "description": "Servicios exclusivos de acompañamiento con Mireia en Valencia"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Valencia"
+    },
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "name": "Contacto Directo",
+      "url": "https://www.valeriaferrer.com/contact"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.valeriaferrer.com/models/mireia"
+  }
+}
