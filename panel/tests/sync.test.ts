@@ -268,9 +268,10 @@ describe('catalog:ensure (incremental)', () => {
     const stale = '/chicas/stale-cover-removed.jpg';
     const orderBefore = (await listOverrides(db)).find((r) => r.slug === target)!.displayOrder;
 
+    const staleGallery = ['/chicas/old-gallery-01.jpg', '/chicas/old-gallery-02.jpg'];
     await db
       .update(modelOverrides)
-      .set({ coverImagePath: stale })
+      .set({ coverImagePath: stale, galleryImagePaths: staleGallery })
       .where(eq(modelOverrides.slug, target));
 
     const report = await ensureCatalogMembership({
@@ -285,6 +286,8 @@ describe('catalog:ensure (incremental)', () => {
     const after = (await listOverrides(db)).find((r) => r.slug === target)!;
     expect(after.coverImagePath).toBe(model.coverImageUrl);
     expect(after.displayOrder).toBe(orderBefore);
+    const expectedGallery = (model.images || []).filter((p) => p && p !== model.coverImageUrl);
+    expect(after.galleryImagePaths).toEqual(expectedGallery.length ? expectedGallery : null);
   });
 
   it('two concurrent ensures for the same new girl leave one row and unique order', async () => {
