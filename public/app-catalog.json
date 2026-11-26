@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-11-25T12:13:23.617Z",
-  "catalogVersion": "e487614a4ee13e64cb8332b66652385bb436fb8764d7bb1bb61cbef72e4188eb",
+  "generatedAt": "2026-11-26T09:58:55.463Z",
+  "catalogVersion": "0e108984dfa4fc13203a3402878fc808ed9e2e4c428ec69f77c03c2dce5698ee",
   "source": "valeria-ferrer-web",
   "method": "build-app-catalog",
   "models": [
@@ -66,16 +66,24 @@
       "name": "Selena",
       "active": true,
       "vip": false,
-      "coverImageUrl": "/chicas/selena-model-agency-valencia-vf/portada-nov25.jpg",
+      "coverImageUrl": "/chicas/selena-model-agency-valencia-vf/portada-nov26.jpg",
       "images": [
-        "/chicas/selena-model-agency-valencia-vf/gallery/nov25-01.jpg",
-        "/chicas/selena-model-agency-valencia-vf/gallery/nov25-02.jpg",
-        "/chicas/selena-model-agency-valencia-vf/gallery/nov25-03.jpg",
-        "/chicas/selena-model-agency-valencia-vf/gallery/nov25-04.jpg",
-        "/chicas/selena-model-agency-valencia-vf/gallery/nov25-05.jpg",
-        "/chicas/selena-model-agency-valencia-vf/gallery/nov25-06.jpg",
-        "/chicas/selena-model-agency-valencia-vf/gallery/nov25-07.jpg",
-        "/chicas/selena-model-agency-valencia-vf/gallery/nov25-08.jpg"
+        "/chicas/selena-model-agency-valencia-vf/gallery/nov26-01.jpg",
+        "/chicas/selena-model-agency-valencia-vf/gallery/nov26-02.jpg",
+        "/chicas/selena-model-agency-valencia-vf/gallery/nov26-03.jpg",
+        "/chicas/selena-model-agency-valencia-vf/gallery/nov26-04.jpg",
+        "/chicas/selena-model-agency-valencia-vf/gallery/nov26-05.jpg",
+        "/chicas/selena-model-agency-valencia-vf/gallery/nov26-06.jpg",
+        "/chicas/selena-model-agency-valencia-vf/gallery/nov26-07.jpg",
+        "/chicas/selena-model-agency-valencia-vf/gallery/nov26-08.jpg",
+        "/chicas/selena-model-agency-valencia-vf/gallery/nov26-09.jpg",
+        "/chicas/selena-model-agency-valencia-vf/gallery/nov26-10.jpg",
+        "/chicas/selena-model-agency-valencia-vf/gallery/nov26-11.jpg",
+        "/chicas/selena-model-agency-valencia-vf/gallery/nov26-12.jpg",
+        "/chicas/selena-model-agency-valencia-vf/gallery/nov26-13.jpg",
+        "/chicas/selena-model-agency-valencia-vf/gallery/nov26-14.jpg",
+        "/chicas/selena-model-agency-valencia-vf/gallery/nov26-15.jpg",
+        "/chicas/selena-model-agency-valencia-vf/gallery/nov26-16.jpg"
       ]
     },
     {
