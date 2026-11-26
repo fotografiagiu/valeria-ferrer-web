@@ -516,16 +516,20 @@ export async function ensureCatalogMembership(params: {
     }
 
     // 3) Reset invalid covers row-locally (never touch valid staff covers).
+    // Also drop stale gallery_image_paths so deleted/replaced sets cannot linger
+    // after a full photo swap (e.g. Belén nov26).
     for (const slug of finalPlan.coversReset) {
       const model = bySlug.get(slug)!;
       const cover = model.coverImageUrl;
       if (!cover) throw new BadRequestError(`active model ${slug} has no coverImageUrl`);
       const row = freshBySlug.get(slug);
       const coverVersion = row ? row.coverVersion + 1 : 1;
+      const nextGallery = (model.images || []).filter((p) => p && p !== cover);
       await tx
         .update(modelOverrides)
         .set({
           coverImagePath: cover,
+          galleryImagePaths: nextGallery.length ? nextGallery : null,
           coverVersion,
           updatedAt: new Date(),
           updatedBy: params.staffUserId ?? null,
