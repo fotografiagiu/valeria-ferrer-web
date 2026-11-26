@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-11-26T15:33:21.501Z",
-  "catalogVersion": "ef00999070e409970c5bb7fe24c5a367b0f8f13f5b9a68ef15d4603bce8dd4bb",
+  "generatedAt": "2026-11-26T17:44:58.390Z",
+  "catalogVersion": "0476fb65adba256449d2eca39bedd118f82b7294ec50ce6006a88733a1fbd892",
   "source": "valeria-ferrer-web",
   "method": "build-app-catalog",
   "models": [
@@ -731,22 +731,19 @@
     },
     {
       "slug": "alicia",
-      "name": "Alicia",
+      "name": "Ariel",
       "active": true,
       "vip": false,
-      "coverImageUrl": "/chicas/alicia-model-agency-valencia-vf/portada.jpg",
+      "coverImageUrl": "/chicas/alicia-model-agency-valencia-vf/portada-nov26.jpg",
       "images": [
-        "/chicas/alicia-model-agency-valencia-vf/gallery/01.jpg",
-        "/chicas/alicia-model-agency-valencia-vf/gallery/02.jpg",
-        "/chicas/alicia-model-agency-valencia-vf/gallery/03.jpg",
-        "/chicas/alicia-model-agency-valencia-vf/gallery/04.jpg",
-        "/chicas/alicia-model-agency-valencia-vf/gallery/05.jpg",
-        "/chicas/alicia-model-agency-valencia-vf/gallery/06.jpg",
-        "/chicas/alicia-model-agency-valencia-vf/gallery/07.jpg",
-        "/chicas/alicia-model-agency-valencia-vf/gallery/08.jpg",
-        "/chicas/alicia-model-agency-valencia-vf/gallery/09.jpg",
-        "/chicas/alicia-model-agency-valencia-vf/gallery/10.jpg",
-        "/chicas/alicia-model-agency-valencia-vf/gallery/11.jpg"
+        "/chicas/alicia-model-agency-valencia-vf/gallery/nov26-01.jpg",
+        "/chicas/alicia-model-agency-valencia-vf/gallery/nov26-02.jpg",
+        "/chicas/alicia-model-agency-valencia-vf/gallery/nov26-03.jpg",
+        "/chicas/alicia-model-agency-valencia-vf/gallery/nov26-04.jpg",
+        "/chicas/alicia-model-agency-valencia-vf/gallery/nov26-05.jpg",
+        "/chicas/alicia-model-agency-valencia-vf/gallery/nov26-06.jpg",
+        "/chicas/alicia-model-agency-valencia-vf/gallery/nov26-07.jpg",
+        "/chicas/alicia-model-agency-valencia-vf/gallery/nov26-08.jpg"
       ]
     },
     {
