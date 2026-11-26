@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-11-26T09:58:55.463Z",
-  "catalogVersion": "0e108984dfa4fc13203a3402878fc808ed9e2e4c428ec69f77c03c2dce5698ee",
+  "generatedAt": "2026-11-26T15:33:21.501Z",
+  "catalogVersion": "ef00999070e409970c5bb7fe24c5a367b0f8f13f5b9a68ef15d4603bce8dd4bb",
   "source": "valeria-ferrer-web",
   "method": "build-app-catalog",
   "models": [
@@ -109,16 +109,17 @@
       "name": "Belén",
       "active": true,
       "vip": false,
-      "coverImageUrl": "/chicas/belen-model-agency-valencia-vf/portada.jpg",
+      "coverImageUrl": "/chicas/belen-model-agency-valencia-vf/portada-nov26.jpg",
       "images": [
-        "/chicas/belen-model-agency-valencia-vf/gallery/01.jpg",
-        "/chicas/belen-model-agency-valencia-vf/gallery/02.jpg",
-        "/chicas/belen-model-agency-valencia-vf/gallery/03.jpg",
-        "/chicas/belen-model-agency-valencia-vf/gallery/04.jpg",
-        "/chicas/belen-model-agency-valencia-vf/gallery/05.jpg",
-        "/chicas/belen-model-agency-valencia-vf/gallery/06.jpg",
-        "/chicas/belen-model-agency-valencia-vf/gallery/07.jpg",
-        "/chicas/belen-model-agency-valencia-vf/gallery/08.jpg"
+        "/chicas/belen-model-agency-valencia-vf/gallery/nov26-01.jpg",
+        "/chicas/belen-model-agency-valencia-vf/gallery/nov26-02.jpg",
+        "/chicas/belen-model-agency-valencia-vf/gallery/nov26-03.jpg",
+        "/chicas/belen-model-agency-valencia-vf/gallery/nov26-04.jpg",
+        "/chicas/belen-model-agency-valencia-vf/gallery/nov26-05.jpg",
+        "/chicas/belen-model-agency-valencia-vf/gallery/nov26-06.jpg",
+        "/chicas/belen-model-agency-valencia-vf/gallery/nov26-07.jpg",
+        "/chicas/belen-model-agency-valencia-vf/gallery/nov26-08.jpg",
+        "/chicas/belen-model-agency-valencia-vf/gallery/nov26-09.jpg"
       ]
     },
     {
