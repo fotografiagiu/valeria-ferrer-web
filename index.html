@@ -19,9 +19,34 @@
     <link rel="canonical" href="https://www.valeriaferrer.com" />
     <title>Valeria Ferrer | Escorts en Valencia</title>
     
-    <!-- LCP: móvil vertical / desktop landscape -->
-    <link rel="preload" as="image" href="/images/valeria-premium-hero-mobile.webp" type="image/webp" media="(max-width: 767px)" fetchpriority="high">
-    <link rel="preload" as="image" href="/images/valeria-premium-hero.webp" type="image/webp" media="(min-width: 768px)" fetchpriority="high">
+    <!-- Preload del hero vigente: Black Friday 27/11 en Madrid, o portada editorial -->
+    <link rel="preconnect" href="https://d2ol7oe51mr4n9.cloudfront.net" crossorigin>
+    <script>
+      (function () {
+        var parts = new Intl.DateTimeFormat('en-GB', {
+          timeZone: 'Europe/Madrid', day: '2-digit', month: '2-digit', year: 'numeric'
+        }).formatToParts(new Date());
+        var part = function (type) { var x = parts.find(function (p) { return p.type === type; }); return x ? x.value : ''; };
+        var blackFriday = [part('year'), part('month'), part('day')].join('-') === '2026-11-27';
+        var assets = blackFriday ? [
+          ['(max-width: 767px)', 'https://d2ol7oe51mr4n9.cloudfront.net/user_36DayVJkjOLFx77vIiJcDWRkvYc/3a31abcc-04bb-4a95-9ed7-04f4a120d851.png', 'image/png'],
+          ['(min-width: 768px)', 'https://d2ol7oe51mr4n9.cloudfront.net/user_36DayVJkjOLFx77vIiJcDWRkvYc/3927befb-4a3c-4d2c-922f-cab0b747bd7f.png', 'image/png']
+        ] : [
+          ['(max-width: 767px)', '/images/valeria-premium-hero-mobile.webp', 'image/webp'],
+          ['(min-width: 768px)', '/images/valeria-premium-hero.webp', 'image/webp']
+        ];
+        assets.forEach(function (item) {
+          var link = document.createElement('link');
+          link.rel = 'preload';
+          link.as = 'image';
+          link.media = item[0];
+          link.href = item[1];
+          link.type = item[2];
+          link.setAttribute('fetchpriority', 'high');
+          document.head.appendChild(link);
+        });
+      })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
