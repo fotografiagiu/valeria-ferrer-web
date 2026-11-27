@@ -932,3 +932,179 @@
   .vf-noir-home-page .vf-lux-hero--black-friday .vf-lux-hero__title {font-size: clamp(28px, 8.4vw, 32px)}
   .vf-noir-home-page .vf-lux-hero--black-friday .vf-lux-hero__content {width:calc(100% - 20px);padding-bottom:26px}
 }
+
+
+/* BLACK FRIDAY 27 NOV 2026 — arte final COMPLETO (no crops).
+   Only active when the React hero adds --bf-2026 on Madrid's calendar date.
+   Keep the H1 and booking links as visible HTML directly below the artwork.
+   Earlier seasonal hero and CSS are untouched for the following day. */
+.vf-noir-home-page .vf-lux-hero--bf-2026 {
+  position: relative;
+  display: block;
+  min-height: 0;
+  height: auto;
+  padding: 0;
+  overflow: hidden;
+  background: #1b0711;
+}
+.vf-noir-home-page .vf-lux-hero--bf-2026 .vf-lux-hero__visual {
+  position: relative;
+  inset: auto;
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+  background: #1b0711;
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+.vf-noir-home-page .vf-lux-hero--bf-2026 .vf-lux-hero__visual picture {
+  position: relative;
+  inset: auto;
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+.vf-noir-home-page .vf-lux-hero--bf-2026 .vf-lux-hero__visual picture img {
+  position: static;
+  inset: auto;
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: auto;
+  object-fit: contain;
+  object-position: center center;
+  filter: none;
+  transform: none;
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+.vf-noir-home-page .vf-lux-hero--bf-2026 .vf-lux-hero__visual::after {
+  content: none;
+  display: none;
+}
+.vf-noir-home-page .vf-lux-hero--bf-2026 .vf-lux-hero__shade {
+  display: none;
+}
+.vf-noir-home-page .vf-lux-hero--bf-2026 .vf-bf-hero__footer {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  margin: 0;
+  padding: 13px clamp(16px, 3vw, 48px) 18px;
+  background: linear-gradient(95deg, #200711, #3a0c20 55%, #1a0711);
+  border-top: 1px solid rgba(220, 170, 94, .5);
+  color: #f7e8d2;
+}
+.vf-noir-home-page .vf-lux-hero--bf-2026 .vf-bf-hero__footer h1 {
+  margin: 0;
+  font: 500 clamp(18px, 1.6vw, 24px)/1.15 'Cormorant Garamond', Georgia, serif;
+  letter-spacing: .035em;
+  color: #f3d9b2;
+}
+.vf-noir-home-page .vf-lux-hero--bf-2026 .vf-bf-hero__footer p {
+  margin: 0;
+  flex: 1 1 350px;
+  font: 500 11px/1.6 Montserrat, system-ui, sans-serif;
+  color: #ebd5c7;
+}
+.vf-noir-home-page .vf-lux-hero--bf-2026 .vf-bf-hero__footer-links {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.vf-noir-home-page .vf-lux-hero--bf-2026 .vf-bf-hero__footer-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border-radius: 999px;
+  border: 1px solid #d5ab73;
+  padding: 10px 15px;
+  font: 700 10px/1 Montserrat, system-ui, sans-serif;
+  text-decoration: none;
+  color: #fbe4bc;
+  background: rgba(26, 7, 17, .7);
+  white-space: nowrap;
+  min-height: 40px;
+  transition: background .2s ease;
+}
+.vf-noir-home-page .vf-lux-hero--bf-2026 .vf-bf-hero__footer-links a:last-child {
+  background: linear-gradient(115deg, #f8d99a, #c9944d);
+  border-color: #efc98c;
+  color: #271209;
+}
+.vf-noir-home-page .vf-lux-hero--bf-2026 .vf-bf-hero__footer-links a:hover {
+  filter: brightness(1.13);
+}
+.vf-noir-home-page .vf-lux-hero--bf-2026 .vf-bf-hero__footer-links a:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+@media (max-width: 767px) {
+  .vf-noir-home-page .vf-lux-hero--bf-2026 {
+    display: block;
+    min-height: 0;
+    height: auto;
+    overflow: hidden;
+  }
+  .vf-noir-home-page .vf-lux-hero--bf-2026 .vf-lux-hero__visual {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: auto;
+    aspect-ratio: auto;
+  }
+  .vf-noir-home-page .vf-lux-hero--bf-2026 .vf-lux-hero__visual picture {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: auto;
+  }
+  .vf-noir-home-page .vf-lux-hero--bf-2026 .vf-lux-hero__visual picture img {
+    position: static;
+    inset: auto;
+    width: 100%;
+    height: auto;
+    aspect-ratio: auto;
+    object-fit: contain;
+    object-position: center top;
+  }
+  .vf-noir-home-page .vf-lux-hero--bf-2026 .vf-bf-hero__footer {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 7px;
+    padding: 12px 12px 18px;
+  }
+  .vf-noir-home-page .vf-lux-hero--bf-2026 .vf-bf-hero__footer h1 {
+    font-size: 19px;
+  }
+  .vf-noir-home-page .vf-lux-hero--bf-2026 .vf-bf-hero__footer p {
+    flex: none;
+    max-width: 390px;
+    font-size: 11px;
+  }
+  .vf-noir-home-page .vf-lux-hero--bf-2026 .vf-bf-hero__footer-links {
+    width: min(100%, 380px);
+    margin-top: 6px;
+    gap: 7px;
+  }
+  .vf-noir-home-page .vf-lux-hero--bf-2026 .vf-bf-hero__footer-links a {
+    flex: 1;
+    min-height: 44px;
+    font-size: 11px;
+    padding: 10px 9px;
+  }
+  .vf-noir-home-page .vf-lux-hero--bf-2026 + .vf-lux-news {
+    margin-top: 10px;
+  }
+}
