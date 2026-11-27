@@ -28,18 +28,24 @@ test('Novedades hangs at the hero edge instead of over model body', () => {
   assert.match(news, /className="vf-lux-news__hanger"/);
 });
 
-test('mobile Black Friday uses composed vertical asset without dual-crop promo', () => {
-  assert.doesNotMatch(hero, /srcSet="\/images\/valeria-premium-hero-mobile.webp"/);
-  assert.match(hero, /srcSet="\/images\/black-friday-hero-mobile\.webp"/);
-  assert.match(hero, /srcSet="\/images\/black-friday-hero-mobile\.jpg"/);
-  assert.match(hero, /d2ol7oe51mr4n9\.cloudfront\.net\/[^'"\s]+\.png/);
+test('Black Friday 2026 uses approved desktop + mobile artwork without cropping, date-gated', () => {
+  assert.match(hero, /isBlackFridayDayInMadrid/);
+  assert.match(hero, /2026-11-27/);
+  assert.match(hero, /3927befb-4a3c-4d2c-922f-cab0b747bd7f\.png/);
+  assert.match(hero, /3a31abcc-04bb-4a95-9ed7-04f4a120d851\.png/);
+  assert.match(hero, /srcSet=\{BF_2026_MOBILE\}/);
+  assert.match(hero, /blackFridayLive \? BF_2026_DESKTOP : EDITORIAL_DESKTOP/);
+  assert.match(hero, /vf-lux-hero--bf-2026/);
+  assert.match(hero, /<h1 id="vf-lux-hero-title">Escorts en Valencia<\/h1>/);
+  assert.match(hero, /menciona la promoción al llegar/);
+  assert.match(hero, /\/booking/);
   assert.doesNotMatch(hero, /vf-lux-hero__mobile-promo/);
-  const mobile = css.slice(css.lastIndexOf('/* BLACK FRIDAY MÓVIL — recurso vertical compuesto'));
-  assert.match(mobile, /@media \(max-width: 767px\)/);
-  assert.match(mobile, /object-position: center top/);
-  assert.match(mobile, /flex-direction: row/);
-  assert.match(mobile, /display: none !important;/);
-  assert.match(mobile, /\.vf-noir-home-page > \.vf-lux-news \{\s*margin: 10px auto 0;/);
+  const campaign = css.slice(css.lastIndexOf('/* BLACK FRIDAY 27 NOV 2026'));
+  assert.match(campaign, /\.vf-lux-hero--bf-2026/);
+  assert.match(campaign, /object-fit: contain/);
+  assert.match(campaign, /mask-image: none/);
+  assert.match(campaign, /@media \(max-width: 767px\)/);
+  assert.match(campaign, /height: auto/);
 });
 
 test('desktop image feathers into the solid burgundy background without bottom hard cut', () => {
