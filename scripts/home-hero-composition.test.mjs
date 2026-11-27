@@ -31,13 +31,15 @@ test('Novedades hangs at the hero edge instead of over model body', () => {
 test('Black Friday 2026 uses approved desktop + mobile artwork without cropping, date-gated', () => {
   assert.match(hero, /isBlackFridayDayInMadrid/);
   assert.match(hero, /2026-11-27/);
-  assert.match(hero, /3927befb-4a3c-4d2c-922f-cab0b747bd7f\.png/);
-  assert.match(hero, /3a31abcc-04bb-4a95-9ed7-04f4a120d851\.png/);
+  assert.match(hero, /0faf3089-30b2-4d75-9abb-ae6cbc0d2987\.png/);
+  assert.match(hero, /b4ea7120-aa91-4399-ad9e-a6ff8cbfcbe8\.png/);
   assert.match(hero, /srcSet=\{BF_2026_MOBILE\}/);
   assert.match(hero, /blackFridayLive \? BF_2026_DESKTOP : EDITORIAL_DESKTOP/);
   assert.match(hero, /vf-lux-hero--bf-2026/);
   assert.match(hero, /<h1 id="vf-lux-hero-title">Escorts en Valencia<\/h1>/);
   assert.match(hero, /menciona la promoción al llegar/);
+  assert.match(hero, /Oferta de 1 hora por 130 €/);
+  assert.doesNotMatch(hero, /30 min 70 €|45 min 100 €/);
   assert.match(hero, /\/booking/);
   assert.doesNotMatch(hero, /vf-lux-hero__mobile-promo/);
   const campaign = css.slice(css.lastIndexOf('/* BLACK FRIDAY 27 NOV 2026'));

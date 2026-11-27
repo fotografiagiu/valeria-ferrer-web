@@ -14,9 +14,9 @@ import '../styles/valeria-home-final.css';
 interface HomeHeroProps { models?: ReadonlyArray<{ slug: string }> }
 
 const BF_2026_DESKTOP =
-  'https://d2ol7oe51mr4n9.cloudfront.net/user_36DayVJkjOLFx77vIiJcDWRkvYc/3927befb-4a3c-4d2c-922f-cab0b747bd7f.png';
+  'https://d2ol7oe51mr4n9.cloudfront.net/user_36DayVJkjOLFx77vIiJcDWRkvYc/0faf3089-30b2-4d75-9abb-ae6cbc0d2987.png';
 const BF_2026_MOBILE =
-  'https://d2ol7oe51mr4n9.cloudfront.net/user_36DayVJkjOLFx77vIiJcDWRkvYc/3a31abcc-04bb-4a95-9ed7-04f4a120d851.png';
+  'https://d2ol7oe51mr4n9.cloudfront.net/user_36DayVJkjOLFx77vIiJcDWRkvYc/b4ea7120-aa91-4399-ad9e-a6ff8cbfcbe8.png';
 const EDITORIAL_DESKTOP = '/images/valeria-premium-hero.webp';
 const EDITORIAL_MOBILE = '/images/valeria-premium-hero-mobile.webp';
 
@@ -87,9 +87,9 @@ const NovemberNoirHome: React.FC<HomeHeroProps> = () => {
           )}
           <img
             src={blackFridayLive ? BF_2026_DESKTOP : EDITORIAL_DESKTOP}
-            alt={blackFridayLive ? 'Valeria Ferrer Black Friday: 30 minutos 70 euros, 45 minutos 100 euros y una hora 130 euros. Reserva en nuestra web o menciona Black Friday al llegar. Solo el 27 de noviembre, todo el día.' : ''}
-            width={blackFridayLive ? 1672 : 1264}
-            height={blackFridayLive ? 941 : 954}
+            alt={blackFridayLive ? 'Black Friday Valeria Ferrer. Oferta exclusiva de 1 hora por 130 euros, válida el 27 de noviembre durante todo el día. Reserva por nuestra web o menciona la promoción Black Friday al llegar.' : ''}
+            width={blackFridayLive ? 1916 : 1264}
+            height={blackFridayLive ? 821 : 954}
             loading="eager"
             decoding="async"
             fetchPriority="high"
@@ -100,7 +100,7 @@ const NovemberNoirHome: React.FC<HomeHeroProps> = () => {
       {blackFridayLive ? (
         <div className="vf-bf-hero__footer">
           <h1 id="vf-lux-hero-title">Escorts en Valencia</h1>
-          <p>Black Friday · 30 min 70 € · 45 min 100 € · 1 h 130 €. Reserva en la web o menciona la promoción al llegar.</p>
+          <p>Black Friday · Oferta de 1 hora por 130 €. Reserva por la web o menciona la promoción al llegar. Válida solo hoy, todo el día.</p>
           <div className="vf-bf-hero__footer-links">
             <Link to="/models">Ver perfiles <ArrowUpRight size={15} aria-hidden="true" /></Link>
             <Link to="/booking"><CalendarCheck size={15} aria-hidden="true" /> Reservar ahora</Link>
